@@ -5,7 +5,7 @@ Este repositório contém o código-fonte de um sistema completo de nutrição c
 ## 💻 Tecnologias Utilizadas
 
 - **⚙️ Backend:** Node.js (Express)
-- **🌐 Frontend:** Vue.js
+- **🌐 Frontend:** Vue.js com Nuxt
 - **🔐 Autenticação:** Login e cadastro de usuários com proteção de rotas
 
 ## 📌 Funcionalidades
