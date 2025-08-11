@@ -87,8 +87,4 @@ npm run dev
 
 ---
 
-## 📫 Contato
 
-Para dúvidas, sugestões ou contribuições, entre em contato com a equipe do projeto ou abra uma issue neste repositório.
-
----
