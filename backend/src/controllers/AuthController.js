@@ -6,6 +6,8 @@ import { AppError } from '../exceptions/AppError.js';
 export class AuthController {
   static async login(req, res, next) {
     try {
+      console.log('aaa');
+      
       const parsedResult = LoginUserSchema.safeParse(req.body);
 
       if (!parsedResult.success) {

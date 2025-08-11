@@ -1,10 +1,8 @@
-import axiosInstance from './axiosConfig'
-// import store from './store'
-
 // Função GET
 const get = async (route, params = {}) => {
+  const { $axios } = useNuxtApp()  // pega axios do plugin injetado
   try {
-    const res = await axiosInstance.get(route, { params })
+    const res = await $axios.get(route, { params })
     return { ...res.data, status: res.status }
   } catch (err) {
     return { error: true, ...err.response, status: err.response?.status }
@@ -13,8 +11,9 @@ const get = async (route, params = {}) => {
 
 // Função SEARCH
 const search = async (route, objectParams) => {
+  const { $axios } = useNuxtApp()
   try {
-    const res = await axiosInstance.get(route, { params: objectParams })
+    const res = await $axios.get(route, { params: objectParams })
     return { ...res.data, status: res.status }
   } catch (err) {
     return { error: true, ...err.response, status: err.response?.status }
@@ -23,6 +22,7 @@ const search = async (route, objectParams) => {
 
 // Função INSERT
 const insert = async (route, object, itemMessage) => {
+  const { $axios } = useNuxtApp()
   let headers = {}
 
   for (const key in object) {
@@ -33,65 +33,34 @@ const insert = async (route, object, itemMessage) => {
   }
 
   try {
-    const res = await axiosInstance.post(route, object, { headers })
-
-    // if (itemMessage) {
-    //   store.dispatch('setSuccess', {
-    //     message: `Sucesso ao cadastrar ${itemMessage}!`,
-    //   })
-    // }
+    const res = await $axios.post(route, object, { headers })
 
     return { ...res.data, status: res.status }
   } catch (err) {
-    // if (itemMessage) {
-    //   store.dispatch('setError', {
-    //     message: `Erro ao cadastrar ${itemMessage}!`,
-    //   })
-    // }
     return { error: true, ...err.response, status: err.response?.status }
   }
 }
 
 // Função UPDATE
 const update = async (route, id, object, itemMessage) => {
+  const { $axios } = useNuxtApp()
   try {
-    const res = await axiosInstance.patch(`/${route}/${id}`, object)
-
-    // if (itemMessage) {
-    //   store.dispatch('setSuccess', {
-    //     message: `Sucesso ao atualizar ${itemMessage}!`,
-    //   })
-    // }
+    const res = await $axios.patch(`/${route}/${id}`, object)
 
     return { ...res.data, status: res.status }
   } catch (err) {
-    // if (itemMessage) {
-    //   store.dispatch('setError', {
-    //     message: `Erro ao atualizar ${itemMessage}!`,
-    //   })
-    // }
     return { error: true, ...err.response, status: err.response?.status }
   }
 }
 
 // Função REMOVE
 const remove = async (route, id, itemMessage) => {
+  const { $axios } = useNuxtApp()
   try {
-    const res = await axiosInstance.delete(`/${route}/${id}`)
-
-    // if (itemMessage) {
-    //   store.dispatch('setSuccess', {
-    //     message: `Sucesso ao remover ${itemMessage}!`,
-    //   })
-    // }
+    const res = await $axios.delete(`/${route}/${id}`)
 
     return { ...res.data, status: res.status }
   } catch (err) {
-    // if (itemMessage) {
-    //   store.dispatch('setError', {
-    //     message: `Erro ao remover ${itemMessage}!`,
-    //   })
-    // }
     return { error: true, ...err.response, status: err.response?.status }
   }
 }

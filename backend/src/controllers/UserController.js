@@ -20,6 +20,8 @@ export class UserController {
       data.role = this.translateRole(data.role);
 
       const parseResult = CreateUserSchema.safeParse(data);
+      console.log(parseResult);
+      
       if (!parseResult.success) {
         const errors = formatZodErrors(parseResult.error);
         return res.status(422).json({ error: true, data: errors });

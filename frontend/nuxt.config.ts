@@ -11,12 +11,18 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
-    secretKey: '',
+    apiKey: '',
     public: {
-      frontendUrl: process.env.NUXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'
+      apiBase: process.env.NUXT_PUBLIC_API_BASE
     }
   },
   app: {
-    baseURL: '/app/', // muda a raiz do app
+    baseURL: '/', // muda a raiz do app,
+    head: {
+      title: 'NutriPlan',
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/np.svg' }
+      ]
+    }
   }  
 })

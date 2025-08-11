@@ -7,7 +7,6 @@
                 <span 
                     class="hover:font-semibold cursor-pointer text-[#8A5ACD]" 
                     @click="navigate('/register')">
-                    <NuxtLink to="/register" />
                     Crie uma conta
                 </span>
             </p>
