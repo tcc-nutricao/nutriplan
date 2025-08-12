@@ -28,7 +28,7 @@ Este repositório contém o código-fonte de um sistema completo de nutrição c
 │   └── ...
 ├── frontend/        # Aplicação Vue.js
 │   ├── components/  # Componentes reutilizáveis
-│   ├── views/       # Telas da aplicação
+│   ├── pages/       # Telas da aplicação
 │   └── ...
 └── README.md
 ```
