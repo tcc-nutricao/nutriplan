@@ -1,5 +1,4 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
-export default defineNuxtConfig({
+export default {
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   components: true,
@@ -12,17 +11,18 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     apiKey: '',
+    internalApiBase: process.env.NUXT_INTERNAL_API_BASE,
     public: {
-      apiBase: process.env.NUXT_PUBLIC_API_BASE
-    }
+      apiBase: process.env.NUXT_PUBLIC_API_BASE,
+    },
   },
   app: {
-    baseURL: '/', // muda a raiz do app,
+    baseURL: '/',
     head: {
       title: 'NutriPlan',
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/np.svg' }
-      ]
-    }
-  }  
-})
+        { rel: 'icon', type: 'image/x-icon', href: '/np.svg' },
+      ],
+    },
+  },
+};

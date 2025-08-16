@@ -3,8 +3,10 @@ import axios from 'axios'
 export default defineNuxtPlugin((nuxtApp) => {
   const config = useRuntimeConfig()
 
+  const isServer = process.server
+
   const axiosInstance = axios.create({
-    baseURL: config.public.apiBase,
+    baseURL: isServer ? config.internalApiBase : config.public.apiBase,
     withCredentials: true,
   })
 
@@ -12,7 +14,6 @@ export default defineNuxtPlugin((nuxtApp) => {
     (response) => response,
     (error) => {
       if (error.response) {
-        // tratamento de erros
       }
       return Promise.reject(error)
     }
