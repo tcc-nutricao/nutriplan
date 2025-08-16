@@ -7,6 +7,7 @@ Este repositório contém o código-fonte de um sistema completo de nutrição c
 - **⚙️ Backend:** Node.js (Express)
 - **🌐 Frontend:** Vue.js com Nuxt
 - **🔐 Autenticação:** Login e cadastro de usuários com proteção de rotas
+- **🐋 Conteinerização:** Docker
 
 ## 📌 Funcionalidades
 
@@ -21,16 +22,20 @@ Este repositório contém o código-fonte de um sistema completo de nutrição c
 
 ```bash
 /
-├── backend/         # API em Node.js com Express
+├── backend/         # API em Node.js com Express 
 │   ├── prisma/      # Configurações e schema do banco de dados
-│   ├── routes/      # Rotas da aplicação
-│   ├── controllers/ # Lógica das rotas
-│   └── ...
+|   ├── src/
+|   |   ├── routes/      # Rotas da aplicação 
+│   |   ├── controllers/ # Lógica das rotas
+|   |   ├── Dockerfile   # Arquivo de configuração do Docker para iniciar o backend
+│   |   └── ...
 ├── frontend/        # Aplicação Vue.js
 │   ├── components/  # Componentes reutilizáveis
 │   ├── pages/       # Telas da aplicação
+|   ├── Dockerfile   # Arquivo de configuração do Docker para iniciar o frontend
 │   └── ...
 └── README.md
+└── docker-compose.yml
 ```
 
 ## 👨‍💻 Como Rodar Localmente
@@ -42,49 +47,32 @@ git clone https://github.com/tcc-nutricao/sistema-nutricao.git
 cd sistema-nutricao
 ```
 
-2. **Configure o backend**
+2. **Configure o backend e frontens usando Docker**
 
+Rode os comandos Docker na raíz do projeto:
+
+Build inicial:
 ```bash
-cd backend
+docker-compose build
 ```
 
-Instale as dependências:
+Rodar em background:
 ```bash
-npm install
+docker-compose up -d
 ```
 
-Configure o Prisma:
+Ver logs em tempo real:
 ```bash
-npx prisma generate
+docker-compose logs -f backend
+docker-compose logs -f frontend
 ```
 
-Se necessário, crie o banco de dados com:
+Executar as migrações do prisma:
 ```bash
-npx prisma migrate dev
+docker exec -it backend npx prisma migrate dev
 ```
 
-Inicie o servidor:
+Se for necessário parar tudo:
 ```bash
-npm run dev
+docker-compose down
 ```
-
-3. **Configure o frontend**
-
-Em outro terminal:
-```bash
-cd frontend
-```
-
-Instale as dependências:
-```bash
-npm install
-```
-
-Inicie o servidor:
-```bash
-npm run dev
-```
-
----
-
-
