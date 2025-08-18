@@ -47,9 +47,9 @@ git clone https://github.com/tcc-nutricao/sistema-nutricao.git
 cd sistema-nutricao
 ```
 
-2. **Configure o backend e frontens usando Docker**
+2. **Configure o backend e frontend usando Docker**
 
-Rode os comandos Docker na raíz do projeto:
+Rode os comandos Docker na raíz do projeto após abrir o Docker desktop:
 
 Build inicial:
 ```bash
