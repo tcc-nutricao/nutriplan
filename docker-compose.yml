@@ -10,7 +10,13 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=4000
-
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_DATABASE=prototipo_tcc
+    depends_on:
+      - db
   frontend:
     build: ./frontend
     container_name: frontend
@@ -24,3 +30,18 @@ services:
       - NUXT_PUBLIC_API_BASE=http://localhost:4000
     depends_on:
       - backend
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: prototipo_tcc
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+
+volumes:
+  db_data:
