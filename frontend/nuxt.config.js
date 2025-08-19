@@ -20,9 +20,14 @@ export default {
     baseURL: '/',
     head: {
       title: 'NutriPlan',
-      link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/np.svg' },
-      ],
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/np.svg' }],
     },
   },
+  devServer: {
+    host: '0.0.0.0',
+    port: 3000,      
+    watch: {
+      usePolling: true,
+    }
+  }
 };

@@ -5,8 +5,8 @@ services:
     ports:
       - "4000:4000"  
     volumes:
-      - ./backend:/app
-      - /app/node_modules
+      - ./backend:/backend
+      - /backend/node_modules:/backend/node_modules 
     environment:
       - NODE_ENV=development
       - PORT=4000
@@ -15,6 +15,7 @@ services:
       - DB_USER=root
       - DB_PASSWORD=root
       - DB_DATABASE=prototipo_tcc
+      - CHOKIDAR_USEPOLLING=true
     depends_on:
       - db
   frontend:
@@ -23,11 +24,14 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend:/app
-      - /app/node_modules
+      - ./frontend:/frontend
+      - /frontend/node_modules:/frontend/node_modules 
     environment:
       - NUXT_INTERNAL_API_BASE=http://backend:4000
       - NUXT_PUBLIC_API_BASE=http://localhost:4000
+      - CHOKIDAR_USEPOLLING=true
+      - HOST=0.0.0.0
+      - PORT=3000
     depends_on:
       - backend
   db:
