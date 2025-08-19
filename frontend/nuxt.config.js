@@ -11,7 +11,7 @@ export default {
   },
   runtimeConfig: {
     apiKey: '',
-    internalApiBase: process.env.NUXT_INTERNAL_API_BASE,
+    // internalApiBase: process.env.NUXT_INTERNAL_API_BASE,
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE,
     },

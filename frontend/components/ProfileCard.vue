@@ -1,18 +1,26 @@
 <template>
-    <div class="flex min-h-fit items-center bg-gradient-to-br from-white to-p-200 p-5 rounded-full">
-        <div class="w-[50%] bg-white p-5 rounded-xl text-center flex items-center">
-            <i>icone</i>
-            <p class="text-xl font-semibold mb-3">Nome da pessoa</p>
-            <p>Email da pessoa</p>
-        </div>
-        <div class="w-[50%] flex flex-col gap-3">
-            <p class="text-white">Plano Alimentar</p>
-            <p class="text-white">Diário Alimentar</p>
-            <p class="text-white">Meu Progresso</p>
-            <p class="text-white">Receitar</p>
-        </div>
+  <div class="w-fit flex flex-col items-center p-5 bg-gradient-to-br from-p-500 via-p-600 to-p-700 rounded-xl h-fit">
+    <div class="bg-white flex flex-col items-center mb-3 p-5 rounded-xl">
+      <div class="w-[60px] p-3 flex items-center justify-center border-2 border-p-600 rounded-full mb-3">
+        <i class="text-p-600 fa-solid fa-user text-2xl"></i>
+      </div>
+
+      <p class="text-p-950 font-sora text-xl font-semibold">Ana Beatriz</p>
+      <p class="text-p-950 font-sora font-light text-sm">anabeatriz@gmail.com</p>
     </div>
+
+    <ListItem :items="items" />
+  </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
+
+const items = ref([
+    { label: 'Plano Alimentar', route: '/' },
+    { label: 'Diário Alimentar', route: '/' },
+    { label: 'Meu Progresso', route: '/' },
+    { label: 'Receitas', route: '/' },
+    { label: 'Meus Grupos', route: '/' }
+])
 </script>
