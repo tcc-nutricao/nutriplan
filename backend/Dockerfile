@@ -15,5 +15,5 @@ RUN chmod +x /start.sh
 ENV PORT=4000
 EXPOSE 4000
 
-CMD ["/start.sh"]
+CMD ["sh", "/start.sh"]
 
