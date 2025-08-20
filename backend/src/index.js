@@ -1,23 +1,31 @@
-import express, { Router } from 'express'
+import express from 'express'
 import cors from 'cors'
 import 'dotenv/config'
-
-import UserRoute from './routes/UserRoute.js'
-import AuthRoute from './routes/AuthRoute.js'
+import fs from 'fs'
+import path from 'path'
 
 const app = express()
 const port = process.env.PORT || 4000
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-
 app.use(cors({ credentials: true, origin: process.env.CORS }))
 
-const router = Router() 
-app.use(router)
+const routesPath = path.join(process.cwd(), 'src', 'routes')
 
-UserRoute(router) 
-AuthRoute(router)
+fs.readdirSync(routesPath).forEach(async (file) => {
+  if (file.endsWith('Route.js')) {
+    const routeModule = await import(`./routes/${file}`)
+    const route = routeModule.default || routeModule
+    if (typeof route === 'function') {
+      route(app)
+    } else {
+      console.warn(`O módulo ${file} não exporta uma função padrão`)
+    }
+  }
+})
+
+app.get('/', (req, res) => res.send('API rodando!'))
 
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`)

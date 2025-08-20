@@ -76,6 +76,7 @@ model Recipe {
   id          Int       @id @default(autoincrement())
   name        String
   description String?
+  calories    Float
   created_at  DateTime
   deleted_at  DateTime?
   updated_at  DateTime?
@@ -115,7 +116,7 @@ model RecipeFood {
 model Patient {
   id              Int          @id @default(autoincrement())
   id_user         Int          @unique
-  id_nutricionist Int?
+  id_nutritionist Int?
   created_at      DateTime
   deleted_at      DateTime?
   updated_at      DateTime?
@@ -125,10 +126,10 @@ model Patient {
   reports      Report[]
   mealPlans    MealPlan[]
 
-  nutricionist Nutricionist? @relation(fields: [id_nutricionist], references: [id])
+  nutritionist Nutritionist? @relation(fields: [id_nutritionist], references: [id])
 }
 
-model Nutricionist {
+model Nutritionist {
   id                   Int       @id @default(autoincrement())
   id_user              Int       @unique
   professional_register String
@@ -166,20 +167,22 @@ model Goal {
   deleted_at   DateTime?
   updated_at   DateTime?
 
+  goalObjectives GoalObjective[] 
+  mealPlans MealPlan[]
+
   patient   Patient   @relation(fields: [id_patient], references: [id])
-  objective Objective @relation(fields: [id_objective], references: [id])
 }
 
 model Objective {
   id          Int      @id @default(autoincrement())
   name        String
+  icon        String?
   description String?
   created_at  DateTime
   deleted_at  DateTime?
   updated_at  DateTime?
 
-  goals     Goal[]
-  mealPlans MealPlan[]
+  goalObjectives GoalObjective[]   
 }
 
 model Preference {
@@ -246,15 +249,15 @@ model MealPlan {
   id              Int       @id @default(autoincrement())
   id_patient      Int
   id_nutritionist Int
-  id_objective    Int
+  id_goal    Int
   status          MealPlanStatus
   created_at      DateTime
   deleted_at      DateTime?
   updated_at      DateTime?
 
   patient     Patient     @relation(fields: [id_patient], references: [id])
-  nutricionist Nutricionist @relation(fields: [id_nutritionist], references: [id])
-  objective   Objective   @relation(fields: [id_objective], references: [id])
+  nutricionist Nutritionist @relation(fields: [id_nutritionist], references: [id])
+  goal   Goal   @relation(fields: [id_goal], references: [id])
 
   mealPlanRecipes           MealPlanRecipe[]
   mealPlanMeals             MealPlanMeal[]
@@ -337,6 +340,18 @@ model Group {
   updated_at  DateTime?
 
   userGroups UserGroup[]
+}
+
+model GoalObjective {
+  id         Int      @id @default(autoincrement())
+  id_goal   Int
+  id_objective   Int
+  created_at DateTime
+  deleted_at DateTime?
+  updated_at DateTime?
+
+  goal Goal @relation(fields: [id_goal], references: [id])
+  objective Objective @relation(fields: [id_objective], references: [id])
 }
 
 

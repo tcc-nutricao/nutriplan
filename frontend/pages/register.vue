@@ -43,8 +43,9 @@
 <script setup>
 import { insert } from '../crud'
 import { ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
 
-const router = useRoute()
+const router = useRouter()
 
 const route = ref('user')
 const object = ref({
@@ -68,8 +69,8 @@ const openModal = ref(false)
 const selectedButton = ref(null)
 const modalContent = ref('O perfil profissional é destinado apenas a nutricionistas e profissionais da saúde.')
 
-const navigate = (route) => {
-  router.push(route)
+const navigate = async (route) => {
+  await router.push(route)
 }
 
 const save = async () => {
@@ -77,7 +78,7 @@ const save = async () => {
   errors.value = response.error ? response.data.data : {}
   
   if (!response.error) {
-    router.back()
+    navigate('/')
   }
 }
 
