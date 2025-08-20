@@ -15,6 +15,32 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Enums
+enum GoalStatus {
+  PENDING
+  ACTIVE
+  COMPLETED
+  CANCELED
+}
+
+enum ReportType {
+  BLOOD_TEST
+  CHECKUP
+  DIAGNOSIS
+}
+
+enum UserGroupRole {
+  ADMIN
+  MEMBER
+  GUEST
+}
+
+enum MealPlanStatus {
+  DRAFT
+  ACTIVE
+  COMPLETED
+}
+
 enum Role {
   STANDARD
   PROFESSIONAL
@@ -30,4 +56,293 @@ model User {
   updatedAt  DateTime @updatedAt
   deletedAt  DateTime? 
 }
+
+model Food {
+  id          Int       @id @default(autoincrement())
+  name        String
+  calories    Float
+  protein     Float
+  carbs       Float
+  fat         Float
+  created_at  DateTime
+  deleted_at  DateTime?
+  updated_at  DateTime?
+
+  recipeFoods   RecipeFood[]
+  foodConsumed  FoodConsumed[]
+}
+
+model Recipe {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  created_at  DateTime
+  deleted_at  DateTime?
+  updated_at  DateTime?
+
+  recipeFoods      RecipeFood[]
+  mealPlanRecipes  MealPlanRecipe[]
+  foodConsumed     FoodConsumed[]
+}
+
+model PreparationMethod {
+  id                Int     @id @default(autoincrement())
+  name              String
+  description       String?
+  created_at        DateTime
+  deleted_at        DateTime?
+  updated_at        DateTime?
+
+  recipeFoods RecipeFood[]
+}
+
+model RecipeFood {
+  id                Int     @id @default(autoincrement())
+  id_food           Int
+  id_recipe         Int
+  id_preparation_method Int?
+  nutrition_value   Float
+  image             Bytes?
+  created_at        DateTime
+  deleted_at        DateTime?
+  updated_at        DateTime?
+
+  food    Food   @relation(fields: [id_food], references: [id])
+  recipe  Recipe @relation(fields: [id_recipe], references: [id])
+  preparationMethod PreparationMethod? @relation(fields: [id_preparation_method], references: [id])
+}
+
+model Patient {
+  id              Int          @id @default(autoincrement())
+  id_user         Int          @unique
+  id_nutricionist Int?
+  created_at      DateTime
+  deleted_at      DateTime?
+  updated_at      DateTime?
+
+  healthData   HealthData[]
+  goals        Goal[]
+  reports      Report[]
+  mealPlans    MealPlan[]
+
+  nutricionist Nutricionist? @relation(fields: [id_nutricionist], references: [id])
+}
+
+model Nutricionist {
+  id                   Int       @id @default(autoincrement())
+  id_user              Int       @unique
+  professional_register String
+  created_at           DateTime
+  deleted_at           DateTime?
+  updated_at           DateTime?
+
+  patients   Patient[]
+  mealPlans  MealPlan[]
+}
+
+model HealthData {
+  id          Int      @id @default(autoincrement())
+  id_patient  Int
+  height      Float
+  weight      Float
+  bmi         Float
+  record_date DateTime
+  created_at  DateTime
+  deleted_at  DateTime?
+  updated_at  DateTime?
+
+  patient Patient @relation(fields: [id_patient], references: [id])
+}
+
+model Goal {
+  id           Int      @id @default(autoincrement())
+  id_patient   Int
+  description  String?
+  id_objective Int
+  start_date   DateTime
+  end_date     DateTime?
+  status       GoalStatus
+  created_at   DateTime
+  deleted_at   DateTime?
+  updated_at   DateTime?
+
+  patient   Patient   @relation(fields: [id_patient], references: [id])
+  objective Objective @relation(fields: [id_objective], references: [id])
+}
+
+model Objective {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  created_at  DateTime
+  deleted_at  DateTime?
+  updated_at  DateTime?
+
+  goals     Goal[]
+  mealPlans MealPlan[]
+}
+
+model Preference {
+  id         Int       @id @default(autoincrement())
+  name       String
+  icon       String?
+  notes      String?
+  created_at DateTime
+  deleted_at DateTime?
+  updated_at DateTime?
+
+  mealPreferences MealPreference[]
+}
+
+model MealPreference {
+  id            Int       @id @default(autoincrement())
+  id_meal       Int
+  id_preference Int
+  created_at    DateTime
+  deleted_at    DateTime?
+  updated_at    DateTime?
+
+  meal       Meal       @relation(fields: [id_meal], references: [id])
+  preference Preference @relation(fields: [id_preference], references: [id])
+}
+
+model DietaryRestriction {
+  id         Int       @id @default(autoincrement())
+  name       String
+  description String?
+  icon       String?
+  created_at DateTime
+  deleted_at DateTime?
+  updated_at DateTime?
+
+  mealPlanDietaryRestrictions MealPlanDietaryRestriction[]
+}
+
+model MealPlanDietaryRestriction {
+  id                     Int                @id @default(autoincrement())
+  id_dietary_resctriction Int
+  id_meal_plan           Int
+  created_at             DateTime
+  deleted_at             DateTime?
+  updated_at             DateTime?
+
+  dietaryRestriction DietaryRestriction @relation(fields: [id_dietary_resctriction], references: [id])
+  mealPlan           MealPlan          @relation(fields: [id_meal_plan], references: [id])
+}
+
+model Report {
+  id          Int       @id @default(autoincrement())
+  id_patient  Int
+  type        ReportType
+  generated_at DateTime
+  created_at  DateTime
+  deleted_at  DateTime?
+  updated_at  DateTime?
+
+  patient Patient @relation(fields: [id_patient], references: [id])
+}
+
+model MealPlan {
+  id              Int       @id @default(autoincrement())
+  id_patient      Int
+  id_nutritionist Int
+  id_objective    Int
+  status          MealPlanStatus
+  created_at      DateTime
+  deleted_at      DateTime?
+  updated_at      DateTime?
+
+  patient     Patient     @relation(fields: [id_patient], references: [id])
+  nutricionist Nutricionist @relation(fields: [id_nutritionist], references: [id])
+  objective   Objective   @relation(fields: [id_objective], references: [id])
+
+  mealPlanRecipes           MealPlanRecipe[]
+  mealPlanMeals             MealPlanMeal[]
+  mealPlanDietaryRestrictions MealPlanDietaryRestriction[]
+}
+
+model MealPlanRecipe {
+  id            Int      @id @default(autoincrement())
+  id_recipe     Int
+  id_meal_plan  Int
+  created_at    DateTime
+  deleted_at    DateTime?
+  updated_at    DateTime?
+
+  recipe   Recipe   @relation(fields: [id_recipe], references: [id])
+  mealPlan MealPlan @relation(fields: [id_meal_plan], references: [id])
+}
+
+model Meal {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  created_at  DateTime
+  deleted_at  DateTime?
+  updated_at  DateTime?
+
+  mealPreferences MealPreference[]
+  mealPlanMeals   MealPlanMeal[]
+  foodConsumed    FoodConsumed[]
+}
+
+model MealPlanMeal {
+  id           Int      @id @default(autoincrement())
+  id_meal_plan Int
+  id_meal      Int
+  time         DateTime?
+  created_at   DateTime
+  deleted_at   DateTime?
+  updated_at   DateTime?
+
+  mealPlan Meal @relation(fields: [id_meal], references: [id])
+  meal     MealPlan @relation(fields: [id_meal_plan], references: [id])
+}
+
+model FoodConsumed {
+  id        Int      @id @default(autoincrement())
+  id_meal   Int
+  id_food   Int
+  id_recipe Int?
+  quantity  Float
+  date      DateTime
+  created_at DateTime
+  deleted_at DateTime?
+  updated_at DateTime?
+
+  meal   Meal   @relation(fields: [id_meal], references: [id])
+  food   Food   @relation(fields: [id_food], references: [id])
+  recipe Recipe? @relation(fields: [id_recipe], references: [id])
+}
+
+model UserGroup {
+  id         Int      @id @default(autoincrement())
+  id_user    Int
+  id_group   Int
+  role       UserGroupRole
+  created_at DateTime
+  deleted_at DateTime?
+  updated_at DateTime?
+
+  group Group @relation(fields: [id_group], references: [id])
+}
+
+model Group {
+  id          Int      @id @default(autoincrement())
+  name        String
+  decription  String?
+  invite_code String
+  created_at  DateTime
+  deleted_at  DateTime?
+  updated_at  DateTime?
+
+  userGroups UserGroup[]
+}
+
+
+
+
+
+
+
 
