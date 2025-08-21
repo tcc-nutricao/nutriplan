@@ -1,12 +1,13 @@
 <template>
-    <div class="flex gap-2">
+    <div class="flex gap-2 justify-center">
         <div 
             v-for="(restriction, index) in items"
             :key="index"
-            class="flex gap-1 border-r-2 border-p-600"
+            :class="{ 'border-p-600 border-r-2': index < items.length - 1 }"
+            class="flex items-center gap-1 pr-1"
         >
-            <i :class="restriction.icon"></i>
-            <i class="fa fa-times text-red-500"></i>
+            <IconSolid :icon="restriction.dietaryRestriction.icon" sm />
+            <IconSolid icon="fa-times" color="text-red-500" sm />
         </div>
     </div>
   

@@ -10,14 +10,11 @@ export const login = async (req, res, next) => {
 }
 
 export const validate = (req, res, next) => {
-  const authHeader = req.headers.authorization
+  const token = req.cookies.token
 
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    res.status(401).json({ message: 'Token não fornecido' })
-    return
+   if (!token) {
+    return res.status(401).json({ message: "Token não fornecido" })
   }
-
-  const token = authHeader.split(' ')[1]
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)

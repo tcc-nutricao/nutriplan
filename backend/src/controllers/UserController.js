@@ -6,16 +6,15 @@ import { CreateUserSchema } from '../dtos/user/CreateUserDto.js';
 export const UserController = {
   async search (req, res, next)  {
     try {
-      const { filters, limit, page, order } = req.body;
-      const { data, total } = await UserService.search(filters, limit, page, order);
-      return res.status(200).json({ data, total });
+      const { data, total } = await UserService.search(req.body)
+      return res.status(200).json({ data, total })
     } catch (err) {
       next(err);
     }
   },
   async insert (req, res, next) {
     try {
-      const data = req.body;
+      const data = req.body
       data.role = translateRole(data.role)
   
       const parseResult = CreateUserSchema.safeParse(data)

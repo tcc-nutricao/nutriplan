@@ -6,9 +6,8 @@ import { CreateMealPlanSchema } from '../dtos/mealPlan/CreateMealPlanDto.js'
 export const MealPlanController = {
   async search (req, res, next)  {
     try {
-      const { filters, limit, page, order } = req.body
-      const { data, total } = await MealPlanService.search(filters, limit, page, order);
-      return res.status(200).json({ data, total });
+      const { data, total } = await MealPlanService.search(req.query)
+      return res.status(200).json({ data, total })
     } catch (err) {
       next(err)
     }
