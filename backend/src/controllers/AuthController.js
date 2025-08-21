@@ -35,6 +35,18 @@ export const AuthController = {
   
       next(err)
     }
+  },
+  async logout(req, res, next) {
+    try {
+      res.clearCookie('token', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict'
+      })
+      return res.status(200).json({ message: 'Logout realizado com sucesso' })
+    } catch (err) {
+      next(err)
+    }
   }
 }
 

@@ -9,6 +9,14 @@ export const login = async (req, res, next) => {
   }
 }
 
+export const logout = async (req, res, next) => {
+  try {
+    await AuthController.logout(req, res, next)
+  } catch (error) {
+    next(error)
+  }
+}
+
 export const validate = (req, res, next) => {
   const token = req.cookies.token
 

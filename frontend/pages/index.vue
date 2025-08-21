@@ -34,9 +34,12 @@
 <script setup>
 import { insert } from '../crud'
 import { ref } from 'vue'
-
 import { useRouter } from 'vue-router'
 const router = useRouter()
+
+definePageMeta({
+  hideTopBar: true
+})
 
 const route = ref('auth/login')
 const object = ref({
