@@ -1,8 +1,8 @@
 <template>
     <div class="font-sora flex items-center justify-center min-h-screen bg-gradient-to-br from-p-500 via-p-600 to-p-700">
         <div class="w-full max-w-xl p-[70px] bg-gradient-to-br from-white to-p-200 rounded-tl-[70px] rounded-br-[70px] rounded-bl-xl rounded-tr-xl shadow-custom">
-            <Logo class="mb-5" />
-            <p class="text-[#351F56] font-sora font-bold text-3xl mb-5 select-none">Cadastre-se</p>
+            <Logo class="mb-5 text-7xl" />
+            <p class="text-p-950 font-sora font-bold text-3xl mb-5 select-none">Cadastre-se</p>
             <p class="mb-5">Já tem conta? 
               <span 
                 class="hover:font-semibold cursor-pointer text-[#8A5ACD]" 
