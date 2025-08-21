@@ -12,7 +12,7 @@
     ]">{{ label }}</p>
 </template>
 
-<script setup lang='ts'>
+<script setup>
 const props = defineProps({
     xs: Boolean,
     sm: Boolean,

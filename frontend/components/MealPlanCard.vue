@@ -1,6 +1,6 @@
 <template>
     <Card>
-        <div class="flex items-center gap-3 justify-between mb-3">
+        <div class="flex items-center gap-3 justify-between mb-5">
             <p class="text-p-950">{{ title }}</p>
             <IconSolid 
                 v-if="items.length > 3" 
@@ -22,7 +22,7 @@
                 <IconSolid icon="fa-chevron-left" />
             </div>
 
-            <div class="flex justify-center items-center gap-3 flex-1">
+            <div :class="items.length === 1 ? 'justify-center' : 'justify-start'" class="flex items-center gap-3 flex-1">
                 <PlanCard
                     v-for="(mealPlan, index) in visibleItems"
                     :key="index"

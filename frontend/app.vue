@@ -1,9 +1,11 @@
 <template>
   <div class="min-h-screen flex flex-col">
     <TopBar v-if="!hideTopBar" />
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
+    <div class="m-5">
+      <NuxtLayout>
+        <NuxtPage />
+      </NuxtLayout>
+    </div>
   </div>
 </template>
 

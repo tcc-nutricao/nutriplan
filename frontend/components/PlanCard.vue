@@ -1,5 +1,5 @@
 <template>
-    <div class="grid grid-cols-1 w-fit h-fit border-p-600 border-2 rounded-xl gap-3">
+    <div class="grid grid-cols-1 border-p-600 border-2 rounded-xl gap-3">
         <div class="bg-p-600 rounded-t-lg w-full h-full text-white text-center p-2">
             <p class="font-sora text-lg">{{ object.calories }} kcal</p>
         </div>
