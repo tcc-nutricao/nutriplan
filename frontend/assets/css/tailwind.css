@@ -14,3 +14,7 @@
 * {
     font-family: Sora;
 }
+
+svg {
+    line-height: 0;
+}
