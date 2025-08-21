@@ -1,4 +1,5 @@
 <template>
+    <TopBar />
     <div class="flex flex-1">
         <ProfileCard />
         <MealPlanCard title="Meu plano" :mealPlan="object" />
