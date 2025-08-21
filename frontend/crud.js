@@ -1,6 +1,5 @@
-// Função GET
 const get = async (route, params = {}) => {
-  const { $axios } = useNuxtApp()  // pega axios do plugin injetado
+  const { $axios } = useNuxtApp()  
   try {
     const res = await $axios.get(route, { params })
     return { ...res.data, status: res.status }
@@ -9,7 +8,6 @@ const get = async (route, params = {}) => {
   }
 }
 
-// Função SEARCH
 const search = async (route, objectParams) => {
   const { $axios } = useNuxtApp()
   try {
@@ -20,7 +18,6 @@ const search = async (route, objectParams) => {
   }
 }
 
-// Função INSERT
 const insert = async (route, object, itemMessage) => {
   const { $axios } = useNuxtApp()
   let headers = {}
@@ -34,14 +31,12 @@ const insert = async (route, object, itemMessage) => {
 
   try {
     const res = await $axios.post(route, object, { headers })
-
     return { ...res.data, status: res.status }
   } catch (err) {
     return { error: true, ...err.response, status: err.response?.status }
   }
 }
 
-// Função UPDATE
 const update = async (route, id, object, itemMessage) => {
   const { $axios } = useNuxtApp()
   try {
@@ -53,7 +48,6 @@ const update = async (route, id, object, itemMessage) => {
   }
 }
 
-// Função REMOVE
 const remove = async (route, id, itemMessage) => {
   const { $axios } = useNuxtApp()
   try {
