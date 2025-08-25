@@ -5,7 +5,7 @@
       <div class="flex justify-between items-center mb-6">
         <h2 class="text-xl font-bold text-purple-700">Dados Pessoais</h2>
         <button
-          class="bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded-lg transition font-medium"
+          class="bg-purple-500 hover:bg-purple-600 text-white px-8 py-2 rounded-lg transition font-medium"
         >
           Editar
         </button>
