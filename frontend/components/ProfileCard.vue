@@ -13,8 +13,8 @@
           </g>
         </svg>
       </div>
-      <p class="text-p-950 font-sora text-xl font-semibold">Ana Beatriz</p>
-      <p class="text-p-950 font-sora font-light text-sm">anabeatriz@gmail.com</p>
+      <p class="text-p-950 font-sora text-xl font-semibold">Luna Araújo</p>
+      <p class="text-p-950 font-sora font-light text-sm">luna@gmail.com</p>
     </div>
 
     <ListItem :items="items" />
