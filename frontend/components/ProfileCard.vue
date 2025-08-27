@@ -1,9 +1,9 @@
 <template>
-  <div class="w-fit flex flex-col items-center p-5 bg-gradient-to-br from-p-500 via-p-600 to-p-700 rounded-xl h-fit">
-    <div class="bg-white flex flex-col items-center mb-3 p-5 rounded-xl">
-      <div class="flex items-center justify-center rounded-full">
+  <div class="w-fit flex flex-col items-center p-5 bg-gradient-to-br from-p-500 via-p-600 to-p-700 rounded-xl h-fit drop-shadow-xl">
+    <div class="bg-white flex flex-col items-center mb-3 p-5 rounded-xl transition drop-shadow-xl group cursor-pointer active:bg-p-100">
+      <div class="flex items-center justify-center rounded-full transition ease-in-out group-hover:-translate-y-1 group-active:scale-95">
         <svg
-          class="size-[140px] p-3 text-p-600 block" 
+          class="size-[100px] mb-3 mt-1 text-p-600 block drop-shadow-np" 
           viewBox="36.5 20 165 165" 
           fill="currentColor"
           aria-hidden="true"
@@ -13,8 +13,8 @@
           </g>
         </svg>
       </div>
-      <p class="text-p-950 font-sora text-xl font-semibold">Ana Beatriz</p>
-      <p class="text-p-950 font-sora font-light text-sm">anabeatriz@gmail.com</p>
+      <p class="text-p-950 font-sora text-xl font-semibold transition ease-in-out group-hover:scale-[125%] group-active:scale-110">Ana Beatriz</p>
+      <p class="text-p-950 font-sora font-light text-sm transition ease-in-out group-hover:translate-y-1 group-active:scale-95">anabeatriz@gmail.com</p>
     </div>
 
     <ListItem :items="items" />

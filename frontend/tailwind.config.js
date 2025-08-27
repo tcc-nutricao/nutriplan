@@ -37,6 +37,10 @@ module.exports = {
         'custom': '0 15px 40px rgba(0, 0, 0, 0.2)',
         'btn-hover': '0 4px 8px rgba(53, 31, 86, 0.2)', // R950 com 0.2 alpha
       },
+      dropShadow: {
+        'np': '0 10px 10px rgba(138, 90, 205, 0.35)',
+        'nplight': '0 10px 10px rgba(138, 90, 205, 0.20)',
+      },
     },
   },  
   plugins: [],

@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-center items-center gap-2 transition hover:opacity-95 active:opacity-85 active:scale-95">
+    <div class="flex justify-center items-center gap-2 transition hover:opacity-85 active:opacity-85 active:scale-95 drop-shadow-nplight">
         <svg class="w-[2em] h-[2em] text-p-600" viewBox="0 0 2000 2000" fill="currentColor">
             <g 
                 id="Layer_3"
