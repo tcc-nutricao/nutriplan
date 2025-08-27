@@ -14,7 +14,18 @@ export const AuthController = {
       }
   
       const result = await AuthService.login(parsedResult.data)
-      return res.status(200).json(result)
+
+      res.cookie('token', result.token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: "strict",
+        maxAge: 24 * 60 * 60 * 1000
+      })
+
+      return res.status(200).json({
+        message: result.message,
+        user: result.user
+      })
     } catch (err) {
       if (err instanceof AppError) {
         return res
@@ -22,6 +33,18 @@ export const AuthController = {
           .json({ error: true, data: err.details })
       }
   
+      next(err)
+    }
+  },
+  async logout(req, res, next) {
+    try {
+      res.clearCookie('token', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict'
+      })
+      return res.status(200).json({ message: 'Logout realizado com sucesso' })
+    } catch (err) {
       next(err)
     }
   }

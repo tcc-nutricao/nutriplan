@@ -45,6 +45,10 @@ import { insert } from '../crud'
 import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
+definePageMeta({
+  hideTopBar: true
+})
+
 const router = useRouter()
 
 const route = ref('user')

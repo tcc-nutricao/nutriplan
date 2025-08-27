@@ -2,14 +2,14 @@
   <i
     class="fa-solid"
     :class="[
-      props.icon,
+      `fas ${ props.icon }`,
+      color,
       { 'text-2xl': props.twoxl },
       { 'text-xl': props.xl },
       { 'text-lg': props.lg },
       { 'text-sm': props.sm },
       { 'text-xs': props.xs },
     ]"
-    :style="{ color: props.color }"
   />
 </template>
 

@@ -183,7 +183,7 @@ Table mealPlan {
   id_patient integer
   id_nutritionist integer
   id_goal integer
-  calories double
+  calories integer
   status enum
   created_at timestamp
   deleted_at timestamp

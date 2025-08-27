@@ -1,15 +1,16 @@
 import { search, insert, update, remove } from '../api/MealPlanApi.js'
+import { validate } from '../api/AuthApi.js'
 
 const route = '/meal-plan'
 
 export default (router) => {
   router
     .route(route)
-    .get(search)
+    .get(validate, search)
     .post(insert)
 
   router
     .route(`${route}/:id`)
-    .patch(update)
-    .delete(remove)
+    .patch(validate, update)
+    .delete(validate, remove)
 }

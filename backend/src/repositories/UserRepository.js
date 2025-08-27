@@ -3,7 +3,8 @@ import { PrismaClient } from '../generated/prisma/index.js';
 const prisma = new PrismaClient()
 
 export const UserRepository = {
-  async search (filters, limit, page, order) {
+  async search (object) {
+    const { filters = [], limit = 10, page = 1, order = 'asc' } = object
     const where = {}
   
     if (filters.name) {

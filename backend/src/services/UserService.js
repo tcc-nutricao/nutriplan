@@ -3,8 +3,8 @@ import { AppError } from '../exceptions/AppError.js'
 import bcrypt from 'bcrypt'
 
 export const UserService = {
-  async search (filters, limit = 10, page = 1, order = 'asc') {
-    return await UserRepository.search(filters, limit, page, order)
+  async search (object) {
+    return await UserRepository.search(object)
   },
   async insert (data) {
     try {

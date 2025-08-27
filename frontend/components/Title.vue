@@ -1,7 +1,7 @@
 <template>
     <p :class="[
-        'text-[#351F56]',
-        'font-bold',
+        color,
+        { 'text-bold': bold },
         { 'text-xl': props.xl },
         { 'text-2xl': props.twoxl },
         { 'text-3xl': props.threexl },
@@ -12,7 +12,7 @@
     ]">{{ label }}</p>
 </template>
 
-<script setup lang='ts'>
+<script setup>
 const props = defineProps({
     xs: Boolean,
     sm: Boolean,
@@ -21,6 +21,8 @@ const props = defineProps({
     threexl: Boolean,
     fourxl: Boolean,
     lg: Boolean,
-    label: String
+    label: String,
+    color: String,
+    bold: Boolean
 })
 </script>

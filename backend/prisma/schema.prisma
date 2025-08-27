@@ -159,7 +159,6 @@ model Goal {
   id           Int      @id @default(autoincrement())
   id_patient   Int
   description  String?
-  id_objective Int
   start_date   DateTime
   end_date     DateTime?
   status       GoalStatus
@@ -223,13 +222,13 @@ model DietaryRestriction {
 
 model MealPlanDietaryRestriction {
   id                     Int                @id @default(autoincrement())
-  id_dietary_resctriction Int
+  id_dietary_restriction Int
   id_meal_plan           Int
   created_at             DateTime
   deleted_at             DateTime?
   updated_at             DateTime?
 
-  dietaryRestriction DietaryRestriction @relation(fields: [id_dietary_resctriction], references: [id])
+  dietaryRestriction DietaryRestriction @relation(fields: [id_dietary_restriction], references: [id])
   mealPlan           MealPlan          @relation(fields: [id_meal_plan], references: [id])
 }
 
@@ -249,7 +248,8 @@ model MealPlan {
   id              Int       @id @default(autoincrement())
   id_patient      Int
   id_nutritionist Int
-  id_goal    Int
+  id_goal         Int
+  calories        Int
   status          MealPlanStatus
   created_at      DateTime
   deleted_at      DateTime?

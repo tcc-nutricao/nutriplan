@@ -1,31 +1,38 @@
 <template>
-    <TopBar />
-    <div class="flex flex-1">
-        <ProfileCard />
-        <MealPlanCard title="Meu plano" :mealPlan="object" />
+  <div class="flex flex-col md:flex-row gap-5 w-full">
+    <ProfileCard />
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-5 w-full items-stretch">
+      <MealPlanCard title="Meu plano" :items="actualPlan" />
+      <MealPlanCard class="md:col-span-4" title="Outros planos" :items="otherPlans" />
     </div>
+  </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import { search } from '../crud'
 
-const object = ref({})
-const actualPlan = ref({})
-const otherPlans = ref({})
+const actualPlan = ref([])
+const otherPlans = ref([])
+const limit = ref(null)
+const page = ref(1)
+const order = ref('asc')
 
 const loadItems = async () => {
-    const query = {
-        params: {
-            filters: []
-        }
+  const query = {
+    params: {
+      filters: [],
+      limit: limit.value,
+      page: page.value,
+      order: order.value
     }
-    await search('meal-plan', query)
+  }
+  const result = await search('meal-plan', query)
+  actualPlan.value = result.data.filter(item => item.status === 'ACTIVE')
+  otherPlans.value = result.data.filter(item => item.status !== 'ACTIVE')
 }
 
 onMounted(async () => {
-    const result = await loadItems()
-    object.value = result.data
+  await loadItems()
 })
-
 </script>
