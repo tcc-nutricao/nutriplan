@@ -13,8 +13,8 @@
           </g>
         </svg>
       </div>
-      <p class="text-p-950 font-sora text-xl font-semibold">Luna Araújo</p>
-      <p class="text-p-950 font-sora font-light text-sm">luna@gmail.com</p>
+      <p class="text-p-950 font-sora text-xl text-center font-semibold transition ease-in-out group-hover:scale-[112%] group-active:scale-105">Luna Araújo</p>
+      <p class="text-p-950 font-sora font-light text-sm transition ease-in-out group-hover:translate-y-1 group-active:scale-95">luna@gmail.com</p>
     </div>
 
     <ListItem :items="items" />

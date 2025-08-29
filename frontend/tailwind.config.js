@@ -23,6 +23,7 @@ module.exports = {
           800: '#663c9b',
           900: '#553280',
           950: '#351f56',
+          g: '#F6F5FD'
         },
         'danger': '#EA3939',
         'success': '#2FC44F',
@@ -35,11 +36,12 @@ module.exports = {
       },
       boxShadow: {
         'custom': '0 15px 40px rgba(0, 0, 0, 0.2)',
-        'btn-hover': '0 4px 8px rgba(53, 31, 86, 0.2)', // R950 com 0.2 alpha
+        'btn-hover': '0 4px 8px rgba(53, 31, 86, 1)', // R950 com 0.2 alpha
       },
       dropShadow: {
-        'np': '0 10px 10px rgba(138, 90, 205, 0.35)',
-        'nplight': '0 10px 10px rgba(138, 90, 205, 0.20)',
+        'np2': '0 10px 10px rgba(128, 0, 255, 0.1)',
+        'np': '0 10px 10px rgba(138, 90, 205, 0.2)',
+        'nplight': '0 10px 10px rgba(138, 90, 205, 0.2)',
       },
     },
   },  

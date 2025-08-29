@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col md:flex-row gap-5 w-full">
+  <div class="flex flex-col md:flex-row gap-5 w-full p-5">
     <ProfileCard />
     <div class="grid grid-cols-1 md:grid-cols-5 gap-5 w-full items-stretch">
       <MealPlanCard title="Meu plano" :items="actualPlan" />

@@ -91,47 +91,47 @@ const props = defineProps({
 })
 
 const greenClass = computed(() => {
-  return 'bg-green-500 hover:bg-green-600'
+  return 'transition bg-green-500 hover:bg-green-600 active:scale-95 hover:shadow-lg'
 })
 
 const lightPurpleClass = computed(() => {
-  return 'bg-[#9B78DA] hover:bg-purple-500'
+  return 'transition bg-p-500 hover:bg-p-600 active:scale-95 hover:shadow-lg'
 })
 
 const mediumPurpleClass = computed(() => {
-  return 'bg-[#8A5ACD] hover:bg-purple-600'
+  return 'transition bg-p-600 hover:bg-p-700 active:scale-95 hover:shadow-lg hover:drop-shadow-np2'
 })
 
 const darkPurpleClass = computed(() => {
-  return 'bg-[#663C9B] hover:bg-purple-700'
+  return 'transition bg-p-700 hover:bg-p-800 active:scale-95 hover:shadow-lg'
 })
 
 const redClass = computed(() => {
-  return 'bg-red-500 hover:bg-red-600'
+  return 'transition bg-red-500 hover:bg-red-600 active:scale-95 hover:shadow-lg'
 })
 
 const greenBorderClass = computed(() => {
-  return 'border border-green-500 hover:border-green-600 text-green-500'
+  return 'transition border border-green-500 hover:border-green-600 text-green-500 active:scale-95 hover:shadow-lg'
 })
 
 const lightPurpleBorderClass = computed(() => {
-  return 'border border-[#9B78DA] hover:bg-[#9B78DA] hover:bg-opacity-20 text-[#9B78DA]'
+  return 'transition border border-[#9B78DA] hover:bg-[#9B78DA] hover:bg-opacity-20 text-[#9B78DA] active:scale-95 hover:shadow-lg'
 })
 
 const mediumPurpleBorderClass = computed(() => {
-  return 'border border-[#8A5ACD] hover:border-purple-500 text-[#8A5ACD]'
+  return 'transition border border-[#8A5ACD] hover:border-p-700 text-p-600 active:scale-95 hover:shadow-lg'
 })
 
 const darkPurpleBorderClass = computed(() => {
-  return 'border border-[#663C9B] hover:border-purple-600 text-[#663C9B]'
+  return 'transition border border-[#663C9B] hover:border-purple-600 text-[#663C9B] active:scale-95 hover:shadow-lg'
 })
 
 const darkGrayBorderClass = computed(() => {
-  return 'border border-[#7A6E94] hover:border-black text-[#7A6E94]'
+  return 'transition border border-[#7A6E94] hover:border-black text-[#7A6E94] active:scale-95 hover:shadow-lg'
 })
 
 const redBorderClass = computed(() => {
-  return 'border border-red-500 hover:border-red-600 text-red-500'
+  return 'transition border border-red-500 hover:border-red-600 text-red-500 active:scale-95 hover:shadow-lg'
 })
 
 </script>
