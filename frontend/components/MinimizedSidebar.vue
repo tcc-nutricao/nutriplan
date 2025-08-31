@@ -5,7 +5,7 @@
         @click="toggleSidebar" 
         class="absolute z-50 top-3 -right-3 cursor-pointer p-1 bg-white rounded-full w-6 h-6 flex items-center justify-center shadow"
       >
-        <i class="fa-solid fa-chevron-left text-p-600"></i>
+        <i class="fa-solid fa-chevron-right text-p-600"></i>
       </button>
     </div>
     <div class="w-full h-full flex flex-col items-center p-5 
