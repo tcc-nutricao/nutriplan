@@ -7,10 +7,12 @@
       class="font-sora cursor-pointer text-white transition-all duration-150 ease-in-out px-3 py-2 rounded-lg hover:scale-105 active:scale-95"
       :class="{
         'bg-white/20': item.label === selectedItem,
-        'hover:bg-white/10': item.label !== selectedItem
+        'hover:bg-white/10': item.label !== selectedItem,
+        'text-center': item?.icon
       }"
     >
-      {{ item.label }}
+      <span>{{ item?.label }}</span>
+      <i v-if="item.icon" :class="`fa-solid ${item?.icon}`" :title="item?.iconLabel" />
     </li>
   </ul>
 </template>

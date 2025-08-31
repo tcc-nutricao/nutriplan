@@ -38,7 +38,8 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 definePageMeta({
-  hideTopBar: true
+  hideTopBar: true,
+  hideSideBar: true
 })
 
 const route = ref('auth/login')
