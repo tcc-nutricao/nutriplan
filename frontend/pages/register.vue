@@ -46,7 +46,8 @@ import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
 definePageMeta({
-  hideTopBar: true
+  hideTopBar: true,
+  hideSideBar: true
 })
 
 const router = useRouter()

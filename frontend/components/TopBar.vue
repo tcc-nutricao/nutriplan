@@ -11,20 +11,5 @@
 </template>
 
 <script setup>
-import { insert } from '../crud'
-import { useRouter } from 'vue-router'
 
-const router = useRouter()
-const route = 'auth/logout'
-
-const navigate = async (route) => {
-  await router.push(route)
-}
-
-const logout = async () => {
-  const response = await insert(route)
-  if (!response.error) {
-    navigate('/')
-  }
-}
 </script>
