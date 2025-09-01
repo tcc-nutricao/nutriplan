@@ -43,4 +43,8 @@ svg {
     color: rgba(85, 50, 128, 0.5);
     /* 950 */
     color: rgba(53, 31, 86, 0.5);
+    /* danger */
+    color: #EA3939;
+    /* danger light */
+    color: #ff5858;
 }

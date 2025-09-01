@@ -26,6 +26,7 @@ module.exports = {
           g: '#F6F5FD'
         },
         'danger': '#EA3939',
+        'danger-light': '#FF5858',
         'success': '#2FC44F',
         'gray-medium': '#b4a9c5',
         'gray-dark': '#877d92',

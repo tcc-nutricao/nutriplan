@@ -8,11 +8,11 @@
       :class="{
         'bg-white/20': item.label === selectedItem,
         'hover:bg-white/10': item.label !== selectedItem,
-        'text-center': item?.icon
+        'text-center flex justify-center hover:scale-[115%]': item?.icon,
       }"
     >
       <span>{{ item?.label }}</span>
-      <i v-if="item.icon" :class="`fa-solid ${item?.icon}`" :title="item?.iconLabel" />
+      <i v-if="item.icon" :class="`fa-solid ${item?.icon} text-center flex items-center`" :title="item?.iconLabel" />
     </li>
   </ul>
 </template>
