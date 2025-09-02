@@ -1,5 +1,5 @@
 <template>
-  <Flex items-center class="rounded-lg border text-sm overflow-hidden h-[42px] focus-within:border-[#8A5ACD] focus-within:border-2" :class="classes">
+  <Flex items-center class="rounded-lg border text-sm overflow-hidden h-[42px] focus-within:border-[#8A5ACD] focus-within:border-2 transition" :class="classes">
     <slot name="pre-icon" />
     <slot name="input">
       <input

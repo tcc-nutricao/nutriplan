@@ -22,7 +22,7 @@
       { 'rounded-lg bg-gray-200 hover:bg-gray-300 border border-gray-300': gray },
       { 'rounded-lg 0 border border-slate-20 hover:bg-gray-50': light },
     ]"
-    class="rounded-lg flex items-center justify-center">
+    class="rounded-xl flex items-center justify-center">
     <div :class="size === 'text-xs' || size === 'text-sm' ? 'px-2' : 'px-4'" class="py-2 flex items-center justify-center">
       <slot>
         <i class="fa-solid" :class="label ? `mr-2 ${icon}` : `${icon}`" v-if="icon"></i>
