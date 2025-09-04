@@ -1,9 +1,9 @@
 <template>
-  <Flex items-center class="rounded-lg border text-sm overflow-hidden h-[42px] focus-within:border-[#8A5ACD] focus-within:border-2 transition" :class="classes">
+  <Flex items-center class="rounded-xl border-2 text-sm overflow-hidden border-p-g2 h-[42px] focus-within:border-p-600 transition" :class="classes">
     <slot name="pre-icon" />
     <slot name="input">
       <input
-        class="px-2 grow border-none bg-transparent focus:outline-none focus:ring-0 text-gray-700"
+        class="px-3 grow border-none bg-transparent focus:outline-none focus:ring-0 text-p-950"
         :class="{ 'text-danger-500': props.error }"
         v-model="displayValue"
         @input="handleInput"
@@ -46,7 +46,7 @@ const classes = computed(() => ({
   'border-red-500': props.error,
   'text-red-500': props.error,
   'bg-slate-200': props.disabled,
-  'border-slate-400': !props.error
+  'border-cinza': !props.error
 }))
 watch(
   () => props.modelValue,

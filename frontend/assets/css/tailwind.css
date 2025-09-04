@@ -48,3 +48,19 @@ svg {
     /* danger light */
     color: #ff5858;
 }
+
+.h1 {
+    font-size: 2.4em;
+    @apply font-bold text-p-600 m-0;
+}
+.h2{
+    font-size: 1.5em;
+    font-weight: 600;
+    @apply text-p-950;
+}
+
+.h3 {
+    font-size: 1.25em;
+    font-weight: 500;
+    @apply text-p-950;
+}
