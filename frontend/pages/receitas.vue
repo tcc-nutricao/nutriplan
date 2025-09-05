@@ -3,7 +3,7 @@
         <h1 class="h1">Receitas</h1>
         <div class="flex flex-row gap-5">
             <div class="flex flex-col w-[50%] mb-8">
-                <SearchBar :filter="true" :sort="true" />
+                <SearchBar :filter="true" :sort="true" class="stickyProfile w-full shadowSearch" />
                 <div listaReceitas class="flex flex-col gap-3 w-full mt-5">
                     <ReceitaButton
                         v-for="item in itemList"
@@ -18,7 +18,7 @@
                 </div>
             </div>
 
-            <div v-if="selectedItem" class="bg-white rounded-3xl shadow-lg border-2 p-6 w-[50%] mb-8">
+            <div v-if="selectedItem" class="stickyProfile bg-white rounded-3xl shadow-lg border-2 p-6 w-[50%] mb-8">
                 <h2 class="h2 mb-4">{{ selectedItem.title }}</h2>
                 <div class="flex flex-wrap gap-2 mb-4">
                     <span v-for="(category, index) in selectedItem.categories" :key="index" class="bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-sm">
@@ -35,7 +35,7 @@
                 <h3 class="h3 mt-4 mb-2">Modo de preparo:</h3>
                 <p class="mb-1.5" v-for="(step, index) in selectedItem.steps" :key="index"><span class="font-bold">{{ index + 1 }}. </span>{{ step }}</p>
             </div>
-            <div v-else class="bg-white rounded-3xl shadow-lg border-2 p-6 w-[50%] flex items-center justify-center text-gray-500">
+            <div v-else class="stickyProfile bg-white rounded-3xl shadow-lg border-2 p-6 py-20 w-[50%] flex items-center justify-center text-gray-500">
                 <p>Selecione uma receita ao lado para ver os detalhes!</p>
             </div>
         </div>
@@ -87,6 +87,30 @@ export default {
                     'Sirva gelado.'
                 ]
             },
+            { id: 4, title: 'Suco de Uva', categories: ['Leve', 'Doce', 'Fácil'], time: '2', portions: '1', 
+                description: 'Descrição detalhada da receita selecionada. Ingredientes, modo de preparo, dicas e outras informações relevantes para o usuário.', 
+                ingredients: ['1 cacho de uvas', '1L de água'],
+                steps: ['Lave bem a uva e corte em pedacos pequenos.',
+                    'Bata no liquidificador com um pouco de água.',
+                    'Sirva gelado.'
+                ]
+            },
+            { id: 5, title: 'Suco de Uva', categories: ['Leve', 'Doce', 'Fácil'], time: '2', portions: '1', 
+                description: 'Descrição detalhada da receita selecionada. Ingredientes, modo de preparo, dicas e outras informações relevantes para o usuário.', 
+                ingredients: ['1 cacho de uvas', '1L de água'],
+                steps: ['Lave bem a uva e corte em pedacos pequenos.',
+                    'Bata no liquidificador com um pouco de água.',
+                    'Sirva gelado.'
+                ]
+            },
+            { id: 6, title: 'Suco de Uva', categories: ['Leve', 'Doce', 'Fácil'], time: '2', portions: '1', 
+                description: 'Descrição detalhada da receita selecionada. Ingredientes, modo de preparo, dicas e outras informações relevantes para o usuário.', 
+                ingredients: ['1 cacho de uvas', '1L de água'],
+                steps: ['Lave bem a uva e corte em pedacos pequenos.',
+                    'Bata no liquidificador com um pouco de água.',
+                    'Sirva gelado.'
+                ]
+            },
         ]
     };
     },
@@ -105,3 +129,34 @@ export default {
     }
 }
 </script>
+
+<style>
+.stickyProfile {
+    position: sticky;
+    top: 30px;
+    align-self: flex-start;
+  }
+
+  @keyframes fade-shadow {
+    from { 
+        box-shadow: 0 0 40px 40px rgba(246, 245, 253, 0),
+        0 -10px 0 rgba(246, 245, 253, 0);
+    }
+    to { 
+        box-shadow: 0 0 40px 40px rgba(246, 245, 253, 1),
+        0 -30px 0 rgba(246, 245, 253, 1);
+    }
+  }
+  
+  .shadowSearch {
+    background-color: #f6f5fd;
+
+    animation: fade-shadow linear;
+
+    animation-timeline: scroll();
+    animation-range-start: 120px;
+    animation-range-end: 200px;
+
+    animation-fill-mode: forwards;
+  }
+</style>

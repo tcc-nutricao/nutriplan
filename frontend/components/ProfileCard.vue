@@ -1,6 +1,6 @@
 <template>
   <aside v-if="isOpen"
-        class="transform transition-transform duration-300 z-50 ml-4 mr-6"
+        class="sticky top-0 transform transition-transform duration-300 z-50 ml-4 mr-6"
   >
     <div class="flex justify-end">
         <button 

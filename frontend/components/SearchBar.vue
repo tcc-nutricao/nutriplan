@@ -1,7 +1,7 @@
 <template>
-  <div ref="searchBarContainer" class="flex flex-row gap-2">
+  <div ref="searchBarContainer" class="flex flex-row gap-2 bg-transparent">
     <Input
-      class="mb-5 bg-white w-full shadow-lg shadow-gray-600/10 focus-within:shadow-p-600/20 hover:shadow-p-600/20 transition"
+      class="bg-white w-full shadow-lg shadow-gray-600/10 focus-within:shadow-p-600/20 hover:shadow-p-600/20 transition"
       label="pesquisaReceita"
       placeholder="Pesquise uma receita"
     />
