@@ -25,8 +25,8 @@ const hideSideBar = computed(() => route.meta.hideSideBar === true)
 
 <style>
   @keyframes fade-out {
-    from { opacity: 1; }
-    to { opacity: 0; }
+    from { opacity: 1; pointer-events: all; }
+    to { opacity: 0; pointer-events: none;}
   }
 
   .top-bar-fading {
@@ -40,7 +40,6 @@ const hideSideBar = computed(() => route.meta.hideSideBar === true)
 
     animation-duration: 3s;
 
-    pointer-events: none;
   }
 
   .stickyProfile {

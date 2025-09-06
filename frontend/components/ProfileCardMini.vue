@@ -46,7 +46,7 @@ const route = 'auth/logout'
 
 const items = [
   { icon: 'fa-list', iconLabel: 'Plano Alimentar', route: '/' },
-  { icon: 'fa-calendar-days', iconLabel: 'Diário Alimentar', route: '/' },
+  { icon: 'fa-calendar-days', iconLabel: 'Diário Alimentar', route: '/diario-alimentar' },
   { icon: 'fa-bars-progress', iconLabel: 'Meu Progresso', route: '/' },
   { icon: 'fa-utensils', iconLabel: 'Receitas', route: '/receitas' },
   { icon: 'fa-users', iconLabel: 'Meus Grupos', route: '/' }

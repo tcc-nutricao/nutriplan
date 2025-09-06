@@ -1,6 +1,6 @@
 <template>
     <div 
-        class="flex flex-col items-between gap-2 py-4 px-6 bg-white rounded-3xl shadow-lg border-2 cursor-pointer transition-all duration-100"
+        class="flex flex-col items-between gap-2 py-4 px-6 bg-white rounded-3xl shadow-lg border-2 cursor-pointer transition-all duration-100 active:scale-[98%]"
         :class="{'border-p-600 shadow-xl shadow-p-600/20 w-[100%] transition': isSelected}, {'w-[85%]' : !isSelected}"
         @click="notificarClique"
     >

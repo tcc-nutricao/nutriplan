@@ -30,7 +30,7 @@
 
       <ListItem :items="items" class="mb-6" />
       <div class="flex justify-start items-center gap-2 w-full hover:bg-white/10 font-sora cursor-pointer text-white 
-                  transition px-3 py-2 rounded-lg hover:scale-105 active:scale-95 group hover:text-danger-light"
+                  select-none transition px-3 py-2 rounded-lg hover:scale-105 active:scale-95 group hover:text-danger-light"
                   @click="logout">
         <i 
               class="fa-solid fa-right-from-bracket ml-1 text-lg font-semibold hover:scale-110 active:scale-95 transition cursor-pointer"
@@ -56,7 +56,7 @@ const route = 'auth/logout'
 
 const items = [
   { label: 'Plano Alimentar', route: '/' },
-  { label: 'Diário Alimentar', route: '/' },
+  { label: 'Diário Alimentar', route: '/diario-alimentar' },
   { label: 'Meu Progresso', route: '/' },
   { label: 'Receitas', route: '/receitas' },
   { label: 'Meus Grupos', route: '/' }

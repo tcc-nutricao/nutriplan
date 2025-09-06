@@ -99,7 +99,7 @@ const lightPurpleClass = computed(() => {
 })
 
 const mediumPurpleClass = computed(() => {
-  return 'transition bg-p-600 hover:bg-p-700 active:scale-95 hover:shadow-lg hover:drop-shadow-np2'
+  return 'transition bg-p-600 hover:bg-p-700 active:scale-95 hover:shadow-lg hover:drop-shadow-np2 active:shadow-none'
 })
 
 const darkPurpleClass = computed(() => {
@@ -111,27 +111,27 @@ const redClass = computed(() => {
 })
 
 const greenBorderClass = computed(() => {
-  return 'transition border border-green-500 hover:border-green-600 text-green-500 active:scale-95 hover:shadow-lg'
+  return 'transition border-2 border-green-500 hover:border-green-600 text-green-500 active:scale-95 hover:shadow-lg'
 })
 
 const lightPurpleBorderClass = computed(() => {
-  return 'transition border border-[#9B78DA] hover:bg-[#9B78DA] hover:bg-opacity-20 text-[#9B78DA] active:scale-95 hover:shadow-lg'
+  return 'transition border-2 border-[#9B78DA] hover:bg-[#9B78DA] hover:bg-opacity-20 text-[#9B78DA] active:scale-95 hover:shadow-lg'
 })
 
 const mediumPurpleBorderClass = computed(() => {
-  return 'transition border border-[#8A5ACD] hover:border-p-700 text-p-600 active:scale-95 hover:shadow-lg'
+  return 'transition border-2 border-p-600 hover:border-p-700 hover:bg-p-100 text-p-600 active:scale-95 active:shadow-none'
 })
 
 const darkPurpleBorderClass = computed(() => {
-  return 'transition border border-[#663C9B] hover:border-purple-600 text-[#663C9B] active:scale-95 hover:shadow-lg'
+  return 'transition border-2 border-[#663C9B] hover:border-purple-600 text-[#663C9B] active:scale-95 hover:shadow-lg'
 })
 
 const darkGrayBorderClass = computed(() => {
-  return 'transition border border-[#7A6E94] hover:border-black text-[#7A6E94] active:scale-95 hover:shadow-lg'
+  return 'transition border-2 border-[#7A6E94] hover:border-black text-[#7A6E94] active:scale-95 hover:shadow-lg'
 })
 
 const redBorderClass = computed(() => {
-  return 'transition border border-red-500 hover:border-red-600 text-red-500 active:scale-95 hover:shadow-lg'
+  return 'transition border-2 border-red-500 hover:border-red-600 text-red-500 active:scale-95 hover:shadow-lg'
 })
 
 </script>

@@ -64,3 +64,14 @@ svg {
     font-weight: 500;
     @apply text-p-950;
 }
+
+.h2main {
+    font-size: 1.5em;
+    font-weight: 600;
+    @apply text-p-600;
+}
+.h3main {
+    font-size: 1.25em;
+    font-weight: 500;
+    @apply text-p-600;
+}
