@@ -21,27 +21,38 @@ svg {
 
 .cccc {
     /* 50 */
+    color: #f6f5fd;
     color: rgba(246, 245, 253, 0.5);
     /* 100 */
+    color: #f0edfa;
     color: rgba(240, 237, 250, 0.5);
     /* 200 */
+    color: #e3ddf7;
     color: rgba(227, 221, 247, 0.5);
     /* 300 */
+    color: #cec2f0;
     color: rgba(206, 194, 240, 0.5);
     /* 400 */
+    color: #b49fe6;
     color: rgba(180, 159, 230, 0.5);
     /* 500 */
+    color: #9b78da;
     color: rgba(155, 120, 218, 0.5);
     /* 600 */
+    color: #8a5acd;
     color: rgba(138, 90, 205, 0.5);
     color: rgba(128, 0, 255, 0.5);
     /* 700 */
+    color: #7a48b9;
     color: rgba(122, 72, 185, 0.5);
     /* 800 */
+    color: #663c9b;
     color: rgba(102, 60, 155, 0.5);
     /* 900 */
+    color: #553280;
     color: rgba(85, 50, 128, 0.5);
     /* 950 */
+    color: #351f56;
     color: rgba(53, 31, 86, 0.5);
     /* danger */
     color: #EA3939;

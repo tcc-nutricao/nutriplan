@@ -10,42 +10,79 @@
                         {{ currentDate }}
                     </div>
                 </div>
-                <InputText
-                    class="mb-5"
-                    label="Refeição"
-                    placeholder="Selecione"
-                />
+                <p class="text-danger font-bold w-full text-center mt-0" v-if="errors.meal && selectedMeal === null">Selecione uma refeição</p>
+                <div class="flex gap-2 w-full justify-center">
+                    <Button 
+                        mediumPurple
+                        :red="errors.meal && selectedMeal === null"
+                        v-for="meal in mealNames"
+                        :key="meal"
+                        :label="meal"
+                        @click="selectMeal(meal)"
+                        :outlined="selectedMeal !== meal"
+                        :class="[
+                            'w-max px-0 h-[42px] shadow-lg shadow-p-600/10 transition',
+                            { 'bg-p-500 text-white': selectedMeal === meal }
+                        ]"
+                    />
+                </div>
                 <div class="flex flex-col px-4 pb-3 pt-4 border-2 border-p-400 rounded-2xl">
-                    <InputText
+                    <Label label="Alimento" class="text-xl font-semibold mb-1"/>
+                    <Input
+                        v-model="newItem.food"
                         class="mb-5"
-                        label="Alimento"
                         placeholder="Buscar"
+                        :error="errors.food"
                     />
                     <InputText
+                        v-model="newItem.quantity"
                         class="mb-5"
                         label="Quantidade"
                         placeholder="Digite"
-                    />
-                    <InputText
+                        type="number"
+                        :error="errors.quantity"
+                        />
+                        <InputText
+                        v-model="newItem.unit"
                         class="mb-5"
                         label="Unidade"
                         placeholder="Buscar"
+                        :error="errors.unit"
                     />
                     <div class="flex flex-row justify-end gap-2">
                         <Button 
                             mediumPurple outlined
                             class="w-max px-0 h-[42px] shadow-lg shadow-p-600/20 transition"
-                            icon="fa-solid fa-delete-left w-2 text-p-600 flex justify-center"
+                            label="Limpar"
+                            icon="fa-solid fa-delete-left text-p-600 flex justify-center"
+                            @click="clearInputs"
                         />
                         <Button 
                             mediumPurple
                             class="w-max px-0 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
-                            icon="fa-solid fa-plus short w-2 flex justify-center"
+                            label="Adicionar alimento"
+                            icon="fa-solid fa-plus short flex justify-center"
+                            @click="addItem"
                         />
                     </div>
                 </div>
-                <div class="flex flex-row">
-
+                <div v-if="hasAnyItems" class="flex flex-col gap-4 mt-4 max-w-full">
+                    <template v-for="mealName in mealNames" :key="mealName" class="max-w-full">
+                        <div v-if="newMealItems[mealName].length > 0" class="max-w-full">
+                            <h3 class="text-p-800 font-bold text-lg mb-2">{{ mealName }}</h3>
+                            <div class="flex flex-col gap-2">
+                                <ItemButton
+                                    v-for="(item, index) in newMealItems[mealName]"
+                                    :key="index"
+                                    :label="item.food"
+                                    :quantity="item.quantity"
+                                    :unity="item.unit"
+                                    class="w-full"
+                                    @delete-item="deleteItem(mealName, index)" 
+                                />
+                            </div>
+                        </div>
+                    </template>
                 </div>
                 <div class="flex justify-center mt-2">
                     <Button 
@@ -81,9 +118,16 @@
                             <span class="font-bold text-3xl text-p-600 mx-1">{{ totalConsumed }}</span>
                             / {{ dailyCalorieGoal }} kcal ({{ Math.round(totalConsumed / dailyCalorieGoal * 100) }}%)
                         </h3>
-                        <div class="flex flex-col items-end w-[35%] mt-2">
-                            <p v-for="i in 5">{{ nutriente(i-1) }}
-                            <span class="font-bold text-lg mx-1">{{ totalNutriente(i-1).toFixed() }}g</span></p>
+                        <div class="flex flex-col items-start w-[90%] mt-4 cursor-default">
+                            <p v-for="i in 5" :class="classes[i-1]">{{ nutriente(i-1) }}
+                            <span class="font-bold text-lg mx-1">{{ totalNutriente(i-1).toFixed(1) }} g</span></p>
+                        </div>
+                        <div class="flex items-center justify-center w-full h-full">
+                            <NutrientsChart
+                            class="overflow-visible"
+                                :chart-data="chartData"
+                                :chart-options="chartOptions"
+                            />
                         </div>
                     </div>
                 </div>
@@ -93,72 +137,227 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                dailyCalorieGoal: 2000,
-                currentDate: new Date().toLocaleDateString('pt-BR'),
-                selectedPeriod: 'diário',
-                selectedDay: '04/09',
-                meals: [
-                    { name: 'Café da manhã', items: [
-                        { food: 'Café', quantity: 1, unit: 'xícara', calories: 2, nutrients: [0.1, 0.3, 0, 0, 0] },
-                        { food: 'Pão integral', quantity: 2, unit: 'fatias', calories: 130, nutrients: [21, 5.5, 1.6, 2.7, 2.2] },
-                        { food: 'Margarina', quantity: 20, unit: 'g', calories: 72, nutrients: [0.1, 0.1, 8.1, 0, 0.1] },
-                        { food: 'Queijo branco', quantity: 30, unit: 'g', calories: 80, nutrients: [0.8, 5.4, 6.2, 0, 0.8] },
-                    ] },
-                    { name: 'Almoço', items: [
-                        { food: 'Arroz integral', quantity: 150, unit: 'g', calories: 180, nutrients: [36, 3.8, 1.4, 2.7, 0.1] },
-                        { food: 'Feijão preto', quantity: 100, unit: 'g', calories: 130, nutrients: [23.7, 8.5, 0.5, 8.8, 0.3] },
-                        { food: 'Peito de frango grelhado', quantity: 120, unit: 'g', calories: 200, nutrients: [0, 37, 4.3, 0, 0] },
-                        { food: 'Salada de alface e tomate', quantity: 80, unit: 'g', calories: 20, nutrients: [3.9, 1.2, 0.3, 1.8, 2.5] },
-                    ] },
-                    { name: 'Lanche da tarde', items: [
-                        { food: 'Iogurte natural', quantity: 200, unit: 'g', calories: 120, nutrients: [9, 7, 6, 0, 9] },
-                        { food: 'Granola', quantity: 50, unit: 'g', calories: 220, nutrients: [32, 5, 8, 5, 12] },
-                        { food: 'Mel', quantity: 20, unit: 'g', calories: 64, nutrients: [17, 0.1, 0, 0, 17] },
-                    ] },
-                    { name: 'Lanche', items: [
-                        { food: 'Maçã', quantity: 1, unit: 'unidade', calories: 80, nutrients: [21, 0.4, 0.3, 3.6, 15] },
-                        { food: 'Castanhas', quantity: 30, unit: 'g', calories: 185, nutrients: [4, 4.3, 18, 2.2, 1.3] },
-                    ] },
-                    { name: 'Jantar', items: [
-                        { food: 'Sopa de legumes', quantity: 300, unit: 'g', calories: 150, nutrients: [20, 5, 5, 6, 8] },
-                        { food: 'Pão integral', quantity: 50, unit: 'g', calories: 130, nutrients: [21, 5.5, 1.6, 2.7, 2.2] },
-                    ] },
-                ]
-            }
-        },
-        computed: {
-            totalConsumed() {
-                let total = 0; 
-                for (const meal of this.meals) {
-                    for (const item of meal.items) {
-                        total += item.calories; 
-                    }
-                }
-                return total;
-            }
-        },
-        methods: {
-            totalNutriente(num) {
-                let total = 0;
-                for (const meal of this.meals) {
-                    for (const item of meal.items) {
-                        total += item.nutrients[num];
-                    }
-                }
-                return total;
+export default {
+    data() {
+        return {
+            dailyCalorieGoal: 2000,
+            currentDate: new Date().toLocaleDateString('pt-BR'),
+            selectedPeriod: 'diário',
+            selectedDay: '04/09',
+            meals: [
+                { name: 'Café da manhã', items: [
+                    { food: 'Café', quantity: 1, unit: 'xícara', calories: 2, nutrients: [0.1, 0.3, 0, 0, 0] },
+                    { food: 'Pão integral', quantity: 2, unit: 'fatias', calories: 130, nutrients: [21, 5.5, 1.6, 2.7, 2.2] },
+                    { food: 'Margarina', quantity: 20, unit: 'g', calories: 72, nutrients: [0.1, 0.1, 8.1, 0, 0.1] },
+                    { food: 'Queijo branco', quantity: 30, unit: 'g', calories: 80, nutrients: [0.8, 5.4, 6.2, 0, 0.8] },
+                ] },
+                { name: 'Almoço', items: [
+                    { food: 'Arroz integral', quantity: 150, unit: 'g', calories: 180, nutrients: [36, 3.8, 1.4, 2.7, 0.1] },
+                    { food: 'Feijão preto', quantity: 100, unit: 'g', calories: 130, nutrients: [23.7, 8.5, 0.5, 8.8, 0.3] },
+                    { food: 'Peito de frango grelhado', quantity: 120, unit: 'g', calories: 200, nutrients: [0, 37, 4.3, 0, 0] },
+                    { food: 'Salada de alface e tomate', quantity: 80, unit: 'g', calories: 20, nutrients: [3.9, 1.2, 0.3, 1.8, 2.5] },
+                ] },
+                { name: 'Lanche', items: [
+                    { food: 'Maçã', quantity: 1, unit: 'unidade', calories: 80, nutrients: [21, 0.4, 0.3, 3.6, 15] },
+                    { food: 'Castanhas', quantity: 30, unit: 'g', calories: 185, nutrients: [4, 4.3, 18, 2.2, 1.3] },
+                    { food: 'Iogurte natural', quantity: 200, unit: 'g', calories: 120, nutrients: [9, 7, 6, 0, 9] },
+                    { food: 'Granola', quantity: 50, unit: 'g', calories: 220, nutrients: [32, 5, 8, 5, 12] },
+                    { food: 'Mel', quantity: 20, unit: 'g', calories: 64, nutrients: [17, 0.1, 0, 0, 17] },
+                ] },
+                { name: 'Jantar', items: [
+                    { food: 'Sopa de legumes', quantity: 300, unit: 'g', calories: 150, nutrients: [20, 5, 5, 6, 8] },
+                    { food: 'Pão integral', quantity: 50, unit: 'g', calories: 130, nutrients: [21, 5.5, 1.6, 2.7, 2.2] },
+                ] },
+            ],
+            selectedMeal: null, 
+            
+            mealNames: ['Café da manhã', 'Almoço', 'Lanche', 'Janta'],
+            
+            newMealItems: {
+                'Café da manhã': [],
+                'Almoço': [],
+                'Lanche': [],
+                'Janta': []
             },
-            nutriente(num) {
-                switch (num) {
-                    case 0: return 'Carboidratos: ';
-                    case 1: return 'Proteínas: ';
-                    case 2: return 'Gorduras: ';
-                    case 3: return 'Fibras: ';
-                    case 4: return 'Açúcares: ';
+            newItem: {
+                food: '',
+                quantity: '',
+                unit: ''
+            },
+            errors: {
+                food: null,
+                quantity: null,
+                unit: null,
+                meal: null
+            },
+            chartOptions: {
+                responsive: true,
+                maintainAspectRatio: false,
+                layout: {
+                    padding: 10 
+                },
+                plugins: {
+                    layout: {
+                        autoPadding: false,
+                        padding: 100
+                    },
+                    legend: {
+                        display: false,
+                        position: 'bottom',
+                        useBorderRadius: true,  
+                        borderRadius: 20
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const value = context.raw;
+                                const total = context.chart.getDatasetMeta(0).total;
+                                const percentage = (value / total) * 100;
+                                let label = `${percentage.toFixed(1)}%`;
+                                // return label;
+                                return value.toFixed(1)+' g';
+                            }
+                        }
+                    }
+                }
+            },
+            classes: [class0, class1, class2, class3, class4],
+        }
+    },
+    computed: {
+        totalConsumed() {
+            let total = 0; 
+            for (const meal of this.meals) {
+                for (const item of meal.items) {
+                    total += item.calories; 
                 }
             }
+            return total;
+        },
+        chartData() {
+            return {
+                labels: [
+                    `Carboidratos (${this.porcentagemNutriente(0)})`, 
+                    `Proteínas (${this.porcentagemNutriente(1)})`, 
+                    `Gorduras (${this.porcentagemNutriente(2)})`, 
+                    `Fibras (${this.porcentagemNutriente(3)})`, 
+                    `Açúcares (${this.porcentagemNutriente(4)})`, 
+                ],
+                datasets: [
+                    {
+                        backgroundColor: ['#553280', '#7a48b9', '#9b78da', '#cec2f0 ', '#f0edfa'],
+                        data: [
+                            this.totalNutriente(0),
+                            this.totalNutriente(1),
+                            this.totalNutriente(2),
+                            this.totalNutriente(3),
+                            this.totalNutriente(4)
+                        ],
+                        borderColor: ['transparent', 'transparent', 'transparent', 'transparent', '#b49fe6'],
+                        clip: {
+                            left: 5, 
+                            top: 50, 
+                            right: 5,
+                            bottom: 50, 
+                        },
+                        borderRadius: 8,
+                        borderWidth: 1,
+                        hoverOffset: 30,
+                    }
+                ],
+            }
+        },
+        hasAnyItems() {
+            const allMeals = Object.values(this.newMealItems);
+            return allMeals.some(itemList => itemList.length > 0);
         }
+    },
+    methods: {
+        totalNutriente(num) {
+            let total = 0;
+            for (const meal of this.meals) {
+                for (const item of meal.items) {
+                    total += item.nutrients[num];
+                }
+            }
+            return total;
+        },
+        nutriente(num) {
+            switch (num) {
+                case 0: return 'Carboidratos: ';
+                case 1: return 'Proteínas: ';
+                case 2: return 'Gorduras: ';
+                case 3: return 'Fibras: ';
+                case 4: return 'Açúcares: ';
+            }
+        },
+        allNutrientes() {
+            let total = 0;
+            for (let i = 0; i < 5; i++) {
+                total += this.totalNutriente(i);
+            };
+            return total
+        },
+        porcentagemNutriente(num) {
+            const value = this.totalNutriente(num);
+            const total = this.allNutrientes();
+            const percentage = (value / total) * 100;
+            let label = `${percentage.toFixed(1)}%`;
+            return label;
+        },
+        selectMeal(meal) {
+            this.selectedMeal = meal;
+        },
+
+        addItem() {
+            this.errors = { food: null, quantity: null, unit: null };
+            if (!this.selectedMeal) {
+                this.errors.meal = 'Selecione uma refeição';
+                return;
+            }
+
+            let isValid = true;
+            if (!this.newItem.food) {
+                this.errors.food = 'Campo obrigatório';
+                isValid = false;
+            }
+            if (!this.newItem.quantity) {
+                this.errors.quantity = 'Campo obrigatório';
+                isValid = false;
+            }
+            if (!this.newItem.unit) {
+                this.errors.unit = 'Campo obrigatório';
+                isValid = false;
+            }
+
+            if (!isValid) {
+                return;
+            }
+            
+            this.newMealItems[this.selectedMeal].push({ ...this.newItem });
+            this.clearInputs();
+        },
+        
+        deleteItem(mealName, itemIndex) {
+            this.newMealItems[mealName].splice(itemIndex, 1);
+        },
+
+        clearInputs() {
+            this.newItem.food = '';
+            this.newItem.quantity = '';
+            this.newItem.unit = '';
+            this.errors = { food: null, quantity: null, unit: null };
+        },
     }
+}
+
+const class0 = 'border-l-[25px] border-2 rounded-md pl-1 mb-1 border-p-900';
+
+const class1 = 'border-l-[25px] border-2 rounded-md pl-1 mb-1 border-p-700';
+
+const class2 = 'border-l-[25px] border-2 rounded-md pl-1 mb-1 border-p-500';
+
+const class3 = 'border-l-[25px] border-2 rounded-md pl-1 mb-1 border-p-300';
+
+const class4 = 'border-l-[25px] border-2 rounded-md pl-1 mb-1 border-p-100 ring-1 ring-p-400';
 </script>
