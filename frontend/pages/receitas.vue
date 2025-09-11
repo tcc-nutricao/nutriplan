@@ -34,6 +34,13 @@
                 <p v-for="(ingredient, index) in selectedItem.ingredients" :key="index">{{ '• ' + ingredient }}</p>
                 <h3 class="h3 mt-4 mb-2">Modo de preparo:</h3>
                 <p class="mb-1.5" v-for="(step, index) in selectedItem.steps" :key="index"><span class="font-bold">{{ index + 1 }}. </span>{{ step }}</p>
+                <div class="w-full flex justify-center mt-5">
+                    <Button
+                        mediumPurple
+                        class="w-max px-3 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
+                        label="Gerar PDF"
+                    />
+                </div>
             </div>
             <div v-else class="stickyProfile bg-white rounded-3xl shadow-lg border-2 p-6 py-20 w-[50%] flex items-center justify-center text-gray-500">
                 <p>Selecione uma receita ao lado para ver os detalhes!</p>

@@ -129,6 +129,13 @@
                                 :chart-options="chartOptions"
                             />
                         </div>
+                        <div class="w-full flex justify-center mt-5">
+                            <Button
+                                mediumPurple
+                                class="w-max px-3 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
+                                label="Gerar PDF"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
