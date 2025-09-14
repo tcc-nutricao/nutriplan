@@ -3,7 +3,6 @@
     <TopBar v-if="!hideTopBar" class="top-bar-fading"/>
     <div class="min-w-screen flex flex-1">
       <ProfileCard v-if="!hideSideBar" class="stickyProfile" />
-      <!-- <Sidebar v-if="!hideSideBar" /> -->
       <div class="flex-1">
         <NuxtLayout>
           <NuxtPage />

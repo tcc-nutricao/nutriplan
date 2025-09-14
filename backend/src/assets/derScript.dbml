@@ -1,11 +1,13 @@
 // Use DBML to define your database structure
 // Docs: https://dbml.dbdiagram.io/docs
+// Create: https://www.dbdiagram.io/d
 
 Table foodConsumed {
   id integer [primary key]
-  id_meal integer
+  id_meal_plan_meal integer
   id_food integer
   id_recipe integer
+  id_unit_of_measurement integer
   quantity double
   date datetime
   created_at timestamp
@@ -194,7 +196,7 @@ Table mealPlan {
 Table mealPlanRecipe {
   id integer [primary key]
   id_recipe integer
-  id_meal_plan integer
+  id_meal_plan_meal integer
   created_at timestamp
   deleted_at timestamp
   updated_at timestamp
@@ -239,6 +241,15 @@ Table group {
   updated_at timestamp
 }
 
+Table unitOfMeasurement {
+  id integer [primary key]
+  name varchar
+  symbol varchar
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
 Ref userGroup: userGroup.id_user > user.id 
 Ref: group.id < userGroup.id_group
 Ref: patient.id_user - user.id
@@ -250,7 +261,7 @@ Ref: mealPlan.id_patient < patient.id
 Ref: patient.id < report.id_patient
 Ref: patient.id < healthData.id_patient
 Ref: mealPlanRecipe.id_recipe - recipe.id
-Ref: mealPlanRecipe.id_meal_plan - mealPlan.id
+Ref: mealPlanRecipe.id_meal_plan_meal - mealPlanMeal.id
 Ref: recipeFood.id_recipe > recipe.id
 Ref: recipeFood.id_preparation_method > preparationMethod.id
 Ref: recipeFood.id_food - food.id
@@ -261,10 +272,10 @@ Ref: mealPlanDietaryRestriction.id_meal_plan > mealPlan.id
 Ref: mealPlanMeal.id_meal > meal.id
 Ref: mealPlanMeal.id_meal_plan > mealPlan.id
 Ref: foodConsumed.id_food > food.id
-Ref: foodConsumed.id_meal > meal.id
+Ref: foodConsumed.id_meal_plan_meal > mealPlanMeal.id
 Ref: foodConsumed.id_recipe > recipe.id
 Ref: goalObjective.id_goal > goal.id
 Ref: goalObjective.id_objective > objective.id
-
+Ref: foodConsumed.id_unit_of_measurement - unitOfMeasurement.id
 
 

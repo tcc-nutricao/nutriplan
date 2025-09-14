@@ -1,5 +1,6 @@
 import { MealPlanRepository } from '../repositories/MealPlanRepository.js'
 import { MealPlanDietaryRestrictionRepository } from '../repositories/MealPlanDietaryRestrictionRepository.js'
+import { MealPlanMealRepository } from '../repositories/MealPlanMealRepository.js'
 import { GoalObjectiveRepository } from '../repositories/GoalObjectiveRepository.js'
 
 export const MealPlanService = {
@@ -16,23 +17,28 @@ export const MealPlanService = {
     }))
 
     if (mealPlanIds.length) {
-      const dietaryRestrictionFilters = { column: 'idMealPlan', value: mealPlanIds }
+      const mealPlanFilters = { column: 'idMealPlan', value: mealPlanIds }
+
       let goalObjective = []
+
       if (goalIds.length) {
         const goalObjectiveFilters = { column: 'idMealPlan', value: goalIds }
 
         const result = await GoalObjectiveRepository.search({ filters: goalObjectiveFilters })
         if (result.data ) goalObjective = result.data
       }
-      const { data: dietaryRestriction = [] } = await MealPlanDietaryRestrictionRepository.search({ filters: dietaryRestrictionFilters })
-      
+
+      const { data: mealPlanMeal = [] } = await MealPlanMealRepository.search({ filters: mealPlanFilters })
+      const { data: dietaryRestriction = [] } = await MealPlanDietaryRestrictionRepository.search({ filters: mealPlanFilters })
       data = mealPlan.map(plan => {
-        const dietaryRestrictions = dietaryRestriction.filter(restriction => restriction.id_meal_plan === plan.id)
         const goalObjectives = goalObjective.filter(goal => goal.id_goal === plan.id_goal)
+        const dietaryRestrictions = dietaryRestriction.filter(restriction => restriction.id_meal_plan === plan.id)
+        const mealPlanMeals = mealPlanMeal.filter(meal => meal.id_meal_plan === plan.id)
         return { 
           ...plan, 
+          goalObjectives,
           dietaryRestrictions,
-          goalObjectives
+          mealPlanMeals
         }
       })
     }

@@ -7,7 +7,6 @@
 generator client {
   provider = "prisma-client-js"
   binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -44,6 +43,16 @@ enum MealPlanStatus {
 enum Role {
   STANDARD
   PROFESSIONAL
+}
+
+enum WeekDay {
+  MON
+  TUE
+  WED
+  THU
+  FRI
+  SAT
+  SUN
 }
 
 model User {
@@ -259,7 +268,6 @@ model MealPlan {
   nutricionist Nutritionist @relation(fields: [id_nutritionist], references: [id])
   goal   Goal   @relation(fields: [id_goal], references: [id])
 
-  mealPlanRecipes           MealPlanRecipe[]
   mealPlanMeals             MealPlanMeal[]
   mealPlanDietaryRestrictions MealPlanDietaryRestriction[]
 }
@@ -267,13 +275,13 @@ model MealPlan {
 model MealPlanRecipe {
   id            Int      @id @default(autoincrement())
   id_recipe     Int
-  id_meal_plan  Int
+  id_meal_plan_meal  Int
   created_at    DateTime
   deleted_at    DateTime?
   updated_at    DateTime?
 
   recipe   Recipe   @relation(fields: [id_recipe], references: [id])
-  mealPlan MealPlan @relation(fields: [id_meal_plan], references: [id])
+  mealPlanMeal MealPlanMeal @relation(fields: [id_meal_plan_meal], references: [id])
 }
 
 model Meal {
@@ -286,36 +294,40 @@ model Meal {
 
   mealPreferences MealPreference[]
   mealPlanMeals   MealPlanMeal[]
-  foodConsumed    FoodConsumed[]
 }
 
 model MealPlanMeal {
-  id           Int      @id @default(autoincrement())
+  id           Int       @id @default(autoincrement())
   id_meal_plan Int
   id_meal      Int
-  time         DateTime?
+  time         DateTime? @db.Time
+  day          WeekDay?
   created_at   DateTime
   deleted_at   DateTime?
   updated_at   DateTime?
 
-  mealPlan Meal @relation(fields: [id_meal], references: [id])
-  meal     MealPlan @relation(fields: [id_meal_plan], references: [id])
+  mealPlan MealPlan @relation(fields: [id_meal_plan], references: [id])
+  meal     Meal     @relation(fields: [id_meal], references: [id])
+  mealPlanRecipes           MealPlanRecipe[]
+  foodConsumed    FoodConsumed[]
 }
 
 model FoodConsumed {
   id        Int      @id @default(autoincrement())
-  id_meal   Int
+  id_meal_plan_meal   Int
   id_food   Int
   id_recipe Int?
+  id_unit_of_measurement Int
   quantity  Float
   date      DateTime
   created_at DateTime
   deleted_at DateTime?
   updated_at DateTime?
 
-  meal   Meal   @relation(fields: [id_meal], references: [id])
+  mealPlanMeal MealPlanMeal @relation(fields: [id_meal_plan_meal], references: [id])
   food   Food   @relation(fields: [id_food], references: [id])
   recipe Recipe? @relation(fields: [id_recipe], references: [id])
+  unitOfMeasurement UnitOfMeasurement? @relation(fields: [id_unit_of_measurement], references: [id])
 }
 
 model UserGroup {
@@ -352,6 +364,17 @@ model GoalObjective {
 
   goal Goal @relation(fields: [id_goal], references: [id])
   objective Objective @relation(fields: [id_objective], references: [id])
+}
+
+model UnitOfMeasurement {
+  id         Int       @id @default(autoincrement())
+  name       String
+  symbol     String?
+  created_at DateTime  @default(now())
+  updated_at DateTime?  
+  deleted_at DateTime?
+
+  foodConsumed FoodConsumed[]  
 }
 
 

@@ -1,8 +1,11 @@
 <template>
   <div class="flex flex-col md:flex-row gap-5 w-full">
-    <div class="grid grid-cols-1 md:grid-cols-5 gap-5 w-full items-stretch">
-      <MealPlanCard title="Meu plano" :items="actualPlan" />
-      <MealPlanCard class="md:col-span-4" title="Outros planos" :items="otherPlans" />
+    <div class="grid grid-cols-5 gap-5 w-full items-stretch">
+      <MealPlanCardExtended :object="actualPlan[0]" class="col-span-4" />
+      <div>
+        <MealPlanCard title="Meu plano" :items="actualPlan" />
+        <MealPlanCard title="Outros planos" :items="otherPlans" />
+      </div>
     </div>
   </div>
 </template>
