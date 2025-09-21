@@ -6,7 +6,7 @@ import { CreateUserSchema } from '../dtos/user/CreateUserDto.js';
 export const UserController = {
   async search (req, res, next)  {
     try {
-      const { data, total } = await UserService.search(req.body)
+      const { data, total } = await UserService.search(req.query)
       return res.status(200).json({ data, total })
     } catch (err) {
       next(err);
@@ -35,23 +35,24 @@ export const UserController = {
   },
   async update (req, res, next)  {
     try {
+      const { id } = req.params
       const data = req.body
+
       data.role = translateRole(data.role)
-  
+
       const parseResult = CreateUserSchema.safeParse(data)
       if (!parseResult.success) {
         const errors = formatZodErrors(parseResult.error)
         return res.status(422).json({ error: true, data: errors })
       }
-  
-      const { id, ...updateData } = data
+
       if (!id) {
         return res.status(400).json({
           errors: [{ message: 'ID não informado.' }]
         })
       }
-  
-      const user = await UserService.update(id, updateData)
+
+      const user = await UserService.update(Number(id), data)
       return res.status(200).json(user)
     } catch (err) {
       if (err instanceof AppError) {
@@ -60,6 +61,7 @@ export const UserController = {
       next(err);
     }
   },
+
   async remove (req, res, next) {
     try {
       const { id } = req.params

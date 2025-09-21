@@ -4,14 +4,9 @@ const prisma = new PrismaClient()
 
 export const UserRepository = {
   async search (object) {
-    const { filters = [], limit = 10, page = 1, order = 'asc' } = object
-    const where = {}
-  
-    if (filters.name) {
-      where.name = { contains: filters.name, mode: 'insensitive' }
-    }
-    if (filters.email) {
-      where.email = { contains: filters.email, mode: 'insensitive' }
+    const { filters = {}, limit = 10, page = 1, order = 'asc' } = object
+    const where = {
+      deletedAt: null
     }
   
     const total = await prisma.user.count({ where })
@@ -43,9 +38,12 @@ export const UserRepository = {
       data
     })
   },
-  async remove (id) {
-    return await prisma.user.delete({
-      where: { id }
+  async remove(id) {
+    return await prisma.user.update({
+      where: { id },   
+      data: {
+        deletedAt: new Date()    
+      }
     })
   }
 }

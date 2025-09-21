@@ -4,7 +4,8 @@ import bcrypt from 'bcrypt'
 
 export const UserService = {
   async search (object) {
-    return await UserRepository.search(object)
+    const { data = [], total = 0 } = await UserRepository.search(object)
+    return { data, total }
   },
   async insert (data) {
     try {
@@ -29,7 +30,7 @@ export const UserService = {
     try {
       const existing = await UserRepository.findByEmail(data.email)
   
-      if (existing) {
+      if (existing && id !== existing.id) {
         throw new AppError('Email já cadastrado', 400, { emailInUse: 'Este e-mail já está em uso.' })
       }
   
