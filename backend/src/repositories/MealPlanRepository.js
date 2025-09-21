@@ -5,7 +5,9 @@ const prisma = new PrismaClient()
 export const MealPlanRepository = {
   async search (object) {
     const { filters = [], limit = 10, page = 1, order = 'asc' } = object
-    const where = {}
+    const where = {
+      deleted_at: null
+    }
     const total = await prisma.mealPlan.count({ where })
   
     const data = await prisma.mealPlan.findMany({

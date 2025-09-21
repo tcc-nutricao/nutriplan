@@ -6,7 +6,7 @@ export const UserRepository = {
   async search (object) {
     const { filters = {}, limit = 10, page = 1, order = 'asc' } = object
     const where = {
-      deletedAt: null
+      deleted_at: null
     }
   
     const total = await prisma.user.count({ where })
