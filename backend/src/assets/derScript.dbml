@@ -41,6 +41,7 @@ Table recipeFood {
   id_food integer
   id_recipe integer
   id_preparation_method integer
+  id_unit_of_measurement integer
   nutrition_value double
   image mediumblob
   created_at timestamp
@@ -165,16 +166,25 @@ Table report {
 Table patient {
   id integer [primary key]
   id_user integer
-  id_nutricionist integer
+  id_nutritionist integer
   created_at timestamp
   deleted_at timestamp
   updated_at timestamp
 }
 
-Table nutricionist {
+Table nutritionist {
   id integer [primary key]
   id_user integer
   professional_register varchar
+  created_at timestamp
+  deleted_at timestamp
+  updated_at timestamp
+}
+
+Table nutritionist_patient {
+  id integer [primary key]
+  id_nutritionist integer
+  id_patient integer
   created_at timestamp
   deleted_at timestamp
   updated_at timestamp
@@ -187,6 +197,7 @@ Table mealPlan {
   id_goal integer
   calories integer
   status enum
+  expiration_date date
   created_at timestamp
   deleted_at timestamp
   updated_at timestamp
@@ -216,6 +227,7 @@ Table mealPlanMeal {
   id_meal_plan integer
   id_meal integer
   time datetime
+  day string
   created_at timestamp
   deleted_at timestamp
   updated_at timestamp
@@ -253,10 +265,12 @@ Table unitOfMeasurement {
 Ref userGroup: userGroup.id_user > user.id 
 Ref: group.id < userGroup.id_group
 Ref: patient.id_user - user.id
-Ref: nutricionist.id_user - user.id
-Ref: patient.id_nutricionist > nutricionist.id
+Ref: nutritionist.id_user - user.id
+Ref: nutritionist_patient.id_nutritionist - nutritionist.id
+Ref: nutritionist_patient.id_patient - patient.id
+Ref: patient.id_nutritionist > nutritionist.id
 Ref: mealPlan.id_goal - goal.id
-Ref: mealPlan.id_nutritionist - nutricionist.id
+Ref: mealPlan.id_nutritionist - nutritionist.id
 Ref: mealPlan.id_patient < patient.id
 Ref: patient.id < report.id_patient
 Ref: patient.id < healthData.id_patient
@@ -265,6 +279,7 @@ Ref: mealPlanRecipe.id_meal_plan_meal - mealPlanMeal.id
 Ref: recipeFood.id_recipe > recipe.id
 Ref: recipeFood.id_preparation_method > preparationMethod.id
 Ref: recipeFood.id_food - food.id
+Ref: recipeFood.id_unit_of_measurement > unitOfMeasurement.id
 Ref: mealPreference.id_meal > meal.id
 Ref: mealPreference.id_preference - preference.id
 Ref: mealPlanDietaryRestriction.id_meal_plan - dietaryRestriction.id
