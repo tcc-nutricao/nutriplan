@@ -3,14 +3,14 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 export const NutritionistRepository = {
-  async search(object) {
+  async search(object, tx = prisma) {
     const { filters = {}, limit = 10, page = 1, order = 'asc' } = object
 
     const where = { deleted_at: null }
 
-    const total = await prisma.nutritionist.count({ where })
+    const total = await tx.nutritionist.count({ where })
 
-    const data = await prisma.nutritionist.findMany({
+    const data = await tx.nutritionist.findMany({
       where,
       take: limit,
       skip: (page - 1) * limit,
@@ -22,25 +22,25 @@ export const NutritionistRepository = {
     return { data, total }
   },
 
-  async create(data) {
+  async create(data, tx) {
     if (!data.created_at) {
         data.created_at = new Date()
     }
     
-    return await prisma.nutritionist.create({
+    return await tx.nutritionist.create({
       data,
     })
   },
 
   async update(id, data) {
-    return await prisma.nutritionist.update({
+    return await tx.nutritionist.update({
       where: { id },
       data
     })
   },
 
   async remove(id) {
-    return await prisma.nutritionist.update({
+    return await tx.nutritionist.update({
       where: { id },
       data: {
         deletedAt: new Date()
@@ -50,7 +50,7 @@ export const NutritionistRepository = {
 
   // Buscar nutricionista pelo id_user
   async findByUserId(idUser) {
-    return await prisma.nutritionist.findUnique({
+    return await tx.nutritionist.findUnique({
       where: { idUser: idUser }
     })
   }

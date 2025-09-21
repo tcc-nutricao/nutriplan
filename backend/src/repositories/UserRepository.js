@@ -27,8 +27,8 @@ export const UserRepository = {
       where: { email }
     })
   },
-  async create (data) {
-    return await prisma.user.create({
+  async create (data, tx) {
+    return await tx.user.create({
       data,
     })
   },

@@ -3,13 +3,17 @@ import { PatientRepository } from '../repositories/PatientRepository.js'
 import { NutritionistRepository } from '../repositories/NutritionistRepository.js'
 
 import { AppError } from '../exceptions/AppError.js'
+import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcrypt'
+
+const prisma = new PrismaClient()
 
 export const UserService = {
   async search (object) {
     const { data = [], total = 0 } = await UserRepository.search(object)
     return { data, total }
   },
+
   async insert(data) {
     try {
       const existing = await UserRepository.findByEmail(data.email)
@@ -21,26 +25,22 @@ export const UserService = {
 
       const hashedPassword = await bcrypt.hash(data.password, 10)
 
-      const result = await prisma.$transaction(async (prismaTx) => {
-        const user = await prismaTx.user.create({
-          data: {
-            ...data,
-            password: hashedPassword
-          }
-        })
+      const result = await prisma.$transaction(async (tx) => {
+        const user = await UserRepository.create(
+          { ...data, password: hashedPassword },
+          tx
+        )
 
-        const { role, id: idUser } = user
+        const { role, id: idUser, professional_register: professionalRegister } = user
 
-        if (!['STANDARD', 'NUTRITIONIST'].includes(role)) {
+        if (!['STANDARD', 'PROFESSIONAL'].includes(role)) {
           throw new AppError('Role inválida', 400)
         }
 
         if (role === 'STANDARD') {
-          await prismaTx.patient.create({ data: { idUser: idUser, created_at: new Date() } })
+          await PatientRepository.create({ id_user: idUser }, tx)
         } else {
-          await prismaTx.nutritionist.create({
-            data: { id_user: idUser, professional_register: null, created_at: new Date() }
-          })
+          await NutritionistRepository.create({ id_user: idUser, professional_register: professionalRegister }, tx)
         }
 
         return user
