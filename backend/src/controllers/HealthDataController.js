@@ -1,12 +1,12 @@
-import { MealPlanService } from '../services/MealPlanService.js'
+import { HealthDataService } from '../services/HealthDataService.js'
 import { AppError } from '../exceptions/AppError.js'
 import { formatZodErrors } from '../utils/formatZodErrors.js'
-import { CreateMealPlanSchema } from '../dtos/mealPlan/CreateMealPlanDto.js'
+import { CreateHealthDataSchema } from '../dtos/healthData/CreateHealthDataDto.js'
 
-export const MealPlanController = {
+export const HealthDataController = {
   async search (req, res, next)  {
     try {
-      const { data, total } = await MealPlanService.search(req.query)
+      const { data, total } = await HealthDataService.search(req.query)
       return res.status(200).json({ data, total })
     } catch (err) {
       next(err)
@@ -16,15 +16,15 @@ export const MealPlanController = {
     try {
       const data = req.body
   
-      const parseResult = CreateMealPlanSchema.safeParse(data)
+      const parseResult = CreateHealthDataSchema.safeParse(data)
       
       if (!parseResult.success) {
         const errors = formatZodErrors(parseResult.error)
         return res.status(422).json({ error: true, data: errors })
       }
   
-      const mealPlan = await MealPlanService.insert(data)
-      return res.status(201).json(mealPlan)
+      const healthData = await HealthDataService.insert(data)
+      return res.status(201).json(healthData)
     } catch (err) {
       if (err instanceof AppError) {
         return res.status(err.statusCode).json({ error: true, data: err.details })
@@ -36,21 +36,22 @@ export const MealPlanController = {
     try {
       const data = req.body
   
-      const parseResult = CreateMealPlanSchema.safeParse(data)
+      const parseResult = CreateHealthDataSchema.safeParse(data)
       if (!parseResult.success) {
         const errors = formatZodErrors(parseResult.error)
         return res.status(422).json({ error: true, data: errors })
       }
   
       const { id, ...updateData } = data
+
       if (!id) {
         return res.status(400).json({
           errors: [{ message: 'ID não informado.' }]
         })
       }
   
-      const mealPlan = await MealPlanService.update(id, updateData)
-      return res.status(200).json(mealPlan)
+      const healthData = await HealthDataService.update(id, updateData)
+      return res.status(200).json(healthData)
     } catch (err) {
       if (err instanceof AppError) {
         return res.status(err.statusCode).json({ error: true, data: err.details })
@@ -67,14 +68,14 @@ export const MealPlanController = {
         })
       }
   
-      const deletedUser = await MealPlanService.remove(Number(id));
+      const deletedUser = await HealthDataService.remove(Number(id));
       if (!deletedUser) {
         return res.status(404).json({
-          errors: [{ message: 'Plano alimentar não encontrado.' }]
+          errors: [{ message: 'Health Data não encontrado.' }]
         })
       }
   
-      return res.status(200).json({ message: 'Plano alimentar removido com sucesso.' });
+      return res.status(200).json({ message: 'Health Data removido com sucesso.' });
     } catch (err) {
       next(err)
     }
