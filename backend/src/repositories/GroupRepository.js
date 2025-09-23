@@ -25,7 +25,7 @@ export const GroupRepository = {
         id: order === 'asc' ? 'asc' : 'desc',
       },
       include: {
-        patient: true
+        userGroups: true
       },
     });
 
