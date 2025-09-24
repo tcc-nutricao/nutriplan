@@ -1,54 +1,9 @@
-import { PrismaClient } from '@prisma/client';
+import { generateCrudRepository } from './Repository.js'
 
-const prisma = new PrismaClient();
-
-export const GroupRepository = {
-  async search({ filters = [], limit = 10, page = 1, order = 'asc' }) {
-    const where = {
-      deleted_at: null,
-    };
-
-    filters.forEach((filter) => {
-      const { field, value, operator = 'equals' } = filter;
-      if (field && value !== undefined) {
-        where[field] = { [operator]: value };
-      }
-    });
-
-    const total = await prisma.group.count({ where });
-
-    const data = await prisma.group.findMany({
-      where,
-      take: limit,
-      skip: (page - 1) * limit,
-      orderBy: {
-        id: order === 'asc' ? 'asc' : 'desc',
-      },
-      include: {
-        userGroups: true
-      },
-    });
-
-    return { data, total };
-  },
-
-  async create(data) {
-    return await prisma.group.create({
-      data,
-    });
-  },
-
-  async update(id, data) {
-    return await prisma.group.update({
-      where: { id },
-      data,
-    });
-  },
-
-  async remove(id) {
-    return await prisma.group.update({
-      where: { id },
-      data: { deleted_at: new Date() },
-    });
-  },
-};
+export const GroupRepository = generateCrudRepository('group', {
+  softDelete: true,
+  defaultOrderBy: 'id',
+  defaultIncludes: {
+    userGroups: true
+  }
+})
