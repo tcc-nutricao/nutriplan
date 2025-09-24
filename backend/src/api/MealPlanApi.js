@@ -1,4 +1,8 @@
 import { MealPlanController } from '../controllers/MealPlanController.js'
 import { generateCrudApi } from './Api.js'
 
-export const api = generateCrudApi(MealPlanController)
+// Mescla CRUD padrão com métodos customizados do controller
+export const api = {
+  ...generateCrudApi(MealPlanController),
+  // Métodos customizados já estão disponíveis no MealPlanController
+}
