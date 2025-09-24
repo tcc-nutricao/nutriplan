@@ -84,10 +84,10 @@ const selectedItem = ref(null);
 
 const items = [
   { icon: 'fa-list', label: 'Plano Alimentar', route: '/meal-plan' },
-  { icon: 'fa-calendar-days', label: 'Diário Alimentar', route: '/diario-alimentar' },
-  { icon: 'fa-bars-progress', label: 'Meu Progresso', route: '/meu-progresso' },
-  { icon: 'fa-utensils', label: 'Receitas', route: '/receitas' },
-  { icon: 'fa-users', label: 'Meus Grupos', route: '/meus-grupos' }
+  { icon: 'fa-calendar-days', label: 'Diário Alimentar', route: '/food-diary' },
+  { icon: 'fa-bars-progress', label: 'Meu Progresso', route: '/my-progress' },
+  { icon: 'fa-utensils', label: 'Receitas', route: '/recipes' },
+  { icon: 'fa-users', label: 'Meus Grupos', route: '/my-groups' }
 ];
 
 const handleItemSelection = (item) => {
