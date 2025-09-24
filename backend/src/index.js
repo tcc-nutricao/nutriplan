@@ -16,7 +16,7 @@ app.use(cors({ credentials: true, origin: process.env.CORS }))
 const routesPath = path.join(process.cwd(), 'src', 'routes')
 
 fs.readdirSync(routesPath).forEach(async (file) => {
-  if (file.endsWith('Route.js')) {
+  if (file.endsWith('Route.js') && file !== 'Route.js') {
     const routeModule = await import(`./routes/${file}`)
     const route = routeModule.default || routeModule
     if (typeof route === 'function') {

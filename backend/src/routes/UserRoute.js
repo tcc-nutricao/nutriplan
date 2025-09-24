@@ -1,6 +1,6 @@
-import { UserApi } from "../api/UserApi"
-import { genericRoute } from "./Route"
+import { api } from "../api/UserApi.js"
+import { genericRoute } from "./Route.js"
 
 export default (router) => {
-  genericRoute(router, '/user', UserApi)
+  genericRoute(router, '/user', api)
 }
