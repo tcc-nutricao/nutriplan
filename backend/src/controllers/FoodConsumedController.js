@@ -9,7 +9,7 @@ export const MealPlanController = {
   ...generateCrudController(
     FoodConsumedService,
     CreateFoodConsumedSchema,
-    'Alimentos consumidos'
+    'Alimento consumido'
   )
 }
 
