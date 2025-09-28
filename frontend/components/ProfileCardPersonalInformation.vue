@@ -2,12 +2,13 @@
   <div class="bg-white rounded-2xl shadow p-6 w-full max-w-4xl mx-auto mt-6">
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-xl font-bold text-purple-700">Dados Pessoais</h2>
-      <button
+      <!-- <button
         class="bg-purple-500 hover:bg-purple-600 text-white px-8 py-2 rounded-lg transition font-medium"
         @click="$emit('edit')"
       >
         Editar
-      </button>
+      </button> -->
+      <button @click="$emit('edit')">Editar</button>
     </div>
 
     <div class="grid grid-cols-2 gap-6">
@@ -50,6 +51,8 @@
 </template>
 
 <script setup>
+import { defineProps, defineEmits } from "vue";
+
 defineProps({
   idade: { type: Number, default: null },
   sexo: { type: String, default: "" },
@@ -59,6 +62,9 @@ defineProps({
   objetivo: { type: String, default: "Não informado" },
   preferencias: { type: String, default: "Não informado" },
 });
+
+defineEmits(["edit"]);
+
 </script>
 
 <style scoped>
