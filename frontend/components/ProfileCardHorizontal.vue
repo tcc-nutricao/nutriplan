@@ -7,6 +7,7 @@
         <div
           class="w-20 h-20 flex items-center justify-center rounded-full bg-white border-4 border-purple-500"
         >
+          <!-- Se no futuro tiver avatar, pode trocar o ícone pelo <img> -->
           <svg
             class="w-12 h-12 text-purple-500"
             viewBox="36.5 20 165 165"
@@ -21,15 +22,23 @@
       </div>
 
       <div>
-        <p class="text-2xl font-bold text-purple-700">Luna Araújo</p>
-        <p class="text-gray-600 text-sm">luna@gmail.com</p>
+        <p class="text-2xl font-bold text-purple-700">{{ nome }}</p>
+        <p class="text-gray-600 text-sm">{{ email }}</p>
       </div>
     </div>
 
     <button
       class="bg-purple-500 hover:bg-purple-600 text-white px-8 py-2 rounded-lg transition font-medium"
+      @click="$emit('edit')"
     >
       Editar
     </button>
   </div>
 </template>
+
+<script setup>
+defineProps({
+  nome: { type: String, required: true },
+  email: { type: String, required: true },
+});
+</script>
