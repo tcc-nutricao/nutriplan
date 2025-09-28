@@ -36,6 +36,24 @@
               placeholder="Digite seu email"
             />
           </label>
+
+          <label class="block mb-2">
+            Senha atual:
+            <input
+              type="password"
+              class="border rounded w-full p-2 mt-1"
+              placeholder="Digite sua senha"
+            />
+          </label>
+
+          <label class="block mb-2">
+            Nova senha:
+            <input
+              type="password"
+              class="border rounded w-full p-2 mt-1"
+              placeholder="Digite a nova senha"
+            />
+          </label>
         </div>
 
         <div v-else>
