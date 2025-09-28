@@ -35,7 +35,8 @@ const insert = async (data) => {
     if (role === 'STANDARD') {
       await PatientRepository.create({ id_user: idUser }, tx)
     } else {
-      await NutritionistRepository.create({ id_user: idUser, professional_register: professionalRegister }, tx)
+      let pr = professionalRegister ?? "123245"; // Valor padrão se não fornecido
+      await NutritionistRepository.create({ id_user: idUser, professional_register: pr }, tx)
     }
 
     return user

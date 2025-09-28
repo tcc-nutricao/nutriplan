@@ -11,18 +11,28 @@ const port = process.env.PORT || 4000
 app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }))
-app.use(cors({ credentials: true, origin: process.env.CORS }))
+app.use(cors({ 
+  credentials: true, 
+  origin: [process.env.CORS, 'http://localhost:3000', 'http://localhost:3001'],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
+}))
 
 const routesPath = path.join(process.cwd(), 'src', 'routes')
 
 fs.readdirSync(routesPath).forEach(async (file) => {
   if (file.endsWith('Route.js') && file !== 'Route.js') {
-    const routeModule = await import(`./routes/${file}`)
-    const route = routeModule.default || routeModule
-    if (typeof route === 'function') {
-      route(app)
-    } else {
-      console.warn(`O módulo ${file} não exporta uma função padrão`)
+    try {
+      const routeModule = await import(`./routes/${file}`)
+      const route = routeModule.default || routeModule
+      if (typeof route === 'function') {
+        route(app)
+        console.log(`✓ Rota ${file} carregada com sucesso`)
+      } else {
+        console.warn(`⚠ O módulo ${file} não exporta uma função padrão`)
+      }
+    } catch (error) {
+      console.error(`✗ Erro ao carregar a rota ${file}:`, error.message)
     }
   }
 })
@@ -31,4 +41,13 @@ app.get('/', (req, res) => res.send('API rodando!'))
 
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`)
+})
+
+// Error handling global
+process.on('uncaughtException', (error) => {
+  console.error('Erro não capturado:', error)
+})
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Promise rejeitada não tratada:', reason)
 })

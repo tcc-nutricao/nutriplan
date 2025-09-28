@@ -1,7 +1,7 @@
 const get = async (route, params = {}) => {
   const { $axios } = useNuxtApp()  
   try {
-    const res = await $axios.get(route, { params })
+    const res = await $axios.get(`/${route}`, { params })
     return { ...res.data, status: res.status }
   } catch (err) {
     return { error: true, ...err.response, status: err.response?.status }
@@ -11,7 +11,7 @@ const get = async (route, params = {}) => {
 const search = async (route, objectParams) => {
   const { $axios } = useNuxtApp()
   try {
-    const res = await $axios.get(route, { params: objectParams })
+    const res = await $axios.get(`/${route}`, { params: objectParams })
     return { ...res.data, status: res.status }
   } catch (err) {
     return { error: true, ...err.response, status: err.response?.status }
@@ -30,7 +30,7 @@ const insert = async (route, object, itemMessage) => {
   }
 
   try {
-    const res = await $axios.post(route, object, { headers })
+    const res = await $axios.post(`/${route}`, object, { headers })
     return { ...res.data, status: res.status }
   } catch (err) {
     return { error: true, ...err.response, status: err.response?.status }

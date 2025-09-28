@@ -21,16 +21,16 @@ export const generateCrudRepository = (modelName, options = {}) => {
   return {
     async search(object) {
       const { filters = [], limit = 10, page = 1, order = 'asc' } = object
-
+      
       const where = {}
       
-      // Adiciona soft delete se habilitado
       if (softDelete) {
         where.deleted_at = null
       }
 
-      // Processa filtros
-      filters.forEach((filter) => {
+      const filtersArray = Array.isArray(filters) ? filters : []
+      
+      filtersArray.forEach((filter) => {
         const { field, value, operator = 'equals' } = filter
         if (field && value !== undefined) {
           where[field] = { [operator]: value }

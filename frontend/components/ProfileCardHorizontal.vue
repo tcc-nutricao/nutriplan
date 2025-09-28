@@ -21,15 +21,27 @@
       </div>
 
       <div>
-        <p class="text-2xl font-bold text-purple-700">Luna Araújo</p>
-        <p class="text-gray-600 text-sm">luna@gmail.com</p>
+        <p class="text-2xl font-bold text-purple-700">{{ nome }}</p>
+        <p class="text-gray-600 text-sm">{{ email }}</p>
       </div>
     </div>
 
     <button
       class="bg-purple-500 hover:bg-purple-600 text-white px-8 py-2 rounded-lg transition font-medium"
+      @click="$emit('edit')"
     >
       Editar
     </button>
   </div>
 </template>
+
+<script setup>
+import { defineProps, defineEmits } from "vue";
+
+defineProps({
+  nome: { type: String, required: true },
+  email: { type: String, required: true },
+});
+
+defineEmits(["edit"]);
+</script>
