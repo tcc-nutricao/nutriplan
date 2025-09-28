@@ -68,9 +68,7 @@
                 <div class="flex flex-col justify-center items-center mb-3 rounded-3xl shadow-lg gap-1 bg-white p-6 pb-8">
                     <h1 class="h1 mb-0">{{progressoMeta.texto}}</h1>
                     <h3 class="h3">da meta atingida</h3>
-                    <div class="w-full p-0.5 flex items-center justify-start bg-transparent border-2 border-p-600 rounded-lg">
-                        <div class="bg-gradient-to-r from-p-500 to-p-700 h-4 rounded-md" :style="{ width: progressoMeta.valor + '%' }"></div>
-                    </div>
+                    <ProgressBar :progress="progressoMeta.valor" />
                 </div>
                 <div class="flex flex-col justify-center items-center mb-3 rounded-3xl shadow-lg gap-1 bg-white p-6 pb-8">
                     <h1 class="h1">{{diasDeProgresso}} dias</h1>
@@ -272,7 +270,7 @@ export default {
                     { data: '2025-09-23', peso: 71.7 },
                 ];
                 this.isLoading = false; 
-            }, 1000);
+            }, 50);
         }
     },
     mounted() {
