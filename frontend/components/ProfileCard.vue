@@ -37,7 +37,7 @@
             <p
               class="text-p-950 font-sora text-xl text-center font-semibold transition ease-in-out group-hover:scale-[112%] group-active:scale-105"
             >
-              Luna Araújo
+              Luna
             </p>
             <p
               class="text-p-950 font-sora font-light text-sm transition ease-in-out group-hover:translate-y-1 group-active:scale-95"
@@ -127,11 +127,11 @@ const isOpen = ref(true);
 const selectedItem = ref(null);
 
 const items = [
-  { icon: 'fa-list', label: 'Plano Alimentar', route: '/meal-plan' },
-  { icon: 'fa-calendar-days', label: 'Diário Alimentar', route: '/food-diary' },
-  { icon: 'fa-bars-progress', label: 'Meu Progresso', route: '/my-progress' },
-  { icon: 'fa-utensils', label: 'Receitas', route: '/recipes' },
-  { icon: 'fa-users', label: 'Meus Grupos', route: '/my-groups' }
+  { icon: "fa-list", label: "Plano Alimentar", route: "/meal-plan" },
+  { icon: "fa-calendar-days", label: "Diário Alimentar", route: "/food-diary" },
+  { icon: "fa-bars-progress", label: "Meu Progresso", route: "/my-progress" },
+  { icon: "fa-utensils", label: "Receitas", route: "/recipes" },
+  { icon: "fa-users", label: "Meus Grupos", route: "/my-groups" },
 ];
 
 const handleItemSelection = (item) => {
