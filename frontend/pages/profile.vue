@@ -19,6 +19,7 @@
 
     <ProfileEditModal
       v-if="showModal"
+      :key="activeSection"
       :section="activeSection"
       @close="closeModal"
     />
