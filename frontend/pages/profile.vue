@@ -13,14 +13,14 @@
   </div>
 </template>
 
-<script> 
-
+<script>
 export default {
-  name: 'Profile',
+  name: "Profile",
   components: {
-    ProfileCardHorizontal: () => import('../components/ProfileCardHorizontal.vue'),
-    ProfileCardPersonalInformation: () => import('../components/ProfileCardPersonalInformation.vue'),
+    ProfileCardHorizontal: () =>
+      import("../components/ProfileCardHorizontal.vue"),
+    ProfileCardPersonalInformation: () =>
+      import("../components/ProfileCardPersonalInformation.vue"),
   },
 };
-
 </script>

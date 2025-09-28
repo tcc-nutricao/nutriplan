@@ -7,7 +7,6 @@
         <div
           class="w-20 h-20 flex items-center justify-center rounded-full bg-white border-4 border-purple-500"
         >
-          <!-- Se no futuro tiver avatar, pode trocar o ícone pelo <img> -->
           <svg
             class="w-12 h-12 text-purple-500"
             viewBox="36.5 20 165 165"

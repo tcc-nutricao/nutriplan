@@ -58,7 +58,7 @@ defineProps({
   restricoes: { type: String, default: "Não informado" },
   objetivo: { type: String, default: "Não informado" },
   preferencias: { type: String, default: "Não informado" },
-})
+});
 </script>
 
 <style scoped>
