@@ -86,7 +86,9 @@ model Recipe {
   name        String
   description String?
   calories    Float
-  created_at  DateTime
+  preparation_time        Int
+  portion     Int
+  created_at  DateTime @default(now())
   deleted_at  DateTime?
   updated_at  DateTime?
 

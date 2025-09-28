@@ -31,6 +31,9 @@ Table recipe {
   id integer [primary key]
   name varchar
   description text
+  calories number
+  preparation_time time 
+  portion number
   created_at timestamp
   deleted_at timestamp
   updated_at timestamp
