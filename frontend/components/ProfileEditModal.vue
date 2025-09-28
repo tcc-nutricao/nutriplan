@@ -89,7 +89,7 @@
 import { defineProps, defineEmits } from "vue";
 
 defineProps({
-  section: { type: String, required: true }, // "basic" ou "personal"
+  section: { type: String, required: true },
 });
 defineEmits(["close"]);
 </script>
