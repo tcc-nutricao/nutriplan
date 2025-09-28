@@ -1,7 +1,7 @@
 <template>
   <div>
     <ProfileCardHorizontal
-      nome="Luna Araújo"
+      nome="Luna"
       email="luna@gmail.com"
       @edit="openModal('basic')"
     />
