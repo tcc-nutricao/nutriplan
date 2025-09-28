@@ -1,6 +1,6 @@
 <template>
     <div v-if="type === '1'" class="w-full p-0.5 flex items-center justify-start bg-transparent border-2 border-p-600 rounded-lg">
-        <div class="bg-gradient-to-r from-p-500 to-p-700 h-4 rounded-md transition-all duration-500 shadow-xl shadow-p-600/20" 
+        <div class="bg-gradient-to-r from-p-500 to-p-700 h-4 rounded-md transition-all duration-500 shadow-progress" 
             :style="{ width: progress + '%'  }" :class="[`h-${height}`]"
             style="transition: width 0.6s cubic-bezier(0.5, 1, 0.8, 1);"></div>
     </div>

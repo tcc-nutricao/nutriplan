@@ -99,7 +99,7 @@ const lightPurpleClass = computed(() => {
 })
 
 const mediumPurpleClass = computed(() => {
-  return 'transition bg-p-600 hover:bg-p-700 active:scale-95 hover:shadow-lg hover:drop-shadow-np2 active:shadow-none'
+  return 'transition bg-p-600 hover:bg-p-700 active:scale-95 hover:shadow-lg active:shadow-none'
 })
 
 const darkPurpleClass = computed(() => {
@@ -107,7 +107,7 @@ const darkPurpleClass = computed(() => {
 })
 
 const redClass = computed(() => {
-  return 'transition bg-red-500 hover:bg-red-600 active:scale-95 hover:shadow-lg'
+  return 'transition bg-red-500 hover:bg-red-600 active:scale-95 active:shadow-none'
 })
 
 const greenBorderClass = computed(() => {

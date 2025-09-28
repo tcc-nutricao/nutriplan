@@ -40,7 +40,8 @@ module.exports = {
       boxShadow: {
         'custom': '0 15px 40px rgba(0, 0, 0, 0.2)',
         'btn-hover': '0 4px 8px rgba(53, 31, 86, 1)', // R950 com 0.2 alpha
-        'np': '0 4px 8px rgba(128, 0, 255, 0.5)'
+        'np': '0 4px 8px rgba(128, 0, 255, 0.5)',
+        'progress': '0 0px 25px rgba(128, 0, 255, 0.3)',
       },
       dropShadow: {
         'np2': '0 10px 10px rgba(128, 0, 255, 0.1)',

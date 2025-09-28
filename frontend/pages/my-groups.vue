@@ -37,12 +37,22 @@
                                     <i class="fa-regular fa-copy mr-1 text-p-700"></i>{{ selectedItem.code }}
                                 </h2>
                             </div>
-                            <h3 class="text-lg text-p-950" :class="endingClass(calculateDaysRemaining(selectedItem.endDate))">
+                            <h3 class="text-lg" :class="endingClass(calculateDaysRemaining(selectedItem.endDate))">
                                 {{ calculateDaysRemaining(selectedItem.endDate) }}
                             </h3>
-                            <Button mediumPurple
-                                class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
-                                icon="fa-regular fa-edit short flex justify-center" label="Editar" />
+                            <div v-if="selectedItem.isOwner" class="flex gap-3">
+                                <Button mediumPurple
+                                    class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
+                                    icon="fa-regular fa-edit short flex justify-center" label="Editar" />
+                                <Button red
+                                    class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-danger-light shadow-danger/20 transition"
+                                    icon="fa-regular fa-trash-can short flex justify-center" label="Apagar" />
+                            </div>
+                            <div v-else class="flex gap-3">
+                                <Button red
+                                    class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-danger-light shadow-danger/20 transition"
+                                    icon="fa-regular fa-right-from-bracket short flex justify-center" label="Sair" />
+                            </div>
                         </div>
                     </div>
 
@@ -53,8 +63,7 @@
                                 class="flex flex-col gap-1">
                                 <p v-for="(participant, pIndex) in column" :key="pIndex"
                                     class="font-semibold flex items-center text-lg text-gray-700 cursor-pointer text-nowrap">
-                                    <i class="fa-solid fa-circle-user mr-2 text-2xl text-p-700"></i>{{ participant.name
-                                    }}
+                                    <i class="fa-solid fa-circle-user mr-2 text-2xl text-p-700"></i>{{ participant.name }}
                                 </p>
                             </div>
                         </div>
@@ -80,18 +89,19 @@
                                 <h3 class="h3">Progresso geral</h3>
                                 <span class="text-lg font-bold text-p-700">{{ groupProgress }}%</span>
                             </div>
-                            <ProgressBar :progress="groupProgress" :height="6" />
+                            <ProgressBar :progress="groupProgress" :height="'6'" />
                         </div>
 
                         <div>
                             <h3 class="h3 text-center mb-2">Progresso Individual</h3>
                             <div class="flex flex-col gap-3">
                                 <div v-for="participant in selectedItem.participants" :key="participant.id">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <p class="font-semibold text-md text-gray-700">{{ participant.name }}</p>
+                                    <div class="flex justify-between items-center mb-0">
+                                        <p class=" text-md text-gray-700" :class="participant.name === 'Você' ? 'font-black text-p-600' : ''">{{ participant.name }}</p>
                                         <span class="text-md font-bold text-gray-600">{{ participant.progress }}%</span>
                                     </div>
-                                    <ProgressBar :progress="participant.progress" :type="2" />
+                                    <p class="font-light text-sm text-gray-600 mb-1">{{ participant.objective }}</p>
+                                    <ProgressBar :progress="participant.progress" :type="'2'" />
                                 </div>
                             </div>
                         </div>
@@ -118,26 +128,28 @@ export default {
                     code: 'KLM72Q',
                     startDate: '2025-09-01',
                     endDate: '2025-09-29',
+                    isOwner: true,
                     participants: [
-                        { id: 101, name: 'Ana', progress: 80 },
-                        { id: 102, name: 'Beatriz', progress: 50 },
-                        { id: 103, name: 'Carla', progress: 100 }
+                        { id: 101, name: 'Você', progress: 80, objective: 'Perda de Peso' },
+                        { id: 102, name: 'Beatriz', progress: 50, objective: 'Hipertrofia' },
+                        { id: 103, name: 'Carla', progress: 100, objective: 'Perda de Peso' },
                     ]
                 },
                 {
                     id: 2,
-                    title: 'Desafio Verão 2024',
+                    title: 'Desafio Verão 2026',
                     code: 'XPT09A',
                     startDate: '2025-09-15',
                     endDate: '2025-10-13',
+                    isOwner: false,
                     participants: [
-                        { id: 201, name: 'Daniel', progress: 75 },
-                        { id: 202, name: 'Eduardo', progress: 90 },
-                        { id: 203, name: 'Fernanda', progress: 60 },
-                        { id: 204, name: 'Gabriel', progress: 85 },
-                        { id: 205, name: 'Helena', progress: 100 },
-                        { id: 206, name: 'Igor', progress: 40 },
-                        { id: 207, name: 'Juliana', progress: 70 }
+                        { id: 201, name: 'Você', progress: 75, objective: 'Perda de Peso' },
+                        { id: 202, name: 'Eduardo', progress: 90, objective: 'Hipertrofia' },
+                        { id: 203, name: 'Fernanda', progress: 60,  objective: 'Definição' },
+                        { id: 204, name: 'Gabriel', progress: 85, objective: 'Ganho de Massa' },
+                        { id: 205, name: 'Helena', progress: 100, objective: 'Perda de Peso' },
+                        { id: 206, name: 'Igor', progress: 40, objective: 'Hipertrofia' },
+                        { id: 207, name: 'Juliana', progress: 70, objective: 'Definição' },
                     ]
                 },
                 {
@@ -146,12 +158,12 @@ export default {
                     code: 'VWZ21B',
                     startDate: '2025-09-20',
                     endDate: '2025-11-09',
+                    isOwner: false,
                     participants: [
-                        { id: 301, name: 'Gabriel', progress: 25 },
-                        { id: 302, name: 'Helena', progress: 45 },
-                        { id: 303, name: 'Igor', progress: 60 },
-                        { id: 304, name: 'Juliana', progress: 80 },
-                        { id: 307, name: 'Mariana', progress: 70 },
+                        { id: 301, name: 'Você', progress: 25, objective: 'Perda de Peso' },
+                        { id: 302, name: 'Helena', progress: 45, objective: 'Ganho de Massa' },
+                        { id: 303, name: 'Igor', progress: 60, objective: 'Hipertrofia' },
+                        { id: 304, name: 'Juliana', progress: 80, objective: 'Definição' },
                     ]
                 },
             ],

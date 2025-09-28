@@ -23,7 +23,7 @@ export default {
             required: true
         },
         daysRemaining: {
-            type: Array,
+            type: String,
             required: true
         },
         participants: {
