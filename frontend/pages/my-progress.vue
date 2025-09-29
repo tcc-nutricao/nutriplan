@@ -211,6 +211,9 @@ export default {
                     }
                 },
                 plugins: {
+                    legend: {     
+                        display: false
+                    }, 
                     annotation: {
                         annotations: {
                             metaLine: {

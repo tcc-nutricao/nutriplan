@@ -6,10 +6,10 @@
       @click.self="$emit('close')"
     >
       <div
-        class="bg-white rounded-xl p-6 w-full max-w-lg shadow-lg relative max-h-[90vh] overflow-y-auto modal-container"
+        class="bg-white rounded-3xl py-7 px-9 w-full max-w-lg shadow-lg relative max-h-[90vh] overflow-y-auto modal-container"
       >
         <button
-          class="absolute top-3 right-4 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-50"
+          class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-50"
           @click="$emit('close')"
         >&times;
         </button>
@@ -20,78 +20,53 @@
         </h2>
 
         <div v-if="section === 'basic'">
-          <label class="block mb-2">
-            Nome:
-            <input
-              type="text"
-              class="border rounded w-full p-2 mt-1"
-              placeholder="Digite seu nome"
-            />
-          </label>
-
-          <label class="block mb-2">
-            Email:
-            <input
-              type="email"
-              class="border rounded w-full p-2 mt-1"
-              placeholder="Digite seu email"
-            />
-          </label>
-
-          <label class="block mb-2">
-            Senha atual:
-            <input
-              type="password"
-              class="border rounded w-full p-2 mt-1"
-              placeholder="Digite sua senha"
-            />
-          </label>
-
-          <label class="block mb-2">
-            Nova senha:
-            <input
-              type="password"
-              class="border rounded w-full p-2 mt-1"
-              placeholder="Digite a nova senha"
-            />
-          </label>
+          <InputText
+            class="mb-5"
+            label="Nome"
+            placeholder="Insira o Nome" />
+          <InputEmail
+            class="mb-5"
+            label="Email"
+            placeholder="Insira o Email" />
+          <InputPassword 
+            class="mb-5"
+            label="Senha Atual"
+            placeholder="Insira sua senha atual" />
+          <InputPassword 
+            class="mb-5"
+            label="Nova Senha"
+            placeholder="Insira a nova senha" />
         </div>
 
         <div v-else>
-          <label class="block mb-2">
-            Idade:
-            <input type="number" class="border rounded w-full p-2 mt-1" />
-          </label>
-
-          <label class="block mb-2">
-            Sexo:
-            <input type="text" class="border rounded w-full p-2 mt-1" />
-          </label>
-
-          <label class="block mb-2">
-            Altura:
-            <input type="number" class="border rounded w-full p-2 mt-1" />
-          </label>
-
-          <label class="block mb-2">
-            Peso:
-            <input type="number" class="border rounded w-full p-2 mt-1" />
-          </label>
-
-          <label class="block mb-2">
-            Restrições Alimentares:
-            <input type="text" class="border rounded w-full p-2 mt-1" />
-          </label>
-
-          <label class="block mb-2">
-            Objetivo:
-            <input type="text" class="border rounded w-full p-2 mt-1" />
-          </label>
-
-          <label class="block mb-2">
-            Preferências:
-            <input type="text" class="border rounded w-full p-2 mt-1" />
-          </label>
+          <InputText
+            class="mb-5"
+            label="Idade"
+            placeholder="Insira sua idade" />
+          <InputText
+            class="mb-5"
+            label="Sexo"
+            placeholder="Digite aqui" />
+          <InputText
+            class="mb-5"
+            label="Altura"
+            placeholder="Digite aqui" />
+          <InputText
+            class="mb-5"
+            label="Peso"
+            placeholder="Digite aqui" />
+          <InputText
+            class="mb-5"
+            label="Restrições Alimentares"
+            placeholder="Digite aqui" />
+          <InputText
+            class="mb-5"
+            label="Objetivo"
+            placeholder="Digite aqui" />
+          <InputText
+            class="mb-5"
+            label="Preferências"
+            placeholder="Digite aqui" />
         </div>
         <div class="flex justify-center mt-6">
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="xl:mr-60 lg:mr-40">
     <ProfileCardHorizontal
       nome="Luna"
       email="luna@gmail.com"

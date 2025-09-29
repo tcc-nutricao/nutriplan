@@ -31,16 +31,15 @@
                             class="w-36 aspect-square object-cover rounded-2xl flex-shrink-0" />
                         <div class="flex flex-col justify-between">
                             <div class="flex flex-col">
-                                <h2 class="h2main">{{ selectedItem.title }}</h2>
+                                <h2 class="h2main">{{ selectedItem.title }}
+                                </h2>
                                 <h2
                                     class="font-semibold text-md text-p-400 cursor-pointer hover:text-p-700 transition active:text-p-500">
                                     <i class="fa-regular fa-copy mr-1 text-p-700"></i>{{ selectedItem.code }}
                                 </h2>
                             </div>
-                            <h3 class="text-lg" :class="endingClass(calculateDaysRemaining(selectedItem.endDate))">
-                                {{ calculateDaysRemaining(selectedItem.endDate) }}
-                            </h3>
-                            <div v-if="selectedItem.isOwner" class="flex gap-3">
+                            <p class="text-md font-medium text-gray-400">Criado por: {{ selectedItem.owner }}</p>
+                            <div v-if="selectedItem.owner === 'Você'" class="flex gap-3">
                                 <Button mediumPurple
                                     class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
                                     icon="fa-regular fa-edit short flex justify-center" label="Editar" />
@@ -63,7 +62,9 @@
                                 class="flex flex-col gap-1">
                                 <p v-for="(participant, pIndex) in column" :key="pIndex"
                                     class="font-semibold flex items-center text-lg text-gray-700 cursor-pointer text-nowrap">
-                                    <i class="fa-solid fa-circle-user mr-2 text-2xl text-p-700"></i>{{ participant.name }}
+                                    <i class="fa-solid fa-circle-user mr-2 text-2xl text-p-700"></i>
+                                    {{ participant.name }}
+                                    <!-- <i v-if="participant.name === selectedItem.owner" class="fa-solid fa-crown ml-2 mb-1 text-xl text-yellow-400"></i> -->
                                 </p>
                             </div>
                         </div>
@@ -77,13 +78,18 @@
                     </div>
                     <div class="flex flex-col w-full px-10 gap-8">
                         <div>
-                            <div class="flex justify-center items-center mb-3 gap-8">
-                                <p class="text-md text-gray-600">
-                                    Início: <span class="h3main">{{ formattedStartDate }}</span>
-                                </p>
-                                <p class="text-md text-gray-600">
-                                    Final: <span class="h3main">{{ formattedEndDate }}</span>
-                                </p>
+                            <div class="flex justify-between items-center mb-3 gap-8">
+                                <h3 class="text-lg text-center" :class="endingClass(calculateDaysRemaining(selectedItem.endDate))">
+                                    {{ calculateDaysRemaining(selectedItem.endDate) }}
+                                </h3>
+                                <div class="flex gap-8">
+                                    <p class="text-md text-gray-600">
+                                        Início: <span class="h3main">{{ formattedStartDate }}</span>
+                                    </p>
+                                    <p class="text-md text-gray-600">
+                                        Final: <span class="h3main">{{ formattedEndDate }}</span>
+                                    </p>
+                                </div>
                             </div>
                             <div class="flex justify-between items-center mb-1">
                                 <h3 class="h3">Progresso geral</h3>
@@ -127,8 +133,8 @@ export default {
                     title: 'Fit com as amigas',
                     code: 'KLM72Q',
                     startDate: '2025-09-01',
-                    endDate: '2025-09-29',
-                    isOwner: true,
+                    endDate: '2025-09-30',
+                    owner: 'Você',
                     participants: [
                         { id: 101, name: 'Você', progress: 80, objective: 'Perda de Peso' },
                         { id: 102, name: 'Beatriz', progress: 50, objective: 'Hipertrofia' },
@@ -141,7 +147,7 @@ export default {
                     code: 'XPT09A',
                     startDate: '2025-09-15',
                     endDate: '2025-10-13',
-                    isOwner: false,
+                    owner: 'Eduardo',
                     participants: [
                         { id: 201, name: 'Você', progress: 75, objective: 'Perda de Peso' },
                         { id: 202, name: 'Eduardo', progress: 90, objective: 'Hipertrofia' },
@@ -158,7 +164,7 @@ export default {
                     code: 'VWZ21B',
                     startDate: '2025-09-20',
                     endDate: '2025-11-09',
-                    isOwner: false,
+                    owner: 'Igor',
                     participants: [
                         { id: 301, name: 'Você', progress: 25, objective: 'Perda de Peso' },
                         { id: 302, name: 'Helena', progress: 45, objective: 'Ganho de Massa' },
@@ -193,7 +199,7 @@ export default {
             if (diffDays === 1) {
                 return 'Termina amanhã';
             }
-            return `${diffDays} dias faltando`;
+            return `Termina em ${diffDays} dias`;
         },
         endingClass(diffDays) {
             if (diffDays === 'Finalizado' || diffDays === 'Termina hoje' || diffDays === 'Termina amanhã') {

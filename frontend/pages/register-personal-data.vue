@@ -1,7 +1,8 @@
 <template>
 
- <div class="flex items-start justify-center w-full min-h-screen bg-gray-50 p-8">
+ <div class=" flex items-start justify-center w-full min-h-screen p-8">
   <PersonalDataRegister
+  class="lg:mr-40"
   :initial-data="userData"
   @submit="handleSubmit"
   />
