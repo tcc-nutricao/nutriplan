@@ -1,14 +1,14 @@
 <template>
   <div
-    class="flex items-center justify-between bg-white rounded-2xl shadow p-6 w-full max-w-4xl mx-auto"
+    class="flex items-center justify-between bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto"
   >
     <div class="flex items-center gap-4">
       <div class="relative">
         <div
-          class="w-20 h-20 flex items-center justify-center rounded-full bg-white border-4 border-purple-500"
+          class="w-20 h-20 flex items-center justify-center rounded-full bg-transparent  border-purple-200"
         >
           <svg
-            class="w-12 h-12 text-purple-500"
+            class="w-20 h-20 mb-3 mt-1 text-p-600 block drop-shadow-np"
             viewBox="36.5 20 165 165"
             fill="currentColor"
             aria-hidden="true"
@@ -21,17 +21,15 @@
       </div>
 
       <div>
-        <p class="text-2xl font-bold text-purple-700">{{ nome }}</p>
+        <p class="text-2xl font-bold text-p-600">{{ nome }}</p>
         <p class="text-gray-600 text-sm">{{ email }}</p>
       </div>
     </div>
 
-    <button
-      class="bg-purple-500 hover:bg-purple-600 text-white px-8 py-2 rounded-lg transition font-medium"
-      @click="$emit('edit')"
-    >
-      Editar
-    </button>
+    <Button mediumPurple
+      class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
+      icon="fa-regular fa-edit short flex justify-center" label="Editar" @click="$emit('edit')" 
+    />
   </div>
 </template>
 

@@ -11,6 +11,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        'np': '#8a5acd',
         'p': {
           50: '#f6f5fd',
           100: '#f0edfa',

@@ -1,19 +1,20 @@
 <template>
   <teleport to="body">
+    <Transition name="modal" appear>
     <div
       class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]"
+      @click.self="$emit('close')"
     >
       <div
-        class="bg-white rounded-xl p-6 w-full max-w-lg shadow-lg relative max-h-[90vh] overflow-y-auto"
+        class="bg-white rounded-xl p-6 w-full max-w-lg shadow-lg relative max-h-[90vh] overflow-y-auto modal-container"
       >
         <button
-          class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 z-50"
+          class="absolute top-3 right-4 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-50"
           @click="$emit('close')"
-        >
-          ✕
+        >&times;
         </button>
 
-        <h2 class="text-xl font-bold text-purple-700 mb-4">
+        <h2 class="text-2xl font-semibold text-np mb-4">
           Editar
           {{ section === "basic" ? "Perfil" : "dados pessoais" }}
         </h2>
@@ -92,14 +93,15 @@
             <input type="text" class="border rounded w-full p-2 mt-1" />
           </label>
         </div>
+        <div class="flex justify-center mt-6">
 
-        <button
-          class="mt-4 bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded-lg"
-        >
-          Salvar
-        </button>
+          <Button mediumPurple
+          class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition" label="Salvar" 
+        />
+        </div>
       </div>
     </div>
+    </Transition>
   </teleport>
 </template>
 
@@ -111,3 +113,29 @@ defineProps({
 });
 defineEmits(["close"]);
 </script>
+
+<style>
+.modal-enter-from {
+opacity: 0;
+}
+.modal-enter-from .modal-container {
+transform: scale(0.9);
+}
+
+.modal-leave-to {
+opacity: 0;
+}
+.modal-leave-to .modal-container {
+transform: scale(0.9);
+}
+
+.modal-enter-active,
+.modal-leave-active {
+transition: opacity 0.3s ease;
+}
+
+.modal-enter-active .modal-container,
+.modal-leave-active .modal-container {
+transition: transform 0.3s ease;
+}
+</style>

@@ -89,3 +89,7 @@ svg {
     font-weight: 500;
     @apply text-p-600;
 }
+
+.col {
+    @apply flex flex-col;
+}

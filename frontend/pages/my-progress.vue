@@ -190,7 +190,6 @@ export default {
                     maintainAspectRatio: false,
                 };
             }
-            const metaPesoValue = this.metaPeso; 
             const pesos = this.historicoDePesos.map(registro => registro.peso);
             const minPeso = Math.min(...pesos);
             const maxPeso = Math.max(...pesos);
