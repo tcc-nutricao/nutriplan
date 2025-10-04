@@ -5,7 +5,8 @@
 
 */
 -- AlterTable
-ALTER TABLE `recipe` ADD COLUMN `calories` DOUBLE NOT NULL;
+-- Corrigido case: tabela é `Recipe`
+ALTER TABLE `Recipe` ADD COLUMN `calories` DOUBLE NOT NULL;
 
 -- CreateTable
 CREATE TABLE `GoalObjective` (

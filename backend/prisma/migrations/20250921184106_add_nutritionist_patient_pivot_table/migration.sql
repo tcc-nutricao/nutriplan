@@ -1,5 +1,5 @@
 -- AlterTable
-ALTER TABLE `mealplan` ADD COLUMN `expiration_date` DATETIME(3) NULL;
+ALTER TABLE `MealPlan` ADD COLUMN `expiration_date` DATETIME(3) NULL;
 
 -- CreateTable
 CREATE TABLE `NutritionistPatient` (

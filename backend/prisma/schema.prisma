@@ -82,16 +82,15 @@ model Food {
 }
 
 model Recipe {
-  id          Int       @id @default(autoincrement())
-  name        String
-  description String?
-  calories    Float
-  preparation_time        Int
-  portion     Int
-  created_at  DateTime @default(now())
-  deleted_at  DateTime?
-  updated_at  DateTime?
-
+  id               Int       @id @default(autoincrement())
+  name             String
+  description      String?
+  calories         Float
+  preparation_time Int       @default(0)
+  portion          Int       @default(1)
+  created_at       DateTime  @default(now())
+  deleted_at       DateTime?
+  updated_at       DateTime?
   recipeFoods      RecipeFood[]
   mealPlanRecipes  MealPlanRecipe[]
   foodConsumed     FoodConsumed[]

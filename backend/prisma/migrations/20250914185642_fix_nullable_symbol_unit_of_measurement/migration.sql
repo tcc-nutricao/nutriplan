@@ -1,2 +1,2 @@
 -- AlterTable
-ALTER TABLE `unitofmeasurement` MODIFY `symbol` VARCHAR(191) NULL;
+ALTER TABLE `UnitOfMeasurement` MODIFY `symbol` VARCHAR(191) NULL;

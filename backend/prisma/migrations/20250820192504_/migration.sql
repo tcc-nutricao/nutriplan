@@ -6,23 +6,28 @@
 
 */
 -- DropForeignKey
-ALTER TABLE `mealplan` DROP FOREIGN KEY `MealPlan_id_nutritionist_fkey`;
+-- Corrigido case: tabela é `MealPlan`
+ALTER TABLE `MealPlan` DROP FOREIGN KEY `MealPlan_id_nutritionist_fkey`;
 
 -- DropForeignKey
-ALTER TABLE `patient` DROP FOREIGN KEY `Patient_id_nutricionist_fkey`;
+-- Corrigido case: tabela é `Patient`
+ALTER TABLE `Patient` DROP FOREIGN KEY `Patient_id_nutricionist_fkey`;
 
 -- DropIndex
-DROP INDEX `MealPlan_id_nutritionist_fkey` ON `mealplan`;
+-- Corrigido case: índice na tabela `MealPlan`
+DROP INDEX `MealPlan_id_nutritionist_fkey` ON `MealPlan`;
 
 -- DropIndex
-DROP INDEX `Patient_id_nutricionist_fkey` ON `patient`;
+-- Corrigido case: índice na tabela `Patient`
+DROP INDEX `Patient_id_nutricionist_fkey` ON `Patient`;
 
 -- AlterTable
-ALTER TABLE `patient` DROP COLUMN `id_nutricionist`,
+ALTER TABLE `Patient` DROP COLUMN `id_nutricionist`,
     ADD COLUMN `id_nutritionist` INTEGER NULL;
 
 -- DropTable
-DROP TABLE `nutricionist`;
+-- Corrigido case: tabela original `Nutricionist`
+DROP TABLE `Nutricionist`;
 
 -- CreateTable
 CREATE TABLE `Nutritionist` (

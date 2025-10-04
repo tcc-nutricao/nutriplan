@@ -1,8 +1,8 @@
 /*
   Warnings:
 
-  - You are about to drop the column `id_objective` on the `goal` table. All the data in the column will be lost.
+  - You are about to drop the column `id_objective` on the `Goal` table. All the data in the column will be lost.
 
 */
 -- AlterTable
-ALTER TABLE `goal` DROP COLUMN `id_objective`;
+ALTER TABLE `Goal` DROP COLUMN `id_objective`;

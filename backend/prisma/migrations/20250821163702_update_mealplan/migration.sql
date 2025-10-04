@@ -5,4 +5,4 @@
 
 */
 -- AlterTable
-ALTER TABLE `mealplan` ADD COLUMN `calories` INTEGER NOT NULL;
+ALTER TABLE `MealPlan` ADD COLUMN `calories` INTEGER NOT NULL;

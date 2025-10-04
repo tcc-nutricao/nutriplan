@@ -5,7 +5,7 @@
 
 */
 -- AlterTable
-ALTER TABLE `foodconsumed` ADD COLUMN `id_unit_of_measurement` INTEGER NOT NULL;
+ALTER TABLE `FoodConsumed` ADD COLUMN `id_unit_of_measurement` INTEGER NOT NULL;
 
 -- CreateTable
 CREATE TABLE `UnitOfMeasurement` (

@@ -5,7 +5,8 @@
 
 */
 -- AlterTable
-ALTER TABLE `usergroup` MODIFY `role` ENUM('ADMIN', 'MEMBER', 'GUEST') NOT NULL;
+-- Corrigido case: tabela original foi criada como `UserGroup`
+ALTER TABLE `UserGroup` MODIFY `role` ENUM('ADMIN', 'MEMBER', 'GUEST') NOT NULL;
 
 -- CreateTable
 CREATE TABLE `Food` (

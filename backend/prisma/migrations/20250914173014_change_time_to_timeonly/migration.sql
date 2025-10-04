@@ -1,2 +1,2 @@
 -- AlterTable
-ALTER TABLE `mealplanmeal` MODIFY `time` TIME NULL;
+ALTER TABLE `MealPlanMeal` MODIFY `time` TIME NULL;
