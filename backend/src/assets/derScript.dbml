@@ -66,11 +66,7 @@ Table user {
   name varchar
   email varchar
   password varchar
-  birth_date datetime
-  gender char
-  height double
-  weight double
-  profile_picture mediumblob
+  role varchar
   created_at timestamp
   deleted_at timestamp
   updated_at timestamp
@@ -170,6 +166,11 @@ Table patient {
   id integer [primary key]
   id_user integer
   id_nutritionist integer
+  birth_date datetime
+  gender char
+  height double
+  weight double
+  profile_picture mediumblob
   created_at timestamp
   deleted_at timestamp
   updated_at timestamp
@@ -265,6 +266,15 @@ Table unitOfMeasurement {
   deleted_at timestamp
 }
 
+Table recipeGoal {
+  id integer [primary key]
+  id_goal integer
+  id_recipe integer
+  created_at timestamp
+  deleted_at timestamp
+  updated_at timestamp
+}
+
 Ref userGroup: userGroup.id_user > user.id 
 Ref: group.id < userGroup.id_group
 Ref: patient.id_user - user.id
@@ -294,6 +304,8 @@ Ref: foodConsumed.id_meal_plan_meal > mealPlanMeal.id
 Ref: foodConsumed.id_recipe > recipe.id
 Ref: goalObjective.id_goal > goal.id
 Ref: goalObjective.id_objective > objective.id
+Ref: recipeGoal.id_goal > goal.id
+Ref: recipeGoal.id_recipe > recipe.id
 Ref: foodConsumed.id_unit_of_measurement - unitOfMeasurement.id
 
 
