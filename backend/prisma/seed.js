@@ -131,6 +131,11 @@ async function main() {
     data: { name: 'Vitamina de Banana', calories: 180, preparation_time: 5, portion: 1, created_at: new Date() }
   });
 
+  // RECIPE OBJECTIVE (associa a receita ao objective existente)
+  await prisma.recipeObjective.create({
+    data: { id_objective: objective.id, id_recipe: recipe.id }
+  });
+
   // PREPARATION METHOD
   const prepMethod = await prisma.preparationMethod.create({
     data: { name: 'Cru', created_at: new Date() }

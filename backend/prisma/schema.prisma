@@ -100,7 +100,7 @@ model Recipe {
   recipeFoods      RecipeFood[]
   mealPlanRecipes  MealPlanRecipe[]
   foodConsumed     FoodConsumed[]
-  recipeGoals      RecipeGoal[]
+  recipeObjectives RecipeObjective[]
 }
 
 model PreparationMethod {
@@ -194,7 +194,6 @@ model Goal {
 
   goalObjectives GoalObjective[] 
   mealPlans MealPlan[]
-  recipeGoals RecipeGoal[]
 
   patient   Patient   @relation(fields: [id_patient], references: [id])
 }
@@ -208,7 +207,8 @@ model Objective {
   deleted_at  DateTime?
   updated_at  DateTime?
 
-  goalObjectives GoalObjective[]   
+  recipeObjectives RecipeObjective[]
+  goalObjectives GoalObjective[] @relation(name: "ObjectiveGoalObjectives")
 }
 
 model Preference {
@@ -382,7 +382,7 @@ model GoalObjective {
   updated_at    DateTime?
 
   goal Goal @relation(fields: [id_goal], references: [id])
-  objective Objective @relation(fields: [id_objective], references: [id])
+  objective Objective @relation(name: "ObjectiveGoalObjectives", fields: [id_objective], references: [id])
 }
 
 model UnitOfMeasurement {
@@ -409,20 +409,16 @@ model NutritionistPatient {
   patient Patient @relation(fields: [id_patient], references: [id])
 }
 
-model RecipeGoal {
+model RecipeObjective {
   id          Int        @id @default(autoincrement())
-  id_goal     Int
+  id_objective     Int
   id_recipe   Int
   created_at  DateTime   @default(now())
   deleted_at  DateTime?
   updated_at  DateTime   @updatedAt
 
-  goal   Goal   @relation(fields: [id_goal], references: [id])
+  objective   Objective   @relation(fields: [id_objective], references: [id])
   recipe Recipe @relation(fields: [id_recipe], references: [id])
-
-  @@unique([id_goal, id_recipe])
-  @@index([id_goal])
-  @@index([id_recipe])
 }
 
 

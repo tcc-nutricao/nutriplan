@@ -6,6 +6,16 @@ export const RecipeRepository = generateCrudRepository('recipe', {
   defaultIncludes: {
     recipeFoods: true,
     mealPlanRecipes: true,
-    foodConsumed: true
+    foodConsumed: true,
+    recipeObjectives: {
+      include: {
+        objective: {
+          select: {
+            id: true,
+            name: true,
+          }
+        }
+      }
+    }
   }
 })
