@@ -321,7 +321,7 @@ model MealPlanMeal {
 model FoodConsumed {
   id        Int      @id @default(autoincrement())
   id_meal_plan_meal   Int
-  id_food   Int
+  id_food   Int?
   id_recipe Int?
   id_unit_of_measurement Int
   quantity  Float
@@ -331,7 +331,7 @@ model FoodConsumed {
   updated_at DateTime?
 
   mealPlanMeal MealPlanMeal @relation(fields: [id_meal_plan_meal], references: [id])
-  food   Food   @relation(fields: [id_food], references: [id])
+  food   Food?  @relation(fields: [id_food], references: [id])
   recipe Recipe? @relation(fields: [id_recipe], references: [id])
   unitOfMeasurement UnitOfMeasurement? @relation(fields: [id_unit_of_measurement], references: [id])
 }
