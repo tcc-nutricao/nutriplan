@@ -90,7 +90,7 @@ model Food {
 model Recipe {
   id               Int       @id @default(autoincrement())
   name             String
-  description      String?
+  preparation_method      String?
   calories         Float
   preparation_time Int       @default(0)
   portion          Int       @default(1)
