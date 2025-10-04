@@ -55,6 +55,12 @@ enum WeekDay {
   SUN
 }
 
+enum Gender {
+  FEM
+  MASC
+  NONE
+}
+
 model User {
   id         Int      @id @default(autoincrement())
   name       String
@@ -127,20 +133,25 @@ model RecipeFood {
 }
 
 model Patient {
-  id              Int          @id @default(autoincrement())
-  id_user         Int          @unique
-  id_nutritionist Int?
-  created_at      DateTime
-  deleted_at      DateTime?
-  updated_at      DateTime?
+  id                 Int          @id @default(autoincrement())
+  id_user            Int          @unique
+  id_nutritionist    Int?
+  birth_date       DateTime     @default(now())
+  gender           Gender       @default(NONE)
+  height           Float        @default(0)
+  weight           Float        @default(0)
+  profile_picture    Bytes?       @db.MediumBlob
+  created_at         DateTime     @default(now())
+  updated_at         DateTime     @updatedAt
+  deleted_at         DateTime?
 
-  healthData   HealthData[]
-  goals        Goal[]
-  reports      Report[]
-  mealPlans    MealPlan[]
-  nutritionistPatients  NutritionistPatient[]
+  healthData         HealthData[]
+  goals              Goal[]
+  reports            Report[]
+  mealPlans          MealPlan[]
+  nutritionistPatients NutritionistPatient[]
 
-  nutritionist Nutritionist? @relation(fields: [id_nutritionist], references: [id])
+  nutritionist       Nutritionist? @relation(fields: [id_nutritionist], references: [id])
 }
 
 model Nutritionist {

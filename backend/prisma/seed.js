@@ -32,7 +32,16 @@ async function main() {
   const patient = await prisma.patient.upsert({
     where: { id_user: patientUser.id },
     update: {},
-    create: { id_user: patientUser.id, id_nutritionist: nutritionist.id, created_at: new Date() }
+    create: { 
+      id_user: patientUser.id, 
+      id_nutritionist: nutritionist.id, 
+      birth_date: new Date('1990-01-01'),
+      gender: 'FEM',
+      height: 175,
+      weight: 70,
+      profile_picture: null,
+      created_at: new Date()
+    }
   });
 
   // HEALTH DATA
