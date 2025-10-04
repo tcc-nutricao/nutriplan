@@ -6,12 +6,18 @@ export const CreateFoodConsumedSchema = z.object({
     z.number().int().positive({ message: 'ID da refeição do plano é obrigatório e deve ser um número positivo' })
   ),
   id_food: z.preprocess(
-    (val) => Number(val),
-    z.number().int().positive({ message: 'ID do alimento é obrigatório e deve ser um número positivo' })
+    (val) => {
+      if (val === undefined || val === null || val === '' || val === 'null') return null;
+      return Number(val);
+    },
+    z.number().int().positive({ message: 'ID do alimento deve ser um número positivo' }).nullable().optional()
   ),
   id_recipe: z.preprocess(
-    (val) => val === undefined ? undefined : Number(val),
-    z.number().int().positive({ message: 'ID da receita deve ser um número positivo' }).optional()
+    (val) => {
+      if (val === undefined || val === null || val === '' || val === 'null') return null;
+      return Number(val);
+    },
+    z.number().int().positive({ message: 'ID da receita deve ser um número positivo' }).nullable().optional()
   ),
   id_unit_of_measurement: z.preprocess(
     (val) => Number(val),

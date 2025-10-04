@@ -9,7 +9,6 @@ export const MealRepository = generateCrudRepository('meal', {
         mealPlan: true 
       } 
     }, 
-    mealPreferences: true,
-    foodConsumed: true
+    mealPreferences: true
   }
 })

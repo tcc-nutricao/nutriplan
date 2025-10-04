@@ -23,18 +23,16 @@ export const generateCrudController = (Service, Schema, entityName = 'Item', cus
   async insert(req, res, next) {
     try {
       let data = req.body
-
-      // Aplica transformação customizada se fornecida
-      if (customTransform) {
-        data = customTransform(data)
-      }
+      if (customTransform) data = customTransform(data)
 
       const parseResult = Schema.safeParse(data)
-      
       if (!parseResult.success) {
         const errors = formatZodErrors(parseResult.error)
         return res.status(422).json({ error: true, data: errors })
       }
+
+      // Usa os dados processados (inclui preprocess de datas/horário)
+      data = parseResult.data
 
       const result = await Service.insert(data)
       return res.status(201).json(result)
@@ -50,11 +48,7 @@ export const generateCrudController = (Service, Schema, entityName = 'Item', cus
     try {
       const { id } = req.params
       let data = req.body
-
-      // Aplica transformação customizada se fornecida
-      if (customTransform) {
-        data = customTransform(data)
-      }
+      if (customTransform) data = customTransform(data)
 
       const parseResult = Schema.safeParse(data)
       if (!parseResult.success) {
@@ -67,6 +61,8 @@ export const generateCrudController = (Service, Schema, entityName = 'Item', cus
           errors: [{ message: 'ID não informado.' }]
         })
       }
+
+      data = parseResult.data
 
       const result = await Service.update(Number(id), data)
       return res.status(200).json(result)
