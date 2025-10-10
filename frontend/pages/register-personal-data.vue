@@ -1,31 +1,160 @@
 <template>
 
- <div class=" flex items-start justify-center w-full min-h-screen p-8">
-  <PersonalDataRegister
-  class="lg:mr-40"
-  :initial-data="userData"
-  @submit="handleSubmit"
-  />
+  <div class="flex flex-col items-center justify-start w-full max-h-screen p-8">
+    <h2 class="text-4xl font-semibold text-p-600 text-center mb-8">
+      Vamos cadastrar seus dados pessoais!
+    </h2>
+    <div class="bg-white rounded-3xl shadow-lg p-8 w-full max-w-5xl">
+
+      <div class="grid grid-cols-2 gap-6">
+        <div v-for="input in inputValues" class="col-span-1">
+          <Label class="mb-2" :label="input.label" />
+          <Select v-if="input.type === 'select'" :ref="input.ref" :options="input.options" v-model="input.value"
+            required />
+          <Input v-else :type="input.type" :ref="input.ref" :placeholder="input.placeholder" v-model="input.value"
+            required />
+        </div>
+
+        <div class="col-span-2 flex justify-center gap-3 mt-8">
+          <Button gray outlined class="w-max px-3 h-[42px] shadow-lg border-2 border-gray-300 transition"
+            @click="navigateTo('/profile')">
+            Pular
+          </Button>
+          <Button mediumPurple class="w-max px-3 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
+            @click="submitForm">
+            Confirmar
+          </Button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
-import PersonalDataRegister from "@/components/PersonalDataRegister.vue";
 
-// guardar dados do back
+definePageMeta({
+  hideTopBar: false,
+  hideSideBar: true
+})
+
+const inputValues = ref([
+  {
+    label: 'Que dia você nasceu?',
+    type: 'date',
+    placeholder: 'Data de nascimento',
+    ref: 'birthday',
+    value: '',
+    error: '',
+  },
+  {
+    label: 'Qual gênero você se identifica?',
+    type: 'select',
+    placeholder: 'Selecione',
+    ref: 'gender',
+    value: '',
+    error: '',
+    options: [
+      { value: 'Feminino', label: 'Feminino' },
+      { value: 'Masculino', label: 'Masculino' },
+      { value: 'Outro', label: 'Outro' },
+      { value: 'Prefiro não informar', label: 'Prefiro não informar' }
+    ]
+  },
+  {
+    label: 'Qual é seu peso?',
+    type: 'number',
+    placeholder: 'Seu peso em kg',
+    value: '',
+    error: '',
+    ref: 'weight'
+  },
+  {
+    label: 'Qual é a sua altura? (ex: 170cm)',
+    type: 'number',
+    placeholder: 'Sua altura em cm',
+    value: '',
+    error: '',
+    ref: 'height'
+  },
+  {
+    label: 'Você tem alguma restrição alimentar?',
+    type: 'select',
+    placeholder: 'Selecione',
+    ref: 'restrictions',
+    value: '',
+    error: '',
+    options: [
+      { value: 'Nenhuma', label: 'Nenhuma' },
+      { value: 'Sem glúten', label: 'Sem glúten' },
+      { value: 'Sem lactose', label: 'Sem lactose' },
+      { value: 'Vegano', label: 'Vegano' },
+      { value: 'Vegetariano', label: 'Vegetariano' }
+    ]
+  },
+  {
+    label: 'Você tem alguma preferência alimentar?',
+    type: 'select',
+    placeholder: 'Selecione',
+    ref: 'preferences',
+    value: '',
+    error: '',
+    options: [
+      { value: 'Nenhuma', label: 'Nenhuma' },
+      { value: 'Dieta Vegetariana', label: 'Dieta Vegetariana' },
+      { value: 'Dieta low carb', label: 'Dieta low carb' },
+      { value: 'Dieta plant-based', label: 'Dieta plant-based' },
+      { value: 'Dieta balanceada', label: 'Dieta balanceada' }
+    ]
+  },
+  {
+    label: 'Qual é seu objetivo?',
+    type: 'select',
+    placeholder: 'Selecione',
+    ref: 'objective',
+    value: '',
+    error: '',
+    options: [
+      { value: 'Perder peso', label: 'Perder peso' },
+      { value: 'Ganhar massa muscular', label: 'Ganhar massa muscular' },
+      { value: 'Manter peso', label: 'Manter peso' },
+      { value: 'Melhorar hábitos', label: 'Melhorar hábitos' }
+    ]
+  },
+])
+
 const userData = ref(null);
 
 onMounted(async () => {
-  // chamar a API
   const response = await fetch("/api/user/personal-data");
   userData.value = await response.json();
 });
 
+function submitForm() {
+  let isFormValid = true;
+  inputValues.value.forEach(input => {
+    if (!input.value) {
+      input.error = 'Este campo é obrigatório';
+      isFormValid = false;
+    } else {
+      input.error = '';
+    }
+  });
+
+  if (!isFormValid) {
+    console.log("Formulário inválido. Corrija os erros.");
+    return;
+  }
+
+  const formData = inputValues.value.reduce((acc, field) => {
+    acc[field.fieldRef] = field.value;
+    return acc;
+  }, {});
+  console.log("Formulário válido! Enviando dados:", formData);
+}
+
 function handleSubmit(formData) {
   console.log("Dados recebidos do formulário:", formData);
-
-  //API de update
   fetch("/api/user/personal-data", {
     method: "POST",
     body: JSON.stringify(formData),

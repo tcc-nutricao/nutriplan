@@ -1,5 +1,10 @@
 <template>
   <div class="xl:mr-60 lg:mr-40">
+    <div class="flex justify-center mb-3">
+      <div class="w-full max-w-4xl text-start">
+        <h1 class="h1">Meu perfil</h1>
+      </div>
+    </div>
     <ProfileCardHorizontal
       nome="Luna"
       email="luna@gmail.com"

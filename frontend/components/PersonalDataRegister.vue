@@ -86,9 +86,12 @@
         </select>
       </div>
 
+      <Select :label="'teste'"/>
+
+
       <div class="col-span-2 flex justify-center mt-8">
-        <button
-          class="bg-purple-600 hover:bg-purple-700 text-white px-10 py-3 rounded-lg font-medium transition"
+        <Button mediumPurple
+          class="w-max px-3 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
           @click="submitForm"
         >
           Confirmar
