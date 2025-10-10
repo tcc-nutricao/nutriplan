@@ -3,7 +3,7 @@
     :disabled="disabled"
     v-bind="$attrs"
     :class="[
-      { 'text-black': dark || gray || light },
+      { 'text-black': dark || light },
       { 'text-white': !dark && !outlined && !gray && !light },
       { 'w-full': block },
       { 'inline-block': !block },
@@ -19,7 +19,8 @@
       { [darkGrayBorderClass]: darkGray && outlined },
       { [redClass]: red && !outlined },
       { [redBorderClass]: red && outlined },
-      { 'rounded-lg bg-gray-200 hover:bg-gray-300 border border-gray-300': gray },
+      { [grayClass]: gray && !outlined },
+      { [grayBorderClass]: gray && outlined },
       { 'rounded-lg 0 border border-slate-20 hover:bg-gray-50': light },
     ]"
     class="rounded-xl flex items-center justify-center">
@@ -110,6 +111,10 @@ const redClass = computed(() => {
   return 'transition bg-red-500 hover:bg-red-600 active:scale-95 active:shadow-none'
 })
 
+const grayClass = computed(() => {
+  return 'transition bg-gray-500 hover:bg-gray-600 active:scale-95 active:shadow-none'
+})
+
 const greenBorderClass = computed(() => {
   return 'transition border-2 border-green-500 hover:border-green-600 text-green-500 active:scale-95 hover:shadow-lg'
 })
@@ -128,6 +133,10 @@ const darkPurpleBorderClass = computed(() => {
 
 const darkGrayBorderClass = computed(() => {
   return 'transition border-2 border-[#7A6E94] hover:border-black text-[#7A6E94] active:scale-95 hover:shadow-lg'
+})
+
+const grayBorderClass = computed(() => {
+  return 'transition border-2 border-gray-400 bg-gray-100 hover:border-gray-300 hover:bg-gray-200 text-gray-500 active:scale-95 hover:shadow-lg'
 })
 
 const redBorderClass = computed(() => {
