@@ -1,6 +1,6 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 /**
  * Gera um repository genérico com operações CRUD
@@ -14,50 +14,51 @@ const prisma = new PrismaClient()
 export const generateCrudRepository = (modelName, options = {}) => {
   const {
     softDelete = true,
-    defaultOrderBy = 'id',
-    defaultIncludes = {}
-  } = options
+    defaultOrderBy = "id",
+    defaultIncludes = {},
+  } = options;
 
   return {
     async search(object) {
-      const { filters = [], limit = 10, page = 1, order = 'asc' } = object
-      
-      const where = {}
-      
-      if (softDelete) {
-        where.deleted_at = null
+      const { filters = [], limit = 10, page = 1, order = "asc" } = object;
+
+      const where = {};
+      var parsed;
+      if (typeof filters === "string") {
+        parsed = JSON.parse(filters);
+      } else {
+        parsed = [];
       }
+      const filtersArray = Array.isArray(parsed) ? parsed : [];
 
-      const filtersArray = Array.isArray(filters) ? filters : []
-      
       filtersArray.forEach((filter) => {
-        const { field, value, operator = 'equals' } = filter
+        const { field, value, operator = "equals" } = filter;
         if (field && value !== undefined) {
-          where[field] = { [operator]: value }
+          where[field] = { [operator]: value };
         }
-      })
+      });
 
-      const total = await prisma[modelName].count({ where })
+      const total = await prisma[modelName].count({ where });
 
       const data = await prisma[modelName].findMany({
         where,
         take: limit,
         skip: (page - 1) * limit,
-        orderBy: { [defaultOrderBy]: order === 'asc' ? 'asc' : 'desc' },
-        include: defaultIncludes
-      })
+        orderBy: { [defaultOrderBy]: order === "asc" ? "asc" : "desc" },
+        include: defaultIncludes,
+      });
 
-      return { data, total }
+      return { data, total };
     },
 
     async create(data, tx = null) {
-      const client = tx || prisma
+      const client = tx || prisma;
       return await client[modelName].create({
         data: {
           ...data,
-          created_at: new Date()
-        }
-      })
+          created_at: new Date(),
+        },
+      });
     },
 
     async update(id, data) {
@@ -65,21 +66,21 @@ export const generateCrudRepository = (modelName, options = {}) => {
         where: { id },
         data: {
           ...data,
-          updated_at: new Date()
-        }
-      })
+          updated_at: new Date(),
+        },
+      });
     },
 
     async remove(id) {
       if (softDelete) {
         return await prisma[modelName].update({
           where: { id },
-          data: { deleted_at: new Date() }
-        })
+          data: { deleted_at: new Date() },
+        });
       } else {
         return await prisma[modelName].delete({
-          where: { id }
-        })
+          where: { id },
+        });
       }
     },
 
@@ -87,15 +88,15 @@ export const generateCrudRepository = (modelName, options = {}) => {
     async findUnique(where) {
       return await prisma[modelName].findUnique({
         where,
-        include: defaultIncludes
-      })
+        include: defaultIncludes,
+      });
     },
 
     // Método auxiliar para buscar por email (comum em muitos models)
     async findByEmail(email) {
       return await prisma[modelName].findUnique({
-        where: { email }
-      })
-    }
-  }
-}
+        where: { email },
+      });
+    },
+  };
+};
