@@ -209,6 +209,7 @@ async function submitForm() {
       const response = await insert(route_patient.value, patientData);
       console.log("Paciente criado:", response?.data ?? response);
     }
+    navigateTo("/profile");
   } catch (err) {
     console.error("Erro ao salvar paciente:", err);
     alert("Erro ao salvar os dados. Tente novamente.");
