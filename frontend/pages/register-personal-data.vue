@@ -59,7 +59,7 @@ const router = useRouter();
 const route_objective = ref("objective");
 const route_patient = ref("patient");
 
-// 🔹 Aqui você precisa ter acesso ao usuário logado (exemplo mockado)
+//  Aqui precisa ter acesso ao usuário logado
 const userData = ref({ id: 4 }); // substitua isso pelo user logado real
 
 definePageMeta({
