@@ -3,7 +3,7 @@
     <Input
       class="bg-white w-full shadow-lg shadow-gray-600/10 focus-within:shadow-p-600/20 hover:shadow-p-600/20 transition"
       label="pesquisaReceita"
-      placeholder="Pesquise uma receita"
+      :placeholder="placeholder"
     />
 
     <Button
@@ -34,6 +34,10 @@ defineProps({
   sort: {
     type: Boolean,
     default: true
+  },
+  placeholder: {
+    type: String,
+    default: 'Pesquise aqui'
   }
 });
 

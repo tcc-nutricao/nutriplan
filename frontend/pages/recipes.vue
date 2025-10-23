@@ -3,7 +3,7 @@
         <h1 class="h1">Receitas</h1>
         <div class="flex flex-row gap-5">
             <div class="flex flex-col w-[50%] mb-8">
-                <SearchBar :filter="true" :sort="true" class="stickyProfile w-full shadowSearch" />
+                <SearchBar :filter="true" :sort="true" placeholder="Pesquise uma receita" class="stickyProfile w-full shadowSearch" />
                 <div listaReceitas class="flex flex-col gap-3 w-full mt-5">
                     <ReceitaButton
                         v-for="item in itemList"
