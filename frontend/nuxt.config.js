@@ -2,7 +2,9 @@ export default {
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   components: true,
-  css: ['../assets/css/tailwind.css'],
+  css: [
+    '../assets/css/tailwind.css',
+  ],
   postcss: {
     plugins: {
       tailwindcss: {},

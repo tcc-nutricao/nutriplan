@@ -31,12 +31,12 @@
               v-model="object.password"
               :error="errors.password"
               required />
-            <OptionsButton outlined :error="errors.role"  v-model="selectedButton" :buttons="buttons" class="mb-5" />
+            <OptionsButton outlined :error="errors.role" v-model="selectedButton" :buttons="buttons" v-model:changeSelected="changeSelected" class="mb-5" />
             <Flex justifyCenter>
               <Button mediumPurple label="Criar conta" class="w-[50%]" @click="save" />
             </Flex>
         </div>
-        <Modal :content="modalContent" v-if="openModal" @closeModal="openModal = false" />
+        <ModalCRN :content="modalContent" v-if="openModal" @closeModal="openModal = false" @cancelModal="openModal = false; changeSelected = true" @updateCrn="object.crn = $event" />
     </div>
 </template>
 
@@ -57,7 +57,8 @@ const object = ref({
   name: null,
   email: null,
   password: null,
-  role: null
+  role: null,
+  crn: null
 })
 const errors = ref({
   name: null,
@@ -72,6 +73,7 @@ const buttons = ref([
 ])
 const openModal = ref(false)
 const selectedButton = ref(null)
+const changeSelected = ref(false)
 const modalContent = ref('O perfil profissional é destinado apenas a nutricionistas e profissionais da saúde.')
 
 const navigate = async (route) => {

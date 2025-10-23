@@ -1,7 +1,7 @@
 <template>
   <FlexCol gap-1>
     <Label :label="label" :required="required" :error="error" />
-    <Input v-model="localValue" :error="error" :placeholder="props.placeholder" :disabled="props.disabled" />
+    <Input v-model="localValue" :error="error" :placeholder="props.placeholder" :prefix="props.prefix" :disabled="props.disabled" />
     <Error :message="error" />
   </FlexCol>
 </template>
@@ -16,6 +16,7 @@ const props = defineProps({
   error: Array,
   modelValue: [String, Number],
   placeholder: String,
+  prefix: String
 })
 
 const emits = defineEmits(['update:modelValue'])

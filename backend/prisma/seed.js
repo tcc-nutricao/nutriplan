@@ -87,54 +87,30 @@ async function main() {
   });
 
   // OBJECTIVES & GOALS
-  const objective1 = await prisma.objective.create({
-    data: {
-      name: "Perder Peso",
-      description: "Reduzir gordura corporal",
-      created_at: new Date(),
-    },
-  });
-
-  const objective2 = await prisma.objective.create({
-    data: {
-      name: "Aumentar Massa Muscular",
-      description: "Ganhar massa muscular",
-      created_at: new Date(),
-    },
-  });
-
-  const objective3 = await prisma.objective.create({
-    data: {
-      name: "Manter Peso",
-      description: "Manter peso atual",
-      created_at: new Date(),
-    },
-  });
-
-  const objective4 = await prisma.objective.create({
-    data: {
-      name: "Melhorar hábitos",
-      description: "Melhorar hábitos alimentares",
-      created_at: new Date(),
-    },
+  const objectives = await prisma.objective.createMany({
+    data: [
+      { id: 1, name: 'Perda de peso', description: 'Reduzir peso corporal de forma saudável', created_at: new Date() },
+      { id: 2, name: 'Ganho de peso', description: 'Aumentar peso corporal de forma saudável', created_at: new Date() },
+      { id: 3, name: 'Manutenção de peso', description: 'Manter o peso atual dentro de uma faixa saudável', created_at: new Date() },
+      { id: 4, name: 'Redução de IMC', description: 'Diminuir o índice de massa corporal', created_at: new Date() },
+      { id: 5, name: 'Reeducação alimentar', description: 'Desenvolver hábitos alimentares saudáveis', created_at: new Date() }
+    ],
+    skipDuplicates: true
   });
 
   const goal = await prisma.goal.create({
-    data: {
-      id_patient: patient.id,
-      description: "Perder 5kg",
-      start_date: new Date(),
-      status: GoalStatus.ACTIVE,
-      created_at: new Date(),
-    },
+    data: { 
+      id_patient: patient.id, 
+      description: 'Perder 5kg', 
+      target_weight: 75, // Peso alvo: de 80kg para 75kg
+      start_date: new Date(), 
+      status: GoalStatus.ACTIVE, 
+      created_at: new Date() 
+    }
   });
 
   await prisma.goalObjective.create({
-    data: {
-      id_goal: goal.id,
-      id_objective: objective1.id,
-      created_at: new Date(),
-    },
+    data: { id_goal: goal.id, id_objective: 1, created_at: new Date() }
   });
 
   // PREFERENCES
@@ -273,9 +249,9 @@ async function main() {
     },
   });
 
-  // RECIPE OBJECTIVE (associa a receita ao objective existente)
+  // RECIPE OBJECTIVE (associa a receita ao objetivo de perda de peso - id 1)
   await prisma.recipeObjective.create({
-    data: { id_objective: objective1.id, id_recipe: recipe.id },
+    data: { id_objective: 1, id_recipe: recipe.id }
   });
 
   // PREPARATION METHOD

@@ -1,10 +1,14 @@
 <template>
   <Flex items-center class="rounded-xl border-2 text-sm overflow-hidden border-p-g2 h-[42px] focus-within:border-p-600 transition" :class="classes">
     <slot name="pre-icon" />
+    <span 
+      v-if="prefix" 
+      class="pl-3 text-p-950 select-none"
+    >{{ prefix }}</span>
     <slot name="input">
       <input
         class="px-3 grow border-none bg-transparent focus:outline-none focus:ring-0 text-p-950"
-        :class="{ 'text-danger-500': props.error }"
+        :class="{ 'text-danger-500': props.error }, { 'pl-1': prefix }"
         v-model="displayValue"
         @input="handleInput"
         @keydown.enter.prevent="emitEnter"
@@ -31,7 +35,8 @@ const props = defineProps({
   placeholder: String,
   min: String,
   max: String,
-  mask: String
+  mask: String,
+  prefix: String
 })
 const localValue = ref(props.modelValue)
 const displayValue = ref(applyMask(localValue.value, props.mask))

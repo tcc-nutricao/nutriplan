@@ -1,58 +1,39 @@
 import { MealPlanRepository } from '../repositories/MealPlanRepository.js'
-import { MealPlanDietaryRestrictionRepository } from '../repositories/MealPlanDietaryRestrictionRepository.js'
-import { MealPlanMealRepository } from '../repositories/MealPlanMealRepository.js'
-import { GoalObjectiveRepository } from '../repositories/GoalObjectiveRepository.js'
 import { generateCrudService } from './Service.js'
 
 
-// Método customizado para search
-const search = async (object) => {
-  const { data: mealPlan = [] } = await MealPlanRepository.search(object)
-
-  const mealPlanIds = mealPlan.map(item => item.id)
-  const goalIds = mealPlan.map(item => item.idGoal)
-
-  let data = mealPlan.map(plan => ({
-    ...plan, 
-    dietaryRestrictions: [],
-    goalObjectives: []
-  }))
-
-  if (mealPlanIds.length) {
-    const mealPlanFilters = { column: 'idMealPlan', value: mealPlanIds }
-
-    let goalObjective = []
-
-    if (goalIds.length) {
-      const goalObjectiveFilters = { column: 'idMealPlan', value: goalIds }
-
-      const result = await GoalObjectiveRepository.search({ filters: goalObjectiveFilters })
-      if (result.data ) goalObjective = result.data
+// Métodos customizados adicionais
+const getMealPlanByPatient = async (patientId, additionalFilters = []) => {
+  try {
+    if (!patientId) {
+      throw new Error('patientId é obrigatório')
     }
 
-    const { data: mealPlanMeal = [] } = await MealPlanMealRepository.search({ filters: mealPlanFilters })
-    const { data: dietaryRestriction = [] } = await MealPlanDietaryRestrictionRepository.search({ filters: mealPlanFilters })
-    data = mealPlan.map(plan => {
-      const goalObjectives = goalObjective.filter(goal => goal.id_goal === plan.id_goal)
-      const dietaryRestrictions = dietaryRestriction.filter(restriction => restriction.id_meal_plan === plan.id)
-      const mealPlanMeals = mealPlanMeal.filter(meal => meal.id_meal_plan === plan.id)
-      return { 
-        ...plan, 
-        goalObjectives,
-        dietaryRestrictions,
-        mealPlanMeals
-      }
+    // Combinar filtro do paciente com filtros adicionais
+    const filters = [
+      { column: 'id_patient', value: patientId, operator: '=' },
+      ...additionalFilters
+    ]
+    
+    const { data: mealPlans = [], total } = await MealPlanRepository.search({ 
+      filters
     })
-  }
 
-  let total = data.length
-  return { data, total }
+    if (mealPlans.length === 0) {
+      return { data: [], total: 0, message: 'Nenhum plano de refeição encontrado para este paciente' }
+    }
+
+    return { data: mealPlans, total }
+
+  } catch (error) {
+    console.error('Erro ao buscar meal plans do paciente:', error)
+    throw error
+  }
 }
 
-// Métodos customizados adicionais (se necessário)
 export const MealPlanService = {
   ...generateCrudService(MealPlanRepository),
-  search // Sobrescreve o search padrão
+  getMealPlanByPatient
 }
 
 
