@@ -185,6 +185,7 @@ model Goal {
   id           Int      @id @default(autoincrement())
   id_patient   Int
   description  String?
+  target_weight Float?
   start_date   DateTime
   end_date     DateTime?
   status       GoalStatus

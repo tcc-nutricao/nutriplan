@@ -10,9 +10,9 @@
                 :outlined="outlined"
                 class="w-full"
                 :red="props.error"
-                :class="selectedButton && selectedButton.label === button.label ? 'border-2 font-semibold' : ''"
-                :mediumPurple="selectedButton && selectedButton.label === button.label"
-                :darkGray="(!selectedButton || selectedButton.label !== button.label) && !props.error"
+                :class="props.modelValue && props.modelValue.label === button.label ? 'border-2 font-semibold' : ''"
+                :mediumPurple="props.modelValue && props.modelValue.label === button.label"
+                :darkGray="(!props.modelValue || props.modelValue.label !== button.label) && !props.error"
                 @click="selectButton(button)" />
         </Flex>
         <Error v-model="props.error" :message="props.error" />
@@ -20,20 +20,28 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { watch } from 'vue'
 
 const props = defineProps({
+    modelValue: Object,
     buttons: Array,
     error: String,
-    outlined: Boolean
+    outlined: Boolean,
+    changeSelected: Boolean
 })
 
-const emits = defineEmits(['update:modelValue'])
+const emits = defineEmits(['update:modelValue', 'update:changeSelected']) 
 
-const selectedButton = ref(null)
 
 const selectButton = (button) => {
-    selectedButton.value = button
     emits('update:modelValue', button)
 }
+
+watch(() => props.changeSelected, (newValue) => {
+    if (newValue === true) {
+        emits('update:modelValue', props.buttons[0]); 
+        
+        emits('update:changeSelected', false); 
+    }
+});
 </script>

@@ -20,14 +20,18 @@ export const generateCrudRepository = (modelName, options = {}) => {
 
   return {
     async search(object) {
-      const { filters = [], limit = 10, page = 1, order = "asc" } = object;
+      const {
+        filters = [],
+        limit = 10,
+        page = 1,
+        order = "asc",
+        orderColumn,
+      } = object;
 
       const where = {};
-      var parsed;
-      if (typeof filters === "string") {
-        parsed = JSON.parse(filters);
-      } else {
-        parsed = [];
+
+      if (softDelete) {
+        where.deleted_at = null;
       }
       const filtersArray = Array.isArray(parsed) ? parsed : [];
 
@@ -40,11 +44,13 @@ export const generateCrudRepository = (modelName, options = {}) => {
 
       const total = await prisma[modelName].count({ where });
 
+      const orderField = orderColumn || defaultOrderBy;
+
       const data = await prisma[modelName].findMany({
         where,
         take: limit,
         skip: (page - 1) * limit,
-        orderBy: { [defaultOrderBy]: order === "asc" ? "asc" : "desc" },
+        orderBy: { [orderField]: order === "asc" ? "asc" : "desc" },
         include: defaultIncludes,
       });
 
@@ -82,6 +88,20 @@ export const generateCrudRepository = (modelName, options = {}) => {
           where: { id },
         });
       }
+    },
+
+    // Método auxiliar para buscar por ID
+    async findById(id) {
+      const where = { id };
+
+      if (softDelete) {
+        where.deleted_at = null;
+      }
+
+      return await prisma[modelName].findUnique({
+        where,
+        include: defaultIncludes,
+      });
     },
 
     // Método auxiliar para buscar por campo único

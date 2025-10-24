@@ -6,7 +6,7 @@
             :class="{ 'border-p-600 border-r-2': index < items.length - 1 }"
             class="flex items-center gap-1 pr-1"
         >
-            <IconSolid :icon="restriction.dietaryRestriction.icon" sm />
+            <IconSolid :icon="restriction.dietaryRestriction.icon" color="text-p-600" sm />
             <IconSolid icon="fa-times" color="text-red-500" sm />
         </div>
     </div>

@@ -10,8 +10,8 @@
                 v-for="(goalObjective, index) in object.goalObjectives"
                 :key="index"
             >
-                <IconSolid :icon="goalObjective.objective.icon" sm />
-                <p class="font-sora text-p-600">{{ goalObjective.objective.name }}</p>
+                <IconSolid :icon="goalObjective.objective.icon" color="text-p-600" sm />
+                <p class="font-sora text-p-950 font-semibold">{{ goalObjective.objective.name }}</p>
             </div>  
         </div>
     </div>
