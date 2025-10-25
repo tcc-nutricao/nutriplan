@@ -20,6 +20,7 @@ const calculateNutritionalStatistics = async (foodConsumedList) => {
 //   const totalWater = await HydrationService.getTotalWaterIntakeForDate(dateRange, patientId)
   statistics.totalWater = 0
 
+  for (const item of foodConsumedList) {
     const quantity = item.quantity || 0
     const food = item.food || {}
     const recipe = item.recipe || {}
