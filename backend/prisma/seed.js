@@ -158,8 +158,8 @@ async function main() {
   // RECIPE FOOD
   await prisma.recipeFood.createMany({
     data: [
-      { id_food: banana.id, id_recipe: recipe.id, id_unit_of_measurement: gram.id, id_preparation_method: prepMethod.id, nutrition_value: 100, created_at: new Date() },
-      { id_food: rice.id, id_recipe: recipe.id, id_unit_of_measurement: gram.id, id_preparation_method: prepMethod.id, nutrition_value: 50, created_at: new Date() }
+      { id_food: banana.id, id_recipe: recipe.id, id_unit_of_measurement: gram.id, id_preparation_method: prepMethod.id, quantity: 100, created_at: new Date() },
+      { id_food: rice.id, id_recipe: recipe.id, id_unit_of_measurement: gram.id, id_preparation_method: prepMethod.id, quantity: 50, created_at: new Date() }
     ]
   });
 

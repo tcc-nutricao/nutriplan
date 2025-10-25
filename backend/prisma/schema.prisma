@@ -84,6 +84,8 @@ model Food {
   protein     Float
   carbs       Float
   fat         Float
+  sugar       Float     @default(0)
+  fiber       Float     @default(0)
   created_at  DateTime
   deleted_at  DateTime?
   updated_at  DateTime?
@@ -96,7 +98,6 @@ model Recipe {
   id               Int       @id @default(autoincrement())
   name             String
   preparation_method      String?
-  calories         Float
   preparation_time Int       @default(0)
   portion          Int       @default(1)
   created_at       DateTime  @default(now())
@@ -125,7 +126,7 @@ model RecipeFood {
   id_recipe              Int
   id_preparation_method  Int?
   id_unit_of_measurement Int
-  nutrition_value        Float
+  quantity               Float     @default(1)
   image                  Bytes?
   created_at             DateTime  @default(now())
   updated_at             DateTime  @updatedAt

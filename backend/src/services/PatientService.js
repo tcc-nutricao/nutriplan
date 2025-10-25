@@ -10,6 +10,23 @@ const baseCrudService = generateCrudService(PatientRepository)
 export const PatientService = {
   ...baseCrudService,
 
+  // Função para buscar paciente pelo ID do usuário
+  async getPatientByUserId(userId) {
+    try {
+      const filters = [{ column: 'id_user', value: userId, operator: '=' }]
+      const { data: patients = [] } = await PatientRepository.search({ filters })
+      
+      if (patients.length === 0) {
+        throw new Error('Paciente não encontrado para este usuário')
+      }
+      
+      return patients[0]
+    } catch (error) {
+      console.error('Erro ao buscar paciente por user ID:', error)
+      throw error
+    }
+  },
+
   async getProgress(patientId) {
     try {
         if (!patientId) {
@@ -95,4 +112,5 @@ export const PatientService = {
         throw err
     }
   }
+
 }
