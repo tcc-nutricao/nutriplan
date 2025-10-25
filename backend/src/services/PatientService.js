@@ -47,15 +47,15 @@ export const PatientService = {
             throw new Error('Nenhum dado de saúde encontrado')
         }
 
+        const mainGoalObjective = goalObjectives.find(obj => obj.type === 'MAIN')
+
         // Extrair dados para cálculo
-        const objective = goalObjectives[0].objective
+        const objective = mainGoalObjective?.objective
         const initialWeight = healthData[healthData.length - 1].weight
         const actualWeight = healthData[0].weight
         const height = patient.height / 100 // converter cm para metros se necessário
         const lastUpdate = healthData[0].record_date
 
-        console.log(healthData)
-        
         // Preparar histórico de progresso
         const progress = healthData.map(health => ({
             weight: health.weight,

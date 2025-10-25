@@ -61,6 +61,11 @@ enum Gender {
   NONE
 }
 
+enum GoalObjectiveType {
+  MAIN
+  SECONDARY
+}
+
 model User {
   id         Int      @id @default(autoincrement())
   name       String
@@ -378,6 +383,7 @@ model GoalObjective {
   id            Int      @id @default(autoincrement())
   id_goal       Int
   id_objective  Int
+  type          GoalObjectiveType
   created_at    DateTime
   deleted_at    DateTime?
   updated_at    DateTime?
