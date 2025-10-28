@@ -51,16 +51,12 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { search, insert, update } from "../crud";
+import { search } from "../crud";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-const route_objective = ref("objective");
-const route_patient = ref("patient");
-
-//  Aqui precisa ter acesso ao usuário logado
-const userData = ref({ id: 4 }); // substitua isso pelo user logado real
+const route = ref("objective");
 
 definePageMeta({
   hideTopBar: false,
@@ -69,10 +65,10 @@ definePageMeta({
 
 const inputValues = ref([
   {
-    label: "Qual é a sua data de nascimento?",
+    label: "Que dia você nasceu?",
     type: "date",
     placeholder: "Data de nascimento",
-    ref: "birth_date",
+    ref: "birthday",
     value: "",
     error: "",
   },
@@ -84,26 +80,27 @@ const inputValues = ref([
     value: "",
     error: "",
     options: [
-      { value: "FEM", label: "Feminino" },
-      { value: "MASC", label: "Masculino" },
-      { value: "NONE", label: "Prefiro não informar" },
+      { value: "Feminino", label: "Feminino" },
+      { value: "Masculino", label: "Masculino" },
+      { value: "Outro", label: "Outro" },
+      { value: "Prefiro não informar", label: "Prefiro não informar" },
     ],
   },
   {
     label: "Qual é seu peso?",
     type: "number",
     placeholder: "Seu peso em kg",
-    ref: "weight",
     value: "",
     error: "",
+    ref: "weight",
   },
   {
     label: "Qual é a sua altura? (ex: 170cm)",
     type: "number",
     placeholder: "Sua altura em cm",
-    ref: "height",
     value: "",
     error: "",
+    ref: "height",
   },
   {
     label: "Você tem alguma restrição alimentar?",
@@ -146,29 +143,40 @@ const inputValues = ref([
   },
 ]);
 
+const userData = ref(null);
+
 onMounted(async () => {
-  await getData();
+  getObjectives();
+  // try {
+  //   const response = await fetch("/api/user/personal-data");
+  //   if (response.ok) {
+  //     userData.value = await response.json();
+  //     // Preencher campos se houver dados existentes
+  //     if (userData.value) {
+  //       inputValues.value.forEach((input) => {
+  //         if (userData.value[input.ref]) {
+  //           input.value = userData.value[input.ref];
+  //         }
+  //       });
+  //     }
+  //   }
+  // } catch (error) {
+  //   console.error("Erro ao carregar dados do usuário:", error);
+  // }
 });
 
-function validateForm() {
+function submitForm() {
   let isFormValid = true;
   inputValues.value.forEach((input) => {
-    if (
-      !input.value &&
-      input.ref !== "restrictions" &&
-      input.ref !== "preferences"
-    ) {
+    if (!input.value) {
       input.error = "Este campo é obrigatório";
       isFormValid = false;
     } else {
       input.error = "";
     }
   });
-  return isFormValid;
-}
 
-async function submitForm() {
-  if (!validateForm()) {
+  if (!isFormValid) {
     console.log("Formulário inválido. Corrija os erros.");
     return;
   }
@@ -178,59 +186,48 @@ async function submitForm() {
     return acc;
   }, {});
 
-  const patientData = {
-    id_user: userData.value.id,
-    birth_date: new Date(formData.birth_date).toISOString(),
-    gender: formData.gender,
-    height: Number(formData.height),
-    weight: Number(formData.weight),
-  };
-
-  console.log("patientData preparado para insert:", patientData);
-
-  try {
-    // 🔹 Primeiro verifica se já existe um paciente com esse usuário
-    const existingPatient = await search(route_patient.value, {
-      filters: '[{ "field": "id_user", "value": ' + userData.value.id + " }]",
-    });
-
-    if (existingPatient?.data?.length > 0) {
-      const patientId = existingPatient.data[0].id;
-      console.log("Atualizando paciente existente ID:", patientId);
-
-      const response = await update(
-        route_patient.value,
-        patientId,
-        patientData
-      );
-      console.log("Paciente atualizado:", response?.data ?? response);
-    } else {
-      console.log("Criando novo paciente...");
-      const response = await insert(route_patient.value, patientData);
-      console.log("Paciente criado:", response?.data ?? response);
-    }
-    navigateTo("/profile");
-  } catch (err) {
-    console.error("Erro ao salvar paciente:", err);
-    alert("Erro ao salvar os dados. Tente novamente.");
-  }
+  console.log("Formulário válido! Enviando dados:", formData);
+  handleSubmit(formData);
 }
 
-async function getData() {
-  try {
-    const respObjectives = await search(route_objective.value, null);
-    if (respObjectives && respObjectives.data) {
-      const options = respObjectives.data.map((item) => ({
-        value: item.name,
-        label: item.description,
-      }));
-      const objectiveInput = inputValues.value.find(
-        (i) => i.ref === "objective"
-      );
-      if (objectiveInput) objectiveInput.options = options;
+function handleSubmit(formData) {
+  console.log("Dados recebidos do formulário:", formData);
+
+  fetch("/api/user/personal-data", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Erro na requisição");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Dados salvos com sucesso:", data);
+      // Redirecionar para o perfil após sucesso
+      navigateTo("/profile");
+    })
+    .catch((error) => {
+      console.error("Erro ao salvar dados:", error);
+      alert("Erro ao salvar os dados. Tente novamente.");
+    });
+}
+function getObjectives() {
+  const response = search(route.value, null);
+  response.then((response) => {
+    // Mapeia os objetivos no formato desejado
+    const options = response.data.map((item) => ({
+      value: item.name,
+      label: item.description,
+    }));
+    const objectiveInput = inputValues.value.find((i) => i.ref === "objective");
+    if (objectiveInput) {
+      objectiveInput.options = options;
     }
-  } catch (err) {
-    console.warn("Erro ao carregar objetivos:", err);
-  }
+  });
 }
 </script>

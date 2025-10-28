@@ -22,7 +22,14 @@ export const MealPlanRepository = generateCrudRepository('mealPlan', {
     },
     mealPlanMeals: {
       include: {
-        meal: true
+        meal: true,
+        foodConsumed: {
+          include: {
+            food: true,
+            recipe: true,
+            unitOfMeasurement: true
+          }
+        }
       }
     }
   }
