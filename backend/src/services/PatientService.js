@@ -10,6 +10,23 @@ const baseCrudService = generateCrudService(PatientRepository)
 export const PatientService = {
   ...baseCrudService,
 
+  // Função para buscar paciente pelo ID do usuário
+  async getPatientByUserId(userId) {
+    try {
+      const filters = [{ column: 'id_user', value: userId, operator: '=' }]
+      const { data: patients = [] } = await PatientRepository.search({ filters })
+      
+      if (patients.length === 0) {
+        throw new Error('Paciente não encontrado para este usuário')
+      }
+      
+      return patients[0]
+    } catch (error) {
+      console.error('Erro ao buscar paciente por user ID:', error)
+      throw error
+    }
+  },
+
   async getProgress(patientId) {
     try {
         if (!patientId) {
@@ -47,15 +64,15 @@ export const PatientService = {
             throw new Error('Nenhum dado de saúde encontrado')
         }
 
+        const mainGoalObjective = goalObjectives.find(obj => obj.type === 'MAIN')
+
         // Extrair dados para cálculo
-        const objective = goalObjectives[0].objective
+        const objective = mainGoalObjective?.objective
         const initialWeight = healthData[healthData.length - 1].weight
         const actualWeight = healthData[0].weight
         const height = patient.height / 100 // converter cm para metros se necessário
         const lastUpdate = healthData[0].record_date
 
-        console.log(healthData)
-        
         // Preparar histórico de progresso
         const progress = healthData.map(health => ({
             weight: health.weight,
@@ -95,4 +112,5 @@ export const PatientService = {
         throw err
     }
   }
+
 }

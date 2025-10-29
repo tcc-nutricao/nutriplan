@@ -4,9 +4,13 @@ export const RecipeRepository = generateCrudRepository('recipe', {
   softDelete: true,
   defaultOrderBy: 'id',
   defaultIncludes: {
-    recipeFoods: true,
-    mealPlanRecipes: true,
-    foodConsumed: true,
+    recipeFoods: {
+      include: {
+        food: true,
+        unit_of_measurement: true, // Corrigido para snake_case
+        preparationMethod: true
+      }
+    },
     recipeObjectives: {
       include: {
         objective: {
