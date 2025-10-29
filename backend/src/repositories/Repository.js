@@ -9,16 +9,19 @@ const prisma = new PrismaClient();
  * @param {boolean} options.softDelete - Se deve usar soft delete (padrão: true)
  * @param {string} options.defaultOrderBy - Campo padrão para ordenação (padrão: 'id')
  * @param {Array} options.defaultIncludes - Relacionamentos a incluir por padrão
- * @returns {Object} Repository com métodos search, create, update e remove
+ * @param {Object} options.customMethods - Métodos adicionais específicos do repositório
+ * @returns {Object} Repository com métodos search, create, update, remove, etc.
  */
 export const generateCrudRepository = (modelName, options = {}) => {
   const {
     softDelete = true,
     defaultOrderBy = "id",
     defaultIncludes = {},
+    customMethods = {}, // métodos customizados
   } = options;
 
-  return {
+  // Repositório base com métodos CRUD
+  const repository = {
     async search(object = {}) {
       const {
         filters = [],
@@ -33,8 +36,8 @@ export const generateCrudRepository = (modelName, options = {}) => {
       if (softDelete) {
         where.deleted_at = null;
       }
-     const filtersArray = Array.isArray(filters) ? filters : [];
 
+      const filtersArray = Array.isArray(filters) ? filters : [];
 
       filtersArray.forEach((filter) => {
         const { field, value, operator = "equals" } = filter;
@@ -44,7 +47,6 @@ export const generateCrudRepository = (modelName, options = {}) => {
       });
 
       const total = await prisma[modelName].count({ where });
-
       const orderField = orderColumn || defaultOrderBy;
 
       const data = await prisma[modelName].findMany({
@@ -91,7 +93,6 @@ export const generateCrudRepository = (modelName, options = {}) => {
       }
     },
 
-    // Método auxiliar para buscar por ID
     async findById(id) {
       const where = { id };
 
@@ -105,7 +106,6 @@ export const generateCrudRepository = (modelName, options = {}) => {
       });
     },
 
-    // Método auxiliar para buscar por campo único
     async findUnique(where) {
       return await prisma[modelName].findUnique({
         where,
@@ -113,11 +113,18 @@ export const generateCrudRepository = (modelName, options = {}) => {
       });
     },
 
-    // Método auxiliar para buscar por email (comum em muitos models)
     async findByEmail(email) {
       return await prisma[modelName].findUnique({
         where: { email },
       });
     },
   };
+
+  Object.entries(customMethods).forEach(([name, fn]) => {
+    repository[name] = async (...args) => {
+      return fn(prisma, ...args);
+    };
+  });
+
+  return repository;
 };
