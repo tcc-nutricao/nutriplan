@@ -36,12 +36,8 @@
           >
             Pular
           </Button>
-          <Button
-            mediumPurple
-            class="w-max px-3 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
-            @click="submitForm"
-          >
-            Confirmar
+       <Button mediumPurple @click.prevent="submitForm">
+            Salvar
           </Button>
         </div>
       </div>
@@ -51,7 +47,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { search } from "../crud";
+import { insert, search, update } from "../crud";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -68,7 +64,7 @@ const inputValues = ref([
     label: "Que dia você nasceu?",
     type: "date",
     placeholder: "Data de nascimento",
-    ref: "birthday",
+    ref: "birth_date",
     value: "",
     error: "",
   },
@@ -181,39 +177,54 @@ function submitForm() {
     return;
   }
 
-  const formData = inputValues.value.reduce((acc, field) => {
-    acc[field.ref] = field.value;
-    return acc;
-  }, {});
-
-  console.log("Formulário válido! Enviando dados:", formData);
+  const formData = {
+    birth_date: inputValues.value.find((f) => f.ref === "birth_date").value,
+    gender: mapGender(inputValues.value.find((f) => f.ref === "gender").value),
+    height: parseFloat(inputValues.value.find((f) => f.ref === "height").value),
+    weight: parseFloat(inputValues.value.find((f) => f.ref === "weight").value),
+    restrictions: mapRestrictions(
+      inputValues.value.find((f) => f.ref === "restrictions").value
+    ),
+    preferences: mapPreferences(
+      inputValues.value.find((f) => f.ref === "preferences").value
+    ),
+    objectives: [inputValues.value.find((f) => f.ref === "objective").value],
+  };
   handleSubmit(formData);
+}
+
+function mapGender(inputGender) {
+  if (inputGender === "Feminino") return "FEM";
+  if (inputGender === "Masculino") return "MASC";
+  return "NONE";
+}
+
+function mapRestrictions(input) {
+  if (input === "Nenhuma") return [];
+  return []; // quando você tiver a tabela de restrições no banco, mapeia os IDs aqui
+}
+
+function mapPreferences(input) {
+  if (input === "Nenhuma") return [];
+  return []; // depois ajustaremos com o ID da entidade
 }
 
 function handleSubmit(formData) {
   console.log("Dados recebidos do formulário:", formData);
 
-  fetch("/api/user/personal-data", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Erro na requisição");
+  update("user/personal-data", "", formData)
+    .then((res) => {
+      if (res.error) {
+        console.error("Erro ao salvar dados:", res);
+        alert("Erro ao salvar os dados. Tente novamente.");
+      } else {
+        console.log("Dados salvos com sucesso:", res);
+        navigateTo("/profile");
       }
-      return response.json();
     })
-    .then((data) => {
-      console.log("Dados salvos com sucesso:", data);
-      // Redirecionar para o perfil após sucesso
-      navigateTo("/profile");
-    })
-    .catch((error) => {
-      console.error("Erro ao salvar dados:", error);
-      alert("Erro ao salvar os dados. Tente novamente.");
+    .catch((err) => {
+      console.error("Erro na requisição:", err);
+      alert("Erro na requisição. Tente novamente.");
     });
 }
 function getObjectives() {
@@ -221,7 +232,7 @@ function getObjectives() {
   response.then((response) => {
     // Mapeia os objetivos no formato desejado
     const options = response.data.map((item) => ({
-      value: item.name,
+      value: item.id,
       label: item.description,
     }));
     const objectiveInput = inputValues.value.find((i) => i.ref === "objective");

@@ -19,7 +19,7 @@ export const generateCrudRepository = (modelName, options = {}) => {
   } = options;
 
   return {
-    async search(object) {
+    async search(object = {}) {
       const {
         filters = [],
         limit = 10,
@@ -33,7 +33,8 @@ export const generateCrudRepository = (modelName, options = {}) => {
       if (softDelete) {
         where.deleted_at = null;
       }
-      const filtersArray = Array.isArray(parsed) ? parsed : [];
+
+      const filtersArray = Array.isArray(filters) ? filters : [];
 
       filtersArray.forEach((filter) => {
         const { field, value, operator = "equals" } = filter;

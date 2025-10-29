@@ -135,7 +135,13 @@ async function main() {
   });
 
   await prisma.goalObjective.create({
-    data: { id_goal: goal.id, id_objective: 1, created_at: new Date() },
+    data: {
+      id_goal: goal.id,
+      id_objective: 1,
+      type: "MAIN",
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
   });
 
   // PREFERENCES
@@ -267,7 +273,6 @@ async function main() {
   const recipe = await prisma.recipe.create({
     data: {
       name: "Vitamina de Banana",
-      calories: 180,
       preparation_time: 5,
       portion: 1,
       created_at: new Date(),
@@ -287,9 +292,23 @@ async function main() {
   // RECIPE FOOD
   await prisma.recipeFood.createMany({
     data: [
-      { id_food: banana.id, id_recipe: recipe.id, id_unit_of_measurement: gram.id, id_preparation_method: prepMethod.id, quantity: 100, created_at: new Date() },
-      { id_food: rice.id, id_recipe: recipe.id, id_unit_of_measurement: gram.id, id_preparation_method: prepMethod.id, quantity: 50, created_at: new Date() }
-    ]
+      {
+        id_food: banana.id,
+        id_recipe: recipe.id,
+        id_unit_of_measurement: gram.id,
+        id_preparation_method: prepMethod.id,
+        quantity: 100,
+        created_at: new Date(),
+      },
+      {
+        id_food: rice.id,
+        id_recipe: recipe.id,
+        id_unit_of_measurement: gram.id,
+        id_preparation_method: prepMethod.id,
+        quantity: 50,
+        created_at: new Date(),
+      },
+    ],
   });
 
   // FOOD CONSUMED (one with food, one with recipe)
