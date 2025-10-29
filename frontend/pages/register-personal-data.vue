@@ -36,13 +36,7 @@
           >
             Pular
           </Button>
-          <Button
-            mediumPurple
-            class="w-max px-3 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
-            @click="submitForm"
-          >
-            Confirmar
-          </Button>
+          <Button mediumPurple @click.prevent="submitForm"> Salvar </Button>
         </div>
       </div>
     </div>
@@ -51,16 +45,12 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { search, insert, update } from "../crud";
+import { insert, search, update } from "../crud";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-const route_objective = ref("objective");
-const route_patient = ref("patient");
-
-//  Aqui precisa ter acesso ao usuário logado
-const userData = ref({ id: 4 }); // substitua isso pelo user logado real
+const route = ref("objective");
 
 definePageMeta({
   hideTopBar: false,
@@ -69,7 +59,7 @@ definePageMeta({
 
 const inputValues = ref([
   {
-    label: "Qual é a sua data de nascimento?",
+    label: "Que dia você nasceu?",
     type: "date",
     placeholder: "Data de nascimento",
     ref: "birth_date",
@@ -84,26 +74,27 @@ const inputValues = ref([
     value: "",
     error: "",
     options: [
-      { value: "FEM", label: "Feminino" },
-      { value: "MASC", label: "Masculino" },
-      { value: "NONE", label: "Prefiro não informar" },
+      { value: "Feminino", label: "Feminino" },
+      { value: "Masculino", label: "Masculino" },
+      { value: "Outro", label: "Outro" },
+      { value: "Prefiro não informar", label: "Prefiro não informar" },
     ],
   },
   {
     label: "Qual é seu peso?",
     type: "number",
     placeholder: "Seu peso em kg",
-    ref: "weight",
     value: "",
     error: "",
+    ref: "weight",
   },
   {
     label: "Qual é a sua altura? (ex: 170cm)",
     type: "number",
     placeholder: "Sua altura em cm",
-    ref: "height",
     value: "",
     error: "",
+    ref: "height",
   },
   {
     label: "Você tem alguma restrição alimentar?",
@@ -146,18 +137,16 @@ const inputValues = ref([
   },
 ]);
 
+const userData = ref(null);
+
 onMounted(async () => {
-  await getData();
+  getObjectives();
 });
 
 function validateForm() {
   let isFormValid = true;
   inputValues.value.forEach((input) => {
-    if (
-      !input.value &&
-      input.ref !== "restrictions" &&
-      input.ref !== "preferences"
-    ) {
+    if (!input.value) {
       input.error = "Este campo é obrigatório";
       isFormValid = false;
     } else {
@@ -173,64 +162,67 @@ async function submitForm() {
     return;
   }
 
-  const formData = inputValues.value.reduce((acc, field) => {
-    acc[field.ref] = field.value;
-    return acc;
-  }, {});
-
-  const patientData = {
-    id_user: userData.value.id,
-    birth_date: new Date(formData.birth_date).toISOString(),
-    gender: formData.gender,
-    height: Number(formData.height),
-    weight: Number(formData.weight),
+  const formData = {
+    birth_date: inputValues.value.find((f) => f.ref === "birth_date").value,
+    gender: mapGender(inputValues.value.find((f) => f.ref === "gender").value),
+    height: parseFloat(inputValues.value.find((f) => f.ref === "height").value),
+    weight: parseFloat(inputValues.value.find((f) => f.ref === "weight").value),
+    restrictions: mapRestrictions(
+      inputValues.value.find((f) => f.ref === "restrictions").value
+    ),
+    preferences: mapPreferences(
+      inputValues.value.find((f) => f.ref === "preferences").value
+    ),
+    objectives: [inputValues.value.find((f) => f.ref === "objective").value],
   };
-
-  console.log("patientData preparado para insert:", patientData);
-
-  try {
-    // 🔹 Primeiro verifica se já existe um paciente com esse usuário
-    const existingPatient = await search(route_patient.value, {
-      filters: '[{ "field": "id_user", "value": ' + userData.value.id + " }]",
-    });
-
-    if (existingPatient?.data?.length > 0) {
-      const patientId = existingPatient.data[0].id;
-      console.log("Atualizando paciente existente ID:", patientId);
-
-      const response = await update(
-        route_patient.value,
-        patientId,
-        patientData
-      );
-      console.log("Paciente atualizado:", response?.data ?? response);
-    } else {
-      console.log("Criando novo paciente...");
-      const response = await insert(route_patient.value, patientData);
-      console.log("Paciente criado:", response?.data ?? response);
-    }
-    navigateTo("/profile");
-  } catch (err) {
-    console.error("Erro ao salvar paciente:", err);
-    alert("Erro ao salvar os dados. Tente novamente.");
-  }
+  handleSubmit(formData);
 }
 
-async function getData() {
-  try {
-    const respObjectives = await search(route_objective.value, null);
-    if (respObjectives && respObjectives.data) {
-      const options = respObjectives.data.map((item) => ({
-        value: item.name,
-        label: item.description,
-      }));
-      const objectiveInput = inputValues.value.find(
-        (i) => i.ref === "objective"
-      );
-      if (objectiveInput) objectiveInput.options = options;
+function mapGender(inputGender) {
+  if (inputGender === "Feminino") return "FEM";
+  if (inputGender === "Masculino") return "MASC";
+  return "NONE";
+}
+
+function mapRestrictions(input) {
+  if (input === "Nenhuma") return [];
+  return []; // , mapeia os IDs das restrições aqui
+}
+
+function mapPreferences(input) {
+  if (input === "Nenhuma") return [];
+  return []; // ajustar com o ID da entidade
+}
+
+function handleSubmit(formData) {
+  console.log("Dados recebidos do formulário:", formData);
+
+  update("user/personal-data", "", formData)
+    .then((res) => {
+      if (res.error) {
+        console.error("Erro ao salvar dados:", res);
+        alert("Erro ao salvar os dados. Tente novamente.");
+      } else {
+        console.log("Dados salvos com sucesso:", res);
+        navigateTo("/profile");
+      }
+    })
+    .catch((err) => {
+      console.error("Erro na requisição:", err);
+      alert("Erro na requisição. Tente novamente.");
+    });
+}
+function getObjectives() {
+  const response = search(route.value, null);
+  response.then((response) => {
+    const options = response.data.map((item) => ({
+      value: item.id,
+      label: item.description,
+    }));
+    const objectiveInput = inputValues.value.find((i) => i.ref === "objective");
+    if (objectiveInput) {
+      objectiveInput.options = options;
     }
-  } catch (err) {
-    console.warn("Erro ao carregar objetivos:", err);
-  }
+  });
 }
 </script>

@@ -19,15 +19,23 @@ export const generateCrudRepository = (modelName, options = {}) => {
   } = options;
 
   return {
-    async search(object) {
-      const { filters = [], limit = 10, page = 1, order = 'asc', orderColumn } = object
-      
-      const where = {}
-      
+    async search(object = {}) {
+      const {
+        filters = [],
+        limit = 10,
+        page = 1,
+        order = "asc",
+        orderColumn,
+      } = object;
+
+      const where = {};
+
       if (softDelete) {
-        where.deleted_at = null
+        where.deleted_at = null;
       }
       const filtersArray = Array.isArray(parsed) ? parsed : [];
+
+      const filtersArray = Array.isArray(filters) ? filters : [];
 
       filtersArray.forEach((filter) => {
         const { field, value, operator = "equals" } = filter;
@@ -38,15 +46,15 @@ export const generateCrudRepository = (modelName, options = {}) => {
 
       const total = await prisma[modelName].count({ where });
 
-      const orderField = orderColumn || defaultOrderBy
+      const orderField = orderColumn || defaultOrderBy;
 
       const data = await prisma[modelName].findMany({
         where,
         take: limit,
         skip: (page - 1) * limit,
-        orderBy: { [orderField]: order === 'asc' ? 'asc' : 'desc' },
-        include: defaultIncludes
-      })
+        orderBy: { [orderField]: order === "asc" ? "asc" : "desc" },
+        include: defaultIncludes,
+      });
 
       return { data, total };
     },
@@ -86,16 +94,16 @@ export const generateCrudRepository = (modelName, options = {}) => {
 
     // Método auxiliar para buscar por ID
     async findById(id) {
-      const where = { id }
-      
+      const where = { id };
+
       if (softDelete) {
-        where.deleted_at = null
+        where.deleted_at = null;
       }
-      
+
       return await prisma[modelName].findUnique({
         where,
-        include: defaultIncludes
-      })
+        include: defaultIncludes,
+      });
     },
 
     // Método auxiliar para buscar por campo único

@@ -272,7 +272,6 @@ async function main() {
   const recipe = await prisma.recipe.create({
     data: {
       name: "Vitamina de Banana",
-      calories: 180,
       preparation_time: 5,
       portion: 1,
       created_at: new Date(),
