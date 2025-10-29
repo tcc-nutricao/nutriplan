@@ -43,7 +43,9 @@
   </div>
 </template>
 
+
 <script setup>
+//Imports 
 import { ref, onMounted } from "vue";
 import { insert, search, update } from "../crud";
 import { useRouter } from "vue-router";
