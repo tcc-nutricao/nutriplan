@@ -36,9 +36,7 @@
           >
             Pular
           </Button>
-       <Button mediumPurple @click.prevent="submitForm">
-            Salvar
-          </Button>
+          <Button mediumPurple @click.prevent="submitForm"> Salvar </Button>
         </div>
       </div>
     </div>
@@ -214,7 +212,6 @@ function handleSubmit(formData) {
 function getObjectives() {
   const response = search(route.value, null);
   response.then((response) => {
-    
     const options = response.data.map((item) => ({
       value: item.id,
       label: item.description,
