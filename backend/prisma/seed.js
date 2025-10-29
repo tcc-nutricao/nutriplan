@@ -143,7 +143,6 @@ async function main() {
       updated_at: new Date(),
     },
   });
-
   // PREFERENCES
   const preference = await prisma.preference.create({
     data: { name: "Nenhuma", created_at: new Date() },
