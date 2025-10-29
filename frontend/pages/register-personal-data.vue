@@ -143,22 +143,6 @@ const userData = ref(null);
 
 onMounted(async () => {
   getObjectives();
-  // try {
-  //   const response = await fetch("/api/user/personal-data");
-  //   if (response.ok) {
-  //     userData.value = await response.json();
-  //     // Preencher campos se houver dados existentes
-  //     if (userData.value) {
-  //       inputValues.value.forEach((input) => {
-  //         if (userData.value[input.ref]) {
-  //           input.value = userData.value[input.ref];
-  //         }
-  //       });
-  //     }
-  //   }
-  // } catch (error) {
-  //   console.error("Erro ao carregar dados do usuário:", error);
-  // }
 });
 
 function submitForm() {
@@ -201,12 +185,12 @@ function mapGender(inputGender) {
 
 function mapRestrictions(input) {
   if (input === "Nenhuma") return [];
-  return []; // quando você tiver a tabela de restrições no banco, mapeia os IDs aqui
+  return []; // , mapeia os IDs das restrições aqui
 }
 
 function mapPreferences(input) {
   if (input === "Nenhuma") return [];
-  return []; // depois ajustaremos com o ID da entidade
+  return []; // ajustar com o ID da entidade
 }
 
 function handleSubmit(formData) {
@@ -230,7 +214,7 @@ function handleSubmit(formData) {
 function getObjectives() {
   const response = search(route.value, null);
   response.then((response) => {
-    // Mapeia os objetivos no formato desejado
+    
     const options = response.data.map((item) => ({
       value: item.id,
       label: item.description,
