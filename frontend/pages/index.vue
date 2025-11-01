@@ -45,6 +45,8 @@
 import { insert } from "../crud";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useCookie } from "nuxt/app"; // <--- 1. IMPORTE O useCookie
+
 const router = useRouter();
 
 definePageMeta({
@@ -70,8 +72,21 @@ const navigate = async (route) => {
 const login = async () => {
   const response = await insert(route.value, object.value);
   errors.value = response.error ? response.data.data : {};
+  
   if (!response.error) {
-    navigate("/register-personal-data");
+    // --- 2. SALVE OS DADOS ANTES DE NAVEGAR ---
+    // 'response' terá { message, token, user } do seu backend
+    
+    // Salva o objeto do usuário (com id, name, email, e role)
+    const userCookie = useCookie('user-data'); 
+    userCookie.value = response.user;
+
+    // Salva o token (opcional, mas bom para futuras requisições)
+    const tokenCookie = useCookie('auth-token');
+    tokenCookie.value = response.token;
+    // ------------------------------------------
+
+    navigate("/register-personal-data"); // 3. Navegue DEPOIS de salvar
   }
 };
 </script>
