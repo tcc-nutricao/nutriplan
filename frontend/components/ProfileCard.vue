@@ -119,7 +119,6 @@
 
 <script setup>
 import { ref, onMounted, computed } from "vue";
-import { search } from "../crud";
 import { useRouter } from "vue-router";
 import ListItem from "./ListItem.vue";
 import { useCookie } from "nuxt/app";
@@ -131,8 +130,6 @@ const user = ref(userCookie.value);
 
 const isOpen = ref(true);
 const selectedItem = ref(null);
-
-const route = ref("user")
 
 const items = computed(() => {
   if (user.value?.role === 'STANDARD') {

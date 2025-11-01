@@ -109,65 +109,85 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "Profile",
-  components: {
-    ProfileCardHorizontal: () =>
-      import("../components/ProfileCardHorizontal.vue"),
-    ProfileEditModal: () => import("../components/ProfileEditModal.vue"),
-  },
-  data() {
-    return {
-      showModal: '',
-      activeSection: null,
-      imageToEdit: null,
-      personalData: {
-        nome: "Luna Araújo",
-        email: "luna@gmail.com",
-        idade: 15,
-        sexo: "Feminino",
-        altura: 165,
-        peso: 65,
-        restricoes: ["Sem glúten", "Sem lactose"],
-        objetivo: "Perda de Peso",
-        preferencias: "Dieta mediterrânea"
-      }
-    };
-  },
-  props: {
-    nome: String,
-    email: String,
-    idade: Number,
-    sexo: String,
-    altura: Number,
-    peso: Number,
-    restricoes: String,
-    objetivo: String,
-    preferencias: String
-  },
-  methods: {
-    openProfileModal(section) {
-      this.activeSection = section;
-      this.showModal = 'profileEdit';
-    },
-    openAvatarModal() {
-      this.imageToEdit = null;
-      this.showModal = 'avatarAdd';
-    },
-    closeModal() {
-      this.showModal = '';
-      this.activeSection = null;
-      this.imageToEdit = null;
-    },
-    handleImageSelected(imageData) {
-      this.imageToEdit = imageData;
-      this.showModal = 'avatarEdit';
-    },
-    handleAvatarSave(croppedImageData) {
-      this.closeModal();
-    }
-  },
+<script setup>
+import { ref, defineAsyncComponent } from 'vue';
+import { useCookie } from 'nuxt/app';
+
+// --- 1. IMPORTAÇÃO DOS COMPONENTES ---
+// No <script setup>, componentes são importados e usados diretamente.
+// Usamos 'defineAsyncComponent' para manter o lazy loading (import dinâmico)
+const ProfileCardHorizontal = defineAsyncComponent(() =>
+  import("../components/ProfileCardHorizontal.vue")
+);
+const ProfileEditModal = defineAsyncComponent(() => 
+  import("../components/ProfileEditModal.vue")
+);
+
+// --- 2. DEFINIÇÃO DAS PROPS ---
+// 'props' agora são definidas com 'defineProps'
+const props = defineProps({
+  nome: String,
+  email: String,
+  idade: Number,
+  sexo: String,
+  altura: Number,
+  peso: Number,
+  restricoes: String,
+  objetivo: String,
+  preferencias: String
+});
+
+// --- 3. DADOS DO COOKIE ---
+// Pegamos o cookie 'user-data'
+const userCookie = useCookie('user-data');
+
+// --- 4. ESTADO (antigo 'data()') ---
+// Tudo que estava em 'data()' vira uma 'ref()'
+const showModal = ref('');
+const activeSection = ref(null);
+const imageToEdit = ref(null);
+
+// O objeto 'personalData' agora é uma 'ref'
+// O nome e email são preenchidos pelo cookie,
+// com um fallback (o '||') para os valores antigos caso o cookie esteja vazio.
+const personalData = ref({
+  nome: userCookie.value?.name,
+  email: userCookie.value?.email,
+  idade: 15,
+  sexo: "Feminino",
+  altura: 165,
+  peso: 65,
+  restricoes: ["Sem glúten", "Sem lactose"],
+  objetivo: "Perda de Peso",
+  preferencias: "Dieta mediterrânea"
+});
+
+// --- 5. MÉTODOS (antigo 'methods') ---
+// Métodos viram funções 'const'
+// Note que agora usamos '.value' para alterar o valor de uma 'ref'
+const openProfileModal = (section) => {
+  activeSection.value = section;
+  showModal.value = 'profileEdit';
+};
+
+const openAvatarModal = () => {
+  imageToEdit.value = null;
+  showModal.value = 'avatarAdd';
+};
+
+const closeModal = () => {
+  showModal.value = '';
+  activeSection.value = null;
+  imageToEdit.value = null;
+};
+
+const handleImageSelected = (imageData) => {
+  imageToEdit.value = imageData;
+  showModal.value = 'avatarEdit';
+};
+
+const handleAvatarSave = (croppedImageData) => {
+  closeModal();
 };
 </script>
 
