@@ -42,7 +42,7 @@ export const PatientService = {
         const { data: mealPlans = [] } = await MealPlanService.getMealPlanByPatient(patientId, mealPlanFilters)
 
         if (mealPlans.length === 0) {
-            return { data: null, message: 'Nenhum plano de refeição ativo encontrado' }
+            return { data: [], total: 0, message: 'Nenhum plano de refeição ativo encontrado' }
         }
 
         const activeMealPlan = mealPlans[0]

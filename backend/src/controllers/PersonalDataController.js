@@ -8,11 +8,11 @@ export const PersonalDataController = {
       
       const validatedData = validatePersonalData(req.body)
 
-      const result = await PersonalDataService.createPersonalData(userId, validatedData)
+      const result = await PersonalDataService.updatePersonalData(userId, validatedData)
 
-      return res.status(201).json({
+      return res.status(200).json({
         success: true,
-        message: 'Dados pessoais criados com sucesso',
+        message: 'Dados pessoais atualizados com sucesso',
         data: result
       })
     } catch (error) {

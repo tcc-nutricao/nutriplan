@@ -75,6 +75,10 @@ model User {
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
   deleted_at  DateTime? 
+
+  patient    Patient?
+  nutricionist Nutritionist?
+  userGroups  UserGroup[]
 }
 
 model Food {
@@ -142,10 +146,10 @@ model Patient {
   id                 Int          @id @default(autoincrement())
   id_user            Int          @unique
   id_nutritionist    Int?
-  birth_date       DateTime     @default(now())
-  gender           Gender       @default(NONE)
-  height           Float        @default(0)
-  weight           Float        @default(0)
+  birth_date         DateTime     @default(now())
+  gender             Gender       @default(NONE)
+  height             Float        @default(0)
+  weight             Float        @default(0)
   profile_picture    Bytes?       @db.MediumBlob
   created_at         DateTime     @default(now())
   updated_at         DateTime     @updatedAt
@@ -158,12 +162,13 @@ model Patient {
   nutritionistPatients NutritionistPatient[]
 
   nutritionist       Nutritionist? @relation(fields: [id_nutritionist], references: [id])
+  user               User         @relation(fields: [id_user], references: [id])
 }
 
 model Nutritionist {
   id                   Int       @id @default(autoincrement())
   id_user              Int       @unique
-  professional_register String
+  professional_register String?
   created_at           DateTime
   deleted_at           DateTime?
   updated_at           DateTime?
@@ -171,6 +176,7 @@ model Nutritionist {
   patients   Patient[]
   mealPlans  MealPlan[]
   nutritionistPatients  NutritionistPatient[]
+  user  User  @relation(fields: [id_user], references: [id])
 }
 
 model HealthData {
@@ -366,6 +372,7 @@ model UserGroup {
   updated_at DateTime?
 
   group Group @relation(fields: [id_group], references: [id])
+  user User @relation(fields: [id_user], references: [id])
 }
 
 model Group {
@@ -377,7 +384,7 @@ model Group {
   deleted_at  DateTime?
   updated_at  DateTime?
 
-  userGroups UserGroup[]
+  userGroups  UserGroup[]
 }
 
 model GoalObjective {

@@ -13,8 +13,8 @@ export const AuthService = {
       throw new AppError('E-mail ou senha inválidos', 401, { invalidCredentials: 'E-mail ou senha inválidos' })
     }
   
-    const payload = { id: user.id, email: user.email }
-    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1d' })
+  const payload = { id: user.id, email: user.email, role: user.role }
+  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1d' })
   
     return {
       message: 'Login bem-sucedido',

@@ -45,7 +45,7 @@ const getActiveMealPlanForPatient = async (patientId) => {
     const { data: mealPlans = [] } = await getMealPlanByPatient(filters)
     
     if (mealPlans.length === 0) {
-      return { data: null, message: 'Nenhum plano de refeição ativo encontrado' }
+      return { data: [], total: 0, message: 'Nenhum plano de refeição ativo encontrado' }
     }
     
     return mealPlans[0]
@@ -55,8 +55,30 @@ const getActiveMealPlanForPatient = async (patientId) => {
   }
 }
 
+const update = async (id, data) => {
+  // Se o status está sendo alterado para ACTIVE
+  if (data.status === 'ACTIVE') {
+    // Busca o meal plan atual para pegar o paciente
+    const mealPlan = await MealPlanRepository.findById(id);
+    if (!mealPlan) throw new Error('Plano alimentar não encontrado');
+    const patientId = mealPlan.id_patient;
+    // Desativa outros planos ativos desse paciente
+    await MealPlanRepository.updateMany({
+      where: {
+        id_patient: patientId,
+        status: 'ACTIVE',
+        id: { not: id }
+      },
+      data: { status: 'COMPLETED' }
+    });
+  }
+  // Chama o update base
+  return await MealPlanRepository.update(id, data);
+};
+
 export const MealPlanService = {
   ...generateCrudService(MealPlanRepository),
+  update, 
   getMealPlanByPatient,
   getActiveMealPlanForPatient
 }
