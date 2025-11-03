@@ -5,13 +5,13 @@
       class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]"
       @click.self="$emit('closeModal')"
     >
-    <div class="bg-white p-5 rounded-xl shadow-xl max-w-md w-full">
-      <h2 class="text-xl font-bold mb-4">{{ title ? title : '' }}</h2>
+    <div class="bg-white px-7 py-6 rounded-2xl shadow-xl max-w-md w-full">
+      <h2 class="font-semibold mb-4 text-center text-danger text-3xl">{{ title ? title : '' }}</h2>
       <p class="mb-5 text-[#351F56] text-center text-xl">{{ content }}</p>
 
       <Flex gap-5>
-        <Button outlined lightPurple label="Voltar" @click="close" class="w-full" />
-        <Button mediumPurple label="OK" @click="close" class="w-full" />
+        <Button outlined gray label="Cancelar" @click="close" class="w-full" />
+        <Button red :label="btnLabel" @click="close" class="w-full" />
       </Flex>
     </div>
   </div>
@@ -24,7 +24,8 @@ import { ref } from 'vue'
 
 const props = defineProps({
     title: String,
-    content: String
+    content: String,
+    btnLabel: String
 })
 
 const emits = defineEmits(['closeModal'])
@@ -61,3 +62,4 @@ transition: opacity 0.3s ease;
 transition: transform 0.3s ease;
 }
 </style>
+

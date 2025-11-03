@@ -28,6 +28,7 @@ module.exports = {
           g2: '#B9B6C9',
           npShadow: 'rgba(128, 0, 255, 0.5)'
         },
+        't': '#351f56',
         'danger': '#EA3939',
         'danger-light': '#FF5858',
         'success': '#2FC44F',

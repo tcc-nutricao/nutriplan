@@ -6,7 +6,8 @@
       @click.self="$emit('close')"
     >
       <div
-        class="bg-white rounded-3xl py-7 px-9 w-full max-w-lg shadow-lg relative max-h-[90vh] overflow-y-auto modal-container"
+        class="bg-white rounded-3xl py-7 px-9 w-full shadow-lg relative max-h-[90vh] overflow-y-auto modal-container"
+        :class="section === 'basic' ? 'max-w-lg' : 'max-w-3xl'"
       >
         <button
           class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-50"
@@ -38,11 +39,26 @@
             placeholder="Insira a nova senha" />
         </div>
 
-        <div v-else>
-          <InputText
+        <div v-else class="flex w-full justify-between gap-3">
+          <div class="flex flex-col w-full">
+            <InputText
             class="mb-5"
             label="Idade"
             placeholder="Insira sua idade" />
+            <InputText
+            class="mb-5"
+            label="Peso"
+            placeholder="Digite aqui" />
+            <InputText
+            class="mb-5"
+            label="Meta de peso"
+            placeholder="Digite aqui" />
+            <InputText
+            class="mb-5"
+            label="Restrições Alimentares"
+            placeholder="Digite aqui" />
+          </div>
+          <div class="flex flex-col w-full">
           <InputText
             class="mb-5"
             label="Sexo"
@@ -53,20 +69,13 @@
             placeholder="Digite aqui" />
           <InputText
             class="mb-5"
-            label="Peso"
-            placeholder="Digite aqui" />
-          <InputText
-            class="mb-5"
-            label="Restrições Alimentares"
-            placeholder="Digite aqui" />
-          <InputText
-            class="mb-5"
             label="Objetivo"
             placeholder="Digite aqui" />
           <InputText
             class="mb-5"
             label="Preferências"
             placeholder="Digite aqui" />
+          </div>
         </div>
         <div class="flex justify-center mt-6">
 
