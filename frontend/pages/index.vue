@@ -45,7 +45,7 @@
 import { insert } from "../crud";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { useCookie } from "nuxt/app"; // <--- 1. IMPORTE O useCookie
+import { useCookie } from "nuxt/app"; // Importe o useCookie
 
 const router = useRouter();
 
@@ -80,7 +80,9 @@ const login = async () => {
     const tokenCookie = useCookie('auth-token');
     tokenCookie.value = response.token;
 
-    navigate("/register-personal-data");
+    // console.log("Resposta recebida do backend:", response);
+    
+    navigate(response.nextPage); // <-- ANTES: navigate("/register-personal-data")
   }
 };
 </script>

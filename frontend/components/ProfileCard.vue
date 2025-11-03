@@ -175,7 +175,7 @@ const logout = async () => {
 };
 
 const navigate = async (route) => {
-  await router.push(route);
+  await router.push({ path: route, replace: true });
 };
 </script>
 

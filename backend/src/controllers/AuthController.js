@@ -24,7 +24,8 @@ export const AuthController = {
 
       return res.status(200).json({
         message: result.message,
-        user: result.user
+        user: result.user,
+        nextPage: result.nextPage
       })
     } catch (err) {
       if (err instanceof AppError) {
