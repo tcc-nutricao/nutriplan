@@ -13,13 +13,32 @@
                         :time="item.time"
                         :portions="item.portions"
                         :is-selected="item.id === selectedItemId"
+                        :is-fav="item.isFav"
                         @selecionado="selectItem(item.id)"
                     />
                 </div>
             </div>
 
             <div v-if="selectedItem" class="stickyProfile bg-white rounded-3xl shadow-lg border-2 p-6 w-[50%] mb-8">
-                <h2 class="h2 mb-4">{{ selectedItem.title }}</h2>
+                <div class="flex w-full justify-between items-center mb-4">
+                    <h2 class="h2">{{ selectedItem.title }}</h2>
+                    <Button
+                        v-if="selectedItem.isFav"
+                        red outlined
+                        class="w-max px-3 h-[42px] transition"
+                        icon="fa-solid fa-heart short flex justify-center text-red-500"
+                        label="Favoritado"
+                        @click="selectedItem.isFav = !selectedItem.isFav"
+                    />
+                    <Button
+                        v-else
+                        mediumPurple
+                        class="w-max px-3 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
+                        icon="fa-regular fa-heart short flex justify-center"
+                        label="Favoritar"
+                        @click="selectedItem.isFav = !selectedItem.isFav"
+                    />
+                </div>
                 <div class="flex flex-wrap gap-2 mb-4">
                     <span v-for="(category, index) in selectedItem.categories" :key="index" class="bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-sm">
                         {{ category }}
@@ -55,7 +74,7 @@ export default {
     return {
         selectedItemId: null, 
         itemList: [
-            { id: 1, title: 'Muffin de Banana Integral', categories: ['Perda de Peso', 'Sono', 'Antioxidante'], time: '15', portions: '2', 
+            { id: 1, title: 'Muffin de Banana Integral', categories: ['Perda de Peso', 'Sono', 'Antioxidante'], time: '15', portions: '2', isFav: false,
                 description: 'Descrição detalhada da receita selecionada. Ingredientes, modo de preparo, dicas e outras informações relevantes para o usuário.', 
                 ingredients: ['Banana', 'Farinha Integral', 'Mel'],
                 steps: ['Amasse a banana com um garfo até formar um purê.',
@@ -65,7 +84,7 @@ export default {
                         'Deixe esfriar um pouco antes de desenformar e servir.'
                     ]
             },
-            { id: 2, title: 'Salada Detox com Grão de Bico', categories: ['Energia','Perda de Peso', 'Saúde Intestinal'], time: '90', portions: '8', 
+            { id: 2, title: 'Salada Detox com Grão de Bico', categories: ['Energia','Perda de Peso', 'Saúde Intestinal'], time: '90', portions: '8', isFav: true,
             description: 'Descrição detalhada da receita selecionada. Ingredientes, modo de preparo, dicas e outras informações relevantes para o usuário.', 
             ingredients: [  '1 xicara de grão-de- bico cozido', 
                             '1/2 pepino fatiado',
@@ -86,7 +105,7 @@ export default {
                     'Sirva fresca.'
                 ]
             },
-            { id: 3, title: 'Suco de Uva', categories: ['Leve', 'Doce', 'Fácil'], time: '2', portions: '1', 
+            { id: 3, title: 'Suco de Uva', categories: ['Leve', 'Doce', 'Fácil'], time: '2', portions: '1', isFav: false,
                 description: 'Descrição detalhada da receita selecionada. Ingredientes, modo de preparo, dicas e outras informações relevantes para o usuário.', 
                 ingredients: ['1 cacho de uvas', '1L de água'],
                 steps: ['Lave bem a uva e corte em pedacos pequenos.',
@@ -94,7 +113,7 @@ export default {
                     'Sirva gelado.'
                 ]
             },
-            { id: 4, title: 'Suco de Uva', categories: ['Leve', 'Doce', 'Fácil'], time: '2', portions: '1', 
+            { id: 4, title: 'Suco de Uva', categories: ['Leve', 'Doce', 'Fácil'], time: '2', portions: '1', isFav: false,
                 description: 'Descrição detalhada da receita selecionada. Ingredientes, modo de preparo, dicas e outras informações relevantes para o usuário.', 
                 ingredients: ['1 cacho de uvas', '1L de água'],
                 steps: ['Lave bem a uva e corte em pedacos pequenos.',
@@ -102,7 +121,7 @@ export default {
                     'Sirva gelado.'
                 ]
             },
-            { id: 5, title: 'Suco de Uva', categories: ['Leve', 'Doce', 'Fácil'], time: '2', portions: '1', 
+            { id: 5, title: 'Suco de Uva', categories: ['Leve', 'Doce', 'Fácil'], time: '2', portions: '1', isFav: false,
                 description: 'Descrição detalhada da receita selecionada. Ingredientes, modo de preparo, dicas e outras informações relevantes para o usuário.', 
                 ingredients: ['1 cacho de uvas', '1L de água'],
                 steps: ['Lave bem a uva e corte em pedacos pequenos.',
@@ -110,7 +129,7 @@ export default {
                     'Sirva gelado.'
                 ]
             },
-            { id: 6, title: 'Suco de Uva', categories: ['Leve', 'Doce', 'Fácil'], time: '2', portions: '1', 
+            { id: 6, title: 'Suco de Uva', categories: ['Leve', 'Doce', 'Fácil'], time: '2', portions: '1', isFav: false,
                 description: 'Descrição detalhada da receita selecionada. Ingredientes, modo de preparo, dicas e outras informações relevantes para o usuário.', 
                 ingredients: ['1 cacho de uvas', '1L de água'],
                 steps: ['Lave bem a uva e corte em pedacos pequenos.',

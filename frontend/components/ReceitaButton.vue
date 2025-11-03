@@ -4,7 +4,10 @@
         :class="{'border-p-600 shadow-xl shadow-p-600/20 w-[100%] transition': isSelected}, {'w-[85%]' : !isSelected}"
         @click="notificarClique"
     >
-        <h2 class="h2">{{ title }}</h2>
+        <div class="flex w-full items-center justify-between">
+            <h2 class="h2">{{ title }}</h2>
+            <i v-if="isFav" class="fa-solid fa-heart text-xl text-red-500"></i>
+        </div>
         <div class="flex flex-row justify-between items-end">
             <div>
                 <p v-for="(line, index) in categories" :key="index">{{ line }}</p>
@@ -40,11 +43,18 @@ export default {
             type: Boolean,
             default: false
         },
+        isFav: {
+            type: Boolean,
+            default: false
+        },
     },
     emits: ['selecionado'],
     methods: {
         notificarClique() {
             this.$emit('selecionado');
+        },
+        notificarFav() {
+            this.$emit('favorito');
         }
     }
 }

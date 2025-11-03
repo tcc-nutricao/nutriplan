@@ -26,7 +26,7 @@
     class="rounded-xl flex items-center justify-center">
     <div :class="size === 'text-xs' || size === 'text-sm' ? 'px-2' : 'px-4'" class="py-2 flex items-center justify-center">
       <slot>
-        <i class="fa-solid" :class="label ? `mr-2 ${icon}` : `${icon}`" v-if="icon"></i>
+        <i class="" :class="label ? `mr-2 ${icon}` : `${icon}`" v-if="icon"></i>
         <p :class="size ? size : ''">{{ label }}</p>
       </slot>
     </div>
@@ -108,7 +108,7 @@ const darkPurpleClass = computed(() => {
 })
 
 const redClass = computed(() => {
-  return 'transition bg-red-500 hover:bg-red-600 active:scale-95 border-2 border-red-400 shadow-red-500/20 hover:shadow-xl shadow-lg active:shadow-none'
+  return 'transition bg-red-500 hover:bg-red-600 active:scale-95 border-2 border-red-400 shadow-red-500/20 hover:shadow-xl hover:shadow-red-500/20 shadow-lg active:shadow-none'
 })
 
 const grayClass = computed(() => {
@@ -140,7 +140,7 @@ const grayBorderClass = computed(() => {
 })
 
 const redBorderClass = computed(() => {
-  return 'transition border-2 border-red-500 hover:border-red-600 text-red-500 active:scale-95 shadow-red-500/20 hover:shadow-xl shadow-lg active:shadow-none'
+  return 'transition border-2 border-red-500 hover:border-red-600 text-red-500 active:scale-95 shadow-red-500/20 hover:shadow-xl hover:shadow-red-500/20 shadow-lg active:shadow-none'
 })
 
 </script>

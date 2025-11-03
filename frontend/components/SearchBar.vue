@@ -11,7 +11,7 @@
       mediumPurple
       :label="isNarrow ? '' : 'Filtrar'"
       class="w-auto px-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
-      icon="fa-regular fa-filter"
+      icon="fa-solid fa-filter"
     />
     <Button
       v-if="sort"
