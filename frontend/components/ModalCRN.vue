@@ -7,11 +7,17 @@
       <!-- <h3>Informe seu CRN:</h3> -->
       <InputText
         label="Informe seu CRN"
-        class="mb-12" 
+        class="mb-5" 
         v-model="object.crn"
         :error="errors.crn"
+        :disabled="object.isStudent"
         prefix="CRN-"
-        required
+      />
+
+      <Checkbox 
+        label="Sou estudante" 
+        class="mb-12" 
+        v-model="object.isStudent"
       />
 
       <Flex gap-5>
@@ -23,18 +29,19 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const props = defineProps({
-    title: String,
-    content: String
+  title: String,
+  content: String
 })
 
 const object = ref({
-  crn: null,
+ crn: null,
+ isStudent: false
 })
 const errors = ref({
-  crn: null,
+ crn: null,
 })
 
 const emits = defineEmits(['closeModal','cancelModal'])
@@ -42,35 +49,49 @@ const emits = defineEmits(['closeModal','cancelModal'])
 const crnRegex = /^(1[0-2]|[1-9])\/\d{4,7}(\/P)?$/
 
 const validate = () => {
-    errors.value.crn = null 
-    
-    const crnValue = object.value.crn
+  errors.value.crn = null 
+  
+  const crnValue = object.value.crn
 
-    if (!crnValue) {
-        errors.value.crn = "Este campo é obrigatório."
-        return false
-    }
+  if (!crnValue && !object.value.isStudent) {
+    errors.value.crn = "Preencha se não for estudante."
+    return false
+  }
 
-    if (!crnRegex.test(crnValue)) {
-        errors.value.crn = "Formato de CRN inválido. Ex: CRN-3/12345"
-        return false
-    }
+  if (crnValue && !crnRegex.test(crnValue) && !object.value.isStudent) { // Adicionado 'crnValue &&'
+    errors.value.crn = "Formato de CRN inválido. Ex: CRN-3/12345"
+    return false
+  }
 
-    return true
-
+  return true
 }
 
 const save = () => {
-    if (validate()) {
-            emits('closeModal')
-            emits('update:crn', object.value.crn)
-    } else {
-        console.log("Formulário inválido.")
-    }
+  if (validate()) {
+      emits('closeModal')
+      emits('update:crn', object.value.crn)
+  } else {
+    console.log("Formulário inválido.")
+  }
 }
 
 const cancel = () => {
-    emits('cancelModal')
+  emits('cancelModal')
 }
+
+watch(() => object.value.crn, (newValue) => {
+  if (newValue && errors.value.crn) {
+    errors.value.crn = null
+  }
+})
+
+watch(() => object.value.isStudent, (isStudent) => {
+  if (isStudent) {
+    if (errors.value.crn) {
+      errors.value.crn = null
+    }
+  }
+})
+
 </script>
 

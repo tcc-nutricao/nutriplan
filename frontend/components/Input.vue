@@ -4,11 +4,13 @@
     <span 
       v-if="prefix" 
       class="pl-3 text-p-950 select-none"
+      :class="{'text-gray-medium' : props.disabled}"
     >{{ prefix }}</span>
+
     <slot name="input">
       <input
         class="px-3 grow border-none bg-transparent focus:outline-none focus:ring-0 text-p-950"
-        :class="{ 'text-danger-500': props.error }, { 'pl-1': prefix }"
+        :class="{ 'text-danger-500': props.error }, { 'pl-1': prefix }, {'text-gray-medium' : props.disabled}"
         v-model="displayValue"
         @input="handleInput"
         @keydown.enter.prevent="emitEnter"
@@ -50,7 +52,8 @@ const emitEnter = () => {
 const classes = computed(() => ({
   'border-red-500': props.error,
   'text-red-500': props.error,
-  'bg-slate-200': props.disabled,
+  'bg-gray-100': props.disabled,
+  'text-grey-100': props.disabled,
   'border-cinza': !props.error
 }))
 watch(
