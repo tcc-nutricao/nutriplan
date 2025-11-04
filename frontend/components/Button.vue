@@ -26,7 +26,7 @@
     class="rounded-xl flex items-center justify-center">
     <div :class="size === 'text-xs' || size === 'text-sm' ? 'px-2' : 'px-4'" class="py-2 flex items-center justify-center">
       <slot>
-        <i class="" :class="label ? `mr-2 ${icon}` : `${icon}`" v-if="icon"></i>
+        <i :class="label ? `mr-2 ${icon}` : `${icon}`" v-if="icon"></i>
         <p :class="size ? size : ''">{{ label }}</p>
       </slot>
     </div>
