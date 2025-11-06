@@ -10,7 +10,7 @@
         </div>
         <div class="flex flex-row justify-between items-end">
             <div>
-                <p v-for="(line, index) in categories" :key="index">{{ line }}</p>
+                <p v-for="(line, index) in categories" :key="index"><span><i :class="'mr-2 fa-solid '+ line.icon"></i></span>{{ line.label }}</p>
             </div>
             <div>
                 <p><i class="fa-regular fa-clock mr-1"></i> {{ time }} min</p>

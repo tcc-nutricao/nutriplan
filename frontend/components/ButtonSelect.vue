@@ -1,10 +1,10 @@
 <template>
-  <div class="relative" ref="selectMenu">
+  <div class="relative z-1000" ref="selectMenu">
     <Button
       @click="toggleDropdown"
       mediumPurple
-      :label="isNarrow ? '' : label"
       class="w-auto px-2 h-[42px]"
+      :label="label"
       :icon="icon"
       aria-haspopup="listbox" 
       :aria-expanded="isOpen"
@@ -18,11 +18,12 @@
       leave-to-class="transform scale-95 opacity-0 -translate-y-2"
     >
       <ul v-if="isOpen"
-        class="absolute ring-2 ring-p-200 border-1 border-p-300 z-10 mt-1 max-h-60 w-full overflow-auto rounded-xl bg-white py-2 text-base shadow-lg focus:outline-none"
+        class="absolute ring-2 ring-p-200 border-1 border-p-300 z-0 mt-1 max-h-60 w-max overflow-auto rounded-xl bg-white py-2 text-base shadow-lg focus:outline-none"
         role="listbox">
         <li v-for="option in options" :key="option.value" @click="selectOption(option)"
-          class="relative cursor-pointer select-none py-[10px] px-4 mx-2 rounded-lg text-p-950 hover:bg-p-100 hover:text-p-700 transition"
+          class="relative flex items-center gap-2 cursor-pointer select-none py-[10px] px-4 mx-2 rounded-lg text-p-950 hover:bg-p-100 hover:text-p-700 transition"
           role="option" :aria-selected="option.value === modelValue">
+          <i v-if="option.icon !== undefined" :class="'fa-solid ' + option.icon "></i>
           <span :class="[option.value === modelValue ? 'font-semibold' : 'font-normal', 'block truncate']">
             {{ option.label }}
           </span>
@@ -56,7 +57,6 @@ const props = defineProps({
 
 const emits = defineEmits(['update:modelValue']);
 
-const isNarrow = ref(false);
 
 const isOpen = ref(false);
 
@@ -83,12 +83,6 @@ const handleClickOutside = (event) => {
 };
 
 onMounted(() => {
-  observer = new ResizeObserver(entries => {
-    const entry = entries[0];
-    const width = entry.contentRect.width;
-
-    isNarrow.value = width < 450;
-  });
   document.addEventListener('click', handleClickOutside);
 });
 

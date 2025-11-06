@@ -3,7 +3,7 @@
         <h1 class="h1">Receitas</h1>
         <div class="flex flex-row gap-5">
             <div class="flex flex-col w-[50%] mb-8">
-                <SearchBar :filter="true" :sort="true" placeholder="Pesquise uma receita" class="stickyProfile w-full shadowSearch" />
+                <SearchBar :filter="true" :sort="true" :filterOptions="filterOptions" :sortOptions="sortOptions" placeholder="Pesquise uma receita" class="stickyProfile w-full shadowSearch z-20" />
                 <Button
                     v-if="isNutri"
                     mediumPurple
@@ -48,9 +48,9 @@
                     />
                 </div>
                 <div class="flex flex-wrap gap-2 mb-4">
-                    <span v-for="(category, index) in selectedItem.categories" :key="index" class="bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-sm">
-                        {{ category }}
-                    </span>
+                    <p v-for="(category, index) in selectedItem.categories" :key="index" class="bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-sm">
+                        <span><i :class="'mr-2 fa-solid '+ category.icon"></i></span>{{ category.label }}
+                    </p>
                 </div>
                 <p class="mb-2"></p>
                 <div class="flex gap-4 mt-4 text-gray-600">
@@ -69,7 +69,7 @@
                     />
                 </div>
             </div>
-            <div v-else class="stickyProfile bg-white rounded-3xl shadow-lg border-2 p-6 py-20 w-[50%] flex items-center justify-center text-gray-500">
+            <div v-else class="stickyProfile bg-white rounded-3xl shadow-lg border-2 z-0 p-6 py-20 w-[50%] flex items-center justify-center text-gray-500">
                 <p>Selecione uma receita ao lado para ver os detalhes!</p>
             </div>
         </div>
@@ -106,7 +106,13 @@ const closeModal = () => {
 
 const selectedItemId = ref(null);
 const itemList = ref([
-    { id: 1, title: 'Muffin de Banana Integral', categories: ['Perda de Peso', 'Sono', 'Antioxidante'], time: '15', portions: '2', isFav: false,
+    { id: 1, title: 'Muffin de Banana Integral', 
+        categories: [
+            {icon: 'fa-solid fa-fire text-ic-emagrecer', label: 'Perda de Peso'}, 
+            {icon: 'fa-solid fa-moon text-ic-sono', label: 'Sono'},
+            {icon: 'fa-solid fa-atom text-ic-antiox', label:'Antioxidante'}
+        ], 
+        time: '15', portions: '2', isFav: false,
         description: 'Descrição detalhada da receita selecionada. Ingredientes, modo de preparo, dicas e outras informações relevantes para o usuário.', 
         ingredients: ['Banana', 'Farinha Integral', 'Mel'],
         steps: ['Amasse a banana com um garfo até formar um purê.',
@@ -116,7 +122,13 @@ const itemList = ref([
                 'Deixe esfriar um pouco antes de desenformar e servir.'
             ]
     },
-    { id: 2, title: 'Salada Detox com Grão de Bico', categories: ['Energia','Perda de Peso', 'Saúde Intestinal'], time: '90', portions: '8', isFav: true,
+    { id: 2, title: 'Salada Detox com Grão de Bico', 
+    categories: [
+            {icon: 'fa-solid fa-fire text-ic-emagrecer', label: 'Perda de Peso'}, 
+            {icon: 'fa-solid fa-bolt text-ic-energia', label: 'Energia'},
+            {icon: 'fa-solid fa-seedling text-ic-vegano', label:'Vegano'}
+        ], 
+    time: '90', portions: '8', isFav: true,
     description: 'Descrição detalhada da receita selecionada. Ingredientes, modo de preparo, dicas e outras informações relevantes para o usuário.', 
     ingredients: [  '1 xicara de grão-de- bico cozido', 
                     '1/2 pepino fatiado',
@@ -137,7 +149,13 @@ const itemList = ref([
             'Sirva fresca.'
         ]
     },
-    { id: 3, title: 'Suco de Uva', categories: ['Leve', 'Doce', 'Fácil'], time: '2', portions: '1', isFav: false,
+    { id: 3, title: 'Suco de Uva', 
+        categories: [
+            {icon: 'fa-solid fa-hands text-ic-vegetariano', label: 'Fácil'}, 
+            {icon: 'fa-solid fa-candy-cane text-ic-sugar', label: 'Sem açúcar'},
+            {icon: 'fa-solid fa-bolt text-ic-energia', label:'Energia'}
+        ],  
+        time: '2', portions: '1', isFav: false,
         description: 'Descrição detalhada da receita selecionada. Ingredientes, modo de preparo, dicas e outras informações relevantes para o usuário.', 
         ingredients: ['1 cacho de uvas', '1L de água'],
         steps: ['Lave bem a uva e corte em pedacos pequenos.',
@@ -145,7 +163,13 @@ const itemList = ref([
                 'Sirva gelado.'
             ]
     },
-    { id: 4, title: 'Suco de Uva', categories: ['Leve', 'Doce', 'Fácil'], time: '2', portions: '1', isFav: false,
+    { id: 4, title: 'Suco de Uva',
+    categories: [
+            {icon: 'fa-solid fa-hands text-ic-vegetariano', label: 'Fácil'}, 
+            {icon: 'fa-solid fa-candy-cane text-ic-sugar', label: 'Sem açúcar'},
+            {icon: 'fa-solid fa-bolt text-ic-energia', label:'Energia'}
+        ], 
+    time: '2', portions: '1', isFav: false,
         description: 'Descrição detalhada da receita selecionada. Ingredientes, modo de preparo, dicas e outras informações relevantes para o usuário.', 
         ingredients: ['1 cacho de uvas', '1L de água'],
         steps: ['Lave bem a uva e corte em pedacos pequenos.',
@@ -153,7 +177,13 @@ const itemList = ref([
                 'Sirva gelado.'
             ]
     },
-    { id: 5, title: 'Suco de Uva', categories: ['Leve', 'Doce', 'Fácil'], time: '2', portions: '1', isFav: false,
+    { id: 5, title: 'Suco de Uva', 
+    categories: [
+            {icon: 'fa-solid fa-hands text-ic-vegetariano', label: 'Fácil'}, 
+            {icon: 'fa-solid fa-candy-cane text-ic-sugar', label: 'Sem açúcar'},
+            {icon: 'fa-solid fa-bolt text-ic-energia', label:'Energia'}
+        ],  
+    time: '2', portions: '1', isFav: false,
         description: 'Descrição detalhada da receita selecionada. Ingredientes, modo de preparo, dicas e outras informações relevantes para o usuário.', 
         ingredients: ['1 cacho de uvas', '1L de água'],
         steps: ['Lave bem a uva e corte em pedacos pequenos.',
@@ -161,7 +191,13 @@ const itemList = ref([
                 'Sirva gelado.'
             ]
     },
-    { id: 6, title: 'Suco de Uva', categories: ['Leve', 'Doce', 'Fácil'], time: '2', portions: '1', isFav: false,
+    { id: 6, title: 'Suco de Uva', 
+    categories: [
+            {icon: 'fa-solid fa-hands text-ic-vegetariano', label: 'Fácil'}, 
+            {icon: 'fa-solid fa-candy-cane text-ic-sugar', label: 'Sem açúcar'},
+            {icon: 'fa-solid fa-bolt text-ic-energia', label:'Energia'}
+        ],  
+    time: '2', portions: '1', isFav: false,
         description: 'Descrição detalhada da receita selecionada. Ingredientes, modo de preparo, dicas e outras informações relevantes para o usuário.', 
         ingredients: ['1 cacho de uvas', '1L de água'],
         steps: ['Lave bem a uva e corte em pedacos pequenos.',
@@ -174,6 +210,35 @@ const itemList = ref([
 function selectItem(id) {
     selectedItemId.value = id;
 }
+
+const filterOptions = [
+  { value: 'all', label: 'Todos' },
+  { value: 'favorites', label: 'Favoritos', icon: 'fa-heart text-ic-colesterol' },
+//   { value: 'easy', label: 'Fácil', icon: 'fa-hands text-ic-vegan' },
+//   { value: 'sweet', label: 'Doce', icon: 'fa-ice-cream text-ic-sono' },
+  { value: 'gluten-free', label: 'Sem Glúten', icon: 'fa-wheat-awn text-ic-gluten' },
+  { value: 'sugar-free', label: 'Sem açúcar', icon: 'fa-candy-cane text-ic-sugar' },
+  { value: 'lactose-free', label: 'Sem lactose', icon: 'fa-glass-water text-ic-lactose' },
+  { value: 'vegetarian', label: 'Vegetariano', icon: 'fa-carrot text-ic-vegetariano' },
+  { value: 'vegan', label: 'Vegano', icon: 'fa-seedling text-ic-vegano' },
+  { value: 'lose-weight', label: 'Emagrecer', icon: 'fa-fire text-ic-emagrecer' },
+  { value: 'muscle', label: 'Ganho de músculo', icon: 'fa-dumbbell text-ic-musculo' },
+  { value: 'keep-weight', label: 'Manter peso', icon: 'fa-scale-balanced text-ic-manterpeso' },
+  { value: 'colesterol', label: 'Colesterol', icon: 'fa-heart-circle-plus text-ic-colesterol' },
+  { value: 'sleep', label: 'Sono', icon: 'fa-moon text-ic-sono' },
+  { value: 'energy', label: 'Energia', icon: 'fa-bolt text-ic-energia' },
+  { value: 'antiinflammatory', label: 'Antinflamatório', icon: 'fa-droplet text-ic-antinfl' },
+  { value: 'antioxidant', label: 'Antioxidante', icon: 'fa-atom text-ic-antiox' },
+  { value: 'nut-free', label: 'Sem  nozes', icon: 'fa-hand-dots text-ic-nozes' },
+  { value: 'no-fish', label: 'Sem peixe', icon: 'fa-fish text-ic-peixe' },
+  { value: 'intestine', label: 'Intestino', icon: 'fa-worm text-ic-intestino' },
+];
+
+const sortOptions = [
+  { value: 'alphabetic', label: 'Ordem alfabética' },
+  { value: 'recent', label: 'Mais recentes' },
+  { value: 'time', label: 'Tempo de Preparo' },
+];
 
 const selectedItem = computed(() => {
     if (!selectedItemId.value) {

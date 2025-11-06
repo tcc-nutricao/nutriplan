@@ -6,19 +6,21 @@
       :placeholder="placeholder"
     />
 
-    <Button
+    <ButtonSelect
       v-if="filter"
       mediumPurple
       :label="isNarrow ? '' : 'Filtrar'"
-      class="w-auto px-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
+      class="w-auto px-2 h-[42px]"
       icon="fa-solid fa-filter"
+      :options="filterOptions"
     />
-    <Button
+    <ButtonSelect
       v-if="sort"
       mediumPurple
       :label="isNarrow ? '' : 'Ordenar'"
-      class="w-auto px-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
+      class="w-auto px-2 h-[42px]"
       icon="fa-solid fa-arrow-down-short-wide"
+      :options="sortOptions"
     />
   </div>
 </template>
@@ -31,9 +33,23 @@ defineProps({
     type: Boolean,
     default: true
   },
+  filterOptions: {
+    type: Array,
+    default: () => [
+      { value: 'all', label: 'Todos' },
+      { value: 'favorites', label: 'Favoritos' },
+    ]
+  },
   sort: {
     type: Boolean,
     default: true
+  },
+  sortOptions: {
+    type: Array,
+    default: () => [
+      { value: 'alphabetical', label: 'Alfabética' },
+      { value: 'recent', label: 'Mais Recentes' },
+    ]
   },
   placeholder: {
     type: String,
