@@ -26,7 +26,68 @@
                         ]"
                     />
                 </div>
-                <div class="flex flex-col px-4 pb-3 pt-4 border-2 border-p-400 rounded-2xl">
+
+
+                <div 
+                    class="flex flex-col px-4 mt-2 pb-3 pt-4 border-2 rounded-2xl mb-5"
+                    :class="{ 'border-red-500': (errors.meal && selectedMeal === null) || errors.ingredients, 'border-p-400': !errors.ingredients }"
+                >
+                    <Label label="Alimentos" class="text-xl font-semibold mb-1" :error="errors.ingredients"/>
+                    <p v-if="!hasAnyItems" :class="{'text-red-500' : errors.ingredients}" class="text-gray-medium mt-1 pb-3 mb-3 border-b-2 border-p-200">Adicione alimentos abaixo!</p>
+                    <div v-if="hasAnyItems" class="flex flex-col gap-4 mt-1 pb-3 mb-3 max-w-full border-b-2 border-p-200">
+                        <template v-for="mealName in mealNames" :key="mealName" class="max-w-full">
+                        <div v-if="newMealItems[mealName].length > 0" class="max-w-full">
+                            <h3 class="text-p-800 font-bold text-lg mb-2">{{ mealName }}</h3>
+                            <div class="flex flex-wrap gap-2 w-full">
+                                <ItemButton
+                                    v-for="(item, index) in newMealItems[mealName]"
+                                    :key="index"
+                                    :label="item.food"
+                                    :quantity="item.quantity"
+                                    :unity="item.unit"
+                                    class="w-full"
+                                    @delete-item="deleteItem(mealName, index)" 
+                                />
+                            </div>
+                        </div>
+                        </template>
+                    </div>
+                    <Input
+                        v-model="newItem.food"
+                        class="mb-5"
+                        placeholder="Buscar"
+                        :error="errors.food"
+                    />
+                    <div class="flex gap-2 w-full">
+                        <InputText
+                        v-model="newItem.quantity"
+                        class="mb-5 w-full"
+                        label="Quantidade"
+                        placeholder="Digite aqui"
+                        type="number"
+                        :error="errors.quantity"
+                        />
+                        <InputText
+                        v-model="newItem.unit"
+                        class="mb-5 w-full"
+                        label="Unidade"
+                        placeholder="Buscar"
+                        :error="errors.unit"
+                        />
+                    </div>
+                    <div class="flex flex-row justify-center gap-2">
+                        <Button 
+                        mediumPurple
+                        class="w-max px-0 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
+                        label="Adicionar ingrediente"
+                        icon="fa-solid fa-plus short flex justify-center"
+                        @click="addItem"
+                        />
+                    </div>
+                </div>
+
+
+                <!-- <div class="flex flex-col px-4 pb-3 pt-4 border-2 border-p-400 rounded-2xl">
                     <Label label="Alimento" class="text-xl font-semibold mb-1"/>
                     <Input
                         v-model="newItem.food"
@@ -83,16 +144,17 @@
                             </div>
                         </div>
                     </template>
-                </div>
+                </div> -->
                 <div class="flex justify-center mt-2">
                     <Button 
                         mediumPurple
                         class="w-max px-3 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
                         label="Registrar consumo"
+                        @click="save"
                     />
                 </div>
             </div>
-            <div class="flex flex-col w-[60%] mb-8 rounded-3xl shadow-lg gap-3 bg-white p-6 pb-8">
+            <div class="flex flex-col w-[60%] mb-8 rounded-3xl shadow-lg gap-3 bg-white p-6 pb-8 h-max">
                 <div class="flex gap-3 items-center">
                     <h2 class="h2">Consumo</h2>
                     <div class="flex justify-center align-items border-2 px-2 py-1 bg-p-100 transition 
@@ -199,11 +261,20 @@ const newItem = reactive({
   unit: ''
 });
 
+const inputs = reactive({
+  ingredients: '',
+  name: '',
+  portions: '',
+  time: '',
+  preparation: ''
+})
+
 const errors = reactive({
   food: null,
   quantity: null,
   unit: null,
-  meal: null
+  meal: null,
+  ingredients: null,
 });
 
 const chartOptions = {
@@ -373,5 +444,22 @@ function clearInputs() {
   errors.quantity = null;
   errors.unit = null;
   errors.meal = null;
+}
+
+function save() {
+  errors.ingredients = null
+
+  let isValid = true;
+  
+  if (!hasAnyItems.value) { 
+      errors.ingredients = 'Campo obrigatório';
+      isValid = false;
+  }
+
+  if (!isValid) {
+      return;
+  }
+  
+  // logica add alimentos backend aqui
 }
 </script>
