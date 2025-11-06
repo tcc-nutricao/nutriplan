@@ -1,5 +1,6 @@
 <template>
-  <div class="flex flex-col md:flex-row gap-5 w-full">
+  <div class="flex flex-col gap-3 px-10">
+    <h1 class="h1">Plano Alimentar</h1>
     <div class="grid grid-cols-5 gap-5 w-full items-stretch">
       <MealPlanCardExtended :object="actualPlan[0]" class="col-span-4" />
       <div>

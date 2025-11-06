@@ -1,5 +1,5 @@
 <template>
-    <Card>
+    <div class="mb-8 rounded-3xl shadow-lg gap-3 bg-white p-6 pb-8">
         <div class="flex items-center gap-3 justify-between mb-5">
             <p class="text-p-950">{{ title }}</p>
             <IconSolid 
@@ -38,7 +38,7 @@
                 <IconSolid icon="fa-chevron-right" />
             </div>
         </div>
-    </Card>
+    </div>
 </template>
 
 <script setup>
