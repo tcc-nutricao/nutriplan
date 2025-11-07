@@ -1,9 +1,9 @@
 import { generateCrudRepository } from './Repository.js'
 
 export const GroupRepository = generateCrudRepository('group', {
-  softDelete: true,
+  softDelete: false, 
   defaultOrderBy: 'id',
-  defaultIncludes: {
-    userGroups: true
-  }
+  include: { 
+    userGroups: true 
+  } 
 })

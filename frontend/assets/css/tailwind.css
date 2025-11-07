@@ -60,6 +60,10 @@ svg {
     color: #ff5858;
 }
 
+.txt{
+    @apply text-t;
+}
+
 .h1 {
     font-size: 2.4em;
     @apply font-bold text-p-600 m-0;

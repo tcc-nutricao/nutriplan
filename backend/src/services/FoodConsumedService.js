@@ -3,7 +3,6 @@ import { generateCrudService } from './Service.js'
 import { MealPlanService } from './MealPlanService.js'
 import { PatientService } from './PatientService.js'
 import { RecipeService } from './RecipeService.js'
-import { symbol } from 'zod'
 
 const calculateNutritionalStatistics = async (foodConsumedList) => {
   const statistics = {
@@ -94,7 +93,7 @@ export const FoodConsumedService = {
         const mealPlanMeals = activeMealPlan.mealPlanMeals || []
 
         if (mealPlanMeals.length === 0) {
-          return { data: null, message: 'Nenhuma refeição encontrada no plano ativo.' }
+          return { data: [], total: 0, message: 'Nenhuma refeição encontrada no plano ativo.' }
         }
 
         let allFoodConsumed = []
@@ -115,7 +114,7 @@ export const FoodConsumedService = {
         })
 
         if (allFoodConsumed.length === 0) {
-            return { data: null, message: 'Nenhum alimento consumido encontrado para o período especificado.' }
+            return { data: [], total: 0, message: 'Nenhum alimento consumido encontrado para o período especificado.' }
         }
 
         const statistics = await calculateNutritionalStatistics(allFoodConsumed)

@@ -1,5 +1,5 @@
 <template>
-  <div class="xl:mr-60 lg:mr-40">
+  <div class="xl:mr-60 lg:mr-40 pb-12">
     <div class="flex justify-center mb-3">
       <div class="w-full max-w-4xl text-start">
         <h1 class="h1">Meu perfil</h1>
@@ -44,7 +44,7 @@
       />
     </div>
 
-    <div class="bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto mt-6">
+    <div v-if="user.role==='STANDARD'" class="bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto mt-6">
       <div class="flex justify-between items-center mb-6">
         <h2 class="h2main">Dados Pessoais</h2>
         <Button mediumPurple
@@ -60,16 +60,16 @@
           :title="'Idade'" 
           />
           <InfoArea 
-          :value="personalData.altura ? `${personalData.altura} cm` : 'Não informado'" 
-          :title="'Altura'" 
+          :value="personalData.peso ? `${personalData.peso} kg` : 'Não informado'" 
+          :title="'Peso'" 
+          />
+          <InfoArea 
+          :value="personalData.meta ? `${personalData.meta} kg` : 'Não informado'" 
+          :title="'Meta de Peso'" 
           />
           <InfoArea 
           :array="personalData.restricoes || 'Não informado'" 
           :title="'Restrições Alimentares'" 
-          />
-          <InfoArea 
-          :value="personalData.preferencias || 'Não informado'" 
-          :title="'Preferências Alimentares'" 
           />
         </div>
         <div class="col w-full gap-4">
@@ -78,15 +78,24 @@
           :title="'Sexo'" 
           />
           <InfoArea 
-          :value="personalData.peso ? `${personalData.peso} kg` : 'Não informado'" 
-          :title="'Peso'" 
+          :value="personalData.altura ? `${personalData.altura} cm` : 'Não informado'" 
+          :title="'Altura'" 
           />
           <InfoArea 
           :value="personalData.objetivo || 'Não informado'" 
           :title="'Objetivo'" 
           />
+          <InfoArea 
+          :value="personalData.preferencias || 'Não informado'" 
+          :title="'Preferências Alimentares'" 
+          />
         </div>
       </div>
+    </div>
+
+    <div class="flex gap-5 items-center justify-between bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto mt-10 border-2 border-danger">
+      <h2 class="text-2xl font-semibold w-full text-start text-danger">Apagar conta</h2>
+        <Button red class="ml-2" icon="fa-solid fa-trash" label="Apagar" @click="openDangerModal('delete')" />
     </div>
 
     <ProfileEditModal
@@ -106,68 +115,83 @@
       @close="closeModal"
       @imageSelected="handleImageSelected"
     />
+    <ModalDanger
+      v-if="showModal == 'delete'"
+      title="Tem certeza?"
+      content="Ao apagar sua conta, ela será desativada e você não terá mais acesso ao sistema."
+      btnLabel="Apagar"
+      @closeModal="closeModal"
+    />
   </div>
 </template>
 
-<script>
-export default {
-  name: "Profile",
-  components: {
-    ProfileCardHorizontal: () =>
-      import("../components/ProfileCardHorizontal.vue"),
-    ProfileEditModal: () => import("../components/ProfileEditModal.vue"),
-  },
-  data() {
-    return {
-      showModal: '',
-      activeSection: null,
-      imageToEdit: null,
-      personalData: {
-        nome: "Luna Araújo",
-        email: "luna@gmail.com",
-        idade: 15,
-        sexo: "Feminino",
-        altura: 165,
-        peso: 65,
-        restricoes: ["Sem glúten", "Sem lactose"],
-        objetivo: "Perda de Peso",
-        preferencias: "Dieta mediterrânea"
-      }
-    };
-  },
-  props: {
-    nome: String,
-    email: String,
-    idade: Number,
-    sexo: String,
-    altura: Number,
-    peso: Number,
-    restricoes: String,
-    objetivo: String,
-    preferencias: String
-  },
-  methods: {
-    openProfileModal(section) {
-      this.activeSection = section;
-      this.showModal = 'profileEdit';
-    },
-    openAvatarModal() {
-      this.imageToEdit = null;
-      this.showModal = 'avatarAdd';
-    },
-    closeModal() {
-      this.showModal = '';
-      this.activeSection = null;
-      this.imageToEdit = null;
-    },
-    handleImageSelected(imageData) {
-      this.imageToEdit = imageData;
-      this.showModal = 'avatarEdit';
-    },
-    handleAvatarSave(croppedImageData) {
-      this.closeModal();
-    }
-  },
+<script setup>
+import { ref, defineAsyncComponent } from 'vue';
+import { useCookie } from 'nuxt/app';
+
+const ProfileEditModal = defineAsyncComponent(() => 
+  import("../components/ProfileEditModal.vue")
+);
+
+const props = defineProps({
+  nome: String,
+  email: String,
+  idade: Number,
+  sexo: String,
+  altura: Number,
+  peso: Number,
+  restricoes: String,
+  objetivo: String,
+  preferencias: String
+});
+
+const userCookie = useCookie('user-data');
+const user = ref(userCookie.value);
+
+const showModal = ref('');
+const activeSection = ref(null);
+const imageToEdit = ref(null);
+
+const personalData = ref({
+  nome: userCookie.value?.name,
+  email: userCookie.value?.email,
+  idade: 15,
+  sexo: "Feminino",
+  altura: 165,
+  peso: 65,
+  restricoes: ["Sem glúten", "Sem lactose"],
+  objetivo: "Perda de Peso",
+  preferencias: "Dieta mediterrânea",
+  meta: "80"
+});
+
+const openProfileModal = (section) => {
+  activeSection.value = section;
+  showModal.value = 'profileEdit';
+};
+
+const openAvatarModal = () => {
+  imageToEdit.value = null;
+  showModal.value = 'avatarAdd';
+};
+
+const openDangerModal = () => {
+  showModal.value = 'delete';
+};
+
+const closeModal = () => {
+  showModal.value = '';
+  activeSection.value = null;
+  imageToEdit.value = null;
+};
+
+const handleImageSelected = (imageData) => {
+  imageToEdit.value = imageData;
+  showModal.value = 'avatarEdit';
+};
+
+const handleAvatarSave = (croppedImageData) => {
+  closeModal();
 };
 </script>
 

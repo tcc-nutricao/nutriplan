@@ -1,5 +1,10 @@
 <template>
-  <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60">
+<teleport to="body">
+<Transition name="modal" appear>
+  <div
+      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]"
+      @click.self="$emit('closeModal')"
+    >
     <div class="bg-white px-7 py-6 rounded-2xl shadow-xl max-w-md w-full">
       <h2 class="text-xl font-bold mb-4">{{ title ? title : '' }}</h2>
       <p class="mb-8 text-p-700 text-center text-xl">{{ content }}</p>
@@ -7,11 +12,17 @@
       <!-- <h3>Informe seu CRN:</h3> -->
       <InputText
         label="Informe seu CRN"
-        class="mb-12" 
+        class="mb-5" 
         v-model="object.crn"
         :error="errors.crn"
+        :disabled="object.isStudent"
         prefix="CRN-"
-        required
+      />
+
+      <Checkbox 
+        label="Sou estudante" 
+        class="mb-12" 
+        v-model="object.isStudent"
       />
 
       <Flex gap-5>
@@ -20,21 +31,24 @@
       </Flex>
     </div>
   </div>
+</Transition>
+</teleport>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const props = defineProps({
-    title: String,
-    content: String
+  title: String,
+  content: String
 })
 
 const object = ref({
-  crn: null,
+ crn: null,
+ isStudent: false
 })
 const errors = ref({
-  crn: null,
+ crn: null,
 })
 
 const emits = defineEmits(['closeModal','cancelModal'])
@@ -42,35 +56,74 @@ const emits = defineEmits(['closeModal','cancelModal'])
 const crnRegex = /^(1[0-2]|[1-9])\/\d{4,7}(\/P)?$/
 
 const validate = () => {
-    errors.value.crn = null 
-    
-    const crnValue = object.value.crn
+  errors.value.crn = null 
+  
+  const crnValue = object.value.crn
 
-    if (!crnValue) {
-        errors.value.crn = "Este campo é obrigatório."
-        return false
-    }
+  if (!crnValue && !object.value.isStudent) {
+    errors.value.crn = "Preencha se não for estudante."
+    return false
+  }
 
-    if (!crnRegex.test(crnValue)) {
-        errors.value.crn = "Formato de CRN inválido. Ex: CRN-3/12345"
-        return false
-    }
+  if (crnValue && !crnRegex.test(crnValue) && !object.value.isStudent) { // Adicionado 'crnValue &&'
+    errors.value.crn = "Formato de CRN inválido. Ex: CRN-3/12345"
+    return false
+  }
 
-    return true
-
+  return true
 }
 
 const save = () => {
-    if (validate()) {
-            emits('closeModal')
-            emits('update:crn', object.value.crn)
-    } else {
-        console.log("Formulário inválido.")
-    }
+  if (validate()) {
+      emits('closeModal')
+      emits('update:crn', object.value.crn)
+  } else {
+    console.log("Formulário inválido.")
+  }
 }
 
 const cancel = () => {
-    emits('cancelModal')
+  emits('cancelModal')
 }
+
+watch(() => object.value.crn, (newValue) => {
+  if (newValue && errors.value.crn) {
+    errors.value.crn = null
+  }
+})
+
+watch(() => object.value.isStudent, (isStudent) => {
+  if (isStudent) {
+    if (errors.value.crn) {
+      errors.value.crn = null
+    }
+  }
+})
+
 </script>
 
+<style>
+.modal-enter-from {
+opacity: 0;
+}
+.modal-enter-from .modal-container {
+transform: scale(0.9);
+}
+
+.modal-leave-to {
+opacity: 0;
+}
+.modal-leave-to .modal-container {
+transform: scale(0.9);
+}
+
+.modal-enter-active,
+.modal-leave-active {
+transition: opacity 0.3s ease;
+}
+
+.modal-enter-active .modal-container,
+.modal-leave-active .modal-container {
+transition: transform 0.3s ease;
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
   <Card>
     <div class="flex flex-col gap-3 w-full">
-      <div class="bg-p-600 rounded-md p-2">
+      <div class="bg-p-600 rounded-xl p-2">
         <div class="flex flex-wrap text-white gap-2 justify-center items-center">
             <span class="text-white">Plano de</span>
             <span

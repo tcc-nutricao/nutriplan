@@ -37,12 +37,13 @@
             <p
               class="text-p-950 font-sora text-xl text-center font-semibold transition ease-in-out group-hover:scale-[112%] group-active:scale-105"
             >
-              Luna
+              {{ user.name }}
             </p>
+            <p v-if="user?.role === 'PROFESSIONAL'" class="text-p-600 tracking-[1.2px] text-[0.6rem] font-semibold mb-1 -translate-y-0.5 group-hover:translate-y-0.5 transition">PROFISSIONAL</p>
             <p
               class="text-p-950 font-sora font-light text-sm transition ease-in-out group-hover:translate-y-1 group-active:scale-95"
             >
-              luna@gmail.com
+              {{ user.email }}
             </p>
           </div>
           <ListItem
@@ -117,22 +118,40 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import ListItem from "./ListItem.vue";
+import { useCookie } from "nuxt/app";
 
 const router = useRouter();
+
+const userCookie = useCookie('user-data');
+const user = ref(userCookie.value);
 
 const isOpen = ref(true);
 const selectedItem = ref(null);
 
-const items = [
-  { icon: "fa-list", label: "Plano Alimentar", route: "/meal-plan" },
-  { icon: "fa-calendar-days", label: "Diário Alimentar", route: "/food-diary" },
-  { icon: "fa-bars-progress", label: "Meu Progresso", route: "/my-progress" },
-  { icon: "fa-utensils", label: "Receitas", route: "/recipes" },
-  { icon: "fa-users", label: "Meus Grupos", route: "/my-groups" },
-];
+const items = computed(() => {
+  if (user.value?.role === 'STANDARD') {
+    return [
+      { icon: "fa-list", label: "Plano Alimentar", route: "/meal-plan" },
+      { icon: "fa-calendar-days", label: "Diário Alimentar", route: "/food-diary" },
+      { icon: "fa-bars-progress", label: "Meu Progresso", route: "/my-progress" },
+      { icon: "fa-utensils", label: "Receitas", route: "/recipes" },
+      { icon: "fa-users", label: "Meus Grupos", route: "/my-groups" },
+    ];
+  }
+  if (user.value?.role === 'PROFESSIONAL') {
+    return [
+      { icon: "fa-users", label: "Meus pacientes", route: "/professional/patients" },
+      { icon: "fa-list", label: "Planos Alimentares", route: "/meal-plan" },
+      { icon: "fa-utensils", label: "Receitas", route: "/recipes" },
+    ];
+  }
+});
+
+onMounted(async () => {
+});
 
 const handleItemSelection = (item) => {
   selectedItem.value = item.label;
@@ -145,12 +164,18 @@ const handleProfileClick = () => {
 };
 
 const logout = async () => {
+  const userCookie = useCookie('user-data');
+  const tokenCookie = useCookie('auth-token');
+  
+  userCookie.value = null;  
+  tokenCookie.value = null; 
+
   console.log("Logout...");
   navigate("/");
 };
 
 const navigate = async (route) => {
-  await router.push(route);
+  await router.push({ path: route, replace: true });
 };
 </script>
 

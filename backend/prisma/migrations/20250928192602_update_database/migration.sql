@@ -6,6 +6,6 @@
 
 */
 -- AlterTable
-ALTER TABLE `recipe` ADD COLUMN `portion` INTEGER NOT NULL,
+ALTER TABLE `Recipe` ADD COLUMN `portion` INTEGER NOT NULL,
     ADD COLUMN `preparation_time` INTEGER NOT NULL,
     MODIFY `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3);

@@ -42,7 +42,7 @@
                             <div v-if="selectedItem.owner === 'Você'" class="flex gap-3">
                                 <Button mediumPurple
                                     class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
-                                    icon="fa-regular fa-edit short flex justify-center" label="Editar" />
+                                    icon="fa-solid fa-edit short flex justify-center" label="Editar" />
                                 <Button red
                                     class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-danger-light shadow-danger/20 transition"
                                     icon="fa-regular fa-trash-can short flex justify-center" label="Apagar" />
@@ -50,7 +50,7 @@
                             <div v-else class="flex gap-3">
                                 <Button red
                                     class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-danger-light shadow-danger/20 transition"
-                                    icon="fa-regular fa-right-from-bracket short flex justify-center" label="Sair" />
+                                    icon="fa-solid fa-right-from-bracket short flex justify-center" label="Sair" />
                             </div>
                         </div>
                     </div>
