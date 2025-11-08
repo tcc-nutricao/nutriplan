@@ -18,7 +18,7 @@ export const needsInitialRegistration = async (userId) => {
       return { needsInitialRegistration: true }
     }
 
-    const lastHealthData = await HealthDataRepository.findByPatientId(patient.id)
+    const lastHealthData = await HealthDataRepository.findActualByPatientId(patient.id)
 
     const oneYearAgo = new Date()
     oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)

@@ -19,9 +19,30 @@ const transformUserData = (data) => {
   return data
 }
 
-export const UserController = generateCrudController(
-  UserService,
-  CreateUserSchema,
-  'Usuário',
-  transformUserData
-)
+const createTemporaryUser = async (req, res, next) => {
+  try {
+    let data = req.body
+    if (data.role) {
+      data.role = translateRole(data.role)
+    }
+
+    const tempUser = await UserService.createTemporaryUser(data)
+    return res.status(201).json({
+      success: true,
+      data: tempUser,
+      message: 'Usuário temporário criado com sucesso'
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const UserController = {
+  ...generateCrudController(
+    UserService,
+    CreateUserSchema,
+    'Usuário',
+    transformUserData
+  ),
+  createTemporaryUser
+} 

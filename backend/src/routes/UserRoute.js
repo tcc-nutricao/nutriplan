@@ -3,4 +3,5 @@ import { genericRoute } from "./Route.js"
 
 export default (router) => {
   genericRoute(router, '/user', api)
+  router.post('/user/temporary', api.createTemporaryUser)
 }

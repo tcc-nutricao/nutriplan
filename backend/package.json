@@ -26,6 +26,7 @@
     "gitignore": "^0.7.0",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.14.3",
+    "nodemailer": "^7.0.10",
     "openai": "^5.23.0",
     "zod": "^3.25.76"
   },

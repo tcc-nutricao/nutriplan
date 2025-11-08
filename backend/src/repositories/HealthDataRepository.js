@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 const findActualByPatientId = async (patientId) => {
   return await prisma.healthData.findFirst({
-    where: { patientId },
+    where: { id_patient: patientId },
     orderBy: { record_date: 'desc' },
     include: { patient: true }
   });
