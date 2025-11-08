@@ -1,6 +1,34 @@
 import { PersonalDataService } from '../services/PersonalDataService.js'
 import { validatePersonalData } from '../dtos/personalData/CreatePersonalDataDto.js'
 
+export const getPersonalData = async (req, res) => {
+  try {
+    const userId = req.user.id
+    const result = await PersonalDataService.getPersonalData(userId)
+
+    if (!result) {
+      return res.status(404).json({
+        success: false,
+        message: 'Dados pessoais não encontrados'
+      })
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: result
+    })
+  } catch (error) {
+    console.error('Erro ao buscar dados pessoais:', error)
+    return res.status(500).json({
+      success: false,
+      message: 'Erro ao buscar dados pessoais'
+    })
+  }
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+
+
 export const updatePersonalData = async (req, res) => {
   try {
     const userId = req.user.id 
