@@ -1,10 +1,38 @@
 import { UserRepository } from '../repositories/UserRepository.js'
 import { PatientRepository } from '../repositories/PatientRepository.js'
+import { HealthDataRepository } from '../repositories/HealthDataRepository.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { AppError } from '../exceptions/AppError.js'
 
 const JWT_SECRET = process.env.JWT_SECRET || 'chave_secreta_segura'
+
+export const needsInitialRegistration = async (userId) => {
+  try {
+    if (!userId) {
+      throw new AppError('ID do usuário não fornecido', 400, { userId: 'ID do usuário é obrigatório' })
+    }
+
+    const patient = await PatientRepository.findByUserId(userId)
+    if (!patient) {
+      return { needsInitialRegistration: true }
+    }
+
+    const lastHealthData = await HealthDataRepository.findByPatientId(patient.id)
+
+    const oneYearAgo = new Date()
+    oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)
+
+    const healthDataExpired = !lastHealthData || (lastHealthData.record_date && lastHealthData.record_date < oneYearAgo)
+    const patientDataExpired = patient.updated_at && patient.updated_at < oneYearAgo
+
+    const needsInitialRegistration = patient.weight === 0 || healthDataExpired || patientDataExpired
+
+    return { needsInitialRegistration }
+  } catch (error) {
+    throw error
+  }
+}
 
 export const AuthService = {
   async login (data) {
@@ -14,24 +42,14 @@ export const AuthService = {
       throw new AppError('E-mail ou senha inválidos', 401, { invalidCredentials: 'E-mail ou senha inválidos' })
     }
   
-  let nextPage = '/meal-plan' 
+    let nextPage = '/meal-plan' 
 
     if (user.role === 'PROFESSIONAL') {
       nextPage = '/professional/patients'
     } else if (user.role === 'STANDARD') {
-      const patient = await PatientRepository.findByUserId(user.id)
-      
-      if (!patient) {
+      const needsRegistration = await needsInitialRegistration(user.id)
+      if (needsRegistration.needsInitialRegistration) {
         nextPage = '/register-personal-data'
-      } else if (patient.weight === 0) {
-        nextPage = '/register-personal-data'
-      } else {
-        const oneMonthAgo = new Date()
-        oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1)
-
-        if (patient.updated_at < oneMonthAgo) {
-          nextPage = '/register-personal-data'
-        }
       }
     }
 
