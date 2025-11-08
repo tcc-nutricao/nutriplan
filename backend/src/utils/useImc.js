@@ -9,7 +9,9 @@ export const calculateImc = (weight, height) => {
     throw new Error('Peso e altura devem ser valores positivos válidos')
   }
 
-  const imc = weight / (height * height)
+  const heightInMeters = height / 100
+
+  const imc = weight / (heightInMeters * heightInMeters)
   return parseFloat(imc.toFixed(2))
 }
 

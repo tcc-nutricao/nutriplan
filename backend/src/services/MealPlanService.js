@@ -42,8 +42,8 @@ const getActiveMealPlanForPatient = async (patientId) => {
       { column: 'status', value: 'ACTIVE', operator: '=' },
       { column: 'id_patient', value: patientId, operator: '=' }
     ]
-    const { data: mealPlans = [] } = await getMealPlanByPatient(filters)
-    
+    const { data: mealPlans = [] } = await getMealPlanByPatient(patientId, filters)
+
     if (mealPlans.length === 0) {
       return { data: [], total: 0, message: 'Nenhum plano de refeição ativo encontrado' }
     }

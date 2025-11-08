@@ -9,9 +9,12 @@
       class="flex items-center justify-between bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto"
     >
       <div class="flex items-center gap-4">
-        <div class="relative hover:scale-110 active:scale-95 transition cursor-pointer group" @click="openAvatarModal()">
+        <div
+          class="relative hover:scale-110 active:scale-95 transition cursor-pointer group"
+          @click="openAvatarModal()"
+        >
           <div
-            class="w-20 h-20 flex items-center justify-center rounded-full bg-transparent  border-purple-200"
+            class="w-20 h-20 flex items-center justify-center rounded-full bg-transparent border-purple-200"
           >
             <svg
               class="w-20 h-20 mb-3 mt-1 text-p-600 block drop-shadow-np"
@@ -38,64 +41,95 @@
         </div>
       </div>
 
-      <Button mediumPurple
+      <Button
+        mediumPurple
         class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
-        icon="fa-regular fa-edit short flex justify-center" label="Editar" @click="openProfileModal('basic')" 
+        icon="fa-regular fa-edit short flex justify-center"
+        label="Editar"
+        @click="openProfileModal('basic')"
       />
     </div>
 
-    <div v-if="user.role==='STANDARD'" class="bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto mt-6">
+    <div
+      v-if="user.role === 'STANDARD'"
+      class="bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto mt-6"
+    >
       <div class="flex justify-between items-center mb-6">
         <h2 class="h2main">Dados Pessoais</h2>
-        <Button mediumPurple
+        <Button
+          mediumPurple
           class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
-          icon="fa-regular fa-edit short flex justify-center" label="Editar" @click="openProfileModal('personal')" 
+          icon="fa-regular fa-edit short flex justify-center"
+          label="Editar"
+          @click="openProfileModal('personal')"
         />
       </div>
 
       <div class="flex w-full gap-8">
         <div class="col w-full gap-4">
-          <InfoArea 
-          :value="personalData.idade ? `${personalData.idade} anos` : 'Não informado'"
-          :title="'Idade'" 
+          <InfoArea
+            :value="
+              personalData.idade
+                ? `${personalData.idade} anos`
+                : 'Não informado'
+            "
+            :title="'Idade'"
           />
-          <InfoArea 
-          :value="personalData.peso ? `${personalData.peso} kg` : 'Não informado'" 
-          :title="'Peso'" 
+          <InfoArea
+            :value="
+              personalData.peso ? `${personalData.peso} kg` : 'Não informado'
+            "
+            :title="'Peso'"
           />
-          <InfoArea 
-          :value="personalData.meta ? `${personalData.meta} kg` : 'Não informado'" 
-          :title="'Meta de Peso'" 
+          <InfoArea
+            :value="
+              personalData.meta ? `${personalData.meta} kg` : 'Não informado'
+            "
+            :title="'Meta de Peso'"
           />
-          <InfoArea 
-          :array="personalData.restricoes || 'Não informado'" 
-          :title="'Restrições Alimentares'" 
+          <InfoArea
+            :array="personalData.restricoes || 'Não informado'"
+            :title="'Restrições Alimentares'"
           />
         </div>
         <div class="col w-full gap-4">
-          <InfoArea 
-          :value="personalData.sexo || 'Não informado'" 
-          :title="'Sexo'" 
+          <InfoArea
+            :value="personalData.sexo || 'Não informado'"
+            :title="'Sexo'"
           />
-          <InfoArea 
-          :value="personalData.altura ? `${personalData.altura} cm` : 'Não informado'" 
-          :title="'Altura'" 
+          <InfoArea
+            :value="
+              personalData.altura
+                ? `${personalData.altura} cm`
+                : 'Não informado'
+            "
+            :title="'Altura'"
           />
-          <InfoArea 
-          :value="personalData.objetivo || 'Não informado'" 
-          :title="'Objetivo'" 
+          <InfoArea
+            :value="personalData.objetivo || 'Não informado'"
+            :title="'Objetivo'"
           />
-          <InfoArea 
-          :value="personalData.preferencias || 'Não informado'" 
-          :title="'Preferências Alimentares'" 
+          <InfoArea
+            :value="personalData.preferencias || 'Não informado'"
+            :title="'Preferências Alimentares'"
           />
         </div>
       </div>
     </div>
 
-    <div class="flex gap-5 items-center justify-between bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto mt-10 border-2 border-danger">
-      <h2 class="text-2xl font-semibold w-full text-start text-danger">Apagar conta</h2>
-        <Button red class="ml-2" icon="fa-solid fa-trash" label="Apagar" @click="openDangerModal('delete')" />
+    <div
+      class="flex gap-5 items-center justify-between bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto mt-10 border-2 border-danger"
+    >
+      <h2 class="text-2xl font-semibold w-full text-start text-danger">
+        Apagar conta
+      </h2>
+      <Button
+        red
+        class="ml-2"
+        icon="fa-solid fa-trash"
+        label="Apagar"
+        @click="openDangerModal('delete')"
+      />
     </div>
 
     <ProfileEditModal
@@ -126,86 +160,95 @@
 </template>
 
 <script setup>
-import { ref, defineAsyncComponent } from 'vue';
-import { useCookie } from 'nuxt/app';
+import { ref, onMounted, defineAsyncComponent } from "vue";
+import { useCookie, useNuxtApp } from "nuxt/app";
 
-const ProfileEditModal = defineAsyncComponent(() => 
+const { $axios } = useNuxtApp();
+
+const ProfileEditModal = defineAsyncComponent(() =>
   import("../components/ProfileEditModal.vue")
 );
 
-const props = defineProps({
-  nome: String,
-  email: String,
-  idade: Number,
-  sexo: String,
-  altura: Number,
-  peso: Number,
-  restricoes: String,
-  objetivo: String,
-  preferencias: String
-});
-
-const userCookie = useCookie('user-data');
+const userCookie = useCookie("user-data");
 const user = ref(userCookie.value);
 
-const showModal = ref('');
+const showModal = ref("");
 const activeSection = ref(null);
 const imageToEdit = ref(null);
 
 const personalData = ref({
-  nome: userCookie.value?.name,
-  email: userCookie.value?.email,
-  idade: 15,
-  sexo: "Feminino",
-  altura: 165,
-  peso: 65,
-  restricoes: ["Sem glúten", "Sem lactose"],
-  objetivo: "Perda de Peso",
-  preferencias: "Dieta mediterrânea",
-  meta: "80"
+  nome: userCookie.value?.name || "",
+  email: userCookie.value?.email || "",
+  idade: null,
+  sexo: "",
+  altura: null,
+  peso: null,
+  restricoes: [],
+  objetivo: "",
+  preferencias: "",
+  meta: null,
 });
 
 const openProfileModal = (section) => {
   activeSection.value = section;
-  showModal.value = 'profileEdit';
+  showModal.value = "profileEdit";
 };
 
 const openAvatarModal = () => {
   imageToEdit.value = null;
-  showModal.value = 'avatarAdd';
+  showModal.value = "avatarAdd";
 };
 
 const openDangerModal = () => {
-  showModal.value = 'delete';
+  showModal.value = "delete";
 };
 
 const closeModal = () => {
-  showModal.value = '';
+  showModal.value = "";
   activeSection.value = null;
   imageToEdit.value = null;
 };
 
 const handleImageSelected = (imageData) => {
   imageToEdit.value = imageData;
-  showModal.value = 'avatarEdit';
+  showModal.value = "avatarEdit";
 };
 
 const handleAvatarSave = (croppedImageData) => {
   closeModal();
 };
+
+onMounted(async () => {
+  try {
+    const res = await $axios.get("/user/personal-data");
+    if (res.data.success) {
+      const data = res.data.data;
+
+      if (!Array.isArray(data.restricoes)) {
+        data.restricoes = data.restricoes
+          ? [data.restricoes] 
+          : []; 
+      }
+
+      personalData.value = data;
+    }
+  } catch (err) {
+    console.error("Erro ao buscar dados pessoais:", err);
+  }
+});
 </script>
 
 <style>
 .modal-enter-from {
   opacity: 0;
 }
-.modal-enter-from :deep(.modal-container) { 
+.modal-enter-from :deep(.modal-container) {
   transform: scale(0.9);
 }
 .modal-leave-to {
   opacity: 0;
 }
-.modal-leave-to :deep(.modal-container) { 
+.modal-leave-to :deep(.modal-container) {
   transform: scale(0.9);
 }
 .modal-enter-active,

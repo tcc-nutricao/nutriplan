@@ -4,4 +4,6 @@ import { validate } from '../api/AuthApi.js'
 
 export default (router) => {
   genericRoute(router, '/nutritionist', api)
+  router.get("/nutritionist/patients", validate, api.getPatients)
+  router.get("/nutritionist/patients/:id", validate, api.getPatientInfo)
 }
