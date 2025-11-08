@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Brigadeiro",
+    "preparation_method": "Em uma panela, misture o leite condensado, o chocolate em pó e a manteiga. Cozinhe em fogo baixo, mexendo sempre, até desgrudar do fundo da panela (cerca de 10 minutos). Despeje em um prato untado, espere esfriar, enrole e passe no granulado.",
+    "preparation_time": 25,
+    "portion": 20
+  },
+  {
+    "name": "Pão de Queijo de Liquidificador",
+    "preparation_method": "Bata todos os ingredientes no liquidificador, exceto o queijo ralado. Após obter uma mistura homogênea, adicione o queijo e pulse apenas para misturar. Despeje em forminhas untadas e leve ao forno pré-aquecido a 180°C por cerca de 20 minutos ou até dourar.",
+    "preparation_time": 30,
+    "portion": 12
+  },
+  {
+    "name": "Mousse de Maracujá",
+    "preparation_method": "Bata no liquidificador o leite condensado, o creme de leite e o suco de maracujá concentrado por 3 minutos. Despeje em uma travessa ou em taças individuais e leve à geladeira por no mínimo 4 horas.",
+    "preparation_time": 10,
+    "portion": 6
+  },
+  {
+    "name": "Caipirinha",
+    "preparation_method": "Corte o limão em 8 pedaços, retirando a parte branca do meio. Em um copo, macere levemente o limão com o açúcar. Adicione o gelo até o topo do copo e complete com a cachaça. Mexa bem e sirva.",
+    "preparation_time": 5,
+    "portion": 1
+  },
+  {
+    "name": "Frango Grelhado Simples",
+    "preparation_method": "Tempere os filés de frango com sal, pimenta, alho e suco de limão. Aqueça uma frigideira ou grill com um fio de azeite. Grelhe os filés por cerca de 4-5 minutos de cada lado, ou até estarem cozidos e dourados.",
+    "preparation_time": 15,
+    "portion": 2
+  },
+  {
+    "name": "Omelete de Queijo e Presunto",
+    "preparation_method": "Bata os ovos em uma tigela e tempere com sal e pimenta. Aqueça uma frigideira antiaderente com manteiga. Despeje os ovos e, quando começar a firmar, espalhe o queijo e o presunto picados sobre uma metade. Dobre a omelete e cozinhe por mais um minuto.",
+    "preparation_time": 10,
+    "portion": 1
+  },
+  {
+    "name": "Arroz Branco Básico",
+    "preparation_method": "Em uma panela, refogue o alho e a cebola no óleo até dourar. Adicione o arroz e refogue por mais um minuto. Acrescente a água fervente e o sal. Cozinhe em fogo baixo com a panela semi-tampada até a água secar completamente.",
+    "preparation_time": 20,
+    "portion": 4
+  },
+  {
+    "name": "Macarrão Alho e Óleo",
+    "preparation_method": "Cozinhe o macarrão conforme as instruções da embalagem. Enquanto isso, em uma frigideira grande, aqueça o azeite e doure o alho fatiado em fogo baixo. Escorra o macarrão, junte à frigideira com o alho, misture bem, adicione salsinha picada e sirva.",
+    "preparation_time": 15,
+    "portion": 2
+  },
+  {
+    "name": "Vitamina de Banana",
+    "preparation_method": "Coloque a banana picada, o leite e a aveia no liquidificador. Se desejar, adicione mel ou açúcar. Bata tudo até obter uma mistura homogênea e cremosa. Sirva imediatamente.",
+    "preparation_time": 5,
+    "portion": 1
+  },
+  {
+    "name": "Salada Caprese",
+    "preparation_method": "Fatie o tomate e a mussarela de búfala em rodelas de espessura semelhante. Em um prato, intercale as fatias de tomate, mussarela e folhas de manjericão. Regue com azeite de oliva extra virgem e tempere com sal e pimenta a gosto.",
+    "preparation_time": 10,
+    "portion": 2
+  }
+]

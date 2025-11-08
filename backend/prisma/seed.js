@@ -7,6 +7,8 @@ import {
   UserGroupRole,
   WeekDay,
 } from "@prisma/client";
+import { generateFoods, generateRecipes, generateMealPlans } from '../src/utils/useGeneratePopulateAI.js';
+import fs from 'fs';
 const prisma = new PrismaClient();
 
 async function main() {
@@ -370,7 +372,44 @@ async function main() {
     },
   });
 
+  // Popula com dados AI
+  await populateWithAI();
+
   console.log("Seed finished.");
+}
+
+async function populateWithAI() {
+  // Gera e lê os dados AI
+  await generateFoods();
+  await generateRecipes();
+  await generateMealPlans();
+
+  // Lê os arquivos gerados
+  const foods = JSON.parse(fs.readFileSync('foods.json'));
+  const recipes = JSON.parse(fs.readFileSync('recipes.json'));
+  const mealplans = JSON.parse(fs.readFileSync('mealplans.json'));
+
+  // Insere os foods
+  for (const food of foods) {
+    await prisma.food.create({ data: { ...food, created_at: new Date() } });
+  }
+  // Insere as recipes
+  for (const recipe of recipes) {
+    await prisma.recipe.create({ data: { ...recipe, created_at: new Date() } });
+  }
+  // Insere os mealplans (vincule a um paciente/nutricionista/goal válido se necessário)
+  // Exemplo: todos para o paciente e nutri criados acima
+  for (const plan of mealplans) {
+    await prisma.mealPlan.create({
+      data: {
+        ...plan,
+        id_patient: patient.id,
+        id_nutritionist: nutritionist.id,
+        id_goal: goal.id,
+        created_at: new Date(),
+      },
+    });
+  }
 }
 
 main()
