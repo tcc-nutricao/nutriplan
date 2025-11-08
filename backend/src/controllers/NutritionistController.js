@@ -28,14 +28,39 @@ const getPatients = async (req, res) => {
   }
 }
 
-// Mescla CRUD padrão com métodos customizados
+const getPatientInfo = async (req, res) => {
+  try {
+    const { id } = req.params
+    if (!id) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'ID do paciente é obrigatório' 
+      })
+    }
+
+    const patient = await NutritionistService.getPatientInfo(parseInt(id))
+
+    return res.status(200).json({ 
+      success: true, 
+      data: patient 
+    })
+  } catch (error) {
+    console.error('Erro ao buscar informações do paciente:', error)
+    return res.status(500).json({ 
+      success: false, 
+      message: error.message || 'Erro interno do servidor' 
+    })
+  }
+}
+
 export const NutritionistController = {
   ...generateCrudController(
     NutritionistService,
     CreateNutritionistSchema,
     'Nutricionista'
   ),
-  getPatients
+  getPatients,
+  getPatientInfo
 }
 
 

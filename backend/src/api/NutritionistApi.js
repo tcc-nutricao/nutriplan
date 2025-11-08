@@ -4,5 +4,6 @@ import { generateCrudApi } from './Api.js'
 // Mescla CRUD padrão com métodos customizados do controller
 export const api = {
   ...generateCrudApi(NutritionistController),
-  getPatients: NutritionistController.getPatients
+  getPatients: NutritionistController.getPatients,
+  getPatientInfo: NutritionistController.getPatientInfo,
 }

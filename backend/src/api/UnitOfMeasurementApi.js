@@ -2,5 +2,5 @@ import { UnitOfMeasurementController } from '../controllers/UnitOfMeasurementCon
 import { generateCrudApi } from './Api.js';
 
 export const api = {
-  ...generateCrudApi(UnitOfMeasurementController),
+  ...generateCrudApi(UnitOfMeasurementController)
 };
