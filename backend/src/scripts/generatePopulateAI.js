@@ -1,8 +1,7 @@
 
 import axios from 'axios';
 import fs from 'fs';
-import dotenv from 'dotenv';
-dotenv.config({ path: '../../.env' });
+import 'dotenv/config';
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key=${GEMINI_API_KEY}`;
@@ -60,7 +59,7 @@ async function generateFoods(total = 1000, batchSize = 50, concurrency = 2) {
     batchResults.forEach(foods => allFoods.push(...foods));
     console.log(`  Progresso: ${allFoods.length}/${total} alimentos gerados`);
     // Salva progresso parcial a cada lote
-  fs.writeFileSync('src/assets/foods.json', JSON.stringify(allFoods, null, 2));
+    fs.writeFileSync('foods.json', JSON.stringify(allFoods, null, 2));
     // Delay entre grupos para respeitar rate limit
     if (i + concurrency < batches) {
       await delay(5000);
@@ -82,34 +81,24 @@ Exemplo de resposta: [{"name":"Salada de Frango","preparation_method":"Misture t
 Apenas o array JSON, sem texto extra.
 `;
 
+  const response = await axios.post(
+    geminiUrl,
+    {
+      contents: [{ parts: [{ text: prompt }] }]
+    }
+  );
+
+  const text = response.data.candidates[0].content.parts[0].text;
   try {
-    const response = await axios.post(
-      geminiUrl,
-      {
-        contents: [{ parts: [{ text: prompt }] }]
-      }
-    );
-    const text = response.data.candidates[0].content.parts[0].text;
-    try {
-      return JSON.parse(text);
-    } catch (e) {
-      const match = text.match(/\[.*\]/s);
-      return match ? JSON.parse(match[0]) : [];
-    }
-  } catch (error) {
-    if (error.response) {
-      console.error('Erro na chamada Gemini:', error.response.status, error.response.statusText);
-      console.error('Corpo da resposta:', error.response.data);
-    } else {
-      console.error('Erro desconhecido na chamada Gemini:', error.message);
-    }
-    throw error;
+    return JSON.parse(text);
+  } catch (e) {
+    const match = text.match(/\[.*\]/s);
+    return match ? JSON.parse(match[0]) : [];
   }
 }
 
 // Gera receitas em lotes com paralelismo controlado
 async function generateRecipes(total = 1000, batchSize = 50, concurrency = 2) {
-  console.log(geminiUrl)
   console.log(`Gerando ${total} receitas em lotes de ${batchSize} com concorrência ${concurrency}...`);
   const batches = Math.ceil(total / batchSize);
   const allRecipes = [];
@@ -127,7 +116,7 @@ async function generateRecipes(total = 1000, batchSize = 50, concurrency = 2) {
     batchResults.forEach(recipes => allRecipes.push(...recipes));
     console.log(`  Progresso: ${allRecipes.length}/${total} receitas geradas`);
     // Salva progresso parcial a cada lote
-  fs.writeFileSync('src/assets/recipes.json', JSON.stringify(allRecipes, null, 2));
+    fs.writeFileSync('recipes.json', JSON.stringify(allRecipes, null, 2));
     // Delay entre grupos para respeitar rate limit
     if (i + concurrency < batches) {
       await delay(5000);
@@ -183,7 +172,7 @@ async function generateMealPlans(total = 100, batchSize = 20, concurrency = 2) {
     batchResults.forEach(plans => allMealPlans.push(...plans));
     console.log(`  Progresso: ${allMealPlans.length}/${total} planos gerados`);
     // Salva progresso parcial a cada lote
-  fs.writeFileSync('src/assets/mealplans.json', JSON.stringify(allMealPlans, null, 2));
+    fs.writeFileSync('mealplans.json', JSON.stringify(allMealPlans, null, 2));
     // Delay entre grupos para respeitar rate limit
     if (i + concurrency < batches) {
       await delay(5000);

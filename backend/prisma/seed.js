@@ -7,7 +7,6 @@ import {
   UserGroupRole,
   WeekDay,
 } from "@prisma/client";
-import { generateFoods, generateRecipes, generateMealPlans } from '../src/utils/useGeneratePopulateAI.js';
 import fs from 'fs';
 const prisma = new PrismaClient();
 
@@ -379,36 +378,70 @@ async function main() {
 }
 
 async function populateWithAI() {
-  // Gera e lê os dados AI
-  await generateFoods();
-  await generateRecipes();
-  await generateMealPlans();
+  console.log("Carregando dados gerados por IA dos arquivos JSON...");
 
-  // Lê os arquivos gerados
-  const foods = JSON.parse(fs.readFileSync('foods.json'));
-  const recipes = JSON.parse(fs.readFileSync('recipes.json'));
-  const mealplans = JSON.parse(fs.readFileSync('mealplans.json'));
+  // Lê os arquivos gerados (devem ser criados previamente com: node generate-data.js)
+  let foods = [];
+  let recipes = [];
+  let mealplans = [];
 
-  // Insere os foods
-  for (const food of foods) {
-    await prisma.food.create({ data: { ...food, created_at: new Date() } });
+  try {
+    foods = JSON.parse(fs.readFileSync('foods.json', 'utf-8'));
+    console.log(`✓ ${foods.length} alimentos carregados`);
+  } catch (e) {
+    console.warn('⚠️  foods.json não encontrado. Execute: node generate-data.js');
   }
-  // Insere as recipes
-  for (const recipe of recipes) {
-    await prisma.recipe.create({ data: { ...recipe, created_at: new Date() } });
+
+  try {
+    recipes = JSON.parse(fs.readFileSync('recipes.json', 'utf-8'));
+    console.log(`✓ ${recipes.length} receitas carregadas`);
+  } catch (e) {
+    console.warn('⚠️  recipes.json não encontrado. Execute: node generate-data.js');
   }
-  // Insere os mealplans (vincule a um paciente/nutricionista/goal válido se necessário)
-  // Exemplo: todos para o paciente e nutri criados acima
-  for (const plan of mealplans) {
-    await prisma.mealPlan.create({
-      data: {
-        ...plan,
-        id_patient: patient.id,
-        id_nutritionist: nutritionist.id,
-        id_goal: goal.id,
-        created_at: new Date(),
-      },
+
+  try {
+    mealplans = JSON.parse(fs.readFileSync('mealplans.json', 'utf-8'));
+    console.log(`✓ ${mealplans.length} planos carregados`);
+  } catch (e) {
+    console.warn('⚠️  mealplans.json não encontrado. Execute: node generate-data.js');
+  }
+
+  // Insere os foods em lote
+  if (foods.length > 0) {
+    console.log(`Inserindo ${foods.length} alimentos no banco...`);
+    await prisma.food.createMany({
+      data: foods.map(food => ({ ...food, created_at: new Date() })),
+      skipDuplicates: true,
     });
+    console.log('✓ Alimentos inseridos');
+  }
+
+  // Insere as recipes em lote
+  if (recipes.length > 0) {
+    console.log(`Inserindo ${recipes.length} receitas no banco...`);
+    await prisma.recipe.createMany({
+      data: recipes.map(recipe => ({ ...recipe, created_at: new Date() })),
+      skipDuplicates: true,
+    });
+    console.log('✓ Receitas inseridas');
+  }
+
+  // Insere os mealplans (vincule a um paciente/nutricionista/goal válido)
+  if (mealplans.length > 0) {
+    console.log(`Inserindo ${mealplans.length} planos no banco...`);
+    // Como mealplans precisam de relacionamentos, inserimos um por um
+    for (const plan of mealplans) {
+      await prisma.mealPlan.create({
+        data: {
+          ...plan,
+          id_patient: patient.id,
+          id_nutritionist: nutritionist.id,
+          id_goal: goal.id,
+          created_at: new Date(),
+        },
+      });
+    }
+    console.log('✓ Planos inseridos');
   }
 }
 

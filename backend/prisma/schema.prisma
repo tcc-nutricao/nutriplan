@@ -90,6 +90,7 @@ model Food {
   fat         Float
   sugar       Float     @default(0)
   fiber       Float     @default(0)
+  favorite    Boolean?   @default(0)
   created_at  DateTime
   deleted_at  DateTime?
   updated_at  DateTime?
@@ -104,6 +105,7 @@ model Recipe {
   preparation_method      String?
   preparation_time Int       @default(0)
   portion          Int       @default(1)
+  favorite         Boolean?  @default(0)
   created_at       DateTime  @default(now())
   deleted_at       DateTime?
   updated_at       DateTime?
@@ -292,6 +294,7 @@ model MealPlan {
   calories        Int
   status          MealPlanStatus
   expiration_date DateTime?
+  favorite        Boolean?    @default(0)
   created_at      DateTime
   deleted_at      DateTime?
   updated_at      DateTime?
