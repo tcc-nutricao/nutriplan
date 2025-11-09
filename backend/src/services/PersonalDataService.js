@@ -184,6 +184,7 @@ const updatePersonalData = async (userId, personalData) => {
       tx
     });
 
+    let latestHealth;
     if (latestHealthData.data && latestHealthData.data.length > 0) {
       // Se já existe, atualiza o mais recente
       const healthDataInfo = {
@@ -198,6 +199,7 @@ const updatePersonalData = async (userId, personalData) => {
         healthDataInfo,
         tx
       );
+      latestHealth = { ...latestHealthData.data[0], ...healthDataInfo };
     } else {
       // Se não existe, cria o primeiro registro
       if (height && weight) {
@@ -209,8 +211,21 @@ const updatePersonalData = async (userId, personalData) => {
           bmi,
           record_date: new Date(),
         };
-        await HealthDataRepository.create(healthDataInfo, tx);
+        const created = await HealthDataRepository.create(healthDataInfo, tx);
+        latestHealth = created;
       }
+    }
+
+    // Atualizar Patient com os dados mais recentes de HealthData
+    if (latestHealth) {
+      await PatientRepository.update(
+        patient.id,
+        {
+          height: latestHealth.height,
+          weight: latestHealth.weight
+        },
+        tx
+      );
     }
 
     return {
