@@ -5,32 +5,8 @@ import { MealPlanService } from './MealPlanService.js'
 import { generateCrudService } from './Service.js'
 import { getImcData } from '../utils/useImc.js'
 import { calculateProgress, formatProgressResponse, calculateTotalDays } from '../utils/useProgress.js'
-import { PrismaClient } from '@prisma/client'
 
 const baseCrudService = generateCrudService(PatientRepository)
-
-const prisma = new PrismaClient()
-
-const insert = async (data) => {
-  try {
-    const result = await prisma.$transaction(async (tx) => {
-      const patient = await PatientRepository.create(data, tx)
-      const healthData = {
-        id_patient: patient.id,
-        height: patient.height,
-        weight: patient.weight,
-        record_date: new Date(),
-        bmi: getImcData(patient.weight, patient.height).imc
-      }
-      await HealthDataRepository.create(healthData, tx)
-      return patient
-    })
-    return result
-  } catch (error) {
-    console.error('Erro ao inserir paciente:', error)
-    throw error
-  }
-}
 
 // Função para buscar paciente pelo ID do usuário
 const getPatientByUserId = async (userId) => {
