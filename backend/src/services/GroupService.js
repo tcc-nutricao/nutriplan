@@ -15,7 +15,6 @@ export const GroupService = {
         throw new Error('userId é obrigatório');
       }
       const groups = await UserGroupRepository.getGroupsByUserId(userId);
-      console.log(groups)
       let allMetaAchieved = [];
       const groupsWithProgress = await Promise.all((groups || []).map(async (group) => {
         // Supondo que group.userGroups é um array de participantes do grupo

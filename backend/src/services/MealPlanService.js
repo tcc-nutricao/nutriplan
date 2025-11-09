@@ -1,4 +1,5 @@
 import { MealPlanRepository } from '../repositories/MealPlanRepository.js'
+import { PatientRepository } from '../repositories/PatientRepository.js'
 import { generateCrudService } from './Service.js'
 
 
@@ -55,25 +56,33 @@ const getActiveMealPlanForPatient = async (patientId) => {
   }
 }
 
-const update = async (id, data) => {
+const update = async (id, data, user) => {
+  const mealPlanId = parseInt(id, 10);
   // Se o status está sendo alterado para ACTIVE
+  const mealPlan = await MealPlanRepository.findById(mealPlanId);
+  const patientId = mealPlan.id_patient;
   if (data.status === 'ACTIVE') {
     // Busca o meal plan atual para pegar o paciente
-    const mealPlan = await MealPlanRepository.findById(id);
     if (!mealPlan) throw new Error('Plano alimentar não encontrado');
-    const patientId = mealPlan.id_patient;
     // Desativa outros planos ativos desse paciente
     await MealPlanRepository.updateMany({
       where: {
         id_patient: patientId,
         status: 'ACTIVE',
-        id: { not: id }
+        id: { not: mealPlanId }
       },
       data: { status: 'COMPLETED' }
     });
   }
-  // Chama o update base
-  return await MealPlanRepository.update(id, data);
+
+  const patient = await PatientRepository.findById(patientId);
+  const canEdit = user.role === 'PROFESSIONAL' || !patient.id_nutritionist;
+
+  if (canEdit) {
+    return await MealPlanRepository.update(mealPlanId, data);
+  }
+
+  return { data: [], total: 0, message: 'Usuários pacientes não podem atualizar planos alimentares.' };
 };
 
 export const MealPlanService = {

@@ -8,8 +8,6 @@ export const ProfileService = {
       throw new Error('Role do usuário não fornecida');
     }
 
-    console.log(role)
-
     if (role === 'PROFESSIONAL') {
       return await NutritionistRepository.findByUserId(id);
     } else if (role === 'STANDARD') {

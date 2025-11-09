@@ -5,8 +5,6 @@ export const ProfileController = {
     try {
       const { id, role } = req.user;
 
-      console.log(id)
-
       const profileData = await ProfileService.getProfileByRole(id, role);
 
       return res.status(200).json({

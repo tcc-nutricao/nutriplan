@@ -1,6 +1,10 @@
 import { generateCrudRepository } from './Repository.js'
 
-export const MealPlanRepository = generateCrudRepository('mealPlan', {
+
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
+
+const base = generateCrudRepository('mealPlan', {
   softDelete: false, // MealPlan usa hard delete
   defaultOrderBy: 'id',
   defaultIncludes: {
@@ -34,5 +38,12 @@ export const MealPlanRepository = generateCrudRepository('mealPlan', {
     }
   }
 })
+
+export const MealPlanRepository = {
+  ...base,
+  updateMany: async ({ where, data }) => {
+    return prisma.mealPlan.updateMany({ where, data })
+  }
+}
 
 

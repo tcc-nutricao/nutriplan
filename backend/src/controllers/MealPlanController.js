@@ -31,6 +31,23 @@ const getMealPlanByPatient = async (req, res) => {
   }
 }
 
+const update = async (req, res) => {
+  try {
+    const { id } = req.params
+    const user = req.user
+    const data = req.body
+
+    const result = await MealPlanService.update(id, data, user)
+    return res.status(200).json({ success: true, data: result })
+  } catch (error) {
+    console.error('Erro ao atualizar plano alimentar:', error)
+    return res.status(500).json({
+      success: false,
+      message: error.message || 'Erro interno do servidor'
+    })
+  }
+}
+
 // Mescla CRUD padrão com métodos customizados
 export const MealPlanController = {
   ...generateCrudController(
@@ -38,6 +55,7 @@ export const MealPlanController = {
     CreateMealPlanSchema,
     'Plano alimentar'
   ),
+  update,
   getMealPlanByPatient
 }
 
