@@ -91,6 +91,7 @@ model Food {
   sugar       Float     @default(0)
   fiber       Float     @default(0)
   favorite    Boolean?   @default(false)
+  description String?
   created_at  DateTime
   deleted_at  DateTime?
   updated_at  DateTime?

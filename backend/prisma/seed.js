@@ -372,12 +372,12 @@ async function main() {
   });
 
   // Popula com dados AI
-  await populateWithAI();
+  await populateWithAI(patient, nutritionist, goal);
 
   console.log("Seed finished.");
 }
 
-async function populateWithAI() {
+async function populateWithAI(patient, nutritionist, goal) {
   console.log("Carregando dados gerados por IA dos arquivos JSON...");
 
   // Lê os arquivos gerados (devem ser criados previamente com: node generate-data.js)
@@ -386,24 +386,24 @@ async function populateWithAI() {
   let mealplans = [];
 
   try {
-    foods = JSON.parse(fs.readFileSync('foods.json', 'utf-8'));
+    foods = JSON.parse(fs.readFileSync('src/assets/foods.json', 'utf-8'));
     console.log(`✓ ${foods.length} alimentos carregados`);
   } catch (e) {
-    console.warn('⚠️  foods.json não encontrado. Execute: node generate-data.js');
+    console.warn('⚠️  src/assets/foods.json não encontrado. Execute: node generate-data.js');
   }
 
   try {
-    recipes = JSON.parse(fs.readFileSync('recipes.json', 'utf-8'));
+    recipes = JSON.parse(fs.readFileSync('src/assets/recipes.json', 'utf-8'));
     console.log(`✓ ${recipes.length} receitas carregadas`);
   } catch (e) {
-    console.warn('⚠️  recipes.json não encontrado. Execute: node generate-data.js');
+    console.warn('⚠️  src/assets/recipes.json não encontrado. Execute: node generate-data.js');
   }
 
   try {
-    mealplans = JSON.parse(fs.readFileSync('mealplans.json', 'utf-8'));
+    mealplans = JSON.parse(fs.readFileSync('src/assets/mealplans.json', 'utf-8'));
     console.log(`✓ ${mealplans.length} planos carregados`);
   } catch (e) {
-    console.warn('⚠️  mealplans.json não encontrado. Execute: node generate-data.js');
+    console.warn('⚠️  src/assets/mealplans.json não encontrado. Execute: node generate-data.js');
   }
 
   // Insere os foods em lote
