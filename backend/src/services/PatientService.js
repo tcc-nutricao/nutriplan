@@ -113,7 +113,6 @@ const getProgress = async (patientId) => {
 
 export const PatientService = {
   ...baseCrudService,
-  insert,
   getPatientByUserId,
   getProgress
 }
