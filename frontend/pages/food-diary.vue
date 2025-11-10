@@ -33,25 +33,6 @@
                     :class="{ 'border-red-500': (errors.meal && selectedMeal === null) || errors.ingredients, 'border-p-400': !errors.ingredients }"
                 >
                     <Label label="Alimentos" class="text-xl font-semibold mb-1" :error="errors.ingredients"/>
-                    <p v-if="!hasAnyItems" :class="{'text-red-500' : errors.ingredients}" class="text-gray-medium mt-1 pb-3 mb-3 border-b-2 border-p-200">Adicione alimentos abaixo!</p>
-                    <div v-if="hasAnyItems" class="flex flex-col gap-4 mt-1 pb-3 mb-3 max-w-full border-b-2 border-p-200">
-                        <template v-for="mealName in mealNames" :key="mealName" class="max-w-full">
-                        <div v-if="newMealItems[mealName].length > 0" class="max-w-full">
-                            <h3 class="text-p-800 font-bold text-lg mb-2">{{ mealName }}</h3>
-                            <div class="flex flex-wrap gap-2 w-full">
-                                <ItemButton
-                                    v-for="(item, index) in newMealItems[mealName]"
-                                    :key="index"
-                                    :label="item.food"
-                                    :quantity="item.quantity"
-                                    :unity="item.unit"
-                                    class="w-full"
-                                    @delete-item="deleteItem(mealName, index)" 
-                                />
-                            </div>
-                        </div>
-                        </template>
-                    </div>
                     <Input
                         v-model="newItem.food"
                         class="mb-5"
@@ -86,65 +67,25 @@
                     </div>
                 </div>
 
-
-                <!-- <div class="flex flex-col px-4 pb-3 pt-4 border-2 border-p-400 rounded-2xl">
-                    <Label label="Alimento" class="text-xl font-semibold mb-1"/>
-                    <Input
-                        v-model="newItem.food"
-                        class="mb-5"
-                        placeholder="Buscar"
-                        :error="errors.food"
-                    />
-                    <InputText
-                        v-model="newItem.quantity"
-                        class="mb-5"
-                        label="Quantidade"
-                        placeholder="Digite"
-                        type="number"
-                        :error="errors.quantity"
-                        />
-                        <InputText
-                        v-model="newItem.unit"
-                        class="mb-5"
-                        label="Unidade"
-                        placeholder="Buscar"
-                        :error="errors.unit"
-                    />
-                    <div class="flex flex-row justify-end gap-2">
-                        <Button 
-                            mediumPurple outlined
-                            class="w-max px-0 h-[42px] shadow-lg shadow-p-600/20 transition"
-                            label="Limpar"
-                            icon="fa-solid fa-delete-left text-p-600 flex justify-center"
-                            @click="clearInputs"
-                        />
-                        <Button 
-                            mediumPurple
-                            class="w-max px-0 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
-                            label="Adicionar alimento"
-                            icon="fa-solid fa-plus short flex justify-center"
-                            @click="addItem"
-                        />
-                    </div>
-                </div>
-                <div v-if="hasAnyItems" class="flex flex-col gap-4 mt-4 max-w-full">
+                <p v-if="!hasAnyItems" :class="{'text-red-500' : errors.ingredients}" class="text-gray-medium mt-1 pb-3 mb-3 border-b-2 border-p-200">Adicione alimentos ou receitas em refeições acima!</p>
+                <div v-if="hasAnyItems" class="flex flex-col gap-4 mt-1 pb-3 mb-3 max-w-full border-b-2 border-p-200">
                     <template v-for="mealName in mealNames" :key="mealName" class="max-w-full">
-                        <div v-if="newMealItems[mealName].length > 0" class="max-w-full">
-                            <h3 class="text-p-800 font-bold text-lg mb-2">{{ mealName }}</h3>
-                            <div class="flex flex-col gap-2">
-                                <ItemButton
-                                    v-for="(item, index) in newMealItems[mealName]"
-                                    :key="index"
-                                    :label="item.food"
-                                    :quantity="item.quantity"
-                                    :unity="item.unit"
-                                    class="w-full"
-                                    @delete-item="deleteItem(mealName, index)" 
-                                />
-                            </div>
+                    <div v-if="newMealItems[mealName].length > 0" class="max-w-full">
+                        <h3 class="text-p-800 font-bold text-lg mb-2">{{ mealName }}</h3>
+                        <div class="flex flex-wrap gap-2 w-full">
+                            <ItemButton
+                                v-for="(item, index) in newMealItems[mealName]"
+                                :key="index"
+                                :label="item.food"
+                                :quantity="item.quantity"
+                                :unity="item.unit"
+                                class="w-full"
+                                @delete-item="deleteItem(mealName, index)" 
+                            />
                         </div>
+                    </div>
                     </template>
-                </div> -->
+                </div>
                 <div class="flex justify-center mt-2">
                     <Button 
                         mediumPurple
