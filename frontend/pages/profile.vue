@@ -88,7 +88,7 @@
             :title="'Meta de Peso'"
           />
           <InfoArea
-            :array="personalData.restricoes || 'Não informado'"
+            :array="personalData.restricoes == '' ? ['Nenhuma'] : (personalData.restricoes || 'Não informado')"
             :title="'Restrições Alimentares'"
           />
         </div>
@@ -140,6 +140,7 @@
     />
     <ModalAvatarEdit
       v-if="showModal == 'avatarEdit'"
+      :title="showModal"
       :current-image="imageToEdit"
       @close="closeModal"
       @save="handleAvatarSave"

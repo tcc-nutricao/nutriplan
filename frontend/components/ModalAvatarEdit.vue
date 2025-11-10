@@ -16,16 +16,41 @@
           </button>
 
           <h2 class="text-2xl font-semibold text-np mb-4">
-            Editar foto de perfil
+            {{title == 'avatarEdit' ? 'Editar foto de perfil' : 'Editar capa do grupo'}}
           </h2>
 
           <ClientOnly>
             <div class="h-80 w-full mt-4 mb-3 bg-gray-100 rounded-xl overflow-hidden flex items-center justify-center">
               <Cropper
+                v-if="showModal == 'avatarEdit'"
                 ref="cropper"
                 class="h-full w-full"
                 :src="imageSrc"
                 :stencil-component="CircleStencil"
+                :stencil-props="{
+                    aspectRatio: 1/1, 
+                    previewClass: 'previewCircle',
+                    handlers: {},
+                    lines: {},
+                    movable: false,
+                    resizable: false,
+                    aspectRatio: 1,
+                }"
+                :resize-image="{
+                    adjustStencil: false
+                }"
+                :stencil-size="{
+                    width: 280,
+                    height: 280
+                }"
+                image-restriction="stencil"
+              />
+              <Cropper
+                v-else
+                ref="cropper"
+                class="h-full w-full cursor-move"
+                :src="imageSrc"
+                :stencil-component="RectangleStencil"
                 :stencil-props="{
                     aspectRatio: 1/1, 
                     previewClass: 'previewCircle',
@@ -83,14 +108,15 @@
 
 <script setup>
 import { defineProps, defineEmits, ref, onMounted } from "vue";
-import { Cropper, CircleStencil } from 'vue-advanced-cropper';
+import { Cropper, RectangleStencil, CircleStencil } from 'vue-advanced-cropper';
 import 'vue-advanced-cropper/dist/style.css';
 
 const props = defineProps({
   currentImage: {
     type: String,
     default: 'https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg'
-  }
+  },
+  title: String,
 });
 
 const emit = defineEmits(["close", "save"]);

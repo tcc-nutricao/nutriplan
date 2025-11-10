@@ -7,8 +7,9 @@
             <div class="flex flex-col gap-5 w-[30%]">
                 <div class="flex flex-col justify-center px-6 pt-5 h-max rounded-3xl shadow-lg gap-3 bg-white pb-6">
                     <Button mediumPurple
-                        class="w-min px-3 h-[42px] text-nowrap shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
-                        icon="fa-solid fa-plus short flex justify-center" label="Criar novo grupo" />
+                        class="w-full px-3 h-[42px] text-nowrap shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
+                        icon="fa-solid fa-plus short flex justify-center" label="Criar novo grupo"
+                        @click="openCreateModal" />
                     <div class="flex items-end gap-3 border-t-2 pt-2 mt-2 border-p-200">
                         <InputText class="mb-0 w-full" label="Entrar em um grupo"
                             placeholder="Digite o código do grupo" />
@@ -42,7 +43,7 @@
                             <div v-if="selectedItem.owner === 'Você'" class="flex gap-3">
                                 <Button mediumPurple
                                     class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
-                                    icon="fa-solid fa-edit short flex justify-center" label="Editar" />
+                                    icon="fa-solid fa-edit short flex justify-center" label="Editar" @click="openEditModal" />
                                 <Button red
                                     class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-danger-light shadow-danger/20 transition"
                                     icon="fa-regular fa-trash-can short flex justify-center" label="Apagar" />
@@ -119,142 +120,165 @@
                 <h3 class="h2">Crie ou entre em um grupo!</h3>
             </div>
         </div>
+        <ModalGroupCreate v-if="showModal === 'Criar' || showModal === 'Editar'" :title="showModal" :groupName="selectedItem.name" :groupImage="selectedItem.image" @close="closeModal" />
     </div>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            selectedItemId: 1,
-            itemList: [
-                {
-                    id: 1,
-                    title: 'Fit com as amigas',
-                    code: 'KLM72Q',
-                    startDate: '2025-09-01',
-                    endDate: '2025-09-30',
-                    owner: 'Você',
-                    participants: [
-                        { id: 101, name: 'Você', progress: 80, objective: 'Perda de Peso' },
-                        { id: 102, name: 'Beatriz', progress: 50, objective: 'Hipertrofia' },
-                        { id: 103, name: 'Carla', progress: 100, objective: 'Perda de Peso' },
-                    ]
-                },
-                {
-                    id: 2,
-                    title: 'Desafio Verão 2026',
-                    code: 'XPT09A',
-                    startDate: '2025-09-15',
-                    endDate: '2025-10-13',
-                    owner: 'Eduardo',
-                    participants: [
-                        { id: 201, name: 'Você', progress: 75, objective: 'Perda de Peso' },
-                        { id: 202, name: 'Eduardo', progress: 90, objective: 'Hipertrofia' },
-                        { id: 203, name: 'Fernanda', progress: 60,  objective: 'Definição' },
-                        { id: 204, name: 'Gabriel', progress: 85, objective: 'Ganho de Massa' },
-                        { id: 205, name: 'Helena', progress: 100, objective: 'Perda de Peso' },
-                        { id: 206, name: 'Igor', progress: 40, objective: 'Hipertrofia' },
-                        { id: 207, name: 'Juliana', progress: 70, objective: 'Definição' },
-                    ]
-                },
-                {
-                    id: 3,
-                    title: 'Vida Saudável',
-                    code: 'VWZ21B',
-                    startDate: '2025-09-20',
-                    endDate: '2025-11-09',
-                    owner: 'Igor',
-                    participants: [
-                        { id: 301, name: 'Você', progress: 25, objective: 'Perda de Peso' },
-                        { id: 302, name: 'Helena', progress: 45, objective: 'Ganho de Massa' },
-                        { id: 303, name: 'Igor', progress: 60, objective: 'Hipertrofia' },
-                        { id: 304, name: 'Juliana', progress: 80, objective: 'Definição' },
-                    ]
-                },
-            ],
-        };
+<script setup>
+import { ref, computed } from 'vue';
+
+const selectedItemId = ref(1);
+const itemList = ref([
+    {
+        id: 1,
+        title: 'Fit com as amigas',
+        code: 'KLM72Q',
+        startDate: '2025-09-01',
+        endDate: '2025-09-30',
+        owner: 'Você',
+        participants: [
+            { id: 101, name: 'Você', progress: 80, objective: 'Perda de Peso' },
+            { id: 102, name: 'Beatriz', progress: 50, objective: 'Hipertrofia' },
+            { id: 103, name: 'Carla', progress: 100, objective: 'Perda de Peso' },
+        ]
     },
-    methods: {
-        selectItem(id) {
-            this.selectedItemId = id;
-        },
-        calculateDaysRemaining(endDateString) {
-            const today = new Date();
-            const endDate = new Date(endDateString + 'T00:00:00');
-
-            today.setHours(0, 0, 0, 0);
-            endDate.setHours(0, 0, 0, 0);
-
-            if (endDate < today) {
-                return 'Finalizado';
-            }
-
-            const diffTime = endDate.getTime() - today.getTime();
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-            if (diffDays === 0) {
-                return 'Termina hoje';
-            }
-            if (diffDays === 1) {
-                return 'Termina amanhã';
-            }
-            return `Termina em ${diffDays} dias`;
-        },
-        endingClass(diffDays) {
-            if (diffDays === 'Finalizado' || diffDays === 'Termina hoje' || diffDays === 'Termina amanhã') {
-                return 'text-danger-light';
-            } else {
-                return 'text-p-950';
-            }
-        },
+    {
+        id: 2,
+        title: 'Desafio Verão 2026',
+        code: 'XPT09A',
+        startDate: '2025-09-15',
+        endDate: '2025-10-13',
+        owner: 'Eduardo',
+        participants: [
+            { id: 201, name: 'Você', progress: 75, objective: 'Perda de Peso' },
+            { id: 202, name: 'Eduardo', progress: 90, objective: 'Hipertrofia' },
+            { id: 203, name: 'Fernanda', progress: 60, objective: 'Definição' },
+            { id: 204, name: 'Gabriel', progress: 85, objective: 'Ganho de Massa' },
+            { id: 205, name: 'Helena', progress: 100, objective: 'Perda de Peso' },
+            { id: 206, name: 'Igor', progress: 40, objective: 'Hipertrofia' },
+            { id: 207, name: 'Juliana', progress: 70, objective: 'Definição' },
+        ]
     },
-    computed: {
-        selectedItem() {
-            if (!this.selectedItemId) {
-                return null;
-            }
-            return this.itemList.find(item => item.id === this.selectedItemId);
-        },
-        participantColumns() {
-            if (!this.selectedItem) return [];
+    {
+        id: 3,
+        title: 'Vida Saudável',
+        code: 'VWZ21B',
+        startDate: '2025-09-20',
+        endDate: '2025-11-09',
+        owner: 'Igor',
+        participants: [
+            { id: 301, name: 'Você', progress: 25, objective: 'Perda de Peso' },
+            { id: 302, name: 'Helena', progress: 45, objective: 'Ganho de Massa' },
+            { id: 303, name: 'Igor', progress: 60, objective: 'Hipertrofia' },
+            { id: 304, name: 'Juliana', progress: 80, objective: 'Definição' },
+        ]
+    },
+]);
 
-            const participants = this.selectedItem.participants;
-            const chunkSize = 3;
-            const columns = [];
+function selectItem(id) {
+    selectedItemId.value = id;
+}
 
-            for (let i = 0; i < participants.length; i += chunkSize) {
-                const chunk = participants.slice(i, i + chunkSize);
-                columns.push(chunk);
-            }
+const showModal = ref("");
 
-            return columns;
-        },
-        formattedStartDate() {
-            if (!this.selectedItem) return '';
-            const dateString = this.selectedItem.startDate; 
-            const parts = dateString.split('-');
-            return `${parts[2]}/${parts[1]}/${parts[0]}`;
-        },
-        formattedEndDate() {
-            if (!this.selectedItem) return '';
-            const dateString = this.selectedItem.endDate; 
-            const parts = dateString.split('-');
-            return `${parts[2]}/${parts[1]}/${parts[0]}`;
-        },
-        groupProgress() {
-            if (!this.selectedItem || this.selectedItem.participants.length === 0) {
-                return 0;
-            }
+const openCreateModal = () => {
+  showModal.value = "Criar";
+};
 
-            const totalProgress = this.selectedItem.participants.reduce((sum, participant) => {
-                return sum + participant.progress;
-            }, 0);
+const openEditModal = () => {
+  showModal.value = "Editar";
+};
 
-            const average = totalProgress / this.selectedItem.participants.length;
-            return Math.round(average);
-        }
+const openDeleteModal = () => {
+  showModal.value = "delete";
+};
+const openLeaveModal = () => {
+  showModal.value = "leave";
+};
 
+const closeModal = () => {
+  showModal.value = "";
+  activeSection.value = null;
+  imageToEdit.value = null;
+};
+
+function calculateDaysRemaining(endDateString) {
+    const today = new Date();
+    const endDate = new Date(endDateString + 'T00:00:00');
+
+    today.setHours(0, 0, 0, 0);
+    endDate.setHours(0, 0, 0, 0);
+
+    if (endDate < today) {
+        return 'Finalizado';
+    }
+
+    const diffTime = endDate.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 0) {
+        return 'Termina hoje';
+    }
+    if (diffDays === 1) {
+        return 'Termina amanhã';
+    }
+    return `Termina em ${diffDays} dias`;
+}
+
+function endingClass(diffDays) {
+    if (diffDays === 'Finalizado' || diffDays === 'Termina hoje' || diffDays === 'Termina amanhã') {
+        return 'text-danger-light';
+    } else {
+        return 'text-p-950';
     }
 }
+
+const selectedItem = computed(() => {
+    if (!selectedItemId.value) {
+        return null;
+    }
+    return itemList.value.find(item => item.id === selectedItemId.value);
+});
+
+const participantColumns = computed(() => {
+    if (!selectedItem.value) return [];
+
+    const participants = selectedItem.value.participants;
+    const chunkSize = 3;
+    const columns = [];
+
+    for (let i = 0; i < participants.length; i += chunkSize) {
+        const chunk = participants.slice(i, i + chunkSize);
+        columns.push(chunk);
+    }
+
+    return columns;
+});
+
+const formattedStartDate = computed(() => {
+    if (!selectedItem.value) return '';
+    const dateString = selectedItem.value.startDate;
+    const parts = dateString.split('-');
+    return `${parts[2]}/${parts[1]}/${parts[0]}`;
+});
+
+const formattedEndDate = computed(() => {
+    if (!selectedItem.value) return '';
+    const dateString = selectedItem.value.endDate;
+    const parts = dateString.split('-');
+    return `${parts[2]}/${parts[1]}/${parts[0]}`;
+});
+
+const groupProgress = computed(() => {
+    if (!selectedItem.value || selectedItem.value.participants.length === 0) {
+        return 0;
+    }
+
+    const totalProgress = selectedItem.value.participants.reduce((sum, participant) => {
+        return sum + participant.progress;
+    }, 0);
+
+    const average = totalProgress / selectedItem.value.participants.length;
+    return Math.round(average);
+});
 </script>
