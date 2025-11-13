@@ -59,6 +59,14 @@ const updatePersonalData = async (userId, personalData) => {
 
   const patient = existingPatient?.data?.[0];
 
+  if (birth_date) {
+    const birthDate = new Date(birth_date);
+    const age = new Date().getFullYear() - birthDate.getFullYear();
+    if (age < 5 || age > 150) {
+      throw new AppError("A data de nascimento deve ser válida.");
+    }
+  }
+
   const result = await prisma.$transaction(async (tx) => {
     // 1. Atualizar dados do Patient
     const updatedPatientData = {
@@ -217,7 +225,7 @@ const updatePersonalData = async (userId, personalData) => {
     }
 
     // ta dando bug na req essa parte, ver depois o pq //
-    
+
     // // Atualizar Patient com os dados mais recentes de HealthData
     // if (latestHealth) {
     //   const patientInfo = await PatientRepository.update(
