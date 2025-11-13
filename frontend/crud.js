@@ -40,7 +40,11 @@ const insert = async (route, object, itemMessage) => {
 const update = async (route, id, object, itemMessage) => {
   const { $axios } = useNuxtApp()
   try {
-    const res = await $axios.patch(`/${route}/${id}`, object)
+    const hasId = typeof id !== 'object'
+    const url = hasId ? `/${route}/${id}` : `/${route}`
+    const data = hasId ? object : id
+    
+    const res = await $axios.patch(url, data)
 
     return { ...res.data, status: res.status }
   } catch (err) {

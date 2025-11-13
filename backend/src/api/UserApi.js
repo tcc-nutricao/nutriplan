@@ -4,5 +4,6 @@ import { generateCrudApi } from './Api.js'
 // Mescla CRUD padrão com métodos customizados do controller
 export const api = {
   ...generateCrudApi(UserController),
-  createTemporaryUser: UserController.createTemporaryUser
+  createTemporaryUser: UserController.createTemporaryUser,
+  update: UserController.update
 }

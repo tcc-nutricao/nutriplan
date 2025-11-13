@@ -199,7 +199,7 @@ function mapPreferences(input) {
 function handleSubmit(formData) {
   console.log("Dados recebidos do formulário:", formData);
 
-  update("user/personal-data", "", formData)
+  update("user/personal-data", formData)
     .then((res) => {
       if (res.error) {
         console.error("Erro ao salvar dados:", res);

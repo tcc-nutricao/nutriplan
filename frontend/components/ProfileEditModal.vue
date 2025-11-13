@@ -24,18 +24,22 @@
           <InputText
             class="mb-5"
             label="Nome"
+            v-model="basicFormData.name"
             placeholder="Insira o Nome" />
           <InputEmail
             class="mb-5"
             label="Email"
+            v-model="basicFormData.email"
             placeholder="Insira o Email" />
           <InputPassword 
             class="mb-5"
             label="Senha Atual"
+            v-model="basicFormData.currentPassword"
             placeholder="Insira sua senha atual" />
           <InputPassword 
             class="mb-5"
             label="Nova Senha"
+            v-model="basicFormData.newPassword"
             placeholder="Insira a nova senha" />
         </div>
 
@@ -43,43 +47,44 @@
           <div class="flex flex-col w-full">
             <InputText
             class="mb-5"
-            label="Idade"
-            placeholder="Insira sua idade" />
+            label="Data de Nascimento"
+            type="date"
+            v-model="personalFormData.birth_date"
+            placeholder="Insira sua data de nascimento" />
             <InputText
             class="mb-5"
             label="Peso"
-            placeholder="Digite aqui" />
-            <InputText
-            class="mb-5"
-            label="Meta de peso"
+            type="number"
+            v-model="personalFormData.weight"
             placeholder="Digite aqui" />
             <InputText
             class="mb-5"
             label="Restrições Alimentares"
+            v-model="personalFormData.restrictions"
             placeholder="Digite aqui" />
           </div>
           <div class="flex flex-col w-full">
           <InputText
             class="mb-5"
             label="Sexo"
+            v-model="personalFormData.gender"
             placeholder="Digite aqui" />
           <InputText
             class="mb-5"
             label="Altura"
+            type="number"
+            v-model="personalFormData.height"
             placeholder="Digite aqui" />
           <InputText
             class="mb-5"
             label="Objetivo"
-            placeholder="Digite aqui" />
-          <InputText
-            class="mb-5"
-            label="Preferências"
+            v-model="personalFormData.objectives"
             placeholder="Digite aqui" />
           </div>
         </div>
         <div class="flex justify-center mt-6">
-
           <Button mediumPurple
+          @click="handleSubmit"
           class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition" label="Salvar" 
         />
         </div>
@@ -90,12 +95,84 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from "vue";
+import { ref, defineProps, defineEmits } from "vue";
+import { update } from "../crud";
 
-defineProps({
+const props = defineProps({
   section: { type: String, required: true },
 });
-defineEmits(["close"]);
+const emit = defineEmits(["close"]);
+
+// Valores dos campos para a seção basic
+const basicFormData = ref({
+  name: "",
+  email: "",
+  currentPassword: "",
+  newPassword: "",
+});
+
+// Valores dos campos para a seção personal
+const personalFormData = ref({
+  birth_date: "",
+  gender: "",
+  height: "",
+  weight: "",
+  restrictions: [],
+  preferences: [],
+  objectives: [],
+});
+
+async function handleSubmit() {
+  if (props.section === "basic") {
+    const formData = {
+      name: basicFormData.value.name,
+      email: basicFormData.value.email,
+      currentPassword: basicFormData.value.currentPassword,
+      newPassword: basicFormData.value.newPassword,
+    };
+
+    try {
+      const res = await update("user", formData);
+      if (res.error) {
+        console.error("Erro ao atualizar perfil:", res);
+        alert("Erro ao atualizar perfil. Tente novamente.");
+      } else {
+        console.log("Perfil atualizado com sucesso:", res);
+        alert("Perfil atualizado com sucesso!");
+        emit("close");
+      }
+    } catch (err) {
+      console.error("Erro na requisição:", err);
+      alert("Erro na requisição. Tente novamente.");
+    }
+  } else {
+    // Atualizar dados pessoais
+    const formData = {
+      birth_date: personalFormData.value.birth_date,
+      gender: personalFormData.value.gender,
+      height: parseFloat(personalFormData.value.height),
+      weight: parseFloat(personalFormData.value.weight),
+      restrictions: personalFormData.value.restrictions,
+      preferences: personalFormData.value.preferences,
+      objectives: personalFormData.value.objectives,
+    };
+
+    try {
+      const res = await update("user/personal-data", formData);
+      if (res.error) {
+        console.error("Erro ao atualizar dados pessoais:", res);
+        alert("Erro ao atualizar dados pessoais. Tente novamente.");
+      } else {
+        console.log("Dados pessoais atualizados com sucesso:", res);
+        alert("Dados pessoais atualizados com sucesso!");
+        emit("close");
+      }
+    } catch (err) {
+      console.error("Erro na requisição:", err);
+      alert("Erro na requisição. Tente novamente.");
+    }
+  }
+}
 </script>
 
 <style>

@@ -45,6 +45,51 @@ const insert = async (data) => {
   return result
 }
 
+const update = async (data, userId) => {
+  try {
+    const existingUser = await UserRepository.findById(userId)
+    if (!existingUser) {
+      throw new AppError('Usuário não encontrado', 404)
+    }
+
+    if (data.email && data.email !== existingUser.email) {
+      const emailInUse = await UserRepository.findByEmail(data.email)
+      if (emailInUse) {
+        throw new AppError('Email já cadastrado', 400, {
+          emailInUse: 'Este e-mail já está em uso.'
+        })
+      }
+    }
+
+    const updateData = {
+      name: data.name,
+      email: data.email,
+    }
+
+    if (data.currentPassword && data.newPassword) {
+      console.log(existingUser.password, data.currentPassword)
+      const currentPasswordMatches = await bcrypt.compare(data.currentPassword, existingUser.password)
+
+      if (!currentPasswordMatches) {
+        throw new AppError('Senha antiga incorreta', 400, {
+          currentPassword: 'A senha antiga está incorreta.'
+        })
+      }
+
+      updateData.password = await bcrypt.hash(data.newPassword, 10)
+      delete data.currentPassword
+      delete data.newPassword
+    }
+
+    const result = await UserRepository.update(userId, updateData)
+
+    return result
+
+  } catch (error) {
+    throw error
+  }
+}
+
 const createTemporaryUser = async (data) => {
   try {
     const existing = await UserRepository.findByEmail(data.email)
@@ -87,6 +132,7 @@ const createTemporaryUser = async (data) => {
 export const UserService = {
   ...generateCrudService(UserRepository),
   insert,
+  update, 
   createTemporaryUser
 }
 

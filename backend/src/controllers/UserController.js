@@ -37,6 +37,26 @@ const createTemporaryUser = async (req, res, next) => {
   }
 }
 
+const update = async (req, res, next) => {
+  try {
+    const userId = req.user.id
+    let data = req.body
+    if (data.role) {
+      data.role = translateRole(data.role)
+    }
+
+    const result = await UserService.update(data, parseInt(userId))
+
+    return res.status(200).json({
+      success: true,
+      data: result,
+      message: 'Usuário atualizado com sucesso'
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
 export const UserController = {
   ...generateCrudController(
     UserService,
@@ -44,5 +64,6 @@ export const UserController = {
     'Usuário',
     transformUserData
   ),
-  createTemporaryUser
+  createTemporaryUser,
+  update
 } 
