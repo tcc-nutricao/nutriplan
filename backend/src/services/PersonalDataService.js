@@ -5,6 +5,7 @@ import { GoalRepository } from "../repositories/GoalRepository.js";
 import { GoalObjectiveRepository } from "../repositories/GoalObjectiveRepository.js";
 import { HealthDataRepository } from "../repositories/HealthDataRepository.js";
 import { PrismaClient } from "@prisma/client";
+import { AppError } from "../utils/AppError.js";
 
 const prisma = new PrismaClient();
 
@@ -54,7 +55,7 @@ const updatePersonalData = async (userId, personalData) => {
   });
 
   if (!existingPatient.data || existingPatient.data.length === 0) {
-    throw new Error("Dados pessoais do paciente não encontrados");
+    throw new AppError("Dados pessoais do paciente não encontrados");
   }
 
   const patient = existingPatient.data[0];

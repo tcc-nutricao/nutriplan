@@ -6,7 +6,7 @@
  */
 export const calculateImc = (weight, height) => {
   if (!weight || !height || weight <= 0 || height <= 0) {
-    throw new Error('Peso e altura devem ser valores positivos válidos')
+    throw new AppError('Peso e altura devem ser valores positivos válidos')
   }
 
   const heightInMeters = height / 100

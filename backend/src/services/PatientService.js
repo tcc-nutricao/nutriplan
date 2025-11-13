@@ -1,4 +1,3 @@
-
 import { PatientRepository } from '../repositories/PatientRepository.js'
 import { HealthDataRepository } from '../repositories/HealthDataRepository.js'
 import { MealPlanService } from './MealPlanService.js'
@@ -15,7 +14,7 @@ const getPatientByUserId = async (userId) => {
     const { data: patients = [] } = await PatientRepository.search({ filters })
     
     if (patients.length === 0) {
-      throw new Error('Paciente não encontrado para este usuário')
+      throw new AppError('Paciente não encontrado para este usuário')
     }
     
     return patients[0]
@@ -28,12 +27,12 @@ const getPatientByUserId = async (userId) => {
 const getProgress = async (patientId) => {
   try {
       if (!patientId) {
-          throw new Error('patientId é obrigatório')
+          throw new AppError('patientId é obrigatório')
       }
 
       const patient = await PatientRepository.findById(patientId)
       if (!patient) {
-          throw new Error('Paciente não encontrado')
+          throw new AppError('Paciente não encontrado')
       }
 
       const mealPlanFilters = [{ column: 'status', value: 'ACTIVE', operator: '=' }]
@@ -59,7 +58,7 @@ const getProgress = async (patientId) => {
       })
 
       if (healthData.length === 0) {
-          throw new Error('Nenhum dado de saúde encontrado')
+          throw new AppError('Nenhum dado de saúde encontrado')
       }
 
       const mainGoalObjective = goalObjectives.find(obj => obj.type === 'MAIN')

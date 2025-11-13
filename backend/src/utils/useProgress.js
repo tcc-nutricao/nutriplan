@@ -33,7 +33,7 @@ export const calculateProgress = (objectiveId, initialData, currentData, targetD
   const calculator = progressCalculators[objectiveId]
   
   if (!calculator) {
-    throw new Error(`Objetivo com ID ${objectiveId} não é suportado`)
+    throw new AppError(`Objetivo com ID ${objectiveId} não é suportado`)
   }
   
   return calculator(initialData, currentData, targetData, objectiveName)

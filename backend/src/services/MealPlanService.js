@@ -1,13 +1,14 @@
 import { MealPlanRepository } from '../repositories/MealPlanRepository.js'
 import { PatientRepository } from '../repositories/PatientRepository.js'
 import { generateCrudService } from './Service.js'
+import { AppError } from '../errors/AppError.js'
 
 
 // Métodos customizados adicionais
 const getMealPlanByPatient = async (patientId, additionalFilters = []) => {
   try {
     if (!patientId) {
-      throw new Error('patientId é obrigatório')
+      throw new AppError('patientId é obrigatório')
     }
 
     // Combinar filtro do paciente com filtros adicionais
@@ -36,7 +37,7 @@ const getMealPlanByPatient = async (patientId, additionalFilters = []) => {
 const getActiveMealPlanForPatient = async (patientId) => {
   try {
     if (!patientId) {
-      throw new Error('ID do paciente é obrigatório')
+      throw new AppError('ID do paciente é obrigatório')
     }
 
     const filters = [
@@ -63,7 +64,7 @@ const update = async (id, data, user) => {
   const patientId = mealPlan.id_patient;
   if (data.status === 'ACTIVE') {
     // Busca o meal plan atual para pegar o paciente
-    if (!mealPlan) throw new Error('Plano alimentar não encontrado');
+    if (!mealPlan) throw new AppError('Plano alimentar não encontrado');
     // Desativa outros planos ativos desse paciente
     await MealPlanRepository.updateMany({
       where: {

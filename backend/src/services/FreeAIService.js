@@ -20,7 +20,7 @@ export const FreeAIService = {
       return result.generated_text
       
     } catch (error) {
-      throw new Error('Erro na geração gratuita')
+      throw new AppError('Erro na geração gratuita')
     }
   }
 }
