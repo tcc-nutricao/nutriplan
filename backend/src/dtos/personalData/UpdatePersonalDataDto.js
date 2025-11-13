@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const createPersonalDataSchema = z.object({
+export const updatePersonalDataSchema = z.object({
   birth_date: z.string().refine((date) => !isNaN(Date.parse(date)), {
     message: 'Data de nascimento deve ser uma data válida'
   }),
@@ -21,5 +21,5 @@ export const createPersonalDataSchema = z.object({
 })
 
 export const validatePersonalData = (data) => {
-  return createPersonalDataSchema.parse(data)
+  return updatePersonalDataSchema.parse(data)
 }

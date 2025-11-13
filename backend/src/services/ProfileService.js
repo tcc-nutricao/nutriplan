@@ -1,6 +1,6 @@
 import { NutritionistRepository } from '../repositories/NutritionistRepository.js';
 import { PatientRepository } from '../repositories/PatientRepository.js';
-import { AppError } from '../errors/AppError.js';
+import { AppError } from '../exceptions/AppError.js';
 
 export const ProfileService = {
   async getProfileByRole(id, role) {

@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI } from '@google/generative-ai'
-import { AppError } from './errors' // Certifique-se de que o caminho está correto
+import { AppError } from '../exceptions/AppError.js'
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
 

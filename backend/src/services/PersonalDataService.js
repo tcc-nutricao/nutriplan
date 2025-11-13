@@ -5,7 +5,7 @@ import { GoalRepository } from "../repositories/GoalRepository.js";
 import { GoalObjectiveRepository } from "../repositories/GoalObjectiveRepository.js";
 import { HealthDataRepository } from "../repositories/HealthDataRepository.js";
 import { PrismaClient } from "@prisma/client";
-import { AppError } from "../utils/AppError.js";
+import { AppError } from "../exceptions/AppError.js";
 
 const prisma = new PrismaClient();
 
@@ -39,7 +39,6 @@ const getPersonalData = async (userId) => {
 };
 
 const updatePersonalData = async (userId, personalData) => {
-  // nao esquecer de implementar a logica de preferences n * n
   const {
     birth_date,
     gender,
@@ -58,7 +57,7 @@ const updatePersonalData = async (userId, personalData) => {
     throw new AppError("Dados pessoais do paciente não encontrados");
   }
 
-  const patient = existingPatient.data[0];
+  const patient = existingPatient?.data?.[0];
 
   const result = await prisma.$transaction(async (tx) => {
     // 1. Atualizar dados do Patient
@@ -149,7 +148,7 @@ const updatePersonalData = async (userId, personalData) => {
       mealPlan = await MealPlanRepository.create(mealPlanData, tx);
     }
 
-    // 5. Atualizar restrições - remover existentes e criar novas
+    //5. Atualizar restrições - remover existentes e criar novas
     if (restrictions.length >= 0) {
       // Permitir array vazio para remover todas
       // Remover restrições existentes
@@ -176,7 +175,7 @@ const updatePersonalData = async (userId, personalData) => {
       }
     }
 
-    // 6. Atualizar ou criar HealthData mais recente (dentro da transação)
+    //6. Atualizar ou criar HealthData mais recente (dentro da transação)
     const latestHealthData = await HealthDataRepository.search({
       filters: [{ field: "id_patient", value: patient.id, operator: "equals" }],
       orderColumn: "record_date",
@@ -217,9 +216,9 @@ const updatePersonalData = async (userId, personalData) => {
       }
     }
 
-    // Atualizar Patient com os dados mais recentes de HealthData
+    // // Atualizar Patient com os dados mais recentes de HealthData
     if (latestHealth) {
-      await PatientRepository.update(
+      const patient = await PatientRepository.update(
         patient.id,
         {
           height: latestHealth.height,

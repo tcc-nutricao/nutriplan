@@ -1,5 +1,5 @@
 import { PersonalDataService } from '../services/PersonalDataService.js'
-import { validatePersonalData } from '../dtos/personalData/CreatePersonalDataDto.js'
+import { updatePersonalDataSchema, validatePersonalData } from '../dtos/personalData/UpdatePersonalDataDto.js'
 
 export const getPersonalData = async (req, res) => {
   try {
@@ -25,9 +25,6 @@ export const getPersonalData = async (req, res) => {
     })
   }
 }
-
-//------------------------------------------------------------------------------------------------------------------------------
-
 
 export const updatePersonalData = async (req, res) => {
   try {

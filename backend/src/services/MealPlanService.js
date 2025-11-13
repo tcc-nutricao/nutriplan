@@ -1,7 +1,7 @@
 import { MealPlanRepository } from '../repositories/MealPlanRepository.js'
 import { PatientRepository } from '../repositories/PatientRepository.js'
 import { generateCrudService } from './Service.js'
-import { AppError } from '../errors/AppError.js'
+import { AppError } from '../exceptions/AppError.js'
 
 
 // Métodos customizados adicionais
