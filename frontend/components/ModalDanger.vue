@@ -11,7 +11,7 @@
 
       <Flex gap-5>
         <Button outlined gray label="Cancelar" @click="close" class="w-full" />
-        <Button red :label="btnLabel" @click="close" class="w-full" />
+        <Button red :label="btnLabel" @click="confirm" class="w-full" />
       </Flex>
     </div>
   </div>
@@ -28,12 +28,17 @@ const props = defineProps({
     btnLabel: String
 })
 
-const emits = defineEmits(['closeModal'])
+const emits = defineEmits(['closeModal', 'confirm'])
 
 const isOpen = ref(false)
 
 const close = () => {
     emits('closeModal')
+}
+
+const confirm = () => {
+    emits('confirm')
+    close();
 }
 </script>
 

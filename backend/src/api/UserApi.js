@@ -5,5 +5,6 @@ import { generateCrudApi } from './Api.js'
 export const api = {
   ...generateCrudApi(UserController),
   createTemporaryUser: UserController.createTemporaryUser,
-  update: UserController.update
+  update: UserController.update,
+  remove: UserController.remove
 }

@@ -57,6 +57,22 @@ const update = async (req, res, next) => {
   }
 }
 
+const remove = async (req, res, next) => {
+  try {
+    const userId = req.user.id
+
+    const result = await UserService.remove(parseInt(userId))
+
+    return res.status(200).json({
+      success: true,
+      data: result,
+      message: 'Conta apagada com sucesso'
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
 export const UserController = {
   ...generateCrudController(
     UserService,
@@ -65,5 +81,6 @@ export const UserController = {
     transformUserData
   ),
   createTemporaryUser,
-  update
+  update,
+  remove
 } 

@@ -37,6 +37,10 @@ export const needsInitialRegistration = async (userId) => {
 export const AuthService = {
   async login (data) {
     const user = await UserRepository.findByEmail(data.email)
+
+    if (user.deleted_at) {
+      throw new AppError('Conta desativada. Entre em contato com o suporte.', 403, { accountDeactivated: 'Conta desativada. Entre em contato com o suporte.' })
+    }
   
     if (!user || !(await bcrypt.compare(data.password, user.password))) {
       throw new AppError('E-mail ou senha inválidos', 401, { invalidCredentials: 'E-mail ou senha inválidos' })
