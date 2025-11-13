@@ -61,7 +61,7 @@ export const FoodConsumedService = {
         let dateRange
         
         if (!dates || !Array.isArray(dates) || dates.length === 0) {
-          throw new AppError('Array de datas é obrigatório e deve conter pelo menos 1 elemento')
+          throw new AppError({ message: 'Array de datas é obrigatório e deve conter pelo menos 1 elemento', field: 'dates' })
         }
         
         if (dates.length === 1) {
@@ -79,7 +79,7 @@ export const FoodConsumedService = {
             dateRange = [startDate, endDate]
           }
         } else {
-          throw new AppError('Array de datas deve conter 1 ou 2 elementos')
+          throw new AppError({ message: 'Array de datas deve conter 1 ou 2 elementos', field: 'dates' })
         }
 
         const patient = await PatientService.getPatientByUserId(userId)
@@ -87,7 +87,7 @@ export const FoodConsumedService = {
         const activeMealPlan = await MealPlanService.getActiveMealPlanForPatient(patient.id)
 
         if (!activeMealPlan) {
-          throw new AppError('Nenhum plano de refeição ativo encontrado.')
+          throw new AppError({ message: 'Nenhum plano de refeição ativo encontrado.' })
         }
 
         const mealPlanMeals = activeMealPlan.mealPlanMeals || []

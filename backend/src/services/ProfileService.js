@@ -6,7 +6,7 @@ export const ProfileService = {
   async getProfileByRole(id, role) {
     try {
       if (!role) {
-      throw new AppError('Role do usuário não fornecida');
+      throw new AppError({ message: 'Role do usuário não fornecida', field: 'role' });
     }
 
     if (role === 'PROFESSIONAL') {
@@ -18,7 +18,7 @@ export const ProfileService = {
     return { data: [], total: 0, message: 'Role não reconhecida' };
 
     } catch (error) {
-      throw new AppError('Erro ao buscar perfil: ' + error.message);
+      throw new AppError({ message: 'Erro ao buscar perfil: ' + error.message });
     }
   }
 }

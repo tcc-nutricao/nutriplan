@@ -10,7 +10,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'chave_secreta_segura'
 export const needsInitialRegistration = async (userId) => {
   try {
     if (!userId) {
-      throw new AppError('ID do usuário não fornecido', 400, { userId: 'ID do usuário é obrigatório' })
+      throw new AppError({ message: 'ID do usuário é obrigatório', statusCode: 400, field: 'userId' })
     }
 
     const patient = await PatientRepository.findByUserId(userId)
@@ -39,11 +39,11 @@ export const AuthService = {
     const user = await UserRepository.findByEmail(data.email)
 
     if (user?.deleted_at) {
-      throw new AppError('Conta desativada. Entre em contato com o suporte.', 403, { accountDeactivated: 'Conta desativada. Entre em contato com o suporte.' })
+      throw new AppError({ message: 'Conta desativada. Entre em contato com o suporte.', statusCode: 403, field: 'email' })
     }
   
     if (!user || !(await bcrypt.compare(data.password, user.password))) {
-      throw new AppError('E-mail ou senha inválidos', 401, { invalidCredentials: 'E-mail ou senha inválidos' })
+      throw new AppError({ message: 'E-mail ou senha inválidos', statusCode: 401, field: 'password' })
     }
   
     let nextPage = '/meal-plan' 
