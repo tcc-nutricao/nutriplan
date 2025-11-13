@@ -7,7 +7,6 @@ const baseCrudService = generateCrudService(GroupRepository)
 
 export const GroupService = {
   ...baseCrudService,
-  // Adicione métodos específicos do serviço de grupo aqui, se necessário
 
   async getGroupsProgressByUser(userId) {
     try {
@@ -17,11 +16,8 @@ export const GroupService = {
       const groups = await UserGroupRepository.getGroupsByUserId(userId);
       let allMetaAchieved = [];
       const groupsWithProgress = await Promise.all((groups || []).map(async (group) => {
-        // Supondo que group.userGroups é um array de participantes do grupo
         const participants = await Promise.all((group.userGroups || []).map(async (participant) => {
-          // Busca progresso do paciente
           const progress = await PatientRepository.getProgress(participant.id_patient);
-          // Só pega os campos necessários
           const metaAchieved = progress?.metaAchieved ?? null;
           const objective = progress?.objective ?? null;
           if (metaAchieved !== null && !isNaN(metaAchieved)) {
@@ -33,11 +29,13 @@ export const GroupService = {
             objective
           };
         }));
-        // Calcula média do grupo
         const groupMetaAchieved = participants.length > 0 ? (participants.reduce((acc, p) => acc + (p.metaAchieved || 0), 0) / participants.length) : null;
         return {
-          id: group.id,
-          name: group.name,
+          id: group.group.id,
+          name: group.group.name,
+          start_date: group.group.start_date,
+          end_date: group.group.end_date,
+          invite_code: group.group.invite_code,
           participants,
           groupMetaAchieved
         };
@@ -51,6 +49,3 @@ export const GroupService = {
     }
   }
 }
-
-
-

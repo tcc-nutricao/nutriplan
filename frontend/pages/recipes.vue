@@ -105,7 +105,7 @@ const { $axios } = useNuxtApp();
 const isNutri = computed(() => userCookie.value?.role === 'PROFESSIONAL');
 
 const showModal = ref('');
-const recipeListTop = ref(null); // Referência para o topo da lista
+const recipeListTop = ref(null);
 const selectedItemId = ref(null);
 const itemList = ref([]); 
 const pending = ref(true); 
@@ -156,7 +156,6 @@ function getIconForCategory(categoryName) {
 async function fetchRecipes(page = 1) {
   try {
     pending.value = true;
-    // 1. Reativamos a busca paginada, enviando 'page' e 'limit' para a API.
     const response = await $axios.get('/recipe', {
       params: {
         page: page,
@@ -164,14 +163,11 @@ async function fetchRecipes(page = 1) {
       }
     });
 
-    // 2. O backend retorna { data: [...], total: ... }
     const recipesFromApi = response.data.data; 
     const totalItems = response.data.total;
     
     if (recipesFromApi && recipesFromApi.length > 0) {
-      // 3. Mapeia e armazena apenas os itens da página atual.
       itemList.value = recipesFromApi.map(mapApiDataToFrontend);
-      // 4. Seleciona o primeiro item da página atual.
       selectItem(itemList.value[0].id);
     } else {
       itemList.value = [];
@@ -203,7 +199,6 @@ async function toggleFavorite(recipe) {
 }
 
 function handlePageChange(page) {
-  // Busca os dados da nova página na API.
   fetchRecipes(page);
   recipeListTop.value?.scrollIntoView({ behavior: 'smooth' });
 }

@@ -1,5 +1,6 @@
 <template>
     <div class="flex flex-col w-full gap-3 px-10">
+        <div ref="groupListTop"></div>
         <div class="flex w-full">
             <h1 class="h1">Meus Grupos</h1>
         </div>
@@ -18,13 +19,19 @@
                             label="Entrar" />
                     </div>
                 </div>
-                <div class="flex flex-col gap-3 w-full">
+                <div v-if="!pending && itemList.length > 0" class="flex flex-col gap-3 w-full">
                     <GroupButton v-for="item in itemList" :key="item.id" :title="item.title"
                         :daysRemaining="calculateDaysRemaining(item.endDate)" :participants="item.participants.length"
                         :is-selected="item.id === selectedItemId" @selecionado="selectItem(item.id)" />
                 </div>
+                <div v-else-if="pending" class="mt-5 text-center text-gray-500">
+                    <p>Carregando grupos...</p>
+                </div>
+                <div v-else class="mt-5 text-center text-gray-500">
+                    <p>Você ainda não participa de nenhum grupo.</p>
+                </div>
             </div>
-            <div v-if="selectedItem" class="flex flex-col gap-5 w-[65%]">
+            <div v-if="!pending && selectedItem" class="flex flex-col gap-5 w-[65%]">
                 <div class="flex items-start justify-between p-6 h-max rounded-3xl shadow-lg gap-5 bg-white">
 
                     <div class="flex gap-5">
@@ -125,58 +132,77 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import { useCookie, useNuxtApp } from 'nuxt/app';
 
-const selectedItemId = ref(1);
-const itemList = ref([
-    {
-        id: 1,
-        title: 'Fit com as amigas',
-        code: 'KLM72Q',
-        startDate: '2025-09-01',
-        endDate: '2025-09-30',
-        owner: 'Você',
-        participants: [
-            { id: 101, name: 'Você', progress: 80, objective: 'Perda de Peso' },
-            { id: 102, name: 'Beatriz', progress: 50, objective: 'Hipertrofia' },
-            { id: 103, name: 'Carla', progress: 100, objective: 'Perda de Peso' },
-        ]
-    },
-    {
-        id: 2,
-        title: 'Desafio Verão 2026',
-        code: 'XPT09A',
-        startDate: '2025-09-15',
-        endDate: '2025-10-13',
-        owner: 'Eduardo',
-        participants: [
-            { id: 201, name: 'Você', progress: 75, objective: 'Perda de Peso' },
-            { id: 202, name: 'Eduardo', progress: 90, objective: 'Hipertrofia' },
-            { id: 203, name: 'Fernanda', progress: 60, objective: 'Definição' },
-            { id: 204, name: 'Gabriel', progress: 85, objective: 'Ganho de Massa' },
-            { id: 205, name: 'Helena', progress: 100, objective: 'Perda de Peso' },
-            { id: 206, name: 'Igor', progress: 40, objective: 'Hipertrofia' },
-            { id: 207, name: 'Juliana', progress: 70, objective: 'Definição' },
-        ]
-    },
-    {
-        id: 3,
-        title: 'Vida Saudável',
-        code: 'VWZ21B',
-        startDate: '2025-09-20',
-        endDate: '2025-11-09',
-        owner: 'Igor',
-        participants: [
-            { id: 301, name: 'Você', progress: 25, objective: 'Perda de Peso' },
-            { id: 302, name: 'Helena', progress: 45, objective: 'Ganho de Massa' },
-            { id: 303, name: 'Igor', progress: 60, objective: 'Hipertrofia' },
-            { id: 304, name: 'Juliana', progress: 80, objective: 'Definição' },
-        ]
-    },
-]);
+const { $axios } = useNuxtApp();
+const userCookie = useCookie('user-data');
+
+const itemList = ref([]);
+const selectedItemId = ref(null);
+const pending = ref(true);
+const groupListTop = ref(null);
+
+function mapApiDataToFrontend(apiGroup) {
+  console.log('Mapeando grupo da API:', apiGroup);
+  // O backend já calcula a média do grupo em 'groupMetaAchieved'
+  // e o progresso individual em 'metaAchieved'
+  const participants = (apiGroup.participants || []).map(p => ({
+    id: p.id_user,
+    // Correção: O nome do participante está dentro do objeto 'user'
+    name: p.user.name === userCookie.value?.name ? 'Você' : p.user.name,
+    progress: Math.round(p.metaAchieved * 100) || 0,
+    objective: p.objective?.description || 'Não definido',
+  }));
+  console.log('Participantes mapeados:', participants);
+
+  // Encontra o dono do grupo
+  const ownerParticipant = apiGroup.participants.find(p => p.role === 'OWNER');
+  const ownerName = ownerParticipant?.user.name === userCookie.value?.name ? 'Você' : ownerParticipant?.user.name || 'Desconhecido';
+
+  return {
+    id: apiGroup.id,
+    title: apiGroup.name,
+    code: apiGroup.invite_code,
+    startDate: apiGroup.start_date,
+    endDate: apiGroup.end_date,
+    owner: ownerName,
+    participants: participants, // Adiciona a lista de participantes mapeados ao objeto final
+  };
+  // O objeto final retornado por esta função será logado no fetchGroups
+}
+
+async function fetchGroups() {
+  try {
+    pending.value = true;
+    const response = await $axios.get('/group/progress');
+    console.log('Resposta completa da API /group/progress:', response);
+
+    const groupsFromApi = response.data.data.groups;
+
+    if (groupsFromApi && groupsFromApi.length > 0) {
+      itemList.value = groupsFromApi.map(mapApiDataToFrontend);
+      // Seleciona o primeiro grupo da lista por padrão
+      selectItem(itemList.value[0].id);
+    } else {
+      itemList.value = [];
+    }
+    console.log('Lista final de itens (itemList.value):', itemList.value);
+  } catch (error) {
+    console.error("Erro ao buscar os grupos:", error);
+    itemList.value = [];
+  } finally {
+    pending.value = false;
+  }
+}
+
+onMounted(() => {
+  fetchGroups();
+});
 
 function selectItem(id) {
     selectedItemId.value = id;
+    groupListTop.value?.scrollIntoView({ behavior: 'smooth' });
 }
 
 const showModal = ref("");
@@ -257,14 +283,14 @@ const participantColumns = computed(() => {
 
 const formattedStartDate = computed(() => {
     if (!selectedItem.value) return '';
-    const dateString = selectedItem.value.startDate;
+    const dateString = selectedItem.value.startDate || '';
     const parts = dateString.split('-');
     return `${parts[2]}/${parts[1]}/${parts[0]}`;
 });
 
 const formattedEndDate = computed(() => {
     if (!selectedItem.value) return '';
-    const dateString = selectedItem.value.endDate;
+    const dateString = selectedItem.value.endDate || '';
     const parts = dateString.split('-');
     return `${parts[2]}/${parts[1]}/${parts[0]}`;
 });
