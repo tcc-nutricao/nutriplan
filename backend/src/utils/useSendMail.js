@@ -23,6 +23,6 @@ export async function useSendMail({ to, subject, text, html }) {
     const info = await transporter.sendMail(mailOptions);
     return info;
   } catch (error) {
-    throw new AppError('Erro ao enviar e-mail: ' + error.message);
+    throw new AppError({ message: 'Erro ao enviar e-mail: ' + error.message });
   }
 }

@@ -54,10 +54,18 @@ const updatePersonalData = async (userId, personalData) => {
   });
 
   if (!existingPatient.data || existingPatient.data.length === 0) {
-    throw new AppError("Dados pessoais do paciente não encontrados");
+    throw new AppError({ message: "Dados pessoais do paciente não encontrados" });
   }
 
   const patient = existingPatient?.data?.[0];
+
+  if (birth_date) {
+    const birthDate = new Date(birth_date);
+    const age = new Date().getFullYear() - birthDate.getFullYear();
+    if (age < 5 || age > 150) {
+      throw new AppError({ message: "A data de nascimento deve ser válida.", statusCode: 400, field: "birth_date" });
+    }
+  }
 
   const result = await prisma.$transaction(async (tx) => {
     // 1. Atualizar dados do Patient
@@ -217,7 +225,7 @@ const updatePersonalData = async (userId, personalData) => {
     }
 
     // ta dando bug na req essa parte, ver depois o pq //
-    
+
     // // Atualizar Patient com os dados mais recentes de HealthData
     // if (latestHealth) {
     //   const patientInfo = await PatientRepository.update(

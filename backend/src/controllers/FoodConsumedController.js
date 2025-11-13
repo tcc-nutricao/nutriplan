@@ -31,7 +31,8 @@ const getFoodDiaryStatistics = async (req, res, next) => {
     if (error.message.includes('Array de datas')) {
       return res.status(400).json({
         success: false,
-        message: error.message
+        field: error.field || null,
+        message: error.message || 'Erro interno do servidor'
       })
     }
     

@@ -10,7 +10,11 @@ export const AuthController = {
 
       if (!parsedResult.success) {
         const errors = formatZodErrors(parsedResult.error)
-        return res.status(422).json({ error: true, data: errors })
+        return res.status(422).json({
+          error: true,
+          field: error.field || null,
+          data: errors
+        })
       }
   
       const result = await AuthService.login(parsedResult.data)

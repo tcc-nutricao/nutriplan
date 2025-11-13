@@ -14,6 +14,7 @@ export const ProfileController = {
     } catch (error) {
       return res.status(400).json({
         success: false,
+        field: error.field || null,
         message: error.message || 'Erro ao buscar perfil',
       });
     }

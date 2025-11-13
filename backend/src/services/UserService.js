@@ -14,8 +14,10 @@ const prisma = new PrismaClient()
 const insert = async (data) => {
   const existing = await UserRepository.findByEmail(data.email)
   if (existing) {
-    throw new AppError('Email já cadastrado', 400, {
-      emailInUse: 'Este e-mail já está em uso.'
+    throw new AppError({
+      statusCode: 400,
+      message: 'Email já cadastrado',
+      field: 'email'
     })
   }
 
@@ -30,7 +32,7 @@ const insert = async (data) => {
     const { role, id: idUser, professional_register: professionalRegister } = user
 
     if (!['STANDARD', 'PROFESSIONAL'].includes(role)) {
-      throw new AppError('Role inválida', 400)
+      throw new AppError({ message: 'Role inválida', statusCode: 400, field: 'role' })
     }
 
     if (role === 'STANDARD') {
@@ -49,15 +51,13 @@ const update = async (data, userId) => {
   try {
     const existingUser = await UserRepository.findById(userId)
     if (!existingUser) {
-      throw new AppError('Usuário não encontrado', 404)
+      throw new AppError({ message: 'Usuário não encontrado', statusCode: 404 })
     }
 
     if (data.email && data.email !== existingUser.email) {
       const emailInUse = await UserRepository.findByEmail(data.email)
       if (emailInUse) {
-        throw new AppError('Email já cadastrado', 400, {
-          emailInUse: 'Este e-mail já está em uso.'
-        })
+        throw new AppError({ message: 'Email já cadastrado', statusCode: 400, field: 'email' })
       }
     }
 
@@ -67,14 +67,12 @@ const update = async (data, userId) => {
     }
 
     if (data.currentPassword && data.newPassword) {
-      console.log(existingUser.password, data.currentPassword)
       const currentPasswordMatches = await bcrypt.compare(data.currentPassword, existingUser.password)
 
       if (!currentPasswordMatches) {
-        throw new AppError('Senha antiga incorreta', 400, {
-          currentPassword: 'A senha antiga está incorreta.'
-        })
+        throw new AppError({ message: 'Senha antiga incorreta', statusCode: 400, field: 'currentPassword' })
       }
+    }
 
       updateData.password = await bcrypt.hash(data.newPassword, 10)
       delete data.currentPassword
@@ -94,9 +92,7 @@ const createTemporaryUser = async (data) => {
   try {
     const existing = await UserRepository.findByEmail(data.email)
     if (existing) {
-      throw new AppError('Email já cadastrado', 400, {
-        emailInUse: 'Este e-mail já está em uso.'
-      })
+      throw new AppError({ message: 'Email já cadastrado', statusCode: 400, field: 'email' })
     }
 
   const nameLower = data.name.toLowerCase().replace(/\s+/g, '')

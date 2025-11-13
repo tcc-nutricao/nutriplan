@@ -78,7 +78,7 @@ IMPORTANTE: Retorne apenas o JSON válido, sem texto adicional antes ou depois.
 
     } catch (error) {
       console.error('Erro ao gerar recomendações de receitas (Gemini):', error)
-      throw new AppError('Falha ao gerar recomendações. Tente novamente.')
+      throw new AppError({ message: 'Falha ao gerar recomendações. Tente novamente.' })
     }
   },
 
@@ -112,7 +112,7 @@ Não adicione texto antes ou depois do JSON.
 
     } catch (error) {
       console.error('Erro ao analisar alimento (Gemini):', error)
-      throw new AppError('Falha ao analisar alimento.')
+      throw new AppError({ message: 'Falha ao analisar alimento.' })
     }
   },
 
@@ -186,7 +186,7 @@ Crie ${days} dias completos. Retorne APENAS o JSON.
 
     } catch (error) {
       console.error('Erro ao gerar plano alimentar (Gemini):', error)
-      throw new AppError('Falha ao gerar plano alimentar.')
+      throw new AppError({ message: 'Falha ao gerar plano alimentar.' })
     }
   },
 
@@ -217,7 +217,7 @@ Seja didático e inclua dicas práticas quando relevante.
 
     } catch (error) {
       console.error('Erro no chat nutricional (Gemini):', error)
-      throw new AppError('Falha no chat nutricional.')
+      throw new AppError({ message: 'Falha no chat nutricional.' })
     }
   }
 }

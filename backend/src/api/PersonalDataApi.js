@@ -21,6 +21,7 @@ export const getPersonalData = async (req, res) => {
     console.error('Erro ao buscar dados pessoais:', error)
     return res.status(500).json({
       success: false,
+      field: error.field || null,
       message: 'Erro ao buscar dados pessoais'
     })
   }
@@ -52,7 +53,8 @@ export const updatePersonalData = async (req, res) => {
 
     return res.status(400).json({
       success: false,
+      field: error.field || null,
       message: error.message || 'Erro interno do servidor'
-    })
+    });
   }
 }

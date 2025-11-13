@@ -11,7 +11,7 @@ export const GroupService = {
   async getGroupsProgressByUser(userId) {
     try {
       if (!userId) {
-        throw new AppError('userId é obrigatório');
+        throw new AppError({ message: 'userId é obrigatório' });
       }
       const groups = await UserGroupRepository.getGroupsByUserId(userId);
       let allMetaAchieved = [];
