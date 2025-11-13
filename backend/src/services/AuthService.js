@@ -38,7 +38,7 @@ export const AuthService = {
   async login (data) {
     const user = await UserRepository.findByEmail(data.email)
 
-    if (user.deleted_at) {
+    if (user?.deleted_at) {
       throw new AppError('Conta desativada. Entre em contato com o suporte.', 403, { accountDeactivated: 'Conta desativada. Entre em contato com o suporte.' })
     }
   

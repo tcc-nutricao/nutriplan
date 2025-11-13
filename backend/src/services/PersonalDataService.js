@@ -216,17 +216,19 @@ const updatePersonalData = async (userId, personalData) => {
       }
     }
 
+    // ta dando bug na req essa parte, ver depois o pq //
+    
     // // Atualizar Patient com os dados mais recentes de HealthData
-    if (latestHealth) {
-      const patient = await PatientRepository.update(
-        patient.id,
-        {
-          height: latestHealth.height,
-          weight: latestHealth.weight
-        },
-        tx
-      );
-    }
+    // if (latestHealth) {
+    //   const patientInfo = await PatientRepository.update(
+    //     patient.id,
+    //     {
+    //       height: latestHealth.height,
+    //       weight: latestHealth.weight
+    //     },
+    //     tx
+    //   );
+    // }
 
     return {
       patient: updatedPatient,
