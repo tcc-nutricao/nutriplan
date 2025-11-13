@@ -28,6 +28,13 @@ export const generateCrudRepository = (modelName, options = {}) => {
         orderColumn,
       } = object;
 
+      const take = parseInt(limit, 10);
+      const currentPage = parseInt(page, 10);
+
+      if (isNaN(take) || isNaN(currentPage)) {
+        throw new Error("Parâmetros de paginação 'limit' e 'page' devem ser números válidos.");
+      }
+
       const where = {};
 
       if (softDelete) {
@@ -49,8 +56,8 @@ export const generateCrudRepository = (modelName, options = {}) => {
 
       const data = await prisma[modelName].findMany({
         where,
-        take: limit,
-        skip: (page - 1) * limit,
+        take: take,
+        skip: (currentPage - 1) * take,
         orderBy: { [orderField]: order === "asc" ? "asc" : "desc" },
         include: defaultIncludes,
       });

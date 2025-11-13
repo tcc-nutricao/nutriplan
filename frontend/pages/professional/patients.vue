@@ -87,7 +87,7 @@
                         <PlanCard :object="selectedItem.mealPlan" />
                         <Button mediumPurple
                             class="w-max pr-3 pl-2 h-[42px]"
-                            icon="fa-regular fa-right-left short flex justify-center" label="Mudar plano"
+                            icon="fa-solid fa-right-left short flex justify-center" label="Mudar plano"
                         />
                     </div>
                     <div class="bg-white rounded-3xl w-[65%] shadow-lg border-2 p-7 flex flex-col items-center gap-5">
@@ -104,7 +104,7 @@
                         </div>
                         <Button mediumPurple
                             class="w-max pr-3 pl-2 h-[42px]"
-                            icon="fa-regular fa-plus short flex justify-center" label="Incluir receita"
+                            icon="fa-solid fa-plus short flex justify-center" label="Incluir receita"
                         />
                     </div>
                 </div>

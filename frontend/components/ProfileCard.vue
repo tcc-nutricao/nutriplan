@@ -35,7 +35,7 @@
               </svg>
             </div>
             <p
-              class="text-p-950 font-sora text-xl text-center font-semibold transition ease-in-out group-hover:scale-[112%] group-active:scale-105"
+              class="text-p-950 max-w-[170px] font-sora text-xl text-center font-semibold transition ease-in-out group-hover:scale-[112%] group-active:scale-105"
             >
               {{ user.name }}
             </p>

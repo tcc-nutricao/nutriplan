@@ -19,7 +19,7 @@
             <div class="flex flex-col items-center justify-end h-full">
                 <Button mediumPurple
                     class="w-max pr-3 pl-2 h-[42px]"
-                    icon="fa-regular fa-chevron-right short flex justify-center ml-1" label=""
+                    icon="fa-solid fa-chevron-right short flex justify-center ml-1" label=""
                 />
             </div>
         </div>

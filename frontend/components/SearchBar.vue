@@ -10,7 +10,7 @@
       v-if="filter"
       mediumPurple
       :label="isNarrow ? '' : 'Filtrar'"
-      class="w-auto px-2 h-[42px]"
+      class="w-auto h-[42px]"
       icon="fa-solid fa-filter"
       :options="filterOptions"
     />
@@ -18,7 +18,7 @@
       v-if="sort"
       mediumPurple
       :label="isNarrow ? '' : 'Ordenar'"
-      class="w-auto px-2 h-[42px]"
+      class="w-auto h-[42px]"
       icon="fa-solid fa-arrow-down-short-wide"
       :options="sortOptions"
     />
