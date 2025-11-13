@@ -38,7 +38,11 @@ export const generateCrudController = (Service, Schema, entityName = 'Item', cus
       return res.status(201).json(result)
     } catch (err) {
       if (err instanceof AppError) {
-        return res.status(err.statusCode).json({ error: true, data: err.details })
+        return res.status(err.statusCode).json({
+          error: true,
+          field: err.field || null,
+          data: err.details
+        })
       }
       next(err)
     }
@@ -68,7 +72,11 @@ export const generateCrudController = (Service, Schema, entityName = 'Item', cus
       return res.status(200).json(result)
     } catch (err) {
       if (err instanceof AppError) {
-        return res.status(err.statusCode).json({ error: true, data: err.details })
+        return res.status(err.statusCode).json({
+          error: true,
+          field: err.field || null,
+          data: err.details
+        })
       }
       next(err)
     }

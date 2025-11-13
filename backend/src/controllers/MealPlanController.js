@@ -26,6 +26,7 @@ const getMealPlanByPatient = async (req, res) => {
     console.error('Erro ao buscar planos do paciente:', error)
     return res.status(500).json({ 
       success: false, 
+      field: error.field || null,
       message: error.message || 'Erro interno do servidor' 
     })
   }
@@ -43,6 +44,7 @@ const update = async (req, res) => {
     console.error('Erro ao atualizar plano alimentar:', error)
     return res.status(500).json({
       success: false,
+      field: error.field || null,
       message: error.message || 'Erro interno do servidor'
     })
   }

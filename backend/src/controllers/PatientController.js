@@ -24,6 +24,7 @@ const getProgress = async (req, res) => {
     console.error('Erro ao buscar progresso do paciente:', error)
     return res.status(500).json({ 
       success: false, 
+      field: error.field || null,
       message: error.message || 'Erro interno do servidor' 
     })
   }
