@@ -21,7 +21,7 @@
                 </div>
                 <div v-if="!pending && itemList.length > 0" class="flex flex-col gap-3 w-full">
                     <GroupButton v-for="item in itemList" :key="item.id" :title="item.title"
-                        :daysRemaining="calculateDaysRemaining(item.endDate)" :participants="item.participants.length"
+                        :daysRemaining="calculateDaysRemaining(item.endDate)" :participants="item.participantCount"
                         :is-selected="item.id === selectedItemId" @selecionado="selectItem(item.id)" />
                 </div>
                 <div v-else-if="pending" class="mt-5 text-center text-gray-500">
@@ -65,16 +65,13 @@
 
                     <div class="flex flex-col">
                         <h3 class="h3">Participantes:</h3>
-                        <div class="flex flex-row gap-5 mt-2">
-                            <div v-for="(column, colIndex) in participantColumns" :key="colIndex"
-                                class="flex flex-col gap-1">
-                                <p v-for="(participant, pIndex) in column" :key="pIndex"
-                                    class="font-semibold flex items-center text-lg text-gray-700 cursor-pointer text-nowrap">
-                                    <i class="fa-solid fa-circle-user mr-2 text-2xl text-p-700"></i>
-                                    {{ participant.name }}
-                                    <!-- <i v-if="participant.name === selectedItem.owner" class="fa-solid fa-crown ml-2 mb-1 text-xl text-yellow-400"></i> -->
-                                </p>
-                            </div>
+                        <div class="flex flex-col gap-1 mt-2">
+                            <p v-for="participant in selectedItem.participants" :key="participant.id"
+                                class="font-semibold flex items-center text-lg text-gray-700 cursor-pointer text-nowrap" :title="participant.name">
+                                <i class="fa-solid fa-circle-user mr-2 text-2xl text-p-700"></i>
+                                {{ participant.name }}
+                                <!-- <i v-if="participant.name === selectedItem.owner" class="fa-solid fa-crown ml-2 mb-1 text-xl text-yellow-400"></i> -->
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -144,21 +141,14 @@ const pending = ref(true);
 const groupListTop = ref(null);
 
 function mapApiDataToFrontend(apiGroup) {
-  console.log('Mapeando grupo da API:', apiGroup);
-  // O backend já calcula a média do grupo em 'groupMetaAchieved'
-  // e o progresso individual em 'metaAchieved'
-  const participants = (apiGroup.participants || []).map(p => ({
-    id: p.id_user,
-    // Correção: O nome do participante está dentro do objeto 'user'
-    name: p.user.name === userCookie.value?.name ? 'Você' : p.user.name,
-    progress: Math.round(p.metaAchieved * 100) || 0,
-    objective: p.objective?.description || 'Não definido',
+  // A API agora retorna um array de nomes (strings)
+  const participants = apiGroup.participantNames.map((name, index) => ({
+    id: index, // Usamos o índice como ID, já que só temos o nome
+    name: name === userCookie.value?.name.split(' ')[0] ? 'Você' : name,
+    // O progresso agora precisaria vir de outro endpoint ou ser calculado de outra forma
+    progress: 0, 
+    objective: 'Não definido',
   }));
-  console.log('Participantes mapeados:', participants);
-
-  // Encontra o dono do grupo
-  const ownerParticipant = apiGroup.participants.find(p => p.role === 'OWNER');
-  const ownerName = ownerParticipant?.user.name === userCookie.value?.name ? 'Você' : ownerParticipant?.user.name || 'Desconhecido';
 
   return {
     id: apiGroup.id,
@@ -166,28 +156,24 @@ function mapApiDataToFrontend(apiGroup) {
     code: apiGroup.invite_code,
     startDate: apiGroup.start_date,
     endDate: apiGroup.end_date,
-    owner: ownerName,
-    participants: participants, // Adiciona a lista de participantes mapeados ao objeto final
+    owner: 'Você', // Placeholder, já que não temos mais os detalhes do dono
+    participantCount: apiGroup.participantCount,
+    participants: participants,
   };
-  // O objeto final retornado por esta função será logado no fetchGroups
 }
 
 async function fetchGroups() {
   try {
     pending.value = true;
     const response = await $axios.get('/group/progress');
-    console.log('Resposta completa da API /group/progress:', response);
-
     const groupsFromApi = response.data.data.groups;
 
     if (groupsFromApi && groupsFromApi.length > 0) {
       itemList.value = groupsFromApi.map(mapApiDataToFrontend);
-      // Seleciona o primeiro grupo da lista por padrão
       selectItem(itemList.value[0].id);
     } else {
       itemList.value = [];
     }
-    console.log('Lista final de itens (itemList.value):', itemList.value);
   } catch (error) {
     console.error("Erro ao buscar os grupos:", error);
     itemList.value = [];
@@ -266,21 +252,6 @@ const selectedItem = computed(() => {
     return itemList.value.find(item => item.id === selectedItemId.value);
 });
 
-const participantColumns = computed(() => {
-    if (!selectedItem.value) return [];
-
-    const participants = selectedItem.value.participants;
-    const chunkSize = 3;
-    const columns = [];
-
-    for (let i = 0; i < participants.length; i += chunkSize) {
-        const chunk = participants.slice(i, i + chunkSize);
-        columns.push(chunk);
-    }
-
-    return columns;
-});
-
 const formattedStartDate = computed(() => {
     if (!selectedItem.value) return '';
     const dateString = selectedItem.value.startDate || '';
@@ -301,7 +272,7 @@ const groupProgress = computed(() => {
     }
 
     const totalProgress = selectedItem.value.participants.reduce((sum, participant) => {
-        return sum + participant.progress;
+        return sum + (participant.progress || 0);
     }, 0);
 
     const average = totalProgress / selectedItem.value.participants.length;

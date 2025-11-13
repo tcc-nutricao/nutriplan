@@ -13,35 +13,25 @@ export const GroupService = {
       if (!userId) {
         throw new AppError({ message: 'userId é obrigatório' });
       }
-      const groups = await UserGroupRepository.getGroupsByUserId(userId);
-      let allMetaAchieved = [];
-      const groupsWithProgress = await Promise.all((groups || []).map(async (group) => {
-        const participants = await Promise.all((group.userGroups || []).map(async (participant) => {
-          const progress = await PatientRepository.getProgress(participant.id_patient);
-          const metaAchieved = progress?.metaAchieved ?? null;
-          const objective = progress?.objective ?? null;
-          if (metaAchieved !== null && !isNaN(metaAchieved)) {
-            allMetaAchieved.push(metaAchieved);
-          }
-          return {
-            ...participant,
-            metaAchieved,
-            objective
-          };
-        }));
-        const groupMetaAchieved = participants.length > 0 ? (participants.reduce((acc, p) => acc + (p.metaAchieved || 0), 0) / participants.length) : null;
+      const userGroups = await UserGroupRepository.getGroupsByUserId(userId);
+
+      const groupsWithDetails = await Promise.all((userGroups || []).map(async (userGroup) => {
+        const groupId = userGroup.id_group;
+
+        const participantCount = await UserGroupRepository.countParticipantsByGroupId(groupId);
+        console.log(`[Group ID: ${groupId}] Contagem de participantes:`, participantCount);
+
+        const participantNames = await UserGroupRepository.getParticipantNamesByGroupId(groupId);
+        console.log(`[Group ID: ${groupId}] Nomes dos participantes:`, participantNames);
+
         return {
-          id: group.group.id,
-          name: group.group.name,
-          start_date: group.group.start_date,
-          end_date: group.group.end_date,
-          invite_code: group.group.invite_code,
-          participants,
-          groupMetaAchieved
+          ...userGroup.group, // Retorna todos os dados do grupo
+          participantCount,
+          participantNames,
         };
       }));
       return {
-        groups: groupsWithProgress
+        groups: groupsWithDetails
       };
     } catch (error) {
       console.error('Erro ao buscar progresso dos grupos para o paciente:', error);
