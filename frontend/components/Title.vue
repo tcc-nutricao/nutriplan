@@ -1,7 +1,7 @@
 <template>
     <p :class="[
-        color,
-        { 'text-bold': bold },
+        props.color,
+        { 'text-bold': props.bold },
         { 'text-xl': props.xl },
         { 'text-2xl': props.twoxl },
         { 'text-3xl': props.threexl },
@@ -9,7 +9,7 @@
         { 'text-lg': props.lg },
         { 'text-sm': props.sm },
         { 'text-xs': props.xs },
-    ]">{{ label }}</p>
+    ]">{{ props.label }}</p>
 </template>
 
 <script setup>
