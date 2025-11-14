@@ -72,7 +72,6 @@ const update = async (data, userId) => {
       if (!currentPasswordMatches) {
         throw new AppError({ message: 'Senha antiga incorreta', statusCode: 400, field: 'currentPassword' })
       }
-    }
 
       updateData.password = await bcrypt.hash(data.newPassword, 10)
       delete data.currentPassword

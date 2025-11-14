@@ -12,7 +12,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
-      if (error.response?.status === 401 && process.client) {
+      if ((error.response?.status === 401 || error.response?.status === 403) && process.client) {
         window.location.href = '/'
       }
       return Promise.reject(error)

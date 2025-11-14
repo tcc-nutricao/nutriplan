@@ -117,10 +117,13 @@
 </template>
 
 <script>
+import { get } from '~/crud.js'
+
 export default {
     data() {
     return {
         selectedItemId: null, 
+        route: 'nutritionist-patient',
         itemList: [
             {   id: 1, 
                 name: 'Mariana Alves', 
@@ -226,6 +229,9 @@ export default {
                 return `${imcValue} (obesidade grave)`;
             }
         }
+    },
+    async mounted() {
+        await get(this.route)
     },
     computed: {
         selectedItem() {

@@ -1,9 +1,17 @@
-import { validate } from "../api/AuthApi.js";
+import { authenticate } from '../middleware/index.js'
 
-export const genericRoute = (router, route, api) => {
+export const genericRoute = (router, route, api, authorizationMiddleware = null) => {
   const { search, insert, update, remove } = api;
 
-  router.route(route).get(validate, search).post(insert);
+  const middlewares = authorizationMiddleware 
+    ? [authenticate, authorizationMiddleware] 
+    : [authenticate];
 
-  router.route(`${route}/:id`).patch(validate, update).delete(validate, remove);
+  router.route(route)
+    .get(...middlewares, search)
+    .post(...middlewares, insert);
+
+  router.route(`${route}/:id`)
+    .patch(...middlewares, update)
+    .delete(...middlewares, remove);
 };

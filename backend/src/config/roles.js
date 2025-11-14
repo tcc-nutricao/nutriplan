@@ -1,0 +1,4 @@
+export const Roles = {
+  STANDARD: 'STANDARD',
+  PROFESSIONAL: 'PROFESSIONAL'
+}

@@ -1,10 +1,9 @@
 import { api } from "../api/PatientApi.js"
 import { genericRoute } from "./Route.js"
-import { validate } from '../api/AuthApi.js'
+import { authenticate, authorize } from '../middleware/index.js'
+import { Roles } from "../config/roles.js";
 
 export default (router) => {
-  genericRoute(router, '/patient', api)
-  
-  // Rota customizada para progresso do paciente
-  router.get('/patient/:id/progress', validate, api.getProgress)
+  genericRoute(router, '/patient', api, authorize(Roles.STANDARD))
+  router.get('/patient/:id/progress', authenticate, authorize(Roles.STANDARD), api.getProgress)
 }
