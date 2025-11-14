@@ -1,5 +1,5 @@
 import { GeminiController } from '../controllers/GeminiController.js'
-import { authenticate } from '../api/AuthApi.js'
+import { authenticate } from '../middleware/index.js'
 
 export default (router) => {
   router.post('/gemini/recipes/:patientId', authenticate, GeminiController.generateRecipeRecommendations)
