@@ -382,8 +382,9 @@ model UserGroup {
 model Group {
   id          Int      @id @default(autoincrement())
   name        String
-  decription  String?
+  description  String?
   invite_code String
+  picture    Bytes?       @db.MediumBlob
   created_at  DateTime
   deleted_at  DateTime?
   updated_at  DateTime?

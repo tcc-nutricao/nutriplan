@@ -11,11 +11,11 @@
                         class="w-full px-3 h-[42px] text-nowrap shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
                         icon="fa-solid fa-plus short flex justify-center" label="Criar novo grupo"
                         @click="openCreateModal" />
-                    <div class="flex items-end gap-3 border-t-2 pt-2 mt-2 border-p-200">
+                    <div class="flex flex-col 2xl:flex-row items-end gap-3 border-t-2 pt-2 mt-2 border-p-200">
                         <InputText class="mb-0 w-full" label="Entrar em um grupo"
                             placeholder="Digite o código do grupo" />
                         <Button mediumPurple
-                            class="w-max px-3 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
+                            class="w-full 2xl:w-max px-3 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
                             label="Entrar" />
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                         <h3 class="h3">Participantes:</h3>
                         <div class="flex flex-col gap-1 mt-2">
                             <p v-for="participant in selectedItem.participants" :key="participant.id"
-                                class="font-semibold flex items-center text-lg text-gray-700 cursor-pointer text-nowrap" :title="participant.name">
+                                class="font-semibold flex items-center text-lg text-gray-700 cursor-default text-nowrap" :title="participant.name">
                                 <i class="fa-solid fa-circle-user mr-2 text-2xl text-p-700"></i>
                                 {{ participant.name }}
                                 <!-- <i v-if="participant.name === selectedItem.owner" class="fa-solid fa-crown ml-2 mb-1 text-xl text-yellow-400"></i> -->
@@ -124,13 +124,14 @@
                 <h3 class="h2">Crie ou entre em um grupo!</h3>
             </div>
         </div>
-        <ModalGroupCreate v-if="showModal === 'Criar' || showModal === 'Editar'" :title="showModal" :groupName="selectedItem.name" :groupImage="selectedItem.image" @close="closeModal" />
+        <ModalGroupCreate v-if="showModal === 'Criar' || showModal === 'Editar'" :title="showModal" @close="closeModal" @save="handleGroupCreate" />
     </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useCookie, useNuxtApp } from 'nuxt/app';
+import { insert } from '../crud';
 
 const { $axios } = useNuxtApp();
 const userCookie = useCookie('user-data');
@@ -141,11 +142,9 @@ const pending = ref(true);
 const groupListTop = ref(null);
 
 function mapApiDataToFrontend(apiGroup) {
-  // A API agora retorna um array de nomes (strings)
   const participants = apiGroup.participantNames.map((name, index) => ({
-    id: index, // Usamos o índice como ID, já que só temos o nome
+    id: index, 
     name: name === userCookie.value?.name.split(' ')[0] ? 'Você' : name,
-    // O progresso agora precisaria vir de outro endpoint ou ser calculado de outra forma
     progress: 0, 
     objective: 'Não definido',
   }));
@@ -156,7 +155,7 @@ function mapApiDataToFrontend(apiGroup) {
     code: apiGroup.invite_code,
     startDate: apiGroup.start_date,
     endDate: apiGroup.end_date,
-    owner: 'Você', // Placeholder, já que não temos mais os detalhes do dono
+    owner: 'Você',
     participantCount: apiGroup.participantCount,
     participants: participants,
   };
@@ -186,6 +185,35 @@ onMounted(() => {
   fetchGroups();
 });
 
+function generateInviteCode(length = 6) {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+}
+
+async function handleGroupCreate(groupData) {
+  try {
+    const dataToSave = { 
+      name: groupData.name,
+      image: groupData.image, // Opcional
+      invite_code: generateInviteCode() 
+    };
+    const response = await insert('group', dataToSave);
+
+    if (!response.error) {
+      closeModal();
+      await fetchGroups(); // Atualiza a lista de grupos
+    } else {
+      console.error("Erro ao criar o grupo:", response.data);
+    }
+  } catch (error) {
+    console.error("Erro na chamada da API para criar grupo:", error);
+  }
+}
+
 function selectItem(id) {
     selectedItemId.value = id;
     groupListTop.value?.scrollIntoView({ behavior: 'smooth' });
@@ -204,14 +232,9 @@ const openEditModal = () => {
 const openDeleteModal = () => {
   showModal.value = "delete";
 };
-const openLeaveModal = () => {
-  showModal.value = "leave";
-};
 
 const closeModal = () => {
   showModal.value = "";
-  activeSection.value = null;
-  imageToEdit.value = null;
 };
 
 function calculateDaysRemaining(endDateString) {

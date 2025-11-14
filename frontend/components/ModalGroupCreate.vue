@@ -86,6 +86,7 @@ import { ref, onMounted } from "vue";
 
 const props = defineProps({
   title: String,
+  initialData: { type: Object, default: () => ({ name: null, image: null }) }
 });
 const object = ref({
   name: null,
@@ -127,12 +128,24 @@ const triggerFileInput = () => {
 };
 
 const save = () => {
+  errors.value.name = null;
+  if (!object.value.name) {
+    errors.value.name = 'O nome do grupo é obrigatório.';
+    return;
+  }
+
   emit('save', object.value);
+  // Limpa o formulário e fecha o modal após salvar
+  object.value = { name: null, image: null };
+  errors.value = { name: null };
+  emit('close');
 }
 
-const emit = defineEmits(["close", "save", "imageSelected"]);
+const emit = defineEmits(["close", "save"]);
 
 onMounted(() => {
+  // Preenche o formulário com dados iniciais (útil para edição)
+  object.value = { ...props.initialData };
 });
 
 const showModal = ref("");
