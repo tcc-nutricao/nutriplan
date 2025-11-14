@@ -17,7 +17,7 @@ export const logout = async (req, res, next) => {
   }
 }
 
-export const validate = (req, res, next) => {
+export const authenticate = (req, res, next) => {
   const token = req.cookies.token
 
    if (!token) {

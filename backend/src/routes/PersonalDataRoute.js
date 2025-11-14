@@ -1,7 +1,7 @@
 import { updatePersonalData, getPersonalData } from "../api/PersonalDataApi.js";
-import { validate } from "../api/AuthApi.js";
+import { authenticate } from "../api/AuthApi.js";
 
 export default (router) => {
-  router.patch("/user/personal-data", validate, updatePersonalData);
-  router.get("/user/personal-data", validate, getPersonalData);
+  router.patch("/user/personal-data", authenticate, updatePersonalData);
+  router.get("/user/personal-data", authenticate, getPersonalData);
 };
