@@ -19,13 +19,16 @@ export const GroupService = {
         const groupId = userGroup.id_group;
 
         const participantCount = await UserGroupRepository.countParticipantsByGroupId(groupId);
-        console.log(`[Group ID: ${groupId}] Contagem de participantes:`, participantCount);
+        // console.log(`[Group ID: ${groupId}] Contagem de participantes:`, participantCount);
 
         const participantNames = await UserGroupRepository.getParticipantNamesByGroupId(groupId);
-        console.log(`[Group ID: ${groupId}] Nomes dos participantes:`, participantNames);
+        // console.log(`[Group ID: ${groupId}] Nomes dos participantes:`, participantNames);
 
         return {
-          ...userGroup.group, // Retorna todos os dados do grupo
+          ...userGroup.group, 
+          picture: userGroup.group.picture 
+            ? Buffer.from(userGroup.group.picture).toString('base64') 
+            : null,
           participantCount,
           participantNames,
         };

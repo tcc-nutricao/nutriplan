@@ -134,11 +134,11 @@ const save = () => {
     return;
   }
 
+  // DIAGNÓSTICO: O que está sendo enviado para a página pai?
+  console.log('Dados emitidos pelo ModalGroupCreate:', object.value);
+  // Verifique no console do navegador se 'object.value.image' tem uma string base64.
+
   emit('save', object.value);
-  // Limpa o formulário e fecha o modal após salvar
-  object.value = { name: null, image: null };
-  errors.value = { name: null };
-  emit('close');
 }
 
 const emit = defineEmits(["close", "save"]);

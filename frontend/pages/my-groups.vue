@@ -21,7 +21,7 @@
                 </div>
                 <div v-if="!pending && itemList.length > 0" class="flex flex-col gap-3 w-full">
                     <GroupButton v-for="item in itemList" :key="item.id" :title="item.title"
-                        :daysRemaining="calculateDaysRemaining(item.endDate)" :participants="item.participantCount"
+                        :daysRemaining="calculateDaysRemaining(item.endDate)" :participants="item.participantCount" :picture="item.picture"
                         :is-selected="item.id === selectedItemId" @selecionado="selectItem(item.id)" />
                 </div>
                 <div v-else-if="pending" class="mt-5 text-center text-gray-500">
@@ -35,7 +35,7 @@
                 <div class="flex items-start justify-between p-6 h-max rounded-3xl shadow-lg gap-5 bg-white">
 
                     <div class="flex gap-5">
-                        <img src="../assets/images/groupPhoto.jpg" alt="Foto do grupo"
+                        <img :src="selectedItem.picture || defaultGroupImage" alt="Foto do grupo"
                             class="w-36 aspect-square object-cover rounded-2xl flex-shrink-0" />
                         <div class="flex flex-col justify-between">
                             <div class="flex flex-col">
@@ -121,7 +121,7 @@
             </div>
             <div v-else
                 class="stickyProfile bg-white rounded-3xl text-nowrap shadow-lg border-2 p-6 py-20 w-[70%] flex items-center justify-center text-gray-500">
-                <h3 class="h2">Crie ou entre em um grupo!</h3>
+                <h3 class="h2">{{ pending ? 'Carregando...' : 'Crie ou entre em um grupo!' }}</h3>
             </div>
         </div>
         <ModalGroupCreate v-if="showModal === 'Criar' || showModal === 'Editar'" :title="showModal" @close="closeModal" @save="handleGroupCreate" />
@@ -132,6 +132,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { useCookie, useNuxtApp } from 'nuxt/app';
 import { insert } from '../crud';
+import defaultGroupImage from '~/assets/images/groupPhoto.jpg';
 
 const { $axios } = useNuxtApp();
 const userCookie = useCookie('user-data');
@@ -152,6 +153,7 @@ function mapApiDataToFrontend(apiGroup) {
   return {
     id: apiGroup.id,
     title: apiGroup.name,
+    picture: apiGroup.picture ? `data:image/jpeg;base64,${apiGroup.picture}` : null,
     code: apiGroup.invite_code,
     startDate: apiGroup.start_date,
     endDate: apiGroup.end_date,
@@ -198,16 +200,21 @@ async function handleGroupCreate(groupData) {
   try {
     const dataToSave = { 
       name: groupData.name,
-      image: groupData.image, // Opcional
+      picture: groupData.image, // Opcional - Corrigido de 'image' para 'picture'
       invite_code: generateInviteCode() 
     };
+
+    // DIAGNÓSTICO: O que está sendo enviado para a API?
+    console.log('Payload enviado para a API (insert):', dataToSave);
+
     const response = await insert('group', dataToSave);
 
     if (!response.error) {
-      closeModal();
       await fetchGroups(); // Atualiza a lista de grupos
+      closeModal(); // Fecha o modal APÓS o sucesso
     } else {
       console.error("Erro ao criar o grupo:", response.data);
+      alert('Ocorreu um erro ao criar o grupo. Tente novamente.');
     }
   } catch (error) {
     console.error("Erro na chamada da API para criar grupo:", error);

@@ -31,7 +31,6 @@ export const generateCrudController = (Service, Schema, entityName = 'Item', cus
         return res.status(422).json({ error: true, data: errors })
       }
 
-      // Usa os dados processados (inclui preprocess de datas/horário)
       data = parseResult.data
 
       const result = await Service.insert(data)

@@ -8,9 +8,9 @@ import cookieParser from 'cookie-parser'
 const app = express()
 const port = process.env.PORT || 4000
 
-app.use(express.json())
+app.use(express.json({ limit: '3mb' }))
 app.use(cookieParser())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ limit: '3mb', extended: true }))
 app.use(cors({ 
   credentials: true, 
   origin: [process.env.CORS, 'http://localhost:3000', 'http://localhost:3001'],
