@@ -63,6 +63,10 @@ const remove = async (req, res, next) => {
 
     const result = await UserService.remove(parseInt(userId))
 
+    if (res.statusCode === 200) {
+      res.clearCookie('token');
+    }
+
     return res.status(200).json({
       success: true,
       data: result,

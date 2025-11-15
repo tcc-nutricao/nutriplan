@@ -87,6 +87,21 @@ const update = async (data, userId) => {
   }
 }
 
+const remove = async (userId) => {
+  try {
+    const existingUser = await UserRepository.findById(userId)
+    if (!existingUser) {
+      throw new AppError({ message: 'Usuário não encontrado', statusCode: 404 })
+    }
+
+    await UserRepository.remove(userId)
+
+    return { message: 'Usuário apagado com sucesso' }
+  } catch (error) {
+    throw error
+  }
+}
+
 const createTemporaryUser = async (data) => {
   try {
     const existing = await UserRepository.findByEmail(data.email)
@@ -128,6 +143,7 @@ export const UserService = {
   ...generateCrudService(UserRepository),
   insert,
   update, 
+  remove,
   createTemporaryUser
 }
 

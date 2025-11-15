@@ -55,7 +55,10 @@ const update = async (route, id, object, itemMessage) => {
 const remove = async (route, id, itemMessage) => {
   const { $axios } = useNuxtApp()
   try {
-    const res = await $axios.delete(`/${route}/${id}`)
+    const hasId = id !== undefined && id !== null
+    const url = hasId ? `/${route}/${id}` : `/${route}`
+    
+    const res = await $axios.delete(url)
 
     return { ...res.data, status: res.status }
   } catch (err) {
