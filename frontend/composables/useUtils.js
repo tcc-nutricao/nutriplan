@@ -20,7 +20,21 @@ export function useUtils() {
     return maskedValue
   }
 
+  const getISODateString = (dateString, startOfDay = true) => {
+    // Converte data do formato brasileiro (dd/mm/yyyy) para ISO 8601
+    const date = new Date(dateString.split('/').reverse().join('-'));
+    
+    if (startOfDay) {
+      date.setHours(0, 0, 0, 0);
+    } else {
+      date.setHours(23, 59, 59, 999);
+    }
+    
+    return date.toISOString();
+  }
+
   return {
-    applyMask
+    applyMask,
+    getISODateString
   }
 }
