@@ -206,10 +206,13 @@ const openDangerModal = () => {
   showModal.value = "delete";
 };
 
-const closeModal = () => {
+const closeModal = (shouldReload = false) => {
   showModal.value = "";
   activeSection.value = null;
   imageToEdit.value = null;
+  if (shouldReload) {
+    window.location.reload();
+  }
 };
 
 const handleImageSelected = (imageData) => {

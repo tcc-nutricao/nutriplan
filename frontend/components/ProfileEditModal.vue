@@ -3,7 +3,7 @@
     <Transition name="modal" appear>
     <div
       class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]"
-      @click.self="$emit('close')"
+      @click.self="$emit('close', false)"
     >
       <div
         class="bg-white rounded-3xl py-7 px-9 w-full shadow-lg relative max-h-[90vh] overflow-y-auto modal-container"
@@ -11,7 +11,7 @@
       >
         <button
           class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-50"
-          @click="$emit('close')"
+          @click="$emit('close', false)"
         >&times;
         </button>
 
@@ -97,6 +97,7 @@
 <script setup>
 import { ref, defineProps, defineEmits } from "vue";
 import { update } from "../crud";
+import { useCookie } from "nuxt/app";
 
 const props = defineProps({
   section: { type: String, required: true },
@@ -122,6 +123,8 @@ const personalFormData = ref({
   objectives: [],
 });
 
+const userCookie = useCookie("user-data");
+
 async function handleSubmit() {
   if (props.section === "basic") {
     const formData = {
@@ -137,9 +140,15 @@ async function handleSubmit() {
         console.error("Erro ao atualizar perfil:", res);
         alert("Erro ao atualizar perfil. Tente novamente.");
       } else {
-        console.log("Perfil atualizado com sucesso:", res);
+        console.log("Perfil atualizado com sucesso:", res.data.data);
+
+        // Atualiza o cookie com os novos dados do usuário
+        const updatedUser = res.data;
+        userCookie.value.name = updatedUser.name;
+        userCookie.value.email = updatedUser.email;
+
         alert("Perfil atualizado com sucesso!");
-        emit("close");
+        emit("close", true); // Emitir 'true' para indicar sucesso e recarregar
       }
     } catch (err) {
       console.error("Erro na requisição:", err);
@@ -163,9 +172,9 @@ async function handleSubmit() {
         console.error("Erro ao atualizar dados pessoais:", res);
         alert("Erro ao atualizar dados pessoais. Tente novamente.");
       } else {
-        console.log("Dados pessoais atualizados com sucesso:", res);
+        console.log("Dados pessoais atualizados com sucesso:", res.data.data);
         alert("Dados pessoais atualizados com sucesso!");
-        emit("close");
+        emit("close", true); // Emitir 'true' para indicar sucesso e recarregar
       }
     } catch (err) {
       console.error("Erro na requisição:", err);
