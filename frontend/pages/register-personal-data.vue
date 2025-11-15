@@ -7,7 +7,12 @@
       <div class="grid grid-cols-2 gap-6">
         <div class="col-span-1">
           <Label class="mb-2" label="Que dia você nasceu?" />
-          <Input type="date" v-model="form.birth_date" placeholder="Data de nascimento" required />
+          <Input
+            type="date"
+            v-model="form.birth_date"
+            placeholder="Data de nascimento"
+            required
+          />
         </div>
         <div class="col-span-1">
           <Label class="mb-2" label="Qual gênero você se identifica?" />
@@ -15,26 +20,56 @@
         </div>
         <div class="col-span-1">
           <Label class="mb-2" label="Qual é seu peso?" />
-          <Input type="number" v-model.number="form.weight" placeholder="Seu peso em kg" required />
+          <Input
+            type="number"
+            v-model.number="form.weight"
+            placeholder="Seu peso em kg"
+            required
+          />
         </div>
         <div class="col-span-1">
           <Label class="mb-2" label="Qual é a sua altura? (ex: 170cm)" />
-          <Input type="number" v-model.number="form.height" placeholder="Sua altura em cm" required />
+          <Input
+            type="number"
+            v-model.number="form.height"
+            placeholder="Sua altura em cm"
+            required
+          />
         </div>
         <div class="col-span-1">
           <Label class="mb-2" label="Você tem alguma restrição alimentar?" />
-          <Select v-model="form.restrictions" :options="restrictionOptions" multiple required />
+          <Select
+            v-model="form.restrictions"
+            :options="restrictionOptions"
+            multiple
+            required
+          />
         </div>
         <div class="col-span-1">
           <Label class="mb-2" label="Você tem alguma preferência alimentar?" />
-          <Select v-model="form.preferences" :options="preferenceOptions" multiple required />
+          <Select
+            v-model="form.preferences"
+            :options="preferenceOptions"
+            multiple
+            required
+          />
         </div>
         <div class="col-span-1">
           <Label class="mb-2" label="Qual é seu objetivo?" />
-          <Select v-model="form.objective" :options="objectiveOptions" multiple required />
+          <Select
+            v-model="form.objective"
+            :options="objectiveOptions"
+            multiple
+            required
+          />
         </div>
         <div class="col-span-2 flex justify-center gap-3 mt-8">
-          <Button gray outlined class="w-max px-3 h-[42px] shadow-lg border-2 border-gray-300 transition" @click="navigateTo('/profile')">
+          <Button
+            gray
+            outlined
+            class="w-max px-3 h-[42px] shadow-lg border-2 border-gray-300 transition"
+            @click="navigateTo('/profile')"
+          >
             Pular
           </Button>
           <Button mediumPurple @click.prevent="save"> Salvar </Button>
@@ -43,7 +78,6 @@
     </Card>
   </div>
 </template>
-
 
 <script setup>
 import { ref, onMounted } from "vue";
@@ -61,7 +95,7 @@ const form = ref({
   height: null, // number
   restrictions: [], // array of ids
   preferences: [], // array de ids
-  objective: [] // array de ids
+  objective: [], // array de ids
 });
 
 const genderOptions = [
@@ -80,7 +114,9 @@ onMounted(async () => {
     { route: "preference", target: preferenceOptions },
     { route: "objective", target: objectiveOptions },
   ];
-  await Promise.all(selectRoutes.map(({ route, target }) => getSelectItems(route, target)));
+  await Promise.all(
+    selectRoutes.map(({ route, target }) => getSelectItems(route, target))
+  );
 });
 
 async function save() {
@@ -93,10 +129,14 @@ async function save() {
     objectives: form.value.objective ? [form.value.objective] : [],
   };
   await update("user/personal-data", payload);
+  navigateTo("/meal-plan");
 }
 
 async function getSelectItems(route, target) {
   const response = await get(route);
-  target.value = (response.data || []).map(item => ({ value: item.id, label: item.name }));
+  target.value = (response.data || []).map((item) => ({
+    value: item.id,
+    label: item.name,
+  }));
 }
 </script>
