@@ -3,6 +3,6 @@ import { genericRoute } from "./Route.js"
 import { authenticate } from '../middleware/index.js'
 
 export default (router) => {
-  genericRoute(router, '/meal-plan', api)
+  genericRoute(router, '/meal-plan', api, authenticate)
   router.get('/meal-plan/patient/:patientId', authenticate, api.getMealPlanByPatient)
 }

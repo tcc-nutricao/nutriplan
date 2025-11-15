@@ -1,4 +1,6 @@
 import { RecipeRepository } from '../repositories/RecipeRepository.js'
+import { MealPlanRecipeRepository } from '../repositories/MealPlanRecipeRepository.js'
+import { PatientRepository } from '../repositories/PatientRepository.js'
 import { generateCrudService } from './Service.js'
 
 // Função para calcular valores nutricionais da receita baseado nos alimentos
@@ -84,6 +86,22 @@ export const RecipeService = {
       throw error
     }
   },
+
+  async getPatientRecipes(userId) {
+    try {
+      if (!userId) {
+        throw new Error('ID do usuário é obrigatório')
+      }
+      const patient = await PatientRepository.findByUserId(userId)
+      if (!patient) {
+        throw new Error('Paciente não encontrado para o ID do usuário fornecido')
+      }
+      return await MealPlanRecipeRepository.findByPatientId(patient.id)
+    } catch (error) {
+      console.error('Erro ao buscar receitas do usuário:', error)
+      throw error
+    }
+  }
 }
 
 

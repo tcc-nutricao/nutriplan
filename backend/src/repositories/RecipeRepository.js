@@ -17,6 +17,7 @@ export const RecipeRepository = generateCrudRepository('recipe', {
           select: {
             id: true,
             name: true,
+            icon: true
           }
         }
       }

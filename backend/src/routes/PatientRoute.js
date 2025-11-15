@@ -4,6 +4,6 @@ import { authenticate, authorize } from '../middleware/index.js'
 import { Roles } from "../config/roles.js";
 
 export default (router) => {
-  genericRoute(router, '/patient', api, authorize(Roles.STANDARD))
+  genericRoute(router, '/patient', api, authenticate, authorize(Roles.STANDARD))
   router.get('/patient/:id/progress', authenticate, authorize(Roles.STANDARD), api.getProgress)
 }

@@ -4,5 +4,5 @@ import { Roles } from "../config/roles.js";
 import { authenticate, authorize } from '../middleware/index.js'
 
 export default (router) => {
-  genericRoute(router, '/user-group', api, authorize(Roles.STANDARD))
+  genericRoute(router, '/user-group', api, authenticate, authorize(Roles.STANDARD))
 }

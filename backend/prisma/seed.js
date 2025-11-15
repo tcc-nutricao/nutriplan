@@ -8,10 +8,15 @@ import {
   WeekDay,
 } from "@prisma/client";
 import fs from 'fs';
+import bcrypt from 'bcrypt';
+
 const prisma = new PrismaClient();
 
 async function main() {
   console.log("Starting seed...");
+
+  // Hash das senhas
+  const hashedPassword = await bcrypt.hash("123456", 10);
 
   // USERS
   const adminUser = await prisma.user.upsert({
@@ -20,7 +25,7 @@ async function main() {
     create: {
       name: "Admin",
       email: "admin@example.com",
-      password: "hashed_admin",
+      password: hashedPassword,
       role: Role.PROFESSIONAL,
     },
   });
@@ -30,7 +35,7 @@ async function main() {
     create: {
       name: "Paciente",
       email: "patient@example.com",
-      password: "hashed_patient",
+      password: hashedPassword,
       role: Role.STANDARD,
     },
   });
@@ -40,7 +45,7 @@ async function main() {
     create: {
       name: "Nutri",
       email: "nutri@example.com",
-      password: "hashed_nutri",
+      password: hashedPassword,
       role: Role.PROFESSIONAL,
     },
   });
@@ -93,30 +98,35 @@ async function main() {
       {
         id: 1,
         name: "Perda de peso",
+        icon: "fa-solid fa-fire text-ic-emagrecer",
         description: "Reduzir peso corporal de forma saudável",
         created_at: new Date(),
       },
       {
         id: 2,
         name: "Ganho de peso",
+        icon: "fa-solid fa-dumbbell text-ic-musculo",
         description: "Aumentar peso corporal de forma saudável",
         created_at: new Date(),
       },
       {
         id: 3,
         name: "Manutenção de peso",
+        icon: "fa-solid fa-scale-balanced text-ic-manterpeso",
         description: "Manter o peso atual dentro de uma faixa saudável",
         created_at: new Date(),
       },
       {
         id: 4,
         name: "Redução de IMC",
+        icon: "fa-solid fa-chart-line text-ic-emagrecer",
         description: "Diminuir o índice de massa corporal",
         created_at: new Date(),
       },
       {
         id: 5,
         name: "Reeducação alimentar",
+        icon: "fa-solid fa-utensils text-ic-vegano",
         description: "Desenvolver hábitos alimentares saudáveis",
         created_at: new Date(),
       },
@@ -145,25 +155,32 @@ async function main() {
     },
   });
   // PREFERENCES
-  const preference = await prisma.preference.create({
-    data: { name: "Nenhuma", created_at: new Date() },
+  await prisma.preference.createMany({
+    data: [
+      { name: "Sem Glúten", icon: "fa-wheat-awn text-ic-gluten", created_at: new Date() },
+      { name: "Sem açúcar", icon: "fa-candy-cane text-ic-sugar", created_at: new Date() },
+      { name: "Sem lactose", icon: "fa-glass-water text-ic-lactose", created_at: new Date() },
+      { name: "Vegetariano", icon: "fa-carrot text-ic-vegetariano", created_at: new Date() },
+      { name: "Vegano", icon: "fa-seedling text-ic-vegano", created_at: new Date() },
+      { name: "Emagrecer", icon: "fa-fire text-ic-emagrecer", created_at: new Date() },
+      { name: "Ganho de músculo", icon: "fa-dumbbell text-ic-musculo", created_at: new Date() },
+      { name: "Manter peso", icon: "fa-scale-balanced text-ic-manterpeso", created_at: new Date() },
+      { name: "Colesterol", icon: "fa-heart-circle-plus text-ic-colesterol", created_at: new Date() },
+      { name: "Sono", icon: "fa-moon text-ic-sono", created_at: new Date() },
+      { name: "Energia", icon: "fa-bolt text-ic-energia", created_at: new Date() },
+      { name: "Antinflamatório", icon: "fa-droplet text-ic-antinfl", created_at: new Date() },
+      { name: "Antioxidante", icon: "fa-atom text-ic-antiox", created_at: new Date() },
+      { name: "Sem nozes", icon: "fa-hand-dots text-ic-nozes", created_at: new Date() },
+      { name: "Sem peixe", icon: "fa-fish text-ic-peixe", created_at: new Date() },
+      { name: "Intestino", icon: "fa-worm text-ic-intestino", created_at: new Date() },
+      { name: "Fácil", icon: "fa-hands text-ic-vegan", created_at: new Date() },
+      { name: "Doce", icon: "fa-ice-cream text-ic-sono", created_at: new Date() },
+    ],
+    skipDuplicates: true,
   });
 
-  const preference1 = await prisma.preference.create({
-    data: { name: "Dieta vegetariana", created_at: new Date() },
-  });
-
-  const preference2 = await prisma.preference.create({
-    data: { name: "Dieta low carb", created_at: new Date() },
-  });
-
-  const preference3 = await prisma.preference.create({
-    data: { name: "Dieta plant based", created_at: new Date() },
-  });
-
-  const preference4 = await prisma.preference.create({
-    data: { name: "Dieta balanceada", created_at: new Date() },
-  });
+  // Pega a primeira preferência para uso nos relacionamentos
+  const preference = await prisma.preference.findFirst();
   // DIETARY RESTRICTION
   const dietaryRestriction = await prisma.dietaryRestriction.create({
     data: { name: "Nenhuma", created_at: new Date() },
@@ -332,6 +349,16 @@ async function main() {
       date: new Date(),
       created_at: new Date(),
       updated_at: new Date(),
+    },
+  });
+
+  // MEAL PLAN RECIPE (associa a receita ao plano de refeição)
+  await prisma.mealPlanRecipe.create({
+    data: {
+      id_recipe: recipe.id,
+      id_meal_plan_meal: planBreakfast.id,
+      favorite: true,
+      created_at: new Date(),
     },
   });
 

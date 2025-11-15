@@ -106,7 +106,6 @@ model Recipe {
   preparation_method      String?
   preparation_time Int       @default(0)
   portion          Int       @default(1)
-  favorite         Boolean?  @default(false)
   created_at       DateTime  @default(now())
   deleted_at       DateTime?
   updated_at       DateTime?
@@ -312,6 +311,7 @@ model MealPlanRecipe {
   id            Int      @id @default(autoincrement())
   id_recipe     Int
   id_meal_plan_meal  Int
+  favorite      Boolean? @default(false)
   created_at    DateTime
   deleted_at    DateTime?
   updated_at    DateTime?

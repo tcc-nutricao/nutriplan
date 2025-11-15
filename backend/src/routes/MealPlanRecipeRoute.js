@@ -1,7 +1,7 @@
-import { api } from "../api/MealApi.js"
+import { api } from "../api/MealPlanRecipeApi.js"
 import { genericRoute } from "./Route.js"
 import { authenticate } from '../middleware/index.js'
 
 export default (router) => {
-  genericRoute(router, '/meal', api, authenticate)
+  genericRoute(router, '/meal-plan-recipe', api, authenticate)
 }

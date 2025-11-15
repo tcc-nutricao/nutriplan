@@ -47,8 +47,9 @@ defineProps({
   sortOptions: {
     type: Array,
     default: () => [
-      { value: 'alphabetical', label: 'Alfabética' },
+      { value: 'alphabetical', label: 'Ordem Alfabética' },
       { value: 'recent', label: 'Mais Recentes' },
+      { value: 'time', label: 'Tempo de Preparo' },
     ]
   },
   placeholder: {
