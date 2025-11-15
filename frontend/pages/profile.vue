@@ -225,23 +225,14 @@ const handleAvatarSave = (croppedImageData) => {
 };
 
 const handleDeleteAccount = async () => {
-  try {
-    console.log('apagando conta...');
-    const res = await remove("user");
-    if (res.error) {
-      console.error("Erro ao apagar conta:", res);
-      alert("Erro ao apagar conta. Tente novamente.");
-    } else {
-      console.log("Conta apagada com sucesso:", res);
-      alert("Conta apagada com sucesso!");
-      // Limpar cookie e redirecionar para login
-      userCookie.value = null;
-      navigateTo("/");
-    }
-  } catch (err) {
-    console.error("Erro na requisição:", err);
-    alert("Erro na requisição. Tente novamente.");
+  const response = await remove("user");
+  if (response && response.error) {
+    console.error("Erro ao apagar conta:", response.message || "Erro desconhecido");
+    return;
   }
+  
+  closeModal();
+  await navigateTo('/');
 };
 
 onMounted(async () => {
