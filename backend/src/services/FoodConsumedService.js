@@ -3,6 +3,7 @@ import { generateCrudService } from './Service.js'
 import { MealPlanService } from './MealPlanService.js'
 import { PatientService } from './PatientService.js'
 import { RecipeService } from './RecipeService.js'
+import { AppError } from '../exceptions/AppError.js'
 
 const calculateNutritionalStatistics = async (foodConsumedList) => {
   const statistics = {
@@ -118,6 +119,8 @@ export const FoodConsumedService = {
         }
 
         const statistics = await calculateNutritionalStatistics(allFoodConsumed)
+        
+        statistics.goalCalories = activeMealPlan.calories || 0
 
         const mealsWithFood = await Promise.all(mealPlanMealsWithFilteredFood.map(async (mealPlanMeal) => {
           const foodsConsumedInMeal = mealPlanMeal.filteredFoodConsumed
@@ -142,7 +145,7 @@ export const FoodConsumedService = {
 
           return {
             id: mealPlanMeal.id,
-            name: mealPlanMeal.name,
+            name: mealPlanMeal.meal.name,
             consumedItems
           }
         }))
