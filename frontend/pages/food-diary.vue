@@ -1,18 +1,18 @@
 <template>
-    <div class="flex flex-col gap-3 px-10">
+    <div class="flex flex-col gap-3 px-4 sm:px-6 md:px-10">
         <h1 class="h1">Diário Alimentar</h1>
-        <div class="grid grid-cols-5 gap-2">
-            <Card class="col-span-2">
-                <div class="flex flex-row justify-between items-center mb-3">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+            <Card class="lg:col-span-2">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 gap-2">
                     <h2 class="h2">Registrar consumo diário</h2>
                     <div class="flex justify-center align-items border-2 px-2 py-1 bg-p-100 transition 
-                        border-p-400 rounded-xl h2main hover:bg-p-200 cursor-pointer active:scale-95 select-none">
+                        border-p-400 rounded-xl h2main hover:bg-p-200 cursor-pointer active:scale-95 select-none text-sm sm:text-base">
                         {{ new Date().toLocaleDateString('pt-BR') }}
                     </div>
                 </div>
 
-                <p class="text-danger font-bold w-full text-center mt-0" v-if="errors.meal && selectedMeal === null">Selecione uma refeição</p>
-                <div class="flex gap-2 w-full justify-center">
+                <p class="text-danger font-bold w-full text-center mt-0 text-sm sm:text-base" v-if="errors.meal && selectedMeal === null">Selecione uma refeição</p>
+                <div class="flex flex-wrap gap-2 w-full justify-center">
                     <Button 
                         mediumPurple
                         :red="errors.meal && selectedMeal === null"
@@ -22,7 +22,7 @@
                         @click="selectMeal(meal)"
                         :outlined="selectedMeal !== meal"
                         :class="[
-                            'w-max px-0 h-[42px] shadow-lg shadow-p-600/10 transition',
+                            'w-auto sm:w-max px-2 sm:px-0 h-[38px] sm:h-[42px] text-xs sm:text-sm shadow-lg shadow-p-600/10 transition',
                             { 'bg-p-500 text-white': selectedMeal === meal }
                         ]"
                     />
@@ -97,43 +97,43 @@
                 </div>
             </Card>
 
-            <Card class="col-span-3">
+            <Card class="lg:col-span-3">
                 <PeriodTab 
                     :periods="datePeriods" 
                     @period-changed="handlePeriodChange"
                 />
-                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 pt-3 px-4">
-                    <div class="col-span-1 flex flex-col">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 pt-3 px-2 sm:px-4">
+                    <div class="lg:col-span-1 flex flex-col">
                         <div v-for="meal in meals" :key="meal.id" class="mt-3">
-                            <h3 class="text-p-900 font-bold">{{ meal.name.toUpperCase() }}</h3>
-                            <p v-for="(consumed, index) in meal.consumedItems" :key="index" class="text-nowrap">
+                            <h3 class="text-p-900 font-bold text-sm sm:text-base">{{ meal.name.toUpperCase() }}</h3>
+                            <p v-for="(consumed, index) in meal.consumedItems" :key="index" class="text-sm sm:text-base break-words sm:text-nowrap">
                                 {{ consumed?.item?.name }} ({{ consumed?.quantity + ' ' + consumed?.unitOfMeasurement?.symbol }})
                             </p>
                         </div>
                     </div>
-                    <div class="col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-2 flex flex-col items-center mb-2">
-                        <h3 class="h3 text-center">
+                    <div class="lg:col-span-2 flex flex-col items-center mb-2 mt-4 lg:mt-0">
+                        <h3 class="h3 text-center text-sm sm:text-base">
                             Total consumido:
-                            <span class="font-bold text-3xl text-p-600 mx-1">{{ macros?.totalCalories ?? 0 }}</span>
+                            <span class="font-bold text-2xl sm:text-3xl text-p-600 mx-1">{{ macros?.totalCalories ?? 0 }}</span>
                             / {{ dailyCalorieGoal }} kcal ({{ Math.round(macros?.totalCalories / macros?.goalCalories * 100) }}%)
                         </h3>
-                        <div class="flex flex-col items-start w-full md:w-[90%] mt-4 cursor-default">
+                        <div class="flex flex-col items-start w-full lg:w-[90%] mt-4 cursor-default">
                             <p v-for="(macroLabel, i) in macroLabels" :key="i" :class="[
-                                'border-l-[25px] border-2 rounded-md pl-1 mb-1 w-full',
+                                'border-l-[20px] sm:border-l-[25px] border-2 rounded-md pl-1 mb-1 w-full text-sm sm:text-base',
                                 getMacroClasses(i)
                             ]">{{ macroLabel.label }}
-                            <span class="font-bold text-lg mx-1">{{ macros[macroLabel.key]?.toFixed(1) }} g</span></p>
+                            <span class="font-bold text-base sm:text-lg mx-1">{{ macros[macroLabel.key]?.toFixed(1) }} g</span></p>
                         </div>
                         <div class="flex items-center justify-center w-full h-full mt-4">
                             <NutrientsChart
-                                class="overflow-visible"
+                                class="overflow-visible max-w-full"
                                 :chart-data="chartData"
                             />
                         </div>
                         <div class="w-full flex justify-center mt-5">
                             <Button
                                 mediumPurple
-                                class="w-max px-3 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
+                                class="w-max px-2 sm:px-3 h-[38px] sm:h-[42px] text-sm sm:text-base shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
                                 label="Gerar PDF"
                             />
                         </div>
