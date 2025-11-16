@@ -49,7 +49,7 @@ const calculateWeightLossProgress = (initial, current, target, objectiveName) =>
   const percentage = totalToLose > 0 ? Math.min((actualLoss / totalToLose) * 100, 100) : 0
   
   return {
-    metaAchieved: Math.max(percentage, 0),
+    metaAchieved: parseFloat(Math.max(percentage, 0).toFixed(1)),
     weightDifference: -(actualLoss), // negativo para perda
     targetWeight: target?.targetWeight,
     objective: objectiveName
@@ -66,7 +66,7 @@ const calculateWeightGainProgress = (initial, current, target, objectiveName) =>
   const percentage = totalToGain > 0 ? Math.min((actualGain / totalToGain) * 100, 100) : 0
   
   return {
-    metaAchieved: Math.max(percentage, 0),
+    metaAchieved: parseFloat(Math.max(percentage, 0).toFixed(1)),
     weightDifference: actualGain, 
     targetWeight: target?.targetWeight,
     objective: objectiveName
@@ -84,7 +84,7 @@ const calculateWeightMaintenanceProgress = (initial, current, target, objectiveN
   const percentage = isWithinRange ? 100 : Math.max(100 - (difference * 25), 0) // penaliza 25% por kg fora da faixa
   
   return {
-    metaAchieved: Math.max(percentage, 0),
+    metaAchieved: parseFloat(Math.max(percentage, 0).toFixed(1)),
     weightDifference: current.weight - initial.weight,
     targetWeight: target?.targetWeight,
     objective: objectiveName
@@ -104,7 +104,7 @@ const calculateImcReductionProgress = (initial, current, target, objectiveName) 
   const percentage = totalImcToReduce > 0 ? Math.min((actualImcReduction / totalImcToReduce) * 100, 100) : 0
   
   return {
-    metaAchieved: Math.max(percentage, 0),
+    metaAchieved: parseFloat(Math.max(percentage, 0).toFixed(1)),
     weightDifference: current.weight - initial.weight,
     targetWeight: target?.targetWeight,
     objective: objectiveName
@@ -126,7 +126,7 @@ const calculateFoodEducationProgress = (initial, current, target, objectiveName)
   const finalPercentage = Math.min(adherencePercentage + consistencyBonus, 100)
   
   return {
-    metaAchieved: Math.max(finalPercentage, 0),
+    metaAchieved: parseFloat(Math.max(finalPercentage, 0).toFixed(1)),
     weightDifference: current.weight - initial.weight,
     targetWeight: target?.targetWeight,
     objective: objectiveName
@@ -137,7 +137,10 @@ const calculateFoodEducationProgress = (initial, current, target, objectiveName)
  * Formata dados de progresso para resposta da API
  */
 export const formatProgressResponse = (progressData, patientData) => {
+  console.log(patientData.id)
   return {
+    id_patient: patientData.idPatient,
+    height: patientData.height,
     objective: progressData.objective,
     initialWeight: patientData.initialWeight,
     actualWeight: patientData.actualWeight,

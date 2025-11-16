@@ -2,10 +2,10 @@ import { PatientService } from '../services/PatientService.js'
 import { CreatePatientSchema } from '../dtos/patient/CreatePatientDto.js'
 import { generateCrudController } from './Controller.js'
 
-// Métodos customizados específicos do Patient
 const getProgress = async (req, res) => {
   try {
-    const { id } = req.params
+    const { id } = req.user; 
+    console.log(id)
     
     if (!id) {
       return res.status(400).json({ 
@@ -30,7 +30,6 @@ const getProgress = async (req, res) => {
   }
 }
 
-// Mescla CRUD padrão com métodos customizados
 export const PatientController = {
   ...generateCrudController(
     PatientService,
