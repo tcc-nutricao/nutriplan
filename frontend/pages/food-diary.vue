@@ -1,14 +1,11 @@
 <template>
     <div class="flex flex-col gap-3 px-4 sm:px-6 md:px-10">
         <h1 class="h1">Diário Alimentar</h1>
-        <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-10">
             <Card class="lg:col-span-2">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 gap-2">
                     <h2 class="h2">Registrar consumo diário</h2>
-                    <div class="flex justify-center align-items border-2 px-2 py-1 bg-p-100 transition 
-                        border-p-400 rounded-xl h2main hover:bg-p-200 cursor-pointer active:scale-95 select-none text-sm sm:text-base">
-                        {{ new Date().toLocaleDateString('pt-BR') }}
-                    </div>
+                    <Badge :label="new Date().toLocaleDateString('pt-BR')"/>
                 </div>
 
                 <p class="text-danger font-bold w-full text-center mt-0 text-sm sm:text-base" v-if="errors.meal && selectedMeal === null">Selecione uma refeição</p>
@@ -102,8 +99,8 @@
                     :periods="datePeriods" 
                     @period-changed="handlePeriodChange"
                 />
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 pt-3 px-2 sm:px-4">
-                    <div class="lg:col-span-1 flex flex-col">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 pt-3 px-2 sm:px-4 mt-3">
+                    <div class="lg:col-span-1 flex flex-col border-r-2 border-gray-200">
                         <div v-for="meal in meals" :key="meal.id" class="mt-3">
                             <h3 class="text-p-900 font-bold text-sm sm:text-base">{{ meal.name.toUpperCase() }}</h3>
                             <p v-for="(consumed, index) in meal.consumedItems" :key="index" class="text-sm sm:text-base break-words sm:text-nowrap">

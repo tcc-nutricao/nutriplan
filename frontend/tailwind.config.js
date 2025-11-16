@@ -54,7 +54,6 @@ module.exports = {
         }
       },
       fontFamily: {
-        newake: ["'Newake'", "sans-serif"],
         sora: ['Sora', 'sans-serif'],
       },
       boxShadow: {

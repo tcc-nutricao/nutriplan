@@ -1,6 +1,5 @@
 <template>
     <div class="flex flex-col w-full gap-3 px-10">
-        <div ref="groupListTop"></div>
         <div class="flex w-full">
             <h1 class="h1">Meus Grupos</h1>
         </div>

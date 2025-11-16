@@ -1,7 +1,5 @@
 <template>
-    <div class="px-10 flex flex-col gap-3">
-        <div ref="recipeListTop"></div>
-
+    <div class="px-4 lg:px-10 flex flex-col gap-3">
         <h1 class="h1">Receitas</h1>
 
         <div class="flex flex-row gap-5">

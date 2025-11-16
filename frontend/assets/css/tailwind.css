@@ -4,13 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face{
-    font-family: 'Newake';
-    src: url('../fonts/Newake.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
-
 * {
     font-family: Sora;
 }
@@ -66,7 +59,7 @@ svg {
 
 .h1 {
     font-size: 2.4em;
-    @apply font-bold text-p-600 m-0;
+    @apply font-bold text-p-950 m-0 text-2xl sm:text-3xl md:text-4xl;
 }
 .h1b {
     @apply font-bold text-p-950 m-0;
