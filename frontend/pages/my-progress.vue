@@ -1,13 +1,13 @@
 <template>
-    <div class="flex flex-col gap-3 px-10">
-        <h1 class="h1">Meu progresso</h1>
+    <div class="flex flex-col gap-3 px-4 sm:px-6 md:px-10">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">Meu progresso</h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-6 xl:grid-cols-6 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-6 xl:grid-cols-6 gap-4 md:gap-6">
             <Card class="col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-2">
-                <div class="flex flex-col space-y-3 mb-5">
+                <div class="flex flex-col space-y-2 sm:space-y-3 mb-3 sm:mb-5">
                     <div v-for="objective in objectiveLabels" class="flex gap-2 items-center">
-                        <p :class="objective.isTitle ? 'h3' : ''">{{ objective.label }} </p>
-                        <h3 :class="objective.isTitle ? 'h2main' : 'h3'">{{ objective.format ? objective.format(items[objective.value]) : items[objective.value] ?? '' }}</h3>
+                        <p :class="objective.isTitle ? 'text-sm sm:text-base md:text-lg font-semibold' : 'text-xs sm:text-sm'">{{ objective.label }} </p>
+                        <h3 :class="objective.isTitle ? 'text-lg sm:text-xl md:text-2xl font-bold text-p-600' : 'text-sm sm:text-base md:text-lg font-semibold'">{{ objective.format ? objective.format(items[objective.value]) : items[objective.value] ?? '' }}</h3>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-2">
@@ -19,7 +19,7 @@
                     />
                     <Button
                         mediumPurple
-                        class="h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
+                        class="h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition text-sm sm:text-base"
                         label="Atualizar"
                         @click="updateProgress"
                     />
@@ -27,39 +27,39 @@
             </Card>
 
             <Card class="col-span-1 md:col-span-3 lg:col-span-3 xl:col-span-3">
-                <div class="flex flex-col justify-start items-center gap-5 mb-3">
-                    <h2 class="h2">Progresso</h2>
-                    <div class="flex items-center justify-center w-full h-[300px]">
+                <div class="flex flex-col justify-start items-center gap-3 sm:gap-5 mb-3">
+                    <h2 class="text-xl sm:text-2xl font-bold text-gray-800">Progresso</h2>
+                    <div class="flex items-center justify-center w-full h-[200px] sm:h-[250px] md:h-[300px]">
                         <ProgressChart
                             class="overflow-visible"
                             :chart-data="chartData"
                             :chart-options="chartOptions"
                         />
                     </div>
-                    <div class="w-full flex justify-center mt-5">
+                    <div class="w-full flex justify-center mt-3 sm:mt-5">
                         <Button
                             mediumPurple
-                            class="w-max px-3 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
+                            class="w-full sm:w-max px-3 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition text-sm sm:text-base"
                             label="Gerar PDF"
                         />
                     </div>
                 </div>
             </Card>
 
-            <Card>
-                <div class="flex flex-col h-max space-y-4">
+            <Card class="col-span-1 md:col-span-1">
+                <div class="flex flex-col h-max space-y-3 sm:space-y-4">
                     <Card class="text-center">
-                        <h1 class="h1 mb-0">{{ items.metaAchieved }}%</h1>
-                        <h3 class="h3">da meta atingida</h3>
+                        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-p-600 mb-0">{{ items.metaAchieved }}%</h1>
+                        <h3 class="text-xs sm:text-sm font-medium text-gray-600">da meta atingida</h3>
                         <ProgressBar :progress="items.metaAchieved" />
                     </Card>
                     <Card class="text-center">
-                        <h1 class="h1 mb-0">{{ items.imc }}</h1>
-                        <h3 class="h3">IMC atual</h3>
+                        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-p-600 mb-0">{{ items.imc }}</h1>
+                        <h3 class="text-xs sm:text-sm font-medium text-gray-600">IMC atual</h3>
                     </Card>
                     <Card class="text-center">
-                        <h1 class="h1 mb-0">{{ progress.length > 0 ? progress.length : 0 }}</h1>
-                        <h3 class="h3">registros de peso</h3>
+                        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-p-600 mb-0">{{ progress.length > 0 ? progress.length : 0 }}</h1>
+                        <h3 class="text-xs sm:text-sm font-medium text-gray-600">registros de peso</h3>
                     </Card>
                 </div>
             </Card>
