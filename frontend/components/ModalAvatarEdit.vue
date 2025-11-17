@@ -22,7 +22,7 @@
           <ClientOnly>
             <div class="h-80 w-full mt-4 mb-3 bg-gray-100 rounded-xl overflow-hidden flex items-center justify-center">
               <Cropper
-                v-if="showModal == 'avatarEdit'"
+                v-if="title == 'avatarEdit'"
                 ref="cropper"
                 class="h-full w-full"
                 :src="imageSrc"

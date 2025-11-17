@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 const findByUserId = async (idUser) => {
   return await prisma.patient.findUnique({
     where: { id_user: idUser },
-	include: { user: true }
+	  include: { user: true }
   });
 };
 

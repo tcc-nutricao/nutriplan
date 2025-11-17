@@ -9,7 +9,7 @@ export const calculateImc = (weight, height) => {
     throw new AppError({ messgae: 'Peso e altura devem ser valores positivos válidos' })
   }
 
-  const heightInMeters = height / 100
+  const heightInMeters = height > 3 ? height / 100 : height
 
   const imc = weight / (heightInMeters * heightInMeters)
   return parseFloat(imc.toFixed(2))
@@ -36,6 +36,7 @@ export const classifyImc = (imc) => {
  * @returns {object} - Objeto com IMC e classificação
  */
 export const getImcData = (weight, height) => {
+  console.log('Calculating IMC with weight:', weight, 'and height:', height)
   const imc = calculateImc(weight, height)
   const classification = classifyImc(imc)
   

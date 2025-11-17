@@ -295,6 +295,7 @@ model MealPlan {
   status          MealPlanStatus
   expiration_date DateTime?
   favorite        Boolean?    @default(false)
+  ai_generated    Boolean     @default(false)
   created_at      DateTime
   deleted_at      DateTime?
   updated_at      DateTime?

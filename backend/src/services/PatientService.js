@@ -4,6 +4,7 @@ import { MealPlanService } from './MealPlanService.js'
 import { generateCrudService } from './Service.js'
 import { getImcData } from '../utils/useImc.js'
 import { calculateProgress, formatProgressResponse, calculateTotalDays } from '../utils/useProgress.js'
+import { AppError } from '../exceptions/AppError.js'
 
 const baseCrudService = generateCrudService(PatientRepository)
 
@@ -24,19 +25,19 @@ const getPatientByUserId = async (userId) => {
   }
 }
 
-const getProgress = async (patientId) => {
+const getProgress = async (userId) => {
   try {
-      if (!patientId) {
-          throw new AppError({ message: 'patientId é obrigatório' })
+      if (!userId) {
+          throw new AppError({ message: 'userId é obrigatório' })
       }
 
-      const patient = await PatientRepository.findById(patientId)
+      const patient = await PatientRepository.findByUserId(userId)
       if (!patient) {
           throw new AppError({ message: 'Paciente não encontrado' })
       }
 
       const mealPlanFilters = [{ column: 'status', value: 'ACTIVE', operator: '=' }]
-      const { data: mealPlans = [] } = await MealPlanService.getMealPlanByPatient(patientId, mealPlanFilters)
+      const { data: mealPlans = [] } = await MealPlanService.getMealPlanByPatient(userId, mealPlanFilters)
 
       if (mealPlans.length === 0) {
           return { data: [], total: 0, message: 'Nenhum plano de refeição ativo encontrado' }
@@ -49,7 +50,7 @@ const getProgress = async (patientId) => {
 
       // Buscar histórico de dados de saúde
       const healthDataFilters = [
-          { column: 'id_patient', value: patientId, operator: '=' }
+          { column: 'id_patient', value: userId, operator: '=' }
       ]
       const { data: healthData = [] } = await HealthDataRepository.search({ 
           filters: healthDataFilters, 
@@ -92,8 +93,9 @@ const getProgress = async (patientId) => {
           objective.name
       )
 
-      // Dados do paciente para formatação
       const patientData = {
+          idPatient: patient.id,
+          height: patient.height,
           initialWeight,
           actualWeight,
           currentImc: imc,

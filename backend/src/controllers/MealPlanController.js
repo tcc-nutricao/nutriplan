@@ -5,16 +5,16 @@ import { generateCrudController } from './Controller.js'
 // Métodos customizados específicos do MealPlan
 const getMealPlanByPatient = async (req, res) => {
   try {
-    const { patientId } = req.params
+    const { id } = req.user
     
-    if (!patientId) {
+    if (!id) {
       return res.status(400).json({ 
         success: false, 
         message: 'ID do paciente é obrigatório' 
       })
     }
 
-    const mealPlansData = await MealPlanService.getMealPlanByPatient(parseInt(patientId))
+    const mealPlansData = await MealPlanService.getMealPlanByPatient(parseInt(id))
     
     return res.status(200).json({ 
       success: true, 

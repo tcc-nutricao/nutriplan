@@ -1,7 +1,5 @@
 <template>
-    <div class="px-10 flex flex-col gap-3">
-        <div ref="recipeListTop"></div>
-
+    <div class="px-4 lg:px-10 flex flex-col gap-3">
         <h1 class="h1">Receitas</h1>
 
         <div class="flex flex-row gap-5">
@@ -10,8 +8,8 @@
                     :filter="true" 
                     :sort="true" 
                     :filterOptions="getFilterOptions()" 
-                    placeholder="Pesquise uma receita" 
-                    class="sticky top-[30px] self-start w-full bg-[#f6f5fd] z-20" 
+                    placeholder="Pesquise uma receita"
+                    class="sticky top-[30px] self-start w-full bg-p-50 z-20 shadowSearch" 
                 />
                 <Button
                     v-if="isNutri"
@@ -36,10 +34,10 @@
                     />
                 </div>
 
-                <div v-else-if="loading" class="mt-5 text-center text-gray-500">
+                <div v-else-if="loading" class="mt-10 text-center text-lg text-gray-500">
                     <p>Carregando receitas...</p>
                 </div>
-                <div v-else class="mt-5 text-center text-gray-500">
+                <div v-else class="mt-10 text-center text-lg text-gray-500">
                     <p>Nenhuma receita encontrada.</p>
                 </div>
             </div>
@@ -168,3 +166,24 @@ const selectedItem = computed(() => {
     return items.value.find(item => item.id === selectedItemId.value);
 });
 </script>
+
+<style scoped>
+@keyframes fade-shadow {
+  from {
+      box-shadow: 0 0 40px 40px rgba(246, 245, 253, 0),
+          0 -10px 0 rgba(246, 245, 253, 0);
+  }
+  to {
+      box-shadow: 0 0 40px 40px rgba(246, 245, 253, 1),
+          0 -30px 0 rgba(246, 245, 253, 1);
+  }
+}
+.shadowSearch {
+    animation: fade-shadow linear;
+    animation-timeline: scroll();
+    animation-range-start: 120px;
+    animation-range-end: 200px;
+
+    animation-fill-mode: forwards;
+}
+</style>

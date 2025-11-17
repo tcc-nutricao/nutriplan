@@ -8,7 +8,7 @@ import { AppError } from '../exceptions/AppError.js'
 const getMealPlanByPatient = async (patientId, additionalFilters = []) => {
   try {
     if (!patientId) {
-      throw new AppError({ message: 'patientId é obrigatório' })
+      throw new AppError({ message: 'Paciente não encontrado para o patientId fornecido' })
     }
 
     // Combinar filtro do paciente com filtros adicionais

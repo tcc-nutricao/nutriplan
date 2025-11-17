@@ -84,6 +84,10 @@ export const FoodConsumedService = {
         }
 
         const patient = await PatientService.getPatientByUserId(userId)
+        console.log('Patient found:', patient.id);
+        if (!patient) {
+          throw new AppError({ message: 'Paciente não encontrado para o usuário fornecido' })
+        }
 
         const activeMealPlan = await MealPlanService.getActiveMealPlanForPatient(patient.id)
 

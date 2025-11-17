@@ -5,5 +5,5 @@ import { Roles } from "../config/roles.js";
 
 export default (router) => {
   genericRoute(router, '/patient', api, authenticate, authorize(Roles.STANDARD))
-  router.get('/patient/:id/progress', authenticate, authorize(Roles.STANDARD), api.getProgress)
+  router.get('/patient/progress', authenticate, authorize(Roles.STANDARD), api.getProgress)
 }
