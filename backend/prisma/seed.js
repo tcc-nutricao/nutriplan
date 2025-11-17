@@ -203,7 +203,7 @@ async function main() {
     skipDuplicates: true,
   });
 
-  // Pega a primeira preferência para uso nos relacionamentos
+    // Pega a primeira preferência para uso nos relacionamentos
   const preference = await prisma.preference.findFirst();
   // DIETARY RESTRICTION
   const dietaryRestriction = await prisma.dietaryRestriction.create({
@@ -225,60 +225,50 @@ async function main() {
     data: { name: "Vegetariano", created_at: new Date() },
   });
 
-  // MEAL BASE
-  const mealBreakfast = await prisma.meal.create({
-    data: { name: "Café da manhã", created_at: new Date() },
+  // MEAL BASE (6 refeições fixas - IDs 1 a 6)
+  const mealBreakfast = await prisma.meal.upsert({
+    where: { id: 1 },
+    update: {},
+    create: { id: 1, name: "Café da manhã", created_at: new Date() },
   });
-  const mealLunch = await prisma.meal.create({
-    data: { name: "Almoço", created_at: new Date() },
+  
+  const mealMorningSnack = await prisma.meal.upsert({
+    where: { id: 2 },
+    update: {},
+    create: { id: 2, name: "Lanche da manhã", created_at: new Date() },
+  });
+  
+  const mealLunch = await prisma.meal.upsert({
+    where: { id: 3 },
+    update: {},
+    create: { id: 3, name: "Almoço", created_at: new Date() },
+  });
+  
+  const mealAfternoonSnack = await prisma.meal.upsert({
+    where: { id: 4 },
+    update: {},
+    create: { id: 4, name: "Café da tarde", created_at: new Date() },
+  });
+  
+  const mealDinner = await prisma.meal.upsert({
+    where: { id: 5 },
+    update: {},
+    create: { id: 5, name: "Janta", created_at: new Date() },
+  });
+  
+  const mealNightSnack = await prisma.meal.upsert({
+    where: { id: 6 },
+    update: {},
+    create: { id: 6, name: "Lanche da noite", created_at: new Date() },
   });
 
-  // MEAL PLAN
-  const mealPlan = await prisma.mealPlan.create({
-    data: {
-      id_patient: patient.id,
-      id_nutritionist: nutritionist.id,
-      id_goal: goal.id,
-      calories: 2000,
-      status: MealPlanStatus.ACTIVE,
-      created_at: new Date(),
-    },
-  });
-
-  // MEAL PLAN MEALS
-  const planBreakfast = await prisma.mealPlanMeal.create({
-    data: {
-      id_meal_plan: mealPlan.id,
-      id_meal: mealBreakfast.id,
-      time: new Date(),
-      day: WeekDay.MON,
-      created_at: new Date(),
-    },
-  });
-  const planLunch = await prisma.mealPlanMeal.create({
-    data: {
-      id_meal_plan: mealPlan.id,
-      id_meal: mealLunch.id,
-      time: new Date(),
-      day: WeekDay.MON,
-      created_at: new Date(),
-    },
-  });
+  console.log('✅ 6 refeições base criadas (IDs 1-6)');
 
   // MEAL PREFERENCES
   await prisma.mealPreference.create({
     data: {
       id_meal: mealBreakfast.id,
       id_preference: preference.id,
-      created_at: new Date(),
-    },
-  });
-
-  // MEAL PLAN DIETARY RESTRICTION
-  await prisma.mealPlanDietaryRestriction.create({
-    data: {
-      id_dietary_restriction: dietaryRestriction.id,
-      id_meal_plan: mealPlan.id,
       created_at: new Date(),
     },
   });
@@ -353,38 +343,40 @@ async function main() {
   });
 
   // FOOD CONSUMED (one with food, one with recipe)
-  await prisma.foodConsumed.create({
-    data: {
-      id_meal_plan_meal: planBreakfast.id,
-      id_food: banana.id,
-      id_unit_of_measurement: gram.id,
-      quantity: 120,
-      date: new Date(),
-      created_at: new Date(),
-      updated_at: new Date(),
-    },
-  });
-  await prisma.foodConsumed.create({
-    data: {
-      id_meal_plan_meal: planLunch.id,
-      id_recipe: recipe.id,
-      id_unit_of_measurement: gram.id,
-      quantity: 1,
-      date: new Date(),
-      created_at: new Date(),
-      updated_at: new Date(),
-    },
-  });
+  // Comentado porque não temos meal plan criado na seed
+  // await prisma.foodConsumed.create({
+  //   data: {
+  //     id_meal_plan_meal: planBreakfast.id,
+  //     id_food: banana.id,
+  //     id_unit_of_measurement: gram.id,
+  //     quantity: 120,
+  //     date: new Date(),
+  //     created_at: new Date(),
+  //     updated_at: new Date(),
+  //   },
+  // });
+  // await prisma.foodConsumed.create({
+  //   data: {
+  //     id_meal_plan_meal: planLunch.id,
+  //     id_recipe: recipe.id,
+  //     id_unit_of_measurement: gram.id,
+  //     quantity: 1,
+  //     date: new Date(),
+  //     created_at: new Date(),
+  //     updated_at: new Date(),
+  //   },
+  // });
 
   // MEAL PLAN RECIPE (associa a receita ao plano de refeição)
-  await prisma.mealPlanRecipe.create({
-    data: {
-      id_recipe: recipe.id,
-      id_meal_plan_meal: planBreakfast.id,
-      favorite: true,
-      created_at: new Date(),
-    },
-  });
+  // Comentado porque não temos meal plan criado na seed
+  // await prisma.mealPlanRecipe.create({
+  //   data: {
+  //     id_recipe: recipe.id,
+  //     id_meal_plan_meal: planBreakfast.id,
+  //     favorite: true,
+  //     created_at: new Date(),
+  //   },
+  // });
 
   // REPORT
   await prisma.report.create({

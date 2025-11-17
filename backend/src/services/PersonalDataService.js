@@ -4,6 +4,10 @@ import { MealPlanDietaryRestrictionRepository } from "../repositories/MealPlanDi
 import { GoalRepository } from "../repositories/GoalRepository.js";
 import { GoalObjectiveRepository } from "../repositories/GoalObjectiveRepository.js";
 import { HealthDataRepository } from "../repositories/HealthDataRepository.js";
+import { MealPlanMealRepository } from "../repositories/MealPlanMealRepository.js";
+import { MealPlanRecipeRepository } from "../repositories/MealPlanRecipeRepository.js";
+import { RecipeRepository } from "../repositories/RecipeRepository.js";
+import { GeminiService } from "./GeminiService.js";
 import { PrismaClient } from "@prisma/client";
 import { AppError } from "../exceptions/AppError.js";
 
@@ -143,17 +147,48 @@ const updatePersonalData = async (userId, personalData) => {
     if (existingMealPlans.data && existingMealPlans.data.length > 0) {
       mealPlan = existingMealPlans.data[0];
     } else {
-      // Criar novo meal plan se não existir
-      const mealPlanData = {
-        id_patient: patient.id,
-        id_nutritionist: 1,
-        id_goal: goal.id,
-        calories: 2000,
-        status: "ACTIVE",
-        created_at: new Date(),
-        updated_at: new Date(),
-      };
-      mealPlan = await MealPlanRepository.create(mealPlanData, tx);
+      // // Gerar 10 planos alimentares completos com IA
+      // console.log('🚀 Nenhum plano existente. Gerando 10 planos com IA...');
+      
+      // // Buscar objetivos já carregados acima (passo 3)
+      // const existingObjectives = await GoalObjectiveRepository.search({
+      //   filters: [{ field: "id_goal", value: goal.id, operator: "equals" }],
+      // });
+      
+      // const aiResult = await generateCompleteAIMealPlans(
+      //   patient, 
+      //   goal, 
+      //   updatedPatientData, // Dados atualizados
+      //   existingObjectives.data || [], // Objetivos já carregados
+      //   [], // Restrições virão depois
+      //   tx
+      // );
+      
+      // if (aiResult.success && aiResult.plans.length > 0) {
+      //   // Ativar o primeiro plano gerado
+      //   mealPlan = await MealPlanRepository.update(
+      //     aiResult.plans[0].id,
+      //     { status: "ACTIVE" },
+      //     tx
+      //   );
+        
+      //   console.log(`✅ Plano 1 ativado. ${aiResult.count - 1} planos alternativos disponíveis.`);
+      // } else {
+      //   // Fallback: criar plano padrão se IA falhar
+      //   console.warn('⚠️  IA falhou. Criando plano padrão...');
+        
+      //   const mealPlanData = {
+      //     id_patient: patient.id,
+      //     id_nutritionist: 1,
+      //     id_goal: goal.id,
+      //     calories: 2000,
+      //     status: "ACTIVE",
+      //     ai_generated: false,
+      //     created_at: new Date(),
+      //     updated_at: new Date(),
+      //   };
+      //   mealPlan = await MealPlanRepository.create(mealPlanData, tx);
+      // }
     }
 
     //5. Atualizar restrições - remover existentes e criar novas
@@ -251,7 +286,170 @@ const updatePersonalData = async (userId, personalData) => {
   return result;
 };
 
+/**
+ * Gera e salva 10 planos alimentares completos com refeições e receitas usando IA
+ * @param {Object} patient - Dados do paciente
+ * @param {Object} goal - Goal ativo do paciente
+ * @param {Object} patientData - Dados atualizados do paciente (height, weight, etc)
+ * @param {Array} goalObjectives - Objetivos já carregados
+ * @param {Array} dietaryRestrictions - Restrições alimentares já carregadas
+ * @param {Object} tx - Transação Prisma (opcional)
+ */
+const generateCompleteAIMealPlans = async (
+  patient, 
+  goal, 
+  patientData,
+  goalObjectives = [],
+  dietaryRestrictions = [],
+  tx = null
+) => {
+  try {
+    console.log('🤖 Iniciando geração de 10 planos completos com IA...');
+
+    // 1. Calcular idade (usar dados já disponíveis)
+    const age = patient.birth_date
+      ? Math.floor((new Date() - new Date(patient.birth_date)) / (365.25 * 24 * 60 * 60 * 1000))
+      : 25;
+
+    // 2. Usar dados já atualizados do paciente (evita busca no banco)
+    const latestHealth = {
+      height: patientData.height || patient.height,
+      weight: patientData.weight || patient.weight,
+      bmi: (patientData.weight || patient.weight) / Math.pow((patientData.height || patient.height) / 100, 2),
+    };
+
+    // 3. Usar objetivos já passados (evita busca duplicada)
+    const restrictions = dietaryRestrictions.map(r => r.name || r);
+
+    // 4. Buscar receitas disponíveis (limitar a 50 para não sobrecarregar o prompt)
+    const recipesData = await RecipeRepository.search({
+      limit: 50,
+      orderColumn: "created_at",
+      order: "desc",
+    });
+    
+    const availableRecipes = recipesData.data || [];
+
+    // 5. Montar perfil do paciente (usando dados já carregados)
+    const userProfile = {
+      height: latestHealth.height,
+      weight: latestHealth.weight,
+      bmi: latestHealth.bmi,
+      gender: patientData.gender || patient.gender,
+      age,
+      goals: goalObjectives.map(go => ({
+        name: go.objective?.name || "Saúde",
+      })),
+      dietaryRestrictions: restrictions,
+    };
+
+    // 6. Chamar Gemini para gerar 10 planos completos
+    console.log('📡 Chamando IA Gemini...');
+    const aiResponse = await GeminiService.generateCompleteMealPlans(
+      userProfile, 
+      availableRecipes, 
+      10
+    );
+
+    // 7. Salvar os 10 planos no banco
+    const savedPlans = [];
+    const now = new Date();
+    const expirationDate = new Date();
+    expirationDate.setMonth(expirationDate.getMonth() + 1); // 1 mês
+
+    for (let planIndex = 0; planIndex < aiResponse.plans.length; planIndex++) {
+      const aiPlan = aiResponse.plans[planIndex];
+      
+      console.log(`📝 Salvando plano ${planIndex + 1}: ${aiPlan.name || 'Sem nome'}`);
+
+      // Criar MealPlan
+      const mealPlanData = {
+        id_patient: patient.id,
+        id_nutritionist: patient.id_nutritionist || 1,
+        id_goal: goal.id,
+        calories: aiPlan.calories || 2000,
+        status: "DRAFT", // Todos como rascunho
+        ai_generated: true,
+        expiration_date: expirationDate,
+        created_at: now,
+        updated_at: now,
+      };
+
+      const createdMealPlan = tx
+        ? await MealPlanRepository.create(mealPlanData, tx)
+        : await MealPlanRepository.create(mealPlanData);
+
+      // Criar MealPlanMeals e MealPlanRecipes para cada dia
+      if (aiPlan.days && Array.isArray(aiPlan.days)) {
+        for (const dayData of aiPlan.days) {
+          if (dayData.meals && Array.isArray(dayData.meals)) {
+            for (const mealData of dayData.meals) {
+              // Criar MealPlanMeal
+              const mealPlanMealData = {
+                id_meal_plan: createdMealPlan.id,
+                id_meal: mealData.id_meal,
+                time: mealData.time ? new Date(`1970-01-01T${mealData.time}:00`) : null,
+                day: dayData.day,
+                created_at: now,
+                updated_at: now,
+              };
+
+              const createdMealPlanMeal = tx
+                ? await MealPlanMealRepository.create(mealPlanMealData, tx)
+                : await MealPlanMealRepository.create(mealPlanMealData);
+
+              // Criar MealPlanRecipes (associar receitas à refeição)
+              if (mealData.recipe_ids && Array.isArray(mealData.recipe_ids)) {
+                for (const recipeId of mealData.recipe_ids) {
+                  // Verificar se a receita existe
+                  const recipeExists = availableRecipes.find(r => r.id === recipeId);
+                  
+                  if (recipeExists || recipeId <= availableRecipes.length) {
+                    const mealPlanRecipeData = {
+                      id_recipe: recipeId,
+                      id_meal_plan_meal: createdMealPlanMeal.id,
+                      favorite: false,
+                      created_at: now,
+                      updated_at: now,
+                    };
+
+                    if (tx) {
+                      await MealPlanRecipeRepository.create(mealPlanRecipeData, tx);
+                    } else {
+                      await MealPlanRecipeRepository.create(mealPlanRecipeData);
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      savedPlans.push(createdMealPlan);
+    }
+
+    console.log(`✅ ${savedPlans.length} planos completos salvos com sucesso!`);
+
+    return {
+      success: true,
+      plans: savedPlans,
+      count: savedPlans.length,
+    };
+
+  } catch (error) {
+    console.error('❌ Erro ao gerar planos completos com IA:', error);
+    return {
+      success: false,
+      plans: [],
+      count: 0,
+      error: error.message,
+    };
+  }
+};
+
 export const PersonalDataService = {
   updatePersonalData,
   getPersonalData,
+  generateCompleteAIMealPlans,
 };
