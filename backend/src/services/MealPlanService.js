@@ -5,20 +5,15 @@ import { AppError } from '../exceptions/AppError.js'
 
 
 // Métodos customizados adicionais
-const getMealPlanByPatient = async (userId, additionalFilters = []) => {
+const getMealPlanByPatient = async (patientId, additionalFilters = []) => {
   try {
-    if (!userId) {
-      throw new AppError({ message: 'userId é obrigatório' })
-    }
-
-    const patient = await PatientRepository.findByUserId(userId)
-    if (!patient) {
-      throw new AppError({ message: 'Paciente não encontrado para o userId fornecido' })
+    if (!patientId) {
+      throw new AppError({ message: 'Paciente não encontrado para o patientId fornecido' })
     }
 
     // Combinar filtro do paciente com filtros adicionais
     const filters = [
-      { column: 'id_patient', value: patient.id, operator: '=' },
+      { column: 'id_patient', value: patientId, operator: '=' },
       ...additionalFilters
     ]
     
