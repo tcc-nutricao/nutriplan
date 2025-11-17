@@ -52,12 +52,12 @@
                                     icon="fa-solid fa-edit short flex justify-center" label="Editar" @click="openEditModal" />
                                 <Button red
                                     class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-danger-light shadow-danger/20 transition"
-                                    icon="fa-regular fa-trash-can short flex justify-center" label="Apagar" />
+                                    icon="fa-regular fa-trash-can short flex justify-center" label="Apagar" @click="openDeleteModal" />
                             </div>
                             <div v-else class="flex gap-3">
                                 <Button red
                                     class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-danger-light shadow-danger/20 transition"
-                                    icon="fa-solid fa-right-from-bracket short flex justify-center" label="Sair" />
+                                    icon="fa-solid fa-right-from-bracket short flex justify-center" label="Sair" @click="openLeaveModal" />
                             </div>
                         </div>
                     </div>
@@ -124,6 +124,14 @@
             </div>
         </div>
         <ModalGroupCreate v-if="showModal === 'Criar' || showModal === 'Editar'" :title="showModal" @close="closeModal" @save="handleGroupCreate" />
+        <ModalDanger
+            v-if="showModal == 'delete'"
+            title="Tem certeza?"
+            :content="showModal === 'delete' ? 'Esse grupo também será apagado para todos os participantes permanentemente.' : 'Ao sair do grupo, será necessário entrar com o mesmo código novamente.'"
+            btnLabel="Apagar"
+            @confirm="[{handleGroupDelete : showModal === 'delete'}, {handleGroupLeave : showModal === 'sair'}]"
+            @closeModal="closeModal"
+        />
     </div>
 </template>
 
@@ -199,7 +207,7 @@ async function handleGroupCreate(groupData) {
   try {
     const dataToSave = { 
       name: groupData.name,
-      picture: groupData.image, // Opcional - Corrigido de 'image' para 'picture'
+      picture: groupData.image, 
       invite_code: generateInviteCode() 
     };
 
@@ -239,7 +247,21 @@ const openDeleteModal = () => {
   showModal.value = "delete";
 };
 
+const openLeaveModal = () => {
+  showModal.value = "sair";
+};
+
 const closeModal = () => {
+  showModal.value = "";
+};
+
+const handleGroupDelete = () => {
+// logica aqui
+  showModal.value = "";
+};
+
+const handleGroupLeave = () => {
+// logica aqui
   showModal.value = "";
 };
 
