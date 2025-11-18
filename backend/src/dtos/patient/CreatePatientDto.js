@@ -33,19 +33,6 @@ export const CreatePatientSchema = z.object({
     },
     z.number().nonnegative({ message: 'Peso deve ser >= 0' })
   ).optional(),
-  profile_picture: z
-    .preprocess(
-      (val) => {
-        if (!val) return undefined;
-        if (typeof val === 'string') {
-          // espera base64 (sem validação rígida aqui)
-            try { return Buffer.from(val, 'base64'); } catch { return undefined; }
-        }
-        return undefined;
-      },
-      z.instanceof(Buffer).optional()
-    )
-    .optional(),
   created_at: z.preprocess(
     (val) => (val ? new Date(val) : new Date()),
     z.date()

@@ -72,6 +72,7 @@ model User {
   email      String   @unique
   password   String
   role       Role
+  profile_picture    Bytes?       @db.MediumBlob
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
   deleted_at  DateTime? 
@@ -152,7 +153,6 @@ model Patient {
   gender             Gender       @default(NONE)
   height             Float        @default(0)
   weight             Float        @default(0)
-  profile_picture    Bytes?       @db.MediumBlob
   created_at         DateTime     @default(now())
   updated_at         DateTime     @updatedAt
   deleted_at         DateTime?

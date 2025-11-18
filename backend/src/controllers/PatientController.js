@@ -5,7 +5,7 @@ import { generateCrudController } from './Controller.js'
 const getProgress = async (req, res) => {
   try {
     const { id } = req.user; 
-    console.log(id)
+    // console.log(id)
     
     if (!id) {
       return res.status(400).json({ 

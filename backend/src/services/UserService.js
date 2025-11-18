@@ -47,6 +47,22 @@ const insert = async (data) => {
   return result
 }
 
+const updateProfilePicture = async (data, userId) => {
+  try {
+    const updatePic = {
+      profile_picture: data.profile_picture
+    }
+
+    const result = await UserRepository.updateProfilePicture(userId, updatePic)
+
+    return result
+
+  } catch (error) {
+    throw error
+  }
+}
+
+
 const update = async (data, userId) => {
   try {
     const existingUser = await UserRepository.findById(userId)
@@ -61,10 +77,14 @@ const update = async (data, userId) => {
       }
     }
 
-    const updateData = {
-      name: data.name,
-      email: data.email,
-    }
+    // data.profile_picture ? console.log('tem foto') : console.log('sem foto');
+
+    const updateData = data.profile_picture
+      ? { profile_picture: data.profile_picture.split(',')[1] } // Extrai apenas a string base64
+      : {
+          name: data.name,
+          email: data.email
+        };
 
     if (data.currentPassword && data.newPassword) {
       const currentPasswordMatches = await bcrypt.compare(data.currentPassword, existingUser.password)
@@ -101,6 +121,26 @@ const remove = async (userId) => {
     throw error
   }
 }
+
+const getProfilePicture = async (userId) => {
+  try {
+    // console.log('userId', userId)
+    if (!userId) {
+      throw new AppError({ message: 'ID do usuário não fornecido', statusCode: 400 });
+    }
+
+    const user = await UserRepository.findProfilePictureByUserId(userId);
+
+    if (!user || !user.profile_picture) {
+      throw new AppError({ message: 'Foto de perfil não encontrada', statusCode: 404 });
+    }
+
+    return user.profile_picture;
+  } catch (err) {
+    throw err;
+  }
+};
+
 
 const createTemporaryUser = async (data) => {
   try {
@@ -144,7 +184,6 @@ export const UserService = {
   insert,
   update, 
   remove,
-  createTemporaryUser
+  createTemporaryUser,
+  getProfilePicture
 }
-
-

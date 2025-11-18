@@ -3,7 +3,7 @@ import { validatePersonalData, updatePersonalDataSchema } from '../dtos/personal
 
 const updatePersonalData = async (req, res) => {
   try {
-    console.log('aaaaa');
+    // console.log('aaaaa');
     
     const userId = req.user.id 
     

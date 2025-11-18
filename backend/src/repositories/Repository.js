@@ -76,6 +76,7 @@ export const generateCrudRepository = (modelName, options = {}) => {
     },
 
     async update(id, data) {
+      // console.log('data', data)
       return await prisma[modelName].update({
         where: { id },
         data: {

@@ -19,6 +19,35 @@ const transformUserData = (data) => {
   return data
 }
 
+const getProfilePicture = async (req, res) => {
+  try {
+    const { id } = req.user;
+    // console.log(id)
+
+    if (!id) {
+      return res.status(400).json({
+        success: false,
+        message: 'ID do usuário é obrigatório'
+      });
+    }
+
+    const profilePicture = await UserService.getProfilePicture(parseInt(id));
+
+    return res.status(200).json({
+      success: true,
+      data: profilePicture
+    });
+  } catch (error) {
+    console.error('Erro ao buscar foto de perfil:', error);
+    return res.status(500).json({
+      success: false,
+      field: error.field || null,
+      message: error.message || 'Erro interno do servidor'
+    });
+  }
+}
+
+
 const createTemporaryUser = async (req, res, next) => {
   try {
     let data = req.body
@@ -44,6 +73,9 @@ const update = async (req, res, next) => {
     if (data.role) {
       data.role = translateRole(data.role)
     }
+
+    // data.profile_picture ? console.log('tem foto') : console.log('sem foto');
+
 
     const result = await UserService.update(data, parseInt(userId))
 
@@ -86,5 +118,6 @@ export const UserController = {
   ),
   createTemporaryUser,
   update,
-  remove
+  remove,
+  getProfilePicture
 } 

@@ -27,6 +27,7 @@ async function main() {
       email: "admin@example.com",
       password: hashedPassword,
       role: Role.PROFESSIONAL,
+      profile_picture: null,
     },
   });
   const patientUser = await prisma.user.upsert({
@@ -37,6 +38,7 @@ async function main() {
       email: "patient@example.com",
       password: hashedPassword,
       role: Role.STANDARD,
+      profile_picture: null,
     },
   });
   const nutritionistUser = await prisma.user.upsert({
@@ -47,6 +49,7 @@ async function main() {
       email: "nutri@example.com",
       password: hashedPassword,
       role: Role.PROFESSIONAL,
+      profile_picture: null,
     },
   });
 
@@ -72,7 +75,6 @@ async function main() {
       gender: "FEM",
       height: 175,
       weight: 70,
-      profile_picture: null,
       created_at: new Date(),
     },
   });
