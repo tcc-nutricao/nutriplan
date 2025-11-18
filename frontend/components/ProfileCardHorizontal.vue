@@ -34,7 +34,6 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from "vue";
 
 defineProps({
   nome: { type: String, required: true },

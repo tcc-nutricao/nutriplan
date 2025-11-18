@@ -211,14 +211,11 @@ async function handleGroupCreate(groupData) {
       invite_code: generateInviteCode() 
     };
 
-    // DIAGNÓSTICO: O que está sendo enviado para a API?
-    console.log('Payload enviado para a API (insert):', dataToSave);
-
     const response = await insert('group', dataToSave);
 
     if (!response.error) {
-      await fetchGroups(); // Atualiza a lista de grupos
-      closeModal(); // Fecha o modal APÓS o sucesso
+      await fetchGroups(); //
+      closeModal(); 
     } else {
       console.error("Erro ao criar o grupo:", response.data);
       alert('Ocorreu um erro ao criar o grupo. Tente novamente.');

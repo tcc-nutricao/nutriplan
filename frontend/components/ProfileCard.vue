@@ -21,7 +21,14 @@
             <div
               class="flex items-center justify-center rounded-full transition ease-in-out group-hover:-translate-y-1 group-active:scale-95"
             >
+              <img
+                v-if="profilePicture"
+                :src="profilePicture"
+                alt="Foto de perfil"
+                class="size-[100px] rounded-full object-cover mb-3 mt-1 shadow-md"
+              />
               <svg
+                v-else
                 class="size-[100px] mb-3 mt-1 text-p-600 block drop-shadow-np"
                 viewBox="36.5 20 165 165"
                 fill="currentColor"
@@ -86,7 +93,14 @@
             @click="handleProfileClick"
             class="cursor-pointer bg-white flex flex-col items-center mb-3 p-2 rounded-xl transition drop-shadow-xl hover:scale-110 active:scale-95"
           >
+            <img
+              v-if="profilePicture"
+              :src="profilePicture"
+              alt="Foto de perfil"
+              class="size-[25px] rounded-full object-cover"
+            />
             <svg
+              v-else
               class="size-[25px] text-p-600 block drop-shadow-np"
               viewBox="36.5 20 165 165"
               fill="currentColor"
@@ -121,15 +135,17 @@
 import { ref, onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import ListItem from "./ListItem.vue";
-import { useCookie } from "nuxt/app";
+import { useCookie, useNuxtApp } from "nuxt/app";
 
 const router = useRouter();
+const { $axios } = useNuxtApp();
 
 const userCookie = useCookie('user-data');
 const user = ref(userCookie.value);
 
 const isOpen = ref(true);
 const selectedItem = ref(null);
+const profilePicture = ref(null);
 
 const items = computed(() => {
   if (user.value?.role === 'STANDARD') {
@@ -151,7 +167,28 @@ const items = computed(() => {
 });
 
 onMounted(async () => {
+  await fetchProfilePicture();
 });
+
+async function fetchProfilePicture() {
+    try {
+        const response = await $axios.get('user/profile_picture');
+        if (response.data && response.data.success && response.data.data) {
+            const bufferData = Object.values(response.data.data);
+            let binaryString = '';
+            const chunkSize = 8192;
+            const uint8Array = new Uint8Array(bufferData);
+            for (let i = 0; i < uint8Array.length; i += chunkSize) {
+                const chunk = uint8Array.subarray(i, i + chunkSize);
+                binaryString += String.fromCharCode.apply(null, chunk);
+            }
+            const base64String = btoa(binaryString);
+            profilePicture.value = `data:image/jpeg;base64,${base64String}`;
+        }
+    } catch (error) {
+        console.error("Erro ao buscar a foto de perfil no ProfileCard:", error);
+    }
+}
 
 const handleItemSelection = (item) => {
   selectedItem.value = item.label;

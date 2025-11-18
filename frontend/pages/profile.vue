@@ -13,7 +13,14 @@
           class="relative hover:scale-110 active:scale-95 transition cursor-pointer group"
           @click="openAvatarModal()"
         >
+          <img
+            v-if="profilePicture"
+            :src="profilePicture"
+            alt="Foto de perfil"
+            class="w-20 h-20 rounded-full object-cover border-2 border-p-200 shadow-md"
+          />
           <div
+            v-else
             class="w-20 h-20 flex items-center justify-center rounded-full bg-transparent border-purple-200"
           >
             <svg
@@ -163,13 +170,14 @@
 
 <script setup>
 import { ref, onMounted, defineAsyncComponent } from "vue";
-import { useCookie, useNuxtApp } from "nuxt/app";
-import { remove } from "../crud";
+import { useCookie, useNuxtApp, navigateTo } from "nuxt/app";
+import { remove, update } from "../crud";
 
 const { $axios } = useNuxtApp();
 
+
 const ProfileEditModal = defineAsyncComponent(() =>
-  import("../components/ProfileEditModal.vue")
+import("../components/ProfileEditModal.vue")
 );
 
 const userCookie = useCookie("user-data");
@@ -177,6 +185,7 @@ const user = ref(userCookie.value);
 
 const showModal = ref("");
 const activeSection = ref(null);
+const profilePicture = ref(null);
 const imageToEdit = ref(null);
 
 const personalData = ref({
@@ -220,8 +229,28 @@ const handleImageSelected = (imageData) => {
   showModal.value = "avatarEdit";
 };
 
-const handleAvatarSave = (croppedImageData) => {
-  closeModal();
+const handleAvatarSave = async (croppedImageData) => {
+  const payload = {
+    profile_picture: croppedImageData
+  };
+
+  try {
+    const response = await update("user", payload);
+
+    if (response && !response.error) {
+      alert("Foto de perfil atualizada com sucesso!");
+      // userCookie.value.profile_picture = base64Image;
+      closeModal(true);
+    } else {
+      console.error("Erro ao atualizar a foto:", response);
+      alert("Ocorreu um erro ao salvar sua foto. Tente novamente.");
+      closeModal();
+    }
+  } catch (error) {
+    console.error("Erro na chamada da API:", error);
+    alert("Ocorreu um erro na comunicação com o servidor.");
+    closeModal();
+  }
 };
 
 const handleDeleteAccount = async () => {
@@ -234,6 +263,30 @@ const handleDeleteAccount = async () => {
   closeModal();
   await navigateTo('/');
 };
+
+async function fetchProfilePicture() {
+    try {
+        const response = await $axios.get('user/profile_picture');
+
+        if (response.data && response.data.success && response.data.data) {
+            
+            const bufferData = Object.values(response.data.data);
+
+            let binaryString = '';
+            const chunkSize = 8192;
+            const uint8Array = new Uint8Array(bufferData);
+            for (let i = 0; i < uint8Array.length; i += chunkSize) {
+                const chunk = uint8Array.subarray(i, i + chunkSize);
+                binaryString += String.fromCharCode.apply(null, chunk);
+            }
+            const base64String = btoa(binaryString);
+
+            profilePicture.value = `data:image/jpeg;base64,${base64String}`;
+        }
+    } catch (error) {
+        console.error("Erro ao buscar a foto de perfil:", error);
+    }
+}
 
 onMounted(async () => {
   try {
@@ -252,24 +305,6 @@ onMounted(async () => {
   } catch (err) {
     console.error("Erro ao buscar dados pessoais:", err);
   }
+  await fetchProfilePicture();
 });
 </script>
-
-<style>
-.modal-enter-from {
-  opacity: 0;
-}
-.modal-enter-from :deep(.modal-container) {
-  transform: scale(0.9);
-}
-.modal-leave-to {
-  opacity: 0;
-}
-.modal-leave-to :deep(.modal-container) {
-  transform: scale(0.9);
-}
-.modal-enter-active,
-.modal-leave-active {
-  transition: all 0.3s ease;
-}
-</style>
