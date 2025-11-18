@@ -1,6 +1,13 @@
 <template>
   <teleport to="body">
-    <Transition name="modal" appear>
+    <Transition
+      name="modal"
+      appear
+      enter-from-class="opacity-0"
+      leave-to-class="opacity-0"
+      enter-active-class="transition-opacity duration-300 ease"
+      leave-active-class="transition-opacity duration-300 ease"
+    >
       <div
         v-if="showModal != 'groupEdit'"
         class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]"
@@ -10,7 +17,7 @@
         @drop.prevent="onDrop"
       >
         <div
-          class="bg-white rounded-3xl py-7 px-9 w-full max-w-lg shadow-lg relative max-h-[90vh] overflow-y-auto modal-container"
+          class="bg-white rounded-3xl py-7 px-9 w-full max-w-lg shadow-lg relative max-h-[90vh] overflow-y-auto modal-container transition-transform duration-300 ease"
           :class="{ 'is-dragging': isDragging }"
         >
           <button
@@ -104,7 +111,6 @@ const handleFile = (file) => {
   if (file && file.type.startsWith('image/')) {
     const reader = new FileReader();
     reader.onload = (event) => {
-      // emit('imageSelected', event.target.result);
       handleImageSelected(event.target.result);
     };
     reader.readAsDataURL(file);
@@ -134,9 +140,6 @@ const save = () => {
     return;
   }
 
-  // DIAGNÓSTICO: O que está sendo enviado para a página pai?
-  console.log('Dados emitidos pelo ModalGroupCreate:', object.value);
-  // Verifique no console do navegador se 'object.value.image' tem uma string base64.
 
   emit('save', object.value);
 }
@@ -144,7 +147,6 @@ const save = () => {
 const emit = defineEmits(["close", "save"]);
 
 onMounted(() => {
-  // Preenche o formulário com dados iniciais (útil para edição)
   object.value = { ...props.initialData };
 });
 
@@ -168,30 +170,6 @@ const closeModal = () => {
 </script>
 
 <style>
-.modal-enter-from {
-  opacity: 0;
-}
-.modal-enter-from .modal-container {
-  transform: scale(0.9);
-}
-
-.modal-leave-to {
-  opacity: 0;
-}
-.modal-leave-to .modal-container {
-  transform: scale(0.9);
-}
-
-.modal-enter-active,
-.modal-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.modal-enter-active .modal-container,
-.modal-leave-active .modal-container {
-  transition: transform 0.3s ease;
-}
-
 .is-dragging {
   border: 4px dashed #8b5cf6;
   background-color: #f5f3ff;

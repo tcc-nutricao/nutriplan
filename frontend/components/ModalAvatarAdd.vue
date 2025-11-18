@@ -1,6 +1,13 @@
 <template>
   <teleport to="body">
-    <Transition name="modal" appear>
+    <Transition
+      name="modal"
+      appear
+      enter-from-class="opacity-0"
+      leave-to-class="opacity-0"
+      enter-active-class="transition-opacity duration-300 ease"
+      leave-active-class="transition-opacity duration-300 ease"
+    >
       <div
         class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]"
         @click.self="$emit('close')"
@@ -9,7 +16,7 @@
         @drop.prevent="onDrop"
       >
         <div
-          class="bg-white rounded-3xl py-7 px-9 w-full max-w-lg shadow-lg relative max-h-[90vh] overflow-y-auto modal-container transition-all"
+          class="bg-white rounded-3xl py-7 px-9 w-full max-w-lg shadow-lg relative max-h-[90vh] overflow-y-auto modal-container transition-all duration-300 ease"
           :class="{ 'is-dragging': isDragging }"
         >
           <button
@@ -83,30 +90,6 @@ const triggerFileInput = () => {
 </script>
 
 <style>
-.modal-enter-from {
-  opacity: 0;
-}
-.modal-enter-from .modal-container {
-  transform: scale(0.9);
-}
-
-.modal-leave-to {
-  opacity: 0;
-}
-.modal-leave-to .modal-container {
-  transform: scale(0.9);
-}
-
-.modal-enter-active,
-.modal-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.modal-enter-active .modal-container,
-.modal-leave-active .modal-container {
-  transition: transform 0.3s ease;
-}
-
 .is-dragging {
   border: 4px dashed #8b5cf6;
   background-color: #f5f3ff;

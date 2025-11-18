@@ -1,12 +1,19 @@
 <template>
   <teleport to="body">
-    <Transition name="modal" appear>
+    <Transition
+      name="modal"
+      appear
+      enter-from-class="opacity-0"
+      leave-to-class="opacity-0"
+      enter-active-class="transition-opacity duration-300 ease"
+      leave-active-class="transition-opacity duration-300 ease"
+    >
     <div
       class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]"
       @click.self="$emit('close', false)"
     >
       <div
-        class="bg-white rounded-3xl py-7 px-9 w-full shadow-lg relative max-h-[90vh] overflow-y-auto modal-container"
+        class="bg-white rounded-3xl py-7 px-9 w-full shadow-lg relative max-h-[90vh] overflow-y-auto modal-container transition-transform duration-300 ease"
         :class="section === 'basic' ? 'max-w-lg' : 'max-w-3xl'"
       >
         <button
@@ -95,7 +102,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, defineEmits } from "vue";
+import { ref } from "vue";
 import { update } from "../crud";
 import { useCookie } from "nuxt/app";
 
@@ -104,7 +111,6 @@ const props = defineProps({
 });
 const emit = defineEmits(["close"]);
 
-// Valores dos campos para a seção basic
 const basicFormData = ref({
   name: "",
   email: "",
@@ -112,7 +118,6 @@ const basicFormData = ref({
   newPassword: "",
 });
 
-// Valores dos campos para a seção personal
 const personalFormData = ref({
   birth_date: "",
   gender: "",
@@ -142,20 +147,18 @@ async function handleSubmit() {
       } else {
         console.log("Perfil atualizado com sucesso:", res.data.data);
 
-        // Atualiza o cookie com os novos dados do usuário
         const updatedUser = res.data;
         userCookie.value.name = updatedUser.name;
         userCookie.value.email = updatedUser.email;
 
         alert("Perfil atualizado com sucesso!");
-        emit("close", true); // Emitir 'true' para indicar sucesso e recarregar
+        emit("close", true); 
       }
     } catch (err) {
       console.error("Erro na requisição:", err);
       alert("Erro na requisição. Tente novamente.");
     }
   } else {
-    // Atualizar dados pessoais
     const formData = {
       birth_date: personalFormData.value.birth_date,
       gender: personalFormData.value.gender,
@@ -174,7 +177,7 @@ async function handleSubmit() {
       } else {
         console.log("Dados pessoais atualizados com sucesso:", res.data.data);
         alert("Dados pessoais atualizados com sucesso!");
-        emit("close", true); // Emitir 'true' para indicar sucesso e recarregar
+        emit("close", true);
       }
     } catch (err) {
       console.error("Erro na requisição:", err);
@@ -183,29 +186,3 @@ async function handleSubmit() {
   }
 }
 </script>
-
-<style>
-.modal-enter-from {
-opacity: 0;
-}
-.modal-enter-from .modal-container {
-transform: scale(0.9);
-}
-
-.modal-leave-to {
-opacity: 0;
-}
-.modal-leave-to .modal-container {
-transform: scale(0.9);
-}
-
-.modal-enter-active,
-.modal-leave-active {
-transition: opacity 0.3s ease;
-}
-
-.modal-enter-active .modal-container,
-.modal-leave-active .modal-container {
-transition: transform 0.3s ease;
-}
-</style>
