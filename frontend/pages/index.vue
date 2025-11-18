@@ -5,7 +5,18 @@
     <div
       class="w-full max-w-xl p-[70px] bg-gradient-to-br from-white to-p-200 rounded-tl-[70px] rounded-br-[70px] rounded-bl-xl rounded-tr-xl shadow-custom"
     >
-      <Logo class="mb-5 text-7xl" />
+    <Logo class="mb-5 text-7xl" />
+    <div v-if="isLoading" class="flex items-center justify-center text-p-950 text-2xl font-semibold">
+      <svg class="animate-spin -ml-1 mr-3 h-8 w-8 text-p-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+        viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+        </path>
+      </svg>
+      <span>Carregando...</span>
+    </div>    
+    <div v-else>
       <p class="text-[#351F56] font-sora font-bold text-3xl mb-5 select-none">
         Login
       </p>
@@ -38,12 +49,13 @@
         <Button mediumPurple label="Login" class="w-[50%]" @click="login" />
       </div>
     </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { insert } from "../crud";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useCookie } from "nuxt/app"; // Importe o useCookie
 
@@ -53,6 +65,8 @@ definePageMeta({
   hideTopBar: true,
   hideSideBar: true,
 });
+
+const isLoading = ref(true);
 
 const route = ref("auth/login");
 const object = ref({
@@ -85,4 +99,8 @@ const login = async () => {
     navigate(response.nextPage); // <-- ANTES: navigate("/register-personal-data")
   }
 };
+
+onMounted(() => {
+  isLoading.value = false;
+});
 </script>

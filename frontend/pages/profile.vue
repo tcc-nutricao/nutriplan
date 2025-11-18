@@ -289,21 +289,23 @@ async function fetchProfilePicture() {
 }
 
 onMounted(async () => {
-  try {
-    const res = await $axios.get("/user/personal-data");
-    if (res.data.success) {
-      const data = res.data.data;
-
-      if (!Array.isArray(data.restricoes)) {
-        data.restricoes = data.restricoes
-          ? [data.restricoes] 
-          : []; 
+  if (user.value.role === 'STANDARD') {
+    try {
+      const res = await $axios.get("/user/personal-data");
+      if (res.data.success) {
+        const data = res.data.data;
+  
+        if (!Array.isArray(data.restricoes)) {
+          data.restricoes = data.restricoes
+            ? [data.restricoes] 
+            : []; 
+        }
+  
+        personalData.value = data;
       }
-
-      personalData.value = data;
+    } catch (err) {
+      console.error("Erro ao buscar dados pessoais:", err);
     }
-  } catch (err) {
-    console.error("Erro ao buscar dados pessoais:", err);
   }
   await fetchProfilePicture();
 });
