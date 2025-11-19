@@ -30,6 +30,7 @@ export const getPersonalData = async (req, res) => {
 export const updatePersonalData = async (req, res) => {
   try {
     const userId = req.user.id 
+    console.log('ID do usuário para atualização de dados pessoais:', userId)
     
     const validatedData = validatePersonalData(req.body)
 

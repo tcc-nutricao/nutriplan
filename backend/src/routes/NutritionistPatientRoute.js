@@ -4,5 +4,5 @@ import { genericRoute } from './Route.js'
 import { authenticate, authorize } from '../middleware/index.js'
 
 export default (router) => {
-  genericRoute(router, '/nutritionist-patient', authenticate, api, authorize(Roles.PROFESSIONAL))
+  genericRoute(router, '/nutritionist-patient', api, authenticate, authorize(Roles.PROFESSIONAL))
 }

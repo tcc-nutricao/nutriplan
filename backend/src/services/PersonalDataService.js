@@ -53,9 +53,13 @@ const updatePersonalData = async (userId, personalData) => {
     preferences = [],
   } = personalData;
 
+  console.log('cuuuuuuuu')
+
   const existingPatient = await PatientRepository.search({
-    filters: [{ field: "id_user", value: userId, operator: "equals" }],
+    filters: [{ field: "id_user", value: userId }],
   });
+
+  console.log('Dados do paciente existente:', existingPatient);
 
   if (!existingPatient.data || existingPatient.data.length === 0) {
     throw new AppError({ message: "Dados pessoais do paciente não encontrados" });
@@ -91,8 +95,8 @@ const updatePersonalData = async (userId, personalData) => {
     let goal;
     const existingGoals = await GoalRepository.search({
       filters: [
-        { field: "id_patient", value: patient.id, operator: "equals" },
-        { field: "status", value: "ACTIVE", operator: "equals" },
+        { field: "id_patient", value: patient.id },
+        { field: "status", value: "ACTIVE" },
       ],
     });
 
@@ -115,7 +119,7 @@ const updatePersonalData = async (userId, personalData) => {
     if (objectives.length > 0) {
       // Remover objetivos existentes (soft delete)
       const existingObjectives = await GoalObjectiveRepository.search({
-        filters: [{ field: "id_goal", value: goal.id, operator: "equals" }],
+        filters: [{ field: "id_goal", value: goal.id }],
       });
 
       for (const obj of existingObjectives.data || []) {
