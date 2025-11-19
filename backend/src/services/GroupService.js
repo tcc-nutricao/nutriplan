@@ -1,44 +1,111 @@
 import { GroupRepository } from '../repositories/GroupRepository.js'
 import { UserGroupRepository } from '../repositories/UserGroupRepository.js'
-import { PatientRepository } from '../repositories/PatientRepository.js'
 import { generateCrudService } from './Service.js'
 
 const baseCrudService = generateCrudService(GroupRepository)
 
+function generateRandomCode(length = 6) {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+  let result = ''
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length))
+  }
+  return result
+}
+
 export const GroupService = {
   ...baseCrudService,
 
-  async getGroupsProgressByUser(userId) {
-    try {
-      if (!userId) {
-        throw new AppError({ message: 'userId é obrigatório' });
+  async create(data, userId) {
+
+    let picture = undefined
+    if (data.picture && typeof data.picture === 'string') {
+      const base64Data = data.picture.replace(/^data:image\/\w+;base64,/, "")
+      picture = Buffer.from(base64Data, 'base64')
+    }
+
+    let endDate = null
+    if (data.end_date) {
+      endDate = new Date(data.end_date)
+      endDate.setHours(endDate.getHours() + 4) 
+    }
+
+    let inviteCode
+    let isUnique = false
+    while (!isUnique) {
+      inviteCode = generateRandomCode(6)
+      const existingGroup = await GroupRepository.findByInviteCode(inviteCode)
+      if (!existingGroup) {
+        isUnique = true
       }
-      const userGroups = await UserGroupRepository.getGroupsByUserId(userId);
+    }
 
-      const groupsWithDetails = await Promise.all((userGroups || []).map(async (userGroup) => {
-        const groupId = userGroup.id_group;
+    const dataWithCreator = {
+      name: data.name,
+      description: data.description,
+      invite_code: inviteCode,
+      picture: picture,
+      end_date: endDate,
+      created_at: new Date(),
+      userGroups: {
+        create: [
+          {
+            id_user: userId,
+            role: 'ADMIN',
+            created_at: new Date()
+          }
+        ]
+      }
+    }
 
-        const participantCount = await UserGroupRepository.countParticipantsByGroupId(groupId);
-        // console.log(`[Group ID: ${groupId}] Contagem de participantes:`, participantCount);
+    
+    return GroupRepository.create(dataWithCreator)
+  },
 
-        const participantNames = await UserGroupRepository.getParticipantNamesByGroupId(groupId);
-        // console.log(`[Group ID: ${groupId}] Nomes dos participantes:`, participantNames);
+  async update(id, data) {
 
-        return {
-          ...userGroup.group, 
-          picture: userGroup.group.picture 
-            ? Buffer.from(userGroup.group.picture).toString('base64') 
-            : null,
-          participantCount,
-          participantNames,
-        };
-      }));
+    const dataToUpdate = { ...data };
+
+    if (dataToUpdate.picture && typeof dataToUpdate.picture === 'string') {
+      const base64Data = dataToUpdate.picture.replace(/^data:image\/\w+;base64,/, "")
+      dataToUpdate.picture = Buffer.from(base64Data, 'base64')
+    }
+
+    if (dataToUpdate.end_date) {
+      const date = new Date(dataToUpdate.end_date)
+      date.setHours(date.getHours() + 4)
+      dataToUpdate.end_date = date
+    }
+
+    dataToUpdate.updated_at = new Date();
+
+    delete dataToUpdate.id; 
+
+    return GroupRepository.update(id, dataToUpdate)
+  },
+
+  async getGroupsProgressByUser(userId) {
+    if (!userId) {
+      throw new Error('userId é obrigatório')
+    }
+    const userGroups = await UserGroupRepository.getGroupsByUserId(userId)
+
+    const groupsWithDetails = await Promise.all((userGroups || []).map(async (userGroup) => {
+      const groupId = userGroup.id_group
+      const participantCount = await UserGroupRepository.countParticipantsByGroupId(groupId)
+      const participantNames = await UserGroupRepository.getParticipantNamesByGroupId(groupId)
+
       return {
-        groups: groupsWithDetails
-      };
-    } catch (error) {
-      console.error('Erro ao buscar progresso dos grupos para o paciente:', error);
-      throw error;
+        ...userGroup.group,
+        picture: userGroup.group.picture
+          ? Buffer.from(userGroup.group.picture).toString('base64')
+          : null,
+        participantCount,
+        participantNames,
+      }
+    }))
+    return {
+      groups: groupsWithDetails
     }
   }
 }

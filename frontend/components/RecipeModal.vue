@@ -48,7 +48,7 @@
                 >
                   <Label label="Ingredientes" class="text-xl font-semibold mb-1" :error="errors.ingredients"/>
                   <p v-if="!hasAnyItems" :class="{'text-red-500' : errors.ingredients}" class="text-gray-medium mt-1 pb-3 mb-3 border-b-2 border-p-200">Adicione ingredientes abaixo!</p>
-                  <div v-if="hasAnyItems" class="flex flex-col flex-wrap gap-2 w-full gap-4 mt-1 pb-3 mb-3 max-w-full border-b-2 border-p-200">
+                  <div v-if="hasAnyItems" class="flex flex-col flex-wrap w-full gap-4 mt-1 pb-3 mb-3 max-w-full border-b-2 border-p-200">
                     <ItemButton
                       v-for="(item, index) in newMealItems"
                       :key="index"

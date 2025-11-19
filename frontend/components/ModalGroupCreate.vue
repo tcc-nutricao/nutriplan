@@ -31,14 +31,36 @@
             {{ title }} grupo
           </h2>
 
-          <InputText
-            class="mb-5"
-            label="Nome do grupo"
-            placeholder="Insira o nome do grupo"
-            v-model="object.name"
-            :error="errors.name"
-            required 
-          />
+          <div class="flex gap-3 justify-between w-full">
+            <InputText
+              class="mb-5 w-full"
+              label="Nome do grupo"
+              placeholder="Insira o nome do grupo"
+              v-model="object.name"
+              :error="errors.name"
+              required 
+            />
+            <div class="flex flex-col">
+
+              <div class="flex w-full items-center">
+                <Checkbox
+                label="Data de término"
+                class="mb-1"s
+                v-model="hasEndDate"
+                @update:modelValue="errors.endDate = null; object.endDate = null"
+                />
+              </div>
+              <Input
+                type="date"
+                placeholder="Data de término"
+                v-model="object.endDate"
+                :error="errors.endDate"
+                :disabled="!hasEndDate"
+                required
+              />
+              <Error v-if="errors.endDate" :message="errors.endDate" class="mt-1" />
+            </div>
+          </div>
           <Label label="Foto de capa" class="mb-2" />
           <div class="flex w-full gap-7 items-center">
             <div class="flex items-center justify-center w-[9rem] h-[9rem] rounded-xl bg-p-200 cursor-pointer transition active:scale-95 group overflow-hidden flex-shrink-0"
@@ -56,8 +78,7 @@
           </p>
           </div>
           <input type="file" ref="fileInput" @change="onFileChange" accept="image/*" class="hidden" />
-
-
+          
           <div class="flex justify-center mt-6">
             <div class="flex gap-3">
               <Button
@@ -89,20 +110,23 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, watchEffect } from "vue";
 
 const props = defineProps({
   title: String,
-  initialData: { type: Object, default: () => ({ name: null, image: null }) }
+  initialData: { type: Object, default: () => ({ name: null, image: null, endDate: null}) },
 });
 const object = ref({
   name: null,
-  image: null
+  image: null,
+  endDate: null,
 })
 const errors = ref({
   name: null,
+  endDate: null,
 })
 
+const hasEndDate = ref(false);
 const isDragging = ref(false);
 const fileInput = ref(null);
 const imageToEdit = ref(null);
@@ -137,17 +161,47 @@ const save = () => {
   errors.value.name = null;
   if (!object.value.name) {
     errors.value.name = 'O nome do grupo é obrigatório.';
-    return;
+  }
+
+  if (hasEndDate.value){
+    errors.value.endDate = null;
+    if (!object.value.endDate) {
+      errors.value.endDate = 'Informe uma data ou desselecione.';
+    } else {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      const oneYearFromNow = new Date(today);
+      oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
+
+      const endDate = new Date(object.value.endDate + 'T00:00:00');
+
+      if (endDate < today) {
+        errors.value.endDate = 'A data não pode ser anterior a hoje.';
+      } else if (endDate > oneYearFromNow) {
+        errors.value.endDate = 'A data não pode ser mais de um ano no futuro.';
+      }
+    }
   }
 
 
+
+  if (!errors.value.name && !errors.value.endDate)
   emit('save', object.value);
+  else return;
 }
 
 const emit = defineEmits(["close", "save"]);
 
-onMounted(() => {
-  object.value = { ...props.initialData };
+watchEffect(() => {
+  if (props.initialData && Object.keys(props.initialData).length > 0) {
+    object.value.name = props.initialData.title;
+    object.value.image = props.initialData.picture;
+    object.value.endDate = props.initialData.endDate ? props.initialData.endDate.split('T')[0] : null;
+    hasEndDate.value = !!props.initialData.endDate;
+  } else {
+    object.value = { name: null, image: null, endDate: null };
+  }
 });
 
 const showModal = ref("");

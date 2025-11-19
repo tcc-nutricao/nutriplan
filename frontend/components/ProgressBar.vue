@@ -4,7 +4,7 @@
       <h3 :class="[titleClass, 'text-base font-semibold text-gray-800']">
         {{ title }}
       </h3>
-      <span class="text-sm font-bold text-p-700">{{ progress ?? 0 }}%</span>
+      <span v-if="showPercentage" class="text-sm font-bold text-p-700">{{ progress ?? 0 }}%</span>
     </div>
     <p v-if="subTitle" class="font-light text-xs text-gray-500 mb-2">
       {{ subTitle }}
@@ -39,6 +39,10 @@
 <script>
 export default {
   props: {
+    showPercentage: {
+      type: Boolean,
+      default: false,
+    },
     progress: {
       type: Number,
       required: true,

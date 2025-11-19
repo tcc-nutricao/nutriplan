@@ -51,7 +51,7 @@
       <Button
         mediumPurple
         class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
-        icon="fa-regular fa-edit short flex justify-center"
+        icon="fa-solid fa-edit short flex justify-center"
         label="Editar"
         @click="openProfileModal('basic')"
       />
@@ -66,7 +66,7 @@
         <Button
           mediumPurple
           class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
-          icon="fa-regular fa-edit short flex justify-center"
+          icon="fa-solid fa-edit short flex justify-center"
           label="Editar"
           @click="openProfileModal('personal')"
         />
@@ -133,7 +133,7 @@
       <Button
         red
         class="ml-2"
-        icon="fa-solid fa-trash"
+        icon="fa-regular fa-trash-can"
         label="Apagar"
         @click="openDangerModal('delete')"
       />
