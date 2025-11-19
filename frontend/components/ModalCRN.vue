@@ -12,7 +12,7 @@
       class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]"
       @click.self="$emit('closeModal')"
     >
-    <div class="bg-white px-7 py-6 rounded-2xl shadow-xl max-w-md w-full modal-container transition-transform duration-300 ease">
+    <div class="bg-white px-7 py-6 rounded-2xl shadow-xl max-w-md w-full mx-4 modal-container transition-transform duration-300 ease">
       <h2 class="text-xl font-bold mb-4">{{ title ? title : '' }}</h2>
       <p class="mb-8 text-p-700 text-center text-xl">{{ content }}</p>
 

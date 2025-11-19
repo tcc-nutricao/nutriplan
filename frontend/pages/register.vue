@@ -1,55 +1,63 @@
 <template>
-    <div class="font-sora flex items-center justify-center min-h-screen bg-gradient-to-br from-p-500 via-p-600 to-p-700">
-        <div class="w-full max-w-xl p-[70px] bg-gradient-to-br from-white to-p-200 rounded-tl-[70px] rounded-br-[70px] rounded-bl-xl rounded-tr-xl shadow-custom">
-            <Logo class="mb-5 text-7xl" />
-            <div v-if="isLoading" class="flex items-center justify-center text-p-950 text-2xl font-semibold">
-              <svg class="animate-spin -ml-1 mr-3 h-8 w-8 text-p-600" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
-                </path>
-              </svg>
-              <span>Carregando...</span>
-            </div>    
-            <div v-else>
-              <p class="text-p-950 font-sora font-bold text-3xl mb-5 select-none">Cadastre-se</p>
-              <p class="mb-5">Já tem conta? 
-                <span 
-                  class="hover:font-semibold cursor-pointer text-[#8A5ACD]" 
-                  @click="$router.push('/')">
-                  Faça login aqui.
-                </span>
-              </p>
-              <InputText
-                class="mb-5"
-                label="Nome"
-                placeholder="Insira o Nome"
-                v-model="object.name"
-                :error="errors.name"
-                required />
-              <InputEmail
-                class="mb-5"
-                label="Email"
-                placeholder="Insira o Email"
-                v-model="object.email"
-                :error="errors.email || errors.emailInUse"
-                required />
-              <InputPassword 
-                class="mb-5"
-                label="Senha"
-                placeholder="Insira a Senha"
-                v-model="object.password"
-                :error="errors.password"
-                required />
-              <OptionsButton outlined :error="errors.role" v-model="selectedButton" :buttons="buttons" v-model:changeSelected="changeSelected" class="mb-5" />
-              <Flex justifyCenter>
-                <Button mediumPurple label="Criar conta" class="w-[50%]" @click="save" />
-              </Flex>
-            </div>
-        </div>
-        <ModalCRN :content="modalContent" v-if="openModal" @closeModal="openModal = false" @cancelModal="openModal = false; changeSelected = true" @updateCrn="object.crn = $event" />
+  <div class="font-sora flex items-center justify-center min-h-screen w-full overflow-y-auto bg-gradient-to-br from-p-500 via-p-600 to-p-700 px-4 py-10">
+    <div class="w-full max-w-lg bg-gradient-to-br from-white to-p-200 rounded-tl-[60px] rounded-br-[60px] rounded-bl-xl rounded-tr-xl shadow-custom p-6 sm:p-8 md:p-10 my-auto">
+      <Logo class="mb-6 text-4xl sm:text-5xl md:text-6xl mx-auto" />
+      <div v-if="isLoading" class="flex items-center justify-center text-p-950 text-lg sm:text-xl font-semibold">
+        <svg class="animate-spin -ml-1 mr-3 h-6 w-6 sm:h-8 sm:w-8 text-p-600"
+          xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+          <path class="opacity-75" fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+          </path>
+        </svg>
+        <span>Carregando...</span>
+      </div>
+      <div v-else>
+        <p class="text-p-950 font-bold text-2xl sm:text-3xl mb-4">
+          Cadastre-se
+        </p>
+        <p class="mb-6 text-sm sm:text-base leading-relaxed">
+          Já tem conta?
+          <span
+            class="hover:font-semibold cursor-pointer text-[#8A5ACD]"
+            @click="$router.push('/')">
+            Faça login aqui.
+          </span>
+        </p>
+        <InputText
+          class="mb-5"
+          label="Nome"
+          placeholder="Insira o Nome"
+          v-model="object.name"
+          :error="errors.name"
+          required />
+        <InputEmail
+          class="mb-5"
+          label="Email"
+          placeholder="Insira o Email"
+          v-model="object.email"
+          :error="errors.email || errors.emailInUse"
+          required />
+        <InputPassword
+          class="mb-8"
+          label="Senha"
+          placeholder="Insira a Senha"
+          v-model="object.password"
+          :error="errors.password" />
+        <OptionsButton
+          outlined
+          :error="errors.role"
+          v-model="selectedButton"
+          :buttons="buttons"
+          v-model:changeSelected="changeSelected"
+          class="mb-8" />
+        <Flex justifyCenter>
+          <Button mediumPurple label="Criar conta" class="w-4/5 sm:w-2/3 md:w-1/2" @click="save" />
+        </Flex>
+      </div>
     </div>
+  </div>
+  <ModalCRN :content="modalContent" v-if="openModal" @closeModal="openModal = false" @cancelModal="openModal = false; changeSelected = true" @updateCrn="object.crn = $event" />
 </template>
 
 <script setup>

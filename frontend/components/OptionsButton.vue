@@ -1,6 +1,6 @@
 <template>
     <FlexCol gap-1>
-        <Flex gap5>
+        <Flex gap5 class="flex-wrap sm:flex-nowrap w-full">
             <Button 
                 v-for="(button, index) of buttons" 
                 :key="index" 
