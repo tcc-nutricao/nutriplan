@@ -53,13 +53,9 @@ const updatePersonalData = async (userId, personalData) => {
     preferences = [],
   } = personalData;
 
-  console.log('cuuuuuuuu')
-
   const existingPatient = await PatientRepository.search({
     filters: [{ field: "id_user", value: userId }],
   });
-
-  console.log('Dados do paciente existente:', existingPatient);
 
   if (!existingPatient.data || existingPatient.data.length === 0) {
     throw new AppError({ message: "Dados pessoais do paciente não encontrados" });
