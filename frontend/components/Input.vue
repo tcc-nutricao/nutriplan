@@ -1,5 +1,5 @@
 <template>
-  <Flex items-center class="rounded-xl border-2 text-sm overflow-hidden border-p-g2 h-[42px] focus-within:border-p-600 transition" :class="classes">
+  <Flex items-center class="rounded-xl border-2 text-sm overflow-hidden border-p-g2 py-1.5 sm:py-2 focus-within:border-p-600 transition w-full" :class="classes">
     <slot name="pre-icon" />
     <span 
       v-if="prefix" 
