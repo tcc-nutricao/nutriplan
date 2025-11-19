@@ -85,7 +85,7 @@ const navigate = async (route) => {
 
 const login = async () => {
   const response = await insert(route.value, object.value);
-  errors.value = response.error ? response.data.data : {};
+  errors.value = response.error ? response?.data?.data : {};
   
   if (!response.error) {
     const userCookie = useCookie('user-data'); 

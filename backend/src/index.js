@@ -13,7 +13,13 @@ app.use(cookieParser())
 app.use(express.urlencoded({ limit: '3mb', extended: true }))
 app.use(cors({ 
   credentials: true, 
-  origin: [process.env.CORS, 'http://localhost:3000', 'http://localhost:3001'],
+  origin: [
+    process.env.CORS, 
+    'http://localhost:3000', 
+    'http://localhost:3001',
+    'http://127.0.0.1:3000',
+    'http://127.0.0.1:3001'
+  ],
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
 }))
