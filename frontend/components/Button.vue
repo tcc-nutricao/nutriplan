@@ -24,7 +24,7 @@
       { 'rounded-lg 0 border border-slate-20 hover:bg-gray-50': light },
     ]"
     class="rounded-xl flex items-center justify-center">
-    <div :class="size === 'text-xs' || size === 'text-sm' ? 'px-2' : 'px-4'" class="py-2 flex items-center justify-center">
+    <div :class="[size === 'text-xs' || size === 'text-sm' ? 'px-2' : 'px-4', 'py-1.5 sm:py-2']"  class="flex items-center justify-center w-full">
       <slot>
         <i :class="label ? `mr-2 ${icon}` : `${icon}`" v-if="icon"></i>
         <p :class="size ? size : ''">{{ label }}</p>
