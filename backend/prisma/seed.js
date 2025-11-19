@@ -391,10 +391,14 @@ async function main() {
   });
 
   // GROUP & USER GROUP
+  const groupEndDate = new Date();
+  groupEndDate.setDate(groupEndDate.getDate() + 15);
+  
   const group = await prisma.group.create({
     data: {
       name: "Grupo Fitness",
       invite_code: "FIT123",
+      end_date: groupEndDate,
       created_at: new Date(),
     },
   });
