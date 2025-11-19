@@ -1,57 +1,58 @@
 <template>
   <div
-    class="font-sora flex items-center justify-center min-h-screen bg-gradient-to-br from-p-500 via-p-600 to-p-700"
+    class="font-sora flex items-center justify-center min-h-screen bg-gradient-to-br from-p-500 via-p-600 to-p-700 px-4"
   >
     <div
-      class="w-full max-w-xl p-[70px] bg-gradient-to-br from-white to-p-200 rounded-tl-[70px] rounded-br-[70px] rounded-bl-xl rounded-tr-xl shadow-custom"
+      class="w-full max-w-[420px] sm:max-w-xl mx-auto p-5 sm:p-8 md:p-[70px] bg-gradient-to-br from-white to-p-200 rounded-tl-[70px] rounded-br-[70px] rounded-bl-xl rounded-tr-xl shadow-custom"
     >
-    <Logo class="mb-5 text-7xl" />
-    <div v-if="isLoading" class="flex items-center justify-center text-p-950 text-2xl font-semibold">
-      <svg class="animate-spin -ml-1 mr-3 h-8 w-8 text-p-600" xmlns="http://www.w3.org/2000/svg" fill="none"
-        viewBox="0 0 24 24">
-        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-        <path class="opacity-75" fill="currentColor"
-          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
-        </path>
-      </svg>
-      <span>Carregando...</span>
-    </div>    
-    <div v-else>
-      <p class="text-[#351F56] font-sora font-bold text-3xl mb-5 select-none">
-        Login
-      </p>
-      <p class="mb-5">
-        Novo usuário?
-        <span
-          class="hover:font-semibold cursor-pointer text-[#8A5ACD]"
-          @click="navigate('/register')"
-        >
-          Crie uma conta
-        </span>
-      </p>
-      <InputEmail
-        class="mb-5"
-        label="Email"
-        placeholder="Insira o Email"
-        v-model="object.email"
-        :error="errors.email"
-        required
-      />
-      <InputPassword
-        class="mb-5"
-        label="Senha"
-        placeholder="Insira a Senha"
-        v-model="object.password"
-        :error="errors.password || errors.invalidCredentials"
-        required
-      />
-      <div class="flex justify-center">
-        <Button mediumPurple label="Login" class="w-[50%]" @click="login" />
+      <Logo class="mb-5 text-5xl sm:text-6xl md:text-7xl mx-auto" />
+      <div v-if="isLoading" class="flex items-center justify-center text-p-950 text-lg sm:text-xl md:text-2xl font-semibold">
+        <svg class="animate-spin -ml-1 mr-3 h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-p-600"
+          xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+          </path>
+        </svg>
+        <span>Carregando...</span>
       </div>
-    </div>
+      <div v-else>
+        <p class="text-[#351F56] font-bold text-2xl sm:text-3xl mb-5 select-none">
+          Login
+        </p>
+        <p class="mb-5 text-sm sm:text-base">
+          Novo usuário?
+          <span
+            class="hover:font-semibold cursor-pointer text-[#8A5ACD]"
+            @click="navigate('/register')"
+          >
+            Crie uma conta
+          </span>
+        </p>
+        <InputEmail
+          class="mb-5"
+          label="Email"
+          placeholder="Insira o Email"
+          v-model="object.email"
+          :error="errors.email"
+          required
+        />
+        <InputPassword
+          class="mb-5"
+          label="Senha"
+          placeholder="Insira a Senha"
+          v-model="object.password"
+          :error="errors.password || errors.invalidCredentials"
+          required
+        />
+        <div class="flex justify-center">
+          <Button mediumPurple label="Login" class="w-full sm:w-3/4 md:w-1/2" @click="login"/>
+        </div>
+      </div>
     </div>
   </div>
 </template>
+
 
 <script setup>
 import { insert } from "../crud";
