@@ -52,42 +52,75 @@
 
         <div v-else class="flex w-full justify-between gap-3">
           <div class="flex flex-col w-full">
-            <InputText
-            class="mb-5"
-            label="Data de Nascimento"
+      <div class="grid grid-cols-2 gap-6">
+        <div class="col-span-1">
+          <Label class="mb-2" label="Que dia você nasceu?" />
+          <Input
             type="date"
             v-model="personalFormData.birth_date"
-            placeholder="Insira sua data de nascimento" />
-            <InputText
-            class="mb-5"
-            label="Peso"
+            placeholder="Data de nascimento"
+            required
+          />
+        </div>
+        <div class="col-span-1">
+          <Label class="mb-2" label="Qual gênero você se identifica?" />
+          <Select v-model="personalFormData.gender" :options="genderOptions" required />
+        </div>
+        <div class="col-span-1">
+          <Label class="mb-2" label="Qual é seu peso?" />
+          <Input
             type="number"
-            v-model="personalFormData.weight"
-            placeholder="Digite aqui" />
-            <InputText
-            class="mb-5"
-            label="Restrições Alimentares"
+            v-model.number="personalFormData.weight"
+            placeholder="Seu peso em kg"
+            required
+          />
+        </div>
+        <div class="col-span-1">
+          <Label class="mb-2" label="Qual é a sua altura? (ex: 170cm)" />
+          <Input
+            type="number"
+            v-model.number="personalFormData.height"
+            placeholder="Sua altura em cm"
+            required
+          />
+        </div>
+        <div class="col-span-1">
+          <Label class="mb-2" label="Você tem uma meta de peso?" />
+          <Input
+            type="number"
+            v-model.number="personalFormData.target_weight"
+            placeholder="Sua meta em kg"
+          />
+        </div>
+        <div class="col-span-1">
+          <Label class="mb-2" label="Você tem alguma restrição alimentar?" />
+          <Select
             v-model="personalFormData.restrictions"
-            placeholder="Digite aqui" />
-          </div>
-          <div class="flex flex-col w-full">
-          <InputText
-            class="mb-5"
-            label="Sexo"
-            v-model="personalFormData.gender"
-            placeholder="Digite aqui" />
-          <InputText
-            class="mb-5"
-            label="Altura"
-            type="number"
-            v-model="personalFormData.height"
-            placeholder="Digite aqui" />
-          <InputText
-            class="mb-5"
-            label="Objetivo"
+            :options="restrictionOptions"
+            multiple
+            required
+          />
+        </div>
+        <div class="col-span-1">
+          <Label class="mb-2" label="Você tem alguma preferência alimentar?" />
+          <Select
+            v-model="personalFormData.preferences"
+            :options="preferenceOptions"
+            multiple
+            required
+          />
+        </div>
+        <div class="col-span-1">
+          <Label class="mb-2" label="Qual é seu objetivo?" />
+          <Select
             v-model="personalFormData.objectives"
-            placeholder="Digite aqui" />
-          </div>
+            :options="objectiveOptions"
+            multiple
+            required
+          />
+        </div>
+      </div>
+      </div>
         </div>
         <div class="flex justify-center mt-6">
           <Button mediumPurple
@@ -102,12 +135,13 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { update } from "../crud";
+import { ref, onMounted } from "vue";
+import { update, get } from "../crud";
 import { useCookie } from "nuxt/app";
 
 const props = defineProps({
   section: { type: String, required: true },
+  userData: { type: Object, default: () => ({}) },
 });
 const emit = defineEmits(["close"]);
 
@@ -126,9 +160,58 @@ const personalFormData = ref({
   restrictions: [],
   preferences: [],
   objectives: [],
+  target_weight: "",
 });
 
+const genderOptions = [
+  { value: "FEM", label: "Feminino" },
+  { value: "MASC", label: "Masculino" },
+  { value: "OTHER", label: "Outro" },
+  { value: "NONE", label: "Prefiro não informar" },
+];
+const restrictionOptions = ref([]);
+const preferenceOptions = ref([]);
+const objectiveOptions = ref([]);
+
 const userCookie = useCookie("user-data");
+
+onMounted(async () => {
+  const selectRoutes = [
+    { route: "restriction", target: restrictionOptions },
+    { route: "preference", target: preferenceOptions },
+    { route: "objective", target: objectiveOptions },
+  ];
+  await Promise.all(
+    selectRoutes.map(({ route, target }) => getSelectItems(route, target))
+  );
+
+  // Pre-fill form data
+  if (props.section === 'basic' && props.userData) {
+    basicFormData.value.name = props.userData.name || "";
+    basicFormData.value.email = props.userData.email || "";
+  } else if (props.section === 'personal' && props.userData) {
+    // Format birth_date to YYYY-MM-DD for date input
+    if (props.userData.birth_date) {
+      const date = new Date(props.userData.birth_date);
+      personalFormData.value.birth_date = date.toISOString().split('T')[0];
+    }
+    personalFormData.value.gender = props.userData.gender || "";
+    personalFormData.value.height = props.userData.altura || "";
+    personalFormData.value.weight = props.userData.peso || "";
+    personalFormData.value.target_weight = props.userData.target_weight || "";
+    personalFormData.value.restrictions = props.userData.restrictions || [];
+    personalFormData.value.preferences = props.userData.preferences || [];
+    personalFormData.value.objectives = props.userData.objectives || [];
+  }
+});
+
+async function getSelectItems(route, target) {
+  const response = await get(route);
+  target.value = (response.data || []).map((item) => ({
+    value: item.id,
+    label: item.name,
+  }));
+}
 
 async function handleSubmit() {
   if (props.section === "basic") {

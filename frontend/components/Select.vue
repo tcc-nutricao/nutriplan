@@ -46,7 +46,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 
 const props = defineProps({
-  modelValue: [String, Number, Boolean],
+  modelValue: [Array, String, Number, Boolean],
   options: {
     type: Array,
     required: true,
@@ -59,7 +59,8 @@ const props = defineProps({
   error: {
     type: [Boolean, String],
     default: false
-  }
+  },
+  required: Boolean,
 });
 
 const emits = defineEmits(['update:modelValue']);

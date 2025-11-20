@@ -37,6 +37,14 @@
           />
         </div>
         <div class="col-span-1">
+          <Label class="mb-2" label="Você tem uma meta de peso?" />
+          <Input
+            type="number"
+            v-model.number="form.target_weight"
+            placeholder="Sua meta em kg"
+          />
+        </div>
+        <div class="col-span-1">
           <Label class="mb-2" label="Você tem alguma restrição alimentar?" />
           <Select
             v-model="form.restrictions"
@@ -51,11 +59,10 @@
             v-model="form.preferences"
             :options="preferenceOptions"
             multiple
-            required
           />
         </div>
         <div class="col-span-1">
-          <Label class="mb-2" label="Qual é seu objetivo?" />
+          <Label class="mb-2" label="Qual é seu objetivo?" required />
           <Select
             v-model="form.objective"
             :options="objectiveOptions"
@@ -96,6 +103,7 @@ const form = ref({
   restrictions: [], // array of ids
   preferences: [], // array de ids
   objective: [], // array de ids
+  target_weight: null, // number
 });
 
 const genderOptions = [
@@ -124,9 +132,9 @@ async function save() {
     ...form.value,
     weight: Number(form.value.weight) ?? null,
     height: Number(form.value.height) ?? null,
-    restrictions: form.value.restrictions ? [form.value.restrictions] : [],
-    preferences: form.value.preferences ? [form.value.preferences] : [],
-    objectives: form.value.objective ? [form.value.objective] : [],
+    restrictions: Array.isArray(form.value.restrictions) ? form.value.restrictions : (form.value.restrictions ? [form.value.restrictions] : []),
+    preferences: Array.isArray(form.value.preferences) ? form.value.preferences : (form.value.preferences ? [form.value.preferences] : []),
+    objectives: Array.isArray(form.value.objective) ? form.value.objective : (form.value.objective ? [form.value.objective] : []),
   };
   await update("user/personal-data", payload);
   navigateTo("/meal-plan");

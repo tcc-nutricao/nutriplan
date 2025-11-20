@@ -27,10 +27,47 @@ const getPersonalData = async (userId) => {
       )
     : null;
 
+  // Buscar Goal ativo
+  const goal = await GoalRepository.search({
+    filters: [
+      { field: "id_patient", value: patient.id },
+      { field: "status", value: "ACTIVE" },
+    ],
+  });
+  const activeGoal = goal.data?.[0];
+
+  // Buscar objetivos do goal
+  let objectives = [];
+  if (activeGoal) {
+    const goalObjectives = await GoalObjectiveRepository.search({
+      filters: [{ field: "id_goal", value: activeGoal.id }],
+    });
+    objectives = goalObjectives.data?.map((go) => go.id_objective) || [];
+  }
+
+  // Buscar MealPlan ativo para restrições
+  const mealPlan = await MealPlanRepository.search({
+    filters: [
+      { field: "id_patient", value: patient.id },
+      { field: "status", value: "ACTIVE" },
+    ],
+  });
+  const activeMealPlan = mealPlan.data?.[0];
+
+  let restrictions = [];
+  if (activeMealPlan) {
+    const mealPlanRestrictions = await MealPlanDietaryRestrictionRepository.search({
+      filters: [{ field: "id_meal_plan", value: activeMealPlan.id }],
+    });
+    restrictions = mealPlanRestrictions.data?.map((r) => r.id_dietary_restriction) || [];
+  }
+
   return {
     nome: user?.name || "",
     email: user?.email || "",
     idade,
+    birth_date, // Retornar data bruta
+    gender, // Retornar enum bruto
     sexo:
       gender === "FEM"
         ? "Feminino"
@@ -39,6 +76,10 @@ const getPersonalData = async (userId) => {
         : "Não informado",
     altura: height,
     peso: weight,
+    target_weight: activeGoal?.target_weight || null,
+    objectives, // Array de IDs
+    restrictions, // Array de IDs
+    preferences: [], // Não implementado ainda
   };
 };
 

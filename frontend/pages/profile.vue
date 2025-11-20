@@ -143,6 +143,7 @@
       v-if="showModal == 'profileEdit'"
       :key="activeSection"
       :section="activeSection"
+      :user-data="activeSection === 'basic' ? { name: user.name, email: user.email } : personalData"
       @close="closeModal"
     />
     <ModalAvatarEdit
