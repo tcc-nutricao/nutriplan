@@ -1,9 +1,10 @@
 <template>
-  <div ref="searchBarContainer" class="flex flex-row gap-2 bg-transparent">
-    <Input
-      class="bg-white w-full shadow-lg shadow-gray-600/10 focus-within:shadow-p-600/20 hover:shadow-p-600/20 transition"
-      label="pesquisaReceita"
+  <div ref="searchBarContainer" class="w-full flex flex-row gap-2 bg-transparent">
+    <Search
+      :type="searchType"
       :placeholder="placeholder"
+      @update:modelValue="handleSearchSelection"
+       class="w-full"
     />
 
     <ButtonSelect
@@ -28,7 +29,12 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 
-defineProps({
+const props = defineProps({
+  searchType: {
+    type: String,
+    required: true,
+    validator: (value) => ['recipes', 'patients', 'foods'].includes(value)
+  },
   filter: {
     type: Boolean,
     default: true
@@ -58,11 +64,16 @@ defineProps({
   }
 });
 
-const searchBarContainer = ref(null);
+const emits = defineEmits(['searchSelected']);
 
+const searchBarContainer = ref(null);
 const isNarrow = ref(false);
 
 let observer;
+
+const handleSearchSelection = (selectedItem) => {
+  emits('searchSelected', selectedItem);
+};
 
 onMounted(() => {
   observer = new ResizeObserver(entries => {

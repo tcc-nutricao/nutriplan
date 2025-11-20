@@ -5,7 +5,9 @@ import { generateCrudService } from './Service.js'
 import { getImcData } from '../utils/useImc.js'
 import { calculateProgress, formatProgressResponse, calculateTotalDays } from '../utils/useProgress.js'
 import { AppError } from '../exceptions/AppError.js'
+import { PrismaClient } from '@prisma/client'
 
+const prisma = new PrismaClient()
 const baseCrudService = generateCrudService(PatientRepository)
 
 // Função para buscar paciente pelo ID do usuário
@@ -115,5 +117,62 @@ const getProgress = async (userId) => {
 export const PatientService = {
   ...baseCrudService,
   getPatientByUserId,
-  getProgress
+  getProgress,
+
+  async searchByTerm(searchTerm, nutritionistId, limit = 10) {
+    try {
+      if (!searchTerm || searchTerm.trim().length === 0) {
+        return { data: [], total: 0 }
+      }
+
+      if (!nutritionistId) {
+        throw new Error('ID do nutricionista é obrigatório')
+      }
+
+      const where = {
+        deleted_at: null,
+        id_nutritionist: nutritionistId,
+        user: {
+          name: {
+            contains: searchTerm.trim()
+          }
+        }
+      }
+
+      const [data, total] = await Promise.all([
+        prisma.patient.findMany({
+          where,
+          take: limit,
+          include: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                email: true
+              }
+            }
+          },
+          orderBy: {
+            user: {
+              name: 'asc'
+            }
+          }
+        }),
+        prisma.patient.count({ where })
+      ])
+
+      // Format response to include patient data with user info
+      const formattedData = data.map(patient => ({
+        id: patient.id,
+        name: patient.user.name,
+        email: patient.user.email,
+        userId: patient.user.id
+      }))
+
+      return { data: formattedData, total }
+    } catch (error) {
+      console.error('Erro ao pesquisar pacientes:', error)
+      throw error
+    }
+  }
 }

@@ -3,7 +3,14 @@
         <h1 class="h1">Meus Pacientes</h1>
         <div class="flex flex-row gap-5 justify-between">
             <div class="flex flex-col w-[40%] mb-8">
-            <SearchBar :filter="true" :sort="true" placeholder="Pesquise um paciente" class="stickyProfile w-full shadowSearch" />
+            <SearchBar 
+                :filter="true" 
+                :sort="true" 
+                placeholder="Pesquise um paciente" 
+                searchType="patients"
+                @searchSelected=""
+                class="stickyProfile w-full shadowSearch" 
+            />
                 <div listaReceitas class="flex flex-col gap-3 w-full mt-5">
                     <PatientButton
                         v-for="item in itemList"

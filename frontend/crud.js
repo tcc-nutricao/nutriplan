@@ -66,4 +66,16 @@ const remove = async (route, id, itemMessage) => {
   }
 }
 
-export { get, search, insert, update, remove }
+const searchDynamic = async (type, searchTerm, limit = 10) => {
+  const { $axios } = useNuxtApp()
+  try {
+    const res = await $axios.get(`/search/${type}`, { 
+      params: { q: searchTerm, limit } 
+    })
+    return { ...res.data, status: res.status }
+  } catch (err) {
+    return { error: true, ...err.response, status: err.response?.status }
+  }
+}
+
+export { get, search, insert, update, remove, searchDynamic }

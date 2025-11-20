@@ -59,11 +59,12 @@
                       @delete-item="deleteItem(index)" 
                     />
                   </div>
-                  <Input
+                  <Search
+                    type="foods"
+                    placeholder="Buscar ingredientes"
                     v-model="object.food"
-                    class="mb-5"
-                    placeholder="Buscar"
-                    :error="errors.food"
+                    @update:modelValue=""
+                    class="w-full mb-3 "
                   />
                   <div class="flex gap-2">
                     <InputText

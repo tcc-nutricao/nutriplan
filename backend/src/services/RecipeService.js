@@ -2,6 +2,9 @@ import { RecipeRepository } from '../repositories/RecipeRepository.js'
 import { MealPlanRecipeRepository } from '../repositories/MealPlanRecipeRepository.js'
 import { PatientRepository } from '../repositories/PatientRepository.js'
 import { generateCrudService } from './Service.js'
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
 
 // Função para calcular valores nutricionais da receita baseado nos alimentos
 const calculateRecipeNutrition = (recipe) => {
@@ -99,6 +102,40 @@ export const RecipeService = {
       return await MealPlanRecipeRepository.findByPatientId(patient.id)
     } catch (error) {
       console.error('Erro ao buscar receitas do usuário:', error)
+      throw error
+    }
+  },
+
+  async searchByTerm(searchTerm, limit = 10) {
+    try {
+      if (!searchTerm || searchTerm.trim().length === 0) {
+        return { data: [], total: 0 }
+      }
+
+      const where = {
+        deleted_at: null,
+        name: {
+          contains: searchTerm.trim()
+        }
+      }
+
+      const [data, total] = await Promise.all([
+        prisma.recipe.findMany({
+          where,
+          take: limit,
+          select: {
+            id: true,
+            name: true,
+            preparation_method: true
+          },
+          orderBy: { name: 'asc' }
+        }),
+        prisma.recipe.count({ where })
+      ])
+
+      return { data, total }
+    } catch (error) {
+      console.error('Erro ao pesquisar receitas:', error)
       throw error
     }
   }
