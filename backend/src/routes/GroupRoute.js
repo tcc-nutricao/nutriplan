@@ -14,6 +14,8 @@ export default (router) => {
 
   router.get('/group/progress', authenticate, authorize(Roles.STANDARD), api.getGroupsProgressByUser)
   router.post('/group/join', authenticate, authorize(Roles.STANDARD), GroupController.joinGroup)
+  router.post('/group/leave', authenticate, authorize(Roles.STANDARD), GroupController.leaveGroup)
+  router.delete('/group/:id', authenticate, authorize(Roles.STANDARD), GroupController.deleteGroup)
 
   genericRoute(router, '/group', api, authenticate, authorize(Roles.STANDARD))
 }

@@ -76,11 +76,33 @@ const getFirstAdminNameByGroupId = async (groupId) => {
 	return adminUserGroup ? adminUserGroup.user.name.split(' ')[0] : 'Desconhecido';
 };
 
+const remove = async (userId, groupId) => {
+	return await prisma.userGroup.updateMany({
+		where: {
+			id_user: userId,
+			id_group: groupId
+		},
+		data: {
+			deleted_at: new Date()
+		}
+	});
+};
+
+const removeAllByGroupId = async (groupId) => {
+	return await prisma.userGroup.deleteMany({
+		where: {
+			id_group: groupId
+		}
+	});
+};
+
 export const UserGroupRepository = {
 	getGroupsByUserId,
 	countParticipantsByGroupId,
 	getParticipantNamesByGroupId,
 	create,
 	findByUserAndGroup,
-	getFirstAdminNameByGroupId
+	getFirstAdminNameByGroupId,
+	remove,
+	removeAllByGroupId
 };

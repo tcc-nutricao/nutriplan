@@ -136,5 +136,33 @@ export const GroupService = {
       role: 'MEMBER',
       created_at: new Date()
     })
+  },
+
+  async leaveGroup(userId, groupId) {
+    if (!userId) {
+      throw new Error('userId é obrigatório')
+    }
+    if (!groupId) {
+      throw new Error('groupId é obrigatório')
+    }
+
+    return UserGroupRepository.remove(userId, groupId)
+  },
+
+  async deleteGroup(groupId, userId) {
+    if (!groupId) {
+      throw new Error('groupId é obrigatório')
+    }
+    if (!userId) {
+      throw new Error('userId é obrigatório')
+    }
+
+    const userGroup = await UserGroupRepository.findByUserAndGroup(userId, groupId)
+    if (!userGroup || userGroup.role !== 'ADMIN') {
+      throw new Error('Apenas administradores podem excluir o grupo')
+    }
+
+    await UserGroupRepository.removeAllByGroupId(groupId)
+    return GroupRepository.remove(groupId)
   }
 }

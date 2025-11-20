@@ -11,7 +11,7 @@
             icon="fa-solid fa-plus short flex justify-center" label="Criar novo grupo" @click="openCreateModal" />
           <div class="flex flex-col 2xl:flex-row items-start 2xl:items-end gap-3 border-t-2 pt-3 mt-2 border-p-200">
             <InputText class="mb-0 w-full" label="Entrar em um grupo" placeholder="Digite o código" v-model="groupCode"
-              :error="groupCodeError" @update:modelValue="handleGroupCodeInput" />
+              :error="groupCodeError" @update:modelValue="handleGroupCodeInput" @keyup.enter="joinGroup" />
             <Button mediumPurple
               class="w-full 2xl:w-max px-3 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
               label="Entrar" @click="joinGroup" />
@@ -36,11 +36,10 @@
     </div>
     <ModalGroupCreate v-if="showModal === 'Criar' || showModal === 'Editar'" :title="showModal"
       :initialData="showModal === 'Editar' ? selectedItem : {}" @close="closeModal" @save="handleSaveGroup" />
-    <ModalDanger v-if="showModal == 'delete'" title="Tem certeza?"
+    <ModalDanger v-if="showModal == 'delete' || showModal == 'leave'" title="Tem certeza?"
       :content="showModal === 'delete' ? 'Esse grupo também será apagado para todos os participantes permanentemente.' : 'Ao sair do grupo, será necessário entrar com o mesmo código novamente.'"
-      btnLabel="Apagar"
-      @confirm="[{ handleGroupDelete: showModal === 'delete' }, { handleGroupLeave: showModal === 'sair' }]"
-      @closeModal="closeModal" />
+      :btnLabel="showModal === 'delete' ? 'Apagar' : 'Sair'" :confirm="showModal" 
+      @leave="handleGroupLeave" @delete="handleGroupDelete" @closeModal="closeModal" />
   </div>
 </template>
 
@@ -193,21 +192,46 @@ const openDeleteModal = () => {
 };
 
 const openLeaveModal = () => {
-  showModal.value = "sair";
+  showModal.value = "leave";
 };
 
 const closeModal = () => {
   showModal.value = "";
 };
 
-const handleGroupDelete = () => {
-  // logica aqui
-  showModal.value = "";
+const handleGroupDelete = async () => {
+  if (!selectedItem.value) return;
+  pending.value = true;
+  try {
+    await $axios.delete(`/group/${selectedItem.value.id}`);
+    await fetchGroups();
+    closeModal();
+  } catch (error) {
+    console.error('Erro ao excluir grupo:', error);
+    alert('Erro ao excluir grupo. Tente novamente.');
+  } finally {
+    pending.value = false;
+  }
 };
 
-const handleGroupLeave = () => {
-  // logica aqui
-  showModal.value = "";
+const handleGroupLeave = async () => {
+  try {
+    if (!selectedItem.value?.id) {
+      console.error("Erro: Nenhum grupo selecionado para sair.");
+      return;
+    }
+
+    pending.value = true;
+    await $axios.post('/group/leave', { groupId: selectedItem.value.id });
+
+    await fetchGroups();
+    closeModal();
+  } catch (error) {
+    console.error("Erro ao sair do grupo:", error);
+    alert(error.response?.data?.message || 'Erro ao sair do grupo.');
+  } finally {
+    pending.value = false;
+  }
 };
 
 function daysSince(startDateString) {

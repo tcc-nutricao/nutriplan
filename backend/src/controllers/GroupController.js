@@ -76,23 +76,56 @@ export const GroupController = {
   createGroupWithUser,
   update,
   getGroupsProgressByUser,
-  joinGroup: async (req, res) => {
+  async joinGroup(req, res) {
     try {
-      const userId = req.user?.id
+      const userId = req.user.id
       const { inviteCode } = req.body
-
-      if (!userId) {
-        return res.status(401).json({ success: false, message: 'Usuário não autenticado' })
-      }
-
-      await GroupService.joinGroup(userId, inviteCode)
-
-      return res.status(200).json({ success: true, message: 'Entrou no grupo com sucesso' })
+      const result = await GroupService.joinGroup(userId, inviteCode)
+      res.json({
+        status: 'success',
+        data: result
+      })
     } catch (error) {
       console.error('Erro ao entrar no grupo:', error)
-      return res.status(400).json({
-        success: false,
-        message: error.message || 'Erro ao entrar no grupo'
+      res.status(400).json({
+        status: 'error',
+        message: error.message
+      })
+    }
+  },
+
+  async leaveGroup(req, res) {
+    try {
+      const userId = req.user.id
+      const { groupId } = req.body
+      const result = await GroupService.leaveGroup(userId, groupId)
+      res.json({
+        status: 'success',
+        data: result
+      })
+    } catch (error) {
+      console.error('Erro ao sair do grupo:', error)
+      res.status(400).json({
+        status: 'error',
+        message: error.message
+      })
+    }
+  },
+
+  async deleteGroup(req, res) {
+    try {
+      const userId = req.user.id
+      const { id } = req.params
+      const result = await GroupService.deleteGroup(Number(id), userId)
+      res.json({
+        status: 'success',
+        data: result
+      })
+    } catch (error) {
+      console.error('Erro ao excluir grupo:', error)
+      res.status(400).json({
+        status: 'error',
+        message: error.message
       })
     }
   }
