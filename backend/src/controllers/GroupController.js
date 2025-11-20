@@ -8,13 +8,13 @@ const createGroupWithUser = async (req, res) => {
   console.log('-------------------------------------------------')
   try {
     const userId = req.user?.id
-    
+
     if (!userId) {
       return res.status(401).json({ success: false, message: 'Usuário não autenticado' })
     }
 
     const newGroup = await GroupService.create(req.body, userId)
-    
+
     console.log('✅ Grupo criado com sucesso!')
     return res.status(201).json(newGroup)
   } catch (error) {
@@ -37,7 +37,7 @@ const update = async (req, res) => {
   } catch (error) {
     console.error('❌ Erro no Update:', error);
     if (error.issues) {
-       return res.status(400).json({ success: false, errors: error.issues });
+      return res.status(400).json({ success: false, errors: error.issues });
     }
     return res.status(400).json({ success: false, message: error.message });
   }
@@ -75,5 +75,25 @@ export const GroupController = {
   ),
   createGroupWithUser,
   update,
-  getGroupsProgressByUser
+  getGroupsProgressByUser,
+  joinGroup: async (req, res) => {
+    try {
+      const userId = req.user?.id
+      const { inviteCode } = req.body
+
+      if (!userId) {
+        return res.status(401).json({ success: false, message: 'Usuário não autenticado' })
+      }
+
+      await GroupService.joinGroup(userId, inviteCode)
+
+      return res.status(200).json({ success: true, message: 'Entrou no grupo com sucesso' })
+    } catch (error) {
+      console.error('Erro ao entrar no grupo:', error)
+      return res.status(400).json({
+        success: false,
+        message: error.message || 'Erro ao entrar no grupo'
+      })
+    }
+  }
 }

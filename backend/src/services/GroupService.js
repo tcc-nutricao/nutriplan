@@ -27,7 +27,7 @@ export const GroupService = {
     let endDate = null
     if (data.end_date) {
       endDate = new Date(data.end_date)
-      endDate.setHours(endDate.getHours() + 4) 
+      endDate.setHours(endDate.getHours() + 4)
     }
 
     let inviteCode
@@ -58,7 +58,7 @@ export const GroupService = {
       }
     }
 
-    
+
     return GroupRepository.create(dataWithCreator)
   },
 
@@ -79,7 +79,7 @@ export const GroupService = {
 
     dataToUpdate.updated_at = new Date();
 
-    delete dataToUpdate.id; 
+    delete dataToUpdate.id;
 
     return GroupRepository.update(id, dataToUpdate)
   },
@@ -94,6 +94,7 @@ export const GroupService = {
       const groupId = userGroup.id_group
       const participantCount = await UserGroupRepository.countParticipantsByGroupId(groupId)
       const participantNames = await UserGroupRepository.getParticipantNamesByGroupId(groupId)
+      const ownerName = await UserGroupRepository.getFirstAdminNameByGroupId(groupId)
 
       return {
         ...userGroup.group,
@@ -102,10 +103,38 @@ export const GroupService = {
           : null,
         participantCount,
         participantNames,
+        userRole: userGroup.role,
+        ownerName
       }
     }))
     return {
       groups: groupsWithDetails
     }
+  },
+
+  async joinGroup(userId, inviteCode) {
+    if (!userId) {
+      throw new Error('userId é obrigatório')
+    }
+    if (!inviteCode) {
+      throw new Error('Código de convite é obrigatório')
+    }
+
+    const group = await GroupRepository.findByInviteCode(inviteCode)
+    if (!group) {
+      throw new Error('Grupo não encontrado com este código')
+    }
+
+    const existingUserGroup = await UserGroupRepository.findByUserAndGroup(userId, group.id)
+    if (existingUserGroup) {
+      throw new Error('Você já participa deste grupo')
+    }
+
+    return UserGroupRepository.create({
+      id_user: userId,
+      id_group: group.id,
+      role: 'MEMBER',
+      created_at: new Date()
+    })
   }
 }

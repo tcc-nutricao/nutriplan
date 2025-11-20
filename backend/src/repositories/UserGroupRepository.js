@@ -41,8 +41,46 @@ const getParticipantNamesByGroupId = async (groupId) => {
 	return userGroups.map(ug => ug.user.name.split(' ')[0]);
 };
 
+const create = async (data) => {
+	return await prisma.userGroup.create({
+		data
+	});
+};
+
+const findByUserAndGroup = async (userId, groupId) => {
+	return await prisma.userGroup.findFirst({
+		where: {
+			id_user: userId,
+			id_group: groupId,
+			deleted_at: null
+		}
+	});
+};
+
+const getFirstAdminNameByGroupId = async (groupId) => {
+	const adminUserGroup = await prisma.userGroup.findFirst({
+		where: {
+			id_group: groupId,
+			role: 'ADMIN',
+			deleted_at: null
+		},
+		include: {
+			user: {
+				select: {
+					name: true
+				}
+			}
+		}
+	});
+
+	return adminUserGroup ? adminUserGroup.user.name.split(' ')[0] : 'Desconhecido';
+};
+
 export const UserGroupRepository = {
 	getGroupsByUserId,
 	countParticipantsByGroupId,
-	getParticipantNamesByGroupId
+	getParticipantNamesByGroupId,
+	create,
+	findByUserAndGroup,
+	getFirstAdminNameByGroupId
 };
