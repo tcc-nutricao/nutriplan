@@ -164,7 +164,7 @@ async function main() {
     data: {
       id_patient: patient.id,
       description: "Perder 5kg",
-      target_weight: 75, // Peso alvo: de 80kg para 75kg
+      target_weight: 75,
       start_date: new Date(),
       status: GoalStatus.ACTIVE,
       created_at: new Date(),
@@ -275,74 +275,24 @@ async function main() {
     },
   });
 
-  // FOODS
-  const banana = await prisma.food.create({
-    data: {
-      name: "Banana",
-      calories: 89,
-      protein: 1.1,
-      carbs: 22.8,
-      fat: 0.3,
-      created_at: new Date(),
-    },
-  });
-  const rice = await prisma.food.create({
-    data: {
-      name: "Arroz",
-      calories: 130,
-      protein: 2.4,
-      carbs: 28,
-      fat: 0.2,
-      created_at: new Date(),
-    },
-  });
 
   // UNIT OF MEASUREMENT
-  const gram = await prisma.unitOfMeasurement.create({
-    data: { name: "Grama", symbol: "g", created_at: new Date() },
-  });
+  try {
+    const unitsData = JSON.parse(fs.readFileSync('src/assets/units_of_measurement.json', 'utf-8'));
+    await prisma.unitOfMeasurement.createMany({
+      data: unitsData.map(u => ({ ...u, created_at: new Date() })),
+      skipDuplicates: true,
+    });
+    console.log('✅ Unidades de medida inseridas');
+  } catch (e) {
+    console.warn('⚠️  src/assets/units_of_measurement.json não encontrado. Criando apenas Grama.', e.message);
+    await prisma.unitOfMeasurement.create({
+      data: { name: "Grama", symbol: "g", created_at: new Date() },
+    });
+  }
+  
+  const gram = await prisma.unitOfMeasurement.findFirst({ where: { name: "Grama" } });
 
-  // RECIPE
-  const recipe = await prisma.recipe.create({
-    data: {
-      name: "Vitamina de Banana",
-      preparation_time: 5,
-      portion: 1,
-      created_at: new Date(),
-    },
-  });
-
-  // RECIPE OBJECTIVE (associa a receita ao objetivo de perda de peso - id 1)
-  await prisma.recipeObjective.create({
-    data: { id_objective: 1, id_recipe: recipe.id },
-  });
-
-  // PREPARATION METHOD
-  const prepMethod = await prisma.preparationMethod.create({
-    data: { name: "Cru", created_at: new Date() },
-  });
-
-  // RECIPE FOOD
-  await prisma.recipeFood.createMany({
-    data: [
-      {
-        id_food: banana.id,
-        id_recipe: recipe.id,
-        id_unit_of_measurement: gram.id,
-        id_preparation_method: prepMethod.id,
-        quantity: 100,
-        created_at: new Date(),
-      },
-      {
-        id_food: rice.id,
-        id_recipe: recipe.id,
-        id_unit_of_measurement: gram.id,
-        id_preparation_method: prepMethod.id,
-        quantity: 50,
-        created_at: new Date(),
-      },
-    ],
-  });
 
   // FOOD CONSUMED (one with food, one with recipe)
   // Comentado porque não temos meal plan criado na seed
@@ -420,65 +370,55 @@ async function main() {
     },
   });
 
-  // Popula com dados AI
   await populateWithAI(patient, nutritionist, goal);
 
   console.log("Seed finished.");
 }
 
 async function populateWithAI(patient, nutritionist, goal) {
-  console.log("Carregando dados gerados por IA dos arquivos JSON...");
 
-  // Lê os arquivos gerados (devem ser criados previamente com: node generate-data.js)
   let foods = [];
   let recipes = [];
   let mealplans = [];
 
   try {
     foods = JSON.parse(fs.readFileSync('src/assets/foods.json', 'utf-8'));
-    console.log(`✓ ${foods.length} alimentos carregados`);
+    console.log(`✅ ${foods.length} alimentos carregados`);
   } catch (e) {
     console.warn('⚠️  src/assets/foods.json não encontrado. Execute: node generate-data.js');
   }
 
   try {
     recipes = JSON.parse(fs.readFileSync('src/assets/recipes.json', 'utf-8'));
-    console.log(`✓ ${recipes.length} receitas carregadas`);
+    console.log(`✅ ${recipes.length} receitas carregadas`);
   } catch (e) {
     console.warn('⚠️  src/assets/recipes.json não encontrado. Execute: node generate-data.js');
   }
 
   try {
     mealplans = JSON.parse(fs.readFileSync('src/assets/mealplans.json', 'utf-8'));
-    console.log(`✓ ${mealplans.length} planos carregados`);
+    console.log(`✅ ${mealplans.length} planos carregados`);
   } catch (e) {
     console.warn('⚠️  src/assets/mealplans.json não encontrado. Execute: node generate-data.js');
   }
 
-  // Insere os foods em lote
   if (foods.length > 0) {
-    console.log(`Inserindo ${foods.length} alimentos no banco...`);
     await prisma.food.createMany({
       data: foods.map(food => ({ ...food, created_at: new Date() })),
       skipDuplicates: true,
     });
-    console.log('✓ Alimentos inseridos');
+    console.log('✅ Alimentos inseridos');
   }
 
-  // Insere as recipes em lote
   if (recipes.length > 0) {
-    console.log(`Inserindo ${recipes.length} receitas no banco...`);
     await prisma.recipe.createMany({
       data: recipes.map(recipe => ({ ...recipe, created_at: new Date() })),
       skipDuplicates: true,
     });
-    console.log('✓ Receitas inseridas');
+    console.log('✅ Receitas inseridas');
   }
 
-  // Insere os mealplans (vincule a um paciente/nutricionista/goal válido)
   if (mealplans.length > 0) {
-    console.log(`Inserindo ${mealplans.length} planos no banco...`);
-    // Como mealplans precisam de relacionamentos, inserimos um por um
     for (const plan of mealplans) {
       await prisma.mealPlan.create({
         data: {
@@ -490,7 +430,100 @@ async function populateWithAI(patient, nutritionist, goal) {
         },
       });
     }
-    console.log('✓ Planos inseridos');
+    console.log('✅ Planos inseridos');
+  }
+
+  // RECIPE FOODS (Relations)
+  try {
+    const recipeFoodsData = JSON.parse(fs.readFileSync('src/assets/recipe_foods.json', 'utf-8'));
+
+    const allFoods = await prisma.food.findMany();
+    const allRecipes = await prisma.recipe.findMany();
+    const allUnits = await prisma.unitOfMeasurement.findMany();
+    const prepMethod = await prisma.preparationMethod.findFirst();
+
+    const foodMap = new Map(allFoods.map(f => [f.name.toLowerCase(), f.id]));
+    const recipeMap = new Map(allRecipes.map(r => [r.name.toLowerCase(), r.id]));
+    const unitMap = new Map(allUnits.map(u => [u.name.toLowerCase(), u.id]));
+
+    const recipeFoodsToInsert = [];
+
+    for (const rf of recipeFoodsData) {
+      const recipeId = recipeMap.get(rf.recipe_name.toLowerCase());
+      const foodId = foodMap.get(rf.food_name.toLowerCase());
+      const unitId = unitMap.get(rf.unit.toLowerCase());
+
+      if (recipeId && foodId) {
+        recipeFoodsToInsert.push({
+          id_recipe: recipeId,
+          id_food: foodId,
+          id_unit_of_measurement: unitId || (allUnits[0] ? allUnits[0].id : 1),
+          id_preparation_method: prepMethod ? prepMethod.id : null,
+          quantity: rf.quantity || 1,
+          created_at: new Date(),
+        });
+      }
+    }
+
+    if (recipeFoodsToInsert.length > 0) {
+      await prisma.recipeFood.createMany({
+        data: recipeFoodsToInsert,
+        skipDuplicates: true,
+      });
+      console.log('✅ Relações receita-alimento inseridas');
+    }
+
+  } catch (e) {
+    console.warn('⚠️  src/assets/recipe_foods.json não encontrado ou erro ao processar.', e.message);
+  }
+
+  // PREFERENCES
+  try {
+    const preferencesData = JSON.parse(fs.readFileSync('src/assets/preferences.json', 'utf-8'));
+    await prisma.preference.createMany({
+      data: preferencesData.map(p => ({ ...p, created_at: new Date() })),
+      skipDuplicates: true,
+    });
+    console.log('✅ Preferências inseridas');
+  } catch (e) {
+    console.warn('⚠️  src/assets/preferences.json não encontrado.', e.message);
+  }
+
+  // RECIPE PREFERENCES (Relations)
+  try {
+    const recipePrefsData = JSON.parse(fs.readFileSync('src/assets/recipe_preferences.json', 'utf-8'));
+
+    const allRecipes = await prisma.recipe.findMany();
+    const allPreferences = await prisma.preference.findMany();
+
+    const recipeMap = new Map(allRecipes.map(r => [r.name.toLowerCase(), r.id]));
+    const preferenceMap = new Map(allPreferences.map(p => [p.name.toLowerCase(), p.id]));
+
+    const recipePrefsToInsert = [];
+
+    for (const rp of recipePrefsData) {
+      const recipeId = recipeMap.get(rp.recipe_name.toLowerCase());
+      const preferenceId = preferenceMap.get(rp.preference_name.toLowerCase());
+
+      if (recipeId && preferenceId) {
+        recipePrefsToInsert.push({
+          id_recipe: recipeId,
+          id_preference: preferenceId,
+          created_at: new Date(),
+        });
+      }
+    }
+
+    if (recipePrefsToInsert.length > 0) {
+      await prisma.recipePreference.createMany({
+        data: recipePrefsToInsert,
+        skipDuplicates: true,
+      });
+      console.log('✅ Relações receita-preferência inseridas');
+    }
+
+  } catch (e) {
+    console.warn('⚠️  src/assets/recipe_preferences.json não encontrado ou erro ao processar.', e.message);
   }
 }
 
