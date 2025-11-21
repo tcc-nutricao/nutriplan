@@ -6,4 +6,6 @@ import { Roles } from "../config/roles.js";
 export default (router) => {
   genericRoute(router, '/recipe', api, authenticate)
   router.get('/get-patient-recipes', authenticate, api.getPatientRecipes, authorize(Roles.STANDARD))
+  router.post('/recipe/favorite', authenticate, api.toggleFavorite, authorize(Roles.STANDARD))
+  router.get('/recipe/favorites', authenticate, api.getFavorites, authorize(Roles.STANDARD))
 }

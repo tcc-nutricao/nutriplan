@@ -19,9 +19,9 @@ const findByPatientId = async (patientId) => {
     include: {
       recipe: {
         include: {
-          recipeObjectives: {
+          recipePreferences: {
             include: {
-              objective: true
+              preference: true
             }
           }
         }
@@ -42,9 +42,9 @@ export const MealPlanRecipeRepository = {
             }, 
             recipe: {
                 include: {
-                    recipeObjectives: {
+                    recipePreferences: {
                         include: {
-                            objective: true
+                            preference: true
                         }
                     }
                 }

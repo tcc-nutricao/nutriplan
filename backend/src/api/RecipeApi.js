@@ -3,5 +3,7 @@ import { generateCrudApi } from './Api.js'
 
 export const api = {
   ...generateCrudApi(RecipeController),
-  getPatientRecipes: RecipeController.getPatientRecipes
+  getPatientRecipes: RecipeController.getPatientRecipes,
+  toggleFavorite: RecipeController.toggleFavorite,
+  getFavorites: RecipeController.getFavorites
 }

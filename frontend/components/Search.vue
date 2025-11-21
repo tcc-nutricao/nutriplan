@@ -16,9 +16,6 @@
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
-        <svg v-else class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
-        </svg>
       </span>
     </div>
 
@@ -35,7 +32,6 @@
         style="min-width: max-content;"
         role="listbox">
 
-        <!-- Results -->
         <li v-for="result in results" :key="result.id" @click="selectResult(result)"
           class="relative cursor-pointer select-none py-[10px] px-4 mx-2 rounded-lg text-p-950 hover:bg-p-100 hover:text-p-700 transition"
           role="option">
@@ -44,13 +40,11 @@
           </span>
         </li>
 
-        <!-- Empty state -->
         <li v-if="results.length === 0 && !isLoading && searchQuery.length > 0" 
           class="px-4 py-3 text-sm text-gray-500 text-center">
           Nenhum resultado encontrado
         </li>
 
-        <!-- Results count and load more (at the bottom) -->
         <li v-if="results.length > 0" 
           class="px-4 pb-1 pt-3 text-xs text-gray-500 border-t-2 border-gray-300 mt-1">
           <div class="flex items-center justify-between gap-2">
@@ -100,7 +94,7 @@ const totalResults = ref(0);
 const isOpen = ref(false);
 const isLoading = ref(false);
 const searchMenu = ref(null);
-const currentLimit = ref(10); // Track current limit for pagination
+const currentLimit = ref(10); 
 let debounceTimeout = null;
 
 const classes = computed(() => {
@@ -151,15 +145,12 @@ const loadMore = async () => {
 };
 
 const handleInput = () => {
-  // Reset limit when user types
   currentLimit.value = 10;
   
-  // Clear previous timeout
   if (debounceTimeout) {
     clearTimeout(debounceTimeout);
   }
 
-  // Set new timeout for debounce (300ms)
   debounceTimeout = setTimeout(() => {
     performSearch();
   }, 300);
@@ -183,7 +174,6 @@ const handleClickOutside = (event) => {
   }
 };
 
-// Watch for external changes to modelValue (if cleared externally)
 watch(() => props.modelValue, (newValue) => {
   if (!newValue) {
     searchQuery.value = '';

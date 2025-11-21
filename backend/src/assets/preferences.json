@@ -1,0 +1,20 @@
+[
+  { "name": "Sem Glúten", "icon": "fa-wheat-awn-circle-exclamation" },
+  { "name": "Sem açúcar", "icon": "fa-solid fa-candy-cane" },
+  { "name": "Sem lactose", "icon": "fa-solid fa-mug-hot" },
+  { "name": "Vegetariano", "icon": "fa-solid fa-leaf" },
+  { "name": "Vegano", "icon": "fa-solid fa-seedling" },
+  { "name": "Emagrecer", "icon": "fa-solid fa-weight-scale" },
+  { "name": "Ganho de músculo", "icon": "fa-solid fa-dumbbell" },
+  { "name": "Manter peso", "icon": "fa-solid fa-chart-line" },
+  { "name": "Colesterol", "icon": "fa-solid fa-heart-pulse" },
+  { "name": "Sono", "icon": "fa-solid fa-moon" },
+  { "name": "Energia", "icon": "fa-solid fa-bolt" },
+  { "name": "Antinflamatório", "icon": "fa-solid fa-shield-heart" },
+  { "name": "Antioxidante", "icon": "fa-solid fa-apple-whole" },
+  { "name": "Sem nozes", "icon": "fa-solid fa-ban" },
+  { "name": "Sem peixe", "icon": "fa-solid fa-fish" },
+  { "name": "Intestino", "icon": "fa-solid fa-stomach" },
+  { "name": "Fácil", "icon": "fa-solid fa-clock" },
+  { "name": "Doce", "icon": "fa-solid fa-cookie-bite" }
+]

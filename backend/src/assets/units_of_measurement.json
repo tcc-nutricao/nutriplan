@@ -1,0 +1,14 @@
+[
+  { "name": "Grama", "symbol": "g" },
+  { "name": "Quilograma", "symbol": "kg" },
+  { "name": "Mililitro", "symbol": "ml" },
+  { "name": "Litro", "symbol": "l" },
+  { "name": "Unidade", "symbol": "un" },
+  { "name": "Xícara", "symbol": "xíc" },
+  { "name": "Colher de Sopa", "symbol": "cs" },
+  { "name": "Colher de Chá", "symbol": "cc" },
+  { "name": "Fatia", "symbol": "ft" },
+  { "name": "Pitada", "symbol": "pt" },
+  { "name": "Lata", "symbol": "lt" },
+  { "name": "Pacote", "symbol": "pc" }
+]

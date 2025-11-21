@@ -1,7 +1,7 @@
 <template>
     <Card 
         :class="{'border-p-600 shadow-xl shadow-p-600/20 w-full transition': item.isSelected, 'w-[85%]' : !item.isSelected}" 
-        class="border-2 cursor-pointer transition-all duration-100 active:scale-[98%]" 
+        class="border-2 cursor-pointer transition-all duration-100 active:scale-[98%]" centered
         @click="$emit('selected')"
     >
         <div class="flex flex-col items-between gap-2">
@@ -11,18 +11,18 @@
             </div>
         </div>
         <div class="flex justify-between items-end">
-            <div class="flex flex-wrap gap-2">
-                <p v-for="(recipeObjective, index) in item.recipe.recipeObjectives" :key="index">
-                    <i :class="'mr-2 fa-solid '+ recipeObjective.objective.icon"></i>{{ recipeObjective.objective.name }}
+            <div class="flex flex-col text-gray-600 mt-1">
+                <p v-for="(recipePreference, index) in item.recipe.recipePreferences" :key="index">
+                    <i :class="'mr-2 text-p-500 fa-solid '+ recipePreference.preference.icon"></i>{{ recipePreference.preference.name }}
                 </p>
             </div>
-            <div class="ml-auto">
+            <div class="ml-auto text-gray-600">
                 <div>
-                    <i class="fa-regular fa-clock mr-1"></i> 
+                    <i class="fa-regular fa-clock mr-2"></i> 
                     <span>{{ item.recipe.preparation_time }} min</span>
                 </div>
                 <div>
-                    <i class="fa-solid fa-utensils mr-1"></i> 
+                    <i class="fa-solid fa-utensils mr-2"></i> 
                     <span>{{ item.recipe.portion }} porções</span>
                 </div>
             </div>  
@@ -38,7 +38,7 @@ export default {
             required: true,
             default: () => ({
                 title: null,
-                recipeObjectives: [],
+                recipePreferences: [],
                 time: null,
                 portions: null,
                 isSelected: false,

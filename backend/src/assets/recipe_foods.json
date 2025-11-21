@@ -1,0 +1,4238 @@
+[
+  {
+    "recipe_name": "Batata Frita Caseira",
+    "food_name": "Batata Inglesa",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Batata Frita Caseira",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Legumes Cozidos",
+    "food_name": "Cenoura",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Legumes Cozidos",
+    "food_name": "Batata Inglesa",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Legumes Cozidos",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Legumes Cozidos",
+    "food_name": "Chuchu",
+    "quantity": 0.5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Legumes Cozidos",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Ovo Cozido",
+    "food_name": "Ovo Cozido",
+    "quantity": 2,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Ovo Cozido",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Salada Simples",
+    "food_name": "Cenoura",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Salada Simples",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Salada Simples",
+    "food_name": "Alface",
+    "quantity": 50,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salada Simples",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Salada Simples",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Salada Simples",
+    "food_name": "Limão",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Arroz com Cenoura",
+    "food_name": "Arroz Branco",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Arroz com Cenoura",
+    "food_name": "Cenoura",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Arroz com Cenoura",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Arroz com Cenoura",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Arroz com Cenoura",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Macarrão com Manteiga",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Macarrão com Manteiga",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Macarrão com Manteiga",
+    "food_name": "Macarrão Cozido",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Macarrão com Manteiga",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Linguiça Frita",
+    "food_name": "Linguiça Calabresa",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Milho Cozido",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Milho Cozido",
+    "food_name": "Milho Verde",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Milho Cozido",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Suco de Laranja",
+    "food_name": "Laranja",
+    "quantity": 4,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Chá de Camomila",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Brigadeiro",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Brigadeiro",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Brigadeiro",
+    "food_name": "Chocolate em Pó",
+    "quantity": 2,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Brigadeiro",
+    "food_name": "Leite Condensado",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Pão de Queijo de Liquidificador",
+    "food_name": "Ovo Cozido",
+    "quantity": 2,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Pão de Queijo de Liquidificador",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Pão de Queijo de Liquidificador",
+    "food_name": "Queijo Minas Frescal",
+    "quantity": 30,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Pão de Queijo de Liquidificador",
+    "food_name": "Polvilho Azedo",
+    "quantity": 1,
+    "unit": "Xícara"
+  },
+  {
+    "recipe_name": "Mousse de Maracujá",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Mousse de Maracujá",
+    "food_name": "Leite Condensado",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Mousse de Maracujá",
+    "food_name": "Creme de Leite",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Mousse de Maracujá",
+    "food_name": "Suco de Laranja",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Caipirinha",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Caipirinha",
+    "food_name": "Limão",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Frango Grelhado",
+    "food_name": "Peito de Frango Grelhado",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Frango Grelhado",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Frango Grelhado",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Frango Grelhado",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Omelete Simples",
+    "food_name": "Ovo Cozido",
+    "quantity": 2,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Omelete Simples",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Omelete Simples",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Omelete Simples",
+    "food_name": "Mel",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Omelete Simples",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Arroz Branco",
+    "food_name": "Arroz Branco",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Arroz Branco",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Arroz Branco",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Arroz Branco",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Arroz Branco",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Macarrão Alho e Óleo",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Macarrão Alho e Óleo",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Macarrão Alho e Óleo",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Macarrão Alho e Óleo",
+    "food_name": "Macarrão Cozido",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Macarrão Alho e Óleo",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Macarrão Alho e Óleo",
+    "food_name": "Salsinha",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Vitamina de Banana",
+    "food_name": "Banana",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Vitamina de Banana",
+    "food_name": "Aveia em Flocos",
+    "quantity": 30,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Vitamina de Banana",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Vitamina de Banana",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Vitamina de Banana",
+    "food_name": "Mel",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Salada Caprese",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Salada Caprese",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Salada Caprese",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Salada Caprese",
+    "food_name": "Queijo Muçarela",
+    "quantity": 2,
+    "unit": "Fatia"
+  },
+  {
+    "recipe_name": "Salada Caprese",
+    "food_name": "Manjericão",
+    "quantity": 5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Salada Caprese",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Purê de Batata",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Purê de Batata",
+    "food_name": "Batata Inglesa",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Purê de Batata",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Purê de Batata",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Torrada com Alho",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Torrada com Alho",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Torrada com Alho",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Torrada com Alho",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Banana Assada",
+    "food_name": "Banana",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Banana Assada",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Banana Assada",
+    "food_name": "Canela em Pó",
+    "quantity": 1,
+    "unit": "Colher de Chá"
+  },
+  {
+    "recipe_name": "Cuscuz Nordestino",
+    "food_name": "Ovo Cozido",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Cuscuz Nordestino",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Cuscuz Nordestino",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Cuscuz Nordestino",
+    "food_name": "Farinha de Trigo",
+    "quantity": 1,
+    "unit": "Xícara"
+  },
+  {
+    "recipe_name": "Cuscuz Nordestino",
+    "food_name": "Milho Verde",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Cuscuz Nordestino",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Panqueca Simples",
+    "food_name": "Ovo Cozido",
+    "quantity": 2,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Panqueca Simples",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Panqueca Simples",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Panqueca Simples",
+    "food_name": "Farinha de Trigo",
+    "quantity": 1,
+    "unit": "Xícara"
+  },
+  {
+    "recipe_name": "Gelatina Colorida",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Gelatina Colorida",
+    "food_name": "Leite Condensado",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Gelatina Colorida",
+    "food_name": "Creme de Leite",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Gelatina Colorida",
+    "food_name": "Gelatina",
+    "quantity": 1,
+    "unit": "Pacote"
+  },
+  {
+    "recipe_name": "Bolo de Caneca",
+    "food_name": "Ovo Cozido",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Bolo de Caneca",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Bolo de Caneca",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Bolo de Caneca",
+    "food_name": "Farinha de Trigo",
+    "quantity": 1,
+    "unit": "Xícara"
+  },
+  {
+    "recipe_name": "Bolo de Caneca",
+    "food_name": "Chocolate em Pó",
+    "quantity": 2,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Pipoca na Panela",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Pipoca na Panela",
+    "food_name": "Milho Verde",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Café Coado",
+    "food_name": "Café",
+    "quantity": 1,
+    "unit": "Xícara"
+  },
+  {
+    "recipe_name": "Café Coado",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Limonada",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Limonada",
+    "food_name": "Limão",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Limonada",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Crepioca",
+    "food_name": "Ovo Cozido",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Crepioca",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Crepioca",
+    "food_name": "Goma de Tapioca",
+    "quantity": 3,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Ovo Mexido",
+    "food_name": "Ovo Cozido",
+    "quantity": 2,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Ovo Mexido",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Ovo Mexido",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Ovo Mexido",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Sanduíche de Presunto e Queijo",
+    "food_name": "Queijo Minas Frescal",
+    "quantity": 30,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Sanduíche de Presunto e Queijo",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Sanduíche de Presunto e Queijo",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Sanduíche de Presunto e Queijo",
+    "food_name": "Presunto",
+    "quantity": 2,
+    "unit": "Fatia"
+  },
+  {
+    "recipe_name": "Tapioca Simples",
+    "food_name": "Goma de Tapioca",
+    "quantity": 3,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Bruschetta",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Bruschetta",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Bruschetta",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Bruschetta",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Bruschetta",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Bruschetta",
+    "food_name": "Manjericão",
+    "quantity": 5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Bruschetta",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Cuscuz Paulista Simples",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Cuscuz Paulista Simples",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Cuscuz Paulista Simples",
+    "food_name": "Cebola",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Cuscuz Paulista Simples",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Cuscuz Paulista Simples",
+    "food_name": "Farinha de Trigo",
+    "quantity": 1,
+    "unit": "Xícara"
+  },
+  {
+    "recipe_name": "Cuscuz Paulista Simples",
+    "food_name": "Milho Verde",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Cuscuz Paulista Simples",
+    "food_name": "Ervilha",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Cuscuz Paulista Simples",
+    "food_name": "Sardinha em Conserva",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Cuscuz Paulista Simples",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Sopa de Legumes",
+    "food_name": "Cenoura",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Sopa de Legumes",
+    "food_name": "Batata Inglesa",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Sopa de Legumes",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Sopa de Legumes",
+    "food_name": "Cebola",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Sopa de Legumes",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Sopa de Legumes",
+    "food_name": "Abobrinha",
+    "quantity": 0.5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Sopa de Legumes",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Vitamina de Morango",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Vitamina de Morango",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Vitamina de Morango",
+    "food_name": "Morango",
+    "quantity": 5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Ovo no Pão",
+    "food_name": "Ovo Cozido",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Ovo no Pão",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Ovo no Pão",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Ovo no Pão",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Ovo no Pão",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Panqueca Americana",
+    "food_name": "Ovo Cozido",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Panqueca Americana",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Panqueca Americana",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Panqueca Americana",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Panqueca Americana",
+    "food_name": "Farinha de Trigo",
+    "quantity": 1,
+    "unit": "Xícara"
+  },
+  {
+    "recipe_name": "Abacate Amassado",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Abacate Amassado",
+    "food_name": "Limão",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Abacate Amassado",
+    "food_name": "Abacate",
+    "quantity": 0.5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Abacate Amassado",
+    "food_name": "Suco de Laranja",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Milkshake de Chocolate",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Milkshake de Chocolate",
+    "food_name": "Chocolate em Pó",
+    "quantity": 2,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Banana com Aveia",
+    "food_name": "Banana",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Banana com Aveia",
+    "food_name": "Aveia em Flocos",
+    "quantity": 30,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Banana com Aveia",
+    "food_name": "Mel",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Banana com Aveia",
+    "food_name": "Canela em Pó",
+    "quantity": 1,
+    "unit": "Colher de Chá"
+  },
+  {
+    "recipe_name": "Frango Desfiado",
+    "food_name": "Peito de Frango Grelhado",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Frango Desfiado",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Arroz Doce Simples",
+    "food_name": "Arroz Branco",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Arroz Doce Simples",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Arroz Doce Simples",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Arroz Doce Simples",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Arroz Doce Simples",
+    "food_name": "Canela em Pó",
+    "quantity": 1,
+    "unit": "Colher de Chá"
+  },
+  {
+    "recipe_name": "Pão com Ovo",
+    "food_name": "Ovo Cozido",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Pão com Ovo",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Pão com Ovo",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Pão com Ovo",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Pão com Ovo",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Pão com Ovo",
+    "food_name": "Requeijão",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Bife Acebolado",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Bife Acebolado",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Bife Acebolado",
+    "food_name": "Cebola",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Bife Acebolado",
+    "food_name": "Mel",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Bife Acebolado",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Salsicha Cozida",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Salsicha Cozida",
+    "food_name": "Salsicha",
+    "quantity": 2,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Salsicha Cozida",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Batata Sauté",
+    "food_name": "Batata Inglesa",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Batata Sauté",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Batata Sauté",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Batata Sauté",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Batata Sauté",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Molho de Tomate Rápido",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Molho de Tomate Rápido",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Molho de Tomate Rápido",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Molho de Tomate Rápido",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Molho de Tomate Rápido",
+    "food_name": "Cebola",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Molho de Tomate Rápido",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Molho de Tomate Rápido",
+    "food_name": "Orégano",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Molho de Tomate Rápido",
+    "food_name": "Manjericão",
+    "quantity": 5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Café com Leite",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Café com Leite",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Café com Leite",
+    "food_name": "Café",
+    "quantity": 1,
+    "unit": "Xícara"
+  },
+  {
+    "recipe_name": "Pudim de Gelatina",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Pudim de Gelatina",
+    "food_name": "Leite Condensado",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Pudim de Gelatina",
+    "food_name": "Creme de Leite",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Pudim de Gelatina",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Pudim de Gelatina",
+    "food_name": "Gelatina",
+    "quantity": 1,
+    "unit": "Pacote"
+  },
+  {
+    "recipe_name": "Geladinho de Suco",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Geladinho de Suco",
+    "food_name": "Suco de Laranja",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Geladinho de Suco",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Mingau de Aveia",
+    "food_name": "Aveia em Flocos",
+    "quantity": 30,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Mingau de Aveia",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Mingau de Aveia",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Mingau de Aveia",
+    "food_name": "Canela em Pó",
+    "quantity": 1,
+    "unit": "Colher de Chá"
+  },
+  {
+    "recipe_name": "Batata Assada",
+    "food_name": "Batata Inglesa",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Batata Assada",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Batata Assada",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Chuchu Refogado",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Chuchu Refogado",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Chuchu Refogado",
+    "food_name": "Cebola",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Chuchu Refogado",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Chuchu Refogado",
+    "food_name": "Chuchu",
+    "quantity": 0.5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Chuchu Refogado",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Chuchu Refogado",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Macarrão com Queijo",
+    "food_name": "Queijo Minas Frescal",
+    "quantity": 30,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Macarrão com Queijo",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Macarrão com Queijo",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Macarrão com Queijo",
+    "food_name": "Macarrão Cozido",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Macarrão com Queijo",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Lasanha Simples",
+    "food_name": "Queijo Minas Frescal",
+    "quantity": 30,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Lasanha Simples",
+    "food_name": "Presunto",
+    "quantity": 2,
+    "unit": "Fatia"
+  },
+  {
+    "recipe_name": "Lasanha Simples",
+    "food_name": "Queijo Muçarela",
+    "quantity": 2,
+    "unit": "Fatia"
+  },
+  {
+    "recipe_name": "Lasanha Simples",
+    "food_name": "Mel",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Ensopado de Batata com Carne",
+    "food_name": "Carne Bovina (Patinho)",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Ensopado de Batata com Carne",
+    "food_name": "Batata Inglesa",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Ensopado de Batata com Carne",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Ensopado de Batata com Carne",
+    "food_name": "Cebola",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Ensopado de Batata com Carne",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Ensopado de Batata com Carne",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Pão Caseiro Simples",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Pão Caseiro Simples",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Pão Caseiro Simples",
+    "food_name": "Farinha de Trigo",
+    "quantity": 1,
+    "unit": "Xícara"
+  },
+  {
+    "recipe_name": "Pão Caseiro Simples",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Molho Branco",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Molho Branco",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Molho Branco",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Molho Branco",
+    "food_name": "Farinha de Trigo",
+    "quantity": 1,
+    "unit": "Xícara"
+  },
+  {
+    "recipe_name": "Molho Branco",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Peito de Frango no Forno",
+    "food_name": "Peito de Frango Grelhado",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Peito de Frango no Forno",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Peito de Frango no Forno",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Peito de Frango no Forno",
+    "food_name": "Limão",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Berinjela Refogada",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Berinjela Refogada",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Berinjela Refogada",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Berinjela Refogada",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Berinjela Refogada",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Quiabo Refogado",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Quiabo Refogado",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Quiabo Refogado",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Quiabo Refogado",
+    "food_name": "Vinagre",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Molho de Alho Caseiro",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Molho de Alho Caseiro",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Molho de Alho Caseiro",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Molho de Alho Caseiro",
+    "food_name": "Maionese",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Pão de Alho Simples",
+    "food_name": "Queijo Minas Frescal",
+    "quantity": 30,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Pão de Alho Simples",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Pão de Alho Simples",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Pão de Alho Simples",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Pão de Alho Simples",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Pão de Alho Simples",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Caldinho de Feijão",
+    "food_name": "Feijão Preto",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Caldinho de Feijão",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Caldinho de Feijão",
+    "food_name": "Cebola",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Caldinho de Feijão",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Caldinho de Feijão",
+    "food_name": "Bacon",
+    "quantity": 50,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Caldinho de Feijão",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Abobrinha Grelhada",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Abobrinha Grelhada",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Abobrinha Grelhada",
+    "food_name": "Abobrinha",
+    "quantity": 0.5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Abobrinha Grelhada",
+    "food_name": "Orégano",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Abobrinha Grelhada",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Skyr com Mel",
+    "food_name": "Mel",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Skyr com Mel",
+    "food_name": "Iogurte Natural",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Iogurte com Granola",
+    "food_name": "Banana",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Iogurte com Granola",
+    "food_name": "Mel",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Iogurte com Granola",
+    "food_name": "Iogurte Natural",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Iogurte com Granola",
+    "food_name": "Morango",
+    "quantity": 5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Tapioca com Queijo",
+    "food_name": "Queijo Minas Frescal",
+    "quantity": 30,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Tapioca com Queijo",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Tapioca com Queijo",
+    "food_name": "Queijo Muçarela",
+    "quantity": 2,
+    "unit": "Fatia"
+  },
+  {
+    "recipe_name": "Tapioca com Queijo",
+    "food_name": "Goma de Tapioca",
+    "quantity": 3,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Smoothie de Manga",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Smoothie de Manga",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Creme de Papaya",
+    "food_name": "Mamão Papaya",
+    "quantity": 0.5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Sanduíche Natural",
+    "food_name": "Peito de Frango Grelhado",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Sanduíche Natural",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Sanduíche Natural",
+    "food_name": "Alface",
+    "quantity": 50,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Sanduíche Natural",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Sanduíche Natural",
+    "food_name": "Maionese",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Sanduíche Natural",
+    "food_name": "Requeijão",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Pão com Requeijão",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Pão com Requeijão",
+    "food_name": "Requeijão",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Torrada com Manteiga",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Torrada com Manteiga",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Cenoura Baby Cozida",
+    "food_name": "Cenoura",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Cenoura Baby Cozida",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Cenoura Baby Cozida",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Cenoura Baby Cozida",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Chá Verde",
+    "food_name": "Chá",
+    "quantity": 1,
+    "unit": "Xícara"
+  },
+  {
+    "recipe_name": "Chá Verde",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Suco de Melancia",
+    "food_name": "Mel",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Suco de Melancia",
+    "food_name": "Melancia",
+    "quantity": 1,
+    "unit": "Fatia"
+  },
+  {
+    "recipe_name": "Salada de Pepino",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Salada de Pepino",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Salada de Pepino",
+    "food_name": "Pepino",
+    "quantity": 0.5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Salada de Pepino",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Salada de Tomate",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Salada de Tomate",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Salada de Tomate",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Salada de Tomate",
+    "food_name": "Cebola",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Salada de Tomate",
+    "food_name": "Orégano",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Salada de Tomate",
+    "food_name": "Vinagre",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Ovo Pochê",
+    "food_name": "Ovo Cozido",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Ovo Pochê",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Ovo Pochê",
+    "food_name": "Vinagre",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Ovo Estrelado",
+    "food_name": "Ovo Cozido",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Ovo Estrelado",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Ovo Estrelado",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Ovo Estrelado",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Torrada Francesa",
+    "food_name": "Ovo Cozido",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Torrada Francesa",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Torrada Francesa",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Torrada Francesa",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Torrada Francesa",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Torrada Francesa",
+    "food_name": "Mel",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Torrada Francesa",
+    "food_name": "Canela em Pó",
+    "quantity": 1,
+    "unit": "Colher de Chá"
+  },
+  {
+    "recipe_name": "Banana Caramelizada",
+    "food_name": "Banana",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Banana Caramelizada",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Banana Caramelizada",
+    "food_name": "Mel",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Café Gelado",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Café Gelado",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Café Gelado",
+    "food_name": "Café",
+    "quantity": 1,
+    "unit": "Xícara"
+  },
+  {
+    "recipe_name": "Creme de Abacate",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Creme de Abacate",
+    "food_name": "Limão",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Creme de Abacate",
+    "food_name": "Abacate",
+    "quantity": 0.5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Creme de Abacate",
+    "food_name": "Suco de Laranja",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Abacaxi Grelhado",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Abacaxi Grelhado",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Abacaxi Grelhado",
+    "food_name": "Abacaxi",
+    "quantity": 2,
+    "unit": "Fatia"
+  },
+  {
+    "recipe_name": "Abacaxi Grelhado",
+    "food_name": "Canela em Pó",
+    "quantity": 1,
+    "unit": "Colher de Chá"
+  },
+  {
+    "recipe_name": "Milho Verde na Manteiga",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Milho Verde na Manteiga",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Milho Verde na Manteiga",
+    "food_name": "Milho Verde",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Cuscuz de Tapioca",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Cuscuz de Tapioca",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Cuscuz de Tapioca",
+    "food_name": "Goma de Tapioca",
+    "quantity": 3,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Pão de Queijo Congelado",
+    "food_name": "Queijo Minas Frescal",
+    "quantity": 30,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Chá Mate Gelado",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Chá Mate Gelado",
+    "food_name": "Limão",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Chá Mate Gelado",
+    "food_name": "Chá",
+    "quantity": 1,
+    "unit": "Xícara"
+  },
+  {
+    "recipe_name": "Suco de Uva Natural",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Suco de Uva Natural",
+    "food_name": "Uva",
+    "quantity": 10,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Suco de Uva Natural",
+    "food_name": "Suco de Laranja",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Suco de Uva Natural",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Gelatina Simples",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Gelatina Simples",
+    "food_name": "Gelatina",
+    "quantity": 1,
+    "unit": "Pacote"
+  },
+  {
+    "recipe_name": "Creme de Milho Rápido",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Creme de Milho Rápido",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Creme de Milho Rápido",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Creme de Milho Rápido",
+    "food_name": "Milho Verde",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Purê de Mandioquinha",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Purê de Mandioquinha",
+    "food_name": "Batata Inglesa",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Purê de Mandioquinha",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Purê de Mandioquinha",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Purê de Mandioquinha",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Couve Refogada",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Couve Refogada",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Couve Refogada",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Couve Refogada",
+    "food_name": "Couve Manteiga",
+    "quantity": 2,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Espinafre Refogado",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Espinafre Refogado",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Espinafre Refogado",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Espinafre Refogado",
+    "food_name": "Espinafre",
+    "quantity": 1,
+    "unit": "Xícara"
+  },
+  {
+    "recipe_name": "Biscoito de Polvilho",
+    "food_name": "Polvilho Azedo",
+    "quantity": 1,
+    "unit": "Xícara"
+  },
+  {
+    "recipe_name": "Iogurte com Frutas",
+    "food_name": "Banana",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Iogurte com Frutas",
+    "food_name": "Mel",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Iogurte com Frutas",
+    "food_name": "Iogurte Natural",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Iogurte com Frutas",
+    "food_name": "Morango",
+    "quantity": 5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Wrap de Frango",
+    "food_name": "Peito de Frango Grelhado",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Wrap de Frango",
+    "food_name": "Alface",
+    "quantity": 50,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Wrap de Frango",
+    "food_name": "Maionese",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Wrap de Frango",
+    "food_name": "Requeijão",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Sanduíche de Atum",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Sanduíche de Atum",
+    "food_name": "Alface",
+    "quantity": 50,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Sanduíche de Atum",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Sanduíche de Atum",
+    "food_name": "Atum em Conserva",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Sanduíche de Atum",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Sanduíche de Atum",
+    "food_name": "Maionese",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Torrada com Geleia",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Suco de Goiaba",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Suco de Goiaba",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Batata Cozida",
+    "food_name": "Batata Inglesa",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Batata Cozida",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Batata Cozida",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Legumes no Vapor",
+    "food_name": "Brócolis Cozido",
+    "quantity": 80,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Legumes no Vapor",
+    "food_name": "Cenoura",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Legumes no Vapor",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Legumes no Vapor",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Chá de Erva-doce",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Pizza Caseira Simples",
+    "food_name": "Queijo Minas Frescal",
+    "quantity": 30,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Pizza Caseira Simples",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Pizza Caseira Simples",
+    "food_name": "Queijo Muçarela",
+    "quantity": 2,
+    "unit": "Fatia"
+  },
+  {
+    "recipe_name": "Pizza Caseira Simples",
+    "food_name": "Orégano",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Macarrão ao Molho Manteiga",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Macarrão ao Molho Manteiga",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Macarrão ao Molho Manteiga",
+    "food_name": "Macarrão Cozido",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Macarrão ao Molho Manteiga",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Macarrão ao Molho Manteiga",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Salada de Abacate",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Salada de Abacate",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Salada de Abacate",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Salada de Abacate",
+    "food_name": "Limão",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Salada de Abacate",
+    "food_name": "Abacate",
+    "quantity": 0.5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Salada de Abacate",
+    "food_name": "Suco de Laranja",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Salada de Abacate",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Sanduíche de Ovo",
+    "food_name": "Ovo Cozido",
+    "quantity": 2,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Sanduíche de Ovo",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Sanduíche de Ovo",
+    "food_name": "Mostarda",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Sanduíche de Ovo",
+    "food_name": "Maionese",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Misto Quente",
+    "food_name": "Queijo Minas Frescal",
+    "quantity": 30,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Misto Quente",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Misto Quente",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Misto Quente",
+    "food_name": "Presunto",
+    "quantity": 2,
+    "unit": "Fatia"
+  },
+  {
+    "recipe_name": "Misto Quente",
+    "food_name": "Requeijão",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Queijo Quente",
+    "food_name": "Queijo Minas Frescal",
+    "quantity": 30,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Queijo Quente",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Queijo Quente",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Salada de Rúcula com Tomate",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Salada de Rúcula com Tomate",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Salada de Rúcula com Tomate",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Coca-Cola Limonada",
+    "food_name": "Limão",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Coca-Cola Limonada",
+    "food_name": "Suco de Laranja",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Batata Doce Assada",
+    "food_name": "Batata Inglesa",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Batata Doce Assada",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Batata Doce Assada",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Banana com Mel",
+    "food_name": "Banana",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Banana com Mel",
+    "food_name": "Mel",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Banana com Mel",
+    "food_name": "Canela em Pó",
+    "quantity": 1,
+    "unit": "Colher de Chá"
+  },
+  {
+    "recipe_name": "Sopa Rala de Frango",
+    "food_name": "Peito de Frango Grelhado",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Sopa Rala de Frango",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Sopa Rala de Frango",
+    "food_name": "Cebola",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Sopa Rala de Frango",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Sopa Rala de Frango",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Sopa Rápida de Tomate",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Sopa Rápida de Tomate",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Sopa Rápida de Tomate",
+    "food_name": "Cebola",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Sopa Rápida de Tomate",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Sopa Rápida de Tomate",
+    "food_name": "Manjericão",
+    "quantity": 5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Pão de Tapioca",
+    "food_name": "Ovo Cozido",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Pão de Tapioca",
+    "food_name": "Queijo Minas Frescal",
+    "quantity": 30,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Pão de Tapioca",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Pão de Tapioca",
+    "food_name": "Goma de Tapioca",
+    "quantity": 3,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Fubá Cozido",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Fubá Cozido",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Fubá Cozido",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Fubá Cozido",
+    "food_name": "Fubá",
+    "quantity": 1,
+    "unit": "Xícara"
+  },
+  {
+    "recipe_name": "Bolo de Areia",
+    "food_name": "Ovo Cozido",
+    "quantity": 2,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Bolo de Areia",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Bolo de Areia",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Bolo de Areia",
+    "food_name": "Farinha de Trigo",
+    "quantity": 1,
+    "unit": "Xícara"
+  },
+  {
+    "recipe_name": "Bolo de Coco Simples",
+    "food_name": "Ovo Cozido",
+    "quantity": 2,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Bolo de Coco Simples",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Bolo de Coco Simples",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Bolo de Coco Simples",
+    "food_name": "Farinha de Trigo",
+    "quantity": 1,
+    "unit": "Xícara"
+  },
+  {
+    "recipe_name": "Bolo de Coco Simples",
+    "food_name": "Coco Ralado",
+    "quantity": 1,
+    "unit": "Pacote"
+  },
+  {
+    "recipe_name": "Arroz de Micro-ondas",
+    "food_name": "Arroz Branco",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Arroz de Micro-ondas",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Arroz de Micro-ondas",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Omelete de Legumes",
+    "food_name": "Ovo Cozido",
+    "quantity": 2,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Omelete de Legumes",
+    "food_name": "Cenoura",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Omelete de Legumes",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Omelete de Legumes",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Omelete de Legumes",
+    "food_name": "Abobrinha",
+    "quantity": 0.5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Omelete de Legumes",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Tostex Simples",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Tostex Simples",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Sanduíche de Peito de Peru",
+    "food_name": "Queijo Minas Frescal",
+    "quantity": 30,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Sanduíche de Peito de Peru",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Sanduíche de Peito de Peru",
+    "food_name": "Alface",
+    "quantity": 50,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Sanduíche de Peito de Peru",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Sanduíche de Peito de Peru",
+    "food_name": "Maionese",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Sanduíche de Peito de Peru",
+    "food_name": "Requeijão",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Banana no Micro-ondas",
+    "food_name": "Banana",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Banana no Micro-ondas",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Banana no Micro-ondas",
+    "food_name": "Canela em Pó",
+    "quantity": 1,
+    "unit": "Colher de Chá"
+  },
+  {
+    "recipe_name": "Salsicha na Airfryer",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Salsicha na Airfryer",
+    "food_name": "Salsicha",
+    "quantity": 2,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Pão de Alho na Airfryer",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Pão de Alho na Airfryer",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Batata em Cubos na Airfryer",
+    "food_name": "Batata Inglesa",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Batata em Cubos na Airfryer",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Batata em Cubos na Airfryer",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Frango Desfiado na Pressão",
+    "food_name": "Peito de Frango Grelhado",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Frango Desfiado na Pressão",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Couve-Flor Cozida",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Couve-Flor Cozida",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Couve-Flor Cozida",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Couve-Flor Cozida",
+    "food_name": "Couve Manteiga",
+    "quantity": 2,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Couve-Flor Cozida",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Brócolis no Vapor",
+    "food_name": "Brócolis Cozido",
+    "quantity": 80,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Brócolis no Vapor",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Brócolis no Vapor",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Panqueca de Banana",
+    "food_name": "Ovo Cozido",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Panqueca de Banana",
+    "food_name": "Banana",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Panqueca de Banana",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Panqueca de Banana",
+    "food_name": "Canela em Pó",
+    "quantity": 1,
+    "unit": "Colher de Chá"
+  },
+  {
+    "recipe_name": "Ovo Frito com Tomate",
+    "food_name": "Ovo Cozido",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Ovo Frito com Tomate",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Ovo Frito com Tomate",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Ovo Frito com Tomate",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Ovo Frito com Tomate",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Ovo Frito com Tomate",
+    "food_name": "Orégano",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Queijo Coalho na Airfryer",
+    "food_name": "Queijo Minas Frescal",
+    "quantity": 30,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Queijo Coalho na Airfryer",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Queijo Coalho na Airfryer",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Espaguete com Azeite",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Espaguete com Azeite",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Espaguete com Azeite",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Espaguete com Azeite",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Vinagrete Simples",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Vinagrete Simples",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Vinagrete Simples",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Vinagrete Simples",
+    "food_name": "Cebola",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Vinagrete Simples",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Vinagrete Simples",
+    "food_name": "Vinagre",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Cuscuz com Ovo",
+    "food_name": "Ovo Cozido",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Cuscuz com Ovo",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Cuscuz com Ovo",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Cuscuz com Ovo",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Cuscuz com Ovo",
+    "food_name": "Fubá",
+    "quantity": 1,
+    "unit": "Xícara"
+  },
+  {
+    "recipe_name": "Frango na Airfryer",
+    "food_name": "Peito de Frango Grelhado",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Frango na Airfryer",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Frango na Airfryer",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Molho Vinagrete para Churrasco",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Molho Vinagrete para Churrasco",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Molho Vinagrete para Churrasco",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Molho Vinagrete para Churrasco",
+    "food_name": "Cebola",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Molho Vinagrete para Churrasco",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Molho Vinagrete para Churrasco",
+    "food_name": "Vinagre",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Tomate Grelhado",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Tomate Grelhado",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Tomate Grelhado",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Tomate Grelhado",
+    "food_name": "Orégano",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Sopa de Cebola Caseira",
+    "food_name": "Queijo Minas Frescal",
+    "quantity": 30,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Sopa de Cebola Caseira",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Sopa de Cebola Caseira",
+    "food_name": "Cebola",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Sopa de Cebola Caseira",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Sopa de Cebola Caseira",
+    "food_name": "Mel",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Farofa de Bacon",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Farofa de Bacon",
+    "food_name": "Farinha de Trigo",
+    "quantity": 1,
+    "unit": "Xícara"
+  },
+  {
+    "recipe_name": "Farofa de Bacon",
+    "food_name": "Bacon",
+    "quantity": 50,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salada Caesar Simples",
+    "food_name": "Queijo Minas Frescal",
+    "quantity": 30,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salada Caesar Simples",
+    "food_name": "Alface",
+    "quantity": 50,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salada Caesar Simples",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Arroz com Brócolis",
+    "food_name": "Arroz Branco",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Arroz com Brócolis",
+    "food_name": "Brócolis Cozido",
+    "quantity": 80,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Arroz com Brócolis",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Arroz com Brócolis",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Arroz com Brócolis",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Salada de Repolho",
+    "food_name": "Cenoura",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Salada de Repolho",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Salada de Repolho",
+    "food_name": "Limão",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Salada de Repolho",
+    "food_name": "Suco de Laranja",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Salada de Repolho",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Salada de Repolho",
+    "food_name": "Vinagre",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Chuchu Cozido com Sal",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Chuchu Cozido com Sal",
+    "food_name": "Chuchu",
+    "quantity": 0.5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Chuchu Cozido com Sal",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Tomate Recheado Simples",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Tomate Recheado Simples",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Tomate Recheado Simples",
+    "food_name": "Maionese",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Patê de Atum",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Patê de Atum",
+    "food_name": "Atum em Conserva",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Patê de Atum",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Patê de Atum",
+    "food_name": "Salsinha",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Patê de Atum",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Patê de Atum",
+    "food_name": "Maionese",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Patê de Sardinha",
+    "food_name": "Limão",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Patê de Sardinha",
+    "food_name": "Sardinha em Conserva",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Patê de Sardinha",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Patê de Sardinha",
+    "food_name": "Maionese",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Molho de Mostarda Rápido",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Molho de Mostarda Rápido",
+    "food_name": "Limão",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Molho de Mostarda Rápido",
+    "food_name": "Mel",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Molho de Mostarda Rápido",
+    "food_name": "Suco de Laranja",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Molho de Mostarda Rápido",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Molho de Mostarda Rápido",
+    "food_name": "Vinagre",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Molho de Mostarda Rápido",
+    "food_name": "Mostarda",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Pipoca Doce Simples",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Pipoca Doce Simples",
+    "food_name": "Milho Verde",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Mandioca Cozida",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Mandioca Cozida",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Mandioca Cozida",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Sopa de Batata Simples",
+    "food_name": "Batata Inglesa",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Sopa de Batata Simples",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Sopa de Batata Simples",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Tomate com Sal",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Tomate com Sal",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Chá de Hortelã",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Panqueca de Aveia",
+    "food_name": "Ovo Cozido",
+    "quantity": 2,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Panqueca de Aveia",
+    "food_name": "Aveia em Flocos",
+    "quantity": 30,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Panqueca de Aveia",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Panqueca de Aveia",
+    "food_name": "Mel",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Crepioca com Queijo",
+    "food_name": "Ovo Cozido",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Crepioca com Queijo",
+    "food_name": "Queijo Minas Frescal",
+    "quantity": 30,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Crepioca com Queijo",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Crepioca com Queijo",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Crepioca com Queijo",
+    "food_name": "Queijo Muçarela",
+    "quantity": 2,
+    "unit": "Fatia"
+  },
+  {
+    "recipe_name": "Crepioca com Queijo",
+    "food_name": "Goma de Tapioca",
+    "quantity": 3,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Morango com Chocolate",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Morango com Chocolate",
+    "food_name": "Chocolate em Pó",
+    "quantity": 2,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Morango com Chocolate",
+    "food_name": "Morango",
+    "quantity": 5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Maçã com Canela",
+    "food_name": "Maçã",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Maçã com Canela",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Maçã com Canela",
+    "food_name": "Canela em Pó",
+    "quantity": 1,
+    "unit": "Colher de Chá"
+  },
+  {
+    "recipe_name": "Gelinho de Frutas",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Gelinho de Frutas",
+    "food_name": "Morango",
+    "quantity": 5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Gelinho de Frutas",
+    "food_name": "Suco de Laranja",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Iogurte Congelado",
+    "food_name": "Mel",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Iogurte Congelado",
+    "food_name": "Iogurte Natural",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Suco Verde Simples",
+    "food_name": "Limão",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Suco Verde Simples",
+    "food_name": "Couve Manteiga",
+    "quantity": 2,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Suco Verde Simples",
+    "food_name": "Suco de Laranja",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Suco Verde Simples",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Batida de Coco",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Batida de Coco",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Batida de Coco",
+    "food_name": "Leite Condensado",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Batida de Coco",
+    "food_name": "Coco Ralado",
+    "quantity": 1,
+    "unit": "Pacote"
+  },
+  {
+    "recipe_name": "Abacaxi com Hortelã",
+    "food_name": "Abacaxi",
+    "quantity": 2,
+    "unit": "Fatia"
+  },
+  {
+    "recipe_name": "Cuscuz Doce",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Cuscuz Doce",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Cuscuz Doce",
+    "food_name": "Coco Ralado",
+    "quantity": 1,
+    "unit": "Pacote"
+  },
+  {
+    "recipe_name": "Mingau de Maisena",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Mingau de Maisena",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Mingau de Maisena",
+    "food_name": "Amido de Milho",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Mingau de Maisena",
+    "food_name": "Canela em Pó",
+    "quantity": 1,
+    "unit": "Colher de Chá"
+  },
+  {
+    "recipe_name": "Pão com Creme de Avelã",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Creme de Manga",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Creme de Manga",
+    "food_name": "Açúcar Branco",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Creme de Manga",
+    "food_name": "Creme de Leite",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Purê de Abóbora",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Purê de Abóbora",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Purê de Abóbora",
+    "food_name": "Cebola",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Purê de Abóbora",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Cenoura Ralada com Limão",
+    "food_name": "Cenoura",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Cenoura Ralada com Limão",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Cenoura Ralada com Limão",
+    "food_name": "Limão",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Cenoura Ralada com Limão",
+    "food_name": "Suco de Laranja",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Macarrão ao Alho Cru",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Macarrão ao Alho Cru",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Macarrão ao Alho Cru",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Macarrão ao Alho Cru",
+    "food_name": "Macarrão Cozido",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Macarrão ao Alho Cru",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Macarrão ao Alho Cru",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Tomate Assado",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Tomate Assado",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Tomate Assado",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Tomate Assado",
+    "food_name": "Orégano",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Tomate Assado",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Pepino com Sal",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Pepino com Sal",
+    "food_name": "Pepino",
+    "quantity": 0.5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Abobrinha Assada",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Abobrinha Assada",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Abobrinha Assada",
+    "food_name": "Abobrinha",
+    "quantity": 0.5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Abobrinha Assada",
+    "food_name": "Pimenta do Reino",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Ovos de Codorna Cozidos",
+    "food_name": "Ovo Cozido",
+    "quantity": 2,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Ovos de Codorna Cozidos",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Mexidão Simples",
+    "food_name": "Arroz Branco",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Mexidão Simples",
+    "food_name": "Feijão Preto",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Mexidão Simples",
+    "food_name": "Ovo Cozido",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Mexidão Simples",
+    "food_name": "Carne Bovina (Patinho)",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Mexidão Simples",
+    "food_name": "Cebola",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Mexidão Simples",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Salsicha no Molho",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Salsicha no Molho",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Salsicha no Molho",
+    "food_name": "Cebola",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Salsicha no Molho",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Salsicha no Molho",
+    "food_name": "Salsicha",
+    "quantity": 2,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Pão com Mel",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Pão com Mel",
+    "food_name": "Mel",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Pão com Manteiga e Orégano",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Pão com Manteiga e Orégano",
+    "food_name": "Pão Francês",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Pão com Manteiga e Orégano",
+    "food_name": "Orégano",
+    "quantity": 1,
+    "unit": "Pitada"
+  },
+  {
+    "recipe_name": "Arroz com Açafrão",
+    "food_name": "Arroz Branco",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Arroz com Açafrão",
+    "food_name": "Água",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Mousse de Limão Rápida",
+    "food_name": "Leite Integral",
+    "quantity": 200,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Mousse de Limão Rápida",
+    "food_name": "Limão",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Mousse de Limão Rápida",
+    "food_name": "Leite Condensado",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Mousse de Limão Rápida",
+    "food_name": "Creme de Leite",
+    "quantity": 1,
+    "unit": "Lata"
+  },
+  {
+    "recipe_name": "Mousse de Limão Rápida",
+    "food_name": "Suco de Laranja",
+    "quantity": 200,
+    "unit": "Mililitro"
+  }
+]

@@ -6,7 +6,6 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-// Função para calcular valores nutricionais da receita baseado nos alimentos
 const calculateRecipeNutrition = (recipe) => {
   if (!recipe.recipeFoods || recipe.recipeFoods.length === 0) {
     return {
@@ -27,7 +26,6 @@ const calculateRecipeNutrition = (recipe) => {
   let totalSugar = 0
   let totalFiber = 0
 
-  // Calcular com base nos alimentos que compõem a receita
   recipe.recipeFoods.forEach(recipeFood => {
     const food = recipeFood.food
     const nutritionValue = recipeFood.quantity
@@ -58,7 +56,6 @@ const baseCrudService = generateCrudService(RecipeRepository)
 export const RecipeService = {
   ...baseCrudService,
 
-  // Sobrescrever o método findById para incluir cálculos nutricionais
   async findById(id) {
     try {
       const recipe = await RecipeRepository.findById(id)
@@ -74,7 +71,6 @@ export const RecipeService = {
     }
   },
 
-  // Sobrescrever o método search para incluir cálculos nutricionais
   async search(params = {}) {
     try {
       const result = await RecipeRepository.search(params)
@@ -136,6 +132,36 @@ export const RecipeService = {
       return { data, total }
     } catch (error) {
       console.error('Erro ao pesquisar receitas:', error)
+      throw error
+    }
+  },
+
+  async toggleFavorite(userId, recipeId) {
+    try {
+      const isFav = await RecipeRepository.isFavorite(userId, recipeId)
+      if (isFav) {
+        await RecipeRepository.removeFavorite(userId, recipeId)
+        return { favorited: false }
+      } else {
+        await RecipeRepository.addFavorite(userId, recipeId)
+        return { favorited: true }
+      }
+    } catch (error) {
+      console.error('Erro ao alternar favorito:', error)
+      throw error
+    }
+  },
+
+  async getFavorites(userId) {
+    try {
+      const favorites = await RecipeRepository.findFavoritesByUserId(userId)
+      // Extract recipe from the favorite relation and calculate nutrition
+      return favorites.map(fav => {
+        const recipe = fav.recipe
+        return calculateRecipeNutrition(recipe)
+      })
+    } catch (error) {
+      console.error('Erro ao buscar favoritos:', error)
       throw error
     }
   }

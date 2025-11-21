@@ -15,8 +15,8 @@
 
 
         <div class="flex flex-wrap gap-2 mb-4">
-            <p v-for="(recipeObjective, index) in item.recipe.recipeObjectives" :key="index" class="bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-sm">
-                <span><i :class="'mr-2 fa-solid '+ recipeObjective?.objective?.icon"></i></span>{{ recipeObjective?.objective?.name }}
+            <p v-for="(recipePreference, index) in item.recipe.recipePreferences" :key="index" class="bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-sm">
+                <span><i :class="'mr-2 fa-solid '+ recipePreference?.preference?.icon"></i></span>{{ recipePreference?.preference?.name }}
             </p>
         </div>
         
@@ -51,7 +51,7 @@
         </div>
     </Card>
     
-    <div v-else class="sticky top-[30px] self-start bg-white rounded-3xl shadow-lg border-2 z-0 p-6 py-20 w-[50%] flex items-center justify-center text-gray-500">
+    <div v-else class="sticky top-[30px] text-center bg-white rounded-3xl shadow-lg border-2 z-0 p-6 py-20 w-[50%] flex items-center justify-center h-max text-gray-500">
         <p>Selecione uma receita ao lado para ver os detalhes!</p>
     </div>
 </template>
@@ -65,7 +65,6 @@ const error = ref({ message: null });
 const props = defineProps({
     item: {
         type: Object,
-        required: true,
         default: () => (null)
     }
 });

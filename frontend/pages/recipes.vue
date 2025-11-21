@@ -68,7 +68,7 @@ const selectedItemId = ref(null);
 const items = ref([]); 
 const preferences = ref([]);
 const loading = ref(true); 
-const route = ref('meal-plan-recipe');
+const route = ref('recipe');
 const errors = ref({});
 
 const currentPage = ref(1);
@@ -86,14 +86,12 @@ const closeModal = () => {
 function preparationMethodMapper(preparationMethod) {
   if (!preparationMethod) return [];
   const steps = preparationMethod
-    .split(',')
+    .split(';')
     .map(step => step.trim())
     .filter(step => step !== '');
   
-  return steps.map((step, index) => {
-    const capitalized = step.charAt(0).toUpperCase() + step.slice(1);
-    const isLast = index === steps.length - 1;
-    return isLast ? capitalized : (capitalized.endsWith(';') ? capitalized : capitalized + ';');
+  return steps.map((step) => {
+    return step.charAt(0).toUpperCase() + step.slice(1);
   });
 }
 
@@ -107,10 +105,11 @@ async function loadItems(page = 1) {
   }
 
   const recipesFromApi = response.data; 
-  const totalItems = response.data.total;
+  const totalItems = response.total;
 
   items.value = recipesFromApi.map(apiRecipe => ({
     ...apiRecipe,
+    recipe: apiRecipe,
     steps: preparationMethodMapper(apiRecipe.preparation_method)
   }));
 
