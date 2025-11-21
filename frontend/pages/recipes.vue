@@ -10,7 +10,7 @@
                     :filterOptions="getFilterOptions()" 
                     placeholder="Pesquise uma receita"
                     searchType="recipes"
-                    @searchSelected="onRecipeSelected"
+                    @searchSelected=""
                     class="sticky top-[30px] self-start w-full bg-p-50 z-20 shadowSearch" 
                 />
                 <Button

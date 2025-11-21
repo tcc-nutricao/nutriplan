@@ -11,6 +11,13 @@
                 @searchSelected=""
                 class="stickyProfile w-full shadowSearch" 
             />
+            <Button
+                mediumPurple
+                class="w-max px-3 h-[42px] mt-5"
+                icon="fa-solid fa-plus short flex justify-center"
+                label="Adicionar um paciente"
+                @click="openCreate"
+            />
                 <div listaReceitas class="flex flex-col gap-3 w-full mt-5">
                     <PatientButton
                         v-for="item in itemList"
@@ -26,9 +33,9 @@
                 </div>
             </div>
 
-            <div class="flex lg:hidden h-max w-max">
+            <!-- <div class="flex lg:hidden h-max w-max">
                 <BackButton />
-            </div>
+            </div> -->
             <div v-if="selectedItem" class="w-[60%] mb-8 flex flex-col gap-5 stickyProfile">
                 <div class="bg-white rounded-3xl shadow-lg border-2 p-8 flex flex-col gap-3">
                     <div class="flex justify-between">
@@ -38,7 +45,8 @@
                         </div>
                         <Button mediumPurple
                             class="w-max pr-3 pl-2 h-[42px]"
-                            icon="fa-regular fa-edit short flex justify-center" label="Editar"
+                            icon="fa-solid fa-edit short flex justify-center" label="Editar"
+                            @click="openEdit"
                         />
                     </div>
                     <div class="flex justify-between w-full gap-15">
@@ -120,136 +128,140 @@
                 <p>Selecione um paciente ao lado para ver os detalhes!</p>
             </div>
         </div>
+        <PatientModal v-if="showModal" :section="showModal" :patientData="selectedItemId" @close="showModal = ''" />
     </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, onMounted } from 'vue'
 import { get } from '~/crud.js'
 
-export default {
-    data() {
-    return {
-        selectedItemId: null, 
-        route: 'nutritionist-patient',
-        itemList: [
-            {   id: 1, 
-                name: 'Mariana Alves', 
-                objective: 'Perda de Peso', 
-                email: 'mariana@email.com',
-                lastUpdate: '15/10/2025', 
-                age: '26',
-                gender: 'F',
-                height: 1.65,
-                weight: 77,
-                restrictions: ['🌾 Celíaco', '🥬 Vegano'],
-                preferences: ['🌙 Qualidade do sono'],
-                mealPlan: {
-                    calories: 1400,
-                    dietaryRestrictions: [
-                        {dietaryRestriction: {icon: 'fa-cow'}},
-                        {dietaryRestriction: {icon: 'fa-fish'}},
-                        {dietaryRestriction: {icon: 'fa-plate-wheat'}},
-                    ],
-                    goalObjectives:[
-                        {objective: { icon: 'fa-weight-scale', name: 'Perda de peso' }},
-                        {objective: { icon: 'fa-leaf', name: 'Saúde intestinal' }}
-                    ]
-                }
-            },
-            {   id: 2, 
-                name: 'João Gomes', 
-                objective: 'Ganho de Massa', 
-                email: 'joao@email.com',
-                lastUpdate: '14/10/2025', 
-                age: '23',
-                gender: 'M',
-                height: 1.85,
-                weight: 75,
-                restrictions: ['🥛 Intolerância a lactose'],
-                preferences: ['🌙 Qualidade do sono'],
-                mealPlan: {
-                    calories: 1400,
-                    dietaryRestrictions: ['fa-cow','fa-fish', 'fa-plate-wheat'],
-                    goalObjectives:
-                        [{ 
-                            objective: { icon: 'fa-weight-scale', name: 'Perda de peso' } 
-                        },
-                        {
-                            objective: { icon: 'fa-leaf', name: 'Saúde intestinal' } 
-                        }
-                    ]
-                }
-            },
-            {
-                id: 3, 
-                name: 'Maria Silva', 
-                objective: 'Perda de Peso', 
-                email: 'maria@email.com',
-                lastUpdate: '13/10/2025', 
-                age: '28',
-                gender: 'F',
-                height: 1.60,
-                weight: 75,
-                restrictions: ['🌾 Celíaco'],
-                preferences: ['🌙 Qualidade do sono'],
-                mealPlan: {
-                    calories: 1400,
-                    dietaryRestrictions: ['fa-cow','fa-fish', 'fa-plate-wheat'],
-                    goalObjectives:
-                        [{ 
-                            objective: { icon: 'fa-weight-scale', name: 'Perda de peso' } 
-                        },
-                        {
-                            objective: { icon: 'fa-leaf', name: 'Saúde intestinal' } 
-                        }
-                    ]
-                }
-            }
-            
-        ],
-        recipesList: [
-            { id: 1, title: 'Muffin de Banana Integral', categories: ['Perda de Peso', 'Sono', 'Antioxidante'], time: '15', portions: '2'},
-            { id: 2, title: 'Salada Detox com Grão de Bico', categories: ['Energia','Perda de Peso', 'Saúde Intestinal'], time: '90', portions: '8'},
-            { id: 3, title: 'Suco de Uva', categories: ['Leve', 'Doce', 'Fácil'], time: '2', portions: '1'},
-        ]
-    };
-    },
-    methods: {
-        selectItem(id) {
-            this.selectedItemId = id;
-        },
-        imcCalc(height, weight) {
-            if (!height || !weight || typeof height !== 'number' || typeof weight !== 'number') {
-                return 'Invalid input';
-            }
-            const imcValue = (weight / (height * height)).toFixed(2);
-            
-            if (imcValue < 18.5) {
-                return `${imcValue} (magreza)`;
-            } else if (imcValue < 25) {
-                return `${imcValue} (normal)`;
-            } else if (imcValue < 30) {
-                return `${imcValue} (sobrepeso)`;
-            } else if (imcValue < 40) {
-                return `${imcValue} (obesidade)`;
-            } else {
-                return `${imcValue} (obesidade grave)`;
-            }
+const selectedItemId = ref(null)
+const route = ref('nutritionist-patient')
+const showModal = ref('')
+const itemList = ref([
+    {   id: 1, 
+        name: 'Mariana Alves', 
+        objective: 'Perda de Peso', 
+        email: 'mariana@email.com',
+        lastUpdate: '15/10/2025', 
+        age: '26',
+        gender: 'F',
+        height: 1.65,
+        weight: 77,
+        restrictions: ['🌾 Celíaco', '🥬 Vegano'],
+        preferences: ['🌙 Qualidade do sono'],
+        mealPlan: {
+            calories: 1400,
+            dietaryRestrictions: [
+                {dietaryRestriction: {icon: 'fa-cow'}},
+                {dietaryRestriction: {icon: 'fa-fish'}},
+                {dietaryRestriction: {icon: 'fa-plate-wheat'}},
+            ],
+            goalObjectives:[
+                {objective: { icon: 'fa-weight-scale', name: 'Perda de peso' }},
+                {objective: { icon: 'fa-leaf', name: 'Saúde intestinal' }}
+            ]
         }
     },
-    async mounted() {
-        await get(this.route)
+    {   id: 2, 
+        name: 'João Gomes', 
+        objective: 'Ganho de Massa', 
+        email: 'joao@email.com',
+        lastUpdate: '14/10/2025', 
+        age: '23',
+        gender: 'M',
+        height: 1.85,
+        weight: 75,
+        restrictions: ['🥛 Intolerância a lactose'],
+        preferences: ['🌙 Qualidade do sono'],
+        mealPlan: {
+            calories: 1400,
+            dietaryRestrictions: ['fa-cow','fa-fish', 'fa-plate-wheat'],
+            goalObjectives:
+                [{ 
+                    objective: { icon: 'fa-weight-scale', name: 'Perda de peso' } 
+                },
+                {
+                    objective: { icon: 'fa-leaf', name: 'Saúde intestinal' } 
+                }
+            ]
+        }
     },
-    computed: {
-        selectedItem() {
-            if (!this.selectedItemId) {
-                return null;
-            }
-            return this.itemList.find(item => item.id === this.selectedItemId);
-        },
-        
+    {
+        id: 3, 
+        name: 'Maria Silva', 
+        objective: 'Perda de Peso', 
+        email: 'maria@email.com',
+        lastUpdate: '13/10/2025', 
+        age: '28',
+        gender: 'F',
+        height: 1.60,
+        weight: 75,
+        restrictions: ['🌾 Celíaco'],
+        preferences: ['🌙 Qualidade do sono'],
+        mealPlan: {
+            calories: 1400,
+            dietaryRestrictions: ['fa-cow','fa-fish', 'fa-plate-wheat'],
+            goalObjectives:
+                [{ 
+                    objective: { icon: 'fa-weight-scale', name: 'Perda de peso' } 
+                },
+                {
+                    objective: { icon: 'fa-leaf', name: 'Saúde intestinal' } 
+                }
+            ]
+        }
+    }
+])
+
+const openCreate = () => {
+    showModal.value = 'create'
+}
+
+const openEdit = () => {
+    showModal.value = 'edit'
+}
+
+const recipesList = ref([
+    { id: 1, title: 'Muffin de Banana Integral', categories: ['Perda de Peso', 'Sono', 'Antioxidante'], time: '15', portions: '2'},
+    { id: 2, title: 'Salada Detox com Grão de Bico', categories: ['Energia','Perda de Peso', 'Saúde Intestinal'], time: '90', portions: '8'},
+    { id: 3, title: 'Suco de Uva', categories: ['Leve', 'Doce', 'Fácil'], time: '2', portions: '1'},
+])
+
+const selectItem = (id) => {
+    selectedItemId.value = id
+}
+
+const imcCalc = (height, weight) => {
+    if (!height || !weight || typeof height !== 'number' || typeof weight !== 'number') {
+        return 'Invalid input'
+    }
+    const imcValue = (weight / (height * height)).toFixed(2)
+    
+    if (imcValue < 18.5) {
+        return `${imcValue} (magreza)`
+    } else if (imcValue < 25) {
+        return `${imcValue} (normal)`
+    } else if (imcValue < 30) {
+        return `${imcValue} (sobrepeso)`
+    } else if (imcValue < 40) {
+        return `${imcValue} (obesidade)`
+    } else {
+        return `${imcValue} (obesidade grave)`
     }
 }
+
+const selectedItem = computed(() => {
+    if (!selectedItemId.value) {
+        return null
+    }
+    return itemList.value.find(item => item.id === selectedItemId.value)
+})
+
+onMounted(async () => {
+    await get(route.value)
+})
 </script>
 
 <style>
