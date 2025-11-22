@@ -1,6 +1,7 @@
 import { GroupRepository } from '../repositories/GroupRepository.js'
 import { UserGroupRepository } from '../repositories/UserGroupRepository.js'
 import { generateCrudService } from './Service.js'
+import { PatientService } from './PatientService.js'
 
 const baseCrudService = generateCrudService(GroupRepository)
 
@@ -88,28 +89,50 @@ export const GroupService = {
     if (!userId) {
       throw new Error('userId é obrigatório')
     }
+
     const userGroups = await UserGroupRepository.getGroupsByUserId(userId)
 
-    const groupsWithDetails = await Promise.all((userGroups || []).map(async (userGroup) => {
-      const groupId = userGroup.id_group
-      const participantCount = await UserGroupRepository.countParticipantsByGroupId(groupId)
-      const participantNames = await UserGroupRepository.getParticipantNamesByGroupId(groupId)
-      const ownerName = await UserGroupRepository.getFirstAdminNameByGroupId(groupId)
+    const groupsWithDetails = await Promise.all(
+      (userGroups || []).map(async (userGroup) => {
+        const groupId = userGroup.id_group
 
-      return {
-        ...userGroup.group,
-        picture: userGroup.group.picture
-          ? Buffer.from(userGroup.group.picture).toString('base64')
-          : null,
-        participantCount,
-        participantNames,
-        userRole: userGroup.role,
-        ownerName
-      }
-    }))
-    return {
-      groups: groupsWithDetails
-    }
+        const participantCount = await UserGroupRepository.countParticipantsByGroupId(groupId)
+        const participants = await UserGroupRepository.getParticipantsByGroupId(groupId)
+        const ownerName = await UserGroupRepository.getFirstAdminNameByGroupId(groupId)
+
+        const results = await Promise.all(
+          participants.map(async (participant) => {
+            const p = await PatientService.getProgress(participant.id_user)
+
+            return {
+              id: participant.id_user,
+              name: participant.user.name,
+              progress: p.metaAchieved  // porcentagem individual
+            }
+          })
+        )
+
+        const total = results.reduce((sum, item) => sum + item.progress, 0) / results.length
+
+        const progress = {
+          participants: results, // lista com id, nome e porcentagem individual
+          total           // média geral
+        }
+
+        return {
+          ...userGroup.group,
+          picture: userGroup.group.picture
+            ? Buffer.from(userGroup.group.picture).toString('base64')
+            : null,
+          participantCount,
+          userRole: userGroup.role,
+          ownerName,
+          progress
+        }
+      })
+    )
+
+    return { groups: groupsWithDetails }
   },
 
   async joinGroup(userId, inviteCode) {

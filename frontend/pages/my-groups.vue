@@ -46,9 +46,8 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useCookie, useNuxtApp } from 'nuxt/app';
-import { insert, update } from '../crud';
+import { insert, update, get } from '../crud';
 
-const { $axios } = useNuxtApp();
 const userCookie = useCookie('user-data');
 
 const itemList = ref([]);
@@ -60,10 +59,10 @@ const groupCode = ref('');
 const groupCodeError = ref(null);
 
 function mapApiDataToFrontend(apiGroup) {
-  const participants = apiGroup.participantNames.map((name, index) => ({
+  const participants = apiGroup.progress.participants.map((participant, index) => ({
     id: index,
-    name: name === userCookie.value?.name.split(' ')[0] ? 'Você' : name,
-    progress: 0,
+    name: participant.name === userCookie.value?.name.split(' ')[0] ? 'Você' : participant.name,
+    progress: participant.progress,
     objective: 'Não definido',
   }));
 
@@ -82,23 +81,16 @@ function mapApiDataToFrontend(apiGroup) {
 }
 
 async function fetchGroups() {
-  try {
-    pending.value = true;
-    const response = await $axios.get('/group/progress');
-    const groupsFromApi = response.data.data.groups;
-
-    if (groupsFromApi && groupsFromApi.length > 0) {
-      itemList.value = groupsFromApi.map(mapApiDataToFrontend);
-      selectItem(itemList.value[0].id);
-    } else {
-      itemList.value = [];
-    }
-  } catch (error) {
-    console.error("Erro ao buscar os grupos:", error);
+  pending.value = true;
+  const response = await get('group/progress');
+  const mappedResponse = response.data.groups.map(group => mapApiDataToFrontend(group))
+  if (mappedResponse && mappedResponse.length) {
+    itemList.value = mappedResponse
+    selectItem(itemList.value[0].id);
+  } else {
     itemList.value = [];
-  } finally {
-    pending.value = false;
   }
+  pending.value = false
 }
 
 onMounted(() => {

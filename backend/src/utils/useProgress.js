@@ -137,7 +137,6 @@ const calculateFoodEducationProgress = (initial, current, target, objectiveName)
  * Formata dados de progresso para resposta da API
  */
 export const formatProgressResponse = (progressData, patientData) => {
-  console.log(patientData.id)
   return {
     id_patient: patientData.idPatient,
     height: patientData.height,

@@ -23,22 +23,16 @@ const countParticipantsByGroupId = async (groupId) => {
 	});
 };
 
-const getParticipantNamesByGroupId = async (groupId) => {
-	const userGroups = await prisma.userGroup.findMany({
+const getParticipantsByGroupId = async (groupId) => {
+	return await prisma.userGroup.findMany({
 		where: {
 			id_group: groupId,
 			deleted_at: null
 		},
 		include: {
-			user: {
-				select: {
-					name: true
-				}
-			}
+			user: true
 		}
 	});
-
-	return userGroups.map(ug => ug.user.name.split(' ')[0]);
 };
 
 const create = async (data) => {
@@ -99,7 +93,7 @@ const removeAllByGroupId = async (groupId) => {
 export const UserGroupRepository = {
 	getGroupsByUserId,
 	countParticipantsByGroupId,
-	getParticipantNamesByGroupId,
+	getParticipantsByGroupId,
 	create,
 	findByUserAndGroup,
 	getFirstAdminNameByGroupId,

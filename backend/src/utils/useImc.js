@@ -4,9 +4,11 @@
  * @param {number} height - Altura em metros
  * @returns {number} - IMC calculado com 2 casas decimais
  */
+import { AppError } from '../exceptions/AppError.js'
+ 
 export const calculateImc = (weight, height) => {
   if (!weight || !height || weight <= 0 || height <= 0) {
-    throw new AppError({ messgae: 'Peso e altura devem ser valores positivos válidos' })
+    throw new AppError({ message: 'Peso e altura devem ser valores positivos válidos' })
   }
 
   const heightInMeters = height > 3 ? height / 100 : height
@@ -36,7 +38,6 @@ export const classifyImc = (imc) => {
  * @returns {object} - Objeto com IMC e classificação
  */
 export const getImcData = (weight, height) => {
-  console.log('Calculating IMC with weight:', weight, 'and height:', height)
   const imc = calculateImc(weight, height)
   const classification = classifyImc(imc)
   
