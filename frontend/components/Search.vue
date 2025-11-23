@@ -7,7 +7,7 @@
         @input="handleInput"
         @focus="handleFocus"
         :placeholder="placeholder"
-        class="relative w-full cursor-text rounded-xl border-2 text-sm h-[42px] bg-white py-2 pl-3 pr-10 focus:outline-none transition"
+        class="relative w-full cursor-text rounded-xl border-2 text-sm h-[42px] bg-white py-2 pl-3 pr-10 focus:outline-none transition focus-within:border-p-600"
         :class="classes"
       />
       

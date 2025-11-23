@@ -9,7 +9,7 @@
       leave-active-class="transition-opacity duration-300 ease"
     >
     <div
-      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[100]"
+      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[300]"
       @click.self="$emit('close', false)"
     >
       <div
@@ -17,7 +17,7 @@
         :class="section === 'basic' ? 'max-w-lg' : 'max-w-3xl'"
       >
         <button
-          class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-50"
+          class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-[50]"
           @click="$emit('close', false)"
         >&times;
         </button>

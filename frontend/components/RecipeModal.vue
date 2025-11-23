@@ -99,7 +99,7 @@
                   <div class="flex flex-row justify-center gap-2">
                     <Button 
                       mediumPurple
-                      class="w-max px-0 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
+                      class="w-max px-0 h-[42px]"
                       label="Adicionar ingrediente"
                       icon="fa-solid fa-plus short flex justify-center"
                       @click="addItem"
@@ -112,7 +112,7 @@
                   v-model="object.portion"
                   class="mb-5"
                   label="Porções"
-                  placeholder="Informe quantas porções essa receita rende" 
+                  placeholder="Quantidade de porções" 
                   :error="errors.portion"
                   required
                 />
@@ -136,7 +136,7 @@
                 />
                 <div class="flex justify-center mt-6">
                   <Button mediumPurple
-                    class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition" label="Salvar" 
+                    class="w-max pr-3 pl-2 h-[42px]" label="Salvar" 
                     @click="saveRecipe"
                   />
                 </div>

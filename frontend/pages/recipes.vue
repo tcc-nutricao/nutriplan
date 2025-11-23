@@ -11,6 +11,8 @@
                     placeholder="Pesquise uma receita"
                     searchType="recipes"
                     @searchSelected="handleSearchSelected"
+                    @filterSelected="handleFilterSelected"
+                    @sortSelected="handleSortSelected"
                     class="sticky top-[30px] bg-g self-start w-full z-20 shadowSearch" 
                 />
                 <Button
@@ -72,6 +74,8 @@ const loading = ref(true);
 const route = ref('recipe');
 const errors = ref({});
 const favoriteRecipeIds = ref(new Set());
+const currentFilter = ref(['all']);
+const currentSort = ref({ column: 'created_at', direction: 'desc' });
 
 const currentPage = ref(1);
 const totalPages = ref(0);
@@ -136,17 +140,49 @@ async function loadFavorites() {
   }
 }
 
+async function handleFilterSelected(filterValue) {
+  currentFilter.value = filterValue;
+  await loadItems(1);
+}
+
+async function handleSortSelected({ column, direction }) {
+  currentSort.value = { column, direction };
+  await loadItems(1);
+}
+
 async function loadItems(page = 1) {
   loading.value = true;
-  const response = await get(route.value, { page, limit: itemsPerPage });
+  let endpoint = route.value;
+  let params = { 
+    page, 
+    limit: itemsPerPage,
+    orderColumn: currentSort.value.column,
+    order: currentSort.value.direction
+  };
+
+  const filters = currentFilter.value;
+
+  if (filters.includes('favorites')) {
+    endpoint = 'recipe/favorites';
+  } else if (!filters.includes('all') && filters.length > 0) {
+    // Filter by preferences
+    params.filters = JSON.stringify([{ 
+      field: 'recipePreferences', 
+      operator: 'some', 
+      value: { id_preference: { in: filters } } 
+    }]);
+  }
+
+  const response = await get(endpoint, params);
 
   if (!response || response.message) {
     errors.value = response.message || 'Erro ao carregar receitas.';
+    loading.value = false;
     return
   }
 
   const recipesFromApi = response.data; 
-  const totalItems = response.total;
+  const totalItems = response.total || recipesFromApi.length;
 
   items.value = recipesFromApi.map(apiRecipe => ({
     ...apiRecipe,

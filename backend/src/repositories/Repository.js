@@ -40,7 +40,15 @@ export const generateCrudRepository = (modelName, options = {}) => {
       if (softDelete) {
         where.deleted_at = null;
       }
-     const filtersArray = Array.isArray(filters) ? filters : [];
+      let filtersParsed = filters;
+      if (typeof filters === 'string') {
+        try {
+          filtersParsed = JSON.parse(filters);
+        } catch (e) {
+          filtersParsed = [];
+        }
+      }
+      const filtersArray = Array.isArray(filtersParsed) ? filtersParsed : [];
 
 
       filtersArray.forEach((filter) => {

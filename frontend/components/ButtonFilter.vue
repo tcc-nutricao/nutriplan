@@ -20,11 +20,18 @@
       <ul v-if="isOpen"
         class="absolute ring-2 ring-p-200 border-1 border-p-300 z-0 mt-1 max-h-60 w-max overflow-auto rounded-xl bg-white py-2 text-base shadow-lg focus:outline-none"
         role="listbox">
-        <li v-for="option in options" :key="option.value" @click="selectOption(option)"
+        <li v-for="option in options" :key="option.value" @click="toggleOption(option)"
           class="relative flex items-center gap-2 cursor-pointer select-none py-[10px] px-4 mx-2 rounded-lg text-p-950 hover:bg-p-100 hover:text-p-700 transition"
-          role="option" :aria-selected="option.value === modelValue">
+          role="option" :aria-selected="isSelected(option.value)">
+          
+          <Checkbox 
+            :modelValue="isSelected(option.value)" 
+            @update:modelValue="() => {}"
+            class="pointer-events-none"
+          />
+          
           <i v-if="option.icon !== undefined" :class="'fa-solid ' + option.icon "></i>
-          <span :class="[option.value === modelValue ? 'font-semibold' : 'font-normal', 'block truncate']">
+          <span :class="[isSelected(option.value) ? 'font-semibold' : 'font-normal', 'block truncate']">
             {{ option.label }}
           </span>
         </li>
@@ -37,7 +44,10 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 
 const props = defineProps({
-  modelValue: [String, Number, Boolean],
+  modelValue: {
+    type: Array,
+    default: () => []
+  },
   icon: String,
   label: String,
   options: {
@@ -47,7 +57,7 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: 'Selecione uma opção'
+    default: 'Selecione opções'
   },
   error: {
     type: [Boolean, String],
@@ -57,22 +67,32 @@ const props = defineProps({
 
 const emits = defineEmits(['update:modelValue']);
 
-
 const isOpen = ref(false);
 
 const toggleDropdown = () => {
   isOpen.value = !isOpen.value;
 };
 
-const selectOption = (option) => {
-  emits('update:modelValue', option.value);
-  isOpen.value = false;
+const isSelected = (value) => {
+  return props.modelValue.includes(value);
 };
 
-const selectedLabel = computed(() => {
-  const selected = props.options.find(opt => opt.value === props.modelValue);
-  return selected ? selected.label : null;
-});
+const toggleOption = (option) => {
+  let newValue = [...props.modelValue];
+  
+  // Logic for exclusive options (handled by parent usually, but we can enforce basic toggle here)
+  // If the parent handles exclusivity, we just emit the new array.
+  
+  const index = newValue.indexOf(option.value);
+  if (index === -1) {
+    newValue.push(option.value);
+  } else {
+    newValue.splice(index, 1);
+  }
+  
+  emits('update:modelValue', newValue);
+  // Keep dropdown open for multiple selection
+};
 
 const selectMenu = ref(null);
 
