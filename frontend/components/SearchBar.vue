@@ -7,7 +7,7 @@
        class="w-full"
     />
 
-    <ButtonSelectMultiple
+    <ButtonFilter
       v-if="filter"
       mediumPurple
       :label="isNarrow ? '' : 'Filtrar'"
