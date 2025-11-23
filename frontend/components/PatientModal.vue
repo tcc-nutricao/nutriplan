@@ -9,11 +9,11 @@
       leave-active-class="transition-opacity duration-300 ease"
     >
     <div
-      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]"
+      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[100]"
       @click.self="$emit('close', false)"
     >
       <div
-        class="bg-white rounded-3xl py-7 px-9 w-full shadow-lg relative max-h-[90vh] overflow-y-auto modal-container transition-transform duration-300 ease"
+        class="bg-white rounded-3xl py-7 px-9 w-full shadow-lg relative max-h-[90vh] overflow-y-shown modal-container transition-transform duration-300 ease"
         :class="section === 'basic' ? 'max-w-lg' : 'max-w-3xl'"
       >
         <button
@@ -31,70 +31,71 @@
           <div class="flex flex-col w-full">
             <div class="grid grid-cols-2 gap-6">
                 <div class="col-span-1">
-                <Label class="mb-2" label="Que dia você nasceu?" />
-                <Input
+                  <Label class="mb-2" label="Data de nascimento" />
+                  <Input
                     type="date"
                     v-model="formData.birth_date"
                     placeholder="Data de nascimento"
                     required
-                />
+                  />
                 </div>
                 <div class="col-span-1">
-                <Label class="mb-2" label="Qual gênero você se identifica?" />
-                <Select v-model="formData.gender" :options="genderOptions" required />
+                  <Label class="mb-2" label="Sexo" />
+                  <Select v-model="formData.gender" :options="genderOptions" required />
                 </div>
                 <div class="col-span-1">
-                <Label class="mb-2" label="Qual é seu peso?" />
-                <Input
+                  <Label class="mb-2" label="Peso" />
+                  <Input
                     type="number"
                     v-model.number="formData.weight"
-                    placeholder="Seu peso em kg"
+                    placeholder="Peso em kg"
                     required
-                />
+                  />
                 </div>
                 <div class="col-span-1">
-                <Label class="mb-2" label="Qual é a sua altura? (ex: 170cm)" />
-                <Input
+                  <Label class="mb-2" label="Altura" />
+                  <Input
                     type="number"
                     v-model.number="formData.height"
-                    placeholder="Sua altura em cm"
+                    placeholder="Altura em cm"
                     required
-                />
+                  />
                 </div>
                 <div class="col-span-1">
-                <Label class="mb-2" label="Você tem uma meta de peso?" />
-                <Input
+                  <Label class="mb-2" label="Meta de peso" />
+                  <Input
                     type="number"
                     v-model.number="formData.target_weight"
-                    placeholder="Sua meta em kg"
-                />
+                    placeholder="Meta em kg"
+                   />  
                 </div>
                 <div class="col-span-1">
-                <Label class="mb-2" label="Você tem alguma restrição alimentar?" />
-                <Select
+                  <Label class="mb-2" label="Restrições alimentares" />
+                  <Select
+                    class="z-[200]"
                     v-model="formData.restrictions"
                     :options="restrictionOptions"
                     multiple
                     required
-                />
+                  />
                 </div>
                 <div class="col-span-1">
-                <Label class="mb-2" label="Você tem alguma preferência alimentar?" />
-                <Select
+                  <Label class="mb-2" label="Preferências alimentares" />
+                  <Select
                     v-model="formData.preferences"
                     :options="preferenceOptions"
                     multiple
                     required
-                />
+                  />
                 </div>
-                <div class="col-span-1">
-                <Label class="mb-2" label="Qual é seu objetivo?" />
-                <Select
+                <div class="col-span-1 ">
+                  <Label class="mb-2" label="Objetivo" />
+                  <Select
                     v-model="formData.objectives"
                     :options="objectiveOptions"
                     multiple
                     required
-                />
+                  />
                 </div>
             </div>
         </div>

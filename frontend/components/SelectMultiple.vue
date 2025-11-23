@@ -8,7 +8,7 @@
       aria-haspopup="listbox" 
       :aria-expanded="isOpen"
     >
-      <span class="block truncate" :class="{ 'text-gray-400': !modelValue }">
+      <span class="block truncate" :class="{ 'text-gray-400': !modelValue || modelValue.length === 0 }">
         {{ selectedLabel || placeholder }}
       </span>
 
@@ -29,12 +29,14 @@
         class="absolute ring-2 ring-p-200 border-1 border-p-300 z-10 mt-1 max-h-60 w-full overflow-auto rounded-xl bg-white py-2 text-base shadow-lg focus:outline-none"
         style="min-width: max-content;"
         role="listbox">
-        <li v-for="option in options" :key="option.value" @click="selectOption(option)"
+        <li v-for="option in sortedOptions" :key="option.value" @click="toggleOption(option)"
           class="relative cursor-pointer select-none py-[10px] px-4 mx-2 rounded-lg text-p-950 hover:bg-p-100 hover:text-p-700 transition"
-          role="option" :aria-selected="option.value === modelValue">
-          <span :class="[option.value === modelValue ? 'font-semibold' : 'font-normal', 'block truncate']">
-            {{ option.label }}
-          </span>
+          role="option" :aria-selected="isSelected(option.value)">
+          <Checkbox 
+            :modelValue="isSelected(option.value)" 
+            :label="option.label"
+            @update:modelValue="() => {}"
+          />
         </li>
       </ul>
     </transition>
@@ -45,7 +47,10 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 
 const props = defineProps({
-  modelValue: [Array, String, Number, Boolean],
+  modelValue: {
+    type: Array,
+    default: () => []
+  },
   options: {
     type: Array,
     required: true,
@@ -53,7 +58,7 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: 'Selecione uma opção'
+    default: 'Selecione opções'
   },
   error: {
     type: [Boolean, String],
@@ -84,14 +89,53 @@ const toggleDropdown = () => {
   isOpen.value = !isOpen.value;
 };
 
-const selectOption = (option) => {
-  emits('update:modelValue', option.value);
-  isOpen.value = false;
+const isSelected = (value) => {
+  return props.modelValue.includes(value);
 };
 
+const toggleOption = (option) => {
+  const currentValue = props.modelValue || [];
+  const index = currentValue.indexOf(option.value);
+  
+  let newValue;
+  if (index === -1) {
+    newValue = [...currentValue, option.value];
+  } else {
+    newValue = currentValue.filter(v => v !== option.value);
+  }
+  
+  emits('update:modelValue', newValue);
+};
+
+const sortedOptions = computed(() => {
+  if (!props.modelValue || props.modelValue.length === 0) {
+    return props.options;
+  }
+
+  const selected = [];
+  const notSelected = [];
+
+  props.options.forEach(option => {
+    if (isSelected(option.value)) {
+      selected.push(option);
+    } else {
+      notSelected.push(option);
+    }
+  });
+
+  return [...selected, ...notSelected];
+});
+
 const selectedLabel = computed(() => {
-  const selected = props.options.find(opt => opt.value === props.modelValue);
-  return selected ? selected.label : null;
+  const count = props.modelValue ? props.modelValue.length : 0;
+  
+  if (count === 0) {
+    return null;
+  } else if (count === 1) {
+    return '1 item selecionado';
+  } else {
+    return `${count} itens selecionados`;
+  }
 });
 
 const selectMenu = ref(null);

@@ -22,7 +22,7 @@
           leave-to-class="scale-90"
           appear
         >
-          <Card class="w-xl relative max-h-[90vh] overflow-y-auto z-50">
+          <Card class="w-2xl relative max-h-[90vh] p-8 z-50 ">
             <button
               class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-50"
               @click="$emit('close')"
@@ -40,21 +40,31 @@
                 label="Título"
                 v-model="object.name"
                 :error="errors.name"
+                required
                 placeholder="Qual é o nome da receita?" />
+
+                <SelectMultiple 
+                  v-model="object.preferences"
+                  :options="preferenceOptions"
+                  label="Categorias"
+                  class="mb-5 w-full"
+                  :error="errors.preferences"
+                  required
+                />
       
                 <div 
                   class="flex flex-col px-4 pb-3 pt-4 border-2 rounded-2xl mb-5"
                   :class="{ 'border-red-500': errors.ingredients, 'border-p-400': !errors.ingredients }"
                 >
-                  <Label label="Ingredientes" class="text-xl font-semibold mb-1" :error="errors.ingredients"/>
+                  <Label label="Ingredientes" class="text-xl font-semibold mb-1" :error="errors.ingredients" required/>
                   <p v-if="!hasAnyItems" :class="{'text-red-500' : errors.ingredients}" class="text-gray-medium mt-1 pb-3 mb-3 border-b-2 border-p-200">Adicione ingredientes abaixo!</p>
                   <div v-if="hasAnyItems" class="flex flex-col flex-wrap w-full gap-4 mt-1 pb-3 mb-3 max-w-full border-b-2 border-p-200">
                     <ItemButton
                       v-for="(item, index) in newMealItems"
                       :key="index"
-                      :label="item.food"
+                      :label="item.food?.name"
                       :quantity="item.quantity"
-                      :unity="item.unit"
+                      :unity="item.unit_label"
                       class="w-full"
                       @delete-item="deleteItem(index)" 
                     />
@@ -64,23 +74,26 @@
                     placeholder="Buscar ingredientes"
                     v-model="object.food"
                     @update:modelValue=""
-                    class="w-full mb-3 "
+                    class="w-full mb-3"
+                    required
                   />
                   <div class="flex gap-2">
                     <InputText
                       v-model="object.quantity"
-                      class="mb-5"
+                      class="mb-5 w-1/2"
                       label="Quantidade"
                       placeholder="Digite aqui"
                       type="number"
                       :error="errors.quantity"
+                      required
                       />
-                    <InputText
-                      v-model="object.unit"
-                      class="mb-5"
+                    <Select
+                      v-model="object.id_unit_of_measurement"
+                      :options="unitOptions"
                       label="Unidade"
-                      placeholder="Buscar"
-                      :error="errors.unit"
+                      class="mb-5 w-1/2"
+                      :error="errors.id_unit_of_measurement"
+                      required
                     />
                   </div>
                   <div class="flex flex-row justify-center gap-2">
@@ -96,11 +109,12 @@
               </div>
               <div class="flex flex-col w-full">
                 <InputText
-                  v-model="object.portions"
+                  v-model="object.portion"
                   class="mb-5"
                   label="Porções"
                   placeholder="Informe quantas porções essa receita rende" 
-                  :error="errors.portions"
+                  :error="errors.portion"
+                  required
                 />
                 <InputText
                   v-model="object.time"
@@ -108,19 +122,22 @@
                   label="Tempo de preparo"
                   placeholder="Tempo em minutos" 
                   :error="errors.time"
+                  required
                 />
                 <TextArea
                   v-model="object.preparation"
+                  subtitle="Separe cada passo por ponto e vírgula ( ; )"
                   class="mb-5"
                   label="Modo de preparo"
                   rows="10"
-                  placeholder="Digite o passo a passo de preparo separado por vírgulas para cada passo" 
+                  placeholder="Exemplo: Separe 200ml de água; Ferva; Sirva." 
                   :error="errors.preparation"
+                  required
                 />
                 <div class="flex justify-center mt-6">
                   <Button mediumPurple
                     class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition" label="Salvar" 
-                    @click="save"
+                    @click="saveRecipe"
                   />
                 </div>
               </div>
@@ -133,60 +150,182 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { get, insert } from "~/crud";
 
 const props = defineProps({
   selected: {
     type: String,
-    required: true,
-    default: () => (null)
+    required: false,
+    default: null
   }
 });
 
-defineEmits(["close"]);
+const emits = defineEmits(["close", "saved"]);
 
 const newMealItems = ref([]);
+const unitOptions = ref([]);
+const preferenceOptions = ref([]);
 
 const object = ref({
-  ingredients: '',
+  food: null,
+  quantity: '',
+  id_unit_of_measurement: '',
   name: '',
-  portions: '',
+  portion: '',
   time: '',
-  preparation: ''
+  preparation: '',
+  preferences: []
 });
 
 const errors = ref({
   food: null,
   quantity: null,
-  unit: null,
+  id_unit_of_measurement: null,
   name: null,
   ingredients: null,
-  portions: null,
+  portion: null,
   time: null,
-  preparation: null
+  preparation: null,
+  preferences: null
 });
 
-async function save() {
-  let response = false;
-  const mappedObject = {
-    name: object.value.name,
-    ingredients: newMealItems.value,
-    portions: object.value.portions,
-    preparation_time: object.value.time,
-    steps: object.value.preparation.split(',').map(step => step.trim())
-  };
+const hasAnyItems = computed(() => {
+  return newMealItems.value.length > 0;
+});
   
-  if (props.selected) {
-    response = await update('meal-plan-recipe', props.selected, mappedObject);
-  } else {
-    response = await create('meal-plan-recipe', mappedObject);
+onMounted(async () => {
+  const selectRoutes = [
+    { route: "unit-of-measurement", target: unitOptions },
+    { route: "preference", target: preferenceOptions },
+  ];
+  await Promise.all(
+    selectRoutes.map(({ route, target }) => getSelectItems(route, target))
+  );
+});
+
+async function getSelectItems(route, target) {
+  const response = await get(route);
+  target.value = (response.data || []).map((item) => ({
+    value: item.id,
+    label: item.name,
+  }));
+}
+
+function addItem() {
+  errors.value.food = null;
+  errors.value.quantity = null;
+  errors.value.id_unit_of_measurement = null;
+
+  if (!object.value.food || !object.value.food.id) {
+    errors.value.food = 'Selecione um alimento';
+    return;
   }
+
+  if (!object.value.quantity || object.value.quantity <= 0) {
+    errors.value.quantity = 'Informe uma quantidade válida';
+    return;
+  }
+
+  if (!object.value.id_unit_of_measurement) {
+    errors.value.id_unit_of_measurement = 'Selecione uma unidade';
+    return;
+  }
+
+  const selectedUnit = unitOptions.value.find(u => u.value === object.value.id_unit_of_measurement);
   
+  newMealItems.value.push({
+    food: { ...object.value.food },
+    quantity: object.value.quantity,
+    id_unit_of_measurement: object.value.id_unit_of_measurement,
+    unit_label: selectedUnit?.label || ''
+  });
+
+  object.value.food = null;
+  object.value.quantity = '';
+  object.value.id_unit_of_measurement = '';
+}
+
+function deleteItem(index) {
+  newMealItems.value.splice(index, 1);
+}
+
+async function saveRecipe() {
+  Object.keys(errors.value).forEach(key => {
+    errors.value[key] = null;
+  });
+
+  let hasErrors = false;
+
+  if (!object.value.name || object.value.name.trim() === '') {
+    errors.value.name = 'Nome da receita é obrigatório';
+    hasErrors = true;
+  }
+
+  if (!object.value.portion || object.value.portion <= 0) {
+    errors.value.portion = 'Porções é obrigatório';
+    hasErrors = true;
+  }
+
+  if (object.value.time === '' || object.value.time < 0) {
+    errors.value.time = 'Tempo de preparo é obrigatório';
+    hasErrors = true;
+  }
+
+  if (!object.value.preferences || object.value.preferences.length === 0) {
+    errors.value.preferences = 'Selecione pelo menos 1 categoria';
+    hasErrors = true;
+  }
+
+  if (!object.value.preparation || object.value.preparation.trim() === '') {
+    errors.value.preparation = 'Modo de preparo é obrigatório';
+    hasErrors = true;
+  }
+
+  if (newMealItems.value.length === 0) {
+    errors.value.ingredients = 'Adicione pelo menos um ingrediente';
+    hasErrors = true;
+  }
+
+  if (hasErrors) {
+    return;
+  }
+
+  const recipeData = {
+    name: object.value.name,
+    portion: parseInt(object.value.portion),
+    preparation_time: parseInt(object.value.time),
+    preparation_method: object.value.preparation,
+    recipeFoods: newMealItems.value.map(item => ({
+      id_food: item.food.id,
+      id_unit_of_measurement: item.id_unit_of_measurement,
+      quantity: parseFloat(item.quantity)
+    })),
+    recipePreferences: object.value.preferences.map(id_preference => ({
+      id_preference
+    }))
+  };
+
+  const response = await insert('recipe', recipeData);
+
   if (response && !response.error) {
-    resetForm();
-    emit('close');
+    object.value.name = '';
+    object.value.portion = '';
+    object. value.time = '';
+    object.value.preparation = '';
+    object.value.preferences = [];
+    newMealItems.value = [];
+    
+    emits('saved');
+    emits('close');
   } else {
-    errors.value = response.errors || {};
+    if (response.errors) {
+      Object.keys(response.errors).forEach(key => {
+        if (errors.value.hasOwnProperty(key)) {
+          errors.value[key] = response.errors[key];
+        }
+      });
+    }
   }
 }
 </script>

@@ -1,5 +1,6 @@
 <template>
-    <Label class="mb-1" :label="label" :required="required" :error="error" />
+    <Label class="mb-0" :label="label" :required="required" :error="error" />
+    <p v-if="subtitle" class="text-[0.8em] text-gray-500 mb-1">{{ subtitle }}</p>
   <Flex items-center class="rounded-xl border-2 text-sm overflow-hidden border-p-g2 focus-within:border-p-600 transition" :class="classes">
 
     <slot name="pre-icon" />
@@ -42,7 +43,12 @@ const props = defineProps({
   min: String,
   max: String,
   mask: String,
-  prefix: String
+  prefix: String,
+  subtitle: String,
+  required: {
+    type: Boolean,
+    default: false
+  }
 })
 const localValue = ref(props.modelValue)
 const displayValue = ref(applyMask(localValue.value, props.mask))

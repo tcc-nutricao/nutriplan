@@ -20,6 +20,31 @@ export const generateCrudController = (Service, Schema, entityName = 'Item', cus
     }
   },
 
+  async findById(req, res, next) {
+    try {
+      const { id } = req.params
+      if (!id) {
+        return res.status(400).json({
+          error: true,
+          message: 'ID não informado.'
+        })
+      }
+
+      const result = await Service.findById(Number(id))
+      
+      if (!result) {
+        return res.status(404).json({
+          error: true,
+          message: `${entityName} não encontrado.`
+        })
+      }
+
+      return res.status(200).json({ data: result })
+    } catch (err) {
+      next(err)
+    }
+  },
+
   async insert(req, res, next) {
     try {
       let data = req.body

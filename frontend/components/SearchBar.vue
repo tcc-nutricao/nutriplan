@@ -1,5 +1,5 @@
 <template>
-  <div ref="searchBarContainer" class="w-full flex flex-row gap-2 bg-transparent">
+  <div ref="searchBarContainer" class="w-full flex flex-row gap-2">
     <Search
       :type="searchType"
       :placeholder="placeholder"

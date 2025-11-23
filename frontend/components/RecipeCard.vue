@@ -1,8 +1,9 @@
 <template>
     <Card v-if="item" class="sticky top-[30px] self-start w-[50%] mb-8 z-20">
-        <div class="flex w-full justify-between items-center space-y-4">
+        <div class="flex w-full justify-between items-center mb-4">
             <h2 class="h2">{{ item?.recipe?.name }}</h2>
             <Button
+             class="mt-0"
             :red="item?.favorite"
             :outlined="item?.favorite"
             :mediumPurple="!item?.favorite"

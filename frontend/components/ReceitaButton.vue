@@ -11,8 +11,8 @@
             </div>
         </div>
         <div class="flex justify-between items-end">
-            <div class="flex flex-col text-gray-600 mt-1">
-                <p v-for="(recipePreference, index) in item.recipe.recipePreferences" :key="index">
+            <div class="flex flex-col text-gray-600 mt-1 text-sm">
+                <p v-for="(recipePreference, index) in item.recipe.recipePreferences?.slice(0, 3)" :key="index">
                     <i :class="'mr-2 text-p-500 fa-solid '+ recipePreference.preference.icon"></i>{{ recipePreference.preference.name }}
                 </p>
             </div>

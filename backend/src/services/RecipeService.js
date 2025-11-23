@@ -56,6 +56,78 @@ const baseCrudService = generateCrudService(RecipeRepository)
 export const RecipeService = {
   ...baseCrudService,
 
+  async create(data) {
+    try {
+      const result = await prisma.$transaction(async (tx) => {
+        const { recipeFoods, recipePreferences, ...recipeData } = data
+
+        const recipe = await tx.recipe.create({
+          data: {
+            ...recipeData,
+            created_at: new Date(),
+            updated_at: new Date(),
+          },
+        })
+
+        if (recipeFoods && recipeFoods.length > 0) {
+          await tx.recipeFood.createMany({
+            data: recipeFoods.map(rf => ({
+              id_recipe: recipe.id,
+              id_food: rf.id_food,
+              id_unit_of_measurement: rf.id_unit_of_measurement,
+              quantity: rf.quantity,
+              id_preparation_method: rf.id_preparation_method || null,
+              created_at: new Date(),
+              updated_at: new Date(),
+            })),
+          })
+        }
+
+        if (recipePreferences && recipePreferences.length > 0) {
+          await tx.recipePreference.createMany({
+            data: recipePreferences.map(rp => ({
+              id_recipe: recipe.id,
+              id_preference: rp.id_preference,
+              created_at: new Date(),
+              updated_at: new Date(),
+            })),
+          })
+        }
+
+        const completeRecipe = await tx.recipe.findUnique({
+          where: { id: recipe.id },
+          include: {
+            recipeFoods: {
+              include: {
+                food: true,
+                unit_of_measurement: true,
+                preparationMethod: true,
+              },
+            },
+            recipePreferences: {
+              include: {
+                preference: {
+                  select: {
+                    id: true,
+                    name: true,
+                    icon: true,
+                  },
+                },
+              },
+            },
+          },
+        })
+
+        return completeRecipe
+      })
+
+      return calculateRecipeNutrition(result)
+    } catch (error) {
+      console.error('Erro ao criar receita:', error)
+      throw error
+    }
+  },
+
   async findById(id) {
     try {
       const recipe = await RecipeRepository.findById(id)
@@ -155,7 +227,6 @@ export const RecipeService = {
   async getFavorites(userId) {
     try {
       const favorites = await RecipeRepository.findFavoritesByUserId(userId)
-      // Extract recipe from the favorite relation and calculate nutrition
       return favorites.map(fav => {
         const recipe = fav.recipe
         return calculateRecipeNutrition(recipe)
@@ -166,5 +237,3 @@ export const RecipeService = {
     }
   }
 }
-
-

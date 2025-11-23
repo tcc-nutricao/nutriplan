@@ -89,12 +89,39 @@ const getFavorites = async (req, res) => {
   }
 }
 
+const insert = async (req, res, next) => {
+  try {
+    let data = req.body
+
+    const parseResult = CreateRecipeSchema.safeParse(data)
+    if (!parseResult.success) {
+      const errors = parseResult.error.errors.map(err => ({
+        field: err.path.join('.'),
+        message: err.message
+      }))
+      return res.status(422).json({ error: true, errors })
+    }
+
+    data = parseResult.data
+
+    const result = await RecipeService.create(data)
+    return res.status(201).json(result)
+  } catch (err) {
+    console.error('Erro no insert:', err)
+    return res.status(500).json({
+      error: true,
+      message: err.message || 'Erro ao criar receita'
+    })
+  }
+}
+
 export const RecipeController = {
   ...generateCrudController(
     RecipeService,
     CreateRecipeSchema,
     'Receita'
   ),
+  insert, // Override the generic insert method
   getPatientRecipes,
   toggleFavorite,
   getFavorites

@@ -50,6 +50,8 @@ import { insert, update, get } from '../crud';
 
 const userCookie = useCookie('user-data');
 
+const { $axios } = useNuxtApp();
+
 const itemList = ref([]);
 const selectedItemId = ref(null);
 const pending = ref(true);
@@ -61,10 +63,15 @@ const groupCodeError = ref(null);
 function mapApiDataToFrontend(apiGroup) {
   const participants = apiGroup.progress.participants.map((participant, index) => ({
     id: index,
-    name: participant.name === userCookie.value?.name.split(' ')[0] ? 'Você' : participant.name,
+    name: participant.name === userCookie.value?.name ? 'Você' : participant.name,
     progress: participant.progress,
     objective: 'Não definido',
-  }));
+  }
+)
+);
+
+console.log(participants.name)
+console.log(userCookie.value?.name)
 
   return {
     id: apiGroup.id,

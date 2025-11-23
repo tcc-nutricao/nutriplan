@@ -10,8 +10,8 @@
                     :filterOptions="getFilterOptions()" 
                     placeholder="Pesquise uma receita"
                     searchType="recipes"
-                    @searchSelected=""
-                    class="sticky top-[30px] self-start w-full bg-p-50 z-20 shadowSearch" 
+                    @searchSelected="handleSearchSelected"
+                    class="sticky top-[30px] bg-g self-start w-full z-20 shadowSearch" 
                 />
                 <Button
                     v-if="isNutri"
@@ -52,6 +52,7 @@
             v-if="showModal"
             :selected="selectedItem?.id"
             @close="closeModal()"
+            @saved="handleRecipeSaved"
         />
     </div>
 </template>
@@ -82,6 +83,37 @@ const modalRecipe = () => {
 const closeModal = () => {
   showModal.value = false;
 };
+
+async function handleRecipeSaved() {
+  await loadItems(currentPage.value);
+}
+
+async function handleSearchSelected(recipe) {
+  if (!recipe || !recipe.id) return;
+
+  const response = await get(`recipe/${recipe.id}`);
+  
+  if (response && response.data) {
+    const fullRecipe = response.data;
+    
+    const formattedRecipe = {
+      ...fullRecipe,
+      recipe: fullRecipe,
+      steps: preparationMethodMapper(fullRecipe.preparation_method),
+      isSelected: true
+    };
+
+    const existingIndex = items.value.findIndex(item => item.id === fullRecipe.id);
+    
+    if (existingIndex !== -1) {
+      selectItem(fullRecipe.id);
+    } else {
+      items.value.unshift(formattedRecipe);
+      
+      selectItem(fullRecipe.id);
+    }
+  }
+}
 
 function preparationMethodMapper(preparationMethod) {
   if (!preparationMethod) return [];
@@ -182,8 +214,8 @@ const selectedItem = computed(() => {
 .shadowSearch {
     animation: fade-shadow linear;
     animation-timeline: scroll();
-    animation-range-start: 120px;
-    animation-range-end: 200px;
+    animation-range-start: 100px;
+    animation-range-end: 130px;
 
     animation-fill-mode: forwards;
 }

@@ -9,7 +9,7 @@
                 placeholder="Pesquise um paciente" 
                 searchType="patients"
                 @searchSelected=""
-                class="stickyProfile w-full shadowSearch" 
+                class="stickyProfile w-full shadowSearch z-[200]" 
             />
             <Button
                 mediumPurple
