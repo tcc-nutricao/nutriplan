@@ -1,28 +1,37 @@
 import { generateCrudRepository } from './Repository.js'
+import { PrismaClient } from '@prisma/client'
 
-export const RecipeRepository = generateCrudRepository('recipe', {
-  softDelete: true,
-  defaultOrderBy: 'id',
-  defaultIncludes: {
-    recipeFoods: {
-      include: {
-        food: true,
-        unit_of_measurement: true, 
-        preparationMethod: true
-      }
-    },
-    recipePreferences: {
-      include: {
-        preference: {
-          select: {
-            id: true,
-            name: true,
-            icon: true
-          }
+const prisma = new PrismaClient()
+
+const defaultIncludes = {
+  recipeFoods: {
+    include: {
+      food: true,
+      unit_of_measurement: true, 
+      preparationMethod: true
+    }
+  },
+  recipePreferences: {
+    include: {
+      preference: {
+        select: {
+          id: true,
+          name: true,
+          icon: true
         }
       }
     }
-  },
+  }
+}
+
+const baseRepository = generateCrudRepository('recipe', {
+  softDelete: true,
+  defaultOrderBy: 'id',
+  defaultIncludes
+})
+
+export const RecipeRepository = {
+  ...baseRepository,
   
   async addFavorite(userId, recipeId) {
     return prisma.favoriteRecipe.create({
@@ -68,4 +77,4 @@ export const RecipeRepository = generateCrudRepository('recipe', {
     })
     return !!favorite
   }
-})
+}

@@ -4,12 +4,13 @@
             <h2 class="h2">{{ item?.recipe?.name }}</h2>
             <Button
              class="mt-0"
-            :red="item?.favorite"
-            :outlined="item?.favorite"
-            :mediumPurple="!item?.favorite"
-            :class="handleFavoriteButtonClass(item?.favorite)"
-            :icon="handleFavoriteButtonIcon(item?.favorite)"
-            :label="handleFavoriteButtonLabel(item?.favorite)"
+            :red="item?.isFavorite"
+            :outlined="item?.isFavorite"
+            :mediumPurple="!item?.isFavorite"
+            :disabled="isTogglingFavorite"
+            :class="handleFavoriteButtonClass(item?.isFavorite)"
+            :icon="handleFavoriteButtonIcon(item?.isFavorite)"
+            :label="handleFavoriteButtonLabel(item?.isFavorite)"
             @click="toggleFavorite(item)"
             />
         </div>
@@ -59,9 +60,10 @@
 
 <script setup>
 import { ref } from 'vue';
-import { update } from '../crud';
+import { insert } from '../crud';
 
 const error = ref({ message: null });
+const isTogglingFavorite = ref(false);
 
 const props = defineProps({
     item: {
@@ -85,18 +87,28 @@ function handleFavoriteButtonLabel(isFavorite = false) {
 }
 
 async function toggleFavorite(recipe) {
-    const originalIsFav = recipe.favorite;
-    recipe.favorite = !recipe.favorite; 
-    const mappedObject = {
-        favorite: recipe.favorite,
-        id_meal_plan: recipe.id_meal_plan,
-        id_recipe: recipe.id_recipe,
-        id_meal_plan_meal: recipe.id_meal_plan_meal
-    };
-    const result = await update('meal-plan-recipe', recipe.id, mappedObject);
-    if (!result) {
-        recipe.favorite = originalIsFav;
-        error.value = result.message || 'Erro ao atualizar favorito.';
+    if (!recipe || !recipe.id || isTogglingFavorite.value) return;
+    
+    isTogglingFavorite.value = true;
+    const originalIsFavorite = recipe.isFavorite;
+    recipe.isFavorite = !recipe.isFavorite;
+    
+    try {
+        const result = await insert('recipe/favorite', { recipeId: recipe.id });
+        
+        if (!result || result.error) {
+            // Reverter em caso de erro
+            recipe.isFavorite = originalIsFavorite;
+            error.value = result?.message || 'Erro ao atualizar favorito.';
+        } else {
+            // Emitir evento para o componente pai atualizar o estado global
+            emit('toggleFavorite', recipe.id, result.data.favorited);
+        }
+    } catch (err) {
+        recipe.isFavorite = originalIsFavorite;
+        error.value = 'Erro ao atualizar favorito.';
+    } finally {
+        isTogglingFavorite.value = false;
     }
 }
 </script>

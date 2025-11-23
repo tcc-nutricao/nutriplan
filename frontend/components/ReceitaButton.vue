@@ -7,7 +7,7 @@
         <div class="flex flex-col items-between gap-2">
             <div class="flex w-full items-center justify-between">
                 <h2 class="h2">{{ item.recipe.name }}</h2>
-                <i v-if="isFav" class="fa-solid fa-heart text-xl text-red-500"></i>
+                <i v-if="item.isFavorite" class="fa-solid fa-heart text-xl text-red-500"></i>
             </div>
         </div>
         <div class="flex justify-between items-end">

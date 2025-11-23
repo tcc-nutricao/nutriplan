@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            <RecipeCard :item="selectedItem" />
+            <RecipeCard :item="selectedItem" @toggleFavorite="handleToggleFavorite" />
         
         </div>
 
@@ -58,7 +58,7 @@
 </template>
 
 <script setup>
-import { get } from '../crud';
+import { get, insert } from '../crud';
 import { ref, computed, onMounted } from 'vue';
 const userCookie = useCookie('user-data');
 const isNutri = computed(() => userCookie.value?.role === 'PROFESSIONAL');
@@ -71,6 +71,7 @@ const preferences = ref([]);
 const loading = ref(true); 
 const route = ref('recipe');
 const errors = ref({});
+const favoriteRecipeIds = ref(new Set());
 
 const currentPage = ref(1);
 const totalPages = ref(0);
@@ -100,7 +101,8 @@ async function handleSearchSelected(recipe) {
       ...fullRecipe,
       recipe: fullRecipe,
       steps: preparationMethodMapper(fullRecipe.preparation_method),
-      isSelected: true
+      isSelected: true,
+      isFavorite: favoriteRecipeIds.value.has(fullRecipe.id)
     };
 
     const existingIndex = items.value.findIndex(item => item.id === fullRecipe.id);
@@ -127,6 +129,13 @@ function preparationMethodMapper(preparationMethod) {
   });
 }
 
+async function loadFavorites() {
+  const response = await get('recipe/favorites');
+  if (response && response.data) {
+    favoriteRecipeIds.value = new Set(response.data.map(fav => fav.id));
+  }
+}
+
 async function loadItems(page = 1) {
   loading.value = true;
   const response = await get(route.value, { page, limit: itemsPerPage });
@@ -142,7 +151,8 @@ async function loadItems(page = 1) {
   items.value = recipesFromApi.map(apiRecipe => ({
     ...apiRecipe,
     recipe: apiRecipe,
-    steps: preparationMethodMapper(apiRecipe.preparation_method)
+    steps: preparationMethodMapper(apiRecipe.preparation_method),
+    isFavorite: favoriteRecipeIds.value.has(apiRecipe.id)
   }));
 
   totalPages.value = Math.ceil(totalItems / itemsPerPage);
@@ -157,12 +167,28 @@ async function getPreferences() {
   }
 }
 
+async function handleToggleFavorite(recipeId, favorited) {
+  // Atualizar o Set local
+  if (favorited) {
+    favoriteRecipeIds.value.add(recipeId);
+  } else {
+    favoriteRecipeIds.value.delete(recipeId);
+  }
+  
+  // Atualizar a receita no array
+  const recipe = items.value.find(item => item.id === recipeId);
+  if (recipe) {
+    recipe.isFavorite = favorited;
+  }
+}
+
 function handlePageChange(page) {
   loadItems(page);
   recipeListTop.value?.scrollIntoView({ behavior: 'smooth' });
 }
 
 onMounted(async () => {
+  await loadFavorites();
   await loadItems();
   await getPreferences();
 });
