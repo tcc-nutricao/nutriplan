@@ -181,29 +181,28 @@ async function main() {
     },
   });
   // PREFERENCES
-  await prisma.preference.createMany({
-    data: [
-      { name: "Sem Glúten", icon: "fa-wheat-awn text-ic-gluten", created_at: new Date() },
-      { name: "Sem açúcar", icon: "fa-candy-cane text-ic-sugar", created_at: new Date() },
-      { name: "Sem lactose", icon: "fa-glass-water text-ic-lactose", created_at: new Date() },
-      { name: "Vegetariano", icon: "fa-carrot text-ic-vegetariano", created_at: new Date() },
-      { name: "Vegano", icon: "fa-seedling text-ic-vegano", created_at: new Date() },
-      { name: "Emagrecer", icon: "fa-fire text-ic-emagrecer", created_at: new Date() },
-      { name: "Ganho de músculo", icon: "fa-dumbbell text-ic-musculo", created_at: new Date() },
-      { name: "Manter peso", icon: "fa-scale-balanced text-ic-manterpeso", created_at: new Date() },
-      { name: "Colesterol", icon: "fa-heart-circle-plus text-ic-colesterol", created_at: new Date() },
-      { name: "Sono", icon: "fa-moon text-ic-sono", created_at: new Date() },
-      { name: "Energia", icon: "fa-bolt text-ic-energia", created_at: new Date() },
-      { name: "Antinflamatório", icon: "fa-droplet text-ic-antinfl", created_at: new Date() },
-      { name: "Antioxidante", icon: "fa-atom text-ic-antiox", created_at: new Date() },
-      { name: "Sem nozes", icon: "fa-hand-dots text-ic-nozes", created_at: new Date() },
-      { name: "Sem peixe", icon: "fa-fish text-ic-peixe", created_at: new Date() },
-      { name: "Intestino", icon: "fa-worm text-ic-intestino", created_at: new Date() },
-      { name: "Fácil", icon: "fa-hands text-ic-vegan", created_at: new Date() },
-      { name: "Doce", icon: "fa-ice-cream text-ic-sono", created_at: new Date() },
-    ],
-    skipDuplicates: true,
-  });
+  let preferencesData = [];
+  try {
+    preferencesData = JSON.parse(fs.readFileSync('src/assets/preferences.json', 'utf-8'));
+  } catch (e) {
+    console.warn('⚠️  src/assets/preferences.json não encontrado.', e.message);
+  }
+
+  if (preferencesData.length > 0) {
+      const existingPrefs = await prisma.preference.findMany({
+          select: { name: true }
+      });
+      const existingNames = new Set(existingPrefs.map(p => p.name));
+
+      const newPrefs = preferencesData.filter(p => !existingNames.has(p.name));
+
+      if (newPrefs.length > 0) {
+           await prisma.preference.createMany({
+            data: newPrefs.map(p => ({ ...p, created_at: new Date() })),
+          });
+          console.log(`✅ ${newPrefs.length} preferências inseridas`);
+      }
+  }
 
     // Pega a primeira preferência para uso nos relacionamentos
   const preference = await prisma.preference.findFirst();
@@ -477,17 +476,7 @@ async function populateWithAI(patient, nutritionist, goal) {
     console.warn('⚠️  src/assets/recipe_foods.json não encontrado ou erro ao processar.', e.message);
   }
 
-  // PREFERENCES
-  try {
-    const preferencesData = JSON.parse(fs.readFileSync('src/assets/preferences.json', 'utf-8'));
-    await prisma.preference.createMany({
-      data: preferencesData.map(p => ({ ...p, created_at: new Date() })),
-      skipDuplicates: true,
-    });
-    console.log('✅ Preferências inseridas');
-  } catch (e) {
-    console.warn('⚠️  src/assets/preferences.json não encontrado.', e.message);
-  }
+
 
   // RECIPE PREFERENCES (Relations)
   try {
