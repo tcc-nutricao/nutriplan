@@ -1,10 +1,14 @@
 <template>
-  <div class="flex flex-col items-center justify-start w-full max-h-screen p-8">
-    <h2 class="text-4xl font-semibold text-p-600 text-center mb-8">
+  <div
+    class="flex flex-col items-center justify-start w-full min-h-screen px-4 py-6 md:p-8"
+  >
+    <h2
+      class="text-2xl md:text-4xl font-semibold text-p-600 text-center mb-6 md:mb-8"
+    >
       Vamos cadastrar seus dados pessoais!
     </h2>
     <Card>
-      <div class="grid grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         <div class="col-span-1">
           <Label class="mb-2" label="Que dia você nasceu?" />
           <Input
@@ -70,16 +74,21 @@
             required
           />
         </div>
-        <div class="col-span-2 flex justify-center gap-3 mt-8">
+        <div
+          class="col-span-1 md:col-span-2 flex flex-col md:flex-row justify-center gap-3 mt-6"
+        >
           <Button
             gray
             outlined
-            class="w-max px-3 h-[42px] shadow-lg border-2 border-gray-300 transition"
+            class="w-full md:w-max px-3 h-[42px] shadow-lg border-2 border-gray-300 transition"
             @click="navigateTo('/profile')"
           >
             Pular
           </Button>
-          <Button mediumPurple @click.prevent="save"> Salvar </Button>
+
+          <Button class="w-full md:w-auto" mediumPurple @click.prevent="save">
+            Salvar
+          </Button>
         </div>
       </div>
     </Card>
@@ -132,9 +141,21 @@ async function save() {
     ...form.value,
     weight: Number(form.value.weight) ?? null,
     height: Number(form.value.height) ?? null,
-    restrictions: Array.isArray(form.value.restrictions) ? form.value.restrictions : (form.value.restrictions ? [form.value.restrictions] : []),
-    preferences: Array.isArray(form.value.preferences) ? form.value.preferences : (form.value.preferences ? [form.value.preferences] : []),
-    objectives: Array.isArray(form.value.objective) ? form.value.objective : (form.value.objective ? [form.value.objective] : []),
+    restrictions: Array.isArray(form.value.restrictions)
+      ? form.value.restrictions
+      : form.value.restrictions
+      ? [form.value.restrictions]
+      : [],
+    preferences: Array.isArray(form.value.preferences)
+      ? form.value.preferences
+      : form.value.preferences
+      ? [form.value.preferences]
+      : [],
+    objectives: Array.isArray(form.value.objective)
+      ? form.value.objective
+      : form.value.objective
+      ? [form.value.objective]
+      : [],
   };
   await update("user/personal-data", payload);
   navigateTo("/meal-plan");
