@@ -21,7 +21,7 @@
   },
   {
     "recipe_name": "Legumes Cozidos",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Legumes Cozidos",
@@ -57,7 +57,7 @@
   },
   {
     "recipe_name": "Ovo Cozido",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Ovo Cozido",
@@ -97,7 +97,7 @@
   },
   {
     "recipe_name": "Salada Simples",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Salada Simples",
@@ -141,7 +141,7 @@
   },
   {
     "recipe_name": "Arroz com Cenoura",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Arroz com Cenoura",
@@ -169,7 +169,7 @@
   },
   {
     "recipe_name": "Macarrão com Manteiga",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Macarrão com Manteiga",
@@ -201,7 +201,7 @@
   },
   {
     "recipe_name": "Milho Cozido",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Milho Cozido",
@@ -229,7 +229,7 @@
   },
   {
     "recipe_name": "Suco de Laranja",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Suco de Laranja",
@@ -265,7 +265,7 @@
   },
   {
     "recipe_name": "Chá de Camomila",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Chá de Camomila",
@@ -285,7 +285,7 @@
   },
   {
     "recipe_name": "Pão de Queijo de Liquidificador",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Pão de Queijo de Liquidificador",
@@ -313,7 +313,7 @@
   },
   {
     "recipe_name": "Frango Grelhado",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Frango Grelhado",
@@ -341,7 +341,7 @@
   },
   {
     "recipe_name": "Omelete Simples",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Omelete Simples",
@@ -381,7 +381,7 @@
   },
   {
     "recipe_name": "Arroz Branco",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Arroz Branco",
@@ -405,7 +405,7 @@
   },
   {
     "recipe_name": "Macarrão Alho e Óleo",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Macarrão Alho e Óleo",
@@ -421,7 +421,7 @@
   },
   {
     "recipe_name": "Vitamina de Banana",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Vitamina de Banana",
@@ -465,7 +465,7 @@
   },
   {
     "recipe_name": "Salada Caprese",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Salada Caprese",
@@ -501,7 +501,7 @@
   },
   {
     "recipe_name": "Purê de Batata",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Purê de Batata",
@@ -517,7 +517,7 @@
   },
   {
     "recipe_name": "Torrada com Alho",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Torrada com Alho",
@@ -545,7 +545,7 @@
   },
   {
     "recipe_name": "Banana Assada",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Banana Assada",
@@ -573,7 +573,7 @@
   },
   {
     "recipe_name": "Cuscuz Nordestino",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Cuscuz Nordestino",
@@ -605,7 +605,7 @@
   },
   {
     "recipe_name": "Panqueca Simples",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Panqueca Simples",
@@ -641,7 +641,7 @@
   },
   {
     "recipe_name": "Pipoca na Panela",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Pipoca na Panela",
@@ -673,7 +673,7 @@
   },
   {
     "recipe_name": "Café Coado",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Café Coado",
@@ -701,7 +701,7 @@
   },
   {
     "recipe_name": "Limonada",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Limonada",
@@ -733,7 +733,7 @@
   },
   {
     "recipe_name": "Crepioca",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Crepioca",
@@ -765,7 +765,7 @@
   },
   {
     "recipe_name": "Ovo Mexido",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Ovo Mexido",
@@ -789,7 +789,7 @@
   },
   {
     "recipe_name": "Sanduíche de Presunto e Queijo",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Sanduíche de Presunto e Queijo",
@@ -821,7 +821,7 @@
   },
   {
     "recipe_name": "Tapioca Simples",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Tapioca Simples",
@@ -849,7 +849,7 @@
   },
   {
     "recipe_name": "Bruschetta",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Bruschetta",
@@ -905,7 +905,7 @@
   },
   {
     "recipe_name": "Sopa de Legumes",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Sopa de Legumes",
@@ -933,7 +933,7 @@
   },
   {
     "recipe_name": "Vitamina de Morango",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Vitamina de Morango",
@@ -957,7 +957,7 @@
   },
   {
     "recipe_name": "Ovo no Pão",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Ovo no Pão",
@@ -985,7 +985,7 @@
   },
   {
     "recipe_name": "Panqueca Americana",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Panqueca Americana",
@@ -1029,7 +1029,7 @@
   },
   {
     "recipe_name": "Abacate Amassado",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Abacate Amassado",
@@ -1049,7 +1049,7 @@
   },
   {
     "recipe_name": "Milkshake de Chocolate",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Milkshake de Chocolate",
@@ -1073,7 +1073,7 @@
   },
   {
     "recipe_name": "Banana com Aveia",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Banana com Aveia",
@@ -1109,7 +1109,7 @@
   },
   {
     "recipe_name": "Frango Desfiado",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Frango Desfiado",
@@ -1133,7 +1133,7 @@
   },
   {
     "recipe_name": "Arroz Doce Simples",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Arroz Doce Simples",
@@ -1153,7 +1153,7 @@
   },
   {
     "recipe_name": "Pão com Ovo",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Pão com Ovo",
@@ -1181,7 +1181,7 @@
   },
   {
     "recipe_name": "Bife Acebolado",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Bife Acebolado",
@@ -1209,7 +1209,7 @@
   },
   {
     "recipe_name": "Batata Sauté",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Batata Sauté",
@@ -1233,7 +1233,7 @@
   },
   {
     "recipe_name": "Molho de Tomate Rápido",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Molho de Tomate Rápido",
@@ -1257,7 +1257,7 @@
   },
   {
     "recipe_name": "Café com Leite",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Café com Leite",
@@ -1277,7 +1277,7 @@
   },
   {
     "recipe_name": "Mingau de Aveia",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Mingau de Aveia",
@@ -1321,7 +1321,7 @@
   },
   {
     "recipe_name": "Batata Assada",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Batata Assada",
@@ -1349,7 +1349,7 @@
   },
   {
     "recipe_name": "Chuchu Refogado",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Chuchu Refogado",
@@ -1361,7 +1361,7 @@
   },
   {
     "recipe_name": "Lasanha Simples",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Lasanha Simples",
@@ -1385,7 +1385,7 @@
   },
   {
     "recipe_name": "Ensopado de Batata com Carne",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Ensopado de Batata com Carne",
@@ -1413,7 +1413,7 @@
   },
   {
     "recipe_name": "Pão Caseiro Simples",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Pão Caseiro Simples",
@@ -1437,7 +1437,7 @@
   },
   {
     "recipe_name": "Molho Branco",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Molho Branco",
@@ -1461,7 +1461,7 @@
   },
   {
     "recipe_name": "Peito de Frango no Forno",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Peito de Frango no Forno",
@@ -1497,7 +1497,7 @@
   },
   {
     "recipe_name": "Berinjela Refogada",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Berinjela Refogada",
@@ -1529,7 +1529,7 @@
   },
   {
     "recipe_name": "Quiabo Refogado",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Quiabo Refogado",
@@ -1553,7 +1553,7 @@
   },
   {
     "recipe_name": "Molho de Alho Caseiro",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Molho de Alho Caseiro",
@@ -1573,7 +1573,7 @@
   },
   {
     "recipe_name": "Pão de Alho Simples",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Pão de Alho Simples",
@@ -1597,7 +1597,7 @@
   },
   {
     "recipe_name": "Caldinho de Feijão",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Caldinho de Feijão",
@@ -1625,7 +1625,7 @@
   },
   {
     "recipe_name": "Abobrinha Grelhada",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Abobrinha Grelhada",
@@ -1657,7 +1657,7 @@
   },
   {
     "recipe_name": "Skyr com Mel",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Skyr com Mel",
@@ -1689,7 +1689,7 @@
   },
   {
     "recipe_name": "Iogurte com Granola",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Iogurte com Granola",
@@ -1725,7 +1725,7 @@
   },
   {
     "recipe_name": "Tapioca com Queijo",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Tapioca com Queijo",
@@ -1749,7 +1749,7 @@
   },
   {
     "recipe_name": "Smoothie de Manga",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Smoothie de Manga",
@@ -1785,7 +1785,7 @@
   },
   {
     "recipe_name": "Creme de Papaya",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Creme de Papaya",
@@ -1801,7 +1801,7 @@
   },
   {
     "recipe_name": "Sanduíche Natural",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Sanduíche Natural",
@@ -1837,7 +1837,7 @@
   },
   {
     "recipe_name": "Pão com Requeijão",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Pão com Requeijão",
@@ -1857,7 +1857,7 @@
   },
   {
     "recipe_name": "Torrada com Manteiga",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Torrada com Manteiga",
@@ -1889,7 +1889,7 @@
   },
   {
     "recipe_name": "Cenoura Baby Cozida",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Cenoura Baby Cozida",
@@ -1933,7 +1933,7 @@
   },
   {
     "recipe_name": "Chá Verde",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Chá Verde",
@@ -1957,7 +1957,7 @@
   },
   {
     "recipe_name": "Suco de Melancia",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Suco de Melancia",
@@ -1993,7 +1993,7 @@
   },
   {
     "recipe_name": "Salada de Pepino",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Salada de Pepino",
@@ -2037,7 +2037,7 @@
   },
   {
     "recipe_name": "Salada de Tomate",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Salada de Tomate",
@@ -2077,7 +2077,7 @@
   },
   {
     "recipe_name": "Ovo Pochê",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Ovo Pochê",
@@ -2109,7 +2109,7 @@
   },
   {
     "recipe_name": "Ovo Estrelado",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Ovo Estrelado",
@@ -2133,7 +2133,7 @@
   },
   {
     "recipe_name": "Torrada Francesa",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Torrada Francesa",
@@ -2169,7 +2169,7 @@
   },
   {
     "recipe_name": "Banana Caramelizada",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Banana Caramelizada",
@@ -2193,7 +2193,7 @@
   },
   {
     "recipe_name": "Café Gelado",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Café Gelado",
@@ -2225,7 +2225,7 @@
   },
   {
     "recipe_name": "Creme de Abacate",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Creme de Abacate",
@@ -2253,7 +2253,7 @@
   },
   {
     "recipe_name": "Abacaxi Grelhado",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Abacaxi Grelhado",
@@ -2281,7 +2281,7 @@
   },
   {
     "recipe_name": "Milho Verde na Manteiga",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Milho Verde na Manteiga",
@@ -2301,7 +2301,7 @@
   },
   {
     "recipe_name": "Cuscuz de Tapioca",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Cuscuz de Tapioca",
@@ -2321,7 +2321,7 @@
   },
   {
     "recipe_name": "Pão de Queijo Congelado",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Pão de Queijo Congelado",
@@ -2345,7 +2345,7 @@
   },
   {
     "recipe_name": "Chá Mate Gelado",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Chá Mate Gelado",
@@ -2377,7 +2377,7 @@
   },
   {
     "recipe_name": "Suco de Uva Natural",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Suco de Uva Natural",
@@ -2409,7 +2409,7 @@
   },
   {
     "recipe_name": "Gelatina Simples",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Gelatina Simples",
@@ -2433,7 +2433,7 @@
   },
   {
     "recipe_name": "Creme de Milho Rápido",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Creme de Milho Rápido",
@@ -2457,7 +2457,7 @@
   },
   {
     "recipe_name": "Purê de Mandioquinha",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Purê de Mandioquinha",
@@ -2485,7 +2485,7 @@
   },
   {
     "recipe_name": "Couve Refogada",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Couve Refogada",
@@ -2529,7 +2529,7 @@
   },
   {
     "recipe_name": "Espinafre Refogado",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Espinafre Refogado",
@@ -2569,7 +2569,7 @@
   },
   {
     "recipe_name": "Biscoito de Polvilho",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Biscoito de Polvilho",
@@ -2589,7 +2589,7 @@
   },
   {
     "recipe_name": "Iogurte com Frutas",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Iogurte com Frutas",
@@ -2621,7 +2621,7 @@
   },
   {
     "recipe_name": "Wrap de Frango",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Wrap de Frango",
@@ -2657,7 +2657,7 @@
   },
   {
     "recipe_name": "Sanduíche de Atum",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Sanduíche de Atum",
@@ -2689,7 +2689,7 @@
   },
   {
     "recipe_name": "Pipoca de Micro-ondas",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Pipoca de Micro-ondas",
@@ -2717,7 +2717,7 @@
   },
   {
     "recipe_name": "Suco de Goiaba",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Suco de Goiaba",
@@ -2753,7 +2753,7 @@
   },
   {
     "recipe_name": "Batata Cozida",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Batata Cozida",
@@ -2781,7 +2781,7 @@
   },
   {
     "recipe_name": "Legumes no Vapor",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Legumes no Vapor",
@@ -2821,7 +2821,7 @@
   },
   {
     "recipe_name": "Chá de Erva-doce",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Chá de Erva-doce",
@@ -2845,7 +2845,7 @@
   },
   {
     "recipe_name": "Pizza Caseira Simples",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Pizza Caseira Simples",
@@ -2861,7 +2861,7 @@
   },
   {
     "recipe_name": "Macarrão ao Molho Manteiga",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Macarrão ao Molho Manteiga",
@@ -2893,7 +2893,7 @@
   },
   {
     "recipe_name": "Salada de Abacate",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Salada de Abacate",
@@ -2929,7 +2929,7 @@
   },
   {
     "recipe_name": "Sanduíche de Ovo",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Sanduíche de Ovo",
@@ -2953,7 +2953,7 @@
   },
   {
     "recipe_name": "Misto Quente",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Misto Quente",
@@ -2973,7 +2973,7 @@
   },
   {
     "recipe_name": "Queijo Quente",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Queijo Quente",
@@ -3005,7 +3005,7 @@
   },
   {
     "recipe_name": "Salada de Rúcula com Tomate",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Salada de Rúcula com Tomate",
@@ -3045,7 +3045,7 @@
   },
   {
     "recipe_name": "Batata Doce Assada",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Batata Doce Assada",
@@ -3069,7 +3069,7 @@
   },
   {
     "recipe_name": "Banana com Mel",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Banana com Mel",
@@ -3097,7 +3097,7 @@
   },
   {
     "recipe_name": "Sopa Rala de Frango",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Sopa Rala de Frango",
@@ -3133,7 +3133,7 @@
   },
   {
     "recipe_name": "Sopa Rápida de Tomate",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Sopa Rápida de Tomate",
@@ -3165,7 +3165,7 @@
   },
   {
     "recipe_name": "Pão de Tapioca",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Pão de Tapioca",
@@ -3193,7 +3193,7 @@
   },
   {
     "recipe_name": "Fubá Cozido",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Fubá Cozido",
@@ -3225,7 +3225,7 @@
   },
   {
     "recipe_name": "Arroz de Micro-ondas",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Arroz de Micro-ondas",
@@ -3245,7 +3245,7 @@
   },
   {
     "recipe_name": "Omelete de Legumes",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Omelete de Legumes",
@@ -3289,7 +3289,7 @@
   },
   {
     "recipe_name": "Tostex Simples",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Tostex Simples",
@@ -3309,7 +3309,7 @@
   },
   {
     "recipe_name": "Sanduíche de Peito de Peru",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Sanduíche de Peito de Peru",
@@ -3337,7 +3337,7 @@
   },
   {
     "recipe_name": "Banana no Micro-ondas",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Banana no Micro-ondas",
@@ -3369,7 +3369,7 @@
   },
   {
     "recipe_name": "Pão de Alho na Airfryer",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Pão de Alho na Airfryer",
@@ -3401,7 +3401,7 @@
   },
   {
     "recipe_name": "Batata em Cubos na Airfryer",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Batata em Cubos na Airfryer",
@@ -3421,7 +3421,7 @@
   },
   {
     "recipe_name": "Frango Desfiado na Pressão",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Frango Desfiado na Pressão",
@@ -3457,7 +3457,7 @@
   },
   {
     "recipe_name": "Couve-Flor Cozida",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Couve-Flor Cozida",
@@ -3501,7 +3501,7 @@
   },
   {
     "recipe_name": "Brócolis no Vapor",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Brócolis no Vapor",
@@ -3537,7 +3537,7 @@
   },
   {
     "recipe_name": "Panqueca de Banana",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Panqueca de Banana",
@@ -3573,7 +3573,7 @@
   },
   {
     "recipe_name": "Ovo Frito com Tomate",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Ovo Frito com Tomate",
@@ -3605,7 +3605,7 @@
   },
   {
     "recipe_name": "Queijo Coalho na Airfryer",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Queijo Coalho na Airfryer",
@@ -3637,7 +3637,7 @@
   },
   {
     "recipe_name": "Espaguete com Azeite",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Espaguete com Azeite",
@@ -3669,7 +3669,7 @@
   },
   {
     "recipe_name": "Vinagrete Simples",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Vinagrete Simples",
@@ -3705,7 +3705,7 @@
   },
   {
     "recipe_name": "Cuscuz com Ovo",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Cuscuz com Ovo",
@@ -3737,7 +3737,7 @@
   },
   {
     "recipe_name": "Frango na Airfryer",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Frango na Airfryer",
@@ -3773,7 +3773,7 @@
   },
   {
     "recipe_name": "Molho Vinagrete para Churrasco",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Molho Vinagrete para Churrasco",
@@ -3817,7 +3817,7 @@
   },
   {
     "recipe_name": "Tomate Grelhado",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Tomate Grelhado",
@@ -3833,7 +3833,7 @@
   },
   {
     "recipe_name": "Sopa de Cebola Caseira",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Sopa de Cebola Caseira",
@@ -3869,7 +3869,7 @@
   },
   {
     "recipe_name": "Farofa de Bacon",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Farofa de Bacon",
@@ -3893,7 +3893,7 @@
   },
   {
     "recipe_name": "Salada Caesar Simples",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Salada Caesar Simples",
@@ -3937,7 +3937,7 @@
   },
   {
     "recipe_name": "Arroz com Brócolis",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Arroz com Brócolis",
@@ -3977,7 +3977,7 @@
   },
   {
     "recipe_name": "Salada de Repolho",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Salada de Repolho",
@@ -4021,7 +4021,7 @@
   },
   {
     "recipe_name": "Chuchu Cozido com Sal",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Chuchu Cozido com Sal",
@@ -4053,7 +4053,7 @@
   },
   {
     "recipe_name": "Tomate Recheado Simples",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Tomate Recheado Simples",
@@ -4081,7 +4081,7 @@
   },
   {
     "recipe_name": "Patê de Atum",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Patê de Atum",
@@ -4133,7 +4133,7 @@
   },
   {
     "recipe_name": "Molho de Mostarda Rápido",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Molho de Mostarda Rápido",
@@ -4161,7 +4161,7 @@
   },
   {
     "recipe_name": "Mandioca Cozida",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Mandioca Cozida",
@@ -4189,7 +4189,7 @@
   },
   {
     "recipe_name": "Sopa de Batata Simples",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Sopa de Batata Simples",
@@ -4217,7 +4217,7 @@
   },
   {
     "recipe_name": "Tomate com Sal",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Tomate com Sal",
@@ -4249,7 +4249,7 @@
   },
   {
     "recipe_name": "Chá de Hortelã",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Chá de Hortelã",
@@ -4265,7 +4265,7 @@
   },
   {
     "recipe_name": "Panqueca de Aveia",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Panqueca de Aveia",
@@ -4309,7 +4309,7 @@
   },
   {
     "recipe_name": "Crepioca com Queijo",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Crepioca com Queijo",
@@ -4337,7 +4337,7 @@
   },
   {
     "recipe_name": "Morango com Chocolate",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Morango com Chocolate",
@@ -4373,7 +4373,7 @@
   },
   {
     "recipe_name": "Maçã com Canela",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Maçã com Canela",
@@ -4405,7 +4405,7 @@
   },
   {
     "recipe_name": "Gelinho de Frutas",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Gelinho de Frutas",
@@ -4425,7 +4425,7 @@
   },
   {
     "recipe_name": "Iogurte Congelado",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Iogurte Congelado",
@@ -4465,7 +4465,7 @@
   },
   {
     "recipe_name": "Suco Verde Simples",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Suco Verde Simples",
@@ -4497,7 +4497,7 @@
   },
   {
     "recipe_name": "Batida de Coco",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Batida de Coco",
@@ -4533,7 +4533,7 @@
   },
   {
     "recipe_name": "Abacaxi com Hortelã",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Abacaxi com Hortelã",
@@ -4557,7 +4557,7 @@
   },
   {
     "recipe_name": "Cuscuz Doce",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Cuscuz Doce",
@@ -4581,7 +4581,7 @@
   },
   {
     "recipe_name": "Mingau de Maisena",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Mingau de Maisena",
@@ -4605,7 +4605,7 @@
   },
   {
     "recipe_name": "Creme de Manga",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Creme de Manga",
@@ -4633,7 +4633,7 @@
   },
   {
     "recipe_name": "Purê de Abóbora",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Purê de Abóbora",
@@ -4661,7 +4661,7 @@
   },
   {
     "recipe_name": "Cenoura Ralada com Limão",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Cenoura Ralada com Limão",
@@ -4701,7 +4701,7 @@
   },
   {
     "recipe_name": "Macarrão ao Alho Cru",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Macarrão ao Alho Cru",
@@ -4733,7 +4733,7 @@
   },
   {
     "recipe_name": "Tomate Assado",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Tomate Assado",
@@ -4765,7 +4765,7 @@
   },
   {
     "recipe_name": "Pepino com Sal",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Pepino com Sal",
@@ -4809,7 +4809,7 @@
   },
   {
     "recipe_name": "Abobrinha Assada",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Abobrinha Assada",
@@ -4845,7 +4845,7 @@
   },
   {
     "recipe_name": "Ovos de Codorna Cozidos",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Ovos de Codorna Cozidos",
@@ -4877,7 +4877,7 @@
   },
   {
     "recipe_name": "Mexidão Simples",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Mexidão Simples",
@@ -4905,7 +4905,7 @@
   },
   {
     "recipe_name": "Pão com Mel",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Pão com Mel",
@@ -4929,7 +4929,7 @@
   },
   {
     "recipe_name": "Pão com Manteiga e Orégano",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Pão com Manteiga e Orégano",
@@ -4961,7 +4961,7 @@
   },
   {
     "recipe_name": "Arroz com Açafrão",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Arroz com Açafrão",

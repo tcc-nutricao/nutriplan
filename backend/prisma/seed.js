@@ -202,29 +202,29 @@ async function main() {
     data: { name: "Nenhuma", created_at: new Date() },
   });
   const dietaryRestriction2 = await prisma.dietaryRestriction.create({
-    data: { name: "Sem glúten", created_at: new Date() },
+    data: { name: "Sem glúten", icon: "fa-wheat-awn-circle-exclamation", created_at: new Date() },
   });
 
   const dietaryRestriction3 = await prisma.dietaryRestriction.create({
-    data: { name: "Sem lactose", created_at: new Date() },
+    data: { name: "Sem lactose", icon: "fa-solid fa-droplet-slash", created_at: new Date() },
   });
 
   const dietaryRestriction4 = await prisma.dietaryRestriction.create({
-    data: { name: "Vegano", created_at: new Date() },
+    data: { name: "Vegano", icon: "fa-solid fa-seedling", created_at: new Date() },
   });
 
   const dietaryRestriction5 = await prisma.dietaryRestriction.create({
-    data: { name: "Vegetariano", created_at: new Date() },
+    data: { name: "Vegetariano", icon: "fa-solid fa-leaf", created_at: new Date() },
   });
 
   const dietaryRestriction6 = await prisma.dietaryRestriction.create({
-    data: { name: "Sem açúcar", created_at: new Date() },
+    data: { name: "Sem açúcar", icon:"fa-solid fa-candy-cane", created_at: new Date() },
   });
   const dietaryRestriction7 = await prisma.dietaryRestriction.create({
-    data: { name: "Sem nozes", created_at: new Date() },
+    data: { name: "Sem nozes", icon: "fa-solid fa-brain", created_at: new Date() },
   });
   const dietaryRestriction8 = await prisma.dietaryRestriction.create({
-    data: { name: "Sem frutos do mar", created_at: new Date() },
+    data: { name: "Sem frutos do mar", icon: "fa-solid fa-fish", created_at: new Date() },
   });
 
   // MEAL BASE (6 refeições fixas - IDs 1 a 6)

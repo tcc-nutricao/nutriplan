@@ -24,6 +24,7 @@
           <Button mediumPurple
             class="w-min px-0 h-[36px]"
             icon="fa-solid fa-eye short flex justify-center"
+            label="Ver"
             @click="openRecipeModal(mealPlanRecipe.recipe)"
           />
         </div>

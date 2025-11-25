@@ -64,12 +64,20 @@ const loadItems = async () => {
       return bMeals - aMeals 
     })
     
-    actualPlan.value = activePlans
-    otherPlans.value = result.data.filter(item => item.status !== 'ACTIVE')
+    actualPlan.value = activePlans.map(transformPlan)
+    otherPlans.value = result.data.filter(item => item.status !== 'ACTIVE').map(transformPlan)
   } catch (error) {
     console.error('Erro ao carregar planos:', error)
     actualPlan.value = []
     otherPlans.value = []
+  }
+}
+
+const transformPlan = (plan) => {
+  return {
+    ...plan,
+    dietaryRestrictions: plan.mealPlanDietaryRestrictions || [],
+    goalObjectives: plan.goal?.goalObjectives || []
   }
 }
 
