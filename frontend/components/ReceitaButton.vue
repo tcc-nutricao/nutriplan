@@ -18,6 +18,10 @@
             </div>
             <div class="ml-auto text-gray-600">
                 <div>
+                    <i class="fa-solid fa-fire mr-2"></i> 
+                    <span>{{ item.recipe.calories }} kcal</span>
+                </div>
+                <div>
                     <i class="fa-regular fa-clock mr-2"></i> 
                     <span>{{ item.recipe.preparation_time }} min</span>
                 </div>
@@ -39,6 +43,7 @@ export default {
             default: () => ({
                 title: null,
                 recipePreferences: [],
+                calories: null,
                 time: null,
                 portions: null,
                 isSelected: false,

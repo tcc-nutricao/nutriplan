@@ -27,11 +27,24 @@ const base = generateCrudRepository('mealPlan', {
     mealPlanMeals: {
       include: {
         meal: true,
-        foodConsumed: {
+        mealPlanRecipes: {
           include: {
-            food: true,
-            recipe: true,
-            unitOfMeasurement: true
+            recipe: {
+              include: {
+                recipePreferences: {
+                  include: {
+                    preference: true
+                  }
+                },
+                recipeFoods: {
+                  include: {
+                    food: true,
+                    unit_of_measurement: true,
+                    preparationMethod: true
+                  }
+                }
+              }
+            }
           }
         }
       }

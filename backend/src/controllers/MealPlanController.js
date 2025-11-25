@@ -2,19 +2,29 @@ import { MealPlanService } from '../services/MealPlanService.js'
 import { CreateMealPlanSchema } from '../dtos/mealPlan/CreateMealPlanDto.js'
 import { generateCrudController } from './Controller.js'
 
-// Métodos customizados específicos do MealPlan
+import { PatientRepository } from '../repositories/PatientRepository.js'
+
 const getMealPlanByPatient = async (req, res) => {
   try {
-    const { id } = req.user
+    const { id: userId } = req.user
     
-    if (!id) {
+    if (!userId) {
       return res.status(400).json({ 
         success: false, 
-        message: 'ID do paciente é obrigatório' 
+        message: 'ID do usuário é obrigatório' 
       })
     }
 
-    const mealPlansData = await MealPlanService.getMealPlanByPatient(parseInt(id))
+    const patient = await PatientRepository.findByUserId(userId)
+    
+    if (!patient) {
+      return res.status(404).json({
+        success: false,
+        message: 'Paciente não encontrado para este usuário'
+      })
+    }
+
+    const mealPlansData = await MealPlanService.getMealPlanByPatient(patient.id)
     
     return res.status(200).json({ 
       success: true, 
@@ -50,7 +60,6 @@ const update = async (req, res) => {
   }
 }
 
-// Mescla CRUD padrão com métodos customizados
 export const MealPlanController = {
   ...generateCrudController(
     MealPlanService,

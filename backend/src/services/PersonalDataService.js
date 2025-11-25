@@ -1,33 +1,32 @@
 import { PatientRepository } from "../repositories/PatientRepository.js";
 import { MealPlanRepository } from "../repositories/MealPlanRepository.js";
 import { MealPlanDietaryRestrictionRepository } from "../repositories/MealPlanDietaryRestrictionRepository.js";
+import { PatientDietaryRestrictionRepository } from "../repositories/PatientDietaryRestrictionRepository.js";
 import { GoalRepository } from "../repositories/GoalRepository.js";
 import { GoalObjectiveRepository } from "../repositories/GoalObjectiveRepository.js";
 import { HealthDataRepository } from "../repositories/HealthDataRepository.js";
 import { MealPlanMealRepository } from "../repositories/MealPlanMealRepository.js";
 import { MealPlanRecipeRepository } from "../repositories/MealPlanRecipeRepository.js";
 import { RecipeRepository } from "../repositories/RecipeRepository.js";
+import { MealPlanPopulateService } from "./MealPlanPopulateService.js";
 import { GeminiService } from "./GeminiService.js";
 import { PrismaClient } from "@prisma/client";
 import { AppError } from "../exceptions/AppError.js";
 
 const prisma = new PrismaClient();
 
-//Pega dados pessoais do paciente
 const getPersonalData = async (userId) => {
   const patient = await PatientRepository.findByUserId(userId);
   if (!patient) return null;
 
   const { birth_date, gender, height, weight, user } = patient;
 
-  // Calcula idade
   const idade = birth_date
     ? Math.floor(
         (new Date() - new Date(birth_date)) / (365.25 * 24 * 60 * 60 * 1000)
       )
     : null;
 
-  // Buscar Goal ativo
   const goal = await GoalRepository.search({
     filters: [
       { field: "id_patient", value: patient.id },
@@ -36,38 +35,28 @@ const getPersonalData = async (userId) => {
   });
   const activeGoal = goal.data?.[0];
 
-  // Buscar objetivos do goal
-  let objectives = [];
+  let objectiveNames = [];
   if (activeGoal) {
     const goalObjectives = await GoalObjectiveRepository.search({
       filters: [{ field: "id_goal", value: activeGoal.id }],
     });
-    objectives = goalObjectives.data?.map((go) => go.id_objective) || [];
+    
+    objectiveNames = goalObjectives.data?.map((go) => go.objective?.name || "Desconhecido") || [];
   }
 
-  // Buscar MealPlan ativo para restrições
-  const mealPlan = await MealPlanRepository.search({
-    filters: [
-      { field: "id_patient", value: patient.id },
-      { field: "status", value: "ACTIVE" },
-    ],
+  let restrictionNames = [];
+  const patientRestrictions = await PatientDietaryRestrictionRepository.search({
+    filters: [{ field: "id_patient", value: patient.id }],
   });
-  const activeMealPlan = mealPlan.data?.[0];
-
-  let restrictions = [];
-  if (activeMealPlan) {
-    const mealPlanRestrictions = await MealPlanDietaryRestrictionRepository.search({
-      filters: [{ field: "id_meal_plan", value: activeMealPlan.id }],
-    });
-    restrictions = mealPlanRestrictions.data?.map((r) => r.id_dietary_restriction) || [];
-  }
+  
+  restrictionNames = patientRestrictions.data?.map((r) => r.dietaryRestriction?.name || "Desconhecido") || [];
 
   return {
     nome: user?.name || "",
     email: user?.email || "",
     idade,
-    birth_date, // Retornar data bruta
-    gender, // Retornar enum bruto
+    birth_date, 
+    gender,
     sexo:
       gender === "FEM"
         ? "Feminino"
@@ -76,10 +65,14 @@ const getPersonalData = async (userId) => {
         : "Não informado",
     altura: height,
     peso: weight,
+    meta: activeGoal?.target_weight || null, 
+    objetivo: objectiveNames.length > 0 ? objectiveNames.join(", ") : "Não informado", 
+    restricoes: restrictionNames.length > 0 ? restrictionNames : ["Nenhuma"], 
     target_weight: activeGoal?.target_weight || null,
-    objectives, // Array de IDs
-    restrictions, // Array de IDs
-    preferences: [], // Não implementado ainda
+    objectives: activeGoal ? (await GoalObjectiveRepository.search({
+      filters: [{ field: "id_goal", value: activeGoal.id }],
+    })).data?.map((go) => go.id_objective) || [] : [],
+    restrictions: patientRestrictions.data?.map((r) => r.id_dietary_restriction) || [],
   };
 };
 
@@ -89,6 +82,7 @@ const updatePersonalData = async (userId, personalData) => {
     gender,
     height,
     weight,
+    target_weight,
     restrictions = [],
     objectives = [],
     preferences = [],
@@ -113,7 +107,6 @@ const updatePersonalData = async (userId, personalData) => {
   }
 
   const result = await prisma.$transaction(async (tx) => {
-    // 1. Atualizar dados do Patient
     const updatedPatientData = {
       birth_date: new Date(birth_date),
       gender,
@@ -128,7 +121,6 @@ const updatePersonalData = async (userId, personalData) => {
       tx
     );
 
-    // 2. Buscar ou criar Goal ativo
     let goal;
     const existingGoals = await GoalRepository.search({
       filters: [
@@ -139,11 +131,18 @@ const updatePersonalData = async (userId, personalData) => {
 
     if (existingGoals.data && existingGoals.data.length > 0) {
       goal = existingGoals.data[0];
+      if (target_weight !== undefined) {
+        goal = await GoalRepository.update(
+          goal.id,
+          { target_weight, updated_at: new Date() },
+          tx
+        );
+      }
     } else {
-      // Criar novo goal se não existir
       const goalData = {
         id_patient: patient.id,
         description: "Objetivo inicial do paciente",
+        target_weight: target_weight || null,
         start_date: new Date(),
         status: "ACTIVE",
         created_at: new Date(),
@@ -152,9 +151,7 @@ const updatePersonalData = async (userId, personalData) => {
       goal = await GoalRepository.create(goalData, tx);
     }
 
-    // 3. Atualizar objetivos - remover existentes e criar novos
     if (objectives.length > 0) {
-      // Remover objetivos existentes (soft delete)
       const existingObjectives = await GoalObjectiveRepository.search({
         filters: [{ field: "id_goal", value: goal.id }],
       });
@@ -163,7 +160,6 @@ const updatePersonalData = async (userId, personalData) => {
         await GoalObjectiveRepository.remove(obj.id, tx);
       }
 
-      // Criar novos objetivos
       for (let i = 0; i < objectives.length; i++) {
         const goalObjectiveData = {
           id_goal: goal.id,
@@ -176,90 +172,29 @@ const updatePersonalData = async (userId, personalData) => {
       }
     }
 
-    // 4. Buscar ou criar MealPlan ativo
-    let mealPlan;
-    const existingMealPlans = await MealPlanRepository.search({
-      filters: [
-        { field: "id_patient", value: patient.id, operator: "equals" },
-        { field: "status", value: "ACTIVE", operator: "equals" },
-      ],
-    });
-
-    if (existingMealPlans.data && existingMealPlans.data.length > 0) {
-      mealPlan = existingMealPlans.data[0];
-    } else {
-      // // Gerar 10 planos alimentares completos com IA
-      // console.log('🚀 Nenhum plano existente. Gerando 10 planos com IA...');
-      
-      // // Buscar objetivos já carregados acima (passo 3)
-      // const existingObjectives = await GoalObjectiveRepository.search({
-      //   filters: [{ field: "id_goal", value: goal.id, operator: "equals" }],
-      // });
-      
-      // const aiResult = await generateCompleteAIMealPlans(
-      //   patient, 
-      //   goal, 
-      //   updatedPatientData, // Dados atualizados
-      //   existingObjectives.data || [], // Objetivos já carregados
-      //   [], // Restrições virão depois
-      //   tx
-      // );
-      
-      // if (aiResult.success && aiResult.plans.length > 0) {
-      //   // Ativar o primeiro plano gerado
-      //   mealPlan = await MealPlanRepository.update(
-      //     aiResult.plans[0].id,
-      //     { status: "ACTIVE" },
-      //     tx
-      //   );
-        
-      //   console.log(`✅ Plano 1 ativado. ${aiResult.count - 1} planos alternativos disponíveis.`);
-      // } else {
-      //   // Fallback: criar plano padrão se IA falhar
-      //   console.warn('⚠️  IA falhou. Criando plano padrão...');
-        
-      //   const mealPlanData = {
-      //     id_patient: patient.id,
-      //     id_nutritionist: 1,
-      //     id_goal: goal.id,
-      //     calories: 2000,
-      //     status: "ACTIVE",
-      //     ai_generated: false,
-      //     created_at: new Date(),
-      //     updated_at: new Date(),
-      //   };
-      //   mealPlan = await MealPlanRepository.create(mealPlanData, tx);
-      // }
-    }
-
-    //5. Atualizar restrições - remover existentes e criar novas
     if (restrictions.length >= 0) {
-      // Permitir array vazio para remover todas
-      // Remover restrições existentes
       const existingRestrictions =
-        await MealPlanDietaryRestrictionRepository.search({
+        await PatientDietaryRestrictionRepository.search({
           filters: [
-            { field: "id_meal_plan", value: mealPlan.id, operator: "equals" },
+            { field: "id_patient", value: patient.id, operator: "equals" },
           ],
         });
 
       for (const restriction of existingRestrictions.data || []) {
-        await MealPlanDietaryRestrictionRepository.remove(restriction.id, tx);
+        await PatientDietaryRestrictionRepository.remove(restriction.id, tx);
       }
 
-      // Criar novas restrições
       for (const restrictionId of restrictions) {
         const restrictionData = {
-          id_meal_plan: mealPlan.id,
+          id_patient: patient.id,
           id_dietary_restriction: restrictionId,
           created_at: new Date(),
           updated_at: new Date(),
         };
-        await MealPlanDietaryRestrictionRepository.create(restrictionData, tx);
+        await PatientDietaryRestrictionRepository.create(restrictionData, tx);
       }
     }
 
-    //6. Atualizar ou criar HealthData mais recente (dentro da transação)
     const latestHealthData = await HealthDataRepository.search({
       filters: [{ field: "id_patient", value: patient.id, operator: "equals" }],
       orderColumn: "record_date",
@@ -270,7 +205,6 @@ const updatePersonalData = async (userId, personalData) => {
 
     let latestHealth;
     if (latestHealthData.data && latestHealthData.data.length > 0) {
-      // Se já existe, atualiza o mais recente
       const healthDataInfo = {
         height: parseFloat(height),
         weight: parseFloat(weight),
@@ -285,7 +219,6 @@ const updatePersonalData = async (userId, personalData) => {
       );
       latestHealth = { ...latestHealthData.data[0], ...healthDataInfo };
     } else {
-      // Se não existe, cria o primeiro registro
       if (height && weight) {
         const bmi = parseFloat(weight) / Math.pow(parseFloat(height) / 100, 2);
         const healthDataInfo = {
@@ -317,12 +250,75 @@ const updatePersonalData = async (userId, personalData) => {
     return {
       patient: updatedPatient,
       goal,
-      mealPlan,
       restrictionsCount: restrictions.length,
       objectivesCount: objectives.length,
       preferencesCount: preferences.length,
     };
   });
+
+  try {
+    const patientId = result.patient.id;
+    
+    const activePlan = await MealPlanRepository.search({
+      filters: [
+        { field: 'id_patient', value: patientId },
+        { field: 'status', value: 'ACTIVE' }
+      ]
+    });
+
+    if (!activePlan.data || activePlan.data.length === 0) {
+      console.log('✨ Gerando novo plano alimentar para o paciente...');
+      
+      // Calcular Calorias (Mifflin-St Jeor)
+      const p = result.patient;
+      const age = new Date().getFullYear() - new Date(p.birth_date).getFullYear();
+      let tmb = 0;
+      
+      if (p.gender === 'MASC') {
+        tmb = (10 * p.weight) + (6.25 * p.height) - (5 * age) + 5;
+      } else {
+        tmb = (10 * p.weight) + (6.25 * p.height) - (5 * age) - 161;
+      }
+      
+      let dailyCalories = tmb * 1.2;
+      
+      const goalType = result.goal?.goalObjectives?.[0]?.objective?.name?.toLowerCase() || '';
+      if (goalType.includes('perda') || goalType.includes('emagrecer') || goalType.includes('queima')) {
+        dailyCalories -= 500; 
+      } else if (goalType.includes('ganho') || goalType.includes('hipertrofia') || goalType.includes('massa')) {
+        dailyCalories += 400; 
+      }
+      
+      if (dailyCalories < 1200) dailyCalories = 1200;
+      if (dailyCalories > 4000) dailyCalories = 4000;
+
+      const newPlan = await MealPlanRepository.create({
+        id_patient: patientId,
+        id_nutritionist: p.id_nutritionist || 1, 
+        id_goal: result.goal.id,
+        calories: Math.round(dailyCalories),
+        status: 'ACTIVE',
+        created_at: new Date(),
+        updated_at: new Date()
+      });
+
+      if (restrictions && restrictions.length > 0) {
+        for (const restrictionId of restrictions) {
+          await MealPlanDietaryRestrictionRepository.create({
+            id_meal_plan: newPlan.id,
+            id_dietary_restriction: restrictionId,
+            created_at: new Date(),
+            updated_at: new Date()
+          });
+        }
+      }
+
+      await MealPlanPopulateService.populateMealPlan(newPlan.id);
+      console.log(`✅ Plano ${newPlan.id} gerado e populado com sucesso.`);
+    }
+  } catch (error) {
+    console.error('Erro ao gerar plano automático:', error);
+  }
 
   return result;
 };

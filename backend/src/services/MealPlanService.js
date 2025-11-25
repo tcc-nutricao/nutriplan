@@ -4,16 +4,14 @@ import { generateCrudService } from './Service.js'
 import { AppError } from '../exceptions/AppError.js'
 
 
-// Métodos customizados adicionais
 const getMealPlanByPatient = async (patientId, additionalFilters = []) => {
   try {
     if (!patientId) {
       throw new AppError({ message: 'Paciente não encontrado para o patientId fornecido' })
     }
 
-    // Combinar filtro do paciente com filtros adicionais
     const filters = [
-      { column: 'id_patient', value: patientId, operator: '=' },
+      { field: 'id_patient', value: patientId, operator: 'equals' },
       ...additionalFilters
     ]
     
@@ -33,7 +31,6 @@ const getMealPlanByPatient = async (patientId, additionalFilters = []) => {
   }
 }
 
-// Função para buscar meal plan ativo do paciente
 const getActiveMealPlanForPatient = async (patientId) => {
   try {
     if (!patientId) {
@@ -41,8 +38,8 @@ const getActiveMealPlanForPatient = async (patientId) => {
     }
 
     const filters = [
-      { column: 'status', value: 'ACTIVE', operator: '=' },
-      { column: 'id_patient', value: patientId, operator: '=' }
+      { field: 'status', value: 'ACTIVE', operator: 'equals' },
+      { field: 'id_patient', value: patientId, operator: 'equals' }
     ]
     const { data: mealPlans = [] } = await getMealPlanByPatient(patientId, filters)
 
@@ -59,13 +56,10 @@ const getActiveMealPlanForPatient = async (patientId) => {
 
 const update = async (id, data, user) => {
   const mealPlanId = parseInt(id, 10);
-  // Se o status está sendo alterado para ACTIVE
   const mealPlan = await MealPlanRepository.findById(mealPlanId);
   const patientId = mealPlan.id_patient;
   if (data.status === 'ACTIVE') {
-    // Busca o meal plan atual para pegar o paciente
     if (!mealPlan) throw new AppError('Plano alimentar não encontrado');
-    // Desativa outros planos ativos desse paciente
     await MealPlanRepository.updateMany({
       where: {
         id_patient: patientId,

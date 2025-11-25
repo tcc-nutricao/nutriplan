@@ -116,10 +116,6 @@
             :value="personalData.objetivo || 'Não informado'"
             :title="'Objetivo'"
           />
-          <InfoArea
-            :value="personalData.preferencias || 'Não informado'"
-            :title="'Preferências Alimentares'"
-          />
         </div>
       </div>
     </div>
@@ -294,15 +290,7 @@ onMounted(async () => {
     try {
       const res = await $axios.get("/user/personal-data");
       if (res.data.success) {
-        const data = res.data.data;
-  
-        if (!Array.isArray(data.restricoes)) {
-          data.restricoes = data.restricoes
-            ? [data.restricoes] 
-            : []; 
-        }
-  
-        personalData.value = data;
+        personalData.value = res.data.data;
       }
     } catch (err) {
       console.error("Erro ao buscar dados pessoais:", err);

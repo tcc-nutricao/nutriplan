@@ -1,7 +1,7 @@
 <template>
-    <Card v-if="item" class="sticky top-[30px] self-start w-[50%] mb-8 z-20">
+    <Card v-if="item" class="sticky top-[30px] self-start w-[50%] z-20" :bg="props.bg">
         <div class="flex w-full justify-between items-center mb-4">
-            <h2 class="h2">{{ item?.recipe?.name }}</h2>
+            <h2 :class="props.bg === true ? 'h2' : 'h1'">{{ item?.recipe?.name }}</h2>
             <Button
              class="mt-0"
             :red="item?.isFavorite"
@@ -25,6 +25,7 @@
         <div class="flex gap-4 mt-4 text-gray-600 mb-2">
             <span><i class="fa-regular fa-clock mr-1"></i> {{ item?.preparation_time }} min</span>
             <span><i class="fa-solid fa-utensils mr-1"></i> {{ item?.portion }} porções</span>
+            <span><i class="fa-solid fa-fire mr-1"></i> {{ item?.calories }} kcal</span>
         </div>
 
         <div class="space-y-2">
@@ -43,7 +44,7 @@
             <p v-for="(step, index) in item?.steps ?? []" :key="index"><span class="font-bold">
                 {{ index + 1 }}. </span>{{ step }}
             </p>
-            <div class="w-full flex justify-center mt-5">
+            <div class="w-full flex justify-center pt-5">
                 <Button
                     mediumPurple
                     class="w-max px-3 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
@@ -69,6 +70,10 @@ const props = defineProps({
     item: {
         type: Object,
         default: () => (null)
+    },
+    bg: {
+        type: Boolean,
+        default: true
     }
 });
 
@@ -97,11 +102,9 @@ async function toggleFavorite(recipe) {
         const result = await insert('recipe/favorite', { recipeId: recipe.id });
         
         if (!result || result.error) {
-            // Reverter em caso de erro
             recipe.isFavorite = originalIsFavorite;
             error.value = result?.message || 'Erro ao atualizar favorito.';
         } else {
-            // Emitir evento para o componente pai atualizar o estado global
             emit('toggleFavorite', recipe.id, result.data.favorited);
         }
     } catch (err) {

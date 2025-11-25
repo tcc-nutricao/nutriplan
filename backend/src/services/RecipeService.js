@@ -61,9 +61,49 @@ export const RecipeService = {
       const result = await prisma.$transaction(async (tx) => {
         const { recipeFoods, recipePreferences, ...recipeData } = data
 
+        let calculatedCalories = 0;
+        
+        if (recipeFoods && recipeFoods.length > 0) {
+          for (const rf of recipeFoods) {
+            const food = await tx.food.findUnique({
+              where: { id: rf.id_food },
+              include: { portions: true }
+            });
+            
+            if (food) {
+              let grams = 0;
+              const unitId = rf.id_unit_of_measurement;
+              const qty = rf.quantity;
+              
+              const unit = await tx.unitOfMeasurement.findUnique({ where: { id: unitId } });
+              const unitName = unit?.name?.toLowerCase() || '';
+              
+              if (['g', 'grama', 'gramas', 'ml', 'mililitro', 'mililitros'].includes(unitName)) {
+                grams = qty;
+              } else if (['kg', 'quilograma', 'l', 'litro'].includes(unitName)) {
+                grams = qty * 1000;
+              } else {
+                const portion = food.portions.find(p => p.id_unit_of_measurement === unitId);
+                if (portion) {
+                  grams = portion.gram_weight * qty;
+                } else {
+                  if (unitName.includes('colher de sopa')) grams = 15 * qty;
+                  else if (unitName.includes('colher de chá')) grams = 5 * qty;
+                  else if (unitName.includes('xícara')) grams = 240 * qty;
+                  else if (unitName.includes('unidade')) grams = 100 * qty; 
+                }
+              }
+              
+              const foodCalories = (food.calories / 100) * grams;
+              calculatedCalories += foodCalories;
+            }
+          }
+        }
+
         const recipe = await tx.recipe.create({
           data: {
             ...recipeData,
+            calories: Math.round(calculatedCalories), 
             created_at: new Date(),
             updated_at: new Date(),
           },
