@@ -8,7 +8,12 @@ import {
   WeekDay,
 } from "@prisma/client";
 import fs from 'fs';
+import path from 'path';
 import bcrypt from 'bcrypt';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const prisma = new PrismaClient();
 
@@ -130,28 +135,14 @@ async function main() {
       },
       {
         id: 2,
-        name: "Ganho de peso",
+        name: "Ganho de massa muscular",
         icon: "fa-solid fa-dumbbell text-ic-musculo",
         description: "Aumentar peso corporal de forma saudável",
         created_at: new Date(),
       },
       {
         id: 3,
-        name: "Manutenção de peso",
-        icon: "fa-solid fa-scale-balanced text-ic-manterpeso",
-        description: "Manter o peso atual dentro de uma faixa saudável",
-        created_at: new Date(),
-      },
-      {
-        id: 4,
-        name: "Redução de IMC",
-        icon: "fa-solid fa-chart-line text-ic-emagrecer",
-        description: "Diminuir o índice de massa corporal",
-        created_at: new Date(),
-      },
-      {
-        id: 5,
-        name: "Reeducação alimentar",
+        name: "Melhorar alimentação",
         icon: "fa-solid fa-utensils text-ic-vegano",
         description: "Desenvolver hábitos alimentares saudáveis",
         created_at: new Date(),
@@ -224,6 +215,16 @@ async function main() {
 
   const dietaryRestriction5 = await prisma.dietaryRestriction.create({
     data: { name: "Vegetariano", created_at: new Date() },
+  });
+
+  const dietaryRestriction6 = await prisma.dietaryRestriction.create({
+    data: { name: "Sem açúcar", created_at: new Date() },
+  });
+  const dietaryRestriction7 = await prisma.dietaryRestriction.create({
+    data: { name: "Sem nozes", created_at: new Date() },
+  });
+  const dietaryRestriction8 = await prisma.dietaryRestriction.create({
+    data: { name: "Sem frutos do mar", created_at: new Date() },
   });
 
   // MEAL BASE (6 refeições fixas - IDs 1 a 6)
@@ -514,6 +515,113 @@ async function populateWithAI(patient, nutritionist, goal) {
   } catch (e) {
     console.warn('⚠️  src/assets/recipe_preferences.json não encontrado ou erro ao processar.', e.message);
   }
+
+  // 12. Seed Food Portions
+  console.log('Seeding Food Portions...');
+  try {
+    const portionsData = JSON.parse(fs.readFileSync(path.join(__dirname, '../src/assets/food_portions.json'), 'utf-8'));
+    
+    // Cache units for quick lookup
+    const unitsMap = new Map();
+    const allUnits = await prisma.unitOfMeasurement.findMany();
+    allUnits.forEach(u => unitsMap.set(u.name.toLowerCase(), u.id));
+    // Add mappings for symbols or variations if needed
+    unitsMap.set('colher de sopa', unitsMap.get('colher de sopa')); 
+    unitsMap.set('colher de chá', unitsMap.get('colher de chá'));
+    
+    // Cache foods
+    const foodsMap = new Map();
+    const allFoods = await prisma.food.findMany();
+    allFoods.forEach(f => foodsMap.set(f.name.toLowerCase(), f.id));
+
+    for (const portion of portionsData) {
+      const foodId = foodsMap.get(portion.food_name.toLowerCase());
+      const unitId = unitsMap.get(portion.unit_name.toLowerCase());
+
+      if (foodId && unitId) {
+        await prisma.foodPortion.create({
+          data: {
+            id_food: foodId,
+            id_unit_of_measurement: unitId,
+            gram_weight: portion.gram_weight,
+            description: portion.description
+          }
+        });
+      } else {
+        console.warn(`Skipping portion for ${portion.food_name} - ${portion.unit_name}: Food or Unit not found.`);
+      }
+    }
+    console.log('✅ Porções de alimentos inseridas');
+  } catch (e) {
+    console.warn('⚠️  src/assets/food_portions.json não encontrado ou erro ao processar.', e.message);
+  }
+
+  // 13. Calculate Recipe Calories
+  console.log('Calculating Recipe Calories...');
+  const recipesToUpdate = await prisma.recipe.findMany({
+    include: {
+      recipeFoods: {
+        include: {
+          food: {
+            include: {
+              portions: true
+            }
+          },
+          unit_of_measurement: true
+        }
+      }
+    }
+  });
+
+  for (const recipe of recipesToUpdate) {
+    let totalCalories = 0;
+
+    for (const rf of recipe.recipeFoods) {
+      const food = rf.food;
+      const unit = rf.unit_of_measurement;
+      const qty = rf.quantity;
+      
+      let grams = 0;
+      
+      // Standard units
+      if (['g', 'grama', 'gramas'].includes(unit.name.toLowerCase()) || unit.symbol === 'g') {
+        grams = qty;
+      } else if (['ml', 'mililitro', 'mililitros'].includes(unit.name.toLowerCase()) || unit.symbol === 'ml') {
+        grams = qty; // Assume 1ml = 1g for simplicity if density unknown, or strictly strictly nutritional data is per 100g/ml
+      } else if (['kg', 'quilograma'].includes(unit.name.toLowerCase()) || unit.symbol === 'kg') {
+        grams = qty * 1000;
+      } else if (['l', 'litro'].includes(unit.name.toLowerCase()) || unit.symbol === 'l') {
+        grams = qty * 1000;
+      } else {
+        // Try to find portion
+        const portion = food.portions.find(p => p.id_unit_of_measurement === unit.id);
+        if (portion) {
+          grams = qty * portion.gram_weight;
+        } else {
+          // Fallback: check if unit name matches any portion description or unit name loosely?
+          // For now, if no portion found, we can't calculate accurately.
+          // Maybe default to 0 or log warning.
+          // console.warn(`No portion found for ${food.name} in ${unit.name} (Recipe: ${recipe.name})`);
+        }
+      }
+
+      if (grams > 0) {
+        // Food calories are per 100g
+        const cal = (food.calories / 100) * grams;
+        totalCalories += cal;
+      }
+    }
+
+    if (totalCalories > 0) {
+      await prisma.recipe.update({
+        where: { id: recipe.id },
+        data: { calories: Math.round(totalCalories) } // Round to nearest integer
+      });
+    }
+  }
+  console.log('✅ Calorias das receitas calculadas');
+
+  console.log("Seed finished.");
 }
 
 main()
