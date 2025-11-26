@@ -160,7 +160,7 @@ const items = computed(() => {
   if (user.value?.role === 'PROFESSIONAL') {
     return [
       { icon: "fa-users", label: "Meus pacientes", route: "/professional/patients" },
-      { icon: "fa-list", label: "Planos Alimentares", route: "/meal-plan" },
+      { icon: "fa-list", label: "Planos Alimentares", route: "/professional/meal-plans" },
       { icon: "fa-utensils", label: "Receitas", route: "/recipes" },
     ];
   }

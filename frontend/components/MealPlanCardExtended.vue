@@ -3,12 +3,12 @@
     <div class="flex flex-col gap-3 pb-10 w-full items-center">
         <div class="relative flex justify-between items-center text-lg bg-p-600 rounded-t-2xl py-6 mb-1 px-5 w-full shadow-lg text-white">
           <p class="font-medium">
-            Plano de 
+            <!-- Plano de  -->
             <span
                 v-for="(goalObjective, index) in object?.goal?.goalObjectives"
                 :key="index"
             >
-                {{ goalObjective.objective?.name }} <span v-if="index !== object?.goal?.goalObjectives?.length - 1">|</span>
+                {{ goalObjective.objective?.name }} <span v-if="index !== object?.goal?.goalObjectives?.length - 1">| </span>
             </span>
           </p>
           <div class="absolute left-1/2 -translate-x-1/2">

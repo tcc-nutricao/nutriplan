@@ -20,7 +20,7 @@ const populateMealPlan = async (mealPlanId, options = {}) => {
     if (!mealPlan) throw new AppError({ message: 'Plano alimentar não encontrado' })
 
     const targetCalories = mealPlan.calories
-    const patient = mealPlan.patient
+    const patient = mealPlan.mealPlanPatients?.[0]?.patient
     
     const { data: allRecipes = [] } = await RecipeRepository.search({
       limit: 1000,

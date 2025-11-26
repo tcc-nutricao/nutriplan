@@ -95,8 +95,8 @@
             :title="'Meta de Peso'"
           />
           <InfoArea
-            :array="personalData.restricoes == '' ? ['Nenhuma'] : (personalData.restricoes || 'Não informado')"
-            :title="'Restrições Alimentares'"
+            :value="personalData.objetivo || 'Não informado'"
+            :title="'Objetivo'"
           />
         </div>
         <div class="col w-full gap-4">
@@ -113,8 +113,8 @@
             :title="'Altura'"
           />
           <InfoArea
-            :value="personalData.objetivo || 'Não informado'"
-            :title="'Objetivo'"
+            :array="personalData.restricoes == '' ? ['Nenhuma'] : (personalData.restricoes || 'Não informado')"
+            :title="'Restrições Alimentares'"
           />
         </div>
       </div>
@@ -235,7 +235,7 @@ const handleAvatarSave = async (croppedImageData) => {
     const response = await update("user", payload);
 
     if (response && !response.error) {
-      alert("Foto de perfil atualizada com sucesso!");
+      // alert("Foto de perfil atualizada com sucesso!");
       // userCookie.value.profile_picture = base64Image;
       closeModal(true);
     } else {

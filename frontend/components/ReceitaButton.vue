@@ -1,6 +1,6 @@
 <template>
     <Card 
-        :class="{'border-p-600 shadow-xl shadow-p-600/20 w-full transition': item.isSelected, 'w-[85%]' : !item.isSelected}" 
+        :class="{'border-p-600 shadow-xl shadow-p-600/20 w-full transition': item.isSelected, 'w-[85%]' : !item.isSelected && !fullWidth, 'w-full': fullWidth}" 
         class="border-2 cursor-pointer transition-all duration-100 active:scale-[98%]" centered
         @click="$emit('selected')"
     >
@@ -49,6 +49,10 @@ export default {
                 isSelected: false,
                 isFav: false
             })
+        },
+        fullWidth: {
+            type: Boolean,
+            default: false
         }
     },
     emits: ['selected']

@@ -261,7 +261,7 @@ const updatePersonalData = async (userId, personalData) => {
     
     const activePlan = await MealPlanRepository.search({
       filters: [
-        { field: 'id_patient', value: patientId },
+        { field: 'mealPlanPatients', value: { id_patient: patientId }, operator: 'some' },
         { field: 'status', value: 'ACTIVE' }
       ]
     });
