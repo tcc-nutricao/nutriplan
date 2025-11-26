@@ -171,6 +171,7 @@ async function main() {
       updated_at: new Date(),
     },
   });
+
   // PREFERENCES
   let preferencesData = [];
   try {
@@ -195,8 +196,9 @@ async function main() {
       }
   }
 
-    // Pega a primeira preferência para uso nos relacionamentos
+  // Pega a primeira preferência para uso nos relacionamentos
   const preference = await prisma.preference.findFirst();
+
   // DIETARY RESTRICTION
   const dietaryRestriction = await prisma.dietaryRestriction.create({
     data: { name: "Nenhuma", created_at: new Date() },
@@ -293,43 +295,6 @@ async function main() {
   
   const gram = await prisma.unitOfMeasurement.findFirst({ where: { name: "Grama" } });
 
-
-  // FOOD CONSUMED (one with food, one with recipe)
-  // Comentado porque não temos meal plan criado na seed
-  // await prisma.foodConsumed.create({
-  //   data: {
-  //     id_meal_plan_meal: planBreakfast.id,
-  //     id_food: banana.id,
-  //     id_unit_of_measurement: gram.id,
-  //     quantity: 120,
-  //     date: new Date(),
-  //     created_at: new Date(),
-  //     updated_at: new Date(),
-  //   },
-  // });
-  // await prisma.foodConsumed.create({
-  //   data: {
-  //     id_meal_plan_meal: planLunch.id,
-  //     id_recipe: recipe.id,
-  //     id_unit_of_measurement: gram.id,
-  //     quantity: 1,
-  //     date: new Date(),
-  //     created_at: new Date(),
-  //     updated_at: new Date(),
-  //   },
-  // });
-
-  // MEAL PLAN RECIPE (associa a receita ao plano de refeição)
-  // Comentado porque não temos meal plan criado na seed
-  // await prisma.mealPlanRecipe.create({
-  //   data: {
-  //     id_recipe: recipe.id,
-  //     id_meal_plan_meal: planBreakfast.id,
-  //     favorite: true,
-  //     created_at: new Date(),
-  //   },
-  // });
-
   // REPORT
   await prisma.report.create({
     data: {
@@ -420,14 +385,25 @@ async function populateWithAI(patient, nutritionist, goal) {
 
   if (mealplans.length > 0) {
     for (const plan of mealplans) {
-      await prisma.mealPlan.create({
+      // Create MealPlan without id_patient
+      const { id_patient, ...planData } = plan;
+      
+      const newPlan = await prisma.mealPlan.create({
         data: {
-          ...plan,
-          id_patient: patient.id,
+          ...planData,
           id_nutritionist: nutritionist.id,
           id_goal: goal.id,
           created_at: new Date(),
         },
+      });
+      
+      // Link to patient
+      await prisma.mealPlanPatient.create({
+        data: {
+          id_meal_plan: newPlan.id,
+          id_patient: patient.id,
+          created_at: new Date(),
+        }
       });
     }
     console.log('✅ Planos inseridos');
@@ -583,7 +559,6 @@ async function populateWithAI(patient, nutritionist, goal) {
       
       let grams = 0;
       
-      // Standard units
       if (['g', 'grama', 'gramas'].includes(unit.name.toLowerCase()) || unit.symbol === 'g') {
         grams = qty;
       } else if (['ml', 'mililitro', 'mililitros'].includes(unit.name.toLowerCase()) || unit.symbol === 'ml') {
@@ -593,20 +568,15 @@ async function populateWithAI(patient, nutritionist, goal) {
       } else if (['l', 'litro'].includes(unit.name.toLowerCase()) || unit.symbol === 'l') {
         grams = qty * 1000;
       } else {
-        // Try to find portion
         const portion = food.portions.find(p => p.id_unit_of_measurement === unit.id);
         if (portion) {
           grams = qty * portion.gram_weight;
         } else {
-          // Fallback: check if unit name matches any portion description or unit name loosely?
-          // For now, if no portion found, we can't calculate accurately.
-          // Maybe default to 0 or log warning.
           // console.warn(`No portion found for ${food.name} in ${unit.name} (Recipe: ${recipe.name})`);
         }
       }
 
       if (grams > 0) {
-        // Food calories are per 100g
         const cal = (food.calories / 100) * grams;
         totalCalories += cal;
       }
@@ -615,7 +585,7 @@ async function populateWithAI(patient, nutritionist, goal) {
     if (totalCalories > 0) {
       await prisma.recipe.update({
         where: { id: recipe.id },
-        data: { calories: Math.round(totalCalories) } // Round to nearest integer
+        data: { calories: Math.round(totalCalories) } 
       });
     }
   }

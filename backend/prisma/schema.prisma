@@ -180,9 +180,9 @@ model Patient {
   healthData         HealthData[]
   goals              Goal[]
   reports            Report[]
-  mealPlans          MealPlan[]
   nutritionistPatients NutritionistPatient[]
   patientDietaryRestrictions PatientDietaryRestriction[]
+  mealPlanPatients   MealPlanPatient[]
 
   nutritionist       Nutritionist? @relation(fields: [id_nutritionist], references: [id])
   user               User         @relation(fields: [id_user], references: [id])
@@ -218,7 +218,7 @@ model HealthData {
 
 model Goal {
   id           Int      @id @default(autoincrement())
-  id_patient   Int
+  id_patient   Int?
   description  String?
   target_weight Float?
   start_date   DateTime
@@ -231,7 +231,7 @@ model Goal {
   goalObjectives GoalObjective[] 
   mealPlans MealPlan[]
 
-  patient   Patient   @relation(fields: [id_patient], references: [id])
+  patient   Patient?   @relation(fields: [id_patient], references: [id])
 }
 
 model Objective {
@@ -310,7 +310,6 @@ model Report {
 
 model MealPlan {
   id              Int       @id @default(autoincrement())
-  id_patient      Int
   id_nutritionist Int
   id_goal         Int
   calories        Int
@@ -322,12 +321,23 @@ model MealPlan {
   deleted_at      DateTime?
   updated_at      DateTime?
   
-  patient      Patient      @relation(fields: [id_patient], references: [id])
   nutricionist Nutritionist @relation(fields: [id_nutritionist], references: [id])
   goal   Goal   @relation(fields: [id_goal], references: [id])
-
+  mealPlanPatients MealPlanPatient[]
   mealPlanMeals             MealPlanMeal[]
   mealPlanDietaryRestrictions MealPlanDietaryRestriction[]
+}
+
+model MealPlanPatient {
+  id           Int       @id @default(autoincrement())
+  id_meal_plan Int
+  id_patient   Int
+  created_at   DateTime
+  deleted_at   DateTime?
+  updated_at   DateTime?
+
+  mealPlan MealPlan @relation(fields: [id_meal_plan], references: [id])
+  patient  Patient  @relation(fields: [id_patient], references: [id])
 }
 
 model MealPlanRecipe {
