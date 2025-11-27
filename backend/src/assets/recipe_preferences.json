@@ -1,15 +1,7 @@
 [
   {
-    "recipe_name": "Batata Frita Caseira",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Batata Frita Caseira",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Batata Frita Caseira",
-    "preference_name": "Sem lactose"
+    "recipe_name": "Legumes Cozidos",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Legumes Cozidos",
@@ -24,6 +16,30 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Legumes Cozidos",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Legumes Cozidos",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Legumes Cozidos",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Legumes Cozidos",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Legumes Cozidos",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Legumes Cozidos",
+    "preference_name": "Intestino"
+  },
+  {
     "recipe_name": "Ovo Cozido",
     "preference_name": "Vegetariano"
   },
@@ -34,6 +50,34 @@
   {
     "recipe_name": "Ovo Cozido",
     "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Ovo Cozido",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Ovo Cozido",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Ovo Cozido",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Ovo Cozido",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Ovo Cozido",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Ovo Cozido",
+    "preference_name": "Energia"
+  },
+  {
+    "recipe_name": "Salada Simples",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Salada Simples",
@@ -48,6 +92,38 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Salada Simples",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Salada Simples",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Salada Simples",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Salada Simples",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Salada Simples",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Salada Simples",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Salada Simples",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Arroz com Cenoura",
+    "preference_name": "Vegetariano"
+  },
+  {
     "recipe_name": "Arroz com Cenoura",
     "preference_name": "Vegano"
   },
@@ -60,6 +136,30 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Arroz com Cenoura",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Arroz com Cenoura",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Arroz com Cenoura",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Arroz com Cenoura",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Arroz com Cenoura",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Arroz com Cenoura",
+    "preference_name": "Intestino"
+  },
+  {
     "recipe_name": "Macarrão com Manteiga",
     "preference_name": "Vegetariano"
   },
@@ -69,19 +169,19 @@
   },
   {
     "recipe_name": "Macarrão com Manteiga",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
-    "recipe_name": "Linguiça Frita",
-    "preference_name": "Sem Glúten"
+    "recipe_name": "Macarrão com Manteiga",
+    "preference_name": "Sem nozes"
   },
   {
-    "recipe_name": "Linguiça Frita",
-    "preference_name": "Sem lactose"
+    "recipe_name": "Macarrão com Manteiga",
+    "preference_name": "Fácil"
   },
   {
-    "recipe_name": "Linguiça Frita",
-    "preference_name": "Sem açúcar"
+    "recipe_name": "Milho Cozido",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Milho Cozido",
@@ -96,6 +196,22 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Milho Cozido",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Milho Cozido",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Milho Cozido",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Suco de Laranja",
+    "preference_name": "Vegetariano"
+  },
+  {
     "recipe_name": "Suco de Laranja",
     "preference_name": "Vegano"
   },
@@ -106,6 +222,30 @@
   {
     "recipe_name": "Suco de Laranja",
     "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Suco de Laranja",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Suco de Laranja",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Suco de Laranja",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Suco de Laranja",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Suco de Laranja",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Chá de Camomila",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Chá de Camomila",
@@ -120,16 +260,20 @@
     "preference_name": "Sem lactose"
   },
   {
-    "recipe_name": "Brigadeiro",
-    "preference_name": "Vegetariano"
+    "recipe_name": "Chá de Camomila",
+    "preference_name": "Sem açúcar"
   },
   {
-    "recipe_name": "Brigadeiro",
-    "preference_name": "Sem Glúten"
+    "recipe_name": "Chá de Camomila",
+    "preference_name": "Sem frutos do mar"
   },
   {
-    "recipe_name": "Brigadeiro",
-    "preference_name": "Sem peixe"
+    "recipe_name": "Chá de Camomila",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Chá de Camomila",
+    "preference_name": "Fácil"
   },
   {
     "recipe_name": "Pão de Queijo de Liquidificador",
@@ -141,31 +285,19 @@
   },
   {
     "recipe_name": "Pão de Queijo de Liquidificador",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
-    "recipe_name": "Mousse de Maracujá",
-    "preference_name": "Vegetariano"
+    "recipe_name": "Pão de Queijo de Liquidificador",
+    "preference_name": "Sem nozes"
   },
   {
-    "recipe_name": "Mousse de Maracujá",
-    "preference_name": "Sem Glúten"
+    "recipe_name": "Pão de Queijo de Liquidificador",
+    "preference_name": "Ganho de músculo"
   },
   {
-    "recipe_name": "Mousse de Maracujá",
-    "preference_name": "Sem peixe"
-  },
-  {
-    "recipe_name": "Caipirinha",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Caipirinha",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Caipirinha",
-    "preference_name": "Sem lactose"
+    "recipe_name": "Pão de Queijo de Liquidificador",
+    "preference_name": "Energia"
   },
   {
     "recipe_name": "Frango Grelhado",
@@ -180,6 +312,26 @@
     "preference_name": "Sem açúcar"
   },
   {
+    "recipe_name": "Frango Grelhado",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Frango Grelhado",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Frango Grelhado",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Frango Grelhado",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Frango Grelhado",
+    "preference_name": "Energia"
+  },
+  {
     "recipe_name": "Omelete Simples",
     "preference_name": "Vegetariano"
   },
@@ -189,11 +341,31 @@
   },
   {
     "recipe_name": "Omelete Simples",
-    "preference_name": "Sem lactose"
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Omelete Simples",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Omelete Simples",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Omelete Simples",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Omelete Simples",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Omelete Simples",
+    "preference_name": "Energia"
   },
   {
     "recipe_name": "Arroz Branco",
-    "preference_name": "Vegano"
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Arroz Branco",
@@ -202,6 +374,22 @@
   {
     "recipe_name": "Arroz Branco",
     "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Arroz Branco",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Arroz Branco",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Arroz Branco",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Macarrão Alho e Óleo",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Macarrão Alho e Óleo",
@@ -216,16 +404,48 @@
     "preference_name": "Sem açúcar"
   },
   {
+    "recipe_name": "Macarrão Alho e Óleo",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Macarrão Alho e Óleo",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Macarrão Alho e Óleo",
+    "preference_name": "Fácil"
+  },
+  {
     "recipe_name": "Vitamina de Banana",
     "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Vitamina de Banana",
-    "preference_name": "Sem Glúten"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Vitamina de Banana",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Vitamina de Banana",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Vitamina de Banana",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Vitamina de Banana",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Vitamina de Banana",
+    "preference_name": "Colesterol"
+  },
+  {
+    "recipe_name": "Salada Caprese",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Salada Caprese",
@@ -240,6 +460,34 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Salada Caprese",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Salada Caprese",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Salada Caprese",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Salada Caprese",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Salada Caprese",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Salada Caprese",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Salada Caprese",
+    "preference_name": "Intestino"
+  },
+  {
     "recipe_name": "Purê de Batata",
     "preference_name": "Vegetariano"
   },
@@ -252,16 +500,36 @@
     "preference_name": "Sem açúcar"
   },
   {
-    "recipe_name": "Torrada com Alho",
-    "preference_name": "Vegano"
+    "recipe_name": "Purê de Batata",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Purê de Batata",
+    "preference_name": "Sem nozes"
   },
   {
     "recipe_name": "Torrada com Alho",
-    "preference_name": "Sem lactose"
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Torrada com Alho",
     "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Torrada com Alho",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Torrada com Alho",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Torrada com Alho",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Banana Assada",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Banana Assada",
@@ -276,52 +544,84 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Banana Assada",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Banana Assada",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Banana Assada",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Banana Assada",
+    "preference_name": "Doce"
+  },
+  {
     "recipe_name": "Cuscuz Nordestino",
     "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Cuscuz Nordestino",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Cuscuz Nordestino",
-    "preference_name": "Sem açúcar"
-  },
-  {
-    "recipe_name": "Panqueca Simples",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Panqueca Simples",
-    "preference_name": "Sem açúcar"
-  },
-  {
-    "recipe_name": "Panqueca Simples",
-    "preference_name": "Sem peixe"
-  },
-  {
-    "recipe_name": "Gelatina Colorida",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Gelatina Colorida",
     "preference_name": "Sem Glúten"
   },
   {
-    "recipe_name": "Gelatina Colorida",
-    "preference_name": "Sem peixe"
+    "recipe_name": "Cuscuz Nordestino",
+    "preference_name": "Sem açúcar"
   },
   {
-    "recipe_name": "Bolo de Caneca",
+    "recipe_name": "Cuscuz Nordestino",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Cuscuz Nordestino",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Cuscuz Nordestino",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Cuscuz Nordestino",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Cuscuz Nordestino",
+    "preference_name": "Energia"
+  },
+  {
+    "recipe_name": "Panqueca Simples",
     "preference_name": "Vegetariano"
   },
   {
-    "recipe_name": "Bolo de Caneca",
-    "preference_name": "Sem peixe"
+    "recipe_name": "Panqueca Simples",
+    "preference_name": "Sem Glúten"
   },
   {
-    "recipe_name": "Bolo de Caneca",
+    "recipe_name": "Panqueca Simples",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Panqueca Simples",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Panqueca Simples",
     "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Panqueca Simples",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Panqueca Simples",
+    "preference_name": "Energia"
+  },
+  {
+    "recipe_name": "Pipoca na Panela",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Pipoca na Panela",
@@ -336,6 +636,26 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Pipoca na Panela",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Pipoca na Panela",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Pipoca na Panela",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Pipoca na Panela",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Café Coado",
+    "preference_name": "Vegetariano"
+  },
+  {
     "recipe_name": "Café Coado",
     "preference_name": "Vegano"
   },
@@ -346,6 +666,26 @@
   {
     "recipe_name": "Café Coado",
     "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Café Coado",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Café Coado",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Café Coado",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Café Coado",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Limonada",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Limonada",
@@ -360,6 +700,22 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Limonada",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Limonada",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Limonada",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Limonada",
+    "preference_name": "Doce"
+  },
+  {
     "recipe_name": "Crepioca",
     "preference_name": "Vegetariano"
   },
@@ -372,6 +728,30 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Crepioca",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Crepioca",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Crepioca",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Crepioca",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Crepioca",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Crepioca",
+    "preference_name": "Energia"
+  },
+  {
     "recipe_name": "Ovo Mexido",
     "preference_name": "Vegetariano"
   },
@@ -381,11 +761,27 @@
   },
   {
     "recipe_name": "Ovo Mexido",
-    "preference_name": "Sem lactose"
+    "preference_name": "Sem açúcar"
   },
   {
-    "recipe_name": "Sanduíche de Presunto e Queijo",
-    "preference_name": "Sem Glúten"
+    "recipe_name": "Ovo Mexido",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Ovo Mexido",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Ovo Mexido",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Ovo Mexido",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Ovo Mexido",
+    "preference_name": "Energia"
   },
   {
     "recipe_name": "Sanduíche de Presunto e Queijo",
@@ -393,7 +789,19 @@
   },
   {
     "recipe_name": "Sanduíche de Presunto e Queijo",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Sanduíche de Presunto e Queijo",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Sanduíche de Presunto e Queijo",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Tapioca Simples",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Tapioca Simples",
@@ -408,20 +816,52 @@
     "preference_name": "Sem lactose"
   },
   {
-    "recipe_name": "Bruschetta",
-    "preference_name": "Vegano"
+    "recipe_name": "Tapioca Simples",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Tapioca Simples",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Tapioca Simples",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Tapioca Simples",
+    "preference_name": "Fácil"
   },
   {
     "recipe_name": "Bruschetta",
-    "preference_name": "Sem Glúten"
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Bruschetta",
+    "preference_name": "Vegano"
   },
   {
     "recipe_name": "Bruschetta",
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Bruschetta",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Bruschetta",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Bruschetta",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Bruschetta",
+    "preference_name": "Fácil"
+  },
+  {
     "recipe_name": "Cuscuz Paulista Simples",
-    "preference_name": "Vegano"
+    "preference_name": "Sem Glúten"
   },
   {
     "recipe_name": "Cuscuz Paulista Simples",
@@ -430,6 +870,22 @@
   {
     "recipe_name": "Cuscuz Paulista Simples",
     "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Cuscuz Paulista Simples",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Cuscuz Paulista Simples",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Cuscuz Paulista Simples",
+    "preference_name": "Energia"
+  },
+  {
+    "recipe_name": "Sopa de Legumes",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Sopa de Legumes",
@@ -444,6 +900,30 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Sopa de Legumes",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Sopa de Legumes",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Sopa de Legumes",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Sopa de Legumes",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Sopa de Legumes",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Sopa de Legumes",
+    "preference_name": "Intestino"
+  },
+  {
     "recipe_name": "Vitamina de Morango",
     "preference_name": "Vegetariano"
   },
@@ -453,31 +933,83 @@
   },
   {
     "recipe_name": "Vitamina de Morango",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Vitamina de Morango",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Vitamina de Morango",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Vitamina de Morango",
+    "preference_name": "Doce"
   },
   {
     "recipe_name": "Ovo no Pão",
     "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Ovo no Pão",
-    "preference_name": "Sem lactose"
   },
   {
     "recipe_name": "Ovo no Pão",
     "preference_name": "Sem açúcar"
   },
   {
+    "recipe_name": "Ovo no Pão",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Ovo no Pão",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Ovo no Pão",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Ovo no Pão",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Ovo no Pão",
+    "preference_name": "Energia"
+  },
+  {
     "recipe_name": "Panqueca Americana",
     "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Panqueca Americana",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Panqueca Americana",
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Panqueca Americana",
     "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Panqueca Americana",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Panqueca Americana",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Panqueca Americana",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Panqueca Americana",
+    "preference_name": "Energia"
+  },
+  {
+    "recipe_name": "Abacate Amassado",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Abacate Amassado",
@@ -492,6 +1024,22 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Abacate Amassado",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Abacate Amassado",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Abacate Amassado",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Abacate Amassado",
+    "preference_name": "Fácil"
+  },
+  {
     "recipe_name": "Milkshake de Chocolate",
     "preference_name": "Vegetariano"
   },
@@ -501,19 +1049,51 @@
   },
   {
     "recipe_name": "Milkshake de Chocolate",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Milkshake de Chocolate",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Milkshake de Chocolate",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Milkshake de Chocolate",
+    "preference_name": "Doce"
   },
   {
     "recipe_name": "Banana com Aveia",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Banana com Aveia",
-    "preference_name": "Sem Glúten"
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Banana com Aveia",
     "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Banana com Aveia",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Banana com Aveia",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Banana com Aveia",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Banana com Aveia",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Banana com Aveia",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Banana com Aveia",
+    "preference_name": "Colesterol"
   },
   {
     "recipe_name": "Frango Desfiado",
@@ -528,6 +1108,22 @@
     "preference_name": "Sem açúcar"
   },
   {
+    "recipe_name": "Frango Desfiado",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Frango Desfiado",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Frango Desfiado",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Frango Desfiado",
+    "preference_name": "Energia"
+  },
+  {
     "recipe_name": "Arroz Doce Simples",
     "preference_name": "Vegetariano"
   },
@@ -537,23 +1133,43 @@
   },
   {
     "recipe_name": "Arroz Doce Simples",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Arroz Doce Simples",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Arroz Doce Simples",
+    "preference_name": "Doce"
   },
   {
     "recipe_name": "Pão com Ovo",
     "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Pão com Ovo",
-    "preference_name": "Sem lactose"
   },
   {
     "recipe_name": "Pão com Ovo",
     "preference_name": "Sem açúcar"
   },
   {
-    "recipe_name": "Bife Acebolado",
-    "preference_name": "Vegano"
+    "recipe_name": "Pão com Ovo",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Pão com Ovo",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Pão com Ovo",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Pão com Ovo",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Pão com Ovo",
+    "preference_name": "Energia"
   },
   {
     "recipe_name": "Bife Acebolado",
@@ -564,28 +1180,44 @@
     "preference_name": "Sem lactose"
   },
   {
-    "recipe_name": "Salsicha Cozida",
-    "preference_name": "Vegano"
+    "recipe_name": "Bife Acebolado",
+    "preference_name": "Sem frutos do mar"
   },
   {
-    "recipe_name": "Salsicha Cozida",
+    "recipe_name": "Bife Acebolado",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Bife Acebolado",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Bife Acebolado",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Batata Sauté",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Batata Sauté",
     "preference_name": "Sem Glúten"
   },
   {
-    "recipe_name": "Salsicha Cozida",
-    "preference_name": "Sem lactose"
+    "recipe_name": "Batata Sauté",
+    "preference_name": "Sem açúcar"
   },
   {
     "recipe_name": "Batata Sauté",
-    "preference_name": "Vegano"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Batata Sauté",
-    "preference_name": "Sem Glúten"
+    "preference_name": "Sem nozes"
   },
   {
-    "recipe_name": "Batata Sauté",
-    "preference_name": "Sem lactose"
+    "recipe_name": "Molho de Tomate Rápido",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Molho de Tomate Rápido",
@@ -600,6 +1232,22 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Molho de Tomate Rápido",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Molho de Tomate Rápido",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Molho de Tomate Rápido",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Molho de Tomate Rápido",
+    "preference_name": "Doce"
+  },
+  {
     "recipe_name": "Café com Leite",
     "preference_name": "Vegetariano"
   },
@@ -609,31 +1257,19 @@
   },
   {
     "recipe_name": "Café com Leite",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
-    "recipe_name": "Pudim de Gelatina",
-    "preference_name": "Vegetariano"
+    "recipe_name": "Café com Leite",
+    "preference_name": "Sem nozes"
   },
   {
-    "recipe_name": "Pudim de Gelatina",
-    "preference_name": "Sem Glúten"
+    "recipe_name": "Café com Leite",
+    "preference_name": "Fácil"
   },
   {
-    "recipe_name": "Pudim de Gelatina",
-    "preference_name": "Sem peixe"
-  },
-  {
-    "recipe_name": "Geladinho de Suco",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Geladinho de Suco",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Geladinho de Suco",
-    "preference_name": "Sem lactose"
+    "recipe_name": "Café com Leite",
+    "preference_name": "Doce"
   },
   {
     "recipe_name": "Mingau de Aveia",
@@ -641,11 +1277,31 @@
   },
   {
     "recipe_name": "Mingau de Aveia",
-    "preference_name": "Sem Glúten"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Mingau de Aveia",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Mingau de Aveia",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Mingau de Aveia",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Mingau de Aveia",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Mingau de Aveia",
+    "preference_name": "Colesterol"
+  },
+  {
+    "recipe_name": "Batata Assada",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Batata Assada",
@@ -660,6 +1316,22 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Batata Assada",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Batata Assada",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Batata Assada",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Chuchu Refogado",
+    "preference_name": "Vegetariano"
+  },
+  {
     "recipe_name": "Chuchu Refogado",
     "preference_name": "Vegano"
   },
@@ -672,28 +1344,32 @@
     "preference_name": "Sem lactose"
   },
   {
-    "recipe_name": "Macarrão com Queijo",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Macarrão com Queijo",
+    "recipe_name": "Chuchu Refogado",
     "preference_name": "Sem açúcar"
   },
   {
-    "recipe_name": "Macarrão com Queijo",
-    "preference_name": "Sem peixe"
+    "recipe_name": "Chuchu Refogado",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Chuchu Refogado",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Chuchu Refogado",
+    "preference_name": "Fácil"
   },
   {
     "recipe_name": "Lasanha Simples",
-    "preference_name": "Vegetariano"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Lasanha Simples",
-    "preference_name": "Sem Glúten"
+    "preference_name": "Sem nozes"
   },
   {
     "recipe_name": "Lasanha Simples",
-    "preference_name": "Sem açúcar"
+    "preference_name": "Doce"
   },
   {
     "recipe_name": "Ensopado de Batata com Carne",
@@ -708,6 +1384,26 @@
     "preference_name": "Sem açúcar"
   },
   {
+    "recipe_name": "Ensopado de Batata com Carne",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Ensopado de Batata com Carne",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Ensopado de Batata com Carne",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Ensopado de Batata com Carne",
+    "preference_name": "Energia"
+  },
+  {
+    "recipe_name": "Pão Caseiro Simples",
+    "preference_name": "Vegetariano"
+  },
+  {
     "recipe_name": "Pão Caseiro Simples",
     "preference_name": "Vegano"
   },
@@ -717,7 +1413,15 @@
   },
   {
     "recipe_name": "Pão Caseiro Simples",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Pão Caseiro Simples",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Pão Caseiro Simples",
+    "preference_name": "Doce"
   },
   {
     "recipe_name": "Molho Branco",
@@ -725,11 +1429,23 @@
   },
   {
     "recipe_name": "Molho Branco",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Molho Branco",
     "preference_name": "Sem açúcar"
   },
   {
     "recipe_name": "Molho Branco",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Molho Branco",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Molho Branco",
+    "preference_name": "Fácil"
   },
   {
     "recipe_name": "Peito de Frango no Forno",
@@ -744,6 +1460,26 @@
     "preference_name": "Sem açúcar"
   },
   {
+    "recipe_name": "Peito de Frango no Forno",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Peito de Frango no Forno",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Peito de Frango no Forno",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Peito de Frango no Forno",
+    "preference_name": "Energia"
+  },
+  {
+    "recipe_name": "Berinjela Refogada",
+    "preference_name": "Vegetariano"
+  },
+  {
     "recipe_name": "Berinjela Refogada",
     "preference_name": "Vegano"
   },
@@ -754,6 +1490,26 @@
   {
     "recipe_name": "Berinjela Refogada",
     "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Berinjela Refogada",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Berinjela Refogada",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Berinjela Refogada",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Berinjela Refogada",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Quiabo Refogado",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Quiabo Refogado",
@@ -768,6 +1524,22 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Quiabo Refogado",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Quiabo Refogado",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Quiabo Refogado",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Quiabo Refogado",
+    "preference_name": "Fácil"
+  },
+  {
     "recipe_name": "Molho de Alho Caseiro",
     "preference_name": "Vegetariano"
   },
@@ -780,6 +1552,18 @@
     "preference_name": "Sem açúcar"
   },
   {
+    "recipe_name": "Molho de Alho Caseiro",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Molho de Alho Caseiro",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Molho de Alho Caseiro",
+    "preference_name": "Fácil"
+  },
+  {
     "recipe_name": "Pão de Alho Simples",
     "preference_name": "Vegetariano"
   },
@@ -789,11 +1573,15 @@
   },
   {
     "recipe_name": "Pão de Alho Simples",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
-    "recipe_name": "Caldinho de Feijão",
-    "preference_name": "Vegano"
+    "recipe_name": "Pão de Alho Simples",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Pão de Alho Simples",
+    "preference_name": "Fácil"
   },
   {
     "recipe_name": "Caldinho de Feijão",
@@ -802,6 +1590,22 @@
   {
     "recipe_name": "Caldinho de Feijão",
     "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Caldinho de Feijão",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Caldinho de Feijão",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Caldinho de Feijão",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Abobrinha Grelhada",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Abobrinha Grelhada",
@@ -816,28 +1620,96 @@
     "preference_name": "Sem lactose"
   },
   {
-    "recipe_name": "Skyr com Mel",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Skyr com Mel",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Skyr com Mel",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Iogurte com Granola",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Iogurte com Granola",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Iogurte com Granola",
+    "recipe_name": "Abobrinha Grelhada",
     "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Abobrinha Grelhada",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Abobrinha Grelhada",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Abobrinha Grelhada",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Abobrinha Grelhada",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Abobrinha Grelhada",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Abobrinha Grelhada",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Skyr com Mel",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Skyr com Mel",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Skyr com Mel",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Skyr com Mel",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Skyr com Mel",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Skyr com Mel",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Skyr com Mel",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Skyr com Mel",
+    "preference_name": "Energia"
+  },
+  {
+    "recipe_name": "Iogurte com Granola",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Iogurte com Granola",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Iogurte com Granola",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Iogurte com Granola",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Iogurte com Granola",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Iogurte com Granola",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Iogurte com Granola",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Iogurte com Granola",
+    "preference_name": "Energia"
   },
   {
     "recipe_name": "Tapioca com Queijo",
@@ -852,6 +1724,18 @@
     "preference_name": "Sem açúcar"
   },
   {
+    "recipe_name": "Tapioca com Queijo",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Tapioca com Queijo",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Tapioca com Queijo",
+    "preference_name": "Fácil"
+  },
+  {
     "recipe_name": "Smoothie de Manga",
     "preference_name": "Vegetariano"
   },
@@ -864,30 +1748,86 @@
     "preference_name": "Sem açúcar"
   },
   {
+    "recipe_name": "Smoothie de Manga",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Smoothie de Manga",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Smoothie de Manga",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Smoothie de Manga",
+    "preference_name": "Doce"
+  },
+  {
     "recipe_name": "Creme de Papaya",
     "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Creme de Papaya",
+    "preference_name": "Vegano"
+  },
+  {
+    "recipe_name": "Creme de Papaya",
     "preference_name": "Sem Glúten"
   },
   {
     "recipe_name": "Creme de Papaya",
-    "preference_name": "Sem açúcar"
-  },
-  {
-    "recipe_name": "Sanduíche Natural",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Sanduíche Natural",
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Creme de Papaya",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Creme de Papaya",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Creme de Papaya",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Creme de Papaya",
+    "preference_name": "Fácil"
+  },
+  {
     "recipe_name": "Sanduíche Natural",
     "preference_name": "Sem açúcar"
   },
   {
+    "recipe_name": "Sanduíche Natural",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Sanduíche Natural",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Sanduíche Natural",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Sanduíche Natural",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Sanduíche Natural",
+    "preference_name": "Energia"
+  },
+  {
+    "recipe_name": "Sanduíche Natural",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Sanduíche Natural",
+    "preference_name": "Colesterol"
+  },
+  {
     "recipe_name": "Pão com Requeijão",
     "preference_name": "Vegetariano"
   },
@@ -897,7 +1837,15 @@
   },
   {
     "recipe_name": "Pão com Requeijão",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Pão com Requeijão",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Pão com Requeijão",
+    "preference_name": "Fácil"
   },
   {
     "recipe_name": "Torrada com Manteiga",
@@ -909,7 +1857,19 @@
   },
   {
     "recipe_name": "Torrada com Manteiga",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Torrada com Manteiga",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Torrada com Manteiga",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Cenoura Baby Cozida",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Cenoura Baby Cozida",
@@ -924,6 +1884,38 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Cenoura Baby Cozida",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Cenoura Baby Cozida",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Cenoura Baby Cozida",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Cenoura Baby Cozida",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Cenoura Baby Cozida",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Cenoura Baby Cozida",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Cenoura Baby Cozida",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Chá Verde",
+    "preference_name": "Vegetariano"
+  },
+  {
     "recipe_name": "Chá Verde",
     "preference_name": "Vegano"
   },
@@ -934,6 +1926,22 @@
   {
     "recipe_name": "Chá Verde",
     "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Chá Verde",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Chá Verde",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Chá Verde",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Chá Verde",
+    "preference_name": "Fácil"
   },
   {
     "recipe_name": "Suco de Melancia",
@@ -948,6 +1956,26 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Suco de Melancia",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Suco de Melancia",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Suco de Melancia",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Suco de Melancia",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Salada de Pepino",
+    "preference_name": "Vegetariano"
+  },
+  {
     "recipe_name": "Salada de Pepino",
     "preference_name": "Vegano"
   },
@@ -960,6 +1988,38 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Salada de Pepino",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Salada de Pepino",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Salada de Pepino",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Salada de Pepino",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Salada de Pepino",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Salada de Pepino",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Salada de Pepino",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Salada de Tomate",
+    "preference_name": "Vegetariano"
+  },
+  {
     "recipe_name": "Salada de Tomate",
     "preference_name": "Vegano"
   },
@@ -970,6 +2030,34 @@
   {
     "recipe_name": "Salada de Tomate",
     "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Salada de Tomate",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Salada de Tomate",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Salada de Tomate",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Salada de Tomate",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Salada de Tomate",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Salada de Tomate",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Salada de Tomate",
+    "preference_name": "Intestino"
   },
   {
     "recipe_name": "Ovo Pochê",
@@ -984,6 +2072,30 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Ovo Pochê",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Ovo Pochê",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Ovo Pochê",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Ovo Pochê",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Ovo Pochê",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Ovo Pochê",
+    "preference_name": "Energia"
+  },
+  {
     "recipe_name": "Ovo Estrelado",
     "preference_name": "Vegetariano"
   },
@@ -993,7 +2105,27 @@
   },
   {
     "recipe_name": "Ovo Estrelado",
-    "preference_name": "Sem lactose"
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Ovo Estrelado",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Ovo Estrelado",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Ovo Estrelado",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Ovo Estrelado",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Ovo Estrelado",
+    "preference_name": "Energia"
   },
   {
     "recipe_name": "Torrada Francesa",
@@ -1001,18 +2133,34 @@
   },
   {
     "recipe_name": "Torrada Francesa",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Torrada Francesa",
     "preference_name": "Sem nozes"
   },
   {
-    "recipe_name": "Banana Caramelizada",
-    "preference_name": "Vegetariano"
+    "recipe_name": "Torrada Francesa",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Torrada Francesa",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Torrada Francesa",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Torrada Francesa",
+    "preference_name": "Energia"
   },
   {
     "recipe_name": "Banana Caramelizada",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Banana Caramelizada",
     "preference_name": "Sem Glúten"
   },
   {
@@ -1020,474 +2168,1046 @@
     "preference_name": "Sem lactose"
   },
   {
-    "recipe_name": "Café Gelado",
-    "preference_name": "Vegetariano"
+    "recipe_name": "Banana Caramelizada",
+    "preference_name": "Sem frutos do mar"
   },
   {
-    "recipe_name": "Café Gelado",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Café Gelado",
-    "preference_name": "Sem peixe"
-  },
-  {
-    "recipe_name": "Creme de Abacate",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Creme de Abacate",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Creme de Abacate",
-    "preference_name": "Sem peixe"
-  },
-  {
-    "recipe_name": "Abacaxi Grelhado",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Abacaxi Grelhado",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Abacaxi Grelhado",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Milho Verde na Manteiga",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Milho Verde na Manteiga",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Milho Verde na Manteiga",
-    "preference_name": "Sem açúcar"
-  },
-  {
-    "recipe_name": "Cuscuz de Tapioca",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Cuscuz de Tapioca",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Cuscuz de Tapioca",
-    "preference_name": "Sem peixe"
-  },
-  {
-    "recipe_name": "Pão de Queijo Congelado",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Pão de Queijo Congelado",
-    "preference_name": "Sem açúcar"
-  },
-  {
-    "recipe_name": "Pão de Queijo Congelado",
-    "preference_name": "Sem peixe"
-  },
-  {
-    "recipe_name": "Chá Mate Gelado",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Chá Mate Gelado",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Chá Mate Gelado",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Suco de Uva Natural",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Suco de Uva Natural",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Suco de Uva Natural",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Gelatina Simples",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Gelatina Simples",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Gelatina Simples",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Creme de Milho Rápido",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Creme de Milho Rápido",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Creme de Milho Rápido",
-    "preference_name": "Sem açúcar"
-  },
-  {
-    "recipe_name": "Purê de Mandioquinha",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Purê de Mandioquinha",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Purê de Mandioquinha",
-    "preference_name": "Sem açúcar"
-  },
-  {
-    "recipe_name": "Couve Refogada",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Couve Refogada",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Couve Refogada",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Espinafre Refogado",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Espinafre Refogado",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Espinafre Refogado",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Biscoito de Polvilho",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Biscoito de Polvilho",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Biscoito de Polvilho",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Iogurte com Frutas",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Iogurte com Frutas",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Iogurte com Frutas",
-    "preference_name": "Sem açúcar"
-  },
-  {
-    "recipe_name": "Wrap de Frango",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Wrap de Frango",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Wrap de Frango",
-    "preference_name": "Sem açúcar"
-  },
-  {
-    "recipe_name": "Sanduíche de Atum",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Sanduíche de Atum",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Sanduíche de Atum",
-    "preference_name": "Sem açúcar"
-  },
-  {
-    "recipe_name": "Torrada com Geleia",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Torrada com Geleia",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Torrada com Geleia",
-    "preference_name": "Sem açúcar"
-  },
-  {
-    "recipe_name": "Pipoca de Micro-ondas",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Pipoca de Micro-ondas",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Pipoca de Micro-ondas",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Suco de Goiaba",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Suco de Goiaba",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Suco de Goiaba",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Batata Cozida",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Batata Cozida",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Batata Cozida",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Legumes no Vapor",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Legumes no Vapor",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Legumes no Vapor",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Chá de Erva-doce",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Chá de Erva-doce",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Chá de Erva-doce",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Pizza Caseira Simples",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Pizza Caseira Simples",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Pizza Caseira Simples",
-    "preference_name": "Sem açúcar"
-  },
-  {
-    "recipe_name": "Macarrão ao Molho Manteiga",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Macarrão ao Molho Manteiga",
-    "preference_name": "Sem açúcar"
-  },
-  {
-    "recipe_name": "Macarrão ao Molho Manteiga",
-    "preference_name": "Sem peixe"
-  },
-  {
-    "recipe_name": "Salada de Abacate",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Salada de Abacate",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Salada de Abacate",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Sanduíche de Ovo",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Sanduíche de Ovo",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Sanduíche de Ovo",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Misto Quente",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Misto Quente",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Misto Quente",
-    "preference_name": "Sem açúcar"
-  },
-  {
-    "recipe_name": "Queijo Quente",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Queijo Quente",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Queijo Quente",
-    "preference_name": "Sem açúcar"
-  },
-  {
-    "recipe_name": "Salada de Rúcula com Tomate",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Salada de Rúcula com Tomate",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Salada de Rúcula com Tomate",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Coca-Cola Limonada",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Coca-Cola Limonada",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Coca-Cola Limonada",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Batata Doce Assada",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Batata Doce Assada",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Batata Doce Assada",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Banana com Mel",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Banana com Mel",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Banana com Mel",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Sopa Rala de Frango",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Sopa Rala de Frango",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Sopa Rala de Frango",
-    "preference_name": "Sem açúcar"
-  },
-  {
-    "recipe_name": "Sopa Rápida de Tomate",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Sopa Rápida de Tomate",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Sopa Rápida de Tomate",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Pão de Tapioca",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Pão de Tapioca",
-    "preference_name": "Sem açúcar"
-  },
-  {
-    "recipe_name": "Pão de Tapioca",
-    "preference_name": "Sem peixe"
-  },
-  {
-    "recipe_name": "Fubá Cozido",
-    "preference_name": "Vegano"
-  },
-  {
-    "recipe_name": "Fubá Cozido",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Fubá Cozido",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Bolo de Areia",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Bolo de Areia",
-    "preference_name": "Sem lactose"
-  },
-  {
-    "recipe_name": "Bolo de Areia",
-    "preference_name": "Sem peixe"
-  },
-  {
-    "recipe_name": "Bolo de Coco Simples",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Bolo de Coco Simples",
-    "preference_name": "Sem peixe"
-  },
-  {
-    "recipe_name": "Bolo de Coco Simples",
+    "recipe_name": "Banana Caramelizada",
     "preference_name": "Sem nozes"
   },
   {
+    "recipe_name": "Banana Caramelizada",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Banana Caramelizada",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Café Gelado",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Café Gelado",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Café Gelado",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Café Gelado",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Café Gelado",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Café Gelado",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Creme de Abacate",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Creme de Abacate",
+    "preference_name": "Vegano"
+  },
+  {
+    "recipe_name": "Creme de Abacate",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Creme de Abacate",
+    "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Creme de Abacate",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Creme de Abacate",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Creme de Abacate",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Creme de Abacate",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Abacaxi Grelhado",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Abacaxi Grelhado",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Abacaxi Grelhado",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Abacaxi Grelhado",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Abacaxi Grelhado",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Abacaxi Grelhado",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Abacaxi Grelhado",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Milho Verde na Manteiga",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Milho Verde na Manteiga",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Milho Verde na Manteiga",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Milho Verde na Manteiga",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Milho Verde na Manteiga",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Milho Verde na Manteiga",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Cuscuz de Tapioca",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Cuscuz de Tapioca",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Cuscuz de Tapioca",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Cuscuz de Tapioca",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Cuscuz de Tapioca",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Pão de Queijo Congelado",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Pão de Queijo Congelado",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Pão de Queijo Congelado",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Pão de Queijo Congelado",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Chá Mate Gelado",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Chá Mate Gelado",
+    "preference_name": "Vegano"
+  },
+  {
+    "recipe_name": "Chá Mate Gelado",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Chá Mate Gelado",
+    "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Chá Mate Gelado",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Chá Mate Gelado",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Chá Mate Gelado",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Chá Mate Gelado",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Suco de Uva Natural",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Suco de Uva Natural",
+    "preference_name": "Vegano"
+  },
+  {
+    "recipe_name": "Suco de Uva Natural",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Suco de Uva Natural",
+    "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Suco de Uva Natural",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Suco de Uva Natural",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Suco de Uva Natural",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Suco de Uva Natural",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Gelatina Simples",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Gelatina Simples",
+    "preference_name": "Vegano"
+  },
+  {
+    "recipe_name": "Gelatina Simples",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Gelatina Simples",
+    "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Gelatina Simples",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Gelatina Simples",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Gelatina Simples",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Creme de Milho Rápido",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Creme de Milho Rápido",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Creme de Milho Rápido",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Creme de Milho Rápido",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Creme de Milho Rápido",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Creme de Milho Rápido",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Purê de Mandioquinha",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Purê de Mandioquinha",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Purê de Mandioquinha",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Purê de Mandioquinha",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Purê de Mandioquinha",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Couve Refogada",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Couve Refogada",
+    "preference_name": "Vegano"
+  },
+  {
+    "recipe_name": "Couve Refogada",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Couve Refogada",
+    "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Couve Refogada",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Couve Refogada",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Couve Refogada",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Couve Refogada",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Couve Refogada",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Couve Refogada",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Couve Refogada",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Espinafre Refogado",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Espinafre Refogado",
+    "preference_name": "Vegano"
+  },
+  {
+    "recipe_name": "Espinafre Refogado",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Espinafre Refogado",
+    "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Espinafre Refogado",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Espinafre Refogado",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Espinafre Refogado",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Espinafre Refogado",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Espinafre Refogado",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Espinafre Refogado",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Espinafre Refogado",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Biscoito de Polvilho",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Biscoito de Polvilho",
+    "preference_name": "Vegano"
+  },
+  {
+    "recipe_name": "Biscoito de Polvilho",
+    "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Biscoito de Polvilho",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Biscoito de Polvilho",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Biscoito de Polvilho",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Biscoito de Polvilho",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Iogurte com Frutas",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Iogurte com Frutas",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Iogurte com Frutas",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Iogurte com Frutas",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Iogurte com Frutas",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Iogurte com Frutas",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Iogurte com Frutas",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Iogurte com Frutas",
+    "preference_name": "Energia"
+  },
+  {
+    "recipe_name": "Wrap de Frango",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Wrap de Frango",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Wrap de Frango",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Wrap de Frango",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Wrap de Frango",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Wrap de Frango",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Wrap de Frango",
+    "preference_name": "Energia"
+  },
+  {
+    "recipe_name": "Sanduíche de Atum",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Sanduíche de Atum",
+    "preference_name": "Vegano"
+  },
+  {
+    "recipe_name": "Sanduíche de Atum",
+    "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Sanduíche de Atum",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Sanduíche de Atum",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Sanduíche de Atum",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Sanduíche de Atum",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Pipoca de Micro-ondas",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Pipoca de Micro-ondas",
+    "preference_name": "Vegano"
+  },
+  {
+    "recipe_name": "Pipoca de Micro-ondas",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Pipoca de Micro-ondas",
+    "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Pipoca de Micro-ondas",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Pipoca de Micro-ondas",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Pipoca de Micro-ondas",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Pipoca de Micro-ondas",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Suco de Goiaba",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Suco de Goiaba",
+    "preference_name": "Vegano"
+  },
+  {
+    "recipe_name": "Suco de Goiaba",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Suco de Goiaba",
+    "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Suco de Goiaba",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Suco de Goiaba",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Suco de Goiaba",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Suco de Goiaba",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Batata Cozida",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Batata Cozida",
+    "preference_name": "Vegano"
+  },
+  {
+    "recipe_name": "Batata Cozida",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Batata Cozida",
+    "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Batata Cozida",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Batata Cozida",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Batata Cozida",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Legumes no Vapor",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Legumes no Vapor",
+    "preference_name": "Vegano"
+  },
+  {
+    "recipe_name": "Legumes no Vapor",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Legumes no Vapor",
+    "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Legumes no Vapor",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Legumes no Vapor",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Legumes no Vapor",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Legumes no Vapor",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Legumes no Vapor",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Legumes no Vapor",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Legumes no Vapor",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Chá de Erva-doce",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Chá de Erva-doce",
+    "preference_name": "Vegano"
+  },
+  {
+    "recipe_name": "Chá de Erva-doce",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Chá de Erva-doce",
+    "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Chá de Erva-doce",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Chá de Erva-doce",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Chá de Erva-doce",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Chá de Erva-doce",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Pizza Caseira Simples",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Pizza Caseira Simples",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Pizza Caseira Simples",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Pizza Caseira Simples",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Macarrão ao Molho Manteiga",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Macarrão ao Molho Manteiga",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Macarrão ao Molho Manteiga",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Macarrão ao Molho Manteiga",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Macarrão ao Molho Manteiga",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Salada de Abacate",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Salada de Abacate",
+    "preference_name": "Vegano"
+  },
+  {
+    "recipe_name": "Salada de Abacate",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Salada de Abacate",
+    "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Salada de Abacate",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Salada de Abacate",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Salada de Abacate",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Salada de Abacate",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Salada de Abacate",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Salada de Abacate",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Salada de Abacate",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Sanduíche de Ovo",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Sanduíche de Ovo",
+    "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Sanduíche de Ovo",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Sanduíche de Ovo",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Sanduíche de Ovo",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Sanduíche de Ovo",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Sanduíche de Ovo",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Sanduíche de Ovo",
+    "preference_name": "Energia"
+  },
+  {
+    "recipe_name": "Misto Quente",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Misto Quente",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Misto Quente",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Misto Quente",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Queijo Quente",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Queijo Quente",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Queijo Quente",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Queijo Quente",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Queijo Quente",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Salada de Rúcula com Tomate",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Salada de Rúcula com Tomate",
+    "preference_name": "Vegano"
+  },
+  {
+    "recipe_name": "Salada de Rúcula com Tomate",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Salada de Rúcula com Tomate",
+    "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Salada de Rúcula com Tomate",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Salada de Rúcula com Tomate",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Salada de Rúcula com Tomate",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Salada de Rúcula com Tomate",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Salada de Rúcula com Tomate",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Salada de Rúcula com Tomate",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Salada de Rúcula com Tomate",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Batata Doce Assada",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Batata Doce Assada",
+    "preference_name": "Vegano"
+  },
+  {
+    "recipe_name": "Batata Doce Assada",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Batata Doce Assada",
+    "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Batata Doce Assada",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Batata Doce Assada",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Batata Doce Assada",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Banana com Mel",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Banana com Mel",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Banana com Mel",
+    "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Banana com Mel",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Banana com Mel",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Banana com Mel",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Banana com Mel",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Sopa Rala de Frango",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Sopa Rala de Frango",
+    "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Sopa Rala de Frango",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Sopa Rala de Frango",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Sopa Rala de Frango",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Sopa Rala de Frango",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Sopa Rala de Frango",
+    "preference_name": "Energia"
+  },
+  {
+    "recipe_name": "Sopa Rápida de Tomate",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Sopa Rápida de Tomate",
+    "preference_name": "Vegano"
+  },
+  {
+    "recipe_name": "Sopa Rápida de Tomate",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Sopa Rápida de Tomate",
+    "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Sopa Rápida de Tomate",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Sopa Rápida de Tomate",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Sopa Rápida de Tomate",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Sopa Rápida de Tomate",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Sopa Rápida de Tomate",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Sopa Rápida de Tomate",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Sopa Rápida de Tomate",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Pão de Tapioca",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Pão de Tapioca",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Pão de Tapioca",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Pão de Tapioca",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Pão de Tapioca",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Pão de Tapioca",
+    "preference_name": "Energia"
+  },
+  {
+    "recipe_name": "Fubá Cozido",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Fubá Cozido",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Fubá Cozido",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Fubá Cozido",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Fubá Cozido",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Fubá Cozido",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Arroz de Micro-ondas",
+    "preference_name": "Vegetariano"
+  },
+  {
     "recipe_name": "Arroz de Micro-ondas",
     "preference_name": "Vegano"
   },
@@ -1498,6 +3218,18 @@
   {
     "recipe_name": "Arroz de Micro-ondas",
     "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Arroz de Micro-ondas",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Arroz de Micro-ondas",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Arroz de Micro-ondas",
+    "preference_name": "Sem nozes"
   },
   {
     "recipe_name": "Omelete de Legumes",
@@ -1512,16 +3244,60 @@
     "preference_name": "Sem lactose"
   },
   {
-    "recipe_name": "Tostex Simples",
-    "preference_name": "Vegano"
+    "recipe_name": "Omelete de Legumes",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Omelete de Legumes",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Omelete de Legumes",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Omelete de Legumes",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Omelete de Legumes",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Omelete de Legumes",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Omelete de Legumes",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Omelete de Legumes",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Omelete de Legumes",
+    "preference_name": "Energia"
   },
   {
     "recipe_name": "Tostex Simples",
-    "preference_name": "Sem Glúten"
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Tostex Simples",
-    "preference_name": "Sem lactose"
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Tostex Simples",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Tostex Simples",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Tostex Simples",
+    "preference_name": "Fácil"
   },
   {
     "recipe_name": "Sanduíche de Peito de Peru",
@@ -1529,11 +3305,23 @@
   },
   {
     "recipe_name": "Sanduíche de Peito de Peru",
-    "preference_name": "Sem Glúten"
+    "preference_name": "Sem açúcar"
   },
   {
     "recipe_name": "Sanduíche de Peito de Peru",
-    "preference_name": "Sem açúcar"
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Sanduíche de Peito de Peru",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Sanduíche de Peito de Peru",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Banana no Micro-ondas",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Banana no Micro-ondas",
@@ -1548,16 +3336,24 @@
     "preference_name": "Sem lactose"
   },
   {
-    "recipe_name": "Salsicha na Airfryer",
-    "preference_name": "Vegano"
+    "recipe_name": "Banana no Micro-ondas",
+    "preference_name": "Sem frutos do mar"
   },
   {
-    "recipe_name": "Salsicha na Airfryer",
-    "preference_name": "Sem Glúten"
+    "recipe_name": "Banana no Micro-ondas",
+    "preference_name": "Sem nozes"
   },
   {
-    "recipe_name": "Salsicha na Airfryer",
-    "preference_name": "Sem lactose"
+    "recipe_name": "Banana no Micro-ondas",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Banana no Micro-ondas",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Pão de Alho na Airfryer",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Pão de Alho na Airfryer",
@@ -1572,6 +3368,22 @@
     "preference_name": "Sem açúcar"
   },
   {
+    "recipe_name": "Pão de Alho na Airfryer",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Pão de Alho na Airfryer",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Pão de Alho na Airfryer",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Batata em Cubos na Airfryer",
+    "preference_name": "Vegetariano"
+  },
+  {
     "recipe_name": "Batata em Cubos na Airfryer",
     "preference_name": "Vegano"
   },
@@ -1582,6 +3394,18 @@
   {
     "recipe_name": "Batata em Cubos na Airfryer",
     "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Batata em Cubos na Airfryer",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Batata em Cubos na Airfryer",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Batata em Cubos na Airfryer",
+    "preference_name": "Sem nozes"
   },
   {
     "recipe_name": "Frango Desfiado na Pressão",
@@ -1596,6 +3420,26 @@
     "preference_name": "Sem açúcar"
   },
   {
+    "recipe_name": "Frango Desfiado na Pressão",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Frango Desfiado na Pressão",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Frango Desfiado na Pressão",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Frango Desfiado na Pressão",
+    "preference_name": "Energia"
+  },
+  {
+    "recipe_name": "Couve-Flor Cozida",
+    "preference_name": "Vegetariano"
+  },
+  {
     "recipe_name": "Couve-Flor Cozida",
     "preference_name": "Vegano"
   },
@@ -1606,6 +3450,38 @@
   {
     "recipe_name": "Couve-Flor Cozida",
     "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Couve-Flor Cozida",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Couve-Flor Cozida",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Couve-Flor Cozida",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Couve-Flor Cozida",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Couve-Flor Cozida",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Couve-Flor Cozida",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Couve-Flor Cozida",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Brócolis no Vapor",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Brócolis no Vapor",
@@ -1620,16 +3496,68 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Brócolis no Vapor",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Brócolis no Vapor",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Brócolis no Vapor",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Brócolis no Vapor",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Brócolis no Vapor",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Brócolis no Vapor",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Brócolis no Vapor",
+    "preference_name": "Intestino"
+  },
+  {
     "recipe_name": "Panqueca de Banana",
     "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Panqueca de Banana",
-    "preference_name": "Sem lactose"
+    "preference_name": "Sem Glúten"
   },
   {
     "recipe_name": "Panqueca de Banana",
     "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Panqueca de Banana",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Panqueca de Banana",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Panqueca de Banana",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Panqueca de Banana",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Panqueca de Banana",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Panqueca de Banana",
+    "preference_name": "Energia"
   },
   {
     "recipe_name": "Ovo Frito com Tomate",
@@ -1641,7 +3569,27 @@
   },
   {
     "recipe_name": "Ovo Frito com Tomate",
-    "preference_name": "Sem lactose"
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Ovo Frito com Tomate",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Ovo Frito com Tomate",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Ovo Frito com Tomate",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Ovo Frito com Tomate",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Ovo Frito com Tomate",
+    "preference_name": "Energia"
   },
   {
     "recipe_name": "Queijo Coalho na Airfryer",
@@ -1656,6 +3604,22 @@
     "preference_name": "Sem açúcar"
   },
   {
+    "recipe_name": "Queijo Coalho na Airfryer",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Queijo Coalho na Airfryer",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Queijo Coalho na Airfryer",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Espaguete com Azeite",
+    "preference_name": "Vegetariano"
+  },
+  {
     "recipe_name": "Espaguete com Azeite",
     "preference_name": "Vegano"
   },
@@ -1666,6 +3630,26 @@
   {
     "recipe_name": "Espaguete com Azeite",
     "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Espaguete com Azeite",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Espaguete com Azeite",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Espaguete com Azeite",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Espaguete com Azeite",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Vinagrete Simples",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Vinagrete Simples",
@@ -1680,6 +3664,34 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Vinagrete Simples",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Vinagrete Simples",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Vinagrete Simples",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Vinagrete Simples",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Vinagrete Simples",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Vinagrete Simples",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Vinagrete Simples",
+    "preference_name": "Intestino"
+  },
+  {
     "recipe_name": "Cuscuz com Ovo",
     "preference_name": "Vegetariano"
   },
@@ -1689,7 +3701,27 @@
   },
   {
     "recipe_name": "Cuscuz com Ovo",
-    "preference_name": "Sem lactose"
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Cuscuz com Ovo",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Cuscuz com Ovo",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Cuscuz com Ovo",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Cuscuz com Ovo",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Cuscuz com Ovo",
+    "preference_name": "Energia"
   },
   {
     "recipe_name": "Frango na Airfryer",
@@ -1704,6 +3736,26 @@
     "preference_name": "Sem açúcar"
   },
   {
+    "recipe_name": "Frango na Airfryer",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Frango na Airfryer",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Frango na Airfryer",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Frango na Airfryer",
+    "preference_name": "Energia"
+  },
+  {
+    "recipe_name": "Molho Vinagrete para Churrasco",
+    "preference_name": "Vegetariano"
+  },
+  {
     "recipe_name": "Molho Vinagrete para Churrasco",
     "preference_name": "Vegano"
   },
@@ -1714,6 +3766,38 @@
   {
     "recipe_name": "Molho Vinagrete para Churrasco",
     "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Molho Vinagrete para Churrasco",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Molho Vinagrete para Churrasco",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Molho Vinagrete para Churrasco",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Molho Vinagrete para Churrasco",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Molho Vinagrete para Churrasco",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Molho Vinagrete para Churrasco",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Molho Vinagrete para Churrasco",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Tomate Grelhado",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Tomate Grelhado",
@@ -1728,16 +3812,52 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Tomate Grelhado",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Tomate Grelhado",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Tomate Grelhado",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Tomate Grelhado",
+    "preference_name": "Fácil"
+  },
+  {
     "recipe_name": "Sopa de Cebola Caseira",
     "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Sopa de Cebola Caseira",
-    "preference_name": "Sem Glúten"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Sopa de Cebola Caseira",
-    "preference_name": "Sem açúcar"
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Sopa de Cebola Caseira",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Sopa de Cebola Caseira",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Sopa de Cebola Caseira",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Sopa de Cebola Caseira",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Farofa de Bacon",
+    "preference_name": "Sem Glúten"
   },
   {
     "recipe_name": "Farofa de Bacon",
@@ -1749,7 +3869,15 @@
   },
   {
     "recipe_name": "Farofa de Bacon",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Farofa de Bacon",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Farofa de Bacon",
+    "preference_name": "Fácil"
   },
   {
     "recipe_name": "Salada Caesar Simples",
@@ -1764,6 +3892,34 @@
     "preference_name": "Sem açúcar"
   },
   {
+    "recipe_name": "Salada Caesar Simples",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Salada Caesar Simples",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Salada Caesar Simples",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Salada Caesar Simples",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Salada Caesar Simples",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Salada Caesar Simples",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Arroz com Brócolis",
+    "preference_name": "Vegetariano"
+  },
+  {
     "recipe_name": "Arroz com Brócolis",
     "preference_name": "Vegano"
   },
@@ -1774,6 +3930,34 @@
   {
     "recipe_name": "Arroz com Brócolis",
     "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Arroz com Brócolis",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Arroz com Brócolis",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Arroz com Brócolis",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Arroz com Brócolis",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Arroz com Brócolis",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Arroz com Brócolis",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Salada de Repolho",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Salada de Repolho",
@@ -1788,6 +3972,38 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Salada de Repolho",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Salada de Repolho",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Salada de Repolho",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Salada de Repolho",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Salada de Repolho",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Salada de Repolho",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Salada de Repolho",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Chuchu Cozido com Sal",
+    "preference_name": "Vegetariano"
+  },
+  {
     "recipe_name": "Chuchu Cozido com Sal",
     "preference_name": "Vegano"
   },
@@ -1798,6 +4014,26 @@
   {
     "recipe_name": "Chuchu Cozido com Sal",
     "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Chuchu Cozido com Sal",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Chuchu Cozido com Sal",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Chuchu Cozido com Sal",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Chuchu Cozido com Sal",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Tomate Recheado Simples",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Tomate Recheado Simples",
@@ -1812,8 +4048,28 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Tomate Recheado Simples",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Tomate Recheado Simples",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Tomate Recheado Simples",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Tomate Recheado Simples",
+    "preference_name": "Fácil"
+  },
+  {
     "recipe_name": "Patê de Atum",
-    "preference_name": "Sem Glúten"
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Patê de Atum",
+    "preference_name": "Vegano"
   },
   {
     "recipe_name": "Patê de Atum",
@@ -1822,6 +4078,18 @@
   {
     "recipe_name": "Patê de Atum",
     "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Patê de Atum",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Patê de Atum",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Patê de Atum",
+    "preference_name": "Fácil"
   },
   {
     "recipe_name": "Patê de Sardinha",
@@ -1836,8 +4104,24 @@
     "preference_name": "Sem açúcar"
   },
   {
+    "recipe_name": "Patê de Sardinha",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Patê de Sardinha",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Patê de Sardinha",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Patê de Sardinha",
+    "preference_name": "Energia"
+  },
+  {
     "recipe_name": "Molho de Mostarda Rápido",
-    "preference_name": "Vegano"
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Molho de Mostarda Rápido",
@@ -1848,28 +4132,44 @@
     "preference_name": "Sem lactose"
   },
   {
-    "recipe_name": "Pipoca Doce Simples",
-    "preference_name": "Vegano"
+    "recipe_name": "Molho de Mostarda Rápido",
+    "preference_name": "Sem frutos do mar"
   },
   {
-    "recipe_name": "Pipoca Doce Simples",
+    "recipe_name": "Molho de Mostarda Rápido",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Molho de Mostarda Rápido",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Molho de Mostarda Rápido",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Mandioca Cozida",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Mandioca Cozida",
     "preference_name": "Sem Glúten"
   },
   {
-    "recipe_name": "Pipoca Doce Simples",
-    "preference_name": "Sem lactose"
+    "recipe_name": "Mandioca Cozida",
+    "preference_name": "Sem açúcar"
   },
   {
     "recipe_name": "Mandioca Cozida",
-    "preference_name": "Vegano"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Mandioca Cozida",
-    "preference_name": "Sem Glúten"
+    "preference_name": "Sem nozes"
   },
   {
-    "recipe_name": "Mandioca Cozida",
-    "preference_name": "Sem lactose"
+    "recipe_name": "Sopa de Batata Simples",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Sopa de Batata Simples",
@@ -1884,6 +4184,22 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Sopa de Batata Simples",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Sopa de Batata Simples",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Sopa de Batata Simples",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Tomate com Sal",
+    "preference_name": "Vegetariano"
+  },
+  {
     "recipe_name": "Tomate com Sal",
     "preference_name": "Vegano"
   },
@@ -1894,6 +4210,26 @@
   {
     "recipe_name": "Tomate com Sal",
     "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Tomate com Sal",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Tomate com Sal",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Tomate com Sal",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Tomate com Sal",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Chá de Hortelã",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Chá de Hortelã",
@@ -1908,16 +4244,56 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Chá de Hortelã",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Chá de Hortelã",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Chá de Hortelã",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Chá de Hortelã",
+    "preference_name": "Fácil"
+  },
+  {
     "recipe_name": "Panqueca de Aveia",
     "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Panqueca de Aveia",
-    "preference_name": "Sem açúcar"
+    "preference_name": "Sem frutos do mar"
   },
   {
     "recipe_name": "Panqueca de Aveia",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Panqueca de Aveia",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Panqueca de Aveia",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Panqueca de Aveia",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Panqueca de Aveia",
+    "preference_name": "Energia"
+  },
+  {
+    "recipe_name": "Panqueca de Aveia",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Panqueca de Aveia",
+    "preference_name": "Colesterol"
   },
   {
     "recipe_name": "Crepioca com Queijo",
@@ -1932,8 +4308,28 @@
     "preference_name": "Sem açúcar"
   },
   {
+    "recipe_name": "Crepioca com Queijo",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Crepioca com Queijo",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Crepioca com Queijo",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Crepioca com Queijo",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Crepioca com Queijo",
+    "preference_name": "Energia"
+  },
+  {
     "recipe_name": "Morango com Chocolate",
-    "preference_name": "Vegano"
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Morango com Chocolate",
@@ -1941,7 +4337,23 @@
   },
   {
     "recipe_name": "Morango com Chocolate",
-    "preference_name": "Sem lactose"
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Morango com Chocolate",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Morango com Chocolate",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Morango com Chocolate",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Maçã com Canela",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Maçã com Canela",
@@ -1956,6 +4368,30 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Maçã com Canela",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Maçã com Canela",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Maçã com Canela",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Maçã com Canela",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Maçã com Canela",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Gelinho de Frutas",
+    "preference_name": "Vegetariano"
+  },
+  {
     "recipe_name": "Gelinho de Frutas",
     "preference_name": "Vegano"
   },
@@ -1968,6 +4404,18 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Gelinho de Frutas",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Gelinho de Frutas",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Gelinho de Frutas",
+    "preference_name": "Doce"
+  },
+  {
     "recipe_name": "Iogurte Congelado",
     "preference_name": "Vegetariano"
   },
@@ -1977,7 +4425,27 @@
   },
   {
     "recipe_name": "Iogurte Congelado",
-    "preference_name": "Sem açúcar"
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Iogurte Congelado",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Iogurte Congelado",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Iogurte Congelado",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Iogurte Congelado",
+    "preference_name": "Energia"
+  },
+  {
+    "recipe_name": "Suco Verde Simples",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Suco Verde Simples",
@@ -1992,6 +4460,34 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Suco Verde Simples",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Suco Verde Simples",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Suco Verde Simples",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Suco Verde Simples",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Suco Verde Simples",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Suco Verde Simples",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Suco Verde Simples",
+    "preference_name": "Intestino"
+  },
+  {
     "recipe_name": "Batida de Coco",
     "preference_name": "Vegetariano"
   },
@@ -2001,7 +4497,23 @@
   },
   {
     "recipe_name": "Batida de Coco",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Batida de Coco",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Batida de Coco",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Batida de Coco",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Abacaxi com Hortelã",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Abacaxi com Hortelã",
@@ -2016,40 +4528,72 @@
     "preference_name": "Sem lactose"
   },
   {
-    "recipe_name": "Cuscuz Doce",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Cuscuz Doce",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Cuscuz Doce",
-    "preference_name": "Sem peixe"
-  },
-  {
-    "recipe_name": "Mingau de Maisena",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Mingau de Maisena",
-    "preference_name": "Sem Glúten"
-  },
-  {
-    "recipe_name": "Mingau de Maisena",
-    "preference_name": "Sem peixe"
-  },
-  {
-    "recipe_name": "Pão com Creme de Avelã",
-    "preference_name": "Vegetariano"
-  },
-  {
-    "recipe_name": "Pão com Creme de Avelã",
+    "recipe_name": "Abacaxi com Hortelã",
     "preference_name": "Sem açúcar"
   },
   {
-    "recipe_name": "Pão com Creme de Avelã",
-    "preference_name": "Sem peixe"
+    "recipe_name": "Abacaxi com Hortelã",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Abacaxi com Hortelã",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Abacaxi com Hortelã",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Abacaxi com Hortelã",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Cuscuz Doce",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Cuscuz Doce",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Cuscuz Doce",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Cuscuz Doce",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Cuscuz Doce",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Cuscuz Doce",
+    "preference_name": "Doce"
+  },
+  {
+    "recipe_name": "Mingau de Maisena",
+    "preference_name": "Vegetariano"
+  },
+  {
+    "recipe_name": "Mingau de Maisena",
+    "preference_name": "Sem Glúten"
+  },
+  {
+    "recipe_name": "Mingau de Maisena",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Mingau de Maisena",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Mingau de Maisena",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Mingau de Maisena",
+    "preference_name": "Doce"
   },
   {
     "recipe_name": "Creme de Manga",
@@ -2061,11 +4605,23 @@
   },
   {
     "recipe_name": "Creme de Manga",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Creme de Manga",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Creme de Manga",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Creme de Manga",
+    "preference_name": "Doce"
   },
   {
     "recipe_name": "Purê de Abóbora",
-    "preference_name": "Vegano"
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Purê de Abóbora",
@@ -2073,7 +4629,19 @@
   },
   {
     "recipe_name": "Purê de Abóbora",
-    "preference_name": "Sem lactose"
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Purê de Abóbora",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Purê de Abóbora",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Cenoura Ralada com Limão",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Cenoura Ralada com Limão",
@@ -2088,6 +4656,38 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Cenoura Ralada com Limão",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Cenoura Ralada com Limão",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Cenoura Ralada com Limão",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Cenoura Ralada com Limão",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Cenoura Ralada com Limão",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Cenoura Ralada com Limão",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Cenoura Ralada com Limão",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Macarrão ao Alho Cru",
+    "preference_name": "Vegetariano"
+  },
+  {
     "recipe_name": "Macarrão ao Alho Cru",
     "preference_name": "Vegano"
   },
@@ -2098,6 +4698,22 @@
   {
     "recipe_name": "Macarrão ao Alho Cru",
     "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Macarrão ao Alho Cru",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Macarrão ao Alho Cru",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Macarrão ao Alho Cru",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Tomate Assado",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Tomate Assado",
@@ -2112,6 +4728,26 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Tomate Assado",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Tomate Assado",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Tomate Assado",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Tomate Assado",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Pepino com Sal",
+    "preference_name": "Vegetariano"
+  },
+  {
     "recipe_name": "Pepino com Sal",
     "preference_name": "Vegano"
   },
@@ -2124,6 +4760,38 @@
     "preference_name": "Sem lactose"
   },
   {
+    "recipe_name": "Pepino com Sal",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Pepino com Sal",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Pepino com Sal",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Pepino com Sal",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Pepino com Sal",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Pepino com Sal",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Pepino com Sal",
+    "preference_name": "Intestino"
+  },
+  {
+    "recipe_name": "Abobrinha Assada",
+    "preference_name": "Vegetariano"
+  },
+  {
     "recipe_name": "Abobrinha Assada",
     "preference_name": "Vegano"
   },
@@ -2134,6 +4802,30 @@
   {
     "recipe_name": "Abobrinha Assada",
     "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Abobrinha Assada",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Abobrinha Assada",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Abobrinha Assada",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Abobrinha Assada",
+    "preference_name": "Emagrecer"
+  },
+  {
+    "recipe_name": "Abobrinha Assada",
+    "preference_name": "Antioxidante"
+  },
+  {
+    "recipe_name": "Abobrinha Assada",
+    "preference_name": "Intestino"
   },
   {
     "recipe_name": "Ovos de Codorna Cozidos",
@@ -2146,6 +4838,30 @@
   {
     "recipe_name": "Ovos de Codorna Cozidos",
     "preference_name": "Sem lactose"
+  },
+  {
+    "recipe_name": "Ovos de Codorna Cozidos",
+    "preference_name": "Sem açúcar"
+  },
+  {
+    "recipe_name": "Ovos de Codorna Cozidos",
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Ovos de Codorna Cozidos",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Ovos de Codorna Cozidos",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Ovos de Codorna Cozidos",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Ovos de Codorna Cozidos",
+    "preference_name": "Energia"
   },
   {
     "recipe_name": "Mexidão Simples",
@@ -2160,16 +4876,24 @@
     "preference_name": "Sem açúcar"
   },
   {
-    "recipe_name": "Salsicha no Molho",
-    "preference_name": "Vegano"
+    "recipe_name": "Mexidão Simples",
+    "preference_name": "Sem frutos do mar"
   },
   {
-    "recipe_name": "Salsicha no Molho",
-    "preference_name": "Sem Glúten"
+    "recipe_name": "Mexidão Simples",
+    "preference_name": "Sem nozes"
   },
   {
-    "recipe_name": "Salsicha no Molho",
-    "preference_name": "Sem lactose"
+    "recipe_name": "Mexidão Simples",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Mexidão Simples",
+    "preference_name": "Ganho de músculo"
+  },
+  {
+    "recipe_name": "Mexidão Simples",
+    "preference_name": "Energia"
   },
   {
     "recipe_name": "Pão com Mel",
@@ -2181,7 +4905,19 @@
   },
   {
     "recipe_name": "Pão com Mel",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Pão com Mel",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Pão com Mel",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Pão com Mel",
+    "preference_name": "Doce"
   },
   {
     "recipe_name": "Pão com Manteiga e Orégano",
@@ -2193,7 +4929,19 @@
   },
   {
     "recipe_name": "Pão com Manteiga e Orégano",
-    "preference_name": "Sem peixe"
+    "preference_name": "Sem frutos do mar"
+  },
+  {
+    "recipe_name": "Pão com Manteiga e Orégano",
+    "preference_name": "Sem nozes"
+  },
+  {
+    "recipe_name": "Pão com Manteiga e Orégano",
+    "preference_name": "Fácil"
+  },
+  {
+    "recipe_name": "Arroz com Açafrão",
+    "preference_name": "Vegetariano"
   },
   {
     "recipe_name": "Arroz com Açafrão",
@@ -2208,15 +4956,15 @@
     "preference_name": "Sem lactose"
   },
   {
-    "recipe_name": "Mousse de Limão Rápida",
-    "preference_name": "Vegetariano"
+    "recipe_name": "Arroz com Açafrão",
+    "preference_name": "Sem açúcar"
   },
   {
-    "recipe_name": "Mousse de Limão Rápida",
-    "preference_name": "Sem Glúten"
+    "recipe_name": "Arroz com Açafrão",
+    "preference_name": "Sem frutos do mar"
   },
   {
-    "recipe_name": "Mousse de Limão Rápida",
-    "preference_name": "Sem peixe"
+    "recipe_name": "Arroz com Açafrão",
+    "preference_name": "Sem nozes"
   }
 ]

@@ -1,6 +1,6 @@
 <template>
     <Card 
-        :class="{'border-p-600 shadow-xl shadow-p-600/20 w-full transition': item.isSelected, 'w-[85%]' : !item.isSelected}" 
+        :class="{'border-p-600 shadow-xl shadow-p-600/20 w-full transition': item.isSelected, 'w-[85%]' : !item.isSelected && !fullWidth, 'w-full': fullWidth}" 
         class="border-2 cursor-pointer transition-all duration-100 active:scale-[98%]" centered
         @click="$emit('selected')"
     >
@@ -17,6 +17,10 @@
                 </p>
             </div>
             <div class="ml-auto text-gray-600">
+                <div>
+                    <i class="fa-solid fa-fire mr-2"></i> 
+                    <span>{{ item.recipe.calories }} kcal</span>
+                </div>
                 <div>
                     <i class="fa-regular fa-clock mr-2"></i> 
                     <span>{{ item.recipe.preparation_time }} min</span>
@@ -39,11 +43,16 @@ export default {
             default: () => ({
                 title: null,
                 recipePreferences: [],
+                calories: null,
                 time: null,
                 portions: null,
                 isSelected: false,
                 isFav: false
             })
+        },
+        fullWidth: {
+            type: Boolean,
+            default: false
         }
     },
     emits: ['selected']

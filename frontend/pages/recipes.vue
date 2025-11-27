@@ -50,7 +50,7 @@
         
         </div>
 
-        <RecipeModal
+        <RecipeCreate
             v-if="showModal"
             :selected="selectedItem?.id"
             @close="closeModal()"
@@ -204,14 +204,12 @@ async function getPreferences() {
 }
 
 async function handleToggleFavorite(recipeId, favorited) {
-  // Atualizar o Set local
   if (favorited) {
     favoriteRecipeIds.value.add(recipeId);
   } else {
     favoriteRecipeIds.value.delete(recipeId);
   }
   
-  // Atualizar a receita no array
   const recipe = items.value.find(item => item.id === recipeId);
   if (recipe) {
     recipe.isFavorite = favorited;

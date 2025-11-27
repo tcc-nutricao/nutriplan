@@ -50,21 +50,21 @@
         </div>
         <div class="col-span-1">
           <Label class="mb-2" label="Você tem alguma restrição alimentar?" />
-          <Select
-            v-model="form.restrictions"
+          <SelectMultiple
+            :modelValue="form.restrictions"
+            @update:modelValue="handleRestrictionsUpdate"
             :options="restrictionOptions"
-            multiple
-            required
+            placeholder="Selecione as restrições"
           />
         </div>
-        <div class="col-span-1">
+        <!-- <div class="col-span-1">
           <Label class="mb-2" label="Você tem alguma preferência alimentar?" />
           <Select
             v-model="form.preferences"
             :options="preferenceOptions"
             multiple
           />
-        </div>
+        </div> -->
         <div class="col-span-1">
           <Label class="mb-2" label="Qual é seu objetivo?" required />
           <Select
@@ -110,7 +110,7 @@ const form = ref({
   weight: null, // number
   height: null, // number
   restrictions: [], // array of ids
-  preferences: [], // array de ids
+  // preferences: [],
   objective: [], // array de ids
   target_weight: null, // number
 });
@@ -122,13 +122,13 @@ const genderOptions = [
   { value: "NONE", label: "Prefiro não informar" },
 ];
 const restrictionOptions = ref([]);
-const preferenceOptions = ref([]);
+// const preferenceOptions = ref([]);
 const objectiveOptions = ref([]);
 
 onMounted(async () => {
   const selectRoutes = [
     { route: "restriction", target: restrictionOptions },
-    { route: "preference", target: preferenceOptions },
+    // { route: "preference", target: preferenceOptions },
     { route: "objective", target: objectiveOptions },
   ];
   await Promise.all(
@@ -138,24 +138,13 @@ onMounted(async () => {
 
 async function save() {
   const payload = {
-    ...form.value,
-    weight: Number(form.value.weight) ?? null,
-    height: Number(form.value.height) ?? null,
-    restrictions: Array.isArray(form.value.restrictions)
-      ? form.value.restrictions
-      : form.value.restrictions
-      ? [form.value.restrictions]
-      : [],
-    preferences: Array.isArray(form.value.preferences)
-      ? form.value.preferences
-      : form.value.preferences
-      ? [form.value.preferences]
-      : [],
-    objectives: Array.isArray(form.value.objective)
-      ? form.value.objective
-      : form.value.objective
-      ? [form.value.objective]
-      : [],
+    birth_date: form.value.birth_date,
+    gender: form.value.gender,
+    weight: Number(form.value.weight),
+    height: Number(form.value.height),
+    target_weight: form.value.target_weight ? Number(form.value.target_weight) : undefined,
+    restrictions: Array.isArray(form.value.restrictions) ? form.value.restrictions : (form.value.restrictions ? [form.value.restrictions] : []),
+    objectives: Array.isArray(form.value.objective) ? form.value.objective : (form.value.objective ? [form.value.objective] : []),
   };
   await update("user/personal-data", payload);
   navigateTo("/meal-plan");
@@ -167,5 +156,28 @@ async function getSelectItems(route, target) {
     value: item.id,
     label: item.name,
   }));
+}
+
+function handleRestrictionsUpdate(newRestrictions) {
+  const noneOption = restrictionOptions.value.find(
+    (opt) => opt.label.toLowerCase() === "nenhuma"
+  );
+
+  if (!noneOption) {
+    form.value.restrictions = newRestrictions;
+    return;
+  }
+
+  const noneId = noneOption.value;
+  const wasNoneSelected = form.value.restrictions.includes(noneId);
+  const isNoneSelected = newRestrictions.includes(noneId);
+
+  if (isNoneSelected && !wasNoneSelected) {
+    form.value.restrictions = [noneId];
+  } else if (isNoneSelected && newRestrictions.length > 1) {
+    form.value.restrictions = newRestrictions.filter((id) => id !== noneId);
+  } else {
+    form.value.restrictions = newRestrictions;
+  }
 }
 </script>

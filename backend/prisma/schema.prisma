@@ -97,16 +97,35 @@ model Food {
   deleted_at  DateTime?
   updated_at  DateTime?
 
+  base_unit   String    @default("g")
+  base_qty    Float     @default(100)
+  
   recipeFoods   RecipeFood[]
   foodConsumed  FoodConsumed[]
+  portions      FoodPortion[]
+}
+
+model FoodPortion {
+  id                     Int       @id @default(autoincrement())
+  id_food                Int
+  id_unit_of_measurement Int
+  gram_weight            Float     // Peso em gramas de 1 unidade desta medida
+  description            String?   // Ex: "Fatia média", "Xícara de chá"
+  created_at             DateTime  @default(now())
+  updated_at             DateTime  @updatedAt
+  deleted_at             DateTime?
+
+  food                Food              @relation(fields: [id_food], references: [id])
+  unitOfMeasurement   UnitOfMeasurement @relation(fields: [id_unit_of_measurement], references: [id])
 }
 
 model Recipe {
   id               Int       @id @default(autoincrement())
   name             String
-  preparation_method      String?
+  preparation_method      String?      @db.VarChar(2000)
   preparation_time Int       @default(0)
   portion          Int       @default(1)
+  calories         Float     @default(0)
   created_at       DateTime  @default(now())
   deleted_at       DateTime?
   updated_at       DateTime?
@@ -161,8 +180,9 @@ model Patient {
   healthData         HealthData[]
   goals              Goal[]
   reports            Report[]
-  mealPlans          MealPlan[]
   nutritionistPatients NutritionistPatient[]
+  patientDietaryRestrictions PatientDietaryRestriction[]
+  mealPlanPatients   MealPlanPatient[]
 
   nutritionist       Nutritionist? @relation(fields: [id_nutritionist], references: [id])
   user               User         @relation(fields: [id_user], references: [id])
@@ -198,7 +218,7 @@ model HealthData {
 
 model Goal {
   id           Int      @id @default(autoincrement())
-  id_patient   Int
+  id_patient   Int?
   description  String?
   target_weight Float?
   start_date   DateTime
@@ -211,7 +231,7 @@ model Goal {
   goalObjectives GoalObjective[] 
   mealPlans MealPlan[]
 
-  patient   Patient   @relation(fields: [id_patient], references: [id])
+  patient   Patient?   @relation(fields: [id_patient], references: [id])
 }
 
 model Objective {
@@ -261,6 +281,7 @@ model DietaryRestriction {
   updated_at DateTime?
 
   mealPlanDietaryRestrictions MealPlanDietaryRestriction[]
+  patientDietaryRestrictions PatientDietaryRestriction[]
 }
 
 model MealPlanDietaryRestriction {
@@ -289,7 +310,6 @@ model Report {
 
 model MealPlan {
   id              Int       @id @default(autoincrement())
-  id_patient      Int
   id_nutritionist Int
   id_goal         Int
   calories        Int
@@ -300,13 +320,24 @@ model MealPlan {
   created_at      DateTime
   deleted_at      DateTime?
   updated_at      DateTime?
-
-  patient     Patient     @relation(fields: [id_patient], references: [id])
+  
   nutricionist Nutritionist @relation(fields: [id_nutritionist], references: [id])
   goal   Goal   @relation(fields: [id_goal], references: [id])
-
+  mealPlanPatients MealPlanPatient[]
   mealPlanMeals             MealPlanMeal[]
   mealPlanDietaryRestrictions MealPlanDietaryRestriction[]
+}
+
+model MealPlanPatient {
+  id           Int       @id @default(autoincrement())
+  id_meal_plan Int
+  id_patient   Int
+  created_at   DateTime
+  deleted_at   DateTime?
+  updated_at   DateTime?
+
+  mealPlan MealPlan @relation(fields: [id_meal_plan], references: [id])
+  patient  Patient  @relation(fields: [id_patient], references: [id])
 }
 
 model MealPlanRecipe {
@@ -418,6 +449,7 @@ model UnitOfMeasurement {
 
   foodConsumed FoodConsumed[]  
   recipeFood RecipeFood[]
+  portions   FoodPortion[]
 }
 
 model NutritionistPatient {
@@ -444,13 +476,17 @@ model RecipePreference {
   recipe Recipe @relation(fields: [id_recipe], references: [id])
 }
 
+model PatientDietaryRestriction {
+  id                     Int                @id @default(autoincrement())
+  id_patient             Int
+  id_dietary_restriction Int
+  created_at             DateTime           @default(now())
+  deleted_at             DateTime?
+  updated_at             DateTime           @updatedAt
 
-
-
-
-
-
-
+  patient            Patient            @relation(fields: [id_patient], references: [id])
+  dietaryRestriction DietaryRestriction @relation(fields: [id_dietary_restriction], references: [id])
+}
 
 model FavoriteRecipe {
   id        Int      @id @default(autoincrement())

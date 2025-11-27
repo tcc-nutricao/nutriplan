@@ -868,7 +868,7 @@
     "fat": 42
   },
   {
-    "name": "Carne Moída (magra)",
+    "name": "Carne Moída",
     "calories": 198,
     "protein": 27,
     "carbs": 0,
@@ -880,13 +880,6 @@
     "protein": 35,
     "carbs": 0,
     "fat": 10
-  },
-  {
-    "name": "Carne Moída (Patinho) Cozida",
-    "calories": 216,
-    "protein": 28,
-    "carbs": 0,
-    "fat": 11
   },
   {
     "name": "Alface Crespa",
@@ -1008,13 +1001,6 @@
     "fat": 1.1
   },
   {
-    "name": "Carne Moída (10% gordura) Cozida",
-    "calories": 215,
-    "protein": 26,
-    "carbs": 0,
-    "fat": 12
-  },
-  {
     "name": "Atum em Água (enlatado)",
     "calories": 116,
     "protein": 26,
@@ -1062,13 +1048,6 @@
     "protein": 13,
     "carbs": 78,
     "fat": 4.5
-  },
-  {
-    "name": "Carne Moída (85/15)",
-    "calories": 250,
-    "protein": 26,
-    "carbs": 0,
-    "fat": 15
   },
   {
     "name": "Soja (Edamame)",

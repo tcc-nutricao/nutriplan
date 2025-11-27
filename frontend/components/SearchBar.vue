@@ -5,6 +5,7 @@
       :placeholder="placeholder"
       @update:modelValue="handleSearchSelection"
        class="w-full"
+       v-if="!noSearch"
     />
 
     <ButtonFilter
@@ -37,6 +38,10 @@ const props = defineProps({
     type: String,
     required: true,
     validator: (value) => ['recipes', 'patients', 'foods'].includes(value)
+  },
+  noSearch: {
+    type: Boolean,
+    default: false
   },
   filter: {
     type: Boolean,

@@ -1,5 +1,6 @@
 import { PatientRepository } from '../repositories/PatientRepository.js'
 import { HealthDataRepository } from '../repositories/HealthDataRepository.js'
+import { GoalRepository } from '../repositories/GoalRepository.js'
 import { MealPlanService } from './MealPlanService.js'
 import { generateCrudService } from './Service.js'
 import { getImcData } from '../utils/useImc.js'
@@ -10,7 +11,6 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 const baseCrudService = generateCrudService(PatientRepository)
 
-// Função para buscar paciente pelo ID do usuário
 const getPatientByUserId = async (userId) => {
   try {
     const filters = [{ column: 'id_user', value: userId, operator: '=' }]
@@ -41,19 +41,6 @@ const getProgress = async (userId) => {
     const mealPlanFilters = [{ column: 'status', value: 'ACTIVE', operator: 'equals' }]
     const { data: mealPlans = [] } = await MealPlanService.getMealPlanByPatient(userId, mealPlanFilters)
 
-    if (mealPlans.length === 0) {
-      return {
-        metaAchieved: 0,
-        progressHistory: [],
-        message: 'Nenhum plano de refeição ativo encontrado'
-      }
-    }
-
-    const activeMealPlan = mealPlans[0]
-    const goal = activeMealPlan.goal
-    const goalObjectives = goal?.goalObjectives || []
-
-    // Buscar histórico de dados de saúde
     const healthDataFilters = [
       { field: 'id_patient', value: patient.id, operator: 'equals' }
     ]
@@ -64,54 +51,106 @@ const getProgress = async (userId) => {
       orderColumn: 'record_date'
     })
 
-    // 👉 SE NÃO TIVER HEALTH DATA, RETORNA PROGRESSO 0
-    if (!healthData || healthData.length === 0) {
-      return {
-        metaAchieved: 0,
-        progressHistory: [],
-        message: 'Nenhum dado de saúde cadastrado ainda'
-      }
+    let actualWeight = patient.weight;
+    let initialWeight = patient.weight;
+    let height = patient.height / 100; 
+    let lastUpdate = patient.updated_at || patient.created_at;
+    let progressHistory = [];
+
+    if (healthData && healthData.length > 0) {
+        actualWeight = healthData[0].weight;
+        initialWeight = healthData[healthData.length - 1].weight;
+        lastUpdate = healthData[0].record_date;
+        progressHistory = healthData.map(h => ({
+            weight: h.weight,
+            date: h.record_date
+        })).reverse();
     }
 
-    // Aqui só chega se houver healthData
-    const mainGoalObjective = goalObjectives.find(obj => obj.type === 'MAIN')
-    const objective = mainGoalObjective?.objective
-
-    const initialWeight = healthData[healthData.length - 1].weight
-    const actualWeight = healthData[0].weight
-    const height = patient.height / 100
-    const lastUpdate = healthData[0].record_date
-
-    const progress = healthData.map(h => ({
-      weight: h.weight,
-      date: h.record_date
-    })).reverse()
-
-    const { imc } = getImcData(actualWeight, height)
-
-    const progressData = calculateProgress(
-      objective.id,
-      { weight: initialWeight, height, date: healthData[healthData.length - 1].record_date },
-      { weight: actualWeight, height, date: lastUpdate },
-      {
-        targetWeight: goal?.target_weight,
-        totalDays: calculateTotalDays(goal?.start_date, goal?.end_date),
-        daysFollowed: progress.length
-      },
-      objective.name
-    )
-
-    const patientData = {
-      idPatient: patient.id,
-      height: patient.height,
-      initialWeight,
-      actualWeight,
-      currentImc: imc,
-      lastUpdate,
-      weightHistory: progress
+    let imc = 0;
+    try {
+        if (actualWeight > 0 && height > 0) {
+            const imcData = getImcData(actualWeight, height);
+            imc = imcData.imc;
+        }
+    } catch (e) {
+        imc = 0;
     }
 
-    return formatProgressResponse(progressData, patientData)
+    let targetWeight = null;
+    let objectiveName = 'Não definido';
+    let metaAchieved = 0;
+    let weightDifference = 0;
+
+    let goal = null;
+
+    if (mealPlans.length > 0) {
+        const activeMealPlan = mealPlans[0];
+        goal = activeMealPlan.goal;
+    }
+
+    if (!goal) {
+        try {
+             const goalFilters = [
+                { field: 'id_patient', value: patient.id, operator: 'equals' },
+                { field: 'status', value: 'ACTIVE', operator: 'equals' }
+            ];
+            const { data: goals = [] } = await GoalRepository.search({
+                filters: goalFilters,
+                limit: 1,
+                order: 'desc',
+                orderColumn: 'created_at'
+            });
+            if (goals.length > 0) {
+                goal = goals[0];
+            }
+        } catch (e) {
+            console.warn('Erro ao buscar objetivo do paciente:', e.message);
+        }
+    }
+
+    if (goal) {
+        const goalObjectives = goal?.goalObjectives || [];
+        const mainGoalObjective = goalObjectives.find(obj => obj.type === 'MAIN');
+        const objective = mainGoalObjective?.objective;
+
+        if (objective) {
+            objectiveName = objective.name;
+            targetWeight = goal?.target_weight;
+
+             try {
+                const progressData = calculateProgress(
+                  objective.id,
+                  { weight: initialWeight, height, date: healthData.length > 0 ? healthData[healthData.length - 1].record_date : patient.created_at },
+                  { weight: actualWeight, height, date: lastUpdate },
+                  {
+                    targetWeight: goal?.target_weight,
+                    totalDays: calculateTotalDays(goal?.start_date, goal?.end_date),
+                    daysFollowed: progressHistory.length
+                  },
+                  objective.name
+                )
+                metaAchieved = progressData.metaAchieved;
+                weightDifference = progressData.weightDifference;
+            } catch (e) {
+                console.warn('Erro ao calcular progresso:', e.message);
+            }
+        }
+    }
+
+    return {
+        id_patient: patient.id,
+        height: patient.height,
+        objective: objectiveName,
+        initialWeight: initialWeight,
+        actualWeight: actualWeight,
+        targetWeight: targetWeight,
+        imc: imc,
+        lastUpdate: lastUpdate,
+        progress: progressHistory,
+        metaAchieved: metaAchieved,
+        weightDifference: weightDifference
+    };
 
   } catch (err) {
     console.log('Erro no getProgress:', err)
@@ -167,7 +206,6 @@ export const PatientService = {
         prisma.patient.count({ where })
       ])
 
-      // Format response to include patient data with user info
       const formattedData = data.map(patient => ({
         id: patient.id,
         name: patient.user.name,
