@@ -10,52 +10,63 @@
     <Card>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         <div class="col-span-1">
-          <Label class="mb-2" label="Que dia você nasceu?" />
+          <Label class="mb-2" label="Que dia você nasceu?" :error="errors.birth_date" />
           <Input
             type="date"
             v-model="form.birth_date"
             placeholder="Data de nascimento"
             required
+            :error="errors.birth_date"
           />
+          <Error :message="errors.birth_date" />
         </div>
         <div class="col-span-1">
-          <Label class="mb-2" label="Qual gênero você se identifica?" />
-          <Select v-model="form.gender" :options="genderOptions" required />
+          <Label class="mb-2" label="Qual gênero você se identifica?" :error="errors.gender" />
+          <Select v-model="form.gender" :options="genderOptions" required :error="errors.gender" />
+          <Error :message="errors.gender" />
         </div>
         <div class="col-span-1">
-          <Label class="mb-2" label="Qual é seu peso?" />
+          <Label class="mb-2" label="Qual é seu peso?" :error="errors.weight" />
           <Input
             type="number"
             v-model.number="form.weight"
             placeholder="Seu peso em kg"
             required
+            :error="errors.weight"
           />
+          <Error :message="errors.weight" />
         </div>
         <div class="col-span-1">
-          <Label class="mb-2" label="Qual é a sua altura? (ex: 170cm)" />
+          <Label class="mb-2" label="Qual é a sua altura? (ex: 170cm)" :error="errors.height" />
           <Input
             type="number"
             v-model.number="form.height"
             placeholder="Sua altura em cm"
             required
+            :error="errors.height"
           />
+          <Error :message="errors.height" />
         </div>
         <div class="col-span-1">
-          <Label class="mb-2" label="Você tem uma meta de peso?" />
+          <Label class="mb-2" label="Você tem uma meta de peso?" :error="errors.target_weight" />
           <Input
             type="number"
             v-model.number="form.target_weight"
             placeholder="Sua meta em kg"
+            :error="errors.target_weight"
           />
+          <Error :message="errors.target_weight" />
         </div>
         <div class="col-span-1">
-          <Label class="mb-2" label="Você tem alguma restrição alimentar?" />
+          <Label class="mb-2" label="Você tem alguma restrição alimentar?" :error="errors.restrictions" />
           <SelectMultiple
             :modelValue="form.restrictions"
             @update:modelValue="handleRestrictionsUpdate"
             :options="restrictionOptions"
             placeholder="Selecione as restrições"
+            :error="errors.restrictions"
           />
+          <Error :message="errors.restrictions" />
         </div>
         <!-- <div class="col-span-1">
           <Label class="mb-2" label="Você tem alguma preferência alimentar?" />
@@ -66,13 +77,15 @@
           />
         </div> -->
         <div class="col-span-1">
-          <Label class="mb-2" label="Qual é seu objetivo?" required />
+          <Label class="mb-2" label="Qual é seu objetivo?" required :error="errors.objective" />
           <Select
             v-model="form.objective"
             :options="objectiveOptions"
             multiple
             required
+            :error="errors.objective"
           />
+          <Error :message="errors.objective" />
         </div>
         <div
           class="col-span-1 md:col-span-2 flex flex-col md:flex-row justify-center gap-3 mt-6"
@@ -115,6 +128,16 @@ const form = ref({
   target_weight: null, // number
 });
 
+const errors = ref({
+  birth_date: null,
+  gender: null,
+  weight: null,
+  height: null,
+  restrictions: null,
+  objective: null,
+  target_weight: null,
+});
+
 const genderOptions = [
   { value: "FEM", label: "Feminino" },
   { value: "MASC", label: "Masculino" },
@@ -136,7 +159,83 @@ onMounted(async () => {
   );
 });
 
+function validate() {
+  let isValid = true;
+  errors.value = {
+    birth_date: null,
+    gender: null,
+    weight: null,
+    height: null,
+    restrictions: null,
+    objective: null,
+    target_weight: null,
+  };
+
+  if (!form.value.birth_date) {
+    errors.value.birth_date = "Campo obrigatório";
+    isValid = false;
+  } else {
+    const birthDate = new Date(form.value.birth_date);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    if (age < 5) {
+      errors.value.birth_date = "Deve ter no mínimo 5 anos de idade";
+      isValid = false;
+    }
+    if (age > 120) {
+      errors.value.birth_date = "Deve ter no máximo 120 anos de idade";
+      isValid = false;
+    }
+  }
+
+  if (!form.value.gender) {
+    errors.value.gender = "Campo obrigatório";
+    isValid = false;
+  }
+
+  if (!form.value.weight) {
+    errors.value.weight = "Campo obrigatório";
+    isValid = false;
+  } else if (form.value.weight < 20 || form.value.weight > 500) {
+    errors.value.weight = "Peso deve ser entre 20 e 500";
+    isValid = false;
+  }
+
+  if (!form.value.height) {
+    errors.value.height = "Campo obrigatório";
+    isValid = false;
+  } else if (form.value.height < 60 || form.value.height > 270) {
+    errors.value.height = "Altura deve ser entre 60 e 270";
+    isValid = false;
+  }
+
+  if (form.value.target_weight) {
+    if (form.value.target_weight < 20 || form.value.target_weight > 500) {
+      errors.value.target_weight = "Meta de peso deve ser entre 20 e 500";
+      isValid = false;
+    }
+  }
+
+  if (!form.value.restrictions || form.value.restrictions.length === 0) {
+    errors.value.restrictions = "Restrição alimentar deve ter no mínimo uma selecionada";
+    isValid = false;
+  }
+
+  if (!form.value.objective || form.value.objective.length === 0) {
+    errors.value.objective = "Campo obrigatório";
+    isValid = false;
+  }
+
+  return isValid;
+}
+
 async function save() {
+  if (!validate()) return;
+
   const payload = {
     birth_date: form.value.birth_date,
     gender: form.value.gender,
