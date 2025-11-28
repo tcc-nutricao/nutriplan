@@ -1,35 +1,24 @@
 <template>
-  <aside class="sticky top-0 z-50 ml-4 mr-6">
+  <aside ref="menuRef" :class="['sticky z-[9999] relative', isMobile ? 'ml-0 mr-0 w-full' : 'ml-4 mr-6']" :style="{ top: `${stickyTop}px` }">
     <transition name="slide-fade" mode="out-in">
-      <!-- CARD EXPANDIDO -->
+      <!-- PROFILECARD EXPANDIDO -->
       <div v-if="isOpen" key="expanded">
-        <div class="flex justify-end">
-          <button
-            @click="isOpen = false"
-            class="absolute z-50 top-3 -right-3 cursor-pointer p-1 bg-white rounded-full w-6 h-6 flex items-center justify-center shadow transition hover:scale-[115%] active:scale-95"
-          >
-            <i class="fa-solid fa-chevron-left text-p-600"></i>
-          </button>
-        </div>
-        <div
-          class="w-fit flex flex-col items-center p-5 bg-gradient-to-br from-p-500 via-p-600 to-p-700 rounded-xl h-fit drop-shadow-xl"
-        >
+        <div class="w-fit flex flex-col items-center p-5 bg-gradient-to-br from-p-500 via-p-600 to-p-700 rounded-xl h-fit drop-shadow-xl">
           <div
             @click="handleProfileClick"
             class="bg-white flex flex-col items-center mb-3 p-5 rounded-xl transition drop-shadow-xl group cursor-pointer active:bg-p-100"
           >
-            <div
-              class="flex items-center justify-center rounded-full transition ease-in-out group-hover:-translate-y-1 group-active:scale-95"
-            >
+            <div class="flex items-center justify-center rounded-full transition ease-in-out group-hover:-translate-y-1 group-active:scale-95">
               <img
                 v-if="profilePicture"
                 :src="profilePicture"
                 alt="Foto de perfil"
-                class="size-[100px] rounded-full object-cover mb-3 mt-1 shadow-md"
+                class="rounded-full object-cover mb-3 mt-1
+                       w-[clamp(10vw,12vw,18vw)] h-[clamp(10vw,12vw,18vw)]"
               />
               <svg
                 v-else
-                class="size-[100px] mb-3 mt-1 text-p-600 block drop-shadow-np"
+                class="mb-3 mt-1 text-p-600 block drop-shadow-np w-[clamp(10vw,12vw,18vw)] h-[clamp(10vw,12vw,18vw)]"
                 viewBox="36.5 20 165 165"
                 fill="currentColor"
                 aria-hidden="true"
@@ -42,14 +31,14 @@
               </svg>
             </div>
             <p
-              class="text-p-950 max-w-[170px] font-sora text-xl text-center font-semibold transition ease-in-out group-hover:scale-[112%] group-active:scale-105"
+              class="text-p-950 font-sora font-semibold text-[clamp(1rem,2.4vw,1.25rem)] text-center transition ease-in-out group-hover:scale-[112%] group-active:scale-105 max-w-[70%]"
             >
               {{ user.name }}
             </p>
-            <p v-if="user?.role === 'PROFESSIONAL'" class="text-p-600 tracking-[1.2px] text-[0.6rem] font-semibold mb-1 -translate-y-0.5 group-hover:translate-y-0.5 transition">PROFISSIONAL</p>
-            <p
-              class="text-p-950 font-sora font-light text-sm transition ease-in-out group-hover:translate-y-1 group-active:scale-95"
-            >
+            <p v-if="user?.role === 'PROFESSIONAL'" class="text-p-600 tracking-[1.2px] text-[clamp(0.55rem,1.2vw,0.7rem)] font-semibold mb-1 transition">
+              PROFISSIONAL
+            </p>
+            <p class="text-p-950 font-sora font-light text-[clamp(0.8rem,1.8vw,1rem)] transition ease-in-out group-hover:translate-y-1 group-active:scale-95">
               {{ user.email }}
             </p>
           </div>
@@ -60,15 +49,15 @@
             class="mb-6"
           />
           <div
-            class="flex justify-start items-center gap-2 w-full hover:bg-white/10 font-sora cursor-pointer text-white select-none transition px-3 py-2 rounded-lg hover:scale-105 active:scale-95 group hover:text-danger-light"
+            class="flex justify-start items-center gap-[clamp(0.6rem,1.6vw,1rem)] w-full hover:bg-white/10 font-sora cursor-pointer text-white select-none transition px-[clamp(0.6rem,2.2vw,1rem)] py-[clamp(0.45rem,1.2vw,0.8rem)] rounded-lg hover:scale-105 active:scale-95 group hover:text-danger-light"
             @click="logout"
           >
             <i
-              class="fa-solid fa-right-from-bracket ml-1 text-lg font-semibold hover:scale-110 active:scale-95 transition cursor-pointer"
+              class="fa-solid fa-right-from-bracket text-[clamp(0.9rem,2.8vw,1.2rem)] font-semibold hover:scale-110 active:scale-95 transition cursor-pointer"
               title="Sair"
             />
             <p
-              class="group-hover:translate-x-2 transition ease-in-out duration-200"
+              class="transition ease-in-out duration-200 text-[clamp(0.85rem,2vw,1rem)]"
             >
               Sair
             </p>
@@ -76,32 +65,34 @@
         </div>
       </div>
 
-      <!-- CARD MINIMIZADO -->
+      <!-- PROFILECARD MINIMIZADO -->
       <div v-else key="minimized">
-        <div class="flex justify-end">
-          <button
-            @click="isOpen = true"
-            class="absolute z-50 top-3 -right-3 cursor-pointer p-1 bg-white rounded-full w-6 h-6 flex items-center justify-center shadow transition hover:scale-[115%] active:scale-95"
-          >
-            <i class="fa-solid fa-chevron-right text-p-600"></i>
-          </button>
-        </div>
         <div
-          class="w-20 flex flex-col items-center p-5 bg-gradient-to-br from-p-500 via-p-600 to-p-700 rounded-xl h-fit drop-shadow-xl"
+          class="w-full max-w-[94vw] mx-auto 
+                flex flex-row items-center justify-between whitespace-nowrap
+                px-[clamp(2vw,3vw,4vw)] py-[clamp(1.6vw,2.4vw,3vw)]
+                bg-gradient-to-br from-p-500 via-p-600 to-p-700 
+                rounded-2xl drop-shadow-xl 
+                gap-[clamp(0.4rem, 2vw, 1rem)]
+                overflow-x-auto overflow-y-hidden no-scrollbar"
         >
           <div
             @click="handleProfileClick"
-            class="cursor-pointer bg-white flex flex-col items-center mb-3 p-2 rounded-xl transition drop-shadow-xl hover:scale-110 active:scale-95"
+            class="cursor-pointer bg-white flex items-center justify-center 
+                  p-[clamp(0.6rem,1.6vw,1.2rem)] rounded-xl 
+                  transition drop-shadow-xl hover:scale-110 active:scale-95"
           >
             <img
               v-if="profilePicture"
               :src="profilePicture"
               alt="Foto de perfil"
-              class="size-[25px] rounded-full object-cover"
+              class="rounded-full object-cover
+                    w-[clamp(2vw,4vw,6vw)] h-[clamp(2vw,4vw,6vw)]"
             />
             <svg
               v-else
-              class="size-[25px] text-p-600 block drop-shadow-np"
+              class="text-p-600 block drop-shadow-np
+                    w-[clamp(2vw,4vw,6vw)] h-[clamp(2vw,4vw,6vw)]"
               viewBox="36.5 20 165 165"
               fill="currentColor"
               aria-hidden="true"
@@ -118,10 +109,12 @@
             :active-item="selectedItem"
             :is-minimized="true"
             @item-selected="handleItemSelection"
-            class="mb-8 mt-3 text-lg text-center"
+            class="minimized-icons"
           />
           <i
-            class="fa-solid fa-right-from-bracket ml-1 text-white hover:text-danger-light text-lg font-semibold hover:scale-[115%] active:scale-95 transition cursor-pointer"
+            class="fa-solid fa-right-from-bracket text-white hover:text-danger-light 
+                  text-[clamp(1rem,3.2vw,1.4rem)] font-semibold 
+                  hover:scale-[115%] active:scale-95 transition cursor-pointer"
             @click="logout"
             title="Sair"
           />
@@ -166,8 +159,26 @@ const items = computed(() => {
   }
 });
 
-onMounted(async () => {
-  await fetchProfilePicture();
+const isMobile = ref(false);
+
+function checkMobile() {
+  isMobile.value = window.innerWidth <= 768;
+
+  if (isMobile.value) {
+    isOpen.value = false;
+  } else {
+    isOpen.value = true;
+  }
+}
+
+const stickyTop = computed(() => {
+  return isMobile.value ? 12 : 12;
+});
+
+onMounted(() => {
+  checkMobile();
+  initMenuHeightObserver();
+  window.addEventListener("resize", checkMobile);
 });
 
 async function fetchProfilePicture() {
@@ -200,6 +211,22 @@ const handleProfileClick = () => {
   selectedItem.value = null;
 };
 
+const menuRef = ref(null);
+
+function initMenuHeightObserver() {
+  const el = menuRef.value;
+  if (!el) return;
+
+  const updateHeight = () => {
+    const h = el.offsetHeight;
+    document.documentElement.style.setProperty('--menu-height', `${h}px`);
+  };
+
+  const observer = new ResizeObserver(updateHeight);
+  observer.observe(el);
+  updateHeight();
+} 
+
 const logout = async () => {
   const userCookie = useCookie('user-data');
   const tokenCookie = useCookie('auth-token');
@@ -220,14 +247,54 @@ const navigate = async (route) => {
 .slide-fade-enter-active {
   transition: all 0.1s ease-out;
 }
-
 .slide-fade-leave-active {
   transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
 }
-
 .slide-fade-enter-from,
 .slide-fade-leave-to {
   transform: translateX(-10px);
   opacity: 0;
+}
+
+.minimized-icons {
+  display: flex;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(0.4rem, 2vw, 1rem);
+  flex-wrap: wrap;
+  row-gap: 0.5rem;
+}
+.minimized-icons i,
+.minimized-icons svg {
+  font-size: clamp(2.2vw, 4vw, 6vw) !important;
+  width: auto;
+  height: auto;
+  opacity: 1 !important;
+  filter: none !important;
+}
+@media (max-width: 420px) {
+  .minimized-icons i,
+  .minimized-icons svg {
+    font-size: clamp(4vw, 5vw, 6vw) !important;
+  }
+}
+.minimized-icons > * {
+  flex: 0 0 auto;
+}
+
+.no-scrollbar::-webkit-scrollbar { 
+  height: 0; 
+}
+.no-scrollbar { 
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+
+aside.sticky {
+  transition: box-shadow 180ms ease, transform 180ms ease;
+}
+aside.sticky.is-stuck {
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
 }
 </style>

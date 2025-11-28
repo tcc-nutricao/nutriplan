@@ -1,7 +1,7 @@
 <template>
     <div 
-        class="flex flex-row items-between justify-between  gap-2 py-4 px-6 bg-white rounded-3xl shadow-lg border-2 cursor-pointer transition-all duration-100 active:scale-[98%]"
-        :class="{'border-p-600 shadow-xl shadow-p-600/20 w-[100%] transition': isSelected}, {'w-[85%]' : !isSelected}"
+        class="flex flex-row items-between justify-between gap-2 py-4 px-6 bg-white rounded-3xl shadow-lg border-2 cursor-pointer transition-all duration-100 active:scale-[98%] w-full"
+        :class="{'md:w-full border-p-600 shadow-xl shadow-p-600/20': isSelected, 'md:w-[85%]': !isSelected}"
         @click="notificarClique"
     >
         <div class="flex flex-col items-between justify-start gap-3">

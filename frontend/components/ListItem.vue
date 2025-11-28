@@ -8,7 +8,7 @@
       :class="{
         'bg-white/20': item.label === activeItem,
         'hover:bg-white/10': item.label !== activeItem,
-        'flex justify-center hover:scale-[115%] active:scale-95': isMinimized,
+        'flex flex-col justify-center items-center text-center gap-1 hover:scale-[115%] active:scale-95': isMinimized,
         'hover:scale-105 active:scale-95': !isMinimized
       }"
     >
@@ -16,7 +16,7 @@
       <span v-if="!isMinimized">{{ item.label }}</span>
       
       <!-- Mostra o ícone apenas se estiver minimizado -->
-      <i v-if="isMinimized" :class="`fa-solid ${item.icon}`" :title="item.label" />
+      <i v-if="isMinimized" :class="`fa-solid ${item.icon}`" class="mx-auto" :title="item.label" />
     </li>
   </ul>
 </template>

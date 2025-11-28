@@ -1,9 +1,9 @@
 <template>
   <div class="min-h-screen bg-p-g flex flex-col">
     <TopBar v-if="!hideTopBar" class="top-bar-fading"/>
-    <div class="min-w-screen flex flex-1">
-      <ProfileCard v-if="!hideSideBar" class="stickyProfile" />
-      <div class="flex-1">
+    <div class="min-w-screen flex flex-1" :class="isMobile ? 'flex-col items-center' : 'flex-row'">
+      <ProfileCard v-if="!hideSideBar" />
+      <div class="flex-1 w-full">
         <NuxtLayout>
           <NuxtPage />
         </NuxtLayout>
@@ -14,11 +14,23 @@
 
 <script setup>
 import { useRoute } from 'vue-router'
+import { ref, onMounted } from 'vue'
 
 const route = useRoute()
 
 const hideTopBar = computed(() => route.meta.hideTopBar === true)
 const hideSideBar = computed(() => route.meta.hideSideBar === true)
+
+const isMobile = ref(false)
+
+const checkMobile = () => {
+  isMobile.value = window.innerWidth <= 768
+}
+
+onMounted(() => {
+  checkMobile()
+  window.addEventListener('resize', checkMobile)
+})
 
 </script>
 
@@ -46,4 +58,14 @@ const hideSideBar = computed(() => route.meta.hideSideBar === true)
     top: 20px;
     align-self: flex-start;
   }
+
+.page-content {
+    transition: margin-top 0.25s ease;
+}
+
+@media (max-width: 768px) {
+  .page-content {
+    margin-top: 6vw;
+  }
+}
 </style>

@@ -46,7 +46,7 @@
           required
         />
         <div class="flex justify-center">
-          <Button mediumPurple label="Login" class="w-full sm:w-3/4 md:w-1/2" @click="login"/>
+          <Button mediumPurple label="Login" class="w-[60%] sm:w-3/4 md:w-1/2" @click="login"/>
         </div>
       </div>
     </div>
