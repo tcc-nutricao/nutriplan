@@ -14,11 +14,11 @@
                 :src="profilePicture"
                 alt="Foto de perfil"
                 class="rounded-full object-cover mb-3 mt-1
-                       w-[clamp(10vw,12vw,18vw)] h-[clamp(10vw,12vw,18vw)]"
+                       w-[clamp(100px, 120px, 140px)] h-[clamp(100px, 120px, 140px)]"
               />
               <svg
                 v-else
-                class="mb-3 mt-1 text-p-600 block drop-shadow-np w-[clamp(10vw,12vw,18vw)] h-[clamp(10vw,12vw,18vw)]"
+                class="mb-3 mt-1 text-p-600 block drop-shadow-np w-[clamp(100px,120px,140px)] h-[clamp(100px,120px,140px)]"
                 viewBox="36.5 20 165 165"
                 fill="currentColor"
                 aria-hidden="true"
