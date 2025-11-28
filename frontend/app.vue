@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen bg-p-g flex flex-col">
-    <TopBar v-if="!hideTopBar" class="top-bar-fading"/>
+    <TopBar v-if="!hideTopBar" class="top-bar-fading scale-[60%] h-[60px] sm:scale-100 sm:h-full"/>
     <div class="min-w-screen flex flex-1" :class="isMobile ? 'flex-col items-center' : 'flex-row'">
       <ProfileCard v-if="!hideSideBar" class="stickyProfile" />
       <div class="flex-1 w-full">
