@@ -6,10 +6,12 @@
             <div class="flex flex-col justify-between">
                 <div class="flex flex-col">
                     <h2 class="h2main">{{ group.title }}</h2>
-                    <h2
+                    <Tooltip :text="'Código copiado!'" :visible="showTooltip">
+                        <h2 @click="copyCode"
                         class="font-semibold text-md text-p-400 cursor-pointer hover:text-p-700 transition active:text-p-500">
                         <i class="fa-regular fa-copy mr-1 text-p-700"></i>{{ group.code }}
                     </h2>
+                    </Tooltip>
                 </div>
                 <p class="text-md font-medium text-gray-400">Criado por: {{ group.owner }}</p>
                 <div v-if="group.userRole === 'ADMIN'" class="flex gap-3">
@@ -46,10 +48,22 @@
 
 <script setup>
 import defaultGroupImage from '~/assets/images/groupPhoto.jpg';
+import Tooltip from './Tooltip.vue';
 
-defineProps({
+const props = defineProps({
     group: { type: Object, required: true }
 });
 
 defineEmits(['edit', 'delete', 'leave']);
+
+const showTooltip = ref(false);
+
+const copyCode = () => {
+    navigator.clipboard.writeText(props.group.code).then(() => {
+        showTooltip.value = true;
+        setTimeout(() => {
+            showTooltip.value = false;
+        }, 2000);
+    });
+};
 </script>
