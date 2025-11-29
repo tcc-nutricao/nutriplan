@@ -67,7 +67,7 @@
                                     </div>
                                     <div class="flex justify-between">
                                         <p>Altura:</p>
-                                        <p class="text-p-600 font-bold">{{ item.height.toFixed(2) }} m</p>
+                                        <p class="text-p-600 font-bold">{{ item.height }} cm</p>
                                     </div>
                                     <div class="flex justify-between">
                                         <p>Peso:</p>
@@ -107,7 +107,12 @@
                             </div>
                             <div class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5">
                                 <h2 class="h3">Plano alimentar</h2>
-                                <PlanCard :object="item.mealPlan" />
+                                <div v-if="item.mealPlan">
+                                    <PlanCard :object="item.mealPlan" />
+                                </div>
+                                <div v-else>
+                                    <p class="text-gray-500">Sem plano alimentar vinculado.</p>
+                                </div>
                             </div>
                             <div class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5">
                                 <h2 class="h3">Receitas</h2>
@@ -149,12 +154,30 @@
                             </h2>
                             <p>{{ selectedItem.email }}</p>
                         </div>
-                        <Button mediumPurple
-                            class="w-max pr-3 pl-2 h-[42px]"
-                            icon="fa-solid fa-edit short flex justify-center" 
-                            label="Editar"
-                            @click="openEdit"
-                        />
+                        <div class="flex gap-2">
+                            <Button mediumPurple
+                                class="w-max pr-3 pl-2 h-[42px]"
+                                icon="fa-solid fa-edit short flex justify-center" 
+                                label="Editar"
+                                @click="openEdit"
+                            />
+                            <Button 
+                                v-if="selectedItem.role === 'GUEST'"
+                                red
+                                class="w-max pr-3 pl-2 h-[42px]"
+                                icon="fa-regular fa-trash-can short flex justify-center" 
+                                label="Apagar"
+                                @click="handleDelete" 
+                            />
+                            <Button 
+                                v-else
+                                red
+                                class="w-max pr-3 pl-2 h-[42px]"
+                                icon="fa-solid fa-link-slash short flex justify-center" 
+                                label="Desvincular"
+                                @click="handleDelete" 
+                            />
+                        </div>
                     </div>
                     <div class="flex justify-between w-full gap-10">
                         <div class="flex flex-col w-[40%] gap-3">
@@ -170,7 +193,7 @@
                             </div>
                             <div class="flex justify-between">
                                 <p>Altura:</p>
-                                <p class="text-p-600 font-bold">{{ selectedItem.height.toFixed(2) }} m</p>
+                                <p class="text-p-600 font-bold">{{ selectedItem.height }} cm</p>
                             </div>
                             <div class="flex justify-between">
                                 <p>Peso:</p>
@@ -214,12 +237,22 @@
                 <div class="flex w-full gap-5">
                     <div class="bg-white rounded-3xl w-[35%] shadow-lg border-2 p-7 flex flex-col gap-5 h-max">
                         <h2 class="h3">Plano alimentar</h2>
-                        <PlanCard :object="selectedItem.mealPlan" />
-                        <Button mediumPurple
-                            class="w-max pr-3 pl-2 h-[42px]"
-                            icon="fa-solid fa-right-left short flex justify-center" 
-                            label="Mudar plano"
-                        />
+                        <div v-if="selectedItem.mealPlan">
+                            <PlanCard :object="selectedItem.mealPlan" />
+                            <Button mediumPurple
+                                class="w-max pr-3 pl-2 h-[42px] mt-5"
+                                icon="fa-solid fa-right-left short flex justify-center" 
+                                label="Mudar plano"
+                            />
+                        </div>
+                        <div v-else class="flex flex-col gap-3">
+                            <p class="text-gray-500">Sem plano alimentar vinculado.</p>
+                            <Button mediumPurple
+                                class="w-max pr-3 pl-2 h-[42px]"
+                                icon="fa-solid fa-plus short flex justify-center" 
+                                label="Criar plano"
+                            />
+                        </div>
                     </div>
                     <div class="bg-white rounded-3xl w-[65%] shadow-lg border-2 p-7 flex flex-col gap-5">
                         <h2 class="h3">Receitas</h2>
@@ -248,88 +281,20 @@
         <PatientModal 
             v-if="showModal" 
             :section="showModal" 
-            :patientData="selectedItemId" 
-            @close="showModal = ''" 
+            :patientData="selectedItem" 
+            @close="handleModalClose" 
         />
     </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { get } from '~/crud.js'
+import { get, remove } from '~/crud.js'
 
 const selectedItemId = ref(null)
 const route = ref('nutritionist-patient')
 const showModal = ref('')
-const itemList = ref([
-    {
-        id: 1,
-        name: 'Mariana Alves',
-        objective: 'Perda de Peso',
-        email: 'mariana@email.com',
-        lastUpdate: '15/10/2025',
-        age: '26',
-        gender: 'F',
-        height: 1.65,
-        weight: 77,
-        restrictions: ['🌾 Celíaco', '🥬 Vegano'],
-        preferences: ['🌙 Qualidade do sono'],
-        mealPlan: {
-            calories: 1400,
-            dietaryRestrictions: [
-                {dietaryRestriction: {icon: 'fa-cow'}},
-                {dietaryRestriction: {icon: 'fa-fish'}},
-                {dietaryRestriction: {icon: 'fa-plate-wheat'}},
-            ],
-            goalObjectives:[
-                {objective: { icon: 'fa-weight-scale', name: 'Perda de peso' }},
-                {objective: { icon: 'fa-leaf', name: 'Saúde intestinal' }}
-            ]
-        }
-    },
-    {
-        id: 2,
-        name: 'João Gomes',
-        objective: 'Ganho de Massa',
-        email: 'joao@email.com',
-        lastUpdate: '14/10/2025',
-        age: '23',
-        gender: 'M',
-        height: 1.85,
-        weight: 75,
-        restrictions: ['🥛 Intolerância a lactose'],
-        preferences: ['🌙 Qualidade do sono'],
-        mealPlan: {
-            calories: 1400,
-            dietaryRestrictions: ['fa-cow','fa-fish', 'fa-plate-wheat'],
-            goalObjectives: [
-                { objective: { icon: 'fa-weight-scale', name: 'Perda de peso' }},
-                { objective: { icon: 'fa-leaf', name: 'Saúde intestinal' }}
-            ]
-        }
-    },
-    {
-        id: 3,
-        name: 'Maria Silva',
-        objective: 'Perda de Peso',
-        email: 'maria@email.com',
-        lastUpdate: '13/10/2025',
-        age: '28',
-        gender: 'F',
-        height: 1.60,
-        weight: 75,
-        restrictions: ['🌾 Celíaco'],
-        preferences: ['🌙 Qualidade do sono'],
-        mealPlan: {
-            calories: 1400,
-            dietaryRestrictions: ['fa-cow','fa-fish', 'fa-plate-wheat'],
-            goalObjectives:[
-                { objective: { icon: 'fa-weight-scale', name: 'Perda de peso' }},
-                { objective: { icon: 'fa-leaf', name: 'Saúde intestinal' }}
-            ]
-        }
-    }
-])
+const itemList = ref([])
 
 const openCreate = () => {
     showModal.value = 'create'
@@ -353,7 +318,8 @@ const imcCalc = (height, weight) => {
     if (!height || !weight || typeof height !== 'number' || typeof weight !== 'number') {
         return 'Invalid input'
     }
-    const imcValue = (weight / (height * height)).toFixed(2)
+    const heightM = height / 100
+    const imcValue = (weight / (heightM * heightM)).toFixed(2)
     
     if (imcValue < 18.5) {
         return `${imcValue} (magreza)`
@@ -376,8 +342,42 @@ const selectedItem = computed(() => {
 })
 
 onMounted(async () => {
-    await get(route.value)
+    await fetchPatients()
 })
+
+const fetchPatients = async () => {
+    const response = await get('patient/all')
+    if (response.success && response.data) {
+        itemList.value = response.data
+    }
+}
+
+const handleModalClose = async (shouldRefresh) => {
+    showModal.value = ''
+    if (shouldRefresh) {
+        await fetchPatients()
+    }
+}
+
+const handleDelete = async () => {
+    if (!selectedItem.value) return;
+
+    const isGuest = selectedItem.value.role === 'GUEST';
+    const message = isGuest 
+        ? 'Tem certeza que deseja apagar este paciente? Todos os dados serão perdidos.' 
+        : 'Tem certeza que deseja desvincular este paciente?';
+
+    if (confirm(message)) {
+        const response = await remove('patient', selectedItem.value.id);
+        if (response.success) {
+            // alert(response.message);
+            selectedItemId.value = null;
+            await fetchPatients();
+        } else {
+            alert('Erro ao excluir/desvincular paciente: ' + (response.message || 'Erro desconhecido'));
+        }
+    }
+}
 </script>
 
 <style>

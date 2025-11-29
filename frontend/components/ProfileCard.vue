@@ -1,5 +1,5 @@
 <template>
-  <aside ref="menuRef" :class="['sticky z-[9999] relative', isMobile ? 'ml-0 mr-0 w-full' : 'ml-4 mr-6']" :style="{ top: `${stickyTop}px` }">
+  <aside ref="menuRef" :class="['sticky z-[550] relative', isMobile ? 'ml-0 mr-0 w-full' : 'ml-4 mr-6']" :style="{ top: `${stickyTop}px` }">
     <transition name="slide-fade" mode="out-in">
       <!-- PROFILECARD EXPANDIDO -->
       <div v-if="isOpen" key="expanded">
@@ -49,7 +49,7 @@
             class="mb-6"
           />
           <div
-            class="flex justify-start items-center gap-[clamp(0.6rem,1.6vw,1rem)] w-full hover:bg-white/10 font-sora cursor-pointer text-white select-none transition px-[clamp(0.6rem,2.2vw,1rem)] py-[clamp(0.45rem,1.2vw,0.8rem)] rounded-lg hover:scale-105 active:scale-95 group hover:text-danger-light"
+            class="flex justify-start items-center gap-2 w-full hover:bg-white/10 font-sora cursor-pointer text-white select-none transition px-[clamp(0.6rem,2.2vw,1rem)] py-[clamp(0.45rem,1.2vw,0.8rem)] rounded-lg hover:scale-105 active:scale-95 group hover:text-danger-light"
             @click="logout"
           >
             <i
@@ -57,7 +57,7 @@
               title="Sair"
             />
             <p
-              class="transition ease-in-out duration-200 text-[clamp(0.85rem,2vw,1rem)]"
+              class="group-hover:translate-x-2 transition ease-in-out duration-200 text-[clamp(0.85rem,2vw,1rem)]"
             >
               Sair
             </p>

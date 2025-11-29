@@ -8,7 +8,7 @@
             enter-active-class="transition-opacity duration-300 ease"
             leave-active-class="transition-opacity duration-300 ease"
         >
-            <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[400]" @click.self="$emit('close')">
+            <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]" @click.self="$emit('close')">
                 <div class="bg-white rounded-3xl py-7 px-9 w-full max-w-4xl shadow-lg relative max-h-[90vh] overflow-y-auto modal-container transition-transform duration-300 ease">
                     <button
                         class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-[50]"

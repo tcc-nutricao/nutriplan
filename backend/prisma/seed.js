@@ -321,7 +321,7 @@ async function main() {
     data: {
       id_user: patientUser.id,
       id_group: group.id,
-      role: UserGroupRole.MEMBER,
+      role: UserGroupRole.ADMIN,
       created_at: new Date(),
     },
   });
@@ -497,15 +497,12 @@ async function populateWithAI(patient, nutritionist, goal) {
   try {
     const portionsData = JSON.parse(fs.readFileSync(path.join(__dirname, '../src/assets/food_portions.json'), 'utf-8'));
     
-    // Cache units for quick lookup
     const unitsMap = new Map();
     const allUnits = await prisma.unitOfMeasurement.findMany();
     allUnits.forEach(u => unitsMap.set(u.name.toLowerCase(), u.id));
-    // Add mappings for symbols or variations if needed
     unitsMap.set('colher de sopa', unitsMap.get('colher de sopa')); 
     unitsMap.set('colher de chá', unitsMap.get('colher de chá'));
     
-    // Cache foods
     const foodsMap = new Map();
     const allFoods = await prisma.food.findMany();
     allFoods.forEach(f => foodsMap.set(f.name.toLowerCase(), f.id));
@@ -562,7 +559,7 @@ async function populateWithAI(patient, nutritionist, goal) {
       if (['g', 'grama', 'gramas'].includes(unit.name.toLowerCase()) || unit.symbol === 'g') {
         grams = qty;
       } else if (['ml', 'mililitro', 'mililitros'].includes(unit.name.toLowerCase()) || unit.symbol === 'ml') {
-        grams = qty; // Assume 1ml = 1g for simplicity if density unknown, or strictly strictly nutritional data is per 100g/ml
+        grams = qty; 
       } else if (['kg', 'quilograma'].includes(unit.name.toLowerCase()) || unit.symbol === 'kg') {
         grams = qty * 1000;
       } else if (['l', 'litro'].includes(unit.name.toLowerCase()) || unit.symbol === 'l') {

@@ -53,7 +53,8 @@ export default {
     },
     computed: {
         imc() {
-            const imcValue = (this.weight / (this.height * this.height)).toFixed(2);
+            const heightM = this.height / 100;
+            const imcValue = (this.weight / (heightM * heightM)).toFixed(2);
             
             if (imcValue < 18.5) {
                 return `${imcValue} (magreza)`;

@@ -31,7 +31,6 @@ enum ReportType {
 enum UserGroupRole {
   ADMIN
   MEMBER
-  GUEST
 }
 
 enum MealPlanStatus {
@@ -43,6 +42,7 @@ enum MealPlanStatus {
 enum Role {
   STANDARD
   PROFESSIONAL
+  GUEST
 }
 
 enum WeekDay {

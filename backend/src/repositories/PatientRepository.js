@@ -13,8 +13,44 @@ const findByUserId = async (idUser) => {
 const findByNutritionistId = async (idNutritionist) => {
   return await prisma.patient.findMany({
     where: {
-      idNutritionist: idNutritionist,
+      id_nutritionist: idNutritionist,
       deleted_at: null
+    },
+    include: {
+      user: true,
+      goals: {
+        where: { status: 'ACTIVE' },
+        include: {
+          goalObjectives: {
+            include: { objective: true }
+          }
+        }
+      },
+      healthData: {
+        orderBy: { record_date: 'desc' },
+        take: 1
+      },
+      patientDietaryRestrictions: {
+        include: { dietaryRestriction: true }
+      },
+      mealPlanPatients: {
+        include: {
+          mealPlan: {
+            include: {
+              goal: {
+                 include: {
+                    goalObjectives: {
+                        include: { objective: true }
+                    }
+                 }
+              },
+              mealPlanDietaryRestrictions: {
+                include: { dietaryRestriction: true }
+              }
+            }
+          }
+        }
+      }
     }
   });
 };

@@ -1,12 +1,12 @@
+import { PrismaClient } from '@prisma/client'
+import { AppError } from '../exceptions/AppError.js'
 import { PatientRepository } from '../repositories/PatientRepository.js'
+import { MealPlanService } from './MealPlanService.js'
 import { HealthDataRepository } from '../repositories/HealthDataRepository.js'
 import { GoalRepository } from '../repositories/GoalRepository.js'
-import { MealPlanService } from './MealPlanService.js'
-import { generateCrudService } from './Service.js'
 import { getImcData } from '../utils/useImc.js'
-import { calculateProgress, formatProgressResponse, calculateTotalDays } from '../utils/useProgress.js'
-import { AppError } from '../exceptions/AppError.js'
-import { PrismaClient } from '@prisma/client'
+import { calculateProgress, calculateTotalDays } from '../utils/useProgress.js'
+import { generateCrudService } from './Service.js'
 
 const prisma = new PrismaClient()
 const baseCrudService = generateCrudService(PatientRepository)
@@ -132,6 +132,7 @@ const getProgress = async (userId) => {
                 )
                 metaAchieved = progressData.metaAchieved;
                 weightDifference = progressData.weightDifference;
+
             } catch (e) {
                 console.warn('Erro ao calcular progresso:', e.message);
             }
@@ -158,13 +159,216 @@ const getProgress = async (userId) => {
   }
 }
 
+const getAllByNutritionist = async (nutritionistId) => {
+  try {
+    const patients = await PatientRepository.findByNutritionistId(nutritionistId);
 
-export const PatientService = {
-  ...baseCrudService,
-  getPatientByUserId,
-  getProgress,
+    return patients.map(patient => {
+      // Calculate Age
+      const birthDate = new Date(patient.birth_date);
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+      }
 
-  async searchByTerm(searchTerm, nutritionistId, limit = 10) {
+      // Get latest weight and height
+      const latestHealthData = patient.healthData && patient.healthData.length > 0 ? patient.healthData[0] : null;
+      const weight = latestHealthData ? latestHealthData.weight : patient.weight;
+      const height = latestHealthData ? latestHealthData.height : patient.height;
+
+      // Get Active Goal/Objective
+      let objective = 'Não definido';
+      let restrictions = [];
+      let restrictionIds = [];
+      let objectiveIds = [];
+      let targetWeight = null;
+      
+      // Restrictions
+      if (patient.patientDietaryRestrictions) {
+          restrictions = patient.patientDietaryRestrictions.map(pdr => pdr.dietaryRestriction.name);
+          restrictionIds = patient.patientDietaryRestrictions.map(pdr => pdr.dietaryRestriction.id);
+      }
+
+      // Objective
+      // Priority: Active Meal Plan Goal -> Active Patient Goal
+      const activeMealPlanPatient = patient.mealPlanPatients && patient.mealPlanPatients.length > 0 ? patient.mealPlanPatients[0] : null;
+      const activeMealPlan = activeMealPlanPatient ? activeMealPlanPatient.mealPlan : null;
+
+      let goal = activeMealPlan ? activeMealPlan.goal : (patient.goals && patient.goals.length > 0 ? patient.goals[0] : null);
+      
+      if (goal) {
+          targetWeight = goal.target_weight;
+          if (goal.goalObjectives && goal.goalObjectives.length > 0) {
+               const mainObjective = goal.goalObjectives.find(go => go.type === 'MAIN') || goal.goalObjectives[0];
+               if (mainObjective && mainObjective.objective) {
+                   objective = mainObjective.objective.name;
+               }
+               objectiveIds = goal.goalObjectives.map(go => go.objective.id);
+          }
+      }
+
+      // Last Update
+      const lastUpdateDate = patient.updated_at || patient.created_at;
+      const lastUpdate = new Date(lastUpdateDate).toLocaleDateString('pt-BR');
+
+      return {
+          id: patient.id,
+          name: patient.user.name,
+          role: patient.user.role,
+          email: patient.user.email,
+          objective: objective,
+          lastUpdate: lastUpdate,
+          age: age.toString(),
+          gender: patient.gender,
+          height: height, 
+          weight: weight,
+          restrictions: restrictions,
+          preferences: [], 
+          mealPlan: activeMealPlan ? {
+              calories: activeMealPlan.calories,
+              dietaryRestrictions: activeMealPlan.mealPlanDietaryRestrictions.map(mpdr => mpdr.dietaryRestriction.icon || mpdr.dietaryRestriction.name),
+              goalObjectives: goal ? goal.goalObjectives.map(go => ({ objective: { icon: go.objective.icon, name: go.objective.name } })) : []
+          } : null,
+          // Raw data for editing
+          birth_date: patient.birth_date,
+          target_weight: targetWeight,
+          restrictionIds: restrictionIds,
+          objectiveIds: objectiveIds
+      };
+    });
+  } catch (error) {
+    console.error('Erro ao buscar pacientes do nutricionista:', error);
+    throw error;
+  }
+}
+
+const deleteOrUnlink = async (patientId, nutritionistId) => {
+    try {
+        const patient = await prisma.patient.findUnique({
+            where: { id: parseInt(patientId) },
+            include: { user: true }
+        });
+
+        if (!patient) {
+            throw new Error('Paciente não encontrado');
+        }
+
+        if (patient.user.role === 'GUEST') {
+            // Delete everything related to the patient
+            await prisma.$transaction(async (tx) => {
+                // 1. Get Patient Goals
+                const goals = await tx.goal.findMany({ 
+                    where: { id_patient: patient.id },
+                    select: { id: true }
+                });
+                const goalIds = goals.map(g => g.id);
+
+                if (goalIds.length > 0) {
+                    // 2. Delete GoalObjectives
+                    await tx.goalObjective.deleteMany({ 
+                        where: { id_goal: { in: goalIds } } 
+                    });
+
+                    // 3. Get MealPlans linked to these Goals
+                    const mealPlans = await tx.mealPlan.findMany({ 
+                        where: { id_goal: { in: goalIds } },
+                        select: { id: true }
+                    });
+                    const mealPlanIds = mealPlans.map(mp => mp.id);
+
+                    if (mealPlanIds.length > 0) {
+                        // 4. Delete MealPlan Dependencies
+                        
+                        // MealPlanPatient (All links to these plans)
+                        await tx.mealPlanPatient.deleteMany({ 
+                            where: { id_meal_plan: { in: mealPlanIds } } 
+                        });
+
+                        // MealPlanDietaryRestriction
+                        await tx.mealPlanDietaryRestriction.deleteMany({ 
+                            where: { id_meal_plan: { in: mealPlanIds } } 
+                        });
+
+                        // MealPlanMeals and their children
+                        const mealPlanMeals = await tx.mealPlanMeal.findMany({ 
+                            where: { id_meal_plan: { in: mealPlanIds } },
+                            select: { id: true }
+                        });
+                        const mealPlanMealIds = mealPlanMeals.map(mpm => mpm.id);
+
+                        if (mealPlanMealIds.length > 0) {
+                            // MealPlanRecipe
+                            await tx.mealPlanRecipe.deleteMany({ 
+                                where: { id_meal_plan_meal: { in: mealPlanMealIds } } 
+                            });
+                            
+                            // FoodConsumed
+                            await tx.foodConsumed.deleteMany({ 
+                                where: { id_meal_plan_meal: { in: mealPlanMealIds } } 
+                            });
+
+                            // MealPlanMeal
+                            await tx.mealPlanMeal.deleteMany({ 
+                                where: { id: { in: mealPlanMealIds } } 
+                            });
+                        }
+
+                        // 5. Delete MealPlans
+                        await tx.mealPlan.deleteMany({ 
+                            where: { id: { in: mealPlanIds } } 
+                        });
+                    }
+
+                    // 6. Delete Goals
+                    await tx.goal.deleteMany({ 
+                        where: { id: { in: goalIds } } 
+                    });
+                }
+
+                // 7. Delete other direct patient relations
+                await tx.healthData.deleteMany({ where: { id_patient: patient.id } });
+                await tx.patientDietaryRestriction.deleteMany({ where: { id_patient: patient.id } });
+                await tx.nutritionistPatient.deleteMany({ where: { id_patient: patient.id } });
+                
+                // Ensure any remaining MealPlanPatient records for this patient are gone
+                await tx.mealPlanPatient.deleteMany({ where: { id_patient: patient.id } });
+                
+                // 8. Delete Patient
+                await tx.patient.delete({ where: { id: patient.id } });
+                
+                // 9. Delete User
+                await tx.user.delete({ where: { id: patient.user.id } });
+            });
+            return { message: 'Paciente e usuário excluídos com sucesso' };
+        } else {
+            // Unlink from nutritionist
+            await prisma.$transaction(async (tx) => {
+                await tx.nutritionistPatient.deleteMany({
+                    where: {
+                        id_patient: patient.id,
+                        id_nutritionist: parseInt(nutritionistId)
+                    }
+                });
+                
+                // Optional: Set id_nutritionist to null if it matches
+                if (patient.id_nutritionist === parseInt(nutritionistId)) {
+                    await tx.patient.update({
+                        where: { id: patient.id },
+                        data: { id_nutritionist: null }
+                    });
+                }
+            });
+            return { message: 'Paciente desvinculado com sucesso' };
+        }
+    } catch (error) {
+        console.error('Erro ao excluir/desvincular paciente:', error);
+        throw error;
+    }
+}
+
+const searchByTerm = async (searchTerm, nutritionistId, limit = 10) => {
     try {
       if (!searchTerm || searchTerm.trim().length === 0) {
         return { data: [], total: 0 }
@@ -212,11 +416,239 @@ export const PatientService = {
         email: patient.user.email,
         userId: patient.user.id
       }))
-
       return { data: formattedData, total }
     } catch (error) {
-      console.error('Erro ao pesquisar pacientes:', error)
+      console.error('Erro ao buscar pacientes por termo:', error)
       throw error
     }
-  }
+}
+
+const createFullPatient = async (nutritionistId, patientData) => {
+    try {
+      console.log('createFullPatient - Start');
+      console.log('nutritionistId:', nutritionistId);
+      console.log('patientData:', JSON.stringify(patientData, null, 2));
+
+      return prisma.$transaction(async (tx) => {
+        // 1. Criar User
+        const newUser = await tx.user.create({
+          data: {
+            name: patientData.name,
+            email: patientData.email,
+            password: patientData.password || "mudar123", // Senha padrão
+            role: "GUEST",
+            created_at: new Date(),
+          }
+        });
+
+        // 2. Criar Paciente
+        const newPatient = await tx.patient.create({
+          data: {
+            id_user: newUser.id,
+            id_nutritionist: nutritionistId,
+            birth_date: new Date(patientData.birth_date),
+            gender: patientData.gender,
+            height: parseFloat(patientData.height),
+            weight: parseFloat(patientData.weight),
+            created_at: new Date(),
+          }
+        });
+
+        // 3. Criar HealthData inicial
+        await tx.healthData.create({
+          data: {
+            id_patient: newPatient.id,
+            height: parseFloat(patientData.height),
+            weight: parseFloat(patientData.weight),
+            bmi: getImcData(parseFloat(patientData.weight), parseFloat(patientData.height) / 100).imc,
+            record_date: new Date(),
+            created_at: new Date(),
+          }
+        });
+
+        // 4. Criar Goal (Meta e Objetivos)
+        if (patientData.objectives && patientData.objectives.length > 0) {
+            const newGoal = await tx.goal.create({
+                data: {
+                    id_patient: newPatient.id,
+                    description: "Objetivo inicial do paciente",
+                    target_weight: patientData.target_weight ? parseFloat(patientData.target_weight) : null,
+                    start_date: new Date(),
+                    status: 'ACTIVE',
+                    created_at: new Date()
+                }
+            });
+
+            // Vincular objetivos ao Goal
+            for (const objectiveId of patientData.objectives) {
+                // Vamos definir o primeiro como MAIN e o resto como SECONDARY se houver mais de um.
+                const type = patientData.objectives.indexOf(objectiveId) === 0 ? 'MAIN' : 'SECONDARY';
+                
+                await tx.goalObjective.create({
+                    data: {
+                        id_goal: newGoal.id,
+                        id_objective: objectiveId,
+                        type: type,
+                        created_at: new Date()
+                    }
+                });
+            }
+        }
+
+        // 5. Criar Restrições Alimentares
+        if (patientData.restrictions && patientData.restrictions.length > 0) {
+            for (const restrictionId of patientData.restrictions) {
+                 await tx.patientDietaryRestriction.create({
+                    data: {
+                        id_patient: newPatient.id,
+                        id_dietary_restriction: restrictionId,
+                        created_at: new Date()
+                    }
+                 });
+            }
+        }
+
+        // 6. Criar vínculo NutritionistPatient (opcional, já que Patient tem id_nutritionist, mas bom manter consistência se usar tabela pivo)
+        await tx.nutritionistPatient.create({
+            data: {
+                id_nutritionist: nutritionistId,
+                id_patient: newPatient.id,
+                created_at: new Date()
+            }
+        });
+
+        return newPatient;
+      });
+    } catch (error) {
+      console.error('Erro no createFullPatient:', error);
+      throw error;
+    }
+}
+
+const updatePatient = async (id, data) => {
+    try {
+      return await prisma.$transaction(async (tx) => {
+        const patient = await tx.patient.findUnique({
+          where: { id: parseInt(id) },
+          include: { user: true }
+        });
+
+        if (!patient) {
+          throw new AppError({ message: 'Paciente não encontrado' });
+        }
+
+        // 1. Update User (Name, Email)
+        if (data.name || data.email) {
+          await tx.user.update({
+            where: { id: patient.id_user },
+            data: {
+              name: data.name,
+              email: data.email
+            }
+          });
+        }
+
+        // 2. Update Patient (Birth Date, Gender, Height, Weight)
+        const patientUpdateData = {};
+        if (data.birth_date) patientUpdateData.birth_date = new Date(data.birth_date);
+        if (data.gender) patientUpdateData.gender = data.gender;
+        if (data.height) patientUpdateData.height = parseFloat(data.height);
+        if (data.weight) patientUpdateData.weight = parseFloat(data.weight);
+
+        if (Object.keys(patientUpdateData).length > 0) {
+          await tx.patient.update({
+            where: { id: parseInt(id) },
+            data: patientUpdateData
+          });
+        }
+
+        // 3. Update HealthData (if weight/height changed, add new record)
+        if (data.weight || data.height) {
+             await tx.healthData.create({
+                data: {
+                    id_patient: parseInt(id),
+                    height: data.height ? parseFloat(data.height) : patient.height,
+                    weight: data.weight ? parseFloat(data.weight) : patient.weight,
+                    bmi: getImcData(
+                        data.weight ? parseFloat(data.weight) : patient.weight, 
+                        (data.height ? parseFloat(data.height) : patient.height) / 100
+                    ).imc,
+                    record_date: new Date(),
+                    created_at: new Date(),
+                }
+             });
+        }
+
+        // 4. Update Goal (Target Weight, Objectives)
+        let goal = await tx.goal.findFirst({
+            where: { id_patient: parseInt(id), status: 'ACTIVE' }
+        });
+
+        if (!goal && (data.target_weight || (data.objectives && data.objectives.length > 0))) {
+             goal = await tx.goal.create({
+                data: {
+                    id_patient: parseInt(id),
+                    description: "Objetivo atualizado",
+                    target_weight: data.target_weight ? parseFloat(data.target_weight) : null,
+                    start_date: new Date(),
+                    status: 'ACTIVE',
+                    created_at: new Date()
+                }
+            });
+        } else if (goal && data.target_weight) {
+            await tx.goal.update({
+                where: { id: goal.id },
+                data: { target_weight: parseFloat(data.target_weight) }
+            });
+        }
+
+        if (goal && data.objectives) {
+            // Remove old objectives
+            await tx.goalObjective.deleteMany({ where: { id_goal: goal.id } });
+            
+            // Add new objectives
+            for (const objectiveId of data.objectives) {
+                const type = data.objectives.indexOf(objectiveId) === 0 ? 'MAIN' : 'SECONDARY';
+                await tx.goalObjective.create({
+                    data: {
+                        id_goal: goal.id,
+                        id_objective: objectiveId,
+                        type: type,
+                        created_at: new Date()
+                    }
+                });
+            }
+        }
+
+        // 5. Update Restrictions
+        if (data.restrictions) {
+            await tx.patientDietaryRestriction.deleteMany({ where: { id_patient: parseInt(id) } });
+            for (const restrictionId of data.restrictions) {
+                 await tx.patientDietaryRestriction.create({
+                    data: {
+                        id_patient: parseInt(id),
+                        id_dietary_restriction: restrictionId,
+                        created_at: new Date()
+                    }
+                 });
+            }
+        }
+
+        return patient;
+      });
+    } catch (error) {
+      console.error('Erro no updatePatient:', error);
+      throw error;
+    }
+}
+
+export const PatientService = {
+  ...baseCrudService,
+  getPatientByUserId,
+  getProgress,
+  getAllByNutritionist,
+  searchByTerm,
+  createFullPatient,
+  updatePatient,
+  deleteOrUnlink
 }
