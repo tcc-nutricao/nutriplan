@@ -12,7 +12,7 @@
       v-if="filter"
       mediumPurple
       :label="isNarrow ? '' : 'Filtrar'"
-      class="w-auto h-[42px]"
+      class="w-auto h-[42px] z-[200]"
       icon="fa-solid fa-filter"
       :options="filterOptions"
       v-model="selectedFilter"
@@ -21,7 +21,7 @@
       v-if="sort"
       mediumPurple
       :label="isNarrow ? '' : 'Ordenar'"
-      class="w-auto h-[42px]"
+      class="w-auto h-[42px] z-[200]"
       icon="fa-solid fa-arrow-down-short-wide"
       :options="sortOptions"
       v-model="selectedSort"
@@ -64,8 +64,8 @@ const props = defineProps({
       { 
         value: 'created_at', 
         label: 'Data de Criação', 
-        labelAsc: 'Mais Antigas', 
-        labelDesc: 'Mais Recentes',
+        labelAsc: 'Mais Antigo', 
+        labelDesc: 'Mais Recente',
         defaultDirection: 'desc'
       },
       { 

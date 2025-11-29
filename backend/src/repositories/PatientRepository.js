@@ -27,8 +27,8 @@ const findByNutritionistId = async (idNutritionist) => {
         }
       },
       healthData: {
-        orderBy: { record_date: 'desc' },
-        take: 1
+        where: { deleted_at: null },
+        orderBy: { record_date: 'desc' }
       },
       patientDietaryRestrictions: {
         include: { dietaryRestriction: true }

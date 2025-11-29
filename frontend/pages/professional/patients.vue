@@ -108,12 +108,44 @@
                             <div class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5">
                                 <h2 class="h3">Plano alimentar</h2>
                                 <div v-if="item.mealPlan">
-                                    <PlanCard :object="item.mealPlan" />
+                                    <PlanCard 
+                                        :calories="item.mealPlan.calories"
+                                        :restrictions="item.mealPlan.dietaryRestrictions"
+                                        :objectives="item.mealPlan.goalObjectives"
+                                    />
                                 </div>
                                 <div v-else>
                                     <p class="text-gray-500">Sem plano alimentar vinculado.</p>
                                 </div>
                             </div>
+                            <!-- Weight Update Card Mobile -->
+                            <div class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5">
+                                <h2 class="h3">Atualizar Peso</h2>
+                                <div class="grid grid-rows-2 gap-2">
+                                    <Input
+                                        class="bg-white shadow-lg shadow-gray-600/10 focus-within:shadow-p-600/20 hover:shadow-p-600/20 transition"
+                                        label="newWeightMobile"
+                                        v-model="newWeight"
+                                        placeholder="Novo peso (kg)"
+                                        type="number"
+                                    />
+                                    <Button
+                                        mediumPurple
+                                        class="h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition text-sm sm:text-base"
+                                        label="Atualizar"
+                                        @click="updatePatientWeight"
+                                    />
+                                </div>
+                            </div>
+                            <!-- Progress Card Mobile -->
+                            <div class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5">
+                                <ProgressCard 
+                                    :patient="item" 
+                                    :dataList="item.role === 'GUEST'"
+                                    @refresh="fetchPatients"
+                                />
+                            </div>
+
                             <div class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5">
                                 <h2 class="h3">Receitas</h2>
                                 <div class="w-full border-b-2 border-gray-200">
@@ -235,41 +267,56 @@
                     </div>
                 </div>
                 <div class="flex w-full gap-5">
-                    <div class="bg-white rounded-3xl w-[35%] shadow-lg border-2 p-7 flex flex-col gap-5 h-max">
-                        <h2 class="h3">Plano alimentar</h2>
-                        <div v-if="selectedItem.mealPlan">
-                            <PlanCard :object="selectedItem.mealPlan" />
-                            <Button mediumPurple
-                                class="w-max pr-3 pl-2 h-[42px] mt-5"
-                                icon="fa-solid fa-right-left short flex justify-center" 
-                                label="Mudar plano"
-                            />
+                    <div class="flex flex-col w-[35%]">
+                        <div class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5 h-max">
+                            <h2 class="h3">Plano alimentar</h2>
+                            <div v-if="selectedItem.mealPlan">
+                                <PlanCard 
+                                    :calories="selectedItem.mealPlan.calories"
+                                    :restrictions="selectedItem.mealPlan.dietaryRestrictions"
+                                    :objectives="selectedItem.mealPlan.goalObjectives"
+                                />
+                                <Button mediumPurple
+                                    class="w-max pr-3 pl-2 h-[42px] mt-5"
+                                    icon="fa-solid fa-right-left short flex justify-center" 
+                                    label="Mudar plano"
+                                />
+                            </div>
+                            <div v-else class="flex flex-col gap-3 items-center justify-between">
+                                <p class="text-gray-500 text-center">Sem plano alimentar vinculado.</p>
+                                <Button mediumPurple
+                                    class="w-max pr-3 pl-2 h-[42px]"
+                                    icon="fa-solid fa-plus short flex justify-center" 
+                                    label="Criar plano"
+                                />
+                            </div>
                         </div>
-                        <div v-else class="flex flex-col gap-3">
-                            <p class="text-gray-500">Sem plano alimentar vinculado.</p>
-                            <Button mediumPurple
-                                class="w-max pr-3 pl-2 h-[42px]"
-                                icon="fa-solid fa-plus short flex justify-center" 
-                                label="Criar plano"
-                            />
+                        <!-- Weight Update Card Desktop -->
+                        <div v-if="selectedItem.role === 'GUEST'" class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5 mt-5">
+                            <h2 class="h3">Atualizar Peso</h2>
+                            <div class="grid grid-rows-2 gap-2">
+                                <Input
+                                    class="bg-white shadow-lg shadow-gray-600/10 focus-within:shadow-p-600/20 hover:shadow-p-600/20 transition"
+                                    label="newWeightDesktop"
+                                    v-model="newWeight"
+                                    placeholder="Novo peso (kg)"
+                                    type="number"
+                                />
+                                <Button
+                                    mediumPurple
+                                    class="h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition text-sm sm:text-base"
+                                    label="Atualizar"
+                                    @click="updatePatientWeight"
+                                />
+                            </div>
                         </div>
                     </div>
-                    <div class="bg-white rounded-3xl w-[65%] shadow-lg border-2 p-7 flex flex-col gap-5">
-                        <h2 class="h3">Receitas</h2>
-                        <div class="w-full border-b-2 border-gray-200">
-                            <ReceitaButtonMini 
-                                v-for="item in recipesList"
-                                :key="item.id"
-                                :title="item.title"
-                                :categories="item.categories"
-                                :time="item.time"
-                                :portions="item.portions"
-                            />
-                        </div>
-                        <Button mediumPurple
-                            class="w-max pr-3 pl-2 h-[42px]"
-                            icon="fa-solid fa-plus short flex justify-center" 
-                            label="Incluir receita"
+                    <!-- Progress Card Desktop -->
+                    <div class="w-[65%]">
+                        <ProgressCard 
+                            :patient="selectedItem" 
+                            :dataList="selectedItem.role === 'GUEST'" 
+                            @refresh="fetchPatients"
                         />
                     </div>
                 </div>
@@ -289,12 +336,13 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { get, remove } from '~/crud.js'
+import { get, remove, insert } from '~/crud.js'
 
 const selectedItemId = ref(null)
 const route = ref('nutritionist-patient')
 const showModal = ref('')
 const itemList = ref([])
+const newWeight = ref(null)
 
 const openCreate = () => {
     showModal.value = 'create'
@@ -312,6 +360,7 @@ const recipesList = ref([
 
 const selectItem = (id) => {
     selectedItemId.value = id
+    newWeight.value = null
 }
 
 const imcCalc = (height, weight) => {
@@ -340,6 +389,38 @@ const selectedItem = computed(() => {
     }
     return itemList.value.find(item => item.id === selectedItemId.value)
 })
+
+const updatePatientWeight = async () => {
+    if (!newWeight.value || newWeight.value <= 0) {
+        alert('Por favor, insira um peso válido');
+        return;
+    }
+
+    if (!selectedItem.value) return;
+
+    const weight = Number(newWeight.value);
+    const height = Number(selectedItem.value.height);
+    const heightM = height / 100;
+    const bmi = (weight / (heightM * heightM)).toFixed(2);
+
+    const payload = {
+        id_patient: Number(selectedItem.value.id),
+        weight: weight,
+        height: height,
+        bmi: Number(bmi),
+        record_date: new Date().toISOString()
+    };
+
+    const response = await insert('health-data', payload);
+    if (response && !response.error) {
+        await fetchPatients();
+        newWeight.value = null;
+        // alert('Peso atualizado com sucesso!');
+    } else {
+        console.error('Erro ao atualizar progresso:', response);
+        alert('Erro ao atualizar peso. Tente novamente.');
+    }
+}
 
 onMounted(async () => {
     await fetchPatients()

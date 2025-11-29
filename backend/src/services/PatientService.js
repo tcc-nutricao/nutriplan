@@ -235,7 +235,12 @@ const getAllByNutritionist = async (nutritionistId) => {
           birth_date: patient.birth_date,
           target_weight: targetWeight,
           restrictionIds: restrictionIds,
-          objectiveIds: objectiveIds
+          objectiveIds: objectiveIds,
+          progress: patient.healthData ? patient.healthData.map(h => ({
+              id: h.id,
+              weight: h.weight,
+              date: h.record_date
+          })).reverse() : []
       };
     });
   } catch (error) {
