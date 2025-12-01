@@ -108,11 +108,9 @@
                             <div class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5">
                                 <h2 class="h3">Plano alimentar</h2>
                                 <div v-if="item.mealPlan">
-                                    <PlanCard 
-                                        :calories="item.mealPlan.calories"
-                                        :restrictions="item.mealPlan.dietaryRestrictions"
-                                        :objectives="item.mealPlan.goalObjectives"
-                                    />
+                                <PlanCard 
+                                    :object="item.mealPlan"
+                                />
                                 </div>
                                 <div v-else>
                                     <p class="text-gray-500">Sem plano alimentar vinculado.</p>
@@ -270,16 +268,17 @@
                     <div class="flex flex-col w-[35%]">
                         <div class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5 h-max">
                             <h2 class="h3">Plano alimentar</h2>
-                            <div v-if="selectedItem.mealPlan">
-                                <PlanCard 
-                                    :calories="selectedItem.mealPlan.calories"
-                                    :restrictions="selectedItem.mealPlan.dietaryRestrictions"
-                                    :objectives="selectedItem.mealPlan.goalObjectives"
-                                />
+                            <div v-if="selectedItem.mealPlan" class="flex flex-col gap-3 items-center justify-center">
+                                <div @click="openViewModal(selectedItem.mealPlan)" class="cursor-pointer hover:scale-[102%] transition active:scale-[98%] w-max">
+                                    <PlanCard 
+                                        :object="selectedItem.mealPlan"
+                                    />
+                                </div>
                                 <Button mediumPurple
                                     class="w-max pr-3 pl-2 h-[42px] mt-5"
                                     icon="fa-solid fa-right-left short flex justify-center" 
                                     label="Mudar plano"
+                                    @click="openMealPlanManager"
                                 />
                             </div>
                             <div v-else class="flex flex-col gap-3 items-center justify-between">
@@ -287,7 +286,8 @@
                                 <Button mediumPurple
                                     class="w-max pr-3 pl-2 h-[42px]"
                                     icon="fa-solid fa-plus short flex justify-center" 
-                                    label="Criar plano"
+                                    label="Adicionar plano"
+                                    @click="openMealPlanManager"
                                 />
                             </div>
                         </div>
@@ -326,11 +326,40 @@
             </div>
         </div>
         <PatientModal 
-            v-if="showModal" 
+            v-if="showModal && showModal !== 'mealPlanManager'" 
             :section="showModal" 
             :patientData="selectedItem" 
             @close="handleModalClose" 
         />
+        <MealPlanManagerModal
+            :show="showModal === 'mealPlanManager'"
+            :patient="selectedItem"
+            @close="showModal = ''"
+            @refresh="fetchPatients"
+        />
+
+        <!-- View Meal Plan Modal -->
+        <teleport to="body">
+            <Transition
+                name="modal"
+                appear
+                enter-from-class="opacity-0"
+                leave-to-class="opacity-0"
+                enter-active-class="transition-opacity duration-300 ease"
+                leave-active-class="transition-opacity duration-300 ease"
+            >
+                <div v-if="showViewModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]" @click.self="closeViewModal">
+                    <div class="bg-white rounded-3xl pb-8 pt-12 px-9 w-full max-w-4xl shadow-lg relative max-h-[90vh] overflow-y-auto modal-container transition-transform duration-300 ease">
+                         <button
+                            class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-[50]"
+                            @click="closeViewModal"
+                        >&times;
+                        </button>
+                        <MealPlanCardExtended v-if="selectedPlan" :object="selectedPlan" />
+                    </div>
+                </div>
+            </Transition>
+        </teleport>
     </div>
 </template>
 
@@ -343,6 +372,20 @@ const route = ref('nutritionist-patient')
 const showModal = ref('')
 const itemList = ref([])
 const newWeight = ref(null)
+
+// Meal Plan View Modal State
+const showViewModal = ref(false)
+const selectedPlan = ref(null)
+
+const openViewModal = (plan) => {
+    selectedPlan.value = plan
+    showViewModal.value = true
+}
+
+const closeViewModal = () => {
+    showViewModal.value = false
+    selectedPlan.value = null
+}
 
 const openCreate = () => {
     showModal.value = 'create'
@@ -415,7 +458,6 @@ const updatePatientWeight = async () => {
     if (response && !response.error) {
         await fetchPatients();
         newWeight.value = null;
-        // alert('Peso atualizado com sucesso!');
     } else {
         console.error('Erro ao atualizar progresso:', response);
         alert('Erro ao atualizar peso. Tente novamente.');
@@ -426,10 +468,39 @@ onMounted(async () => {
     await fetchPatients()
 })
 
+const transformPlan = (plan) => {
+  return {
+    ...plan,
+    dietaryRestrictions: plan.mealPlanDietaryRestrictions || [],
+    objective: plan.objective
+  }
+}
+
 const fetchPatients = async () => {
-    const response = await get('patient/all')
-    if (response.success && response.data) {
-        itemList.value = response.data
+    try {
+        const [patientsRes, plansRes] = await Promise.all([
+            get('patient/all'),
+            get('meal-plan')
+        ]);
+
+        if (patientsRes.success && patientsRes.data) {
+            const patients = patientsRes.data;
+            const rawPlans = plansRes.data || [];
+            const transformedPlans = rawPlans.map(transformPlan);
+
+            itemList.value = patients.map(p => {
+                const plan = transformedPlans.find(mp => 
+                    mp.mealPlanPatients && mp.mealPlanPatients.some(mpp => mpp.id_patient === p.id && mpp.status === 'ACTIVE')
+                );
+                
+                return {
+                    ...p,
+                    mealPlan: plan || null
+                };
+            });
+        }
+    } catch (error) {
+        console.error('Erro ao buscar dados:', error);
     }
 }
 
@@ -438,6 +509,10 @@ const handleModalClose = async (shouldRefresh) => {
     if (shouldRefresh) {
         await fetchPatients()
     }
+}
+
+const openMealPlanManager = () => {
+    showModal.value = 'mealPlanManager'
 }
 
 const handleDelete = async () => {

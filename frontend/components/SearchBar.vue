@@ -37,7 +37,7 @@ const props = defineProps({
   searchType: {
     type: String,
     required: true,
-    validator: (value) => ['recipes', 'patients', 'foods'].includes(value)
+    validator: (value) => ['recipes', 'patients', 'foods', 'meal-plans'].includes(value)
   },
   noSearch: {
     type: Boolean,
@@ -105,22 +105,18 @@ const handleSearchSelection = (selectedItem) => {
 };
 
 watch(selectedFilter, (newValue, oldValue) => {
-  // Logic for exclusive options
-  const newSelection = newValue.filter(x => !oldValue.includes(x)); // What was just added?
+  const newSelection = newValue.filter(x => !oldValue.includes(x)); 
   
   if (newSelection.length > 0) {
     const added = newSelection[0];
     
     if (added === 'all') {
-      // If 'all' is selected, clear everything else
       selectedFilter.value = ['all'];
       return;
     } else if (added === 'favorites') {
-      // If 'favorites' is selected, clear everything else
       selectedFilter.value = ['favorites'];
       return;
     } else {
-      // If a preference is selected, remove 'all' and 'favorites'
       if (selectedFilter.value.includes('all')) {
         selectedFilter.value = selectedFilter.value.filter(v => v !== 'all');
       }
@@ -129,9 +125,7 @@ watch(selectedFilter, (newValue, oldValue) => {
       }
     }
   } else {
-    // Something was removed
     if (newValue.length === 0) {
-      // If everything removed, default back to 'all'
       selectedFilter.value = ['all'];
       return;
     }

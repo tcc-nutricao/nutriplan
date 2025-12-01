@@ -240,7 +240,7 @@ const save = async () => {
         const res = await insert('meal-plan', payload)
         if (res.error) throw res
 
-        alert('Plano alimentar criado com sucesso!')
+        // alert('Plano alimentar criado com sucesso!')
         emit('save')
         emit('close')
     } catch (error) {

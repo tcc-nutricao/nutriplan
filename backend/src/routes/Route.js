@@ -1,6 +1,7 @@
 import { authenticate } from '../middleware/index.js'
 
 export const genericRoute = (router, route, api, authenticateMiddleware, authorizationMiddleware) => {
+  console.log(`Route.js: Registering generic route for ${route}`)
   const { search, insert, update, remove } = api;
 
   const middlewares = [];

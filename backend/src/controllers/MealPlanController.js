@@ -99,7 +99,6 @@ export const MealPlanController = {
       let queryParams = { ...req.query }
       let filters = []
 
-      // Parse existing filters if any
       if (queryParams.filters) {
         try {
           filters = typeof queryParams.filters === 'string' 
@@ -114,21 +113,23 @@ export const MealPlanController = {
 
       if (role === 'PROFESSIONAL') {
         const nutritionist = await NutritionistRepository.findByUserId(userId)
+        console.log('Logged in Nutritionist:', nutritionist)
         if (nutritionist) {
-          // Add nutritionist filter
           filters.push({
             field: 'id_nutritionist',
             value: nutritionist.id,
             operator: 'equals'
           })
+        } else {
+            console.log('No nutritionist found for user:', userId)
         }
       }
 
-      // Update queryParams with the new filters
       queryParams.filters = filters
 
       const { data, total } = await MealPlanService.search(queryParams)
-      return res.status(200).json({ data, total })
+      console.log('MealPlanController search result:', { dataLength: data?.length, total })
+      return res.status(200).json({ success: true, data, total })
     } catch (error) {
       console.error('Erro ao buscar planos alimentares:', error)
       return res.status(500).json({
@@ -138,5 +139,52 @@ export const MealPlanController = {
     }
   },
   update,
-  getMealPlanByPatient
+  getMealPlanByPatient,
+
+  generateAutomaticPlan: async (req, res) => {
+    try {
+      const { id: userId, role } = req.user;
+      const { patientId } = req.body;
+
+      if (role !== 'PROFESSIONAL') {
+        return res.status(403).json({ success: false, message: 'Apenas nutricionistas podem gerar planos automáticos.' });
+      }
+
+      const nutritionist = await NutritionistRepository.findByUserId(userId);
+      if (!nutritionist) {
+        return res.status(404).json({ success: false, message: 'Nutricionista não encontrado.' });
+      }
+
+      const result = await MealPlanService.generateAutomaticPlan(patientId, nutritionist.id);
+      return res.status(201).json({ success: true, data: result });
+
+    } catch (error) {
+      console.error('Erro ao gerar plano automático:', error);
+      return res.status(500).json({
+        success: false,
+        message: error.message || 'Erro interno do servidor'
+      });
+    }
+  },
+
+  assignPlan: async (req, res) => {
+    try {
+      const { id } = req.params; 
+      const { patientId } = req.body;
+
+      if (!id || !patientId) {
+        return res.status(400).json({ success: false, message: 'ID do plano e ID do paciente são obrigatórios.' });
+      }
+
+      const result = await MealPlanService.assignPlanToPatient(Number(id), patientId);
+      return res.status(200).json({ success: true, data: result });
+
+    } catch (error) {
+      console.error('Erro ao atribuir plano:', error);
+      return res.status(500).json({
+        success: false,
+        message: error.message || 'Erro interno do servidor'
+      });
+    }
+  }
 }

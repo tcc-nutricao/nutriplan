@@ -14,7 +14,7 @@
                 :src="profilePicture"
                 alt="Foto de perfil"
                 class="rounded-full object-cover mb-3 mt-1
-                       w-[clamp(100px, 120px, 140px)] h-[clamp(100px, 120px, 140px)]"
+                       size-[100px] lg:size-[120px] xl:size-[140px]"
               />
               <svg
                 v-else
@@ -175,7 +175,8 @@ const stickyTop = computed(() => {
   return isMobile.value ? 12 : 12;
 });
 
-onMounted(() => {
+onMounted(async () => {
+  await fetchProfilePicture();
   checkMobile();
   initMenuHeightObserver();
   window.addEventListener("resize", checkMobile);

@@ -164,7 +164,6 @@ const getAllByNutritionist = async (nutritionistId) => {
     const patients = await PatientRepository.findByNutritionistId(nutritionistId);
 
     return patients.map(patient => {
-      // Calculate Age
       const birthDate = new Date(patient.birth_date);
       const today = new Date();
       let age = today.getFullYear() - birthDate.getFullYear();
@@ -173,30 +172,25 @@ const getAllByNutritionist = async (nutritionistId) => {
           age--;
       }
 
-      // Get latest weight and height
       const latestHealthData = patient.healthData && patient.healthData.length > 0 ? patient.healthData[0] : null;
       const weight = latestHealthData ? latestHealthData.weight : patient.weight;
       const height = latestHealthData ? latestHealthData.height : patient.height;
 
-      // Get Active Goal/Objective
       let objective = 'Não definido';
       let restrictions = [];
       let restrictionIds = [];
       let objectiveIds = [];
       let targetWeight = null;
       
-      // Restrictions
       if (patient.patientDietaryRestrictions) {
           restrictions = patient.patientDietaryRestrictions.map(pdr => pdr.dietaryRestriction.name);
           restrictionIds = patient.patientDietaryRestrictions.map(pdr => pdr.dietaryRestriction.id);
       }
 
-      // Objective
-      // Priority: Active Meal Plan Goal -> Active Patient Goal
       const activeMealPlanPatient = patient.mealPlanPatients && patient.mealPlanPatients.length > 0 ? patient.mealPlanPatients[0] : null;
       const activeMealPlan = activeMealPlanPatient ? activeMealPlanPatient.mealPlan : null;
 
-      let goal = activeMealPlan ? activeMealPlan.goal : (patient.goals && patient.goals.length > 0 ? patient.goals[0] : null);
+      let goal = patient.goals && patient.goals.length > 0 ? patient.goals[0] : null;
       
       if (goal) {
           targetWeight = goal.target_weight;
@@ -209,7 +203,6 @@ const getAllByNutritionist = async (nutritionistId) => {
           }
       }
 
-      // Last Update
       const lastUpdateDate = patient.updated_at || patient.created_at;
       const lastUpdate = new Date(lastUpdateDate).toLocaleDateString('pt-BR');
 
@@ -231,7 +224,6 @@ const getAllByNutritionist = async (nutritionistId) => {
               dietaryRestrictions: activeMealPlan.mealPlanDietaryRestrictions.map(mpdr => mpdr.dietaryRestriction.icon || mpdr.dietaryRestriction.name),
               goalObjectives: goal ? goal.goalObjectives.map(go => ({ objective: { icon: go.objective.icon, name: go.objective.name } })) : []
           } : null,
-          // Raw data for editing
           birth_date: patient.birth_date,
           target_weight: targetWeight,
           restrictionIds: restrictionIds,
@@ -261,9 +253,7 @@ const deleteOrUnlink = async (patientId, nutritionistId) => {
         }
 
         if (patient.user.role === 'GUEST') {
-            // Delete everything related to the patient
             await prisma.$transaction(async (tx) => {
-                // 1. Get Patient Goals
                 const goals = await tx.goal.findMany({ 
                     where: { id_patient: patient.id },
                     select: { id: true }
@@ -271,12 +261,10 @@ const deleteOrUnlink = async (patientId, nutritionistId) => {
                 const goalIds = goals.map(g => g.id);
 
                 if (goalIds.length > 0) {
-                    // 2. Delete GoalObjectives
                     await tx.goalObjective.deleteMany({ 
                         where: { id_goal: { in: goalIds } } 
                     });
 
-                    // 3. Get MealPlans linked to these Goals
                     const mealPlans = await tx.mealPlan.findMany({ 
                         where: { id_goal: { in: goalIds } },
                         select: { id: true }
@@ -284,19 +272,15 @@ const deleteOrUnlink = async (patientId, nutritionistId) => {
                     const mealPlanIds = mealPlans.map(mp => mp.id);
 
                     if (mealPlanIds.length > 0) {
-                        // 4. Delete MealPlan Dependencies
                         
-                        // MealPlanPatient (All links to these plans)
                         await tx.mealPlanPatient.deleteMany({ 
                             where: { id_meal_plan: { in: mealPlanIds } } 
                         });
 
-                        // MealPlanDietaryRestriction
                         await tx.mealPlanDietaryRestriction.deleteMany({ 
                             where: { id_meal_plan: { in: mealPlanIds } } 
                         });
 
-                        // MealPlanMeals and their children
                         const mealPlanMeals = await tx.mealPlanMeal.findMany({ 
                             where: { id_meal_plan: { in: mealPlanIds } },
                             select: { id: true }
@@ -304,51 +288,41 @@ const deleteOrUnlink = async (patientId, nutritionistId) => {
                         const mealPlanMealIds = mealPlanMeals.map(mpm => mpm.id);
 
                         if (mealPlanMealIds.length > 0) {
-                            // MealPlanRecipe
                             await tx.mealPlanRecipe.deleteMany({ 
                                 where: { id_meal_plan_meal: { in: mealPlanMealIds } } 
                             });
                             
-                            // FoodConsumed
                             await tx.foodConsumed.deleteMany({ 
                                 where: { id_meal_plan_meal: { in: mealPlanMealIds } } 
                             });
 
-                            // MealPlanMeal
                             await tx.mealPlanMeal.deleteMany({ 
                                 where: { id: { in: mealPlanMealIds } } 
                             });
                         }
 
-                        // 5. Delete MealPlans
                         await tx.mealPlan.deleteMany({ 
                             where: { id: { in: mealPlanIds } } 
                         });
                     }
 
-                    // 6. Delete Goals
                     await tx.goal.deleteMany({ 
                         where: { id: { in: goalIds } } 
                     });
                 }
 
-                // 7. Delete other direct patient relations
                 await tx.healthData.deleteMany({ where: { id_patient: patient.id } });
                 await tx.patientDietaryRestriction.deleteMany({ where: { id_patient: patient.id } });
                 await tx.nutritionistPatient.deleteMany({ where: { id_patient: patient.id } });
                 
-                // Ensure any remaining MealPlanPatient records for this patient are gone
                 await tx.mealPlanPatient.deleteMany({ where: { id_patient: patient.id } });
                 
-                // 8. Delete Patient
                 await tx.patient.delete({ where: { id: patient.id } });
                 
-                // 9. Delete User
                 await tx.user.delete({ where: { id: patient.user.id } });
             });
             return { message: 'Paciente e usuário excluídos com sucesso' };
         } else {
-            // Unlink from nutritionist
             await prisma.$transaction(async (tx) => {
                 await tx.nutritionistPatient.deleteMany({
                     where: {
@@ -357,7 +331,6 @@ const deleteOrUnlink = async (patientId, nutritionistId) => {
                     }
                 });
                 
-                // Optional: Set id_nutritionist to null if it matches
                 if (patient.id_nutritionist === parseInt(nutritionistId)) {
                     await tx.patient.update({
                         where: { id: patient.id },
@@ -435,18 +408,16 @@ const createFullPatient = async (nutritionistId, patientData) => {
       console.log('patientData:', JSON.stringify(patientData, null, 2));
 
       return prisma.$transaction(async (tx) => {
-        // 1. Criar User
         const newUser = await tx.user.create({
           data: {
             name: patientData.name,
             email: patientData.email,
-            password: patientData.password || "mudar123", // Senha padrão
+            password: patientData.password || "mudar123",
             role: "GUEST",
             created_at: new Date(),
           }
         });
 
-        // 2. Criar Paciente
         const newPatient = await tx.patient.create({
           data: {
             id_user: newUser.id,
@@ -459,7 +430,6 @@ const createFullPatient = async (nutritionistId, patientData) => {
           }
         });
 
-        // 3. Criar HealthData inicial
         await tx.healthData.create({
           data: {
             id_patient: newPatient.id,
@@ -471,7 +441,6 @@ const createFullPatient = async (nutritionistId, patientData) => {
           }
         });
 
-        // 4. Criar Goal (Meta e Objetivos)
         if (patientData.objectives && patientData.objectives.length > 0) {
             const newGoal = await tx.goal.create({
                 data: {
@@ -484,9 +453,7 @@ const createFullPatient = async (nutritionistId, patientData) => {
                 }
             });
 
-            // Vincular objetivos ao Goal
             for (const objectiveId of patientData.objectives) {
-                // Vamos definir o primeiro como MAIN e o resto como SECONDARY se houver mais de um.
                 const type = patientData.objectives.indexOf(objectiveId) === 0 ? 'MAIN' : 'SECONDARY';
                 
                 await tx.goalObjective.create({
@@ -500,7 +467,6 @@ const createFullPatient = async (nutritionistId, patientData) => {
             }
         }
 
-        // 5. Criar Restrições Alimentares
         if (patientData.restrictions && patientData.restrictions.length > 0) {
             for (const restrictionId of patientData.restrictions) {
                  await tx.patientDietaryRestriction.create({
@@ -513,7 +479,6 @@ const createFullPatient = async (nutritionistId, patientData) => {
             }
         }
 
-        // 6. Criar vínculo NutritionistPatient (opcional, já que Patient tem id_nutritionist, mas bom manter consistência se usar tabela pivo)
         await tx.nutritionistPatient.create({
             data: {
                 id_nutritionist: nutritionistId,
@@ -542,7 +507,6 @@ const updatePatient = async (id, data) => {
           throw new AppError({ message: 'Paciente não encontrado' });
         }
 
-        // 1. Update User (Name, Email)
         if (data.name || data.email) {
           await tx.user.update({
             where: { id: patient.id_user },
@@ -553,7 +517,6 @@ const updatePatient = async (id, data) => {
           });
         }
 
-        // 2. Update Patient (Birth Date, Gender, Height, Weight)
         const patientUpdateData = {};
         if (data.birth_date) patientUpdateData.birth_date = new Date(data.birth_date);
         if (data.gender) patientUpdateData.gender = data.gender;
@@ -567,7 +530,6 @@ const updatePatient = async (id, data) => {
           });
         }
 
-        // 3. Update HealthData (if weight/height changed, add new record)
         if (data.weight || data.height) {
              await tx.healthData.create({
                 data: {
@@ -584,7 +546,6 @@ const updatePatient = async (id, data) => {
              });
         }
 
-        // 4. Update Goal (Target Weight, Objectives)
         let goal = await tx.goal.findFirst({
             where: { id_patient: parseInt(id), status: 'ACTIVE' }
         });
@@ -608,10 +569,8 @@ const updatePatient = async (id, data) => {
         }
 
         if (goal && data.objectives) {
-            // Remove old objectives
             await tx.goalObjective.deleteMany({ where: { id_goal: goal.id } });
             
-            // Add new objectives
             for (const objectiveId of data.objectives) {
                 const type = data.objectives.indexOf(objectiveId) === 0 ? 'MAIN' : 'SECONDARY';
                 await tx.goalObjective.create({
@@ -625,7 +584,6 @@ const updatePatient = async (id, data) => {
             }
         }
 
-        // 5. Update Restrictions
         if (data.restrictions) {
             await tx.patientDietaryRestriction.deleteMany({ where: { id_patient: parseInt(id) } });
             for (const restrictionId of data.restrictions) {

@@ -14,6 +14,7 @@
                     <SearchBar
                         :filter="true"
                         :sort="true"
+                        searchType="meal-plans"
                         placeholder="Pesquise um plano"
                         class="w-[40%] shadowSearch z-[200]"
                         noSearch
@@ -38,7 +39,7 @@
                 enter-active-class="transition-opacity duration-300 ease"
                 leave-active-class="transition-opacity duration-300 ease"
             >
-                <div v-if="showViewModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[300]" @click.self="closeViewModal">
+                <div v-if="showViewModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]" @click.self="closeViewModal">
                     <div class="bg-white rounded-3xl pb-8 pt-12 px-9 w-full max-w-4xl shadow-lg relative max-h-[90vh] overflow-y-auto modal-container transition-transform duration-300 ease">
                          <button
                             class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-[50]"
@@ -102,7 +103,7 @@ const transformPlan = (plan) => {
   return {
     ...plan,
     dietaryRestrictions: plan.mealPlanDietaryRestrictions || [],
-    goalObjectives: plan.goal?.goalObjectives || []
+    objective: plan.objective
   }
 }
 

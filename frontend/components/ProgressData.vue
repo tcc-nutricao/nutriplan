@@ -66,7 +66,7 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits, computed } from 'vue';
+import { computed } from 'vue';
 import { remove } from '~/crud.js';
 
 const props = defineProps({

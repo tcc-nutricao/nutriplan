@@ -102,7 +102,7 @@
 </template>
 
 <script setup>
-import { reactive, defineProps, defineEmits, watch } from "vue";
+import { reactive, watch } from "vue";
 
 const props = defineProps({
   initialData: { type: Object, default: () => ({}) },

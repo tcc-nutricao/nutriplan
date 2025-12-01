@@ -4,12 +4,6 @@ import { RecipeRepository } from '../repositories/RecipeRepository.js'
 import { MealPlanRepository } from '../repositories/MealPlanRepository.js'
 import { AppError } from '../exceptions/AppError.js'
 
-/**
- * Popula um plano alimentar de forma inteligente
- * @param {number} mealPlanId - ID do plano alimentar
- * @param {Object} options - Opções de customização
- * @returns {Object} Resultado da operação
- */
 const populateMealPlan = async (mealPlanId, options = {}) => {
   try {
     const {
@@ -33,7 +27,7 @@ const populateMealPlan = async (mealPlanId, options = {}) => {
     }
     
     const patientRestrictions = mealPlan.mealPlanDietaryRestrictions?.map(mpdr => mpdr.dietaryRestriction.name.toLowerCase()) || []
-    const patientObjectives = mealPlan.goal?.goalObjectives?.map(go => go.objective.name.toLowerCase()) || []
+    const patientObjectives = mealPlan.objective ? [mealPlan.objective.name.toLowerCase()] : []
 
     const validRecipes = allRecipes.filter(recipe => {
       const recipePrefs = recipe.recipePreferences.map(rp => rp.preference.name.toLowerCase())

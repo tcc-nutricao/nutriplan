@@ -5,18 +5,10 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 const base = generateCrudRepository('mealPlan', {
-  softDelete: false, // MealPlan usa hard delete
+  softDelete: false, 
   defaultOrderBy: 'id',
   defaultIncludes: {
-    goal: {
-      include: {
-        goalObjectives: {
-          include: {
-            objective: true
-          }
-        }
-      }
-    },
+    objective: true,
     mealPlanPatients: {
       include: {
         patient: true
@@ -75,6 +67,7 @@ export const MealPlanRepository = {
           data: {
             id_meal_plan: mealPlan.id,
             id_patient: id_patient,
+            status: 'ACTIVE',
             created_at: new Date()
           }
         });

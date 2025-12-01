@@ -9,7 +9,7 @@ export const GoalRepository = generateCrudRepository('goal', {
         objective: true
       }
     },
-    mealPlans: true,
+
     patient: true
   }
 });

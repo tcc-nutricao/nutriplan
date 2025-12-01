@@ -3,12 +3,8 @@
     <div class="flex flex-col gap-3 pb-10 w-full items-center">
         <div class="relative flex justify-between items-center text-lg bg-p-600 rounded-t-2xl py-6 mb-1 px-5 w-full shadow-lg text-white">
           <p class="font-medium">
-            <!-- Plano de  -->
-            <span
-                v-for="(goalObjective, index) in object?.goal?.goalObjectives"
-                :key="index"
-            >
-                {{ goalObjective.objective?.name }} <span v-if="index !== object?.goal?.goalObjectives?.length - 1">| </span>
+            <span>
+                {{ object?.objective?.name }}
             </span>
           </p>
           <div class="absolute left-1/2 -translate-x-1/2">
@@ -25,7 +21,7 @@
             <span class="text-gray-600">{{ `${object?.calories} kcal` }}</span>
         </div> 
         <RestrictionsIconBar :items="object?.mealPlanDietaryRestrictions" />
-        <RestrictionsIconBar :items="object?.goal?.goalObjectives" />
+        <RestrictionsIconBar :items="object?.objective ? [object.objective] : []" />
       </div>
       <WeekDaysBar v-model="selectedDay" class="my-2 px-2"/>
       <Menu :items="object?.mealPlanMeals" :selectedDay="selectedDay"  class="w-full px-8"/> 

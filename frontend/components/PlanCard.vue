@@ -7,11 +7,10 @@
         <div class="pb-3 px-3">
             <div 
                 class="flex items-center gap-1 text-sm justify-start"
-                v-for="(goalObjective, index) in object.goalObjectives"
-                :key="index"
+                v-if="object.objective"
             >
-                <IconSolid :icon="goalObjective.objective.icon" color="text-p-600" sm />
-                <p class="font-sora text-p-950 font-semibold text-[0.85em]">{{ goalObjective.objective.name }}</p>
+                <IconSolid :icon="object.objective.icon" color="text-p-600" sm />
+                <p class="font-sora text-p-950 font-semibold text-[0.85em]">{{ object.objective.name }}</p>
             </div>  
         </div>
     </div>
@@ -24,5 +23,5 @@ const props = defineProps({
     object: Object
 })
 
-computed(() => getIntoleranceIcon)
+
 </script>

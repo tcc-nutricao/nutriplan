@@ -12,15 +12,12 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 
-// Métodos customizados adicionais
 const getMealPlanByPatient = async (patientId, additionalFilters = []) => {
   try {
     if (!patientId) {
       throw new AppError({ message: 'Paciente não encontrado para o patientId fornecido' })
     }
 
-    // Combinar filtro do paciente com filtros adicionais
-    // Usando relation filtering: mealPlanPatients: { some: { id_patient: patientId } }
     const filters = [
       { field: 'mealPlanPatients', value: { id_patient: patientId }, operator: 'some' },
       ...additionalFilters
@@ -42,7 +39,6 @@ const getMealPlanByPatient = async (patientId, additionalFilters = []) => {
   }
 }
 
-// Função para buscar meal plan ativo do paciente
 const getActiveMealPlanForPatient = async (patientId) => {
   try {
     if (!patientId) {
@@ -50,8 +46,7 @@ const getActiveMealPlanForPatient = async (patientId) => {
     }
 
     const filters = [
-      { field: 'status', value: 'ACTIVE', operator: 'equals' },
-      { field: 'mealPlanPatients', value: { id_patient: patientId }, operator: 'some' }
+      { field: 'mealPlanPatients', value: { id_patient: patientId, status: 'ACTIVE' }, operator: 'some' }
     ]
     const { data: mealPlans = [] } = await getMealPlanByPatient(patientId, filters)
 
@@ -68,29 +63,16 @@ const getActiveMealPlanForPatient = async (patientId) => {
 
 const update = async (id, data, user) => {
   const mealPlanId = parseInt(id, 10);
-  // Se o status está sendo alterado para ACTIVE
   const mealPlan = await MealPlanRepository.findById(mealPlanId);
   
   if (!mealPlan) throw new AppError('Plano alimentar não encontrado');
 
-  // Obter patientId da relação (assumindo que o include default traz mealPlanPatients)
   const patientId = mealPlan.mealPlanPatients?.[0]?.id_patient;
   
   if (!patientId) throw new AppError('Paciente não encontrado para este plano alimentar');
 
   if (data.status === 'ACTIVE') {
-    // Desativa outros planos ativos desse paciente
-    
-    const activePlans = await getMealPlanByPatient(patientId, [
-        { field: 'status', value: 'ACTIVE', operator: 'equals' },
-        { field: 'id', value: mealPlanId, operator: 'not' }
-    ]);
-
-    if (activePlans.data && activePlans.data.length > 0) {
-        for (const plan of activePlans.data) {
-            await MealPlanRepository.update(plan.id, { status: 'COMPLETED' });
-        }
-    }
+    delete data.status; 
   }
 
   const patient = await PatientRepository.findById(patientId);
@@ -108,42 +90,17 @@ const create = async (data, user) => {
     return await prisma.$transaction(async (tx) => {
       const { 
         calories, 
-        objective, // id_objective
-        restrictions = [], // array of id_dietary_restriction
-        mealRecipes = {}, // { mealId: { day: [recipes] } }
+        objective, 
+        restrictions = [], 
+        mealRecipes = {}, 
         id_patient 
       } = data;
 
-      // 1. Create Goal
-      const goal = await GoalRepository.create({
-        id_patient: id_patient || null,
-        description: 'Plano Alimentar Profissional',
-        target_weight: null,
-        start_date: new Date(),
-        status: 'ACTIVE',
-        created_at: new Date(),
-        updated_at: new Date()
-      }, tx);
-
-      // 2. Link Objective to Goal
-      if (objective) {
-        await GoalObjectiveRepository.create({
-          id_goal: goal.id,
-          id_objective: objective,
-          type: 'MAIN',
-          created_at: new Date(),
-          updated_at: new Date()
-        }, tx);
-      }
-
-      // 3. Create MealPlan
-      // Using direct prisma call to handle transaction correctly and avoid complexity with repository override
       const mealPlan = await tx.mealPlan.create({
         data: {
           id_nutritionist: user.id_nutritionist || user.nutritionist?.id,
-          id_goal: goal.id,
+          id_objective: objective,
           calories: parseInt(calories),
-          status: 'ACTIVE',
           created_at: new Date(),
           updated_at: new Date()
         }
@@ -151,11 +108,10 @@ const create = async (data, user) => {
 
       if (id_patient) {
         await tx.mealPlanPatient.create({
-           data: { id_meal_plan: mealPlan.id, id_patient, created_at: new Date() }
+           data: { id_meal_plan: mealPlan.id, id_patient, status: 'ACTIVE', created_at: new Date() }
         });
       }
 
-      // 4. Create Dietary Restrictions
       if (restrictions && restrictions.length > 0) {
         for (const restrictionId of restrictions) {
           await MealPlanDietaryRestrictionRepository.create({
@@ -167,9 +123,6 @@ const create = async (data, user) => {
         }
       }
 
-      // 5. Create Meals and Recipes
-      // mealRecipes structure: { mealId: { day: [recipes] } }
-      // We need to iterate over meals and days
       
       for (const mealIdStr in mealRecipes) {
         const mealId = parseInt(mealIdStr);
@@ -179,17 +132,15 @@ const create = async (data, user) => {
            const recipes = daysData[day];
            
            if (recipes && recipes.length > 0) {
-             // Create MealPlanMeal
              const mealPlanMeal = await MealPlanMealRepository.create({
                id_meal_plan: mealPlan.id,
                id_meal: mealId,
                day: day,
-               time: new Date(), // Placeholder time
+               time: new Date(), 
                created_at: new Date(),
                updated_at: new Date()
              }, tx);
 
-             // Create MealPlanRecipes
              for (const recipe of recipes) {
                await MealPlanRecipeRepository.create({
                  id_meal_plan_meal: mealPlanMeal.id,
@@ -211,10 +162,163 @@ const create = async (data, user) => {
   }
 };
 
+import { MealPlanPopulateService } from './MealPlanPopulateService.js'
+
+const generateAutomaticPlan = async (patientId, nutritionistId) => {
+  try {
+    const patient = await PatientRepository.findById(patientId);
+    if (!patient) throw new AppError('Paciente não encontrado');
+
+    const goal = await GoalRepository.search({
+      filters: [
+        { field: "id_patient", value: patientId },
+        { field: "status", value: "ACTIVE" },
+      ],
+    });
+    const activeGoal = goal.data?.[0];
+    
+    if (!activeGoal) throw new AppError('Paciente não possui objetivo ativo');
+
+    // Calcular Calorias (Mifflin-St Jeor)
+    const age = new Date().getFullYear() - new Date(patient.birth_date).getFullYear();
+    let tmb = 0;
+    
+    if (patient.gender === 'MASC') {
+      tmb = (10 * patient.weight) + (6.25 * patient.height) - (5 * age) + 5;
+    } else {
+      tmb = (10 * patient.weight) + (6.25 * patient.height) - (5 * age) - 161;
+    }
+    
+    let dailyCalories = tmb * 1.2;
+    
+    const goalObjectives = await GoalObjectiveRepository.search({
+        filters: [{ field: "id_goal", value: activeGoal.id }],
+    });
+    const goalType = goalObjectives.data?.[0]?.objective?.name?.toLowerCase() || '';
+
+    if (goalType.includes('perda') || goalType.includes('emagrecer') || goalType.includes('queima')) {
+      dailyCalories -= 500; 
+    } else if (goalType.includes('ganho') || goalType.includes('hipertrofia') || goalType.includes('massa')) {
+      dailyCalories += 400; 
+    }
+    
+    if (dailyCalories < 1200) dailyCalories = 1200;
+    if (dailyCalories > 4000) dailyCalories = 4000;
+
+    const activePlans = await getMealPlanByPatient(patientId, [
+        { field: 'mealPlanPatients', value: { id_patient: patientId, status: 'ACTIVE' }, operator: 'some' }
+    ]);
+
+    if (activePlans.data && activePlans.data.length > 0) {
+        for (const plan of activePlans.data) {
+            const mpp = plan.mealPlanPatients.find(p => p.id_patient === patientId && p.status === 'ACTIVE');
+            if (mpp) {
+                await prisma.mealPlanPatient.update({
+                    where: { id: mpp.id },
+                    data: { status: 'DRAFT' }
+                });
+            }
+        }
+    } else {
+         const activeMpps = await prisma.mealPlanPatient.findMany({
+             where: { id_patient: patientId, status: 'ACTIVE' }
+         });
+         
+         for (const mpp of activeMpps) {
+             await prisma.mealPlanPatient.update({
+                 where: { id: mpp.id },
+                 data: { status: 'DRAFT' }
+             });
+         }
+    }
+
+    const newPlan = await MealPlanRepository.create({
+      id_patient: patientId, 
+      id_nutritionist: nutritionistId, 
+      id_objective: activeGoal.goalObjectives?.[0]?.id_objective, 
+      calories: Math.round(dailyCalories),
+      created_at: new Date(),
+      updated_at: new Date()
+    });
+
+    const patientRestrictions = await PatientRepository.findById(patientId).then(p => p.patientDietaryRestrictions || []);
+    if (patientRestrictions.length > 0) {
+      for (const pr of patientRestrictions) {
+        await MealPlanDietaryRestrictionRepository.create({
+          id_meal_plan: newPlan.id,
+          id_dietary_restriction: pr.id_dietary_restriction,
+          created_at: new Date(),
+          updated_at: new Date()
+        });
+      }
+    }
+
+    await MealPlanPopulateService.populateMealPlan(newPlan.id);
+    return newPlan;
+
+  } catch (error) {
+    console.error('Erro ao gerar plano automático:', error);
+    throw error;
+  }
+};
+
+const assignPlanToPatient = async (mealPlanId, patientId) => {
+    try {
+        const mealPlan = await MealPlanRepository.findById(mealPlanId);
+        if (!mealPlan) throw new AppError('Plano alimentar não encontrado');
+
+        const activePlans = await getMealPlanByPatient(patientId, [
+            { field: 'mealPlanPatients', value: { id_patient: patientId, status: 'ACTIVE' }, operator: 'some' }
+        ]);
+
+        if (activePlans.data && activePlans.data.length > 0) {
+            for (const plan of activePlans.data) {
+                if (plan.id !== mealPlanId) {
+                     const mpp = plan.mealPlanPatients.find(p => p.id_patient === patientId && p.status === 'ACTIVE');
+                     if (mpp) {
+                        await prisma.mealPlanPatient.update({
+                            where: { id: mpp.id },
+                            data: { status: 'DRAFT' }
+                        });
+                     }
+                }
+            }
+        }
+
+        const existingMpp = await prisma.mealPlanPatient.findFirst({
+            where: { id_meal_plan: mealPlanId, id_patient: patientId }
+        });
+        
+        if (existingMpp) {
+            await prisma.mealPlanPatient.update({
+                where: { id: existingMpp.id },
+                data: { status: 'ACTIVE' }
+            });
+        } else {
+             await prisma.mealPlanPatient.create({
+                data: {
+                    id_meal_plan: mealPlanId,
+                    id_patient: patientId,
+                    status: 'ACTIVE',
+                    created_at: new Date()
+                }
+            });
+        }
+
+        return { message: 'Plano atribuído com sucesso' };
+
+    } catch (error) {
+        console.error('Erro ao atribuir plano:', error);
+        throw error;
+    }
+}
+
 export const MealPlanService = {
   ...generateCrudService(MealPlanRepository),
   create,
   update, 
   getMealPlanByPatient,
-  getActiveMealPlanForPatient
+  getActiveMealPlanForPatient,
+  generateAutomaticPlan,
+  assignPlanToPatient
 }

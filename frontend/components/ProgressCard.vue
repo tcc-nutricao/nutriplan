@@ -34,7 +34,7 @@
                  </div>
                  <div class="flex flex-col items-center">
                     <p class="text-xs text-gray-500">Meta</p>
-                    <p class="font-bold text-p-600">{{ targetWeight ? targetWeight + ' kg' : 'N/A' }}</p>
+                    <p class="font-bold text-p-600">{{ targetWeight ? targetWeight + ' kg' : 'Nenhuma' }}</p>
                  </div>
             </div>
         </div>
@@ -47,7 +47,6 @@
             :history="progress" 
             @close="closeHistory" 
             @refresh="handleRefresh"
-            class="z-[1000]"
         />
     </div>
 </template>

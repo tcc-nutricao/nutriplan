@@ -37,13 +37,7 @@ const findByNutritionistId = async (idNutritionist) => {
         include: {
           mealPlan: {
             include: {
-              goal: {
-                 include: {
-                    goalObjectives: {
-                        include: { objective: true }
-                    }
-                 }
-              },
+              objective: true,
               mealPlanDietaryRestrictions: {
                 include: { dietaryRestriction: true }
               }
@@ -59,7 +53,10 @@ const findById = async (id) => {
   return await prisma.patient.findUnique({
     where: { id: id },
     include: {
-      user: true
+      user: true,
+      patientDietaryRestrictions: {
+        include: { dietaryRestriction: true }
+      }
     }
   });
 };
