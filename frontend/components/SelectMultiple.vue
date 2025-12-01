@@ -35,6 +35,7 @@
           <Checkbox 
             :modelValue="isSelected(option.value)" 
             :label="option.label"
+            class="pointer-events-none"
             @update:modelValue="() => {}"
           />
         </li>
