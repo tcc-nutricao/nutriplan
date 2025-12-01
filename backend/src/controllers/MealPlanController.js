@@ -113,7 +113,7 @@ export const MealPlanController = {
 
       if (role === 'PROFESSIONAL') {
         const nutritionist = await NutritionistRepository.findByUserId(userId)
-        console.log('Logged in Nutritionist:', nutritionist)
+        // console.log('Logged in Nutritionist:', nutritionist)
         if (nutritionist) {
           filters.push({
             field: 'id_nutritionist',
@@ -128,7 +128,7 @@ export const MealPlanController = {
       queryParams.filters = filters
 
       const { data, total } = await MealPlanService.search(queryParams)
-      console.log('MealPlanController search result:', { dataLength: data?.length, total })
+      // console.log('MealPlanController search result:', { dataLength: data?.length, total })
       return res.status(200).json({ success: true, data, total })
     } catch (error) {
       console.error('Erro ao buscar planos alimentares:', error)

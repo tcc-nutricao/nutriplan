@@ -104,9 +104,18 @@ const navigate = async (route) => {
 
 const save = async () => {
   const response = await insert(route.value, object.value)
-  errors.value = response.error ? response.data.data : {}
   
-  if (!response.error) {
+  if (response.error) {
+    if (response.data && response.data.field) {
+       errors.value = { [response.data.field]: response.data.message }
+    } else if (response.data && response.data.data) {
+       errors.value = response.data.data
+    } else {
+       // Fallback for generic errors
+       errors.value = { email: response.data?.message || 'Erro ao criar conta' }
+    }
+  } else {
+    errors.value = {}
     navigate('/')
   }
 }

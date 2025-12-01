@@ -5,7 +5,7 @@ import { generateCrudController } from './Controller.js'
 const getFoodDiaryStatistics = async (req, res, next) => {
   try {
     let dates = req.query.dates
-    console.log('Received dates parameter:', dates);
+    // console.log('Received dates parameter:', dates);
 
     if (typeof dates === 'string') {
       try {

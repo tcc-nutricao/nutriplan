@@ -52,7 +52,7 @@ export const MealPlanRepository = {
   ...base,
   
   create: async (data) => {
-    const { id_patient, ...mealPlanData } = data;
+    const { id_patient, status, ...mealPlanData } = data;
     
     return prisma.$transaction(async (tx) => {
       const mealPlan = await tx.mealPlan.create({
@@ -67,7 +67,7 @@ export const MealPlanRepository = {
           data: {
             id_meal_plan: mealPlan.id,
             id_patient: id_patient,
-            status: 'ACTIVE',
+            status: status || 'ACTIVE',
             created_at: new Date()
           }
         });

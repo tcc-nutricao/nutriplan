@@ -63,9 +63,9 @@ const createFull = async (req, res) => {
 const getAll = async (req, res) => {
   try {
     const { id: userId } = req.user;
-    console.log('getAll - userId:', userId);
+    // console.log('getAll - userId:', userId);
     const nutritionist = await NutritionistRepository.findByUserId(userId);
-    console.log('getAll - nutritionist:', nutritionist);
+    // console.log('getAll - nutritionist:', nutritionist);
 
     if (!nutritionist) {
       return res.status(404).json({
@@ -75,7 +75,7 @@ const getAll = async (req, res) => {
     }
 
     const patients = await PatientService.getAllByNutritionist(nutritionist.id);
-    console.log('getAll - patients found:', patients.length);
+    // console.log('getAll - patients found:', patients.length);
 
     return res.status(200).json({
       success: true,

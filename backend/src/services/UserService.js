@@ -13,7 +13,9 @@ const prisma = new PrismaClient()
 // Método customizado para inserção de usuário
 const insert = async (data) => {
   const existing = await UserRepository.findByEmail(data.email)
-  if (existing) {
+  
+  // Se existe e NÃO está deletado (ativo), erro
+  if (existing && !existing.deleted_at) {
     throw new AppError({
       statusCode: 400,
       message: 'Email já cadastrado',
@@ -24,21 +26,81 @@ const insert = async (data) => {
   const hashedPassword = await bcrypt.hash(data.password, 10)
 
   const result = await prisma.$transaction(async (tx) => {
-    const user = await UserRepository.create(
-      { ...data, password: hashedPassword },
-      tx
-    )
+    let user;
 
-    const { role, id: idUser, professional_register: professionalRegister } = user
+    if (existing && existing.deleted_at) {
+      // Reativar usuário
+      user = await UserRepository.update(existing.id, {
+        ...data,
+        password: hashedPassword,
+        deleted_at: null
+      })
+      
+      // Reativar registros associados
+      if (user.role === 'STANDARD') {
+        // Tenta achar paciente deletado ou cria novo se não existir (embora deva existir)
+        const patient = await PatientRepository.findByUserId(user.id)
+        if (patient) {
+           // Resetar dados do paciente e reativar
+           await prisma.patient.update({
+             where: { id: patient.id },
+             data: { 
+               deleted_at: null,
+               weight: 0,
+               height: 0,
+               gender: 'NONE',
+               birth_date: new Date()
+             }
+           })
 
-    if (!['STANDARD', 'PROFESSIONAL'].includes(role)) {
-      throw new AppError({ message: 'Role inválida', statusCode: 400, field: 'role' })
-    }
+           // Soft-delete dados relacionados para forçar recadastro
+           const now = new Date()
+           await tx.healthData.updateMany({
+             where: { id_patient: patient.id },
+             data: { deleted_at: now }
+           })
+           await tx.goal.updateMany({
+             where: { id_patient: patient.id },
+             data: { deleted_at: now }
+           })
+           await tx.patientDietaryRestriction.updateMany({
+             where: { id_patient: patient.id },
+             data: { deleted_at: now }
+           })
 
-    if (role === 'STANDARD') {
-      await PatientRepository.create({ id_user: idUser }, tx)
+        } else {
+           await PatientRepository.create({ id_user: user.id }, tx)
+        }
+      } else {
+        const nutritionist = await NutritionistRepository.findByUserId(user.id)
+        if (nutritionist) {
+           await prisma.nutritionist.update({
+             where: { id: nutritionist.id },
+             data: { deleted_at: null, professional_register: user.professional_register ?? null }
+           })
+        } else {
+           await NutritionistRepository.create({ id_user: user.id, professional_register: user.professional_register ?? null }, tx)
+        }
+      }
+
     } else {
-      await NutritionistRepository.create({ id_user: idUser, professional_register: professionalRegister ?? null }, tx)
+      // Criar novo usuário
+      user = await UserRepository.create(
+        { ...data, password: hashedPassword },
+        tx
+      )
+
+      const { role, id: idUser, professional_register: professionalRegister } = user
+
+      if (!['STANDARD', 'PROFESSIONAL'].includes(role)) {
+        throw new AppError({ message: 'Role inválida', statusCode: 400, field: 'role' })
+      }
+
+      if (role === 'STANDARD') {
+        await PatientRepository.create({ id_user: idUser }, tx)
+      } else {
+        await NutritionistRepository.create({ id_user: idUser, professional_register: professionalRegister ?? null }, tx)
+      }
     }
 
     return user

@@ -144,7 +144,7 @@ const items = computed(() => {
   if (user.value?.role === 'STANDARD') {
     return [
       { icon: "fa-list", label: "Plano Alimentar", route: "/meal-plan" },
-      { icon: "fa-calendar-days", label: "Diário Alimentar", route: "/food-diary" },
+      // { icon: "fa-calendar-days", label: "Diário Alimentar", route: "/food-diary" },
       { icon: "fa-bars-progress", label: "Meu Progresso", route: "/my-progress" },
       { icon: "fa-utensils", label: "Receitas", route: "/recipes" },
       { icon: "fa-users", label: "Meus Grupos", route: "/my-groups" },

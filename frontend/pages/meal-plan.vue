@@ -56,7 +56,7 @@ const loadItems = async () => {
     const response = await $axios.get('/get-patient-meal-plan')
     const result = response.data
     
-    const activePlans = result.data.filter(item => item.status === 'ACTIVE')
+    const activePlans = result.data.filter(item => item.mealPlanPatients?.[0]?.status === 'ACTIVE')
     
     activePlans.sort((a, b) => {
       const aMeals = a.mealPlanMeals?.length || 0
@@ -65,7 +65,7 @@ const loadItems = async () => {
     })
     
     actualPlan.value = activePlans.map(transformPlan)
-    otherPlans.value = result.data.filter(item => item.status !== 'ACTIVE').map(transformPlan)
+    otherPlans.value = result.data.filter(item => item.mealPlanPatients?.[0]?.status !== 'ACTIVE').map(transformPlan)
   } catch (error) {
     console.error('Erro ao carregar planos:', error)
     actualPlan.value = []

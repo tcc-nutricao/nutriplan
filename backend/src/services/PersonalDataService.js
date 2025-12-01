@@ -261,8 +261,7 @@ const updatePersonalData = async (userId, personalData) => {
     
     const activePlan = await MealPlanRepository.search({
       filters: [
-        { field: 'mealPlanPatients', value: { id_patient: patientId }, operator: 'some' },
-        { field: 'status', value: 'ACTIVE' }
+        { field: 'mealPlanPatients', value: { id_patient: patientId, status: 'ACTIVE' }, operator: 'some' }
       ]
     });
 
@@ -292,10 +291,12 @@ const updatePersonalData = async (userId, personalData) => {
       if (dailyCalories < 1200) dailyCalories = 1200;
       if (dailyCalories > 4000) dailyCalories = 4000;
 
+      const idObjective = result.goal?.goalObjectives?.[0]?.id_objective || 1;
+
       const newPlan = await MealPlanRepository.create({
         id_patient: patientId,
         id_nutritionist: p.id_nutritionist || 1, 
-        id_goal: result.goal.id,
+        id_objective: idObjective,
         calories: Math.round(dailyCalories),
         status: 'ACTIVE',
         created_at: new Date(),
