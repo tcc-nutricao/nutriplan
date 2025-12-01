@@ -125,6 +125,7 @@ watch(
   (newValue) => {
     if (newValue) {
       object.value.role = newValue.label
+      errors.value.role = null // Clear error on selection
       if (newValue.label === 'Profissional') {
         openModal.value = true
       }

@@ -28,7 +28,7 @@
     label: String,
     required: Boolean,
     disabled: Boolean,
-    error: Array,
+    error: [String, Array, Boolean],
     modelValue: [String, Number],
     placeholder: String,
   })

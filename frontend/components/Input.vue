@@ -32,7 +32,7 @@ const { applyMask } = useUtils()
 const props = defineProps({
   modelValue: [String, Number],
   type: String,
-  error: [Boolean, Array],
+  error: [Boolean, Array, String],
   disabled: Boolean,
   placeholder: String,
   min: String,

@@ -116,13 +116,29 @@ const selectRecipesForCalories = (recipes, targetCalories, objectives) => {
     let score = 0
     const prefs = r.recipePreferences.map(rp => rp.preference.name.toLowerCase())
     
+    // Pontuação baseada em correspondência de objetivos
     objectives.forEach(obj => {
-      if (prefs.some(p => p.includes(obj))) score += 5
+      const objLower = obj.toLowerCase();
+      // Melhora a correspondência: verifica se a preferência contém o objetivo ou vice-versa
+      // Ex: Objetivo "Ganho de massa" vs Preferência "Hipertrofia" (precisa de mapeamento ou verificação mais ampla)
+      
+      if (prefs.some(p => p.includes(objLower) || objLower.includes(p))) score += 10
+      
+      // Lógica específica para objetivos comuns
+      if (objLower.includes('perda') || objLower.includes('emagrecer')) {
+         if (prefs.includes('low carb') || prefs.includes('fitness') || prefs.includes('leve')) score += 5;
+         if (r.calories < 400) score += 3; // Favorece receitas menos calóricas
+      }
+      
+      if (objLower.includes('ganho') || objLower.includes('massa') || objLower.includes('hipertrofia')) {
+         if (prefs.includes('proteico') || prefs.includes('energia') || prefs.includes('ganho de massa')) score += 5;
+         if (r.calories > 400) score += 3; // Favorece receitas mais calóricas
+      }
     })
     
     if (r.calories > 0) score += 1
     
-    score += Math.random() * 2
+    score += Math.random() * 2 // Fator de aleatoriedade reduzido para não sobrepor a relevância
     
     return { ...r, score }
   }).sort((a, b) => b.score - a.score)
@@ -131,6 +147,7 @@ const selectRecipesForCalories = (recipes, targetCalories, objectives) => {
   const selected = []
   let currentCalories = 0
   
+  // Tenta encontrar uma receita principal que se encaixe no alvo
   const mainRecipe = scoredRecipes.find(r => {
     if (!r.calories) return true 
     return r.calories >= targetCalories * 0.4 && r.calories <= targetCalories * 1.2
@@ -139,15 +156,16 @@ const selectRecipesForCalories = (recipes, targetCalories, objectives) => {
   if (mainRecipe) {
     selected.push(mainRecipe)
     currentCalories += (mainRecipe.calories || 0)
-  } else {
+  } else if (scoredRecipes.length > 0) {
     selected.push(scoredRecipes[0])
     currentCalories += (scoredRecipes[0].calories || 0)
   }
   
+  // Se ainda faltar muitas calorias, tenta adicionar um acompanhamento
   if (currentCalories < targetCalories * 0.7) {
     const remaining = targetCalories - currentCalories
     const sideDish = scoredRecipes.find(r => {
-      if (selected.includes(r)) return false
+      if (selected.some(s => s.id === r.id)) return false // Evita duplicatas
       if (!r.calories) return true
       return r.calories <= remaining * 1.5 
     })

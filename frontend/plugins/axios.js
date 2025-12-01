@@ -13,7 +13,9 @@ export default defineNuxtPlugin((nuxtApp) => {
     (response) => response,
     (error) => {
       if ((error.response?.status === 401 || error.response?.status === 403) && process.client) {
-        window.location.href = '/'
+        if (!error.config.url.includes('auth/login')) {
+          window.location.href = '/'
+        }
       }
       return Promise.reject(error)
     }

@@ -281,7 +281,16 @@ const updatePersonalData = async (userId, personalData) => {
       
       let dailyCalories = tmb * 1.2;
       
-      const goalType = result.goal?.goalObjectives?.[0]?.objective?.name?.toLowerCase() || '';
+
+      
+      // Fetch fresh goal objectives with the objective relation
+      const goalObjectivesRes = await GoalObjectiveRepository.search({
+        filters: [{ field: "id_goal", value: result.goal.id }]
+      });
+      const goalObjectives = goalObjectivesRes.data || [];
+      
+      const goalType = goalObjectives[0]?.objective?.name?.toLowerCase() || '';
+      
       if (goalType.includes('perda') || goalType.includes('emagrecer') || goalType.includes('queima')) {
         dailyCalories -= 500; 
       } else if (goalType.includes('ganho') || goalType.includes('hipertrofia') || goalType.includes('massa')) {
@@ -291,7 +300,7 @@ const updatePersonalData = async (userId, personalData) => {
       if (dailyCalories < 1200) dailyCalories = 1200;
       if (dailyCalories > 4000) dailyCalories = 4000;
 
-      const idObjective = result.goal?.goalObjectives?.[0]?.id_objective || 1;
+      const idObjective = goalObjectives[0]?.id_objective || 1;
 
       const newPlan = await MealPlanRepository.create({
         id_patient: patientId,

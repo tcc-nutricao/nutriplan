@@ -42,11 +42,14 @@
           label="Senha"
           placeholder="Insira a Senha"
           v-model="object.password"
-          :error="errors.password || errors.invalidCredentials"
+          :error="errors.password"
           required
         />
-        <div class="flex justify-center">
-          <Button mediumPurple label="Login" class="w-[60%] sm:w-3/4 md:w-1/2" @click="login"/>
+        <div class="flex flex-col items-center justify-center">
+          <Button mediumPurple label="Login" class="w-[60%] sm:w-3/4 md:w-1/2" @click.prevent="login" type="button"/>
+          <p v-if="errors.invalidCredentials" class="text-red-500 text-sm font-bold mt-2">
+            {{ errors.invalidCredentials }}
+          </p>
         </div>
       </div>
     </div>
@@ -84,20 +87,55 @@ const navigate = async (route) => {
   await router.push(route);
 };
 
+const validate = () => {
+  errors.value = {
+    email: null,
+    password: null,
+    invalidCredentials: null,
+  };
+  let isValid = true;
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!object.value.email) {
+    errors.value.email = "Email é obrigatório";
+    isValid = false;
+  } else if (!emailRegex.test(object.value.email)) {
+    errors.value.email = "Email inválido";
+    isValid = false;
+  }
+
+  if (!object.value.password) {
+    errors.value.password = "Senha é obrigatória";
+    isValid = false;
+  }
+
+  return isValid;
+};
+
 const login = async () => {
-  const response = await insert(route.value, object.value);
-  errors.value = response.error ? response?.data?.data : {};
-  
-  if (!response.error) {
-    const userCookie = useCookie('user-data'); 
-    userCookie.value = response.user;
+  if (!validate()) return;
 
-    const tokenCookie = useCookie('auth-token');
-    tokenCookie.value = response.token;
-
-    // console.log("Resposta recebida do backend:", response);
+  try {
+    const response = await insert(route.value, object.value);
     
-    navigate(response.nextPage); // <-- ANTES: navigate("/register-personal-data")
+    if (response.error) {
+      errors.value.email = " ";
+      errors.value.password = " ";
+      errors.value.invalidCredentials = "Email ou senha incorretos";
+    } else {
+      const userCookie = useCookie('user-data'); 
+      userCookie.value = response.user;
+
+      const tokenCookie = useCookie('auth-token');
+      tokenCookie.value = response.token;
+
+      console.log("Resposta recebida do backend:", response);
+      
+      navigate(response.nextPage); 
+    }
+  } catch (e) {
+    console.error("Login error:", e);
+    errors.value.invalidCredentials = "Erro ao tentar fazer login";
   }
 };
 
