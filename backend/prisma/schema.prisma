@@ -228,8 +228,7 @@ model Goal {
   deleted_at   DateTime?
   updated_at   DateTime?
 
-  goalObjectives GoalObjective[] 
-  mealPlans MealPlan[]
+  goalObjectives GoalObjective[]
 
   patient   Patient?   @relation(fields: [id_patient], references: [id])
 }
@@ -244,6 +243,7 @@ model Objective {
   updated_at  DateTime?
 
   goalObjectives GoalObjective[] @relation(name: "ObjectiveGoalObjectives")
+  mealPlans      MealPlan[]
 }
 
 model Preference {
@@ -311,9 +311,8 @@ model Report {
 model MealPlan {
   id              Int       @id @default(autoincrement())
   id_nutritionist Int
-  id_goal         Int
+  id_objective    Int
   calories        Int
-  status          MealPlanStatus
   expiration_date DateTime?
   favorite        Boolean?    @default(false)
   ai_generated    Boolean     @default(false)
@@ -322,7 +321,7 @@ model MealPlan {
   updated_at      DateTime?
   
   nutricionist Nutritionist @relation(fields: [id_nutritionist], references: [id])
-  goal   Goal   @relation(fields: [id_goal], references: [id])
+  objective    Objective    @relation(fields: [id_objective], references: [id])
   mealPlanPatients MealPlanPatient[]
   mealPlanMeals             MealPlanMeal[]
   mealPlanDietaryRestrictions MealPlanDietaryRestriction[]
@@ -332,6 +331,7 @@ model MealPlanPatient {
   id           Int       @id @default(autoincrement())
   id_meal_plan Int
   id_patient   Int
+  status       MealPlanStatus @default(ACTIVE)
   created_at   DateTime
   deleted_at   DateTime?
   updated_at   DateTime?

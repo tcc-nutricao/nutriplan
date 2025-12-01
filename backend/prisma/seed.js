@@ -196,7 +196,6 @@ async function main() {
       }
   }
 
-  // Pega a primeira preferência para uso nos relacionamentos
   const preference = await prisma.preference.findFirst();
 
   // DIETARY RESTRICTION
@@ -229,7 +228,7 @@ async function main() {
     data: { name: "Sem frutos do mar", icon: "fa-solid fa-fish", created_at: new Date() },
   });
 
-  // MEAL BASE (6 refeições fixas - IDs 1 a 6)
+  
   const mealBreakfast = await prisma.meal.upsert({
     where: { id: 1 },
     update: {},
@@ -385,23 +384,22 @@ async function populateWithAI(patient, nutritionist, goal) {
 
   if (mealplans.length > 0) {
     for (const plan of mealplans) {
-      // Create MealPlan without id_patient
-      const { id_patient, ...planData } = plan;
+      const { id_patient, status, ...planData } = plan;
       
       const newPlan = await prisma.mealPlan.create({
         data: {
           ...planData,
           id_nutritionist: nutritionist.id,
-          id_goal: goal.id,
+          id_objective: 1, 
           created_at: new Date(),
         },
       });
       
-      // Link to patient
       await prisma.mealPlanPatient.create({
         data: {
           id_meal_plan: newPlan.id,
           id_patient: patient.id,
+          status: MealPlanStatus.ACTIVE,
           created_at: new Date(),
         }
       });
