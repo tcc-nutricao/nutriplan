@@ -21,11 +21,12 @@
                     />
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8 w-max">
                     <div v-for="plan in mealPlans" :key="plan.id" class="cursor-pointer" @click="openViewModal(plan)">
                         <PlanCard :object="plan" class="hover:scale-[102%] transition active:scale-[98%] w-max" />
                     </div>
                 </div>
+                <h2 v-if="mealPlans.length === 0"  class="text-[1.4em]">Nenhum plano encontrado. <span class="font-bold text-np cursor-pointer hover:underline hover:text-p-500 " @click="openCreateModal">Crie um aqui!</span></h2>
              </div>
         </div>
 
@@ -42,7 +43,7 @@
                 <div v-if="showViewModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]" @click.self="closeViewModal">
                     <div class="bg-white rounded-3xl pb-8 pt-12 px-9 w-full max-w-4xl shadow-lg relative max-h-[90vh] overflow-y-auto modal-container transition-transform duration-300 ease">
                          <button
-                            class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-[50]"
+                            class="absolute top-5 right-7 text-3xl text-gray-500 shadow-lg hover:text-danger hover:scale-110 transition z-[50]"
                             @click="closeViewModal"
                         >&times;
                         </button>

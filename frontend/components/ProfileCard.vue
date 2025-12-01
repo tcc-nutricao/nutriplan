@@ -31,11 +31,11 @@
               </svg>
             </div>
             <p
-              class="text-p-950 font-sora font-semibold text-[clamp(1rem,2.4vw,1.25rem)] text-center transition ease-in-out group-hover:scale-[112%] group-active:scale-105 max-w-[70%]"
+              class="text-p-950 text-wrap max-w-[9em] font-sora font-semibold text-[clamp(1rem,2.4vw,1.25rem)] text-center transition ease-in-out group-hover:scale-[112%] group-active:scale-105"
             >
               {{ user.name }}
             </p>
-            <p v-if="user?.role === 'PROFESSIONAL'" class="text-p-600 tracking-[1.2px] text-[clamp(0.55rem,1.2vw,0.7rem)] font-semibold mb-1 transition">
+            <p v-if="user?.role === 'PROFESSIONAL'" class="text-p-600 group-hover:translate-y-1 tracking-[1.2px] text-[clamp(0.55rem,1.2vw,0.7rem)] font-semibold mb-1 transition">
               PROFISSIONAL
             </p>
             <p class="text-p-950 font-sora font-light text-[clamp(0.8rem,1.8vw,1rem)] transition ease-in-out group-hover:translate-y-1 group-active:scale-95">

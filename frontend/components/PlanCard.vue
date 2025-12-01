@@ -3,7 +3,7 @@
         <div class="bg-p-600 rounded-t-lg w-full h-full text-white text-center p-2">
             <p class="font-sora text-lg">{{ object.calories }} kcal</p>
         </div>
-        <RestrictionsIconBar :items="object.dietaryRestrictions" minicard />
+        <RestrictionsIconBar v-if="hasRestrictions" :items="object.dietaryRestrictions" minicard />
         <div class="pb-3 px-3">
             <div 
                 class="flex items-center gap-1 text-sm justify-start"
@@ -23,5 +23,14 @@ const props = defineProps({
     object: Object
 })
 
-
+const hasRestrictions = computed(() => {
+    const restrictions = props.object.dietaryRestrictions;
+    if (!restrictions || restrictions.length === 0) return false;
+    
+    const first = restrictions[0];
+    if (typeof first === 'string') return first !== 'Nenhuma';
+    
+    const name = first.dietaryRestriction?.name || first.name;
+    return name !== 'Nenhuma';
+})
 </script>

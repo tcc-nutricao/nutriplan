@@ -94,7 +94,7 @@
 
           <div v-if="mode === 'generating'" class="flex flex-col items-center justify-center py-10 gap-4">
             <i class="fa-solid fa-wand-magic-sparkles fa-spin text-4xl text-p-600"></i>
-            <p class="text-lg font-semibold text-gray-700">Gerando plano alimentar com IA...</p>
+            <p class="text-lg font-semibold text-gray-700">Gerando plano alimentar...</p>
             <p class="text-sm text-gray-500">Isso pode levar alguns segundos.</p>
           </div>
 

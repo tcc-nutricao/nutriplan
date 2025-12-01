@@ -321,8 +321,16 @@
                     </div>
                 </div>
             </div>
-            <div v-else class="hidden md:flex stickyProfile bg-white rounded-3xl shadow-lg border-2 p-6 py-20 w-[60%] items-center justify-center text-gray-500">
-                <p>Selecione um paciente ao lado para ver os detalhes!</p>
+            <div v-else class="hidden md:flex stickyProfile bg-white rounded-3xl shadow-lg border-2 p-6 py-20 w-[60%] items-center justify-center text-gray-500 flex-col gap-4">
+                <div v-if="loading" class="flex flex-col items-center gap-2">
+                     <i class="fa-solid fa-circle-notch fa-spin text-4xl text-p-600"></i>
+                     <p>Carregando pacientes...</p>
+                </div>
+                <div v-else-if="itemList.length === 0" class="flex flex-col items-center gap-2">
+                     <i class="fa-solid fa-user-slash text-4xl text-gray-300"></i>
+                     <p>Nenhum paciente encontrado.</p>
+                </div>
+                <p v-else>Selecione um paciente ao lado para ver os detalhes!</p>
             </div>
         </div>
         <PatientModal 
@@ -372,6 +380,7 @@ const route = ref('nutritionist-patient')
 const showModal = ref('')
 const itemList = ref([])
 const newWeight = ref(null)
+const loading = ref(true)
 
 // Meal Plan View Modal State
 const showViewModal = ref(false)
@@ -464,10 +473,6 @@ const updatePatientWeight = async () => {
     }
 }
 
-onMounted(async () => {
-    await fetchPatients()
-})
-
 const transformPlan = (plan) => {
   return {
     ...plan,
@@ -477,6 +482,7 @@ const transformPlan = (plan) => {
 }
 
 const fetchPatients = async () => {
+    loading.value = true
     try {
         const [patientsRes, plansRes] = await Promise.all([
             get('patient/all'),
@@ -501,8 +507,14 @@ const fetchPatients = async () => {
         }
     } catch (error) {
         console.error('Erro ao buscar dados:', error);
+    } finally {
+        loading.value = false
     }
 }
+
+onMounted(async () => {
+    await fetchPatients()
+})
 
 const handleModalClose = async (shouldRefresh) => {
     showModal.value = ''
