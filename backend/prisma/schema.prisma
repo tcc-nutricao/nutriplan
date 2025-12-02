@@ -69,7 +69,7 @@ enum GoalObjectiveType {
 model User {
   id         Int      @id @default(autoincrement())
   name       String
-  email      String   @unique
+  email      String?   @unique
   password   String
   role       Role
   profile_picture    Bytes?       @db.MediumBlob
@@ -192,6 +192,8 @@ model Nutritionist {
   id                   Int       @id @default(autoincrement())
   id_user              Int       @unique
   professional_register String?
+  invite_code          String?   @unique
+  invite_code_expires_at DateTime?
   created_at           DateTime
   deleted_at           DateTime?
   updated_at           DateTime?
