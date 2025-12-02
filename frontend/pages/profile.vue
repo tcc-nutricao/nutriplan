@@ -121,6 +121,39 @@
     </div>
 
     <div
+      v-if="user.role === 'STANDARD'"
+      class="bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto mt-6"
+    >
+      <h2 class="h2main mb-6">Nutricionista</h2>
+      <div v-if="personalData.nutritionistName" class="flex items-center gap-4">
+          <div class="w-16 h-16 rounded-full bg-p-100 flex items-center justify-center text-p-600 text-2xl font-bold">
+              {{ personalData.nutritionistName.charAt(0).toUpperCase() }}
+          </div>
+          <div>
+              <p class="text-lg font-semibold text-gray-800">{{ personalData.nutritionistName }}</p>
+              <p class="text-gray-500 text-sm">Seu nutricionista vinculado</p>
+          </div>
+      </div>
+      <div v-else class="flex flex-col gap-4">
+          <p class="text-gray-600">Você ainda não tem um nutricionista vinculado. Insira o código fornecido pelo seu nutricionista para vincular.</p>
+          <div class="flex gap-3 max-w-md">
+              <Input
+                  class="bg-white shadow-lg shadow-gray-600/10 focus-within:shadow-p-600/20 hover:shadow-p-600/20 transition uppercase"
+                  v-model="inviteCode"
+                  placeholder="Código de vínculo (ex: A1B2)"
+              />
+              <Button
+                  mediumPurple
+                  class="w-max px-6 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
+                  label="Vincular"
+                  @click="linkNutritionist"
+                  :loading="linking"
+              />
+          </div>
+      </div>
+    </div>
+
+    <div
       class="flex gap-5 items-center justify-between bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto mt-10 border-2 border-danger"
     >
       <h2 class="text-2xl font-semibold w-full text-start text-danger">
@@ -168,7 +201,7 @@
 <script setup>
 import { ref, onMounted, defineAsyncComponent } from "vue";
 import { useCookie, useNuxtApp, navigateTo } from "nuxt/app";
-import { remove, update } from "../crud";
+import { remove, update, insert } from "../crud";
 
 const { $axios } = useNuxtApp();
 
@@ -185,6 +218,9 @@ const activeSection = ref(null);
 const profilePicture = ref(null);
 const imageToEdit = ref(null);
 
+const inviteCode = ref("");
+const linking = ref(false);
+
 const personalData = ref({
   nome: userCookie.value?.name || "",
   email: userCookie.value?.email || "",
@@ -196,6 +232,7 @@ const personalData = ref({
   objetivo: "",
   preferencias: "",
   meta: null,
+  nutritionistName: null
 });
 
 const openProfileModal = (section) => {
@@ -259,6 +296,32 @@ const handleDeleteAccount = async () => {
   
   closeModal();
   await navigateTo('/');
+};
+
+const linkNutritionist = async () => {
+    if (!inviteCode.value) {
+        alert("Por favor, insira o código.");
+        return;
+    }
+    linking.value = true;
+    try {
+        const res = await insert("nutritionist/link-patient", { code: inviteCode.value.toUpperCase() });
+        if (res.success) {
+            // alert("Vinculado com sucesso!");
+            const dataRes = await $axios.get("/user/personal-data");
+            if (dataRes.data.success) {
+                personalData.value = dataRes.data.data;
+            }
+            inviteCode.value = "";
+        } else {
+            alert("Erro ao vincular: " + (res.message || "Código inválido ou expirado."));
+        }
+    } catch (err) {
+        console.error(err);
+        alert("Erro ao vincular. Tente novamente.");
+    } finally {
+        linking.value = false;
+    }
 };
 
 async function fetchProfilePicture() {

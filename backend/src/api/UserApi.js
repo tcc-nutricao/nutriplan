@@ -6,5 +6,6 @@ export const api = {
   createTemporaryUser: UserController.createTemporaryUser,
   update: UserController.update,
   remove: UserController.remove,
-  getProfilePicture: UserController.getProfilePicture
+  getProfilePicture: UserController.getProfilePicture,
+  inviteUser: UserController.inviteUser
 }

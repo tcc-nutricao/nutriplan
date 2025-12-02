@@ -52,7 +52,7 @@
           v-model:changeSelected="changeSelected"
           class="mb-8" />
         <Flex justifyCenter>
-          <Button mediumPurple label="Criar conta" class="w-4/5 sm:w-2/3 md:w-1/2" @click="save" />
+          <Button mediumPurple label="Criar conta" class="w-4/5 sm:w-2/3 md:w-1/2" @click="save" :loading="isRegistering" />
         </Flex>
       </div>
     </div>
@@ -98,12 +98,16 @@ const selectedButton = ref(null)
 const changeSelected = ref(false)
 const modalContent = ref('O perfil profissional é destinado apenas a nutricionistas e profissionais da saúde.')
 
+const isRegistering = ref(false)
+
 const navigate = async (route) => {
   await router.push(route)
 }
 
 const save = async () => {
+  isRegistering.value = true
   const response = await insert(route.value, object.value)
+  isRegistering.value = false
   
   if (response.error) {
     if (response.data && response.data.field) {

@@ -13,4 +13,5 @@ export default (router) => {
   router.post('/user/temporary', authenticate, authorize(Roles.PROFESSIONAL), api.createTemporaryUser)
   router.patch('/user', authenticate, api.update)
   router.delete('/user', authenticate, api.remove)
+  router.post('/user/:id/invite', authenticate, authorize(Roles.PROFESSIONAL), api.inviteUser)
 }

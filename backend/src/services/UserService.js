@@ -10,17 +10,18 @@ import { useSendMail } from '../utils/useSendMail.js'
 
 const prisma = new PrismaClient()
 
-// Método customizado para inserção de usuário
 const insert = async (data) => {
-  const existing = await UserRepository.findByEmail(data.email)
-  
-  // Se existe e NÃO está deletado (ativo), erro
-  if (existing && !existing.deleted_at) {
-    throw new AppError({
-      statusCode: 400,
-      message: 'Email já cadastrado',
-      field: 'email'
-    })
+  let existing = null;
+  if (data.email) {
+    existing = await UserRepository.findByEmail(data.email)
+    
+    if (existing && !existing.deleted_at) {
+      throw new AppError({
+        statusCode: 400,
+        message: 'Email já cadastrado',
+        field: 'email'
+      })
+    }
   }
 
   const hashedPassword = await bcrypt.hash(data.password, 10)
@@ -29,19 +30,15 @@ const insert = async (data) => {
     let user;
 
     if (existing && existing.deleted_at) {
-      // Reativar usuário
       user = await UserRepository.update(existing.id, {
         ...data,
         password: hashedPassword,
         deleted_at: null
       })
       
-      // Reativar registros associados
       if (user.role === 'STANDARD') {
-        // Tenta achar paciente deletado ou cria novo se não existir (embora deva existir)
         const patient = await PatientRepository.findByUserId(user.id)
         if (patient) {
-           // Resetar dados do paciente e reativar
            await prisma.patient.update({
              where: { id: patient.id },
              data: { 
@@ -53,7 +50,6 @@ const insert = async (data) => {
              }
            })
 
-           // Soft-delete dados relacionados para forçar recadastro
            const now = new Date()
            await tx.healthData.updateMany({
              where: { id_patient: patient.id },
@@ -84,7 +80,6 @@ const insert = async (data) => {
       }
 
     } else {
-      // Criar novo usuário
       user = await UserRepository.create(
         { ...data, password: hashedPassword },
         tx
@@ -105,6 +100,43 @@ const insert = async (data) => {
 
     return user
   })
+
+  try {
+    if (data.email) {
+      const isProfessional = result.role === 'PROFESSIONAL';
+      
+      const subject = isProfessional 
+        ? 'Bem-vindo ao Nutriplan Profissional!' 
+        : 'Bem-vindo ao Nutriplan!';
+        
+      const text = isProfessional
+        ? `Olá ${data.name},\n\nSeja bem-vindo ao Nutriplan! Estamos muito felizes em tê-lo como parceiro.\n\nAcesse sua conta para começar a gerenciar seus pacientes e criar planos alimentares.`
+        : `Olá ${data.name},\n\nSeja bem-vindo ao Nutriplan! Estamos muito felizes em tê-lo conosco.\n\nAcesse sua conta e cadastre seus dados pessoais para começar a usar o sistema!`;
+
+      const htmlBody = isProfessional
+        ? `<p style="font-size: 16px; color: #333333; line-height: 1.5;">Estamos muito felizes em tê-lo como parceiro! O Nutriplan é a ferramenta ideal para você criar planos alimentares, gerenciar seus pacientes e acompanhar a evolução de cada um.</p>
+           <p style="font-size: 16px; color: #333333; line-height: 1.5;">Acesse sua conta para começar a transformar a vida dos seus pacientes.</p>`
+        : `<p style="font-size: 16px; color: #333333; line-height: 1.5;">Estamos muito felizes em ter você conosco! O Nutriplan foi criado para te ajudar a alcançar seus objetivos de saúde de forma simples e eficiente.</p>
+           <p style="font-size: 16px; color: #333333; line-height: 1.5;">Acesse sua conta e cadastre seus dados pessoais para começar a usar o sistema!</p>`;
+
+      await useSendMail({
+        to: data.email,
+        subject,
+        text,
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;">
+            <h2 style="color: #4A148C; text-align: center; margin-bottom: 20px;">${subject}</h2>
+            <p style="font-size: 16px; color: #333333; line-height: 1.5;">Olá <strong>${data.name}</strong>,</p>
+            ${htmlBody}
+            <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
+            <p style="font-size: 12px; color: #888888; text-align: center;">© ${new Date().getFullYear()} Nutriplan. Todos os direitos reservados.</p>
+          </div>
+        `
+      })
+    }
+  } catch (error) {
+    console.error('Erro ao enviar email de boas-vindas:', error)
+  }
 
   return result
 }
@@ -139,10 +171,9 @@ const update = async (data, userId) => {
       }
     }
 
-    // data.profile_picture ? console.log('tem foto') : console.log('sem foto');
 
     const updateData = data.profile_picture
-      ? { profile_picture: data.profile_picture.split(',')[1] } // Extrai apenas a string base64
+      ? { profile_picture: data.profile_picture.split(',')[1] }
       : {
           name: data.name,
           email: data.email
@@ -186,7 +217,6 @@ const remove = async (userId) => {
 
 const getProfilePicture = async (userId) => {
   try {
-    // console.log('userId', userId)
     if (!userId) {
       throw new AppError({ message: 'ID do usuário não fornecido', statusCode: 400 });
     }
@@ -206,9 +236,11 @@ const getProfilePicture = async (userId) => {
 
 const createTemporaryUser = async (data) => {
   try {
-    const existing = await UserRepository.findByEmail(data.email)
-    if (existing) {
-      throw new AppError({ message: 'Email já cadastrado', statusCode: 400, field: 'email' })
+    if (data.email) {
+      const existing = await UserRepository.findByEmail(data.email)
+      if (existing) {
+        throw new AppError({ message: 'Email já cadastrado', statusCode: 400, field: 'email' })
+      }
     }
 
   const nameLower = data.name.toLowerCase().replace(/\s+/g, '')
@@ -229,11 +261,13 @@ const createTemporaryUser = async (data) => {
       return { ...user, temporaryPassword: randomPassword }
     })
 
-    await useSendMail({
-      to: data.email,
-      subject: 'Cadastro temporário no sistema',
-      text: `Olá ${data.name},\n\nSeu cadastro temporário foi criado!\nE-mail: ${data.email}\nSenha temporária: ${randomPassword}\n\nTroque sua senha ao acessar o sistema.`
-    })
+    if (data.email) {
+      await useSendMail({
+        to: data.email,
+        subject: 'Cadastro temporário no sistema',
+        text: `Olá ${data.name},\n\nSeu cadastro temporário foi criado!\nE-mail: ${data.email}\nSenha temporária: ${randomPassword}\n\nTroque sua senha ao acessar o sistema.`
+      })
+    }
     
     return result
   } catch (error) {
@@ -241,11 +275,63 @@ const createTemporaryUser = async (data) => {
   }
 }
 
+const inviteUser = async (userId, email) => {
+  try {
+    const existingUser = await UserRepository.findById(userId);
+    if (!existingUser) {
+      throw new AppError({ message: 'Usuário não encontrado', statusCode: 404 });
+    }
+
+    if (existingUser.email) {
+      throw new AppError({ message: 'Usuário já possui email cadastrado', statusCode: 400 });
+    }
+
+    const emailInUse = await UserRepository.findByEmail(email);
+    if (emailInUse) {
+      throw new AppError({ message: 'Email já cadastrado', statusCode: 400, field: 'email' });
+    }
+
+    const nameLower = existingUser.name.toLowerCase().replace(/\s+/g, '');
+    const randomPassword = `${nameLower}${Math.random().toString(36).slice(-4)}`;
+    const hashedPassword = await bcrypt.hash(randomPassword, 10);
+
+    const updatedUser = await UserRepository.update(userId, {
+      email,
+      password: hashedPassword
+    });
+
+    await useSendMail({
+      to: email,
+      subject: 'Convite para o Nutriplan',
+      text: `Olá ${existingUser.name},\n\nSeu nutricionista te convidou para acessar o Nutriplan!\n\nE-mail: ${email}\nSenha temporária: ${randomPassword}\n\nAcesse o sistema e troque sua senha.`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;">
+          <h2 style="color: #4A148C; text-align: center; margin-bottom: 20px;">Convite para o Nutriplan</h2>
+          <p style="font-size: 16px; color: #333333; line-height: 1.5;">Olá <strong>${existingUser.name}</strong>,</p>
+          <p style="font-size: 16px; color: #333333; line-height: 1.5;">Seu nutricionista te convidou para acessar o Nutriplan! Agora você poderá acompanhar seu plano alimentar e evolução diretamente pelo aplicativo.</p>
+          <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin: 20px 0;">
+            <p style="margin: 5px 0;"><strong>E-mail:</strong> ${email}</p>
+            <p style="margin: 5px 0;"><strong>Senha temporária:</strong> ${randomPassword}</p>
+          </div>
+          <p style="font-size: 16px; color: #333333; line-height: 1.5;">Acesse o sistema e troque sua senha no primeiro acesso.</p>
+          <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
+          <p style="font-size: 12px; color: #888888; text-align: center;">© ${new Date().getFullYear()} Nutriplan. Todos os direitos reservados.</p>
+        </div>
+      `
+    });
+
+    return { message: 'Convite enviado com sucesso' };
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const UserService = {
   ...generateCrudService(UserRepository),
   insert,
   update, 
   remove,
   createTemporaryUser,
-  getProfilePicture
+  getProfilePicture,
+  inviteUser
 }

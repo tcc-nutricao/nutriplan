@@ -22,11 +22,32 @@ const findById = async (id) => {
   });
 };
 
+const updateInviteCode = async (id, code, expiresAt) => {
+  return await prisma.nutritionist.update({
+    where: { id: id },
+    data: {
+      invite_code: code,
+      invite_code_expires_at: expiresAt
+    }
+  });
+};
+
+const findByInviteCode = async (code) => {
+  return await prisma.nutritionist.findUnique({
+    where: { invite_code: code },
+    include: {
+      user: true
+    }
+  });
+};
+
 export const NutritionistRepository = {
   ...generateCrudRepository('nutritionist', {
     softDelete: true,
     defaultOrderBy: 'id'
   }),
   findByUserId,
-  findById
+  findById,
+  updateInviteCode,
+  findByInviteCode
 }

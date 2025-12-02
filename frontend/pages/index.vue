@@ -35,6 +35,7 @@
           placeholder="Insira o Email"
           v-model="object.email"
           :error="errors.email"
+          @keyup.enter="login"
           required
         />
         <InputPassword
@@ -43,6 +44,7 @@
           placeholder="Insira a Senha"
           v-model="object.password"
           :error="errors.password"
+          @keyup.enter="login"
           required
         />
         <div class="flex flex-col items-center justify-center">

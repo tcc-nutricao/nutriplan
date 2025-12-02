@@ -31,7 +31,7 @@
       <MealPlanCardExtended :object="actualPlan[0]" class="col-span-4 mb-10" />
       <div class="col-span-2">
         <MealPlanCard title="Meus planos" :items="actualPlan" />
-        <MealPlanCard title="Outros planos" :items="otherPlans" />
+        <!-- <MealPlanCard title="Outros planos" :items="otherPlans" /> -->
       </div>
     </div>
   </div>

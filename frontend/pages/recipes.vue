@@ -13,7 +13,7 @@
                     @searchSelected="handleSearchSelected"
                     @filterSelected="handleFilterSelected"
                     @sortSelected="handleSortSelected"
-                    class="sticky top-[30px] bg-g self-start w-full z-20 shadowSearch" 
+                    class="sticky top-[30px] bg-g self-start w-full z-[400] shadowSearch" 
                 />
                 <Button
                     v-if="isNutri"

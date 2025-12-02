@@ -6,7 +6,7 @@
             :class="minicard ? 'flex items-center gap-1 pr-1': 'flex items-center gap-1 bg-gray-200 px-3 py-2 rounded-full'"
         >
             <IconSolid :icon="item.icon" color="text-gray-600" md />
-            <IconSolid v-if="minicard" icon="fa-times" color="text-red-500" md />
+            <!-- <IconSolid v-if="minicard" icon="fa-times" color="text-red-500" md /> -->
             <p v-if="!minicard" class="text-gray-600 text-sm ml-1">{{ item.name }}</p>
         </div>
     </div>

@@ -4,6 +4,7 @@ import { MealPlanService } from './MealPlanService.js'
 import { generateCrudService } from './Service.js'
 import { calculateImc, classifyImc } from '../utils/useImc.js'
 import { PatientRepository } from '../repositories/PatientRepository.js'
+import { AppError } from '../exceptions/AppError.js'
 
 const baseCrudService = generateCrudService(NutritionistRepository)
 
@@ -105,6 +106,82 @@ export const NutritionistService = {
             console.error('Erro ao buscar informações do paciente:', error)
             throw error
         }
+    },
+
+    async generateInviteCode(userId) {
+        try {
+            const nutritionist = await NutritionistRepository.findByUserId(userId)
+            if (!nutritionist) {
+                throw new AppError({ message: 'Nutricionista não encontrado', statusCode: 404 })
+            }
+
+            const code = Math.random().toString(36).substring(2, 6).toUpperCase();
+            const expiresAt = new Date(Date.now() + 30 * 60 * 1000); // 30 minutes
+
+            await NutritionistRepository.updateInviteCode(nutritionist.id, code, expiresAt);
+
+            return { code, expiresAt };
+        } catch (error) {
+            throw error;
+        }
+    },
+
+    async getInviteCode(userId) {
+        try {
+            const nutritionist = await NutritionistRepository.findByUserId(userId)
+            if (!nutritionist) {
+                throw new AppError({ message: 'Nutricionista não encontrado', statusCode: 404 })
+            }
+
+            if (nutritionist.invite_code && nutritionist.invite_code_expires_at) {
+                if (new Date() < new Date(nutritionist.invite_code_expires_at)) {
+                     return { 
+                        code: nutritionist.invite_code, 
+                        expiresAt: nutritionist.invite_code_expires_at 
+                    };
+                }
+            }
+
+            // If no code or expired, generate a new one
+            return await this.generateInviteCode(userId);
+
+        } catch (error) {
+            throw error;
+        }
+    },
+
+    async linkPatientByCode(patientId, code) {
+        try {
+            const nutritionist = await NutritionistRepository.findByInviteCode(code);
+
+            if (!nutritionist) {
+                throw new AppError({ message: 'Código inválido', statusCode: 400 });
+            }
+
+            if (new Date() > new Date(nutritionist.invite_code_expires_at)) {
+                throw new AppError({ message: 'Código expirado', statusCode: 400 });
+            }
+
+            // Check if already linked
+            const existingLink = await NutritionistPatientRepository.findByNutritionistAndPatientId(nutritionist.id, patientId);
+            if (existingLink) {
+                 return { message: 'Você já está vinculado a este nutricionista' };
+            }
+
+            await NutritionistPatientRepository.create({
+                id_nutritionist: nutritionist.id,
+                id_patient: patientId
+            });
+            
+            // Update patient's primary nutritionist if not set (optional but recommended)
+            const patient = await PatientRepository.findById(patientId);
+            if (!patient.id_nutritionist) {
+                 await PatientRepository.update(patientId, { id_nutritionist: nutritionist.id });
+            }
+
+            return { message: 'Vinculado com sucesso', nutritionistName: nutritionist.user.name };
+        } catch (error) {
+            throw error;
+        }
     }
 }
-

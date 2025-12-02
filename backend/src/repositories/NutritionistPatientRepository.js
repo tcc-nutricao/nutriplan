@@ -1,6 +1,8 @@
 import { generateCrudRepository } from './Repository.js';
 import { PrismaClient } from '@prisma/client';
 
+const prisma = new PrismaClient();
+
 // Busca todos os pacientes vinculados a um nutricionista (tabela de junção NutritionistPatient)
 const findByNutritionistId = async (idNutritionist) => {
   return await prisma.nutritionistPatient.findMany({
@@ -19,6 +21,16 @@ const findByNutritionistId = async (idNutritionist) => {
   });
 };
 
+const findByNutritionistAndPatientId = async (nutritionistId, patientId) => {
+  return await prisma.nutritionistPatient.findFirst({
+    where: {
+      id_nutritionist: nutritionistId,
+      id_patient: patientId,
+      deleted_at: null
+    }
+  });
+};
+
 export const NutritionistPatientRepository = {
   ...generateCrudRepository('nutritionistPatient', {
     softDelete: true,
@@ -29,6 +41,7 @@ export const NutritionistPatientRepository = {
       nutritionist: true
     }
   }),
-  findByNutritionistId
+  findByNutritionistId,
+  findByNutritionistAndPatientId
 };
 

@@ -1,6 +1,11 @@
 import nodemailer from 'nodemailer';
+import { AppError } from '../exceptions/AppError.js';
 
 export async function useSendMail({ to, subject, text, html }) {
+  if (!process.env.MAILJET_API_KEY || !process.env.MAILJET_API_SECRET) {
+    throw new AppError({ message: 'Credenciais do Mailjet não configuradas no .env' });
+  }
+
   const transporter = nodemailer.createTransport({
     host: 'in-v3.mailjet.com',
     port: 587,

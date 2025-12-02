@@ -119,5 +119,20 @@ export const UserController = {
   createTemporaryUser,
   update,
   remove,
-  getProfilePicture
+  getProfilePicture,
+  inviteUser: async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const { email } = req.body;
+
+      if (!id || !email) {
+        return res.status(400).json({ success: false, message: 'ID e email são obrigatórios' });
+      }
+
+      const result = await UserService.inviteUser(parseInt(id), email);
+      return res.status(200).json({ success: true, data: result });
+    } catch (error) {
+      next(error);
+    }
+  }
 } 

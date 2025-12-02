@@ -16,6 +16,7 @@
                         label="pesquisaReceita"
                         v-model="newWeight"
                         placeholder="Atualize seu peso"
+                        @keyup.enter="updateProgress"
                     />
                     <Button
                         mediumPurple

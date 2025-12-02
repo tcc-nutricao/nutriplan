@@ -6,4 +6,7 @@ export const api = {
   ...generateCrudApi(NutritionistController),
   getPatients: NutritionistController.getPatients,
   getPatientInfo: NutritionistController.getPatientInfo,
+  generateInviteCode: NutritionistController.generateInviteCode,
+  getInviteCode: NutritionistController.getInviteCode,
+  linkPatientByCode: NutritionistController.linkPatientByCode,
 }

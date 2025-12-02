@@ -3,23 +3,30 @@
         <h1 class="h1">Meus Pacientes</h1>
         <div class="flex flex-col md:flex-row gap-5 justify-between">
             <div class="flex flex-col w-full md:w-[40%] mb-8">
-                <div class="search-sticky-wrapper md:static">
-                <SearchBar 
-                    :filter="true" 
-                    :sort="true" 
+                <div class="search-sticky-wrapper md:static flex w-full gap-3">
+                    <Button
+                        mediumPurple
+                        class="w-max px-3 h-[42px] text-nowrap"
+                        icon="fa-solid fa-plus short flex justify-center"
+                        label="Adicionar"
+                        @click="openCreate"
+                    />
+                    <Button
+                        mediumPurple
+                        class="w-max px-3 h-[42px] text-nowrap"
+                        icon="fa-solid fa-key short flex justify-center"
+                        label="Código"
+                        @click="fetchInviteCode"
+                    />
+                    <SearchBar 
+                    :filter="false" 
+                    :sort="false" 
                     placeholder="Pesquise um paciente" 
                     searchType="patients"
                     @searchSelected=""
                     class="w-full shadowSearch z-[200]" 
                 />
                 </div>
-                <Button
-                    mediumPurple
-                    class="w-max px-3 h-[42px] mt-5"
-                    icon="fa-solid fa-plus short flex justify-center"
-                    label="Adicionar um paciente"
-                    @click="openCreate"
-                />
                 <div class="flex flex-col gap-3 w-full mt-5">
                     <div 
                         v-for="(item, index) in itemList" 
@@ -47,12 +54,22 @@
                                         </h2>
                                         <p>{{ item.email }}</p>
                                     </div>
-                                    <Button mediumPurple
-                                        class="w-max pr-3 pl-2 h-[42px]"
-                                        icon="fa-solid fa-edit short flex justify-center" 
-                                        label="Editar"
-                                        @click="openEdit"
-                                    />
+                                    <div class="flex gap-2">
+                                        <Button 
+                                            v-if="!item.email"
+                                            mediumPurple
+                                            class="w-max pr-3 pl-2 h-[42px]"
+                                            icon="fa-solid fa-envelope short flex justify-center" 
+                                            label="Convidar"
+                                            @click="openInviteModal(item)"
+                                        />
+                                        <Button mediumPurple
+                                            class="w-max pr-3 pl-2 h-[42px]"
+                                            icon="fa-solid fa-edit short flex justify-center" 
+                                            label="Editar"
+                                            @click="openEdit"
+                                        />
+                                    </div>
                                 </div>
                                 <div class="flex flex-col gap-3">
                                     <div class="flex justify-between">
@@ -126,6 +143,7 @@
                                         v-model="newWeight"
                                         placeholder="Novo peso (kg)"
                                         type="number"
+                                        @keyup.enter="updatePatientWeight"
                                     />
                                     <Button
                                         mediumPurple
@@ -185,6 +203,14 @@
                             <p>{{ selectedItem.email }}</p>
                         </div>
                         <div class="flex gap-2">
+                            <Button 
+                                v-if="!selectedItem.email"
+                                mediumPurple
+                                class="w-max pr-3 pl-2 h-[42px]"
+                                icon="fa-solid fa-envelope short flex justify-center" 
+                                label="Convidar"
+                                @click="openInviteModal(selectedItem)"
+                            />
                             <Button mediumPurple
                                 class="w-max pr-3 pl-2 h-[42px]"
                                 icon="fa-solid fa-edit short flex justify-center" 
@@ -346,6 +372,91 @@
             @refresh="fetchPatients"
         />
 
+        <!-- Invite Code Modal -->
+        <teleport to="body">
+            <Transition
+                name="modal"
+                appear
+                enter-from-class="opacity-0"
+                leave-to-class="opacity-0"
+                enter-active-class="transition-opacity duration-300 ease"
+                leave-active-class="transition-opacity duration-300 ease"
+            >
+                <div v-if="showInviteModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]" @click.self="showInviteModal = false">
+                    <div class="bg-white rounded-3xl p-8 w-full max-w-md shadow-lg relative flex flex-col gap-5 items-center">
+                         <button
+                            class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-[50]"
+                            @click="showInviteModal = false"
+                        >&times;
+                        </button>
+                        <h2 class="text-2xl font-semibold text-p-600">Código de Vínculo</h2>
+                        <p class="text-center text-gray-600">Compartilhe este código com seu paciente para que ele possa se vincular a você.</p>
+                        
+                        <div class="bg-gray-100 p-6 rounded-xl w-full flex justify-center items-center border-2 border-dashed border-p-400 relative">
+                            <span class="text-5xl font-bold text-p-700 tracking-widest">{{ inviteCode }}</span>
+                            <div class="absolute -bottom-3 -right-3">
+                                <Button
+                                    mediumPurple
+                                    class="w-8 h-8 rounded-full shadow-lg flex items-center justify-center"
+                                    icon="fa-solid fa-rotate-right"
+                                    @click="regenerateInviteCode"
+                                    :loading="loading"
+                                />
+                            </div>
+                        </div>
+
+                        <p class="text-sm text-gray-500" v-if="inviteCodeExpiresAt">Válido até: {{ new Date(inviteCodeExpiresAt).toLocaleTimeString() }}</p>
+                        
+                        <Button mediumPurple
+                            class="w-full h-[42px]"
+                            icon="fa-regular fa-copy short flex justify-center"
+                            label="Copiar e fechar"
+                            @click="copyAndClose"
+                        />
+                    </div>
+                </div>
+            </Transition>
+        </teleport>
+
+        <!-- Invite Patient Modal -->
+        <teleport to="body">
+            <Transition
+                name="modal"
+                appear
+                enter-from-class="opacity-0"
+                leave-to-class="opacity-0"
+                enter-active-class="transition-opacity duration-300 ease"
+                leave-active-class="transition-opacity duration-300 ease"
+            >
+                <div v-if="showInvitePatientModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]" @click.self="showInvitePatientModal = false">
+                    <div class="bg-white rounded-3xl p-8 w-full max-w-md shadow-lg relative flex flex-col gap-5 items-center">
+                         <button
+                            class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-[50]"
+                            @click="showInvitePatientModal = false"
+                        >&times;
+                        </button>
+                        <h2 class="text-2xl font-semibold text-p-600">Convidar Paciente</h2>
+                        <p class="text-center text-gray-600">Insira o email do paciente para enviar um convite de acesso.</p>
+                        
+                        <Input
+                            class="w-full"
+                            label="Email"
+                            v-model="inviteEmail"
+                            placeholder="email@exemplo.com"
+                            type="email"
+                        />
+                        
+                        <Button mediumPurple
+                            class="w-full h-[42px]"
+                            label="Enviar Convite"
+                            @click="sendInvite"
+                            :loading="sendingInvite"
+                        />
+                    </div>
+                </div>
+            </Transition>
+        </teleport>
+
         <!-- View Meal Plan Modal -->
         <teleport to="body">
             <Transition
@@ -382,6 +493,17 @@ const itemList = ref([])
 const newWeight = ref(null)
 const loading = ref(true)
 
+// Invite Code State
+const inviteCode = ref(null)
+const inviteCodeExpiresAt = ref(null)
+const showInviteModal = ref(false)
+
+// Invite Patient State
+const showInvitePatientModal = ref(false)
+const inviteEmail = ref('')
+const sendingInvite = ref(false)
+const patientToInvite = ref(null)
+
 // Meal Plan View Modal State
 const showViewModal = ref(false)
 const selectedPlan = ref(null)
@@ -397,11 +519,89 @@ const closeViewModal = () => {
 }
 
 const openCreate = () => {
-    showModal.value = 'create'
+    showModal.value = 'create-offline'
 }
 
 const openEdit = () => {
     showModal.value = 'edit'
+}
+
+const fetchInviteCode = async () => {
+    loading.value = true
+    try {
+        const res = await get('nutritionist/invite-code')
+        if (res.success) {
+            inviteCode.value = res.data.code
+            inviteCodeExpiresAt.value = res.data.expiresAt
+            showInviteModal.value = true
+        } else {
+            alert('Erro ao buscar código: ' + (res.message || 'Erro desconhecido'))
+        }
+    } catch (error) {
+        console.error(error)
+        alert('Erro ao buscar código')
+    } finally {
+        loading.value = false
+    }
+}
+
+const regenerateInviteCode = async () => {
+    loading.value = true
+    try {
+        const res = await insert('nutritionist/invite-code', {})
+        if (res.success) {
+            inviteCode.value = res.data.code
+            inviteCodeExpiresAt.value = res.data.expiresAt
+        } else {
+            alert('Erro ao gerar código: ' + (res.message || 'Erro desconhecido'))
+        }
+    } catch (error) {
+        console.error(error)
+        alert('Erro ao gerar código')
+    } finally {
+        loading.value = false
+    }
+}
+
+const copyAndClose = async () => {
+    if (inviteCode.value) {
+        try {
+            await navigator.clipboard.writeText(inviteCode.value)
+        } catch (err) {
+            console.error('Failed to copy: ', err)
+        }
+    }
+    showInviteModal.value = false
+}
+
+const openInviteModal = (patient) => {
+    patientToInvite.value = patient
+    inviteEmail.value = ''
+    showInvitePatientModal.value = true
+}
+
+const sendInvite = async () => {
+    if (!inviteEmail.value) {
+        alert('Por favor, insira um email.')
+        return
+    }
+    
+    sendingInvite.value = true
+    try {
+        const res = await insert(`user/${patientToInvite.value.id_user}/invite`, { email: inviteEmail.value })
+        if (res.success) {
+            alert('Convite enviado com sucesso!')
+            showInvitePatientModal.value = false
+            await fetchPatients()
+        } else {
+            alert('Erro ao enviar convite: ' + (res.message || 'Erro desconhecido'))
+        }
+    } catch (error) {
+        console.error(error)
+        alert('Erro ao enviar convite')
+    } finally {
+        sendingInvite.value = false
+    }
 }
 
 const recipesList = ref([

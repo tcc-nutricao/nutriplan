@@ -15,6 +15,8 @@ import { AppError } from "../exceptions/AppError.js";
 
 const prisma = new PrismaClient();
 
+import { NutritionistRepository } from "../repositories/NutritionistRepository.js";
+
 const getPersonalData = async (userId) => {
   const patient = await PatientRepository.findByUserId(userId);
   if (!patient) return null;
@@ -51,6 +53,12 @@ const getPersonalData = async (userId) => {
   
   restrictionNames = patientRestrictions.data?.map((r) => r.dietaryRestriction?.name || "Desconhecido") || [];
 
+  let nutritionistName = null;
+  if (patient.id_nutritionist) {
+    const nutritionist = await NutritionistRepository.findById(patient.id_nutritionist);
+    nutritionistName = nutritionist?.user?.name;
+  }
+
   return {
     nome: user?.name || "",
     email: user?.email || "",
@@ -73,6 +81,7 @@ const getPersonalData = async (userId) => {
       filters: [{ field: "id_goal", value: activeGoal.id }],
     })).data?.map((go) => go.id_objective) || [] : [],
     restrictions: patientRestrictions.data?.map((r) => r.id_dietary_restriction) || [],
+    nutritionistName
   };
 };
 

@@ -23,7 +23,7 @@
         </button>
 
         <h2 class="text-2xl font-semibold text-np mb-4">
-          {{ section === "create" ? "Criar" : "Editar" }}
+          {{ section === "create" || section === "create-offline" ? "Criar" : "Editar" }}
           paciente
         </h2>
 
@@ -41,7 +41,7 @@
             />
             <Error :message="errors.name" />
           </div>
-          <div class="col-span-1">
+          <div class="col-span-1" v-if="section !== 'create-offline'">
             <Label class="mb-2" label="Email" :error="errors.email" />
             <Input
               type="email"
@@ -247,12 +247,12 @@ function validate() {
     target_weight: null,
   };
 
-  if (props.section === 'create') {
+  if (props.section === 'create' || props.section === 'create-offline') {
       if (!formData.value.name) {
           errors.value.name = "Campo obrigatório";
           isValid = false;
       }
-      if (!formData.value.email) {
+      if (props.section === 'create' && !formData.value.email) {
           errors.value.email = "Campo obrigatório";
           isValid = false;
       }
@@ -338,7 +338,7 @@ async function handleSubmit() {
 
   try {
     let res;
-    if (props.section === "create") {
+    if (props.section === "create" || props.section === "create-offline") {
         res = await insert("patient/create-full", payload);
     } else {
         res = await update("patient", props.patientData.id, payload); 
