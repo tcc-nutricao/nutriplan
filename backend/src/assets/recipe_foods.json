@@ -12,31 +12,31 @@
     "unit": "Pitada"
   },
   {
-    "recipe_name": "Legumes Cozidos",
+    "recipe_name": "Peixe Assado com Legumes",
     "food_name": "Cenoura",
     "quantity": 1,
     "unit": "Unidade"
   },
   {
-    "recipe_name": "Legumes Cozidos",
+    "recipe_name": "Peixe Assado com Legumes",
     "food_name": "Batata Inglesa",
     "quantity": 150,
     "unit": "Grama"
   },
   {
-    "recipe_name": "Legumes Cozidos",
+    "recipe_name": "Peixe Assado com Legumes",
     "food_name": "Sal",
     "quantity": 1,
     "unit": "Pitada"
   },
   {
-    "recipe_name": "Legumes Cozidos",
+    "recipe_name": "Peixe Assado com Legumes",
     "food_name": "Chuchu",
     "quantity": 0.5,
     "unit": "Unidade"
   },
   {
-    "recipe_name": "Legumes Cozidos",
+    "recipe_name": "Peixe Assado com Legumes",
     "food_name": "Água",
     "quantity": 200,
     "unit": "Mililitro"
@@ -54,91 +54,91 @@
     "unit": "Mililitro"
   },
   {
-    "recipe_name": "Salada Simples",
+    "recipe_name": "Salada Completa com Frango e Croutons",
     "food_name": "Cenoura",
     "quantity": 1,
     "unit": "Unidade"
   },
   {
-    "recipe_name": "Salada Simples",
+    "recipe_name": "Salada Completa com Frango e Croutons",
     "food_name": "Tomate",
     "quantity": 1,
     "unit": "Unidade"
   },
   {
-    "recipe_name": "Salada Simples",
+    "recipe_name": "Salada Completa com Frango e Croutons",
     "food_name": "Alface",
     "quantity": 50,
     "unit": "Grama"
   },
   {
-    "recipe_name": "Salada Simples",
+    "recipe_name": "Salada Completa com Frango e Croutons",
     "food_name": "Azeite de Oliva",
     "quantity": 1,
     "unit": "Colher de Sopa"
   },
   {
-    "recipe_name": "Salada Simples",
+    "recipe_name": "Salada Completa com Frango e Croutons",
     "food_name": "Sal",
     "quantity": 1,
     "unit": "Pitada"
   },
   {
-    "recipe_name": "Salada Simples",
+    "recipe_name": "Salada Completa com Frango e Croutons",
     "food_name": "Limão",
     "quantity": 1,
     "unit": "Unidade"
   },
   {
-    "recipe_name": "Arroz com Cenoura",
+    "recipe_name": "Risoto de Frango com Cenoura",
     "food_name": "Arroz Branco",
     "quantity": 100,
     "unit": "Grama"
   },
   {
-    "recipe_name": "Arroz com Cenoura",
+    "recipe_name": "Risoto de Frango com Cenoura",
     "food_name": "Cenoura",
     "quantity": 1,
     "unit": "Unidade"
   },
   {
-    "recipe_name": "Arroz com Cenoura",
+    "recipe_name": "Risoto de Frango com Cenoura",
     "food_name": "Sal",
     "quantity": 1,
     "unit": "Pitada"
   },
   {
-    "recipe_name": "Arroz com Cenoura",
+    "recipe_name": "Risoto de Frango com Cenoura",
     "food_name": "Alho",
     "quantity": 1,
     "unit": "Dente"
   },
   {
-    "recipe_name": "Arroz com Cenoura",
+    "recipe_name": "Risoto de Frango com Cenoura",
     "food_name": "Água",
     "quantity": 200,
     "unit": "Mililitro"
   },
   {
-    "recipe_name": "Macarrão com Manteiga",
+    "recipe_name": "Macarrão à Bolonhesa",
     "food_name": "Manteiga",
     "quantity": 1,
     "unit": "Colher de Sopa"
   },
   {
-    "recipe_name": "Macarrão com Manteiga",
+    "recipe_name": "Macarrão à Bolonhesa",
     "food_name": "Sal",
     "quantity": 1,
     "unit": "Pitada"
   },
   {
-    "recipe_name": "Macarrão com Manteiga",
+    "recipe_name": "Macarrão à Bolonhesa",
     "food_name": "Macarrão Cozido",
     "quantity": 100,
     "unit": "Grama"
   },
   {
-    "recipe_name": "Macarrão com Manteiga",
+    "recipe_name": "Macarrão à Bolonhesa",
     "food_name": "Água",
     "quantity": 200,
     "unit": "Mililitro"
@@ -150,19 +150,19 @@
     "unit": "Unidade"
   },
   {
-    "recipe_name": "Milho Cozido",
+    "recipe_name": "Frango com Creme de Milho",
     "food_name": "Sal",
     "quantity": 1,
     "unit": "Pitada"
   },
   {
-    "recipe_name": "Milho Cozido",
+    "recipe_name": "Frango com Creme de Milho",
     "food_name": "Milho Verde",
     "quantity": 1,
     "unit": "Lata"
   },
   {
-    "recipe_name": "Milho Cozido",
+    "recipe_name": "Frango com Creme de Milho",
     "food_name": "Água",
     "quantity": 200,
     "unit": "Mililitro"
@@ -318,67 +318,67 @@
     "unit": "Pitada"
   },
   {
-    "recipe_name": "Arroz Branco",
+    "recipe_name": "Prato Feito: Frango com Arroz e Feijão",
     "food_name": "Arroz Branco",
     "quantity": 100,
     "unit": "Grama"
   },
   {
-    "recipe_name": "Arroz Branco",
+    "recipe_name": "Prato Feito: Frango com Arroz e Feijão",
     "food_name": "Azeite de Oliva",
     "quantity": 1,
     "unit": "Colher de Sopa"
   },
   {
-    "recipe_name": "Arroz Branco",
+    "recipe_name": "Prato Feito: Frango com Arroz e Feijão",
     "food_name": "Sal",
     "quantity": 1,
     "unit": "Pitada"
   },
   {
-    "recipe_name": "Arroz Branco",
+    "recipe_name": "Prato Feito: Frango com Arroz e Feijão",
     "food_name": "Alho",
     "quantity": 1,
     "unit": "Dente"
   },
   {
-    "recipe_name": "Arroz Branco",
+    "recipe_name": "Prato Feito: Frango com Arroz e Feijão",
     "food_name": "Água",
     "quantity": 200,
     "unit": "Mililitro"
   },
   {
-    "recipe_name": "Macarrão Alho e Óleo",
+    "recipe_name": "Macarrão com Iscas de Carne e Brócolis",
     "food_name": "Azeite de Oliva",
     "quantity": 1,
     "unit": "Colher de Sopa"
   },
   {
-    "recipe_name": "Macarrão Alho e Óleo",
+    "recipe_name": "Macarrão com Iscas de Carne e Brócolis",
     "food_name": "Sal",
     "quantity": 1,
     "unit": "Pitada"
   },
   {
-    "recipe_name": "Macarrão Alho e Óleo",
+    "recipe_name": "Macarrão com Iscas de Carne e Brócolis",
     "food_name": "Alho",
     "quantity": 1,
     "unit": "Dente"
   },
   {
-    "recipe_name": "Macarrão Alho e Óleo",
+    "recipe_name": "Macarrão com Iscas de Carne e Brócolis",
     "food_name": "Macarrão Cozido",
     "quantity": 100,
     "unit": "Grama"
   },
   {
-    "recipe_name": "Macarrão Alho e Óleo",
+    "recipe_name": "Macarrão com Iscas de Carne e Brócolis",
     "food_name": "Água",
     "quantity": 200,
     "unit": "Mililitro"
   },
   {
-    "recipe_name": "Macarrão Alho e Óleo",
+    "recipe_name": "Macarrão com Iscas de Carne e Brócolis",
     "food_name": "Salsinha",
     "quantity": 1,
     "unit": "Colher de Sopa"
@@ -450,25 +450,25 @@
     "unit": "Pitada"
   },
   {
-    "recipe_name": "Purê de Batata",
+    "recipe_name": "Escondidinho de Carne Moída",
     "food_name": "Leite Integral",
     "quantity": 200,
     "unit": "Mililitro"
   },
   {
-    "recipe_name": "Purê de Batata",
+    "recipe_name": "Escondidinho de Carne Moída",
     "food_name": "Batata Inglesa",
     "quantity": 150,
     "unit": "Grama"
   },
   {
-    "recipe_name": "Purê de Batata",
+    "recipe_name": "Escondidinho de Carne Moída",
     "food_name": "Manteiga",
     "quantity": 1,
     "unit": "Colher de Sopa"
   },
   {
-    "recipe_name": "Purê de Batata",
+    "recipe_name": "Escondidinho de Carne Moída",
     "food_name": "Sal",
     "quantity": 1,
     "unit": "Pitada"
@@ -640,18 +640,6 @@
     "food_name": "Milho Verde",
     "quantity": 1,
     "unit": "Lata"
-  },
-  {
-    "recipe_name": "Café Coado",
-    "food_name": "Café",
-    "quantity": 1,
-    "unit": "Xícara"
-  },
-  {
-    "recipe_name": "Café Coado",
-    "food_name": "Água",
-    "quantity": 200,
-    "unit": "Mililitro"
   },
   {
     "recipe_name": "Limonada",
@@ -1146,31 +1134,31 @@
     "unit": "Mililitro"
   },
   {
-    "recipe_name": "Batata Sauté",
+    "recipe_name": "Picadinho de Carne com Batata",
     "food_name": "Batata Inglesa",
     "quantity": 150,
     "unit": "Grama"
   },
   {
-    "recipe_name": "Batata Sauté",
+    "recipe_name": "Picadinho de Carne com Batata",
     "food_name": "Manteiga",
     "quantity": 1,
     "unit": "Colher de Sopa"
   },
   {
-    "recipe_name": "Batata Sauté",
+    "recipe_name": "Picadinho de Carne com Batata",
     "food_name": "Sal",
     "quantity": 1,
     "unit": "Pitada"
   },
   {
-    "recipe_name": "Batata Sauté",
+    "recipe_name": "Picadinho de Carne com Batata",
     "food_name": "Alho",
     "quantity": 1,
     "unit": "Dente"
   },
   {
-    "recipe_name": "Batata Sauté",
+    "recipe_name": "Picadinho de Carne com Batata",
     "food_name": "Água",
     "quantity": 200,
     "unit": "Mililitro"
@@ -1222,24 +1210,6 @@
     "food_name": "Manjericão",
     "quantity": 5,
     "unit": "Unidade"
-  },
-  {
-    "recipe_name": "Café com Leite",
-    "food_name": "Leite Integral",
-    "quantity": 200,
-    "unit": "Mililitro"
-  },
-  {
-    "recipe_name": "Café com Leite",
-    "food_name": "Açúcar Branco",
-    "quantity": 1,
-    "unit": "Colher de Sopa"
-  },
-  {
-    "recipe_name": "Café com Leite",
-    "food_name": "Café",
-    "quantity": 1,
-    "unit": "Xícara"
   },
   {
     "recipe_name": "Pudim de Gelatina",
@@ -2070,24 +2040,6 @@
     "unit": "Colher de Sopa"
   },
   {
-    "recipe_name": "Café Gelado",
-    "food_name": "Leite Integral",
-    "quantity": 200,
-    "unit": "Mililitro"
-  },
-  {
-    "recipe_name": "Café Gelado",
-    "food_name": "Açúcar Branco",
-    "quantity": 1,
-    "unit": "Colher de Sopa"
-  },
-  {
-    "recipe_name": "Café Gelado",
-    "food_name": "Café",
-    "quantity": 1,
-    "unit": "Xícara"
-  },
-  {
     "recipe_name": "Creme de Abacate",
     "food_name": "Açúcar Branco",
     "quantity": 1,
@@ -2286,25 +2238,25 @@
     "unit": "Mililitro"
   },
   {
-    "recipe_name": "Couve Refogada",
+    "recipe_name": "Bife com Couve e Arroz",
     "food_name": "Azeite de Oliva",
     "quantity": 1,
     "unit": "Colher de Sopa"
   },
   {
-    "recipe_name": "Couve Refogada",
+    "recipe_name": "Bife com Couve e Arroz",
     "food_name": "Sal",
     "quantity": 1,
     "unit": "Pitada"
   },
   {
-    "recipe_name": "Couve Refogada",
+    "recipe_name": "Bife com Couve e Arroz",
     "food_name": "Alho",
     "quantity": 1,
     "unit": "Dente"
   },
   {
-    "recipe_name": "Couve Refogada",
+    "recipe_name": "Bife com Couve e Arroz",
     "food_name": "Couve Manteiga",
     "quantity": 2,
     "unit": "Unidade"
@@ -4234,5 +4186,131 @@
     "food_name": "Suco de Laranja",
     "quantity": 200,
     "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Peixe Assado com Legumes",
+    "food_name": "Filé de Peixe",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Peixe Assado com Legumes",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Salada Completa com Frango e Croutons",
+    "food_name": "Peito de Frango Desfiado",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salada Completa com Frango e Croutons",
+    "food_name": "Pão de Forma (Croutons)",
+    "quantity": 1,
+    "unit": "Fatia"
+  },
+  {
+    "recipe_name": "Risoto de Frango com Cenoura",
+    "food_name": "Peito de Frango em Cubos",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Risoto de Frango com Cenoura",
+    "food_name": "Manteiga",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Macarrão à Bolonhesa",
+    "food_name": "Carne Moída Refogada",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Macarrão à Bolonhesa",
+    "food_name": "Molho de Tomate",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Frango com Creme de Milho",
+    "food_name": "Peito de Frango Grelhado",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Frango com Creme de Milho",
+    "food_name": "Leite Integral",
+    "quantity": 100,
+    "unit": "Mililitro"
+  },
+  {
+    "recipe_name": "Prato Feito: Frango com Arroz e Feijão",
+    "food_name": "Peito de Frango Grelhado",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Prato Feito: Frango com Arroz e Feijão",
+    "food_name": "Feijão Carioca Cozido",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Prato Feito: Frango com Arroz e Feijão",
+    "food_name": "Alface",
+    "quantity": 50,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Macarrão com Iscas de Carne e Brócolis",
+    "food_name": "Carne Bovina (Iscas)",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Macarrão com Iscas de Carne e Brócolis",
+    "food_name": "Brócolis Cozido",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Escondidinho de Carne Moída",
+    "food_name": "Carne Moída Refogada",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Escondidinho de Carne Moída",
+    "food_name": "Queijo Muçarela",
+    "quantity": 2,
+    "unit": "Fatia"
+  },
+  {
+    "recipe_name": "Picadinho de Carne com Batata",
+    "food_name": "Carne Bovina (Cubos)",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Picadinho de Carne com Batata",
+    "food_name": "Arroz Branco",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Bife com Couve e Arroz",
+    "food_name": "Bife Bovino Grelhado",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Bife com Couve e Arroz",
+    "food_name": "Arroz Branco",
+    "quantity": 100,
+    "unit": "Grama"
   }
 ]

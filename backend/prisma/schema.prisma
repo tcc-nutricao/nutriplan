@@ -129,6 +129,9 @@ model Recipe {
   created_at       DateTime  @default(now())
   deleted_at       DateTime?
   updated_at       DateTime?
+  pref_meal_id     Int?
+  
+  meal             Meal?        @relation(fields: [pref_meal_id], references: [id])
   recipeFoods      RecipeFood[]
   mealPlanRecipes  MealPlanRecipe[]
   foodConsumed     FoodConsumed[]
@@ -365,6 +368,7 @@ model Meal {
 
   mealPreferences MealPreference[]
   mealPlanMeals   MealPlanMeal[]
+  recipes         Recipe[]
 }
 
 model MealPlanMeal {

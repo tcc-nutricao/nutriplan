@@ -1,992 +1,1146 @@
 [
   {
-    "name": "Legumes Cozidos",
-    "preparation_method": "Descasque e corte a cenoura, a batata e o chuchu em cubos; Coloque os legumes em uma panela com água e sal; Cozinhe até que fiquem macios ao toque do garfo; Escorra a água e sirva.",
+    "name": "Peixe Assado com Legumes",
+    "preparation_method": "Tempere o peixe; Coloque em uma assadeira com os legumes cortados; Asse até o peixe ficar macio e os legumes dourados.",
     "preparation_time": 25,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 3,
+    "calories": 500
   },
   {
     "name": "Ovo Cozido",
     "preparation_method": "Coloque os ovos em uma panela e cubra com água; Leve ao fogo alto e, após ferver, cozinhe por exatamente 9 minutos; Resfrie os ovos imediatamente em água gelada; Descasque e sirva.",
     "preparation_time": 9,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 1
   },
   {
-    "name": "Salada Simples",
-    "preparation_method": "Lave bem o tomate, a alface e rale a cenoura; Corte o tomate e rasgue a alface; Misture todos os ingredientes em uma tigela; Tempere com azeite, limão e sal a gosto.",
+    "name": "Salada Completa com Frango e Croutons",
+    "preparation_method": "Misture as folhas e legumes; Adicione tiras de frango grelhado e croutons; Tempere com molho de sua preferência.",
     "preparation_time": 7,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3,
+    "calories": 500
   },
   {
-    "name": "Arroz com Cenoura",
-    "preparation_method": "Rale a cenoura e refogue o alho no óleo; Adicione o arroz e a cenoura ralada, refogando por mais 2 minutos; Acrescente água fervente e sal; Cozinhe em fogo baixo até a água secar.",
+    "name": "Risoto de Frango com Cenoura",
+    "preparation_method": "Refogue o frango e a cenoura; Adicione o arroz e cozinhe com caldo, mexendo sempre para ficar cremoso; Finalize com manteiga.",
     "preparation_time": 22,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 3,
+    "calories": 500
   },
   {
-    "name": "Macarrão com Manteiga",
-    "preparation_method": "Cozinhe o macarrão em água fervente com sal até ficar *al dente*; Escorra a água; Derreta a manteiga na mesma panela ou em uma frigideira; Misture o macarrão quente na manteiga derretida e sirva.",
+    "name": "Macarrão à Bolonhesa",
+    "preparation_method": "Cozinhe o macarrão; Prepare um molho com carne moída e tomate; Misture o molho à massa e sirva com queijo.",
     "preparation_time": 12,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3,
+    "calories": 500
   },
   {
-    "name": "Milho Cozido",
-    "preparation_method": "Limpe as espigas de milho retirando as palhas e os 'cabelos'; Coloque as espigas em uma panela com água e sal; Cozinhe em fogo alto por cerca de 30 minutos ou até que os grãos estejam macios; Escorra e sirva quente.",
+    "name": "Frango com Creme de Milho",
+    "preparation_method": "Grelhe o frango; Bata o milho com leite para fazer o creme e cozinhe até engrossar; Sirva o frango coberto com o creme.",
     "preparation_time": 30,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 2,
+    "calories": 500
   },
   {
     "name": "Suco de Laranja",
     "preparation_method": "Lave e corte as laranjas ao meio; Esprema as laranjas em um espremedor; Coe o suco para retirar as sementes e o excesso de polpa; Sirva imediatamente, adicionando gelo se desejar.",
     "preparation_time": 4,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 1
   },
   {
     "name": "Chá de Camomila",
     "preparation_method": "Ferva a água em uma chaleira; Coloque o sachê ou as flores de camomila em uma xícara; Despeje a água quente sobre a camomila; Deixe em infusão por 5 minutos e sirva.",
     "preparation_time": 5,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 2
   },
   {
     "name": "Pão de Queijo de Liquidificador",
     "preparation_method": "Pré-aqueça o forno a 180°C e unte as forminhas; Bata o leite, o óleo, os ovos e o polvilho no liquidificador; Adicione o queijo ralado e bata mais um pouco; Despeje a massa nas forminhas e asse até dourar (cerca de 20 minutos).",
     "preparation_time": 30,
-    "portion": 12
+    "portion": 12,
+    "pref_meal_id": 1
   },
   {
     "name": "Frango Grelhado",
     "preparation_method": "Tempere os filés de frango com sal, pimenta e os temperos de sua preferência; Aqueça uma grelha ou frigideira com um fio de azeite; Grelhe os filés por cerca de 4 a 6 minutos de cada lado, até ficarem dourados e cozidos por dentro; Sirva quente.",
     "preparation_time": 15,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Omelete Simples",
     "preparation_method": "Quebre os ovos em uma tigela e bata bem com um garfo; Tempere com sal e pimenta a gosto; Aqueça uma frigideira antiaderente com um pouco de manteiga ou óleo; Despeje os ovos batidos e cozinhe até firmar, dobrando a omelete ao meio.",
     "preparation_time": 10,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 3
   },
   {
-    "name": "Arroz Branco",
-    "preparation_method": "Lave o arroz até a água sair clara; Refogue o alho picado no óleo ou azeite em uma panela; Adicione o arroz e refogue bem por 2 minutos; Acrescente água fervente e sal, e cozinhe em fogo baixo com a panela semi-tampada até a água secar.",
+    "name": "Prato Feito: Frango com Arroz e Feijão",
+    "preparation_method": "Tempere o frango e grelhe; Cozinhe o arroz e o feijão separadamente; Monte o prato com uma porção de cada e sirva com salada.",
     "preparation_time": 20,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 3,
+    "calories": 500
   },
   {
-    "name": "Macarrão Alho e Óleo",
-    "preparation_method": "Cozinhe o macarrão em água fervente com sal até ficar *al dente* e escorra; Em uma frigideira, doure o alho laminado no azeite; Junte o macarrão cozido ao alho e azeite; Misture bem, adicione salsinha picada e sirva.",
+    "name": "Macarrão com Iscas de Carne e Brócolis",
+    "preparation_method": "Cozinhe o macarrão; Refogue tiras de carne com brócolis e alho; Misture tudo e sirva.",
     "preparation_time": 15,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3,
+    "calories": 500
   },
   {
     "name": "Vitamina de Banana",
     "preparation_method": "Descasque a banana e corte em pedaços; Coloque a banana, o leite e a aveia no liquidificador; Bata até obter uma mistura homogênea e cremosa; Sirva imediatamente, adicionando açúcar ou mel se desejar.",
     "preparation_time": 5,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Salada Caprese",
     "preparation_method": "Corte o tomate e a muçarela de búfala em rodelas; Intercale as rodelas de tomate, muçarela e folhas de manjericão fresco em um prato; Regue a salada com azeite de oliva extra virgem; Tempere com sal e pimenta-do-reino moída na hora.",
     "preparation_time": 10,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
-    "name": "Purê de Batata",
-    "preparation_method": "Cozinhe as batatas com casca até ficarem muito macias; Descasque as batatas ainda quentes e amasse-as com um espremedor; Em uma panela, misture a batata amassada com leite, manteiga e sal; Cozinhe em fogo baixo, mexendo vigorosamente, até obter a consistência desejada.",
+    "name": "Escondidinho de Carne Moída",
+    "preparation_method": "Prepare o purê de batata; Refogue a carne moída com temperos; Em um refratário, faça uma camada de carne e cubra com o purê; Gratine no forno com queijo.",
     "preparation_time": 20,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 3,
+    "calories": 500
   },
   {
     "name": "Torrada com Alho",
     "preparation_method": "Amasse o alho e misture com manteiga em ponto de pomada e sal; Corte o pão em fatias e passe a pasta de alho em cada lado; Leve as fatias ao forno pré-aquecido ou à *air fryer* até dourar e ficar crocante; Sirva quente.",
     "preparation_time": 10,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 1
   },
   {
     "name": "Banana Assada",
     "preparation_method": "Lave as bananas e faça um corte longitudinal na casca; Coloque as bananas em uma assadeira; Polvilhe o corte da banana com canela e açúcar a gosto; Asse em forno médio por cerca de 15 minutos ou até a casca ficar preta e a banana macia.",
     "preparation_time": 15,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 1
   },
   {
     "name": "Cuscuz Nordestino",
     "preparation_method": "Em uma tigela, hidrate a farinha de milho flocada com água e sal por 10 minutos; Coloque a massa hidratada na cuscuzeira; Leve ao fogo e cozinhe no vapor por cerca de 10 a 15 minutos; Desenforme e sirva quente, geralmente com manteiga ou ovo.",
     "preparation_time": 15,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 1
   },
   {
     "name": "Panqueca Simples",
     "preparation_method": "Bata os ovos, o leite, a farinha, o óleo e o sal no liquidificador até obter uma massa homogênea; Aqueça uma frigideira antiaderente untada; Despeje uma concha da massa e gire para cobrir o fundo; Frite dos dois lados até dourar e repita o processo com o restante da massa.",
     "preparation_time": 20,
-    "portion": 6
+    "portion": 6,
+    "pref_meal_id": 1
   },
   {
     "name": "Pipoca na Panela",
     "preparation_method": "Coloque o óleo e o milho de pipoca em uma panela grande e funda; Leve ao fogo alto e tampe a panela; Segure a panela e chacoalhe ocasionalmente enquanto os grãos estouram; Retire do fogo quando o intervalo entre os estouros diminuir e tempere com sal.",
     "preparation_time": 8,
-    "portion": 3
-  },
-  {
-    "name": "Café Coado",
-    "preparation_method": "Ferva a água em uma chaleira; Coloque o filtro de papel no coador; Adicione o pó de café dentro do filtro; Despeje a água quente lentamente sobre o pó, umedecendo-o por igual, e deixe coar na garrafa térmica.",
-    "preparation_time": 5,
-    "portion": 2
+    "portion": 3,
+    "pref_meal_id": 2
   },
   {
     "name": "Limonada",
     "preparation_method": "Lave bem o limão, corte em quartos e retire a parte branca central; Bata o limão, a água e o açúcar no liquidificador; Coe a mistura para retirar a polpa e o bagaço; Sirva bem gelada.",
     "preparation_time": 5,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 2
   },
   {
     "name": "Crepioca",
     "preparation_method": "Em uma tigela, misture 1 ovo com 2 colheres de sopa de goma de tapioca e tempere com sal; Aqueça uma frigideira antiaderente untada; Despeje a mistura na frigideira e espere firmar; Vire a crepioca e cozinhe o outro lado até dourar.",
     "preparation_time": 7,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Ovo Mexido",
     "preparation_method": "Quebre os ovos em uma tigela e bata levemente com sal e pimenta; Derreta a manteiga em uma frigideira antiaderente em fogo baixo; Despeje os ovos batidos na frigideira; Mexa constantemente com uma espátula até os ovos coagularem no ponto desejado.",
     "preparation_time": 5,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Sanduíche de Presunto e Queijo",
     "preparation_method": "Coloque fatias de presunto e queijo entre duas fatias de pão; Pincele ou passe um pouco de manteiga por fora do pão (opcional); Leve o sanduíche à sanduicheira ou chapa pré-aquecida; Deixe esquentar até o pão dourar e o queijo derreter.",
     "preparation_time": 5,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Tapioca Simples",
     "preparation_method": "Peneire a goma de tapioca em uma frigideira antiaderente fria até cobrir o fundo; Leve ao fogo médio e aguarde a goma hidratar e se unir, formando um disco; Vire o disco e cozinhe o outro lado por cerca de 30 segundos; Sirva.",
     "preparation_time": 5,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Bruschetta",
     "preparation_method": "Corte o pão em fatias e regue com azeite; Asse as fatias em forno pré-aquecido até ficarem crocantes (torradas); Misture tomate picado, alho, manjericão, azeite, sal e pimenta; Cubra cada fatia de pão torrado com a mistura de tomate.",
     "preparation_time": 10,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 2
   },
   {
     "name": "Cuscuz Paulista Simples",
     "preparation_method": "Refogue alho e cebola no azeite; Adicione molho de tomate, água, farinha de milho e tempere; Cozinhe até engrossar; Misture ingredientes opcionais (milho, ervilha, sardinha) se desejar; Despeje a mistura em uma forma untada e deixe esfriar para moldar.",
     "preparation_time": 25,
-    "portion": 6
+    "portion": 6,
+    "pref_meal_id": 3
   },
   {
     "name": "Sopa de Legumes",
     "preparation_method": "Corte os legumes (batata, cenoura, abobrinha) em cubos; Refogue alho e cebola em uma panela grande; Adicione os legumes, água e sal; Cozinhe até que os legumes estejam bem macios; Bata a sopa no liquidificador para obter um creme ou sirva em pedaços.",
     "preparation_time": 35,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 3
   },
   {
     "name": "Vitamina de Morango",
     "preparation_method": "Lave e retire os cabinhos dos morangos; Coloque os morangos, o leite e o açúcar (opcional) no liquidificador; Bata até a mistura ficar homogênea e cremosa; Sirva imediatamente, gelada.",
     "preparation_time": 5,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Ovo no Pão",
     "preparation_method": "Corte um buraco no centro de uma fatia de pão; Derreta manteiga ou azeite em uma frigideira; Coloque a fatia de pão na frigideira; Quebre um ovo no buraco do pão e tempere com sal; Frite até o pão dourar e o ovo cozinhar no ponto desejado.",
     "preparation_time": 8,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Panqueca Americana",
     "preparation_method": "Misture os ingredientes secos (farinha, açúcar, fermento) e os líquidos (ovo, leite, manteiga derretida) separadamente; Junte as duas misturas até ficar homogêneo; Aqueça e unte levemente uma frigideira; Despeje porções da massa, formando discos; Vire quando bolhas aparecerem e doure o outro lado.",
     "preparation_time": 15,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 1
   },
   {
     "name": "Abacate Amassado",
     "preparation_method": "Corte o abacate ao meio e retire o caroço; Retire a polpa do abacate e coloque em uma tigela; Amasse o abacate com um garfo; Adicione suco de limão e sal a gosto e misture bem.",
     "preparation_time": 3,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Milkshake de Chocolate",
     "preparation_method": "Coloque o sorvete de chocolate (ou creme), o leite e a calda de chocolate (opcional) no liquidificador; Bata até atingir a consistência cremosa de milkshake; Despeje em um copo alto; Sirva com chantilly e raspas de chocolate (opcional).",
     "preparation_time": 5,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 2
   },
   {
     "name": "Banana com Aveia",
     "preparation_method": "Descasque e corte a banana em rodelas ou pedaços; Coloque a banana em uma tigela; Adicione a aveia por cima da banana; Se desejar, regue com mel ou canela e sirva.",
     "preparation_time": 3,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Frango Desfiado",
     "preparation_method": "Tempere e cozinhe o peito de frango em água ou caldo, na panela de pressão ou comum, até ficar macio; Escorra o caldo; Coloque o frango cozido em uma tigela grande; Use um garfo para desfiar o frango ou chacoalhe o frango quente dentro da panela tampada.",
     "preparation_time": 30,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 3
   },
   {
     "name": "Arroz Doce Simples",
     "preparation_method": "Cozinhe o arroz com água até secar e ficar macio; Adicione o leite, o açúcar e a canela em pau; Cozinhe em fogo baixo, mexendo ocasionalmente, até o caldo engrossar e o arroz ficar cremoso; Sirva quente ou frio, polvilhado com canela em pó.",
     "preparation_time": 40,
-    "portion": 6
+    "portion": 6,
+    "pref_meal_id": 2
   },
   {
     "name": "Pão com Ovo",
     "preparation_method": "Frite ou cozinhe um ovo no ponto desejado; Corte o pão ao meio e passe manteiga ou requeijão; Coloque o ovo frito ou cozido dentro do pão; Tempere com sal e pimenta e sirva.",
     "preparation_time": 6,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Bife Acebolado",
     "preparation_method": "Tempere os bifes com sal e pimenta; Aqueça óleo ou azeite em uma frigideira em fogo alto; Frite os bifes rapidamente até dourarem dos dois lados; Retire os bifes e, na mesma frigideira, refogue as rodelas de cebola até ficarem macias e caramelizadas; Despeje as cebolas sobre os bifes e sirva.",
     "preparation_time": 12,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
-    "name": "Batata Sauté",
-    "preparation_method": "Cozinhe as batatas pequenas ou em cubos com sal até ficarem *al dente*; Escorra a água; Derreta a manteiga em uma frigideira e adicione cheiro-verde e alho picado (opcional); Salteie as batatas cozidas na manteiga temperada até dourarem levemente.",
+    "name": "Picadinho de Carne com Batata",
+    "preparation_method": "Cozinhe a carne em cubos com molho; Adicione as batatas sauté no final para pegar o gosto; Sirva com arroz.",
     "preparation_time": 20,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 3,
+    "calories": 500
   },
   {
     "name": "Molho de Tomate Rápido",
     "preparation_method": "Refogue alho e cebola no azeite; Adicione tomate pelado ou molho pronto de boa qualidade e tempere com sal e açúcar (para tirar a acidez); Adicione temperos como manjericão e orégano; Cozinhe em fogo baixo por 10 a 15 minutos.",
     "preparation_time": 15,
-    "portion": 4
-  },
-  {
-    "name": "Café com Leite",
-    "preparation_method": "Prepare o café coado ou utilize café solúvel; Aqueça o leite até o ponto desejado (sem ferver); Em uma xícara, misture o café na proporção que preferir; Adicione açúcar a gosto e sirva.",
-    "preparation_time": 3,
-    "portion": 1
+    "portion": 4,
+    "pref_meal_id": 3
   },
   {
     "name": "Mingau de Aveia",
     "preparation_method": "Em uma panela, misture a aveia, o leite e o açúcar ou adoçante; Leve ao fogo baixo e mexa constantemente; Cozinhe até engrossar e atingir a consistência de mingau; Sirva quente ou frio, com canela em pó.",
     "preparation_time": 6,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Batata Assada",
     "preparation_method": "Lave e seque bem as batatas; Fure-as com um garfo; Regue-as com azeite de oliva e tempere com sal grosso e alecrim (opcional); Asse em forno pré-aquecido a 200°C por 40 a 45 minutos, até ficarem macias e com a casca crocante.",
     "preparation_time": 45,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 3
   },
   {
     "name": "Chuchu Refogado",
     "preparation_method": "Descasque e corte o chuchu em cubos ou palitos; Refogue alho e cebola picados no azeite em uma panela; Adicione o chuchu e tempere com sal e pimenta; Adicione um pouco de água e cozinhe com a panela semi-tampada até o chuchu ficar macio.",
     "preparation_time": 15,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Lasanha Simples",
     "preparation_method": "Prepare um molho vermelho ou utilize um molho pronto; Cozinhe a massa de lasanha (se necessário); Em um refratário, intercale camadas de molho, massa e queijo muçarela ralado (e presunto, se desejar); Finalize com queijo parmesão e asse em forno médio por cerca de 30 minutos, ou até gratinar.",
     "preparation_time": 50,
-    "portion": 6
+    "portion": 6,
+    "pref_meal_id": 3
   },
   {
     "name": "Ensopado de Batata com Carne",
     "preparation_method": "Corte a carne e as batatas em cubos; Refogue a carne temperada em uma panela de pressão ou comum; Adicione alho, cebola e *extrato* de tomate; Acrescente as batatas e cubra com caldo de carne ou água; Cozinhe na pressão por 20 minutos (ou 40 minutos em panela comum) até a carne e a batata estarem macias.",
     "preparation_time": 40,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 3
   },
   {
     "name": "Pão Caseiro Simples",
     "preparation_method": "Misture os ingredientes secos (farinha, sal, açúcar) e ative o fermento em água morna; Junte os secos com os líquidos (fermento e óleo) e sove a massa até ficar lisa; Deixe a massa crescer em local aquecido até dobrar de volume (cerca de 1 hora); Modele os pães e asse em forno pré-aquecido até dourar.",
     "preparation_time": 180,
-    "portion": 10
+    "portion": 10,
+    "pref_meal_id": 1
   },
   {
     "name": "Molho Branco",
     "preparation_method": "Derreta a manteiga em uma panela e adicione a farinha, misturando rapidamente para formar um *roux*; Adicione o leite frio aos poucos, mexendo sempre com um *fouet* para não empelotar; Cozinhe em fogo baixo até engrossar; Tempere com sal, noz-moscada e pimenta-do-reino.",
     "preparation_time": 12,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 3
   },
   {
     "name": "Peito de Frango no Forno",
     "preparation_method": "Tempere os filés de peito de frango com sal, limão, azeite e ervas de sua preferência; Coloque os filés em uma assadeira; Cubra com papel alumínio e leve ao forno pré-aquecido a 200°C; Retire o papel alumínio nos últimos 10 minutos e deixe dourar.",
     "preparation_time": 35,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 3
   },
   {
     "name": "Berinjela Refogada",
     "preparation_method": "Corte a berinjela em cubos e deixe de molho em água e sal (para retirar o amargo) por 10 minutos; Escorra e seque os cubos; Refogue o alho picado em azeite; Adicione a berinjela e refogue em fogo alto até ficar macia; Tempere com sal e pimenta.",
     "preparation_time": 15,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Quiabo Refogado",
     "preparation_method": "Lave e seque bem os quiabos e corte as pontas; Aqueça o óleo em uma panela e adicione um pouco de vinagre (para cortar a baba); Refogue o quiabo rapidamente em fogo alto; Tempere com alho, sal e pimenta e continue refogando por mais 5 a 8 minutos.",
     "preparation_time": 12,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Molho de Alho Caseiro",
     "preparation_method": "No liquidificador ou *mixer*, coloque o leite (gelado), o alho, o sal e o cheiro-verde; Ligue o aparelho e, com ele ligado, vá adicionando o óleo em fio, bem lentamente; Continue batendo até o molho emulsionar e engrossar na consistência de maionese; Armazene na geladeira.",
     "preparation_time": 10,
-    "portion": 8
+    "portion": 8,
+    "pref_meal_id": 3
   },
   {
     "name": "Pão de Alho Simples",
     "preparation_method": "Misture manteiga derretida com alho amassado, azeite, sal e queijo ralado (opcional); Corte o pão em fatias sem ir até o final; Passe a pasta de alho entre as fatias e por cima do pão; Embrulhe em papel alumínio e asse em forno ou churrasqueira por 10 a 12 minutos.",
     "preparation_time": 12,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 3
   },
   {
     "name": "Caldinho de Feijão",
     "preparation_method": "Cozinhe o feijão com água e temperos (alho, bacon, cebola); Retire o feijão cozido da panela e bata no liquidificador; Coe a mistura para obter apenas o caldo; Reaqueça, acerte o sal e sirva em canecas, com *bacon* e cheiro-verde por cima.",
     "preparation_time": 20,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 3
   },
   {
     "name": "Abobrinha Grelhada",
     "preparation_method": "Corte a abobrinha em fatias finas no sentido do comprimento; Regue as fatias com azeite, sal, pimenta e orégano; Aqueça bem uma chapa ou frigideira (grelha); Grelhe as fatias de abobrinha por 3 a 4 minutos de cada lado até ficarem macias e com marcas de grelha.",
     "preparation_time": 10,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Skyr com Mel",
     "preparation_method": "Abra o pote de *Skyr* (ou iogurte grego natural); Despeje o iogurte em uma tigela; Regue generosamente com mel; Sirva imediatamente, gelado.",
     "preparation_time": 3,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Iogurte com Granola",
     "preparation_method": "Em uma tigela ou copo, coloque o iogurte natural ou de sua preferência; Adicione a granola por cima do iogurte; Opcionalmente, adicione frutas picadas (banana, morango) e mel; Sirva.",
     "preparation_time": 2,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Tapioca com Queijo",
     "preparation_method": "Peneire a goma de tapioca em uma frigideira até cobrir o fundo; Leve ao fogo e espere a goma se unir; Adicione o queijo (muçarela ou coalho) ralado ou fatiado em metade do disco; Dobre a tapioca ao meio e deixe o queijo derreter.",
     "preparation_time": 5,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Smoothie de Manga",
     "preparation_method": "Descasque a manga e corte em cubos; Congele os cubos de manga por pelo menos 2 horas; Bata a manga congelada no liquidificador com um pouco de leite ou água (o suficiente para bater); Sirva imediatamente para manter a consistência cremosa.",
     "preparation_time": 5,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Creme de Papaya",
     "preparation_method": "Corte o mamão papaya ao meio e retire as sementes; Retire a polpa do mamão e coloque no liquidificador com algumas bolas de sorvete de creme; Bata até obter uma consistência bem cremosa; Sirva em taças imediatamente com cassis (opcional).",
     "preparation_time": 4,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 2
   },
   {
     "name": "Sanduíche Natural",
     "preparation_method": "Misture o frango desfiado com maionese ou *requeijão* e tempere (opcional); Corte o pão integral ao meio; Em uma fatia, espalhe a pasta de frango; Monte o sanduíche com folhas de alface e fatias de tomate; Cubra com a outra fatia de pão e sirva.",
     "preparation_time": 7,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 3
   },
   {
     "name": "Pão com Requeijão",
     "preparation_method": "Corte o pão francês ou de forma; Utilize uma faca ou colher para pegar o requeijão; Espalhe uma camada uniforme de requeijão na fatia de pão; Sirva.",
     "preparation_time": 1,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Torrada com Manteiga",
     "preparation_method": "Corte a fatia de pão; Derreta a manteiga em uma frigideira ou coloque a manteiga no pão e leve à torradeira; Doure o pão dos dois lados até ficar crocante; Retire do fogo e sirva.",
     "preparation_time": 4,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Cenoura Baby Cozida",
     "preparation_method": "Lave as cenouras *baby*; Coloque-as em uma panela e cubra com água e sal; Cozinhe em fogo médio por cerca de 15 minutos ou até ficarem macias; Escorra a água e tempere com azeite e ervas finas (opcional).",
     "preparation_time": 15,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 2
   },
   {
     "name": "Chá Verde",
     "preparation_method": "Aqueça a água até quase ferver (cerca de 80°C); Coloque o sachê ou as folhas de chá verde em uma xícara; Despeje a água quente; Deixe em infusão por 3 minutos e retire o sachê ou coe as folhas antes de beber.",
     "preparation_time": 3,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 2
   },
   {
     "name": "Suco de Melancia",
     "preparation_method": "Corte a melancia e retire as sementes; Coloque os pedaços de melancia no liquidificador; Bata até obter um líquido homogêneo; Sirva imediatamente, com gelo se desejar.",
     "preparation_time": 3,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 2
   },
   {
     "name": "Salada de Pepino",
     "preparation_method": "Lave e corte o pepino em rodelas finas; Coloque as rodelas em uma tigela; Tempere com azeite, sal e pimenta-do-reino a gosto; Misture e sirva frio.",
     "preparation_time": 5,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Salada de Tomate",
     "preparation_method": "Lave os tomates e corte-os em fatias ou cubos; Coloque os tomates em uma tigela; Tempere com sal e azeite; Adicione vinagre, cebola picada ou orégano se desejar.",
     "preparation_time": 4,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Ovo Pochê",
     "preparation_method": "Ferva água em uma panela com um pouco de vinagre; Gire a água com uma colher para formar um redemoinho; Quebre o ovo e despeje-o suavemente no centro do redemoinho; Cozinhe por cerca de 3 a 4 minutos; Retire com uma escumadeira e tempere.",
     "preparation_time": 5,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Ovo Estrelado",
     "preparation_method": "Derreta manteiga ou aqueça o óleo em uma frigideira antiaderente; Quebre o ovo com cuidado e despeje na frigideira; Tempere com sal e pimenta; Cozinhe até a clara ficar firme e a gema no ponto desejado.",
     "preparation_time": 4,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Torrada Francesa",
     "preparation_method": "Em uma tigela, bata o ovo com leite e açúcar; Passe as fatias de pão na mistura de leite e ovo; Derreta manteiga em uma frigideira; Doure cada lado da fatia de pão na frigideira; Sirva com mel ou canela.",
     "preparation_time": 10,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 1
   },
   {
     "name": "Banana Caramelizada",
     "preparation_method": "Derreta o açúcar em uma frigideira em fogo médio até formar um caramelo dourado; Descasque e corte a banana ao meio (ou em rodelas grossas); Coloque a banana no caramelo e vire-a rapidamente; Sirva logo para não endurecer.",
     "preparation_time": 8,
-    "portion": 1
-  },
-  {
-    "name": "Café Gelado",
-    "preparation_method": "Prepare ou utilize café forte já frio; Encha um copo com cubos de gelo; Despeje o café frio e adicione leite (ou leite vegetal); Adicione açúcar ou adoçante a gosto e misture.",
-    "preparation_time": 3,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 2
   },
   {
     "name": "Creme de Abacate",
     "preparation_method": "Retire a polpa do abacate e coloque no liquidificador ou *mixer*; Adicione açúcar e suco de limão (para não oxidar); Bata até obter um creme liso e homogêneo; Sirva gelado.",
     "preparation_time": 3,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 2
   },
   {
     "name": "Abacaxi Grelhado",
     "preparation_method": "Descasque e corte o abacaxi em fatias de 1,5 cm de espessura; Polvilhe canela em pó sobre as fatias; Aqueça uma chapa ou frigideira (grelha) com um pouco de manteiga ou azeite; Grelhe as fatias por 3 a 4 minutos de cada lado até ficarem macias e douradas.",
     "preparation_time": 8,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Milho Verde na Manteiga",
     "preparation_method": "Utilize milho verde cozido (em espiga ou em conserva); Derreta a manteiga em uma frigideira em fogo médio; Adicione os grãos de milho e tempere com sal; Salteie por 3 a 5 minutos até o milho esquentar e pegar o sabor da manteiga.",
     "preparation_time": 6,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Cuscuz de Tapioca",
     "preparation_method": "Em uma tigela grande, misture a tapioca granulada com açúcar; Ferva o leite; Despeje o leite fervente sobre a tapioca e misture bem; Deixe hidratar por 20 minutos e sirva em temperatura ambiente ou gelado.",
     "preparation_time": 20,
-    "portion": 6
+    "portion": 6,
+    "pref_meal_id": 1
   },
   {
     "name": "Pão de Queijo Congelado",
     "preparation_method": "Pré-aqueça o forno a 180°C; Distribua os pães de queijo congelados em uma assadeira, mantendo distância entre eles; Asse pelo tempo indicado na embalagem (geralmente 15-25 minutos); Retire quando estiverem dourados e crescidos.",
     "preparation_time": 20,
-    "portion": 8
+    "portion": 8,
+    "pref_meal_id": 1
   },
   {
     "name": "Chá Mate Gelado",
     "preparation_method": "Prepare a infusão do chá mate (quente ou solúvel) e deixe esfriar; Encha um copo com gelo; Despeje o chá mate já frio; Adicione limão e açúcar se desejar, e sirva.",
     "preparation_time": 5,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 2
   },
   {
     "name": "Suco de Uva Natural",
     "preparation_method": "Lave bem as uvas e separe os bagos; Bata as uvas com um pouco de água e açúcar (opcional) no liquidificador; Coe a mistura para retirar a casca e as sementes; Sirva o suco imediatamente.",
     "preparation_time": 6,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 2
   },
   {
     "name": "Gelatina Simples",
     "preparation_method": "Dissolva o pó da gelatina em 250 ml de água quente, mexendo bem; Adicione 250 ml de água fria e misture; Despeje em taças individuais ou em um refratário; Leve à geladeira por no mínimo 4 horas ou até firmar.",
     "preparation_time": 240,
-    "portion": 6
+    "portion": 6,
+    "pref_meal_id": 2
   },
   {
     "name": "Creme de Milho Rápido",
     "preparation_method": "Bata o milho (em conserva ou fresco) e o leite no liquidificador; Coe a mistura para remover as peles do milho; Em uma panela, derreta a manteiga e adicione o caldo coado; Cozinhe em fogo baixo, mexendo até engrossar e tempere com sal.",
     "preparation_time": 15,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 3
   },
   {
     "name": "Purê de Mandioquinha",
     "preparation_method": "Cozinhe a mandioquinha (batata baroa) até ficar muito macia; Escorra a água e amasse a mandioquinha ainda quente; Em uma panela, misture a mandioquinha amassada com manteiga e um pouco de leite; Cozinhe em fogo baixo, mexendo vigorosamente, e tempere com sal.",
     "preparation_time": 25,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 3
   },
   {
-    "name": "Couve Refogada",
-    "preparation_method": "Lave as folhas de couve e corte-as bem finas; Refogue o alho picado em azeite ou óleo em uma panela larga; Adicione a couve cortada e sal a gosto; Refogue em fogo alto por apenas 2 a 3 minutos para que murche, mas permaneça verde.",
+    "name": "Bife com Couve e Arroz",
+    "preparation_method": "Grelhe o bife; Refogue a couve rapidamente; Sirva acompanhado de arroz branco.",
     "preparation_time": 7,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3,
+    "calories": 500
   },
   {
     "name": "Espinafre Refogado",
     "preparation_method": "Lave bem as folhas de espinafre; Refogue o alho picado em azeite; Adicione as folhas de espinafre na panela; Refogue por 1 a 2 minutos até que as folhas murchem; Tempere com sal e sirva.",
     "preparation_time": 5,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Biscoito de Polvilho",
     "preparation_method": "Pré-aqueça o forno na temperatura indicada na embalagem; Distribua os biscoitos de polvilho prontos em uma assadeira; Asse por 10 a 12 minutos ou até que estejam dourados e crocantes.",
     "preparation_time": 12,
-    "portion": 6
+    "portion": 6,
+    "pref_meal_id": 2
   },
   {
     "name": "Iogurte com Frutas",
     "preparation_method": "Lave e pique as frutas de sua preferência (morango, manga, banana, etc.); Coloque o iogurte em uma tigela; Adicione as frutas picadas por cima; Opcionalmente, adicione mel ou granola.",
     "preparation_time": 3,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Wrap de Frango",
     "preparation_method": "Misture o frango desfiado com requeijão ou maionese; Aqueça a tortilha de *wrap* levemente; Espalhe o recheio de frango no centro da tortilha; Adicione folhas de alface e dobre as laterais, enrolando firmemente.",
     "preparation_time": 8,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 3
   },
   {
     "name": "Sanduíche de Atum",
     "preparation_method": "Escorra o óleo ou água da lata de atum; Em uma tigela, misture o atum com maionese e temperos a gosto; Espalhe a mistura de atum em fatias de pão; Monte o sanduíche com alface e tomate (opcional).",
     "preparation_time": 5,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 3
   },
   {
     "name": "Pipoca de Micro-ondas",
     "preparation_method": "Coloque o saco de pipoca de micro-ondas no centro do aparelho; Ajuste o tempo de preparo de acordo com a embalagem (geralmente 3 minutos); Ligue o micro-ondas na potência máxima; Retire o saco cuidadosamente, abra-o e sirva.",
     "preparation_time": 3,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 2
   },
   {
     "name": "Suco de Goiaba",
     "preparation_method": "Lave e pique as goiabas; Bata as goiabas com água e açúcar no liquidificador; Coe a mistura para retirar as sementes; Sirva gelado.",
     "preparation_time": 5,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 2
   },
   {
     "name": "Batata Cozida",
     "preparation_method": "Lave bem as batatas; Coloque as batatas em uma panela e cubra com água e sal; Cozinhe em fogo médio até que fiquem macias ao serem furadas com um garfo; Escorra a água e sirva (com casca ou descascada).",
     "preparation_time": 20,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 3
   },
   {
     "name": "Legumes no Vapor",
     "preparation_method": "Corte os legumes (brócolis, cenoura, vagem) em pedaços médios; Coloque água na panela e encaixe a cesta de cozimento a vapor; Coloque os legumes na cesta e tampe a panela; Cozinhe por 10 a 15 minutos, até ficarem *al dente*, e tempere com sal.",
     "preparation_time": 15,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Chá de Erva-doce",
     "preparation_method": "Ferva a água; Coloque as sementes ou sachê de erva-doce em uma xícara; Despeje a água quente; Deixe em infusão por 5 minutos; Coe (se necessário) e sirva.",
     "preparation_time": 5,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 2
   },
   {
     "name": "Pizza Caseira Simples",
     "preparation_method": "Pré-aqueça o forno a 200°C; Coloque a massa de pizza pronta em uma assadeira; Espalhe o molho de tomate sobre a massa; Cubra com queijo muçarela ralado e orégano; Asse por 15 a 20 minutos até a borda dourar e o queijo derreter.",
     "preparation_time": 20,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 3
   },
   {
     "name": "Macarrão ao Molho Manteiga",
     "preparation_method": "Cozinhe o macarrão em água fervente com sal até ficar *al dente* e escorra; Na panela do macarrão, derreta a manteiga; Misture o macarrão quente na manteiga derretida; Tempere com sal e pimenta e sirva.",
     "preparation_time": 12,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Salada de Abacate",
     "preparation_method": "Corte o abacate e o tomate em cubos; Em uma tigela, misture o abacate e o tomate; Regue com azeite e suco de limão (para não escurecer); Tempere com sal, pimenta e cheiro-verde a gosto.",
     "preparation_time": 6,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Sanduíche de Ovo",
     "preparation_method": "Cozinhe ovos (por 10 minutos) e pique-os em cubos; Misture o ovo picado com maionese, mostarda e temperos; Espalhe a pasta de ovo em fatias de pão; Monte o sanduíche e sirva.",
     "preparation_time": 10,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 3
   },
   {
     "name": "Misto Quente",
     "preparation_method": "Coloque fatias de queijo e presunto entre duas fatias de pão; Passe manteiga ou requeijão por fora do pão (opcional); Grelhe o sanduíche em uma chapa, sanduicheira ou frigideira; Pressione levemente até o pão dourar e o queijo derreter.",
     "preparation_time": 5,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Queijo Quente",
     "preparation_method": "Coloque fatias de queijo entre duas fatias de pão; Passe manteiga por fora do pão; Doure o sanduíche em uma frigideira ou sanduicheira; Sirva assim que o queijo estiver derretido.",
     "preparation_time": 5,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Salada de Rúcula com Tomate",
     "preparation_method": "Lave e seque as folhas de rúcula; Lave e corte os tomates (cereja ou comuns); Misture a rúcula e o tomate em uma tigela; Regue com azeite de oliva e tempere com sal.",
     "preparation_time": 5,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Batata Doce Assada",
     "preparation_method": "Lave bem as batatas doces (com casca); Corte em rodelas ou palitos; Regue com azeite, sal e alecrim; Asse em forno pré-aquecido a 200°C por cerca de 40 minutos, ou até ficarem macias e douradas.",
     "preparation_time": 40,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 3
   },
   {
     "name": "Banana com Mel",
     "preparation_method": "Descasque e corte a banana em rodelas ou fatias; Coloque a banana em um prato ou tigela; Regue a banana com mel; Opcionalmente, polvilhe canela e sirva.",
     "preparation_time": 1,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Sopa Rala de Frango",
     "preparation_method": "Refogue o frango em cubos com alho e cebola; Adicione água e temperos (sal, *caldo* de galinha, cheiro-verde); Cozinhe por 20 minutos ou até o frango estar macio; Sirva em *cumbucas* como caldo.",
     "preparation_time": 25,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 3
   },
   {
     "name": "Sopa Rápida de Tomate",
     "preparation_method": "Refogue alho e cebola no azeite; Adicione tomates picados ou *extrato* de tomate e caldo de legumes; Cozinhe por 10 minutos; Bata a mistura no liquidificador até obter um creme; Reaqueça e tempere com manjericão.",
     "preparation_time": 15,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Pão de Tapioca",
     "preparation_method": "Misture a tapioca granulada com queijo ralado e ovo; Tempere com sal e fermento em pó; Despeje a massa em forminhas de *muffin* untadas; Asse em forno pré-aquecido a 180°C por cerca de 25 minutos.",
     "preparation_time": 25,
-    "portion": 8
+    "portion": 8,
+    "pref_meal_id": 1
   },
   {
     "name": "Fubá Cozido",
     "preparation_method": "Dissolva o fubá em água fria e sal; Leve a mistura ao fogo médio e comece a mexer; Cozinhe por 10 a 12 minutos, mexendo ocasionalmente, até o fubá engrossar e cozinhar bem; Sirva quente com manteiga.",
     "preparation_time": 12,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 3
   },
   {
     "name": "Arroz de Micro-ondas",
     "preparation_method": "Em um recipiente próprio, misture o arroz, a água e o sal; Cubra o recipiente com tampa própria para micro-ondas ou filme plástico com furos; Leve ao micro-ondas em potência alta por 15 a 20 minutos; Deixe descansar por 5 minutos antes de servir.",
     "preparation_time": 20,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 3
   },
   {
     "name": "Omelete de Legumes",
     "preparation_method": "Refogue os legumes picados (cenoura, abobrinha, pimentão) em azeite; Bata os ovos com sal e pimenta; Adicione os legumes refogados aos ovos; Despeje a mistura em uma frigideira untada e cozinhe até firmar; Dobre ao meio e sirva.",
     "preparation_time": 12,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Tostex Simples",
     "preparation_method": "Passe manteiga nas duas faces externas das fatias de pão; Grelhe o pão em uma sanduicheira, chapa ou frigideira quente; Pressione levemente até o pão ficar dourado; Sirva imediatamente.",
     "preparation_time": 4,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Sanduíche de Peito de Peru",
     "preparation_method": "Passe requeijão ou maionese nas fatias de pão; Coloque fatias de peito de peru e queijo entre as fatias de pão; Opcionalmente, adicione folhas de alface e tomate; Monte o sanduíche e sirva.",
     "preparation_time": 4,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 3
   },
   {
     "name": "Banana no Micro-ondas",
     "preparation_method": "Descasque a banana e coloque em um prato; Polvilhe canela e açúcar por cima da banana; Leve ao micro-ondas em potência alta por 1 a 2 minutos; Sirva quente.",
     "preparation_time": 2,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Pão de Alho na Airfryer",
     "preparation_method": "Utilize pão de alho pronto ou caseiro em fatias; Coloque as fatias na cesta da *Airfryer*; Asse a 180°C por 8 a 10 minutos, virando na metade do tempo; Retire quando estiverem dourados e crocantes.",
     "preparation_time": 10,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 3
   },
   {
     "name": "Batata em Cubos na Airfryer",
     "preparation_method": "Corte as batatas em cubos e tempere com azeite, sal e páprica; Coloque os cubos na cesta da *Airfryer*; Asse a 200°C por 15 a 20 minutos; Chacoalhe a cesta na metade do tempo para que dourem por igual.",
     "preparation_time": 20,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 3
   },
   {
     "name": "Frango Desfiado na Pressão",
     "preparation_method": "Cozinhe o peito de frango temperado em água na panela de pressão por 15 minutos; Retire a pressão e escorra a água, deixando um pouco no fundo; Tampe a panela de pressão (sem lacrar) e chacoalhe vigorosamente por 30 segundos; Retire o frango desfiado da panela.",
     "preparation_time": 20,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 3
   },
   {
     "name": "Couve-Flor Cozida",
     "preparation_method": "Lave a couve-flor e corte-a em buquês; Coloque os buquês em uma panela com água e sal; Cozinhe por 10 a 12 minutos, até ficarem macios mas não desmanchando; Escorra e tempere com azeite e alho.",
     "preparation_time": 12,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 3
   },
   {
     "name": "Brócolis no Vapor",
     "preparation_method": "Lave o brócolis e corte-o em buquês; Cozinhe os buquês no vapor por 8 a 10 minutos, até ficarem *al dente* e com cor vibrante; Tempere com sal e azeite; Sirva.",
     "preparation_time": 10,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Panqueca de Banana",
     "preparation_method": "Amasse a banana em um prato; Misture a banana amassada com um ovo e canela; Aqueça uma frigideira antiaderente untada com pouca manteiga ou óleo; Despeje a massa em pequenas porções e frite dos dois lados.",
     "preparation_time": 6,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Ovo Frito com Tomate",
     "preparation_method": "Frite um ovo em frigideira com manteiga ou azeite e tempere com sal; Em outra frigideira, refogue rapidamente o tomate picado com sal e orégano; Coloque o tomate refogado sobre o ovo frito; Sirva.",
     "preparation_time": 6,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Queijo Coalho na Airfryer",
     "preparation_method": "Corte o queijo coalho em palitos; Pincele levemente com azeite (opcional); Coloque os palitos na cesta da *Airfryer*; Asse a 200°C por 6 a 8 minutos, virando na metade do tempo, até dourar.",
     "preparation_time": 8,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 2
   },
   {
     "name": "Espaguete com Azeite",
     "preparation_method": "Cozinhe o espaguete em água fervente com sal até ficar *al dente* e escorra; Na panela, misture o espaguete quente com azeite de oliva extra virgem; Tempere com mais sal e pimenta do reino a gosto; Sirva imediatamente.",
     "preparation_time": 12,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Vinagrete Simples",
     "preparation_method": "Pique o tomate e a cebola em cubos pequenos; Coloque os legumes picados em uma tigela; Tempere com vinagre, azeite, sal e pimenta-do-reino; Misture bem e deixe apurar o sabor por 5 minutos.",
     "preparation_time": 6,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 3
   },
   {
     "name": "Cuscuz com Ovo",
     "preparation_method": "Hidrate o fubá para cuscuz com água e sal e cozinhe na cuscuzeira; Enquanto isso, cozinhe o ovo em água por 9 minutos e descasque; Desenforme o cuscuz e sirva com o ovo cozido por cima; Adicione manteiga se desejar.",
     "preparation_time": 15,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Frango na Airfryer",
     "preparation_method": "Tempere os pedaços de frango (coxa, sobrecoxa ou filé) com sal, alho e páprica; Coloque o frango na cesta da *Airfryer* sem sobrepor; Asse a 180°C por 20 a 25 minutos; Vire na metade do tempo para dourar por igual.",
     "preparation_time": 25,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 3
   },
   {
     "name": "Molho Vinagrete para Churrasco",
     "preparation_method": "Pique tomate, cebola e pimentão em cubos pequenos; Coloque os legumes em uma tigela; Adicione vinagre, azeite, sal, pimenta e cheiro-verde picado; Misture bem e reserve na geladeira para servir gelado.",
     "preparation_time": 7,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 3
   },
   {
     "name": "Tomate Grelhado",
     "preparation_method": "Corte os tomates em rodelas grossas ou ao meio; Pincele os tomates com azeite e tempere com sal e orégano; Aqueça uma chapa ou frigideira (grelha); Grelhe os tomates por 2 a 3 minutos de cada lado.",
     "preparation_time": 6,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Sopa de Cebola Caseira",
     "preparation_method": "Fatie a cebola e refogue em manteiga até caramelizar; Adicione caldo de legumes e cozinhe por 15 minutos; Bata a mistura no liquidificador e volte para a panela; Sirva quente com pão torrado e queijo ralado.",
     "preparation_time": 20,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 3
   },
   {
     "name": "Farofa de Bacon",
     "preparation_method": "Corte o bacon em cubos pequenos e frite-o na própria gordura até ficar crocante; Retire o bacon, deixando um pouco da gordura na panela; Adicione a farinha de mandioca e mexa bem; Tempere com sal e misture o bacon frito.",
     "preparation_time": 10,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 3
   },
   {
     "name": "Salada Caesar Simples",
     "preparation_method": "Lave e pique as folhas de alface americana; Em uma tigela, misture a alface, os *croutons* prontos e queijo parmesão ralado; Adicione o molho Caesar pronto sobre a salada; Misture suavemente e sirva.",
     "preparation_time": 5,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Arroz com Brócolis",
     "preparation_method": "Cozinhe o arroz branco e cozinhe os buquês de brócolis (*al dente*); Refogue alho picado em azeite; Misture o brócolis cozido e o arroz no alho refogado; Acerte o sal e sirva.",
     "preparation_time": 20,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 3
   },
   {
     "name": "Salada de Repolho",
     "preparation_method": "Lave e fatie o repolho finamente; Coloque o repolho em uma tigela; Tempere com sal, pimenta e suco de limão ou vinagre; Misture bem e adicione cenoura ralada ou cheiro-verde (opcional).",
     "preparation_time": 5,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 3
   },
   {
     "name": "Chuchu Cozido com Sal",
     "preparation_method": "Descasque e corte o chuchu em cubos; Coloque os cubos em uma panela com água e sal; Cozinhe por 10 a 12 minutos, até que fiquem macios; Escorra a água e sirva.",
     "preparation_time": 12,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Tomate Recheado Simples",
     "preparation_method": "Corte a tampa dos tomates e retire a polpa com uma colher; Tempere a parte interna com sal; Em uma tigela, misture maionese com ervas picadas e a polpa do tomate (opcional); Recheie os tomates com a mistura de maionese.",
     "preparation_time": 8,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Patê de Atum",
     "preparation_method": "Escorra o óleo ou água da lata de atum; Em uma tigela, coloque o atum e adicione maionese a gosto; Misture bem e adicione temperos como pimenta-do-reino e salsinha; Sirva com pães ou torradas.",
     "preparation_time": 5,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 2
   },
   {
     "name": "Patê de Sardinha",
     "preparation_method": "Escorra o óleo ou água da sardinha e descarte a espinha central; Amasse a sardinha com um garfo em uma tigela; Misture com maionese e limão; Adicione cheiro-verde picado e sirva com *crackers*.",
     "preparation_time": 4,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 2
   },
   {
     "name": "Molho de Mostarda Rápido",
     "preparation_method": "Em uma tigela, misture a mostarda (amarela ou dijon) com mel; Adicione um pouco de suco de limão ou vinagre para equilibrar o sabor; Tempere com sal e pimenta (opcional); Misture bem até ficar homogêneo.",
     "preparation_time": 2,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 3
   },
   {
     "name": "Mandioca Cozida",
     "preparation_method": "Descasque e corte a mandioca em pedaços; Coloque-a em uma panela de pressão com água e sal; Cozinhe por 20 a 35 minutos após pegar pressão, até ficar bem macia; Escorra e sirva com manteiga derretida.",
     "preparation_time": 35,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 3
   },
   {
     "name": "Sopa de Batata Simples",
     "preparation_method": "Descasque e cozinhe as batatas em água e sal até ficarem macias; Escorra a maior parte da água, reservando um pouco; Bata as batatas com a água reservada no liquidificador para formar um creme; Reaqueça e sirva.",
     "preparation_time": 20,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 3
   },
   {
     "name": "Tomate com Sal",
     "preparation_method": "Lave e corte o tomate em fatias ou rodelas; Coloque as fatias em um prato; Adicione uma pitada de sal sobre cada fatia; Sirva.",
     "preparation_time": 1,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 3
   },
   {
     "name": "Chá de Hortelã",
     "preparation_method": "Ferva a água; Coloque as folhas frescas ou sachê de hortelã em uma xícara; Despeje a água quente; Deixe em infusão por 5 minutos e sirva.",
     "preparation_time": 5,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 2
   },
   {
     "name": "Panqueca de Aveia",
     "preparation_method": "Em um *mixer* ou liquidificador, bata a aveia, os ovos, um pouco de leite e adoçante; Aqueça e unte uma frigideira antiaderente; Despeje pequenas porções da massa e frite dos dois lados; Sirva com frutas ou mel.",
     "preparation_time": 6,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Crepioca com Queijo",
     "preparation_method": "Misture ovo, tapioca e sal em uma tigela; Despeje a mistura em uma frigideira antiaderente aquecida; Coloque o queijo muçarela ou coalho ralado em metade da massa; Dobre e cozinhe até o queijo derreter.",
     "preparation_time": 7,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Morango com Chocolate",
     "preparation_method": "Lave e seque os morangos; Derreta o chocolate em banho-maria ou micro-ondas; Banhe cada morango no chocolate derretido; Coloque em papel manteiga e leve à geladeira para endurecer o chocolate.",
     "preparation_time": 10,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 2
   },
   {
     "name": "Maçã com Canela",
     "preparation_method": "Lave e corte a maçã em fatias ou cubos; Coloque a maçã em uma tigela; Salpique canela em pó por cima; Misture e sirva.",
     "preparation_time": 1,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 2
   },
   {
     "name": "Gelinho de Frutas",
     "preparation_method": "Prepare o suco natural de sua fruta preferida (morango, manga, etc.); Adicione açúcar a gosto e misture; Despeje o suco em forminhas de picolé ou saquinhos de gelinho; Leve ao congelador por no mínimo 3 horas.",
     "preparation_time": 180,
-    "portion": 10
+    "portion": 10,
+    "pref_meal_id": 2
   },
   {
     "name": "Iogurte Congelado",
     "preparation_method": "Despeje iogurte natural em um pote ou recipiente raso; Leve ao congelador; Deixe congelar por cerca de 1 hora, ou até atingir a consistência de sorvete cremoso; Sirva com frutas ou mel.",
     "preparation_time": 60,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 2
   },
   {
     "name": "Suco Verde Simples",
     "preparation_method": "Lave as folhas de couve e retire o talo central; Coloque a couve, o suco de limão e a água no liquidificador; Bata bem até a couve se desfazer; Coe (opcional) e sirva gelado.",
     "preparation_time": 4,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 1
   },
   {
     "name": "Batida de Coco",
     "preparation_method": "No liquidificador, coloque leite de coco, leite condensado e gelo; Adicione açúcar a gosto (opcional) e bata até ficar cremoso; Sirva em um copo com coco ralado na borda.",
     "preparation_time": 4,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 2
   },
   {
     "name": "Abacaxi com Hortelã",
     "preparation_method": "Descasque e corte o abacaxi em cubos pequenos; Lave e pique grosseiramente as folhas de hortelã; Misture o abacaxi picado com a hortelã em uma tigela; Leve para gelar antes de servir.",
     "preparation_time": 3,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 2
   },
   {
     "name": "Cuscuz Doce",
     "preparation_method": "Prepare o cuscuz no vapor e desenforme; Em uma tigela, misture o cuscuz quente com leite (de coco ou comum) e açúcar; Adicione coco ralado (opcional); Sirva quente ou frio.",
     "preparation_time": 10,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Mingau de Maisena",
     "preparation_method": "Dissolva a maisena em um pouco de leite frio; Em uma panela, misture o restante do leite, açúcar e a maisena dissolvida; Cozinhe em fogo baixo, mexendo sempre; Retire assim que engrossar e sirva com canela.",
     "preparation_time": 7,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 1
   },
   {
     "name": "Creme de Manga",
     "preparation_method": "Descasque e corte a manga em cubos e congele; Bata a manga congelada no liquidificador com creme de leite; Adicione açúcar se desejar; Bata até obter um creme liso e consistente.",
     "preparation_time": 5,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 2
   },
   {
     "name": "Purê de Abóbora",
     "preparation_method": "Descasque e cozinhe a abóbora (moranga ou cabotiá) até ficar muito macia; Escorra e amasse a abóbora; Em uma panela, refogue alho e cebola (opcional); Adicione a abóbora amassada, sal e manteiga; Cozinhe por 5 minutos, mexendo para incorporar.",
     "preparation_time": 25,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 3
   },
   {
     "name": "Cenoura Ralada com Limão",
     "preparation_method": "Lave, descasque e rale a cenoura; Coloque a cenoura ralada em uma tigela; Tempere com sal e suco de limão espremido na hora; Misture bem e sirva.",
     "preparation_time": 3,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Macarrão ao Alho Cru",
     "preparation_method": "Cozinhe o macarrão em água e sal até ficar *al dente* e escorra; Amasse ou triture o alho cru; Misture o macarrão quente com azeite, sal, pimenta e o alho triturado; Sirva imediatamente.",
     "preparation_time": 12,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Tomate Assado",
     "preparation_method": "Corte os tomates (cereja ou comuns) ao meio; Coloque-os em uma assadeira e regue com azeite; Tempere com sal, pimenta e orégano; Asse em forno a 200°C por 10 a 15 minutos, até amolecerem levemente.",
     "preparation_time": 15,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Pepino com Sal",
     "preparation_method": "Lave e corte o pepino em rodelas ou palitos; Coloque os pedaços em um prato; Adicione uma pitada de sal por cima; Sirva.",
     "preparation_time": 1,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 3
   },
   {
     "name": "Abobrinha Assada",
     "preparation_method": "Corte a abobrinha em rodelas ou palitos; Regue com azeite e tempere com sal, pimenta e alecrim (opcional); Espalhe em uma assadeira; Asse em forno a 200°C por 15 a 20 minutos, até ficarem macias e levemente douradas.",
     "preparation_time": 20,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Ovos de Codorna Cozidos",
     "preparation_method": "Coloque os ovos de codorna em uma panela e cubra com água; Leve ao fogo até ferver; Cozinhe por 5 minutos após a fervura; Resfrie em água gelada e descasque.",
     "preparation_time": 5,
-    "portion": 3
+    "portion": 3,
+    "pref_meal_id": 2
   },
   {
     "name": "Mexidão Simples",
     "preparation_method": "Em uma frigideira, refogue alho e cebola; Adicione as sobras de arroz, feijão ou carne; Misture bem e abra um espaço na frigideira; Quebre um ovo no espaço e misture com o restante dos ingredientes enquanto cozinha; Tempere e sirva.",
     "preparation_time": 10,
-    "portion": 2
+    "portion": 2,
+    "pref_meal_id": 3
   },
   {
     "name": "Pão com Mel",
     "preparation_method": "Corte o pão em fatias (opcionalmente toste); Coloque a fatia de pão em um prato; Regue com mel; Sirva.",
     "preparation_time": 1,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Pão com Manteiga e Orégano",
     "preparation_method": "Passe manteiga nas fatias de pão e polvilhe orégano; Leve o pão à frigideira, sanduicheira ou micro-ondas; Esquente até a manteiga derreter e o pão ficar levemente crocante.",
     "preparation_time": 3,
-    "portion": 1
+    "portion": 1,
+    "pref_meal_id": 1
   },
   {
     "name": "Arroz com Açafrão",
     "preparation_method": "Prepare o arroz branco normalmente; Na hora de adicionar a água para cozinhar, acrescente uma pitada de açafrão; Cozinhe até secar; O açafrão dará uma cor amarelada e um leve sabor ao arroz.",
     "preparation_time": 20,
-    "portion": 4
+    "portion": 4,
+    "pref_meal_id": 3
   }
 ]

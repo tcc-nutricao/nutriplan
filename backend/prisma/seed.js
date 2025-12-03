@@ -375,11 +375,30 @@ async function populateWithAI(patient, nutritionist, goal) {
   }
 
   if (recipes.length > 0) {
+    const recipesWithPref = recipes.map(recipe => {
+      let prefId = null;
+      const name = recipe.name.toLowerCase();
+      
+      // 1: Café da manhã, 2: Lanche da manhã, 3: Almoço, 4: Café da tarde, 5: Janta, 6: Lanche da noite
+      
+      if (name.includes('café') || name.includes('pão') || name.includes('tapioca') || name.includes('ovo') || name.includes('vitamina') || name.includes('bolo') || name.includes('panqueca') || name.includes('mingau') || name.includes('iogurte') || name.includes('fruta') || name.includes('suco') || name.includes('torrada') || name.includes('sanduíche') || name.includes('queijo') || name.includes('biscoito')) {
+        prefId = 1; // Default to Breakfast/Snack
+        if (name.includes('lanche') || name.includes('tarde')) prefId = 4;
+      }
+      
+      if (name.includes('arroz') || name.includes('feijão') || name.includes('carne') || name.includes('frango') || name.includes('peixe') || name.includes('macarrão') || name.includes('salada') || name.includes('sopa') || name.includes('legumes') || name.includes('purê') || name.includes('batata') || name.includes('bife') || name.includes('lasanha') || name.includes('estrogonofe') || name.includes('assado') || name.includes('grelhado') || name.includes('cozido')) {
+        prefId = 3; // Default to Lunch
+        if (name.includes('sopa') || name.includes('caldo') || name.includes('leve')) prefId = 5; // Dinner preference
+      }
+      
+      return { ...recipe, pref_meal_id: prefId, created_at: new Date() };
+    });
+
     await prisma.recipe.createMany({
-      data: recipes.map(recipe => ({ ...recipe, created_at: new Date() })),
+      data: recipesWithPref,
       skipDuplicates: true,
     });
-    console.log('✅ Receitas inseridas');
+    console.log('✅ Receitas inseridas com pref_meal_id');
   }
 
   if (mealplans.length > 0) {
