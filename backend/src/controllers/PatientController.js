@@ -138,6 +138,25 @@ const deletePatient = async (req, res) => {
   }
 }
 
+const unlinkNutritionist = async (req, res) => {
+  try {
+    const { id: userId } = req.user;
+    
+    const result = await PatientService.unlinkNutritionist(userId);
+
+    return res.status(200).json({
+      success: true,
+      message: result.message
+    });
+  } catch (error) {
+    console.error('Erro ao desvincular nutricionista:', error);
+    return res.status(500).json({
+      success: false,
+      message: error.message || 'Erro interno do servidor'
+    });
+  }
+}
+
 export const PatientController = {
   ...generateCrudController(
     PatientService,
@@ -148,7 +167,8 @@ export const PatientController = {
   createFull,
   getAll,
   update,
-  deletePatient
+  deletePatient,
+  unlinkNutritionist
 }
 
 

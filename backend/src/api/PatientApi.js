@@ -6,7 +6,7 @@ export const api = {
   getProgress: PatientController.getProgress,
   createFull: PatientController.createFull,
   getAll: PatientController.getAll,
-  getAll: PatientController.getAll,
   update: PatientController.update,
-  deletePatient: PatientController.deletePatient
+  deletePatient: PatientController.deletePatient,
+  unlinkNutritionist: PatientController.unlinkNutritionist
 }

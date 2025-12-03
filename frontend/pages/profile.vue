@@ -125,17 +125,27 @@
       class="bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto mt-6"
     >
       <h2 class="h2main mb-6">Nutricionista</h2>
-      <div v-if="personalData.nutritionistName" class="flex items-center gap-4">
-          <div class="w-16 h-16 rounded-full bg-p-100 flex items-center justify-center text-p-600 text-2xl font-bold">
-              {{ personalData.nutritionistName.charAt(0).toUpperCase() }}
+      <div v-if="personalData.nutritionistName" class="flex items-center justify-between w-full">
+          <div class="flex items-center gap-4">
+              <div class="w-16 h-16 rounded-full bg-p-100 flex items-center justify-center text-p-600 text-2xl font-bold">
+                  {{ personalData.nutritionistName.charAt(0).toUpperCase() }}
+              </div>
+              <div>
+                  <p class="text-lg font-semibold text-gray-800">{{ personalData.nutritionistName }}</p>
+                  <p class="text-gray-500 text-sm">Seu nutricionista vinculado</p>
+              </div>
           </div>
-          <div>
-              <p class="text-lg font-semibold text-gray-800">{{ personalData.nutritionistName }}</p>
-              <p class="text-gray-500 text-sm">Seu nutricionista vinculado</p>
-          </div>
+          <Button
+              red
+              class="w-max pr-3 pl-2 h-[42px]"
+              icon="fa-solid fa-link-slash short flex justify-center" 
+              label="Desvincular"
+              @click="openUnlinkModal"
+              :loading="unlinking"
+          />
       </div>
       <div v-else class="flex flex-col gap-4">
-          <p class="text-gray-600">Você ainda não tem um nutricionista vinculado. Insira o código fornecido pelo seu nutricionista para vincular.</p>
+          <p class="text-gray-600">Você não tem um nutricionista vinculado. Insira o código fornecido pelo seu nutricionista para vincular.</p>
           <div class="flex gap-3 max-w-md">
               <Input
                   class="bg-white shadow-lg shadow-gray-600/10 focus-within:shadow-p-600/20 hover:shadow-p-600/20 transition uppercase"
@@ -193,6 +203,14 @@
       content="Ao apagar sua conta, ela será desativada e você não terá mais acesso ao sistema."
       btnLabel="Apagar"
       @confirm="handleDeleteAccount"
+      @closeModal="closeModal"
+    />
+    <ModalDanger
+      v-if="showModal == 'unlink'"
+      title="Desvincular Nutricionista?"
+      content="Ao desvincular, você deixará de compartilhar seus dados com este nutricionista."
+      btnLabel="Desvincular"
+      @confirm="handleUnlinkNutritionist"
       @closeModal="closeModal"
     />
   </div>
@@ -321,6 +339,30 @@ const linkNutritionist = async () => {
         alert("Erro ao vincular. Tente novamente.");
     } finally {
         linking.value = false;
+    }
+};
+
+const unlinking = ref(false);
+
+const openUnlinkModal = () => {
+    showModal.value = "unlink";
+};
+
+const handleUnlinkNutritionist = async () => {
+    unlinking.value = true;
+    try {
+        const res = await remove("patient/nutritionist");
+        if (res.success) {
+            personalData.value.nutritionistName = null;
+            closeModal();
+        } else {
+            alert("Erro ao desvincular: " + (res.message || "Erro desconhecido."));
+        }
+    } catch (err) {
+        console.error(err);
+        alert("Erro ao desvincular. Tente novamente.");
+    } finally {
+        unlinking.value = false;
     }
 };
 

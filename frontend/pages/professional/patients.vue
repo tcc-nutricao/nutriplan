@@ -590,7 +590,7 @@ const sendInvite = async () => {
     try {
         const res = await insert(`user/${patientToInvite.value.id_user}/invite`, { email: inviteEmail.value })
         if (res.success) {
-            alert('Convite enviado com sucesso!')
+            // alert('Convite enviado com sucesso!')
             showInvitePatientModal.value = false
             await fetchPatients()
         } else {

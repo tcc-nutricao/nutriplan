@@ -325,7 +325,7 @@ async function handleSubmit() {
 
   const payload = {
     name: formData.value.name,
-    email: formData.value.email,
+    email: formData.value.email || null,
     birth_date: formData.value.birth_date,
     gender: formData.value.gender,
     height: parseFloat(formData.value.height),

@@ -291,13 +291,13 @@ const inviteUser = async (userId, email) => {
       throw new AppError({ message: 'Email já cadastrado', statusCode: 400, field: 'email' });
     }
 
-    const nameLower = existingUser.name.toLowerCase().replace(/\s+/g, '');
-    const randomPassword = `${nameLower}${Math.random().toString(36).slice(-4)}`;
+    const randomPassword = Math.random().toString(36).substring(2, 6).toUpperCase();
     const hashedPassword = await bcrypt.hash(randomPassword, 10);
 
     const updatedUser = await UserRepository.update(userId, {
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      role: 'STANDARD'
     });
 
     await useSendMail({

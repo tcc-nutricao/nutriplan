@@ -202,12 +202,12 @@ const getAllByNutritionist = async (nutritionistId) => {
                objectiveIds = goal.goalObjectives.map(go => go.objective.id);
           }
       }
-
       const lastUpdateDate = patient.updated_at || patient.created_at;
       const lastUpdate = new Date(lastUpdateDate).toLocaleDateString('pt-BR');
 
       return {
           id: patient.id,
+          id_user: patient.id_user,
           name: patient.user.name,
           role: patient.user.role,
           email: patient.user.email,
@@ -411,7 +411,7 @@ const createFullPatient = async (nutritionistId, patientData) => {
         const newUser = await tx.user.create({
           data: {
             name: patientData.name,
-            email: patientData.email,
+            email: patientData.email || null,
             password: patientData.password || "mudar123",
             role: "GUEST",
             created_at: new Date(),
@@ -605,6 +605,38 @@ const updatePatient = async (id, data) => {
     }
 }
 
+const unlinkNutritionist = async (userId) => {
+    try {
+        const patient = await getPatientByUserId(userId);
+        if (!patient) {
+            throw new AppError({ message: 'Paciente não encontrado' });
+        }
+
+        if (!patient.id_nutritionist) {
+            throw new AppError({ message: 'Você não possui um nutricionista vinculado' });
+        }
+
+        await prisma.$transaction(async (tx) => {
+             await tx.nutritionistPatient.deleteMany({
+                where: {
+                    id_patient: patient.id,
+                    id_nutritionist: patient.id_nutritionist
+                }
+            });
+
+            await tx.patient.update({
+                where: { id: patient.id },
+                data: { id_nutritionist: null }
+            });
+        });
+
+        return { message: 'Desvinculado com sucesso' };
+    } catch (error) {
+        console.error('Erro ao desvincular nutricionista:', error);
+        throw error;
+    }
+}
+
 export const PatientService = {
   ...baseCrudService,
   getPatientByUserId,
@@ -613,5 +645,6 @@ export const PatientService = {
   searchByTerm,
   createFullPatient,
   updatePatient,
-  deleteOrUnlink
+  deleteOrUnlink,
+  unlinkNutritionist
 }
