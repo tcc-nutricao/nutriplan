@@ -13,7 +13,7 @@ const baseCrudService = generateCrudService(PatientRepository)
 
 const getPatientByUserId = async (userId) => {
   try {
-    const filters = [{ column: 'id_user', value: userId, operator: '=' }]
+    const filters = [{ field: 'id_user', value: userId, operator: 'equals' }]
     const { data: patients = [] } = await PatientRepository.search({ filters })
     
     if (patients.length === 0) {
@@ -38,7 +38,7 @@ const getProgress = async (userId) => {
       throw new AppError({ message: 'Paciente não encontrado' })
     }
 
-    const mealPlanFilters = [{ column: 'status', value: 'ACTIVE', operator: 'equals' }]
+    const mealPlanFilters = [{ field: 'status', value: 'ACTIVE', operator: 'equals' }]
     const { data: mealPlans = [] } = await MealPlanService.getMealPlanByPatient(userId, mealPlanFilters)
 
     const healthDataFilters = [
