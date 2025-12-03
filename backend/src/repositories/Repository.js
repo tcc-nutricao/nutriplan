@@ -28,6 +28,7 @@ export const generateCrudRepository = (modelName, options = {}) => {
         orderColumn,
       } = object;
 
+
       const take = parseInt(limit, 10);
       const currentPage = parseInt(page, 10);
 

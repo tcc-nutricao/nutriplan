@@ -38,8 +38,9 @@ const getProgress = async (userId) => {
       throw new AppError({ message: 'Paciente não encontrado' })
     }
 
-    const mealPlanFilters = [{ field: 'status', value: 'ACTIVE', operator: 'equals' }]
-    const { data: mealPlans = [] } = await MealPlanService.getMealPlanByPatient(userId, mealPlanFilters)
+    // const mealPlanFilters = [{ field: 'status', value: 'ACTIVE', operator: 'equals' }]
+    const activeMealPlan = await MealPlanService.getActiveMealPlanForPatient(patient.id)
+    const mealPlans = (activeMealPlan && activeMealPlan.id) ? [activeMealPlan] : []
 
     const healthDataFilters = [
       { field: 'id_patient', value: patient.id, operator: 'equals' }
@@ -141,6 +142,7 @@ const getProgress = async (userId) => {
 
     return {
         id_patient: patient.id,
+        patientName: patient.user.name,
         height: patient.height,
         objective: objectiveName,
         initialWeight: initialWeight,

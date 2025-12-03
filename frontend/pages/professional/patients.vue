@@ -327,6 +327,7 @@
                                     v-model="newWeight"
                                     placeholder="Novo peso (kg)"
                                     type="number"
+                                    @keyup.enter="updatePatientWeight"
                                 />
                                 <Button
                                     mediumPurple

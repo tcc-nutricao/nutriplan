@@ -1,5 +1,18 @@
 <template>
     <div class="flex flex-col gap-3 px-4 sm:px-6 md:px-10">
+        <!-- Hidden PDF Template -->
+        <div style="position: fixed; left: -9999px; top: 0; z-index: -1;">
+            <div ref="pdfContent">
+                <ProgressPdfTemplate 
+                    v-if="!isLoading"
+                    :items="items" 
+                    :progress="progress"
+                    :chart-data="chartData"
+                    :chart-options="chartOptions"
+                    :target-weight="items.targetWeight"
+                />
+            </div>
+        </div>
         <h1 class="h1">Meu progresso</h1>
 
         <div class="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-6 xl:grid-cols-7 gap-4 md:gap-6">
@@ -42,6 +55,8 @@
                             mediumPurple
                             class="w-full sm:w-max px-3 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition text-sm sm:text-base"
                             label="Gerar PDF"
+                            @click="generatePDF"
+                            :disabled="isGeneratingPDF"
                         />
                     </div>
                 </div>
@@ -78,6 +93,8 @@ const isLoading = ref(true);
 const items = ref({});
 const progress = ref([]);
 const newWeight = ref(null);
+const pdfContent = ref(null);
+const isGeneratingPDF = ref(false);
 
 const objectiveLabels = ref([
     { label: "Objetivo atual:", value: "objective", isTitle: true },
@@ -208,6 +225,33 @@ async function updateProgress() {
     }
 }
 
+async function generatePDF() {
+    isGeneratingPDF.value = true;
+    try {
+        const element = pdfContent.value;
+        const opt = {
+            margin: [0, 0],
+            filename: (() => {
+                const patientName = items.value.patientName || 'Paciente';
+                const firstName = patientName.split(' ')[0];
+                const date = new Date().toLocaleDateString('pt-BR').replace(/\//g, '-');
+                return `${firstName} - ${date}.pdf`;
+            })(),
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+        
+        const html2pdf = (await import('html2pdf.js')).default;
+        await html2pdf().set(opt).from(element).save();
+    } catch (error) {
+        console.error('Erro ao gerar PDF:', error);
+        alert('Erro ao gerar PDF. Tente novamente.');
+    } finally {
+        isGeneratingPDF.value = false;
+    }
+}
+
 async function getProgressData() {
     isLoading.value = true;
     const response = await get('patient/progress');
@@ -222,4 +266,3 @@ onMounted(async () => {
     await getProgressData();
 });
 </script>
-  
