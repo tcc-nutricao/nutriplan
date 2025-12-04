@@ -1,13 +1,13 @@
+
 # 🍎 NutriPlan
 
-Este repositório contém o código-fonte de um sistema completo de nutrição chamado NutriPlan. O objetivo é fornecer uma plataforma funcional para ajudar usuários a monitorar sua alimentação e manter hábitos saudáveis, com autenticação segura e interface moderna.
+Este repositório contém o código-fonte de um sistema completo de nutrição chamado NutriPlan. O objetivo é fornecer uma plataforma funcional para ajudar usuários a melhorar sua alimentação e manter hábitos saudáveis, com autenticação segura e interface moderna.
 
 ## 💻 Tecnologias Utilizadas
 
 - **⚙️ Backend:** Node.js (Express)
-- **🌐 Frontend:** Vue.js com Nuxt
+- **🌐 Frontend:** Vue.js com Nuxt e TailwindCSS
 - **🔐 Autenticação:** Login e cadastro de usuários com proteção de rotas
-- **🐋 Conteinerização:** Docker
 
 ## 📌 Funcionalidades
 
@@ -22,57 +22,76 @@ Este repositório contém o código-fonte de um sistema completo de nutrição c
 
 ```bash
 /
-├── backend/         # API em Node.js com Express 
-│   ├── prisma/      # Configurações e schema do banco de dados
-|   ├── src/
-|   |   ├── routes/      # Rotas da aplicação 
-│   |   ├── controllers/ # Lógica das rotas
-|   |   ├── Dockerfile   # Arquivo de configuração do Docker para iniciar o backend
-│   |   └── ...
-├── frontend/        # Aplicação Vue.js
-│   ├── components/  # Componentes reutilizáveis
-│   ├── pages/       # Telas da aplicação
-|   ├── Dockerfile   # Arquivo de configuração do Docker para iniciar o frontend
+├── backend/             # API em Node.js com Express 
+│   ├── prisma/          # Configurações e schema do banco de dados
+│   ├── src/
+│   │   ├── config/      # Configurações gerais
+│   │   ├── controllers/ # Controladores (Lógica de entrada/saída)
+│   │   ├── dtos/        # Data Transfer Objects (Validação de dados)
+│   │   ├── middleware/  # Middlewares (Autenticação, tratamento de erros)
+│   │   ├── repositories # Camada de acesso ao banco de dados (Prisma)
+│   │   ├── routes/      # Definição das rotas da API
+│   │   ├── services/    # Regras de negócio da aplicação
+│   │   ├── utils/       # Funções utilitárias e auxiliares
+│   │   └── index.js     # Ponto de entrada da aplicação
+│   └── ...
+├── frontend/            # Aplicação Vue.js
+│   ├── components/      # Componentes reutilizáveis
+│   ├── pages/           # Telas da aplicação
 │   └── ...
 └── README.md
-└── docker-compose.yml
 ```
 
 ## 👨‍💻 Como Rodar Localmente
 
-1. **Clone o repositório**
-```bash
-git clone https://github.com/tcc-nutricao/sistema-nutricao.git
+### Pré-requisitos
 
-cd sistema-nutricao
+- Node.js e npm
+- MySQL
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/tcc-nutricao/nutriplan.git
+cd nutriplan
 ```
 
-2. **Configure o backend e frontend usando Docker**
+### 2. Configuração do Backend
 
-Rode os comandos Docker na raíz do projeto após abrir o Docker desktop:
+Acesse a pasta do backend, instale as dependências e configure o banco de dados.
 
-Build inicial:
 ```bash
-docker-compose build
+cd backend
+npm install
 ```
 
-Rodar em background:
+Certifique-se de ter um arquivo `.env` na raiz da pasta `backend` com as configurações do seu banco de dados (exemplo: `DATABASE_URL="mysql://user:password@localhost:3306/nutriplan"`).
+
+Em seguida, execute as migrações do Prisma para criar as tabelas e manter o banco atualizado:
+
 ```bash
-docker-compose up -d
+npx prisma migrate dev
 ```
 
-Ver logs em tempo real:
+Inicie o servidor backend:
+
 ```bash
-docker-compose logs -f backend
-docker-compose logs -f frontend
+npm run dev
 ```
 
-Executar as migrações do prisma:
+### 3. Configuração do Frontend
+
+Em um novo terminal, acesse a pasta do frontend e instale as dependências.
+
 ```bash
-docker exec -it backend npx prisma migrate dev
+cd frontend
+npm install
 ```
 
-Se for necessário parar tudo:
+Inicie o servidor frontend:
+
 ```bash
-docker-compose down
+npm run dev
 ```
+
+O projeto estará rodando em `http://localhost:3000` (ou a porta definida pelo Nuxt).
