@@ -256,6 +256,7 @@ const deleteOrUnlink = async (patientId, nutritionistId) => {
 
         if (patient.user.role === 'GUEST') {
             await prisma.$transaction(async (tx) => {
+                // 1. Delete Goals and GoalObjectives
                 const goals = await tx.goal.findMany({ 
                     where: { id_patient: patient.id },
                     select: { id: true }
@@ -266,57 +267,60 @@ const deleteOrUnlink = async (patientId, nutritionistId) => {
                     await tx.goalObjective.deleteMany({ 
                         where: { id_goal: { in: goalIds } } 
                     });
-
-                    const mealPlans = await tx.mealPlan.findMany({ 
-                        where: { id_goal: { in: goalIds } },
-                        select: { id: true }
-                    });
-                    const mealPlanIds = mealPlans.map(mp => mp.id);
-
-                    if (mealPlanIds.length > 0) {
-                        
-                        await tx.mealPlanPatient.deleteMany({ 
-                            where: { id_meal_plan: { in: mealPlanIds } } 
-                        });
-
-                        await tx.mealPlanDietaryRestriction.deleteMany({ 
-                            where: { id_meal_plan: { in: mealPlanIds } } 
-                        });
-
-                        const mealPlanMeals = await tx.mealPlanMeal.findMany({ 
-                            where: { id_meal_plan: { in: mealPlanIds } },
-                            select: { id: true }
-                        });
-                        const mealPlanMealIds = mealPlanMeals.map(mpm => mpm.id);
-
-                        if (mealPlanMealIds.length > 0) {
-                            await tx.mealPlanRecipe.deleteMany({ 
-                                where: { id_meal_plan_meal: { in: mealPlanMealIds } } 
-                            });
-                            
-                            await tx.foodConsumed.deleteMany({ 
-                                where: { id_meal_plan_meal: { in: mealPlanMealIds } } 
-                            });
-
-                            await tx.mealPlanMeal.deleteMany({ 
-                                where: { id: { in: mealPlanMealIds } } 
-                            });
-                        }
-
-                        await tx.mealPlan.deleteMany({ 
-                            where: { id: { in: mealPlanIds } } 
-                        });
-                    }
-
+                    
                     await tx.goal.deleteMany({ 
                         where: { id: { in: goalIds } } 
                     });
                 }
 
+                // 2. Delete MealPlans and related data
+                const mealPlanPatients = await tx.mealPlanPatient.findMany({
+                    where: { id_patient: patient.id },
+                    select: { id_meal_plan: true }
+                });
+                const mealPlanIds = mealPlanPatients.map(mpp => mpp.id_meal_plan);
+
+                if (mealPlanIds.length > 0) {
+                    
+                    await tx.mealPlanPatient.deleteMany({ 
+                        where: { id_meal_plan: { in: mealPlanIds } } 
+                    });
+
+                    await tx.mealPlanDietaryRestriction.deleteMany({ 
+                        where: { id_meal_plan: { in: mealPlanIds } } 
+                    });
+
+                    const mealPlanMeals = await tx.mealPlanMeal.findMany({ 
+                        where: { id_meal_plan: { in: mealPlanIds } },
+                        select: { id: true }
+                    });
+                    const mealPlanMealIds = mealPlanMeals.map(mpm => mpm.id);
+
+                    if (mealPlanMealIds.length > 0) {
+                        await tx.mealPlanRecipe.deleteMany({ 
+                            where: { id_meal_plan_meal: { in: mealPlanMealIds } } 
+                        });
+                        
+                        await tx.foodConsumed.deleteMany({ 
+                            where: { id_meal_plan_meal: { in: mealPlanMealIds } } 
+                        });
+
+                        await tx.mealPlanMeal.deleteMany({ 
+                            where: { id: { in: mealPlanMealIds } } 
+                        });
+                    }
+
+                    await tx.mealPlan.deleteMany({ 
+                        where: { id: { in: mealPlanIds } } 
+                    });
+                }
+
+                // 3. Delete other patient data
                 await tx.healthData.deleteMany({ where: { id_patient: patient.id } });
                 await tx.patientDietaryRestriction.deleteMany({ where: { id_patient: patient.id } });
                 await tx.nutritionistPatient.deleteMany({ where: { id_patient: patient.id } });
                 
+                // Ensure all MealPlanPatients for this patient are gone (redundant but safe)
                 await tx.mealPlanPatient.deleteMany({ where: { id_patient: patient.id } });
                 
                 await tx.patient.delete({ where: { id: patient.id } });

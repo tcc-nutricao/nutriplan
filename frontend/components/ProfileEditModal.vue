@@ -67,7 +67,7 @@
           <Select v-model="personalFormData.gender" :options="genderOptions" required />
         </div>
         <div class="col-span-1">
-          <Label class="mb-2" label="Qual é seu peso?" />
+          <Label class="mb-2" label="Peso" />
           <Input
             type="number"
             v-model.number="personalFormData.weight"
@@ -76,7 +76,7 @@
           />
         </div>
         <div class="col-span-1">
-          <Label class="mb-2" label="Qual é a sua altura? (ex: 170cm)" />
+          <Label class="mb-2" label="Altura (ex: 170cm)" />
           <Input
             type="number"
             v-model.number="personalFormData.height"
@@ -85,7 +85,7 @@
           />
         </div>
         <div class="col-span-1">
-          <Label class="mb-2" label="Você tem uma meta de peso?" />
+          <Label class="mb-2" label="Meta de peso" />
           <Input
             type="number"
             v-model.number="personalFormData.target_weight"
@@ -93,7 +93,7 @@
           />
         </div>
         <div class="col-span-1">
-          <Label class="mb-2" label="Você tem alguma restrição alimentar?" />
+          <Label class="mb-2" label="Restrições alimentares" />
           <Select
             v-model="personalFormData.restrictions"
             :options="restrictionOptions"
@@ -102,16 +102,7 @@
           />
         </div>
         <div class="col-span-1">
-          <Label class="mb-2" label="Você tem alguma preferência alimentar?" />
-          <Select
-            v-model="personalFormData.preferences"
-            :options="preferenceOptions"
-            multiple
-            required
-          />
-        </div>
-        <div class="col-span-1">
-          <Label class="mb-2" label="Qual é seu objetivo?" />
+          <Label class="mb-2" label="Objetivo" />
           <Select
             v-model="personalFormData.objectives"
             :options="objectiveOptions"
