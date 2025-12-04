@@ -11,11 +11,11 @@ Este repositório contém o código-fonte de um sistema completo de nutrição c
 
 ## 📌 Funcionalidades
 
-- Cadastro de usuários
-- Login com autenticação segura (JWT)
-- Validação de formulários com feedback de erros
-- Proteção de rotas autenticadas
-- Integração com banco de dados (via Prisma)
+- Criação de planos alimentares customizados para o objetivo e restrições alimentares do usuário
+- Controle de pacientes para profissionais com criação de planos e receitas
+- Acompanhamento de progresso de peso com metas 
+- Disponibilização de diversas receitas alimentares saudáveis
+- Grupos para acompanhar progresso com amigos, podendo definir data limite para motivação
 - Interface amigável e responsiva
 
 ## 📁 Estrutura do Projeto
