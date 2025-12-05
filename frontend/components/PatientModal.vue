@@ -30,28 +30,17 @@
         <div class="flex w-full justify-between gap-3">
           <div class="flex flex-col w-full">
             <div class="grid grid-cols-2 gap-6">
-          <div class="col-span-1">
-            <Label class="mb-2" label="Nome completo" :error="errors.name" />
-            <Input
-              type="text"
-              v-model="formData.name"
-              placeholder="Nome do paciente"
-              required
-              :error="errors.name"
-            />
-            <Error :message="errors.name" />
-          </div>
-          <div class="col-span-1" v-if="section !== 'create-offline'">
-            <Label class="mb-2" label="Email" :error="errors.email" />
-            <Input
-              type="email"
-              v-model="formData.email"
-              placeholder="Email do paciente"
-              required
-              :error="errors.email"
-            />
-            <Error :message="errors.email" />
-          </div>
+              <div class="col-span-1">
+                <Label class="mb-2" label="Nome completo" :error="errors.name" />
+                <Input
+                  type="text"
+                  v-model="formData.name"
+                  placeholder="Nome do paciente"
+                  required
+                  :error="errors.name"
+                />
+                <Error :message="errors.name" />
+              </div>
                 <div class="col-span-1">
                   <Label class="mb-2" label="Data de nascimento" />
                   <Input
@@ -140,7 +129,6 @@ const emit = defineEmits(["save", "close"]);
 
 const formData = ref({
     name: "",
-    email: "",
     birth_date: "",
     gender: "",
     height: "",
@@ -153,7 +141,6 @@ const formData = ref({
 
 const errors = ref({
   name: null,
-  email: null,
   birth_date: null,
   gender: null,
   height: null,
@@ -191,7 +178,6 @@ onMounted(async () => {
       formData.value.birth_date = date.toISOString().split('T')[0];
     }
     formData.value.name = props.patientData.name || "";
-    formData.value.email = props.patientData.email || "";
     formData.value.gender = props.patientData.gender || "";
     formData.value.height = props.patientData.height || ""; 
     formData.value.weight = props.patientData.weight || ""; 
@@ -237,7 +223,6 @@ function validate() {
   let isValid = true;
   errors.value = {
     name: null,
-    email: null,
     birth_date: null,
     gender: null,
     height: null,
@@ -250,10 +235,6 @@ function validate() {
   if (props.section === 'create' || props.section === 'create-offline') {
       if (!formData.value.name) {
           errors.value.name = "Campo obrigatório";
-          isValid = false;
-      }
-      if (props.section === 'create' && !formData.value.email) {
-          errors.value.email = "Campo obrigatório";
           isValid = false;
       }
   }
@@ -325,7 +306,6 @@ async function handleSubmit() {
 
   const payload = {
     name: formData.value.name,
-    email: formData.value.email || null,
     birth_date: formData.value.birth_date,
     gender: formData.value.gender,
     height: parseFloat(formData.value.height),
@@ -349,7 +329,6 @@ async function handleSubmit() {
       alert("Erro ao salvar paciente. Tente novamente.");
     } else {
       console.log("Paciente salvo com sucesso:", res.data);
-      // alert("Paciente salvo com sucesso!");
       emit("close", true);
     }
   } catch (err) {
