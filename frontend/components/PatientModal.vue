@@ -9,11 +9,11 @@
       leave-active-class="transition-opacity duration-300 ease"
     >
     <div
-      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]"
+      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4"
       @click.self="$emit('close', false)"
     >
       <div
-        class="bg-white rounded-3xl py-7 px-9 w-full shadow-lg relative max-h-[90vh] overflow-y-shown modal-container transition-transform duration-300 ease"
+        class="bg-white rounded-3xl py-7 px-9 w-full shadow-lg relative max-h-[90vh] overflow-y-auto modal-container transition-transform duration-300 ease"
         :class="section === 'basic' ? 'max-w-lg' : 'max-w-3xl'"
       >
         <button
@@ -29,7 +29,7 @@
 
         <div class="flex w-full justify-between gap-3">
           <div class="flex flex-col w-full">
-            <div class="grid grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div class="col-span-1">
                 <Label class="mb-2" label="Nome completo" :error="errors.name" />
                 <Input
