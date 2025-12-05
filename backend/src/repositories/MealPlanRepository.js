@@ -14,7 +14,11 @@ const base = generateCrudRepository('mealPlan', {
         patient: true
       }
     },
-    nutricionist: true,
+    nutricionist: {
+      include: {
+        user: true
+      }
+    },
     mealPlanDietaryRestrictions: {
       include: {
         dietaryRestriction: true

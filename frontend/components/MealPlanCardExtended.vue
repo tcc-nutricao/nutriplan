@@ -15,6 +15,9 @@
           <p class="font-semibold ml-2" >{{ ` #${object?.id}`}}</p>
         </div>
 
+      <p class="text-sm text-gray-500 font-semibold -my-1">
+        {{ creatorText }}
+      </p>
       <div class="flex gap-3 items-center">
         <div class="flex gap-2 justify-center items-center">
             <IconSolid icon="fa-fire" color="text-red-500" sm />
@@ -30,12 +33,21 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 
 const props = defineProps({
   object: { type: Object, required: true },
   title: { type: String, default: '' },
   items: { type: Array, default: () => [] }
+})
+
+const creatorText = computed(() => {
+  // Console log to debug prop data
+  if (props.object?.id_nutritionist === 1) {
+    return 'Criado por: NUTRIPLAN'
+  }
+  const name = props.object?.nutricionist?.user?.name
+  return `Criado por: ${name || 'Desconhecido'}`
 })
 
 const selectedDay = ref('MON') 

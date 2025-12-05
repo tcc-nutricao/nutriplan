@@ -110,8 +110,8 @@ const insert = async (data) => {
         : 'Bem-vindo ao Nutriplan!';
         
       const text = isProfessional
-        ? `Olá ${data.name},\n\nSeja bem-vindo ao Nutriplan! Estamos muito felizes em tê-lo como parceiro.\n\nAcesse sua conta para começar a gerenciar seus pacientes e criar planos alimentares:\nhttp://localhost:3000`
-        : `Olá ${data.name},\n\nSeja bem-vindo ao Nutriplan! Estamos muito felizes em tê-lo conosco.\n\nAcesse sua conta e cadastre seus dados pessoais para começar a usar o sistema:\nhttp://localhost:3000`;
+        ? `Olá ${data.name},\n\nSeja bem-vindo ao Nutriplan! Estamos muito felizes em tê-lo como parceiro.\n\nAcesse sua conta para começar a gerenciar seus pacientes e criar planos alimentares.`
+        : `Olá ${data.name},\n\nSeja bem-vindo ao Nutriplan! Estamos muito felizes em tê-lo conosco.\n\nAcesse sua conta e cadastre seus dados pessoais para começar a usar o sistema.`;
 
       const htmlBody = isProfessional
         ? `<p style="font-size: 16px; color: #333333; line-height: 1.5;">Estamos muito felizes em tê-lo como parceiro! O Nutriplan é a ferramenta ideal para você criar planos alimentares, gerenciar seus pacientes e acompanhar a evolução de cada um.</p>
