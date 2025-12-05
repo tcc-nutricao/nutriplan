@@ -81,6 +81,9 @@ model User {
   nutricionist Nutritionist?
   userGroups  UserGroup[]
   favoriteRecipes FavoriteRecipe[]
+
+  reset_password_token   String?
+  reset_password_expires DateTime?
 }
 
 model Food {

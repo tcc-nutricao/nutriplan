@@ -3,7 +3,12 @@ import { PatientRepository } from '../repositories/PatientRepository.js'
 import { HealthDataRepository } from '../repositories/HealthDataRepository.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import crypto from 'crypto'
 import { AppError } from '../exceptions/AppError.js'
+import { useSendMail } from '../utils/useSendMail.js'
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
 
 const JWT_SECRET = process.env.JWT_SECRET || 'chave_secreta_segura'
 
@@ -71,7 +76,70 @@ export const AuthService = {
       },
       nextPage: nextPage
     }
+  },
+
+  async forgotPassword(email) {
+    const user = await UserRepository.findByEmail(email)
+
+    if (!user) {
+      // Don't reveal that the user does not exist
+       return { message: 'Se o e-mail estiver cadastrado, você receberá um link para redefinir sua senha.' }
+    }
+
+    const token = crypto.randomBytes(20).toString('hex')
+    const now = new Date()
+    now.setHours(now.getHours() + 1) // 1 hour expiration
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        reset_password_token: token,
+        reset_password_expires: now
+      }
+    })
+
+    const resetLink = `http://localhost:3000/reset-password?token=${token}`
+
+    await useSendMail({
+      to: email,
+      subject: 'Redefinição de Senha - Nutriplan',
+      html: `
+        <p>Você solicitou a redefinição de sua senha.</p>
+        <p>Clique no link abaixo para criar uma nova senha:</p>
+        <a href="${resetLink}">${resetLink}</a>
+        <p>Este link expira em 1 hora.</p>
+        <p>Se você não solicitou isso, ignore este e-mail.</p>
+      `
+    })
+
+    return { message: 'Se o e-mail estiver cadastrado, você receberá um link para redefinir sua senha.' }
+  },
+
+  async resetPassword(token, newPassword) {
+    const user = await prisma.user.findFirst({
+        where: {
+            reset_password_token: token,
+            reset_password_expires: {
+                gt: new Date()
+            }
+        }
+    })
+
+    if (!user) {
+        throw new AppError({ message: 'Token inválido ou expirado', statusCode: 400 })
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10)
+
+    await prisma.user.update({
+        where: { id: user.id },
+        data: {
+            password: hashedPassword,
+            reset_password_token: null,
+            reset_password_expires: null
+        }
+    })
+
+    return { message: 'Senha redefinida com sucesso' }
   }
 }
-
-

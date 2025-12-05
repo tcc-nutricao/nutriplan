@@ -110,8 +110,8 @@ const insert = async (data) => {
         : 'Bem-vindo ao Nutriplan!';
         
       const text = isProfessional
-        ? `Olá ${data.name},\n\nSeja bem-vindo ao Nutriplan! Estamos muito felizes em tê-lo como parceiro.\n\nAcesse sua conta para começar a gerenciar seus pacientes e criar planos alimentares.`
-        : `Olá ${data.name},\n\nSeja bem-vindo ao Nutriplan! Estamos muito felizes em tê-lo conosco.\n\nAcesse sua conta e cadastre seus dados pessoais para começar a usar o sistema!`;
+        ? `Olá ${data.name},\n\nSeja bem-vindo ao Nutriplan! Estamos muito felizes em tê-lo como parceiro.\n\nAcesse sua conta para começar a gerenciar seus pacientes e criar planos alimentares:\nhttp://localhost:3000`
+        : `Olá ${data.name},\n\nSeja bem-vindo ao Nutriplan! Estamos muito felizes em tê-lo conosco.\n\nAcesse sua conta e cadastre seus dados pessoais para começar a usar o sistema:\nhttp://localhost:3000`;
 
       const htmlBody = isProfessional
         ? `<p style="font-size: 16px; color: #333333; line-height: 1.5;">Estamos muito felizes em tê-lo como parceiro! O Nutriplan é a ferramenta ideal para você criar planos alimentares, gerenciar seus pacientes e acompanhar a evolução de cada um.</p>
@@ -128,6 +128,9 @@ const insert = async (data) => {
             <h2 style="color: #4A148C; text-align: center; margin-bottom: 20px;">${subject}</h2>
             <p style="font-size: 16px; color: #333333; line-height: 1.5;">Olá <strong>${data.name}</strong>,</p>
             ${htmlBody}
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="http://localhost:3000" style="background-color: #4A148C; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px;">Acessar Sistema</a>
+            </div>
             <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
             <p style="font-size: 12px; color: #888888; text-align: center;">© ${new Date().getFullYear()} Nutriplan. Todos os direitos reservados.</p>
           </div>
@@ -265,7 +268,7 @@ const createTemporaryUser = async (data) => {
       await useSendMail({
         to: data.email,
         subject: 'Cadastro temporário no sistema',
-        text: `Olá ${data.name},\n\nSeu cadastro temporário foi criado!\nE-mail: ${data.email}\nSenha temporária: ${randomPassword}\n\nTroque sua senha ao acessar o sistema.`
+        text: `Olá ${data.name},\n\nSeu cadastro temporário foi criado!\nE-mail: ${data.email}\nSenha temporária: ${randomPassword}\n\nTroque sua senha ao acessar o sistema:\nhttp://localhost:3000`
       })
     }
     

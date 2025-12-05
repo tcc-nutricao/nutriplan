@@ -256,7 +256,6 @@ const deleteOrUnlink = async (patientId, nutritionistId) => {
 
         if (patient.user.role === 'GUEST') {
             await prisma.$transaction(async (tx) => {
-                // 1. Delete Goals and GoalObjectives
                 const goals = await tx.goal.findMany({ 
                     where: { id_patient: patient.id },
                     select: { id: true }
@@ -273,7 +272,6 @@ const deleteOrUnlink = async (patientId, nutritionistId) => {
                     });
                 }
 
-                // 2. Delete MealPlans and related data
                 const mealPlanPatients = await tx.mealPlanPatient.findMany({
                     where: { id_patient: patient.id },
                     select: { id_meal_plan: true }
@@ -315,12 +313,10 @@ const deleteOrUnlink = async (patientId, nutritionistId) => {
                     });
                 }
 
-                // 3. Delete other patient data
                 await tx.healthData.deleteMany({ where: { id_patient: patient.id } });
                 await tx.patientDietaryRestriction.deleteMany({ where: { id_patient: patient.id } });
                 await tx.nutritionistPatient.deleteMany({ where: { id_patient: patient.id } });
                 
-                // Ensure all MealPlanPatients for this patient are gone (redundant but safe)
                 await tx.mealPlanPatient.deleteMany({ where: { id_patient: patient.id } });
                 
                 await tx.patient.delete({ where: { id: patient.id } });

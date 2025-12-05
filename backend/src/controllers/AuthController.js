@@ -52,6 +52,35 @@ export const AuthController = {
     } catch (err) {
       next(err)
     }
+  },
+  
+  async forgotPassword(req, res, next) {
+    try {
+        const { email } = req.body;
+        if (!email) {
+            return res.status(400).json({ error: true, message: 'Email é obrigatório' });
+        }
+        
+        const result = await AuthService.forgotPassword(email);
+        return res.json(result);
+    } catch (err) {
+        next(err);
+    }
+  },
+
+  async resetPassword(req, res, next) {
+    try {
+        const { token, newPassword } = req.body;
+        
+        if (!token || !newPassword) {
+            return res.status(400).json({ error: true, message: 'Token e nova senha são obrigatórios' });
+        }
+
+        const result = await AuthService.resetPassword(token, newPassword);
+        return res.json(result);
+    } catch (err) {
+        next(err);
+    }
   }
 }
 

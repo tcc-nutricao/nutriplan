@@ -3,7 +3,7 @@
     class="font-sora flex items-center justify-center min-h-screen bg-gradient-to-br from-p-500 via-p-600 to-p-700 px-4"
   >
     <div
-      class="w-full max-w-[420px] sm:max-w-xl mx-auto p-5 sm:p-8 md:p-[70px] bg-gradient-to-br from-white to-p-200 rounded-tl-[70px] rounded-br-[70px] rounded-bl-xl rounded-tr-xl shadow-custom"
+      class="w-full max-w-[420px] sm:max-w-xl mx-auto p-5 sm:p-8 md:p-[70px] md:py-[40px] bg-gradient-to-br from-white to-p-200 rounded-tl-[70px] rounded-br-[70px] rounded-bl-xl rounded-tr-xl shadow-custom"
     >
       <Logo class="mb-5 text-5xl sm:text-6xl md:text-7xl mx-auto" />
       <div v-if="isLoading" class="flex items-center justify-center text-p-950 text-lg sm:text-xl md:text-2xl font-semibold">
@@ -48,13 +48,23 @@
           required
         />
         <div class="flex flex-col items-center justify-center">
-          <Button mediumPurple label="Login" class="w-[60%] sm:w-3/4 md:w-1/2" @click.prevent="login" type="button"/>
-          <p v-if="errors.invalidCredentials" class="text-red-500 text-sm font-bold mt-2">
+          <p v-if="errors.invalidCredentials" class="text-red-500 text-sm font-bold mb-2">
             {{ errors.invalidCredentials }}
           </p>
+          <Button mediumPurple label="Login" class="w-[60%] sm:w-3/4 md:w-1/2" @click.prevent="login" type="button"/>
+          <p 
+            class="hover:font-semibold cursor-pointer text-[#8A5ACD] mt-4"
+            @click="showResetModal"
+          >
+            Esqueceu sua senha?
+        </p>
         </div>
       </div>
     </div>
+    <ResetPasswordModal
+      v-if="resetModal"
+      @close="closeResetModal" 
+    />
   </div>
 </template>
 
@@ -66,6 +76,7 @@ import { useRouter } from "vue-router";
 import { useCookie } from "nuxt/app"; // Importe o useCookie
 
 const router = useRouter();
+const resetModal = ref(false);
 
 definePageMeta({
   hideTopBar: true,
@@ -87,6 +98,14 @@ const errors = ref({
 
 const navigate = async (route) => {
   await router.push(route);
+};
+
+const showResetModal = () => {
+  resetModal.value = true;
+};
+
+const closeResetModal = () => {
+  resetModal.value = false;
 };
 
 const validate = () => {
