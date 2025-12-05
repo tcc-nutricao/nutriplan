@@ -3,7 +3,7 @@
     <Transition name="modal" appear enter-from-class="opacity-0" leave-to-class="opacity-0"
       enter-active-class="transition-opacity duration-300 ease"
       leave-active-class="transition-opacity duration-300 ease">
-      <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]"
+      <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4"
         @click.self="$emit('closeModal')">
         <div
           class="bg-white px-7 py-6 rounded-2xl shadow-xl max-w-md w-full modal-container transition-transform duration-300 ease">

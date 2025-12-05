@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body">
     <Transition name="fade">
-      <div v-if="show" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[1000]" @click.self="close">
+      <div v-if="show" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[1000] p-4" @click.self="close">
         <div class="bg-white rounded-3xl shadow-lg w-full max-w-2xl p-8 relative flex flex-col gap-6 max-h-[90vh] overflow-y-auto">
           
           <div class="flex justify-between items-center">
@@ -26,7 +26,7 @@
               </div>
               <h3 class="font-bold text-lg text-center">Criar Automaticamente</h3>
               <p class="text-center text-sm text-gray-500">
-                Gera um plano baseado nos dados do paciente (peso, altura, objetivo) usando IA.
+                Gera um plano baseado nos dados do paciente (peso, altura, objetivo).
               </p>
             </div>
 

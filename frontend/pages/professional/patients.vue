@@ -47,6 +47,7 @@
                         <div 
                             v-if="selectedItemId === item.id" 
                             class="md:hidden flex flex-col gap-5 mt-3"
+                            :ref="el => { if (selectedItemId === item.id) patientCard = el }"
                         >
                             <div class="bg-white rounded-3xl shadow-lg border-2 p-8 flex flex-col gap-3">
                                 <div class="flex justify-between">
@@ -55,22 +56,38 @@
                                             {{ item.name }}
                                         </h2>
                                         <p>{{ item.email }}</p>
-                                    </div>
-                                    <div class="flex gap-2">
-                                        <Button 
-                                            v-if="!item.email"
-                                            mediumPurple
-                                            class="w-max pr-3 pl-2 h-[42px]"
-                                            icon="fa-solid fa-envelope short flex justify-center" 
-                                            label="Convidar"
-                                            @click="openInviteModal(item)"
-                                        />
-                                        <Button mediumPurple
-                                            class="w-max pr-3 pl-2 h-[42px]"
-                                            icon="fa-solid fa-edit short flex justify-center" 
-                                            label="Editar"
-                                            @click="openEdit"
-                                        />
+                                        <div class="flex flex-wrap gap-2 mt-1">
+                                            <Button 
+                                                v-if="!item.email"
+                                                mediumPurple
+                                                class="w-max h-[42px]"
+                                                icon="fa-solid fa-envelope short flex justify-center" 
+                                                label="Convidar"
+                                                @click="openInviteModal(item)"
+                                            />
+                                            <Button mediumPurple
+                                                class="w-max h-[42px]"
+                                                icon="fa-solid fa-edit short flex justify-center" 
+                                                label="Editar"
+                                                @click="openEdit"
+                                            />
+                                            <Button 
+                                                v-if="selectedItem.role === 'GUEST'"
+                                                red
+                                                class="w-max h-[42px]"
+                                                icon="fa-regular fa-trash-can short flex justify-center" 
+                                                label="Apagar"
+                                                @click="openDeleteModal" 
+                                            />
+                                            <Button 
+                                                v-else
+                                                red
+                                                class="w-max h-[42px]"
+                                                icon="fa-solid fa-link-slash short flex justify-center" 
+                                                label="Desvincular"
+                                                @click="openUnlinkModal" 
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="flex flex-col gap-3">
@@ -118,13 +135,25 @@
                             </div>
                             <div class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5">
                                 <h2 class="h3">Plano alimentar</h2>
-                                <div v-if="item.mealPlan">
+                                <div v-if="item.mealPlan" class="flex flex-col gap-4 items-center">
                                 <PlanCard 
                                     :object="item.mealPlan"
                                 />
+                                <Button mediumPurple
+                                    class="w-max pr-3 pl-2 h-[42px]"
+                                    icon="fa-solid fa-right-left short flex justify-center"
+                                    label="Mudar plano"
+                                    @click="openMealPlanManager"
+                                />
                                 </div>
-                                <div v-else>
+                                <div v-else class="flex flex-col gap-4 items-center">
                                     <p class="text-gray-500">Sem plano alimentar vinculado.</p>
+                                    <Button mediumPurple
+                                        class="w-max pr-3 pl-2 h-[42px]"
+                                        icon="fa-solid fa-plus short flex justify-center"
+                                        label="Adicionar plano"
+                                        @click="openMealPlanManager"
+                                    />
                                 </div>
                             </div>
                             <!-- Weight Update Card Mobile -->
@@ -148,23 +177,22 @@
                                 </div>
                             </div>
                             <!-- Progress Card Mobile -->
-                            <div class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5">
-                                <ProgressCard 
-                                    :patient="item" 
-                                    :dataList="item.role === 'GUEST'"
-                                    @refresh="fetchPatients"
-                                />
-                            </div>
-
+                            <ProgressCard 
+                                :patient="item" 
+                                :dataList="item.role === 'GUEST'"
+                                @refresh="fetchPatients"
+                            />
                             <div class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5">
                                 <h2 class="h3">Receitas</h2>
                                 <div class="w-full border-b-2 border-gray-200">
                                 </div>
-                                <Button mediumPurple
-                                    class="w-max pr-3 pl-2 h-[42px]"
-                                    icon="fa-solid fa-plus short flex justify-center" 
-                                    label="Incluir receita"
-                                />
+                                <div class="w-full flex justify-center">
+                                    <Button mediumPurple
+                                        class="w-max pr-3 pl-2 h-[42px]"
+                                        icon="fa-solid fa-plus short flex justify-center" 
+                                        label="Incluir receita"
+                                    />
+                                </div>
                             </div>
                             <p 
                                 v-if="index < itemList.length - 1"
@@ -180,25 +208,25 @@
                 v-if="selectedItem" 
                 class="hidden md:flex w-[60%] mb-8 flex-col gap-5 stickyProfile"
             >
-                <div class="bg-white rounded-3xl shadow-lg border-2 p-8 flex flex-col gap-3">
-                    <div class="flex justify-between">
-                        <div class="flex flex-col gap-2">
-                            <h2 class="text-3xl font-semibold text-p-600 leading-none">
+                <div class="bg-white rounded-3xl shadow-lg border-2 p-8 flex flex-col gap-3 min-w-0">
+                    <div class="flex justify-between min-w-0 gap-3 flex-wrap">
+                        <div class="flex flex-col gap-2 min-w-0">
+                            <h2 class="text-3xl font-semibold text-p-600 leading-none break-words">
                                 {{ selectedItem.name }}
                             </h2>
-                            <p>{{ selectedItem.email }}</p>
+                            <p class="break-all">{{ selectedItem.email }}</p>
                         </div>
-                        <div class="flex gap-2">
+                        <div class="flex gap-2 flex-wrap">
                             <Button 
                                 v-if="!selectedItem.email"
                                 mediumPurple
-                                class="w-max pr-3 pl-2 h-[42px]"
+                                class="max-w-full pr-3 pl-2 h-[42px]"
                                 icon="fa-solid fa-envelope short flex justify-center" 
                                 label="Convidar"
                                 @click="openInviteModal(selectedItem)"
                             />
                             <Button mediumPurple
-                                class="w-max pr-3 pl-2 h-[42px]"
+                                class="max-w-full pr-3 pl-2 h-[42px]"
                                 icon="fa-solid fa-edit short flex justify-center" 
                                 label="Editar"
                                 @click="openEdit"
@@ -206,7 +234,7 @@
                             <Button 
                                 v-if="selectedItem.role === 'GUEST'"
                                 red
-                                class="w-max pr-3 pl-2 h-[42px]"
+                                class="max-w-full pr-3 pl-2 h-[42px]"
                                 icon="fa-regular fa-trash-can short flex justify-center" 
                                 label="Apagar"
                                 @click="openDeleteModal" 
@@ -214,15 +242,15 @@
                             <Button 
                                 v-else
                                 red
-                                class="w-max pr-3 pl-2 h-[42px]"
+                                class="max-w-full pr-3 pl-2 h-[42px]"
                                 icon="fa-solid fa-link-slash short flex justify-center" 
                                 label="Desvincular"
                                 @click="openUnlinkModal" 
                             />
                         </div>
                     </div>
-                    <div class="flex justify-between w-full gap-10">
-                        <div class="flex flex-col w-[40%] gap-3">
+                    <div class="flex justify-between w-full gap-10 flex-wrap min-w-0">
+                        <div class="flex flex-col flex-1 min-w-[260px] gap-3">
                             <div class="flex justify-between">
                                 <p>Idade:</p>
                                 <p class="text-p-600 font-bold">{{ selectedItem.age }}</p>
@@ -248,7 +276,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="flex flex-col w-[50%] gap-3">
+                        <div class="flex flex-col flex-1 min-w-[260px] gap-3">
                             <div class="flex justify-between">
                                 <p>Objetivo:</p>
                                 <p class="text-p-600 font-bold">{{ selectedItem.objective }}</p>
@@ -269,31 +297,31 @@
                     </div>
                 </div>
                 <div class="flex w-full gap-5">
-                    <div class="flex flex-col w-[35%]">
-                        <div class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5 h-max">
-                            <h2 class="h3">Plano alimentar</h2>
-                            <div v-if="selectedItem.mealPlan" class="flex flex-col gap-3 items-center justify-center">
-                                <div @click="openViewModal(selectedItem.mealPlan)" class="cursor-pointer hover:scale-[102%] transition active:scale-[98%] w-max">
+                    <div class="flex flex-col w-[35%] min-w-[250px]">
+                        <div class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5 h-max"> 
+                            <h2 class="h3">Plano alimentar</h2> 
+                            <div v-if="selectedItem.mealPlan" class="flex flex-col gap-3 items-center justify-center"> 
+                                <div @click="openViewModal(selectedItem.mealPlan)" class="cursor-pointer hover:scale-[102%] transition active:scale-[98%] w-max"> 
                                     <PlanCard 
-                                        :object="selectedItem.mealPlan"
-                                    />
-                                </div>
-                                <Button mediumPurple
-                                    class="w-max pr-3 pl-2 h-[42px] mt-5"
+                                        :object="selectedItem.mealPlan" 
+                                    /> 
+                                </div> 
+                                <Button mediumPurple 
+                                    class="pr-3 pl-2 h-[42px] mt-5" 
                                     icon="fa-solid fa-right-left short flex justify-center" 
-                                    label="Mudar plano"
-                                    @click="openMealPlanManager"
-                                />
-                            </div>
-                            <div v-else class="flex flex-col gap-3 items-center justify-between">
-                                <p class="text-gray-500 text-center">Sem plano alimentar vinculado.</p>
-                                <Button mediumPurple
-                                    class="w-max pr-3 pl-2 h-[42px]"
+                                    label="Mudar plano" 
+                                    @click="openMealPlanManager" 
+                                /> 
+                            </div> 
+                            <div v-else class="flex flex-col gap-3 items-center justify-between"> 
+                                <p class="text-gray-500 text-center">Sem plano alimentar vinculado.</p> 
+                                    <Button mediumPurple 
+                                    class="w-max pr-3 pl-2 h-[42px]" 
                                     icon="fa-solid fa-plus short flex justify-center" 
-                                    label="Adicionar plano"
-                                    @click="openMealPlanManager"
-                                />
-                            </div>
+                                    label="Adicionar plano" 
+                                    @click="openMealPlanManager" 
+                                /> 
+                            </div> 
                         </div>
                         <!-- Weight Update Card Desktop -->
                         <div class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5 mt-5">
@@ -322,6 +350,18 @@
                             :patient="selectedItem" 
                             @refresh="fetchPatients"
                         />
+                        <div class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5 mt-5">
+                            <h2 class="h3">Receitas</h2>
+                            <div class="w-full border-b-2 border-gray-200"></div>
+                            <div class="w-full flex justify-center">
+                                <Button 
+                                    mediumPurple
+                                    class="pr-3 pl-2 h-[42px]"
+                                    icon="fa-solid fa-plus short flex justify-center"
+                                    label="Incluir receita"
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -360,7 +400,7 @@
                 enter-active-class="transition-opacity duration-300 ease"
                 leave-active-class="transition-opacity duration-300 ease"
             >
-                <div v-if="showInviteModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]" @click.self="showInviteModal = false">
+                <div v-if="showInviteModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4" @click.self="showInviteModal = false">
                     <div class="bg-white rounded-3xl p-8 w-full max-w-md shadow-lg relative flex flex-col gap-5 items-center">
                          <button
                             class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-[50]"
@@ -406,7 +446,7 @@
                 enter-active-class="transition-opacity duration-300 ease"
                 leave-active-class="transition-opacity duration-300 ease"
             >
-                <div v-if="showInvitePatientModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]" @click.self="showInvitePatientModal = false">
+                <div v-if="showInvitePatientModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] p-4" @click.self="showInvitePatientModal = false">
                     <div class="bg-white rounded-3xl p-8 w-full max-w-md shadow-lg relative flex flex-col gap-5 items-center">
                          <button
                             class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-[50]"
@@ -612,6 +652,8 @@ const sendInvite = async () => {
 const selectItem = (id) => {
     selectedItemId.value = id
     newWeight.value = null
+
+    setTimeout(scrollToPatientCard, 100)
 }
 
 const imcCalc = (height, weight) => {
@@ -735,6 +777,20 @@ const handleDelete = async () => {
         await fetchPatients();
     } else {
         alert('Erro ao excluir/desvincular paciente: ' + (response.message || 'Erro desconhecido'));
+    }
+}
+
+let patientCard = null
+const TOP_OFFSET = 140;
+
+const scrollToPatientCard = () => {
+    if (patientCard) {
+        const elementTop = patientCard.getBoundingClientRect().top + window.scrollY
+        const offsetPosition = elementTop - TOP_OFFSET
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+        })
     }
 }
 </script>
