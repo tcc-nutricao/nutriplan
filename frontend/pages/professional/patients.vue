@@ -100,19 +100,11 @@
                                         <p>Objetivo:</p>
                                         <p class="text-p-600 font-bold">{{ item.objective }}</p>
                                     </div>
-                                    <div>
+                                    <div class="flex justify-between">
                                         <p>Restrição alimentar:</p>
                                         <div class="flex flex-col">
                                             <p v-for="(r,i) in item.restrictions" :key="i" class="text-p-600 font-bold">
                                                 {{ r }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <p>Preferências alimentares:</p>
-                                        <div class="flex flex-col">
-                                            <p v-for="(p,i) in item.preferences" :key="i" class="text-p-600 font-bold">
-                                                {{ p }}
                                             </p>
                                         </div>
                                     </div>
@@ -223,7 +215,7 @@
                                 class="w-max pr-3 pl-2 h-[42px]"
                                 icon="fa-regular fa-trash-can short flex justify-center" 
                                 label="Apagar"
-                                @click="handleDelete" 
+                                @click="openDeleteModal" 
                             />
                             <Button 
                                 v-else
@@ -231,7 +223,7 @@
                                 class="w-max pr-3 pl-2 h-[42px]"
                                 icon="fa-solid fa-link-slash short flex justify-center" 
                                 label="Desvincular"
-                                @click="handleDelete" 
+                                @click="openUnlinkModal" 
                             />
                         </div>
                     </div>
@@ -267,19 +259,11 @@
                                 <p>Objetivo:</p>
                                 <p class="text-p-600 font-bold">{{ selectedItem.objective }}</p>
                             </div>
-                            <div>
-                                <p>Restrição alimentar:</p>
+                            <div class="flex justify-between">
+                                <p>Restrições alimentares:</p>
                                 <div class="flex flex-col">
                                     <p v-for="(r,i) in selectedItem.restrictions" :key="i" class="text-p-600 font-bold">
                                         {{ r }}
-                                    </p>
-                                </div>
-                            </div>
-                            <div>
-                                <p>Preferências alimentares:</p>
-                                <div class="flex flex-col">
-                                    <p v-for="(p,i) in selectedItem.preferences" :key="i" class="text-p-600 font-bold">
-                                        {{ p }}
                                     </p>
                                 </div>
                             </div>
@@ -361,7 +345,7 @@
             </div>
         </div>
         <PatientModal 
-            v-if="showModal && showModal !== 'mealPlanManager'" 
+            v-if="showModal && showModal !== 'mealPlanManager' && showModal !== 'unlink' && showModal !== 'delete'" 
             :section="showModal" 
             :patientData="selectedItem" 
             @close="handleModalClose" 
@@ -480,6 +464,22 @@
                 </div>
             </Transition>
         </teleport>
+        <ModalDanger
+            v-if="showModal == 'delete'"
+            title="Tem certeza?"
+            content="Ao apagar este paciente, todos os dados serão deletados permanentemente."
+            btnLabel="Apagar"
+            @confirm="handleDelete"
+            @closeModal="closeModal"
+        />
+        <ModalDanger
+            v-if="showModal == 'unlink'"
+            title="Desvincular paciente?"
+            content="Ao desvincular, você não terá mais acesso aos dados do paciente."
+            btnLabel="Desvincular"
+            @confirm="handleDelete"
+            @closeModal="closeModal"
+        />
     </div>
 </template>
 
@@ -518,6 +518,17 @@ const closeViewModal = () => {
     showViewModal.value = false
     selectedPlan.value = null
 }
+
+const openDeleteModal = () => {
+    showModal.value = "delete";
+};
+const openUnlinkModal = () => {
+    showModal.value = "unlink";
+};
+
+const closeModal = () => {
+    showModal.value = "";
+}; 
 
 const openCreate = () => {
     showModal.value = 'create-offline'
@@ -624,15 +635,15 @@ const imcCalc = (height, weight) => {
     const imcValue = (weight / (heightM * heightM)).toFixed(2)
     
     if (imcValue < 18.5) {
-        return `${imcValue} (magreza)`
+        return `${imcValue.replace('.', ',')} (magreza)`
     } else if (imcValue < 25) {
-        return `${imcValue} (normal)`
+        return `${imcValue.replace('.', ',')} (normal)`
     } else if (imcValue < 30) {
-        return `${imcValue} (sobrepeso)`
+        return `${imcValue.replace('.', ',')} (sobrepeso)`
     } else if (imcValue < 40) {
-        return `${imcValue} (obesidade)`
+        return `${imcValue.replace('.', ',')} (obesidade)`
     } else {
-        return `${imcValue} (obesidade grave)`
+        return `${imcValue.replace('.', ',')} (obesidade grave)`
     }
 }
 

@@ -536,15 +536,18 @@ const updatePatient = async (id, data) => {
           });
         }
 
-        if (data.weight || data.height) {
+        const newWeight = data.weight ? parseFloat(data.weight) : patient.weight;
+        const newHeight = data.height ? parseFloat(data.height) : patient.height;
+
+        if (newWeight !== patient.weight) {
              await tx.healthData.create({
                 data: {
                     id_patient: parseInt(id),
-                    height: data.height ? parseFloat(data.height) : patient.height,
-                    weight: data.weight ? parseFloat(data.weight) : patient.weight,
+                    height: newHeight,
+                    weight: newWeight,
                     bmi: getImcData(
-                        data.weight ? parseFloat(data.weight) : patient.weight, 
-                        (data.height ? parseFloat(data.height) : patient.height) / 100
+                        newWeight, 
+                        newHeight / 100
                     ).imc,
                     record_date: new Date(),
                     created_at: new Date(),
