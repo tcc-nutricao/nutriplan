@@ -3,7 +3,7 @@
         <div class="flex justify-between items-center">
             <h2 class="h3">Progresso</h2>
             <button 
-                v-if="patient && dataList"
+                v-if="patient"
                 @click="openHistory"
                 class="text-sm text-p-500 hover:text-p-700 font-semibold underline"
             >
@@ -37,6 +37,13 @@
                     <p class="font-bold text-p-600">{{ targetWeight ? targetWeight + ' kg' : 'Nenhuma' }}</p>
                  </div>
             </div>
+            <div class="w-full flex justify-center mt-3">
+                <Button mediumPurple
+                    class="w-max pr-3 pl-2 h-[42px]"
+                    icon="fa-solid fa-file short flex justify-center" 
+                    label="Gerar PDF"
+                />
+            </div>
         </div>
         <div v-else class="flex items-center justify-center h-[200px] text-gray-500">
             Selecione um paciente para ver o progresso.
@@ -65,10 +72,6 @@ const props = defineProps({
         type: Object,
         default: null
     },
-    dataList: {
-        type: Boolean,
-        default: false
-    }
 });
 
 const emit = defineEmits(['refresh']);

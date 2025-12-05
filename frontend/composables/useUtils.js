@@ -43,9 +43,17 @@ export function useUtils() {
     return `${day}/${month}/${year}`;
   }
 
+  const formatNumber = (value) => {
+    if (value === null || value === undefined || value === '') return '';
+    const number = Number(value);
+    if (isNaN(number)) return value;
+    return number.toLocaleString('pt-BR');
+  }
+
   return {
     applyMask,
     getISODateString,
-    formatISODate
+    formatISODate,
+    formatNumber
   }
 }

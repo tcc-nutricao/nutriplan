@@ -1,16 +1,16 @@
 <template>
     <div 
-        class="flex flex-row items-between justify-between gap-2 py-4 px-6 bg-white rounded-3xl shadow-lg border-2 cursor-pointer transition-all duration-100 active:scale-[98%] w-full"
+        class="flex flex-row items-between justify-between gap-2 py-4 px-6 bg-white rounded-3xl shadow-lg border-2 cursor-pointer transition-all duration-150 active:scale-[98%] w-full"
         :class="{'md:w-full border-p-600 shadow-xl shadow-p-600/20': isSelected, 'md:w-[85%]': !isSelected}"
         @click="notificarClique"
     >
         <div class="flex flex-col items-between justify-start gap-3">
             <h2 class="h2">{{ name }}</h2>
             <div>
-                <p>{{ objective }}</p>
+                <p class="font-normal text-gray-600">{{ objective }}</p>
             </div>
         </div>
-        <div class="flex flex-col items-between justify-end gap-3 text-end">
+        <div class="flex flex-col items-between justify-end gap-3 text-end font-normal text-gray-600">
             <p>IMC: <span class="font-semibold text-p-600"> {{ imc }}</span> </p>
             <p>Última atualização: <span class="font-semibold text-p-600"> {{ lastUpdate }}</span></p>
         </div>
@@ -57,15 +57,15 @@ export default {
             const imcValue = (this.weight / (heightM * heightM)).toFixed(2);
             
             if (imcValue < 18.5) {
-                return `${imcValue} (magreza)`;
+                return `${imcValue.replace('.', ',')} (magreza)`;
             } else if (imcValue < 25) {
-                return `${imcValue} (normal)`;
+                return `${imcValue.replace('.', ',')} (normal)`;
             } else if (imcValue < 30) {
-                return `${imcValue} (sobrepeso)`;
+                return `${imcValue.replace('.', ',')} (sobrepeso)`;
             } else if (imcValue < 40) {
-                return `${imcValue} (obesidade)`;
+                return `${imcValue.replace('.', ',')} (obesidade)`;
             } else {
-                return `${imcValue} (obesidade grave)`;
+                return `${imcValue.replace('.', ',')} (obesidade grave)`;
             }
         }
     }

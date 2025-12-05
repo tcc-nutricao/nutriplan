@@ -65,12 +65,12 @@
             <!-- <Card class="col-span-1 md:col-span-1"> -->
                 <div class="col-span-1 md:col-span-1 h-max space-y-3 sm:space-y-4">
                     <Card class="text-center">
-                        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-p-600 mb-0">{{ items.metaAchieved }}%</h1>
+                        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-p-600 mb-0">{{ formatNumber(items.metaAchieved) }}%</h1>
                         <h3 class="text-xs sm:text-sm font-medium text-gray-600 mb-2">da meta atingida</h3>
                         <ProgressBar :progress="items.metaAchieved" />
                     </Card>
                     <Card class="text-center" centered>
-                        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-p-600 mb-0">{{ items.imc }}</h1>
+                        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-p-600 mb-0">{{ formatNumber(items.imc) }}</h1>
                         <h3 class="text-xs sm:text-sm font-medium text-gray-600">IMC atual</h3>
                     </Card>
                     <Card class="text-center" centered>
@@ -88,7 +88,7 @@ import { ref, computed, onMounted } from 'vue';
 import { get, insert } from '~/crud';
 import { useUtils } from '~/composables/useUtils';
 
-const { formatISODate } = useUtils();
+const { formatISODate, formatNumber } = useUtils();
 const isLoading = ref(true);
 const items = ref({});
 const progress = ref([]);
@@ -98,11 +98,11 @@ const isGeneratingPDF = ref(false);
 
 const objectiveLabels = ref([
     { label: "Objetivo atual:", value: "objective", isTitle: true },
-    { label: "Meta de peso:", value: "targetWeight" },
-    { label: "Peso inicial:", value: "initialWeight" },
-    { label: "IMC atual:", value: "imc" },
+    { label: "Meta de peso:", value: "targetWeight", format: (e) => formatNumber(e) },
+    { label: "Peso inicial:", value: "initialWeight", format: (e) => formatNumber(e) },
+    { label: "IMC atual:", value: "imc", format: (e) => formatNumber(e) },
     { label: "Última atualização:", value: "lastUpdate", format: (e) => formatISODate(e) },
-    { label: "Peso atual:", value: "actualWeight", isTitle: true }
+    { label: "Peso atual:", value: "actualWeight", isTitle: true, format: (e) => formatNumber(e) }
 ]);
 
 const chartOptions = computed(() => {

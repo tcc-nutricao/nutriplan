@@ -4,6 +4,16 @@
         <div class="flex flex-col md:flex-row gap-5 justify-between">
             <div class="flex flex-col w-full md:w-[40%] mb-8">
                 <div class="search-sticky-wrapper md:static flex w-full gap-3">
+                    <SearchBar 
+                        :filter="false" 
+                        :sort="false" 
+                        placeholder="Pesquise um paciente" 
+                        searchType="patients"
+                        @searchSelected=""
+                        class="w-full shadowSearch z-[200]" 
+                    />
+                </div>
+                <div class="flex mt-3 gap-3">
                     <Button
                         mediumPurple
                         class="w-max px-3 h-[42px] text-nowrap"
@@ -18,14 +28,6 @@
                         label="Código"
                         @click="fetchInviteCode"
                     />
-                    <SearchBar 
-                    :filter="false" 
-                    :sort="false" 
-                    placeholder="Pesquise um paciente" 
-                    searchType="patients"
-                    @searchSelected=""
-                    class="w-full shadowSearch z-[200]" 
-                />
                 </div>
                 <div class="flex flex-col gap-3 w-full mt-5">
                     <div 
@@ -157,14 +159,6 @@
                             <div class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5">
                                 <h2 class="h3">Receitas</h2>
                                 <div class="w-full border-b-2 border-gray-200">
-                                    <ReceitaButtonMini 
-                                        v-for="r in recipesList"
-                                        :key="r.id"
-                                        :title="r.title"
-                                        :categories="r.categories"
-                                        :time="r.time"
-                                        :portions="r.portions"
-                                    />
                                 </div>
                                 <Button mediumPurple
                                     class="w-max pr-3 pl-2 h-[42px]"
@@ -302,7 +296,7 @@
                             </div>
                         </div>
                         <!-- Weight Update Card Desktop -->
-                        <div v-if="selectedItem.role === 'GUEST'" class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5 mt-5">
+                        <div class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5 mt-5">
                             <h2 class="h3">Atualizar Peso</h2>
                             <div class="grid grid-rows-2 gap-2">
                                 <Input
@@ -326,7 +320,6 @@
                     <div class="w-[65%]">
                         <ProgressCard 
                             :patient="selectedItem" 
-                            :dataList="selectedItem.role === 'GUEST'" 
                             @refresh="fetchPatients"
                         />
                     </div>
@@ -616,12 +609,6 @@ const sendInvite = async () => {
     }
 }
 
-const recipesList = ref([
-    { id: 1, title: 'Muffin de Banana Integral', categories: ['Perda de Peso','Sono','Antioxidante'], time: '15', portions: '2' },
-    { id: 2, title: 'Salada Detox com Grão de Bico', categories: ['Energia','Perda de Peso','Saúde Intestinal'], time: '90', portions: '8' },
-    { id: 3, title: 'Suco de Uva', categories: ['Leve','Doce','Fácil'], time: '2', portions: '1' },
-])
-
 const selectItem = (id) => {
     selectedItemId.value = id
     newWeight.value = null
@@ -742,20 +729,12 @@ const openMealPlanManager = () => {
 const handleDelete = async () => {
     if (!selectedItem.value) return;
 
-    const isGuest = selectedItem.value.role === 'GUEST';
-    const message = isGuest 
-        ? 'Tem certeza que deseja apagar este paciente? Todos os dados serão perdidos.' 
-        : 'Tem certeza que deseja desvincular este paciente?';
-
-    if (confirm(message)) {
-        const response = await remove('patient', selectedItem.value.id);
-        if (response.success) {
-            // alert(response.message);
-            selectedItemId.value = null;
-            await fetchPatients();
-        } else {
-            alert('Erro ao excluir/desvincular paciente: ' + (response.message || 'Erro desconhecido'));
-        }
+    const response = await remove('patient', selectedItem.value.id);
+    if (response.success) {
+        selectedItemId.value = null;
+        await fetchPatients();
+    } else {
+        alert('Erro ao excluir/desvincular paciente: ' + (response.message || 'Erro desconhecido'));
     }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
     <Card 
         :class="{'border-p-600 shadow-xl shadow-p-600/20 w-full transition': item.isSelected, 'w-[85%]' : !item.isSelected && !fullWidth, 'w-full': fullWidth}" 
-        class="border-2 cursor-pointer transition-all duration-100 active:scale-[98%]" centered
+        class="border-2 cursor-pointer transition-all duration-150 active:scale-[98%]" centered
         @click="$emit('selected')"
     >
         <div class="flex flex-col items-between gap-2">
