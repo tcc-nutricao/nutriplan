@@ -7,5 +7,6 @@ export const api = {
   generateAutomaticPlan: MealPlanController.generateAutomaticPlan,
   generateSelfService: MealPlanController.generateSelfService,
   updateFull: MealPlanController.updateFull,
+  deletePlan: MealPlanController.deletePlan,
   assignPlan: MealPlanController.assignPlan
 }

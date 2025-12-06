@@ -248,5 +248,25 @@ export const MealPlanController = {
         message: error.message || 'Erro ao atualizar plano'
       })
     }
+  },
+
+  deletePlan: async (req, res) => {
+    try {
+      const { id } = req.params
+      const user = req.user
+
+      await MealPlanService.deletePlan(id, user)
+
+      return res.status(200).json({
+        success: true,
+        message: 'Plano alimentar excluído com sucesso!'
+      })
+    } catch (error) {
+      console.error('Erro ao apagar plano:', error)
+      return res.status(500).json({
+        success: false,
+        message: error.message || 'Erro ao apagar plano'
+      })
+    }
   }
 }

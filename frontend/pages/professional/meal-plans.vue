@@ -47,7 +47,7 @@
                             @click="closeViewModal"
                         >&times;
                         </button>
-                        <MealPlanCardExtended v-if="selectedPlan" :object="selectedPlan" @edit="openEditModal" />
+                        <MealPlanCardExtended v-if="selectedPlan" :object="selectedPlan" @refresh="handleRefresh" />
                     </div>
                 </div>
             </Transition>
@@ -70,8 +70,8 @@
                             @click="closeCreateModal"
                         >&times;
                         </button>
-                        <h2 class="text-2xl font-semibold text-np mb-4">{{ selectedPlanForEdit ? 'Editar Plano Alimentar' : 'Criar Plano Alimentar' }}</h2>
-                        <MealPlanCreate @close="closeCreateModal" @save="loadItems" :planToEdit="selectedPlanForEdit" />
+                        <h2 class="text-2xl font-semibold text-np mb-4">Criar Plano Alimentar</h2>
+                        <MealPlanCreate @close="closeCreateModal" @save="loadItems" />
                     </div>
                 </div>
             </Transition>
@@ -81,14 +81,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, defineAsyncComponent } from 'vue'
 import { get } from '../../crud'
+import { useNuxtApp } from 'nuxt/app'
+
+// Note: ModalDanger is no longer needed here as it's inside MealPlanCardExtended
+const { $axios } = useNuxtApp()
 
 const showViewModal = ref(false)
 const showCreateModal = ref(false)
 const selectedPlan = ref(null)
-const selectedPlanForEdit = ref(null)
-
+// const selectedPlanForEdit = ref(null) // Removed
 const mealPlans = ref([])
 
 const loadItems = async () => {
@@ -124,20 +127,18 @@ const closeViewModal = () => {
 }
 
 const openCreateModal = () => {
-    selectedPlanForEdit.value = null
     showCreateModal.value = true
-}
-
-const openEditModal = (plan) => {
-    selectedPlanForEdit.value = plan
-    showViewModal.value = false // Close view modal
-    showCreateModal.value = true // Open create modal (in edit mode)
 }
 
 const closeCreateModal = () => {
     showCreateModal.value = false
-    selectedPlanForEdit.value = null
 }
+
+const handleRefresh = () => {
+    closeViewModal()
+    loadItems()
+}
+
 
 </script>
 

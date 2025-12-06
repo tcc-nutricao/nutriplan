@@ -492,7 +492,7 @@
                             @click="closeViewModal"
                         >&times;
                         </button>
-                        <MealPlanCardExtended v-if="selectedPlan" :object="selectedPlan" />
+                        <MealPlanCardExtended v-if="selectedPlan" :object="selectedPlan" @refresh="handlePlanRefresh" />
                     </div>
                 </div>
             </Transition>
@@ -550,6 +550,11 @@ const openViewModal = (plan) => {
 const closeViewModal = () => {
     showViewModal.value = false
     selectedPlan.value = null
+}
+
+const handlePlanRefresh = () => {
+    closeViewModal()
+    fetchPatients()
 }
 
 const openDeleteModal = () => {

@@ -12,7 +12,7 @@
 
           <Flex gap-5>
             <Button outlined gray label="Cancelar" @click="close" class="w-full" />
-            <Button red :label="btnLabel" @click="confirm" class="w-full" />
+            <Button v-if="showConfirm" red :label="btnLabel" @click="confirm" class="w-full" />
           </Flex>
         </div>
       </div>
@@ -30,6 +30,10 @@ const props = defineProps({
   confirm: {
     type: String,
     default: 'confirm'
+  },
+  showConfirm: {
+    type: Boolean,
+    default: true
   }
 })
 

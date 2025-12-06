@@ -134,10 +134,7 @@ const updateWithRelations = async (id, data, user) => {
 
         // 2. Delete existing relations
         await tx.mealPlanDietaryRestriction.deleteMany({ where: { id_meal_plan: mealPlanId } });
-        // Delete meals (cascades to recipes typically, but if not, we must delete recipes first?)
-        // Prisma relies on foreign keys. Let's delete recipes via meals first to be safe if cascade isn't set, 
-        // OR just delete meals if schema supports cascade. 
-        // Assuming cascade or manual cleanup. Let's do manual to be safe if schema ambiguous.
+        
         // Find meals
         const meals = await tx.mealPlanMeal.findMany({ where: { id_meal_plan: mealPlanId }, select: { id: true } });
         const mealIds = meals.map(m => m.id);
@@ -196,6 +193,59 @@ const updateWithRelations = async (id, data, user) => {
 
   } catch (error) {
     console.error('Erro ao atualizar plano (full):', error);
+    throw error;
+  }
+};
+
+const deletePlan = async (id, user) => {
+  try {
+     const mealPlanId = parseInt(id, 10);
+     const mealPlan = await MealPlanRepository.findById(mealPlanId);
+
+     if (!mealPlan) throw new AppError('Plano alimentar não encontrado');
+
+     // Permission check
+     if (user.role !== 'PROFESSIONAL') {
+         throw new AppError('Apenas nutricionistas podem apagar planos.');
+     }
+
+     const nutritionistId = user.id_nutritionist || user.nutritionist?.id;
+     const planNutritionistUserId = mealPlan.nutricionist?.id_user;
+     const isOwner = (nutritionistId && mealPlan.id_nutritionist === nutritionistId) || 
+                     (planNutritionistUserId && user.id === planNutritionistUserId);
+
+     if (!isOwner) {
+        throw new AppError('Você não tem permissão para apagar este plano');
+     }
+
+     // Use validation
+     const activePatientsCount = await prisma.mealPlanPatient.count({
+        where: { id_meal_plan: mealPlanId }
+     });
+
+     if (activePatientsCount > 0) {
+        throw new AppError('Não é possível apagar este plano pois ele está atribuído a pacientes.');
+     }
+
+     return await prisma.$transaction(async (tx) => {
+        await tx.mealPlanDietaryRestriction.deleteMany({ where: { id_meal_plan: mealPlanId } });
+        
+        const meals = await tx.mealPlanMeal.findMany({ where: { id_meal_plan: mealPlanId }, select: { id: true } });
+        const mealIds = meals.map(m => m.id);
+        
+        if (mealIds.length > 0) {
+           await tx.mealPlanRecipe.deleteMany({ where: { id_meal_plan_meal: { in: mealIds } } });
+        }
+        await tx.mealPlanMeal.deleteMany({ where: { id_meal_plan: mealPlanId } });
+        
+        // Just in case check again or delete MealPlanPatient (should be 0 though)
+        await tx.mealPlanPatient.deleteMany({ where: { id_meal_plan: mealPlanId } });
+
+        return await MealPlanRepository.remove(mealPlanId);
+     });
+
+  } catch (error) {
+    console.error('Erro ao apagar plano:', error);
     throw error;
   }
 };
@@ -433,6 +483,7 @@ export const MealPlanService = {
   create,
   update, 
   updateWithRelations,
+  deletePlan,
   getMealPlanByPatient,
   getActiveMealPlanForPatient,
   generateAutomaticPlan,

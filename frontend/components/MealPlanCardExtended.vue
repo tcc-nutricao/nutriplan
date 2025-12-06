@@ -14,12 +14,19 @@
           </div>
           <p class="font-semibold ml-2" >{{ ` #${object?.id}`}}</p>
           
-          <div v-if="canEdit" class="absolute -bottom-5 right-5 z-[50]">
+          <div v-if="canEdit" class="absolute -bottom-5 right-5 z-[50] flex gap-2">
                <Button
                   mediumPurple
-                  class="rounded-full w-10 h-10 shadow-lg border-2 border-white"
+                  class="rounded-full w-10 h-10 border-2 border-white"
                   icon="fa-solid fa-pen"
-                  @click="$emit('edit', object)"
+                  @click="openEditModal"
+               />
+               <Button
+                  v-if="canEdit"
+                  red
+                  class="rounded-full w-10 h-10 border-2 border-white"
+                  icon="fa-solid fa-trash"
+                  @click="checkDelete"
                />
           </div>
         </div>
@@ -38,11 +45,53 @@
       <WeekDaysBar v-model="selectedDay" class="my-2 px-2"/>
       <Menu :items="object?.mealPlanMeals" :selectedDay="selectedDay"  class="w-full px-8"/> 
     </div>
+
+    <!-- Modals -->
+    <teleport to="body">
+       <Transition
+                name="modal"
+                appear
+                enter-from-class="opacity-0"
+                leave-to-class="opacity-0"
+                enter-active-class="transition-opacity duration-300 ease"
+                leave-active-class="transition-opacity duration-300 ease"
+            >
+                <div v-if="showEditModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1100]" @click.self="closeEditModal">
+                    <div class="bg-white rounded-3xl py-7 px-9 w-full max-w-4xl shadow-lg relative max-h-[90vh] overflow-y-auto modal-container transition-transform duration-300 ease">
+                         <button
+                            class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-[50]"
+                            @click="closeEditModal"
+                        >&times;
+                        </button>
+                        <h2 class="text-2xl font-semibold text-np mb-4">Editar Plano Alimentar</h2>
+                        <MealPlanCreate @close="closeEditModal" @save="handleSave" :planToEdit="object" />
+                    </div>
+                </div>
+            </Transition>
+    </teleport>
+
+    <ModalDanger
+       v-if="showDeleteModal"
+       :title="deleteModalState.title"
+       :content="deleteModalState.content"
+       :showConfirm="deleteModalState.canDelete"
+       btnLabel="Excluir"
+        class="z-[1100]"
+       @closeModal="showDeleteModal = false"
+       @confirm="confirmDelete"
+    />
+
   </Card>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, defineAsyncComponent } from 'vue'
+import { useNuxtApp } from 'nuxt/app'
+const { $axios } = useNuxtApp()
+
+// Async components to avoid circular deps if any
+const ModalDanger = defineAsyncComponent(() => import('./ModalDanger.vue'))
+const MealPlanCreate = defineAsyncComponent(() => import('./MealPlanCreate.vue')) // Assuming in same folder or check path
 
 const props = defineProps({
   object: { type: Object, required: true },
@@ -50,25 +99,76 @@ const props = defineProps({
   items: { type: Array, default: () => [] }
 })
 
-const emit = defineEmits(['edit'])
+const emit = defineEmits(['refresh']) // Changed from edit/delete to refresh
 
 import { useCookie } from 'nuxt/app'
 const userCookie = useCookie('user-data')
+
+// Edit State
+const showEditModal = ref(false)
+
+const openEditModal = () => {
+    showEditModal.value = true
+}
+
+const closeEditModal = () => {
+    showEditModal.value = false
+}
+
+const handleSave = () => {
+    emit('refresh')
+}
+
+// Delete State
+const showDeleteModal = ref(false)
+const deleteModalState = ref({
+    title: '',
+    content: '',
+    canDelete: true
+})
+
+const checkDelete = () => {
+    // Check if the plan is used by any valid patient (status: ACTIVE)
+    const activePatients = props.object.mealPlanPatients ? props.object.mealPlanPatients.filter(p => p.status === 'ACTIVE').length : 0
+    
+    if (activePatients > 0) {
+        deleteModalState.value.title = 'Não é possível excluir'
+        deleteModalState.value.content = `Este plano está atribuído a ${activePatients} paciente(s) ativo(s). Para excluí-lo, primeiro remova o plano dos pacientes.`
+        deleteModalState.value.canDelete = false
+    } else {
+        deleteModalState.value.title = 'Excluir Plano Alimentar'
+        deleteModalState.value.content = 'Tem certeza que deseja excluir este plano? Esta Ação é irreversível.'
+        deleteModalState.value.canDelete = true
+    }
+    
+    showDeleteModal.value = true
+}
+
+const confirmDelete = async () => {
+    if (!deleteModalState.value.canDelete) return
+
+    try {
+        await $axios.delete(`/meal-plan/${props.object.id}`)
+        showDeleteModal.value = false
+        emit('refresh') // Notify parent to reload data
+    } catch (error) {
+        console.error('Erro ao excluir plano:', error)
+        alert(error.response?.data?.message || 'Erro ao excluir plano')
+        showDeleteModal.value = false
+    }
+}
 
 const canEdit = computed(() => {
   const user = userCookie.value
   if (!user || user.role !== 'PROFESSIONAL') return false
 
-  // Check if current user is the user linked to the plan's nutritionist
   const planNutritionistUserId = props.object?.nutricionist?.id_user;
   
-  // Method 1: Check by Nutritionist ID (if available in cookie)
   const userNutritionistId = user.id_nutritionist || user.nutritionist?.id
   if (userNutritionistId && props.object?.id_nutritionist === userNutritionistId) {
       return true
   }
 
-  // Method 2: Check by User ID (fallback)
   if (planNutritionistUserId && user.id === planNutritionistUserId) {
       return true
   }
@@ -77,7 +177,6 @@ const canEdit = computed(() => {
 })
 
 const creatorText = computed(() => {
-  // Console log to debug prop data
   if (props.object?.id_nutritionist === 1) {
     return 'Criado por: NUTRIPLAN'
   }
@@ -86,8 +185,6 @@ const creatorText = computed(() => {
 })
 
 const selectedDay = ref('MON') 
-
-const type = ref(false);
 
 onMounted(() => {
   const dayOfWeek = new Date().getDay()
