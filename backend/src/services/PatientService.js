@@ -63,6 +63,7 @@ const getProgress = async (userId) => {
         initialWeight = healthData[healthData.length - 1].weight;
         lastUpdate = healthData[0].record_date;
         progressHistory = healthData.map(h => ({
+            id: h.id,
             weight: h.weight,
             date: h.record_date
         })).reverse();

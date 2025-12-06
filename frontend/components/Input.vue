@@ -14,7 +14,8 @@
         v-model="displayValue"
         @input="handleInput"
         @keydown.enter.prevent="emitEnter"
-        :type="props.type"
+        :type="inputType"
+        :inputmode="inputMode"
         :placeholder="props.placeholder"
         :disabled="props.disabled"
         :min="props.min"
@@ -40,12 +41,40 @@ const props = defineProps({
   mask: String,
   prefix: String
 })
-const localValue = ref(props.modelValue)
-const displayValue = ref(applyMask(localValue.value, props.mask))
-const handleInput = (event) => {
-  displayValue.value = applyMask(event.target.value, props.mask)
+
+const isNumber = computed(() => props.type === 'number');
+const inputType = computed(() => isNumber.value ? 'text' : props.type);
+const inputMode = computed(() => isNumber.value ? 'decimal' : undefined);
+
+const formatValue = (val) => {
+  if (val === null || val === undefined) return '';
+  if (isNumber.value) {
+    return String(val).replace('.', ',');
+  }
+  return props.mask ? applyMask(val, props.mask) : val;
 }
-const emits = defineEmits(['update:modelValue'])
+
+const localValue = ref(props.modelValue)
+const displayValue = ref(formatValue(props.modelValue))
+
+const handleInput = (event) => {
+  let val = event.target.value;
+  if (props.mask) {
+    displayValue.value = applyMask(val, props.mask)
+  } else if (isNumber.value) {
+    // Allow numbers and one comma
+    val = val.replace(/[^0-9,]/g, '');
+    const parts = val.split(',');
+    if (parts.length > 2) {
+      val = parts[0] + ',' + parts.slice(1).join('');
+    }
+    displayValue.value = val;
+  } else {
+    displayValue.value = val;
+  }
+}
+
+const emits = defineEmits(['update:modelValue', 'enter'])
 const emitEnter = () => {
   emits('enter')
 }
@@ -56,19 +85,20 @@ const classes = computed(() => ({
   'text-grey-100': props.disabled,
   'border-cinza': !props.error
 }))
+
 watch(
   () => props.modelValue,
   (newValue) => {
     localValue.value = newValue
-    if (newValue) {
-      displayValue.value = applyMask(newValue, props.mask)
-    } else {
-      displayValue.value = null
-    }
+    displayValue.value = formatValue(newValue)
   }
 )
 
 watch(displayValue, (newValue) => {
-  emits('update:modelValue', newValue)
+  let finalValue = newValue;
+  if (isNumber.value && newValue) {
+    finalValue = newValue.replace(',', '.');
+  }
+  emits('update:modelValue', finalValue)
 })
 </script>

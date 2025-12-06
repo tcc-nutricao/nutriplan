@@ -226,11 +226,11 @@ const getProfilePicture = async (userId) => {
 
     const user = await UserRepository.findProfilePictureByUserId(userId);
 
-    if (!user || !user.profile_picture) {
-      throw new AppError({ message: 'Foto de perfil não encontrada', statusCode: 404 });
+    if (!user) {
+      throw new AppError({ message: 'Usuário não encontrado', statusCode: 404 });
     }
 
-    return user.profile_picture;
+    return user.profile_picture || null;
   } catch (err) {
     throw err;
   }

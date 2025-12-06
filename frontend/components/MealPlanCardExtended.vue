@@ -15,7 +15,7 @@
           <p class="font-semibold ml-2" >{{ ` #${object?.id}`}}</p>
         </div>
 
-      <p class="text-sm text-gray-500 font-semibold -my-1">
+      <p class="text-sm text-gray-500 font-normal -my-1">
         {{ creatorText }}
       </p>
       <div class="flex gap-3 items-center">

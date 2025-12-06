@@ -28,6 +28,7 @@
                         class="bg-white shadow-lg shadow-gray-600/10 focus-within:shadow-p-600/20 hover:shadow-p-600/20 transition"
                         label="pesquisaReceita"
                         v-model="newWeight"
+                        type="number"
                         placeholder="Atualize seu peso"
                         @keyup.enter="updateProgress"
                     />
@@ -42,7 +43,15 @@
 
             <Card class="col-span-1 md:col-span-3 lg:col-span-3 xl:col-span-4">
                 <div class="flex flex-col justify-start items-center gap-3 sm:gap-5 mb-3">
-                    <h2 class="text-xl sm:text-2xl font-bold text-gray-800">Progresso</h2>
+                    <div class="flex justify-between items-center w-full px-4">
+                        <h2 class="text-xl sm:text-2xl font-bold text-gray-800">Progresso</h2>
+                        <button 
+                            @click="openHistory"
+                            class="text-sm text-p-500 hover:text-p-700 font-semibold underline"
+                        >
+                            Registros
+                        </button>
+                    </div>
                     <div class="flex items-center justify-center w-full h-[200px] sm:h-[250px] md:h-[300px]">
                         <ProgressChart
                             class="overflow-visible"
@@ -80,6 +89,12 @@
                 </div>
             <!-- </Card> -->
         </div>
+        <ProgressData 
+            :isOpen="isHistoryOpen" 
+            :history="progress" 
+            @close="closeHistory" 
+            @refresh="getProgressData"
+        />
     </div>
 </template>
 
@@ -87,6 +102,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { get, insert } from '~/crud';
 import { useUtils } from '~/composables/useUtils';
+import ProgressData from '~/components/ProgressData.vue';
 
 const { formatISODate, formatNumber } = useUtils();
 const isLoading = ref(true);
@@ -95,6 +111,15 @@ const progress = ref([]);
 const newWeight = ref(null);
 const pdfContent = ref(null);
 const isGeneratingPDF = ref(false);
+const isHistoryOpen = ref(false);
+
+const openHistory = () => {
+    isHistoryOpen.value = true;
+};
+
+const closeHistory = () => {
+    isHistoryOpen.value = false;
+};
 
 const objectiveLabels = ref([
     { label: "Objetivo atual:", value: "objective", isTitle: true },
