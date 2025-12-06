@@ -47,7 +47,7 @@
                             @click="closeViewModal"
                         >&times;
                         </button>
-                        <MealPlanCardExtended v-if="selectedPlan" :object="selectedPlan" />
+                        <MealPlanCardExtended v-if="selectedPlan" :object="selectedPlan" @edit="openEditModal" />
                     </div>
                 </div>
             </Transition>
@@ -70,8 +70,8 @@
                             @click="closeCreateModal"
                         >&times;
                         </button>
-                        <h2 class="text-2xl font-semibold text-np mb-4">Criar Plano Alimentar</h2>
-                        <MealPlanCreate @close="closeCreateModal" @save="loadItems" />
+                        <h2 class="text-2xl font-semibold text-np mb-4">{{ selectedPlanForEdit ? 'Editar Plano Alimentar' : 'Criar Plano Alimentar' }}</h2>
+                        <MealPlanCreate @close="closeCreateModal" @save="loadItems" :planToEdit="selectedPlanForEdit" />
                     </div>
                 </div>
             </Transition>
@@ -87,6 +87,7 @@ import { get } from '../../crud'
 const showViewModal = ref(false)
 const showCreateModal = ref(false)
 const selectedPlan = ref(null)
+const selectedPlanForEdit = ref(null)
 
 const mealPlans = ref([])
 
@@ -123,11 +124,19 @@ const closeViewModal = () => {
 }
 
 const openCreateModal = () => {
+    selectedPlanForEdit.value = null
     showCreateModal.value = true
+}
+
+const openEditModal = (plan) => {
+    selectedPlanForEdit.value = plan
+    showViewModal.value = false // Close view modal
+    showCreateModal.value = true // Open create modal (in edit mode)
 }
 
 const closeCreateModal = () => {
     showCreateModal.value = false
+    selectedPlanForEdit.value = null
 }
 
 </script>

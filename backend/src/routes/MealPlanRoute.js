@@ -11,4 +11,5 @@ export default (router) => {
   router.post('/meal-plan/generate-self', authenticate, authorize(Roles.STANDARD), api.generateSelfService)
   router.post('/meal-plan/:id/assign', authenticate, authorize(Roles.PROFESSIONAL), api.assignPlan)
   router.post('/meal-plan/:id/populate', authenticate, MealPlanPopulateController.populateMealPlan)
+  router.put('/meal-plan/:id/full', authenticate, authorize(Roles.PROFESSIONAL), api.updateFull)
 }

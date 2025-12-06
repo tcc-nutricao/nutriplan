@@ -94,10 +94,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted, reactive, computed } from 'vue'
-import { get, insert } from '../crud'
+import { ref, onMounted, reactive, computed, watch } from 'vue'
+import { get, insert, update } from '../crud'
+import { useNuxtApp } from 'nuxt/app'
 
+const { $axios } = useNuxtApp()
 const emit = defineEmits(['close', 'save'])
+
+const props = defineProps({
+    planToEdit: {
+        type: Object,
+        default: null
+    }
+})
 
 const calories = ref('')
 const objective = ref('')
@@ -164,6 +173,37 @@ const getMealCalories = (mealId) => {
     return 0
 }
 
+const populateForm = () => {
+    if (props.planToEdit) {
+        calories.value = props.planToEdit.calories
+        objective.value = props.planToEdit.id_objective || props.planToEdit.objective?.id
+        
+        if (props.planToEdit.dietaryRestrictions) {
+            restrictions.value = props.planToEdit.dietaryRestrictions.map(r => r.id_dietary_restriction || r.id)
+        } else if (props.planToEdit.mealPlanDietaryRestrictions) {
+             restrictions.value = props.planToEdit.mealPlanDietaryRestrictions.map(r => r.id_dietary_restriction)
+        }
+
+        // Populate recipes
+        // planToEdit.mealPlanMeals structure: [{ id_meal, day, mealPlanRecipes: [{ recipe }] }]
+        if (props.planToEdit.mealPlanMeals) {
+            props.planToEdit.mealPlanMeals.forEach(mpMeal => {
+                const mealId = mpMeal.id_meal
+                const day = mpMeal.day
+                const recipes = mpMeal.mealPlanRecipes ? mpMeal.mealPlanRecipes.map(mpr => mpr.recipe) : []
+                
+                if (!mealRecipes[mealId]) mealRecipes[mealId] = {}
+                if (!mealRecipes[mealId][day]) mealRecipes[mealId][day] = []
+                
+                // Add recipes directly
+                recipes.forEach(r => {
+                    mealRecipes[mealId][day].push(r)
+                })
+            })
+        }
+    }
+}
+
 onMounted(async () => {
     try {
         const [objRes, restRes, mealRes] = await Promise.all([
@@ -175,6 +215,9 @@ onMounted(async () => {
         objectiveOptions.value = (objRes.data || []).map(i => ({ label: i.name, value: i.id }))
         restrictionOptions.value = (restRes.data || []).map(i => ({ label: i.name, value: i.id }))
         meals.value = mealRes.data || []
+        
+        populateForm()
+
     } catch (error) {
         console.error('Erro ao carregar dados:', error)
         if (!meals.value || meals.value.length === 0) {
@@ -237,15 +280,26 @@ const save = async () => {
             mealRecipes: mealRecipes
         }
 
-        const res = await insert('meal-plan', payload)
-        if (res.error) throw res
+        let res;
+        if (props.planToEdit) {
+             res = await $axios.put(`/meal-plan/${props.planToEdit.id}/full`, payload)
+             if (res.data && res.data.success) {
+                 res = { success: true, ...res.data } // Normalize response structure
+             } else {
+                 if (res.data) res = res.data // If error inside data
+             }
+        } else {
+             res = await insert('meal-plan', payload)
+        }
 
-        // alert('Plano alimentar criado com sucesso!')
+        if (res.error || res.success === false) throw res
+
+        // alert('Plano alimentar salvo com sucesso!')
         emit('save')
         emit('close')
     } catch (error) {
         console.error('Erro ao salvar plano:', error)
-        alert('Erro ao salvar plano alimentar')
+        alert('Erro ao salvar plano alimentar: ' + (error.message || error.response?.data?.message || ''))
     } finally {
         loading.value = false
     }

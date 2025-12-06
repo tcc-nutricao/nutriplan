@@ -224,5 +224,29 @@ export const MealPlanController = {
         message: error.message || 'Erro ao gerar plano'
       })
     }
+  },
+
+  updateFull: async (req, res) => {
+    try {
+      const { id } = req.params
+      const data = req.body
+      const user = req.user
+
+      const result = await MealPlanService.updateWithRelations(id, data, user)
+
+      return res.status(200).json({
+        success: true,
+        data: result,
+        message: 'Plano alimentar atualizado com sucesso!'
+      })
+
+    } catch (error) {
+      console.error('Erro ao atualizar plano (full):', error)
+      return res.status(500).json({
+        success: false,
+        field: error.field || null,
+        message: error.message || 'Erro ao atualizar plano'
+      })
+    }
   }
 }

@@ -6,5 +6,6 @@ export const api = {
   getMealPlanByPatient: MealPlanController.getMealPlanByPatient,
   generateAutomaticPlan: MealPlanController.generateAutomaticPlan,
   generateSelfService: MealPlanController.generateSelfService,
+  updateFull: MealPlanController.updateFull,
   assignPlan: MealPlanController.assignPlan
 }

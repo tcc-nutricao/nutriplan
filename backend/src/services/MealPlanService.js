@@ -83,6 +83,121 @@ const update = async (id, data, user) => {
   }
 
   return { data: [], total: 0, message: 'Usuários pacientes não podem atualizar planos alimentares.' };
+
+};
+
+const updateWithRelations = async (id, data, user) => {
+  try {
+     const mealPlanId = parseInt(id, 10);
+     const mealPlan = await MealPlanRepository.findById(mealPlanId);
+
+     if (!mealPlan) throw new AppError('Plano alimentar não encontrado');
+     
+     // Permission check: only PRO owners can full update
+     // Permission check: only PRO owners can full update
+     if (user.role !== 'PROFESSIONAL') {
+         throw new AppError('Apenas nutricionistas podem editar planos.');
+     }
+
+     // Check if user is the nutritionist who created the plan
+     // 1. Check by ID (if strictly equal)
+     const nutritionistId = user.id_nutritionist || user.nutritionist?.id;
+     
+     // 2. Check by User ID relation (more robust if id_nutritionist is missing in session)
+     // mealPlan.nutricionist should include 'user' based on repository default includes
+     const planNutritionistUserId = mealPlan.nutricionist?.id_user;
+
+     const isOwner = (nutritionistId && mealPlan.id_nutritionist === nutritionistId) || 
+                     (planNutritionistUserId && user.id === planNutritionistUserId);
+
+     if (!isOwner) {
+        throw new AppError('Você não tem permissão para editar este plano');
+     }
+
+     return await prisma.$transaction(async (tx) => {
+        const { 
+          calories, 
+          objective, 
+          restrictions = [], 
+          mealRecipes = {} 
+        } = data;
+
+        // 1. Update basic info
+        await tx.mealPlan.update({
+          where: { id: mealPlanId },
+          data: {
+             calories: parseInt(calories),
+             id_objective: objective,
+             updated_at: new Date()
+          }
+        });
+
+        // 2. Delete existing relations
+        await tx.mealPlanDietaryRestriction.deleteMany({ where: { id_meal_plan: mealPlanId } });
+        // Delete meals (cascades to recipes typically, but if not, we must delete recipes first?)
+        // Prisma relies on foreign keys. Let's delete recipes via meals first to be safe if cascade isn't set, 
+        // OR just delete meals if schema supports cascade. 
+        // Assuming cascade or manual cleanup. Let's do manual to be safe if schema ambiguous.
+        // Find meals
+        const meals = await tx.mealPlanMeal.findMany({ where: { id_meal_plan: mealPlanId }, select: { id: true } });
+        const mealIds = meals.map(m => m.id);
+        
+        if (mealIds.length > 0) {
+           await tx.mealPlanRecipe.deleteMany({ where: { id_meal_plan_meal: { in: mealIds } } });
+        }
+        await tx.mealPlanMeal.deleteMany({ where: { id_meal_plan: mealPlanId } });
+
+
+        // 3. Re-create restrictions
+        if (restrictions && restrictions.length > 0) {
+          for (const restrictionId of restrictions) {
+            await MealPlanDietaryRestrictionRepository.create({
+              id_meal_plan: mealPlanId,
+              id_dietary_restriction: restrictionId,
+              created_at: new Date(),
+              updated_at: new Date()
+            }, tx);
+          }
+        }
+
+        // 4. Re-create meals and recipes
+        for (const mealIdStr in mealRecipes) {
+          const mealId = parseInt(mealIdStr);
+          const daysData = mealRecipes[mealIdStr];
+
+          for (const day in daysData) {
+             const recipes = daysData[day];
+             
+             if (recipes && recipes.length > 0) {
+               const mealPlanMeal = await MealPlanMealRepository.create({
+                 id_meal_plan: mealPlanId,
+                 id_meal: mealId,
+                 day: day,
+                 time: new Date(), 
+                 created_at: new Date(),
+                 updated_at: new Date()
+               }, tx);
+
+               for (const recipe of recipes) {
+                 await MealPlanRecipeRepository.create({
+                   id_meal_plan_meal: mealPlanMeal.id,
+                   id_recipe: recipe.id,
+                   favorite: false,
+                   created_at: new Date(),
+                   updated_at: new Date()
+                 }, tx);
+               }
+             }
+          }
+        }
+
+        return await MealPlanRepository.findById(mealPlanId);
+     });
+
+  } catch (error) {
+    console.error('Erro ao atualizar plano (full):', error);
+    throw error;
+  }
 };
 
 const create = async (data, user) => {
@@ -317,6 +432,7 @@ export const MealPlanService = {
   ...generateCrudService(MealPlanRepository),
   create,
   update, 
+  updateWithRelations,
   getMealPlanByPatient,
   getActiveMealPlanForPatient,
   generateAutomaticPlan,
