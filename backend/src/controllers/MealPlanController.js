@@ -186,5 +186,43 @@ export const MealPlanController = {
         message: error.message || 'Erro interno do servidor'
       });
     }
+  },
+
+  generateSelfService: async (req, res) => {
+    try {
+      const { id: userId } = req.user
+
+      const patient = await PatientRepository.findByUserId(userId)
+      
+      if (!patient) {
+        return res.status(404).json({
+          success: false,
+          message: 'Paciente não encontrado'
+        })
+      }
+
+      if (patient.id_nutritionist) {
+        return res.status(403).json({
+          success: false,
+          message: 'Você possui um nutricionista vinculado. Solicite um plano a ele.'
+        })
+      }
+
+      // ID 1 = NUTRIPLAN 
+      const newPlan = await MealPlanService.generateAutomaticPlan(patient.id, 1)
+
+      return res.status(201).json({
+        success: true,
+        data: newPlan,
+        message: 'Plano alimentar gerado com sucesso!'
+      })
+
+    } catch (error) {
+      console.error('Erro ao gerar plano self-service:', error)
+      return res.status(500).json({
+        success: false,
+        message: error.message || 'Erro ao gerar plano'
+      })
+    }
   }
 }

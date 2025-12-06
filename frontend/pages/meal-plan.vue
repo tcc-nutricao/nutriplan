@@ -1,6 +1,16 @@
 <template>
   <div class="flex flex-col gap-3 px-10">
-    <h1 class="h1">Plano Alimentar</h1>
+    <div class="flex justify-between items-center">
+      <h1 class="h1">Plano Alimentar</h1>
+      <Button 
+        v-if="canGenerateSelf" 
+        @click="openGenerateModal" 
+        :disabled="isGeneratingSelf"
+        mediumPurple
+      >
+        {{ isGeneratingSelf ? 'Gerando...' : 'Gerar novo plano' }}
+      </Button>
+    </div>
     
     <div 
       v-if="actualPlan[0] && isPlanEmpty(actualPlan[0])" 
@@ -28,20 +38,32 @@
     </div>
     
     <div class="grid grid-cols-6 gap-5 w-full items-stretch">
-      <MealPlanCardExtended :object="actualPlan[0]" class="col-span-4 mb-10" />
+      <MealPlanCardExtended v-if="actualPlan.length > 0" :object="actualPlan[0]" class="col-span-4 mb-10" />
       <div class="col-span-2">
         <MealPlanCard title="Meus planos" :items="actualPlan" />
         <!-- <MealPlanCard title="Outros planos" :items="otherPlans" /> -->
       </div>
     </div>
+
+    
+    <Modal
+      v-if="showGenerateModal"
+      title="Gerar novo plano?"
+      content="Ao gerar um novo plano alimentar, o plano atual será arquivado."
+      btnLabel="Gerar"
+      text="A geração automática de planos usa seus dados de peso, altura, idade, gênero e objetivo, além de respeitar suas restrições alimentares, criando um plano customizado para você com as receitas do sistema."
+      @confirm="confirmGeneratePlan"
+      @closeModal="showGenerateModal = false"
+    />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, defineAsyncComponent } from 'vue'
 import { search } from '../crud'
 import { useNuxtApp } from 'nuxt/app'
 
+const ModalDanger = defineAsyncComponent(() => import('../components/ModalDanger.vue'))
 const { $axios } = useNuxtApp()
 
 const actualPlan = ref([])
@@ -50,22 +72,66 @@ const limit = ref(null)
 const page = ref(1)
 const order = ref('asc')
 const isPopulating = ref(false)
+const isGeneratingSelf = ref(false)
+const canGenerateSelf = ref(false)
+
+const checkPermission = async () => {
+  try {
+    const response = await $axios.get('/profile')
+    const patient = response.data.data
+    if (patient && !patient.id_nutritionist) {
+      canGenerateSelf.value = true
+    }
+  } catch (error) {
+    console.error('Erro ao verificar permissões:', error)
+  }
+}
+
+
+const showGenerateModal = ref(false)
+
+const openGenerateModal = () => {
+  showGenerateModal.value = true
+}
+
+const confirmGeneratePlan = async () => {
+  showGenerateModal.value = false
+  isGeneratingSelf.value = true
+  try {
+    const response = await $axios.post('/meal-plan/generate-self')
+    if (response.data.success) {
+      await loadItems()
+    } else {
+      alert('Erro ao gerar plano: ' + response.data.message)
+    }
+  } catch (error) {
+    console.error('Erro ao gerar plano self-service:', error)
+    alert('❌ Erro ao gerar plano. ' + (error.response?.data?.message || ''))
+  } finally {
+    isGeneratingSelf.value = false
+  }
+}
 
 const loadItems = async () => {
   try {
     const response = await $axios.get('/get-patient-meal-plan')
     const result = response.data
     
-    const activePlans = result.data.filter(item => item.mealPlanPatients?.[0]?.status === 'ACTIVE')
-    
-    activePlans.sort((a, b) => {
-      const aMeals = a.mealPlanMeals?.length || 0
-      const bMeals = b.mealPlanMeals?.length || 0
-      return bMeals - aMeals 
-    })
-    
-    actualPlan.value = activePlans.map(transformPlan)
-    otherPlans.value = result.data.filter(item => item.mealPlanPatients?.[0]?.status !== 'ACTIVE').map(transformPlan)
+    if (result.data) {
+        const activePlans = result.data.filter(item => item.mealPlanPatients?.[0]?.status === 'ACTIVE')
+        
+        activePlans.sort((a, b) => {
+          const aMeals = a.mealPlanMeals?.length || 0
+          const bMeals = b.mealPlanMeals?.length || 0
+          if (bMeals === aMeals) {
+             return new Date(b.created_at) - new Date(a.created_at)
+          }
+          return bMeals - aMeals 
+        })
+        
+        actualPlan.value = activePlans.map(transformPlan)
+        otherPlans.value = result.data.filter(item => item.mealPlanPatients?.[0]?.status !== 'ACTIVE').map(transformPlan)
+    }
   } catch (error) {
     console.error('Erro ao carregar planos:', error)
     actualPlan.value = []
@@ -97,7 +163,7 @@ const populatePlan = async (planId) => {
     const response = await $axios.post(`/meal-plan/${planId}/populate`)
     
     if (response.data.success) {
-      alert('✅ Plano populado com sucesso! Recarregando...')
+      // alert('✅ Plano populado com sucesso! Recarregando...')
       await loadItems()
     } else {
       alert('Erro ao popular plano: ' + response.data.message)
@@ -111,6 +177,9 @@ const populatePlan = async (planId) => {
 }
 
 onMounted(async () => {
-  await loadItems()
+  await Promise.all([
+    loadItems(),
+    checkPermission()
+  ])
 })
 </script>
