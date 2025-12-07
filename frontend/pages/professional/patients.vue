@@ -350,18 +350,6 @@
                             :patient="selectedItem" 
                             @refresh="fetchPatients"
                         />
-                        <div class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5 mt-5">
-                            <h2 class="h3">Receitas</h2>
-                            <div class="w-full border-b-2 border-gray-200"></div>
-                            <div class="w-full flex justify-center">
-                                <Button 
-                                    mediumPurple
-                                    class="pr-3 pl-2 h-[42px]"
-                                    icon="fa-solid fa-plus short flex justify-center"
-                                    label="Incluir receita"
-                                />
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

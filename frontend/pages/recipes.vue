@@ -221,11 +221,12 @@ async function loadItems(page = 1) {
     endpoint = 'recipe/favorites';
   } else if (!filters.includes('all') && filters.length > 0) {
     // Filter by preferences
-    params.filters = JSON.stringify([{ 
+    const preferenceFilters = filters.map(id => ({ 
       field: 'recipePreferences', 
       operator: 'some', 
-      value: { id_preference: { in: filters } } 
-    }]);
+      value: { id_preference: id } 
+    }));
+    params.filters = JSON.stringify(preferenceFilters);
   }
 
   const response = await get(endpoint, params);
@@ -252,7 +253,7 @@ async function loadItems(page = 1) {
 }
 
 async function getPreferences() {
-  const response = await get('preference');
+  const response = await get('preference', { limit: 20 });
   if (response && response.data) {
     preferences.value = response.data;
   }

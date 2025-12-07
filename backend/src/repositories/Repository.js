@@ -52,12 +52,17 @@ export const generateCrudRepository = (modelName, options = {}) => {
       const filtersArray = Array.isArray(filtersParsed) ? filtersParsed : [];
 
 
-      filtersArray.forEach((filter) => {
-        const { field, value, operator = "equals" } = filter;
-        if (field && value !== undefined) {
-          where[field] = { [operator]: value };
+      if (filtersArray.length > 0) {
+        if (!where.AND) {
+          where.AND = [];
         }
-      });
+        filtersArray.forEach((filter) => {
+          const { field, value, operator = "equals" } = filter;
+          if (field && value !== undefined) {
+            where.AND.push({ [field]: { [operator]: value } });
+          }
+        });
+      }
 
       const total = await prisma[modelName].count({ where });
 
