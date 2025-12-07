@@ -1,12 +1,12 @@
 <template>
-  <div class="xl:mr-60 lg:mr-40 pb-12">
+  <div class="px-4 sm:px-6 lg:mr-40 xl:mr-60 pb-12">
     <div class="flex justify-center mb-3">
       <div class="w-full max-w-4xl text-start">
         <h1 class="h1">Meu perfil</h1>
       </div>
     </div>
     <div
-      class="flex items-center justify-between bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto"
+      class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto"
     >
       <div class="flex items-center gap-4">
         <div
@@ -42,7 +42,7 @@
           </button>
         </div>
 
-        <div>
+        <div class="w-full">
           <p class="text-2xl font-bold text-p-950">{{ personalData.nome }}</p>
           <p class="text-gray-600 text-sm">{{ personalData.email }}</p>
         </div>
@@ -72,8 +72,8 @@
         />
       </div>
 
-      <div class="flex w-full gap-8">
-        <div class="col w-full gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="flex flex-col w-full gap-4">
           <InfoArea
             :value="
               personalData.idade
@@ -99,7 +99,7 @@
             :title="'Objetivo'"
           />
         </div>
-        <div class="col w-full gap-4">
+        <div class="flex flex-col w-full gap-4">
           <InfoArea
             :value="personalData.sexo || 'Não informado'"
             :title="'Sexo'"
@@ -113,7 +113,11 @@
             :title="'Altura'"
           />
           <InfoArea
-            :array="personalData.restricoes == '' ? ['Nenhuma'] : (personalData.restricoes || 'Não informado')"
+            :array="
+              personalData.restricoes == ''
+                ? ['Nenhuma']
+                : personalData.restricoes || 'Não informado'
+            "
             :title="'Restrições Alimentares'"
           />
         </div>
@@ -125,41 +129,53 @@
       class="bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto mt-6"
     >
       <h2 class="h2main mb-6">Nutricionista</h2>
-      <div v-if="personalData.nutritionistName" class="flex items-center justify-between w-full">
-          <div class="flex items-center gap-4">
-              <div class="w-16 h-16 rounded-full bg-p-100 flex items-center justify-center text-p-600 text-2xl font-bold">
-                  {{ personalData.nutritionistName.charAt(0).toUpperCase() }}
-              </div>
-              <div>
-                  <p class="text-lg font-semibold text-gray-800">{{ personalData.nutritionistName }}</p>
-                  <p class="text-gray-500 text-sm">Seu nutricionista vinculado</p>
-              </div>
+      <div
+        v-if="personalData.nutritionistName"
+        class="flex items-center justify-between w-full"
+      >
+        <div
+          class="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left"
+        >
+          <div
+            class="w-16 h-16 rounded-full bg-p-100 flex items-center justify-center text-p-600 text-2xl font-bold"
+          >
+            {{ personalData.nutritionistName.charAt(0).toUpperCase() }}
           </div>
-          <Button
-              red
-              class="w-max pr-3 pl-2 h-[42px]"
-              icon="fa-solid fa-link-slash short flex justify-center" 
-              label="Desvincular"
-              @click="openUnlinkModal"
-              :loading="unlinking"
-          />
+          <div>
+            <p class="text-lg font-semibold text-gray-800">
+              {{ personalData.nutritionistName }}
+            </p>
+            <p class="text-gray-500 text-sm">Seu nutricionista vinculado</p>
+          </div>
+        </div>
+        <Button
+          red
+          class="w-max pr-3 pl-2 h-[42px]"
+          icon="fa-solid fa-link-slash short flex justify-center"
+          label="Desvincular"
+          @click="openUnlinkModal"
+          :loading="unlinking"
+        />
       </div>
       <div v-else class="flex flex-col gap-4">
-          <p class="text-gray-600">Você não tem um nutricionista vinculado. Insira o código fornecido pelo seu nutricionista para vincular.</p>
-          <div class="flex gap-3 max-w-md">
-              <Input
-                  class="bg-white shadow-lg shadow-gray-600/10 focus-within:shadow-p-600/20 hover:shadow-p-600/20 transition uppercase"
-                  v-model="inviteCode"
-                  placeholder="Código de vínculo (ex: A1B2)"
-              />
-              <Button
-                  mediumPurple
-                  class="w-max px-6 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
-                  label="Vincular"
-                  @click="linkNutritionist"
-                  :loading="linking"
-              />
-          </div>
+        <p class="text-gray-600">
+          Você não tem um nutricionista vinculado. Insira o código fornecido
+          pelo seu nutricionista para vincular.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3 max-w-md w-full">
+          <Input
+            class="bg-white shadow-lg shadow-gray-600/10 focus-within:shadow-p-600/20 hover:shadow-p-600/20 transition uppercase"
+            v-model="inviteCode"
+            placeholder="Código de vínculo (ex: A1B2)"
+          />
+          <Button
+            mediumPurple
+            class="w-full sm:w-max px-6 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
+            label="Vincular"
+            @click="linkNutritionist"
+            :loading="linking"
+          />
+        </div>
       </div>
     </div>
     <div
@@ -168,28 +184,31 @@
     >
       <h2 class="h2main mb-6">Código de vínculo</h2>
       <div class="flex items-center justify-between w-full">
-          <div class="flex items-center gap-4 w-[70%]">
-              <p class="text-md font-normal text-gray-600">Consulte seu código e informe-o ao seu paciente para que ele possa se vincular a você.</p>
-          </div>
-          <Button
-              mediumPurple
-              class="w-max px-3 h-[42px] text-nowrap"
-              icon="fa-solid fa-key short flex justify-center"
-              label="Código"
-              @click="fetchInviteCode"
-          />
+        <div class="flex items-center gap-4 w-[70%]">
+          <p class="text-md font-normal text-gray-600">
+            Consulte seu código e informe-o ao seu paciente para que ele possa
+            se vincular a você.
+          </p>
         </div>
+        <Button
+          mediumPurple
+          class="w-max px-3 h-[42px] text-nowrap"
+          icon="fa-solid fa-key short flex justify-center"
+          label="Código"
+          @click="fetchInviteCode"
+        />
+      </div>
     </div>
 
     <div
-      class="flex gap-5 items-center justify-between bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto mt-10 border-2 border-danger"
+      class="flex flex-col sm:flex-row gap-4 items-center sm:justify-between bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto mt-10 border-2 border-danger text-center sm:text-left"
     >
       <h2 class="text-2xl font-semibold w-full text-start text-danger">
         Apagar conta
       </h2>
       <Button
         red
-        class="ml-2"
+        class="sm:ml-2 w-full sm:w-auto"
         icon="fa-regular fa-trash-can"
         label="Apagar"
         @click="openDangerModal('delete')"
@@ -200,7 +219,11 @@
       v-if="showModal == 'profileEdit'"
       :key="activeSection"
       :section="activeSection"
-      :user-data="activeSection === 'basic' ? { name: user.name, email: user.email } : personalData"
+      :user-data="
+        activeSection === 'basic'
+          ? { name: user.name, email: user.email }
+          : personalData
+      "
       @close="closeModal"
     />
     <ModalAvatarEdit
@@ -233,48 +256,68 @@
     />
     <teleport to="body">
       <Transition
-          name="modal"
-          appear
-          enter-from-class="opacity-0"
-          leave-to-class="opacity-0"
-          enter-active-class="transition-opacity duration-300 ease"
-          leave-active-class="transition-opacity duration-300 ease"
+        name="modal"
+        appear
+        enter-from-class="opacity-0"
+        leave-to-class="opacity-0"
+        enter-active-class="transition-opacity duration-300 ease"
+        leave-active-class="transition-opacity duration-300 ease"
       >
-          <div v-if="showInviteModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]" @click.self="showInviteModal = false">
-              <div class="bg-white rounded-3xl p-8 w-full max-w-md shadow-lg relative flex flex-col gap-5 items-center">
-                    <button
-                      class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-[50]"
-                      @click="showInviteModal = false"
-                  >&times;
-                  </button>
-                  <h2 class="text-2xl font-semibold text-p-600">Código de Vínculo</h2>
-                  <p class="text-center text-gray-600">Compartilhe este código com seu paciente para que ele possa se vincular a você.</p>
-                  
-                  <div class="bg-gray-100 p-6 rounded-xl w-full flex justify-center items-center border-2 border-dashed border-p-400 relative">
-                      <span class="text-5xl font-bold text-p-700 tracking-widest">{{ inviteCode }}</span>
-                      <div class="absolute -bottom-3 -right-3">
-                          <Button
-                              mediumPurple
-                              class="w-8 h-8 rounded-full shadow-lg flex items-center justify-center"
-                              icon="fa-solid fa-rotate-right"
-                              @click="regenerateInviteCode"
-                              :loading="loading"
-                          />
-                      </div>
-                  </div>
+        <div
+          v-if="showInviteModal"
+          class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]"
+          @click.self="showInviteModal = false"
+        >
+          <div
+            class="bg-white rounded-3xl p-5 sm:p-8 w-full max-w-md shadow-lg relative flex flex-col gap-5 items-center"
+          >
+            <button
+              class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-[50]"
+              @click="showInviteModal = false"
+            >
+              &times;
+            </button>
+            <h2 class="text-2xl font-semibold text-p-600">Código de Vínculo</h2>
+            <p class="text-center text-gray-600">
+              Compartilhe este código com seu paciente para que ele possa se
+              vincular a você.
+            </p>
 
-                  <p class="text-sm text-gray-500" v-if="inviteCodeExpiresAt">Válido até: {{ new Date(inviteCodeExpiresAt).toLocaleTimeString() }}</p>
-                  
-                  <Button mediumPurple
-                      class="w-full h-[42px]"
-                      icon="fa-regular fa-copy short flex justify-center"
-                      label="Copiar e fechar"
-                      @click="copyAndClose"
-                  />
+            <div
+              class="bg-gray-100 p-6 rounded-xl w-full flex justify-center items-center border-2 border-dashed border-p-400 relative"
+            >
+              <span
+                class="text-4xl sm:text-5xl font-bold text-p-700 tracking-widest"
+              >
+                {{ inviteCode }}</span
+              >
+              <div class="absolute -bottom-3 -right-3">
+                <Button
+                  mediumPurple
+                  class="w-8 h-8 rounded-full shadow-lg flex items-center justify-center"
+                  icon="fa-solid fa-rotate-right"
+                  @click="regenerateInviteCode"
+                  :loading="loading"
+                />
               </div>
+            </div>
+
+            <p class="text-sm text-gray-500" v-if="inviteCodeExpiresAt">
+              Válido até:
+              {{ new Date(inviteCodeExpiresAt).toLocaleTimeString() }}
+            </p>
+
+            <Button
+              mediumPurple
+              class="w-full h-[42px]"
+              icon="fa-regular fa-copy short flex justify-center"
+              label="Copiar e fechar"
+              @click="copyAndClose"
+            />
           </div>
+        </div>
       </Transition>
-  </teleport>
+    </teleport>
   </div>
 </template>
 
@@ -285,9 +328,8 @@ import { get, remove, update, insert } from "../crud";
 
 const { $axios } = useNuxtApp();
 
-
 const ProfileEditModal = defineAsyncComponent(() =>
-import("../components/ProfileEditModal.vue")
+  import("../components/ProfileEditModal.vue")
 );
 
 const userCookie = useCookie("user-data");
@@ -315,7 +357,7 @@ const personalData = ref({
   objetivo: "",
   preferencias: "",
   meta: null,
-  nutritionistName: null
+  nutritionistName: null,
 });
 
 const openProfileModal = (section) => {
@@ -342,52 +384,52 @@ const closeModal = (shouldReload = false) => {
 };
 
 const fetchInviteCode = async () => {
-    loading.value = true
-    try {
-        const res = await get('nutritionist/invite-code')
-        if (res.success) {
-            inviteCode.value = res.data.code
-            inviteCodeExpiresAt.value = res.data.expiresAt
-            showInviteModal.value = true
-        } else {
-            alert('Erro ao buscar código: ' + (res.message || 'Erro desconhecido'))
-        }
-    } catch (error) {
-        console.error(error)
-        alert('Erro ao buscar código')
-    } finally {
-        loading.value = false
+  loading.value = true;
+  try {
+    const res = await get("nutritionist/invite-code");
+    if (res.success) {
+      inviteCode.value = res.data.code;
+      inviteCodeExpiresAt.value = res.data.expiresAt;
+      showInviteModal.value = true;
+    } else {
+      alert("Erro ao buscar código: " + (res.message || "Erro desconhecido"));
     }
-}
+  } catch (error) {
+    console.error(error);
+    alert("Erro ao buscar código");
+  } finally {
+    loading.value = false;
+  }
+};
 
 const regenerateInviteCode = async () => {
-    loading.value = true
-    try {
-        const res = await insert('nutritionist/invite-code', {})
-        if (res.success) {
-            inviteCode.value = res.data.code
-            inviteCodeExpiresAt.value = res.data.expiresAt
-        } else {
-            alert('Erro ao gerar código: ' + (res.message || 'Erro desconhecido'))
-        }
-    } catch (error) {
-        console.error(error)
-        alert('Erro ao gerar código')
-    } finally {
-        loading.value = false
+  loading.value = true;
+  try {
+    const res = await insert("nutritionist/invite-code", {});
+    if (res.success) {
+      inviteCode.value = res.data.code;
+      inviteCodeExpiresAt.value = res.data.expiresAt;
+    } else {
+      alert("Erro ao gerar código: " + (res.message || "Erro desconhecido"));
     }
-}
+  } catch (error) {
+    console.error(error);
+    alert("Erro ao gerar código");
+  } finally {
+    loading.value = false;
+  }
+};
 
 const copyAndClose = async () => {
-    if (inviteCode.value) {
-        try {
-            await navigator.clipboard.writeText(inviteCode.value)
-        } catch (err) {
-            console.error('Failed to copy: ', err)
-        }
+  if (inviteCode.value) {
+    try {
+      await navigator.clipboard.writeText(inviteCode.value);
+    } catch (err) {
+      console.error("Failed to copy: ", err);
     }
-    showInviteModal.value = false
-}
+  }
+  showInviteModal.value = false;
+};
 
 const handleImageSelected = (imageData) => {
   imageToEdit.value = imageData;
@@ -396,7 +438,7 @@ const handleImageSelected = (imageData) => {
 
 const handleAvatarSave = async (croppedImageData) => {
   const payload = {
-    profile_picture: croppedImageData
+    profile_picture: croppedImageData,
   };
 
   try {
@@ -419,90 +461,96 @@ const handleAvatarSave = async (croppedImageData) => {
 const handleDeleteAccount = async () => {
   const response = await remove("user");
   if (response && response.error) {
-    console.error("Erro ao apagar conta:", response.message || "Erro desconhecido");
+    console.error(
+      "Erro ao apagar conta:",
+      response.message || "Erro desconhecido"
+    );
     return;
   }
-  
+
   closeModal();
-  await navigateTo('/');
+  await navigateTo("/");
 };
 
 const linkNutritionist = async () => {
-    if (!inviteCode.value) {
-        alert("Por favor, insira o código.");
-        return;
+  if (!inviteCode.value) {
+    alert("Por favor, insira o código.");
+    return;
+  }
+  linking.value = true;
+  try {
+    const res = await insert("nutritionist/link-patient", {
+      code: inviteCode.value.toUpperCase(),
+    });
+    if (res.success) {
+      // alert("Vinculado com sucesso!");
+      const dataRes = await $axios.get("/user/personal-data");
+      if (dataRes.data.success) {
+        personalData.value = dataRes.data.data;
+      }
+      inviteCode.value = "";
+    } else {
+      alert(
+        "Erro ao vincular: " + (res.message || "Código inválido ou expirado.")
+      );
     }
-    linking.value = true;
-    try {
-        const res = await insert("nutritionist/link-patient", { code: inviteCode.value.toUpperCase() });
-        if (res.success) {
-            // alert("Vinculado com sucesso!");
-            const dataRes = await $axios.get("/user/personal-data");
-            if (dataRes.data.success) {
-                personalData.value = dataRes.data.data;
-            }
-            inviteCode.value = "";
-        } else {
-            alert("Erro ao vincular: " + (res.message || "Código inválido ou expirado."));
-        }
-    } catch (err) {
-        console.error(err);
-        alert("Erro ao vincular. Tente novamente.");
-    } finally {
-        linking.value = false;
-    }
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao vincular. Tente novamente.");
+  } finally {
+    linking.value = false;
+  }
 };
 
 const unlinking = ref(false);
 
 const openUnlinkModal = () => {
-    showModal.value = "unlink";
+  showModal.value = "unlink";
 };
 
 const handleUnlinkNutritionist = async () => {
-    unlinking.value = true;
-    try {
-        const res = await remove("patient/nutritionist");
-        if (res.success) {
-            personalData.value.nutritionistName = null;
-            closeModal();
-        } else {
-            alert("Erro ao desvincular: " + (res.message || "Erro desconhecido."));
-        }
-    } catch (err) {
-        console.error(err);
-        alert("Erro ao desvincular. Tente novamente.");
-    } finally {
-        unlinking.value = false;
+  unlinking.value = true;
+  try {
+    const res = await remove("patient/nutritionist");
+    if (res.success) {
+      personalData.value.nutritionistName = null;
+      closeModal();
+    } else {
+      alert("Erro ao desvincular: " + (res.message || "Erro desconhecido."));
     }
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao desvincular. Tente novamente.");
+  } finally {
+    unlinking.value = false;
+  }
 };
 
 async function fetchProfilePicture() {
-    try {
-        const response = await $axios.get('user/profile_picture');
+  try {
+    const response = await $axios.get("user/profile_picture");
 
-        if (response.data && response.data.success && response.data.data) {
-            
-            const bufferData = Object.values(response.data.data);
+    if (response.data && response.data.success && response.data.data) {
+      const bufferData = Object.values(response.data.data);
 
-            let binaryString = '';
-            const chunkSize = 8192;
-            const uint8Array = new Uint8Array(bufferData);
-            for (let i = 0; i < uint8Array.length; i += chunkSize) {
-                const chunk = uint8Array.subarray(i, i + chunkSize);
-                binaryString += String.fromCharCode.apply(null, chunk);
-            }
-            const base64String = btoa(binaryString);
+      let binaryString = "";
+      const chunkSize = 8192;
+      const uint8Array = new Uint8Array(bufferData);
+      for (let i = 0; i < uint8Array.length; i += chunkSize) {
+        const chunk = uint8Array.subarray(i, i + chunkSize);
+        binaryString += String.fromCharCode.apply(null, chunk);
+      }
+      const base64String = btoa(binaryString);
 
-            profilePicture.value = `data:image/jpeg;base64,${base64String}`;
-        }
-    } catch (error) {
-        console.error("Erro ao buscar a foto de perfil:", error);
+      profilePicture.value = `data:image/jpeg;base64,${base64String}`;
     }
+  } catch (error) {
+    console.error("Erro ao buscar a foto de perfil:", error);
+  }
 }
 
 onMounted(async () => {
-  if (user.value.role === 'STANDARD') {
+  if (user.value.role === "STANDARD") {
     try {
       const res = await $axios.get("/user/personal-data");
       if (res.data.success) {

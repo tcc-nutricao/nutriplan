@@ -8,119 +8,130 @@
       enter-active-class="transition-opacity duration-300 ease"
       leave-active-class="transition-opacity duration-300 ease"
     >
-    <div
-      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]"
-      @click.self="$emit('close', false)"
-    >
       <div
-        class="bg-white rounded-3xl py-7 px-9 w-full shadow-lg relative max-h-[90vh] overflow-y-auto modal-container transition-transform duration-300 ease"
-        :class="section === 'basic' ? 'max-w-lg' : 'max-w-3xl'"
+        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]"
+        @click.self="$emit('close', false)"
       >
-        <button
-          class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-50"
-          @click="$emit('close', false)"
-        >&times;
-        </button>
+        <div
+          class="bg-white rounded-3xl py-6 px-4 sm:px-9 w-full shadow-lg relative max-h-[90vh] overflow-y-auto modal-container transition-transform duration-300 ease"
+          :class="section === 'basic' ? 'max-w-lg' : 'max-w-3xl'"
+        >
+          <button
+            class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-50"
+            @click="$emit('close', false)"
+          >
+            &times;
+          </button>
 
-        <h2 class="text-2xl font-semibold text-np mb-4">
-          Editar
-          {{ section === "basic" ? "Perfil" : "dados pessoais" }}
-        </h2>
+          <h2 class="text-2xl font-semibold text-np mb-4">
+            Editar
+            {{ section === "basic" ? "Perfil" : "dados pessoais" }}
+          </h2>
 
-        <div v-if="section === 'basic'">
-          <InputText
-            class="mb-5"
-            label="Nome"
-            v-model="basicFormData.name"
-            placeholder="Insira o Nome" />
-          <InputEmail
-            class="mb-5"
-            label="Email"
-            v-model="basicFormData.email"
-            placeholder="Insira o Email" />
-          <InputPassword 
-            class="mb-5"
-            label="Senha Atual"
-            v-model="basicFormData.currentPassword"
-            placeholder="Insira sua senha atual" />
-          <InputPassword 
-            class="mb-5"
-            label="Nova Senha"
-            v-model="basicFormData.newPassword"
-            placeholder="Insira a nova senha" />
-        </div>
+          <div v-if="section === 'basic'">
+            <InputText
+              class="mb-5"
+              label="Nome"
+              v-model="basicFormData.name"
+              placeholder="Insira o Nome"
+            />
+            <InputEmail
+              class="mb-5"
+              label="Email"
+              v-model="basicFormData.email"
+              placeholder="Insira o Email"
+            />
+            <InputPassword
+              class="mb-5"
+              label="Senha Atual"
+              v-model="basicFormData.currentPassword"
+              placeholder="Insira sua senha atual"
+            />
+            <InputPassword
+              class="mb-5"
+              label="Nova Senha"
+              v-model="basicFormData.newPassword"
+              placeholder="Insira a nova senha"
+            />
+          </div>
 
-        <div v-else class="flex w-full justify-between gap-3">
-          <div class="flex flex-col w-full">
-      <div class="grid grid-cols-2 gap-6">
-        <div class="col-span-1">
-          <Label class="mb-2" label="Que dia você nasceu?" />
-          <Input
-            type="date"
-            v-model="personalFormData.birth_date"
-            placeholder="Data de nascimento"
-            required
-          />
-        </div>
-        <div class="col-span-1">
-          <Label class="mb-2" label="Qual gênero você se identifica?" />
-          <Select v-model="personalFormData.gender" :options="genderOptions" required />
-        </div>
-        <div class="col-span-1">
-          <Label class="mb-2" label="Peso" />
-          <Input
-            type="number"
-            v-model.number="personalFormData.weight"
-            placeholder="Seu peso em kg"
-            required
-          />
-        </div>
-        <div class="col-span-1">
-          <Label class="mb-2" label="Altura (ex: 170cm)" />
-          <Input
-            type="number"
-            v-model.number="personalFormData.height"
-            placeholder="Sua altura em cm"
-            required
-          />
-        </div>
-        <div class="col-span-1">
-          <Label class="mb-2" label="Meta de peso" />
-          <Input
-            type="number"
-            v-model.number="personalFormData.target_weight"
-            placeholder="Sua meta em kg"
-          />
-        </div>
-        <div class="col-span-1">
-          <Label class="mb-2" label="Restrições alimentares" />
-          <Select
-            v-model="personalFormData.restrictions"
-            :options="restrictionOptions"
-            multiple
-            required
-          />
-        </div>
-        <div class="col-span-1">
-          <Label class="mb-2" label="Objetivo" />
-          <Select
-            v-model="personalFormData.objectives"
-            :options="objectiveOptions"
-            multiple
-            required
-          />
+          <div v-else class="flex w-full justify-between gap-3">
+            <div class="flex flex-col w-full">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="col-span-1">
+                  <Label class="mb-2" label="Que dia você nasceu?" />
+                  <Input
+                    type="date"
+                    v-model="personalFormData.birth_date"
+                    placeholder="Data de nascimento"
+                    required
+                  />
+                </div>
+                <div class="col-span-1">
+                  <Label class="mb-2" label="Qual gênero você se identifica?" />
+                  <Select
+                    v-model="personalFormData.gender"
+                    :options="genderOptions"
+                    required
+                  />
+                </div>
+                <div class="col-span-1">
+                  <Label class="mb-2" label="Peso" />
+                  <Input
+                    type="number"
+                    v-model.number="personalFormData.weight"
+                    placeholder="Seu peso em kg"
+                    required
+                  />
+                </div>
+                <div class="col-span-1">
+                  <Label class="mb-2" label="Altura (ex: 170cm)" />
+                  <Input
+                    type="number"
+                    v-model.number="personalFormData.height"
+                    placeholder="Sua altura em cm"
+                    required
+                  />
+                </div>
+                <div class="col-span-1">
+                  <Label class="mb-2" label="Meta de peso" />
+                  <Input
+                    type="number"
+                    v-model.number="personalFormData.target_weight"
+                    placeholder="Sua meta em kg"
+                  />
+                </div>
+                <div class="col-span-1">
+                  <Label class="mb-2" label="Restrições alimentares" />
+                  <Select
+                    v-model="personalFormData.restrictions"
+                    :options="restrictionOptions"
+                    multiple
+                    required
+                  />
+                </div>
+                <div class="col-span-1">
+                  <Label class="mb-2" label="Objetivo" />
+                  <Select
+                    v-model="personalFormData.objectives"
+                    :options="objectiveOptions"
+                    multiple
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-center mt-6">
+            <Button
+              mediumPurple
+              @click="handleSubmit"
+              class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
+              label="Salvar"
+            />
+          </div>
         </div>
       </div>
-      </div>
-        </div>
-        <div class="flex justify-center mt-6">
-          <Button mediumPurple
-          @click="handleSubmit"
-          class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition" label="Salvar" 
-        />
-        </div>
-      </div>
-    </div>
     </Transition>
   </teleport>
 </template>
@@ -177,14 +188,14 @@ onMounted(async () => {
   );
 
   // Pre-fill form data
-  if (props.section === 'basic' && props.userData) {
+  if (props.section === "basic" && props.userData) {
     basicFormData.value.name = props.userData.name || "";
     basicFormData.value.email = props.userData.email || "";
-  } else if (props.section === 'personal' && props.userData) {
+  } else if (props.section === "personal" && props.userData) {
     // Format birth_date to YYYY-MM-DD for date input
     if (props.userData.birth_date) {
       const date = new Date(props.userData.birth_date);
-      personalFormData.value.birth_date = date.toISOString().split('T')[0];
+      personalFormData.value.birth_date = date.toISOString().split("T")[0];
     }
     personalFormData.value.gender = props.userData.gender || "";
     personalFormData.value.height = props.userData.altura || "";
@@ -226,7 +237,7 @@ async function handleSubmit() {
         userCookie.value.email = updatedUser.email;
 
         alert("Perfil atualizado com sucesso!");
-        emit("close", true); 
+        emit("close", true);
       }
     } catch (err) {
       console.error("Erro na requisição:", err);
