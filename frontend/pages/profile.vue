@@ -11,7 +11,7 @@
     >
       <div class="flex items-center gap-4">
         <div
-          class="relative hover:scale-110 active:scale-95 transition cursor-pointer group"
+          class="w-max relative hover:scale-110 active:scale-95 transition cursor-pointer group shrink-0"
           @click="openAvatarModal()"
         >
           <img

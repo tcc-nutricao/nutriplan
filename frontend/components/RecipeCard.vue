@@ -1,5 +1,5 @@
 <template>
-    <Card v-if="item" class="sticky top-[30px] self-start w-[50%] z-20" :bg="props.bg">
+    <Card v-if="item" class="sticky top-[30px] self-start w-full z-20" :bg="props.bg">
         <div class="flex w-full justify-between items-center mb-4">
             <h2 :class="props.bg === true ? 'h2' : 'h1'">{{ item?.recipe?.name }}</h2>
             <Button
@@ -49,6 +49,8 @@
                     mediumPurple
                     class="w-max px-3 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
                     label="Gerar PDF"
+                    @click="generatePDF"
+                    :loading="isGeneratingPDF"
                 />
             </div>
         </div>
@@ -60,11 +62,19 @@
             hidden md:flex">
     <p>Selecione uma receita ao lado para ver os detalhes!</p>
 </div>
+
+<!-- Hidden PDF Template -->
+<div style="position: fixed; left: -9999px; top: 0; z-index: -1;">
+    <div ref="pdfContent">
+        <RecipePdfTemplate :item="item" v-if="item"/>
+    </div>
+</div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { insert } from '../crud';
+import RecipePdfTemplate from './RecipePdfTemplate.vue';
 
 const error = ref({ message: null });
 const isTogglingFavorite = ref(false);
@@ -119,6 +129,35 @@ async function toggleFavorite(recipe) {
         error.value = 'Erro ao atualizar favorito.';
     } finally {
         isTogglingFavorite.value = false;
+    }
+}
+
+const isGeneratingPDF = ref(false);
+const pdfContent = ref(null);
+
+async function generatePDF() {
+    if (!props.item) return;
+    isGeneratingPDF.value = true;
+    try {
+        const element = pdfContent.value;
+        const recipeName = props.item.recipe?.name || 'Receita';
+        const filename = `${recipeName}.pdf`;
+
+        const opt = {
+            margin: [0, 0],
+            filename: filename,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+        
+        const html2pdf = (await import('html2pdf.js')).default;
+        await html2pdf().set(opt).from(element).save();
+    } catch (error) {
+        console.error('Erro ao gerar PDF:', error);
+        alert('Erro ao gerar PDF. Tente novamente.');
+    } finally {
+        isGeneratingPDF.value = false;
     }
 }
 </script>

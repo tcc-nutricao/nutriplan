@@ -1,5 +1,5 @@
 [
-  { "name": "Sem Glúten", "icon": "fa-wheat-awn-circle-exclamation" },
+  { "name": "Sem Glúten", "icon": "fa-solid fa-wheat-awn-circle-exclamation" },
   { "name": "Sem açúcar", "icon": "fa-solid fa-candy-cane" },
   { "name": "Sem lactose", "icon": "fa-solid fa-droplet-slash" },
   { "name": "Vegetariano", "icon": "fa-solid fa-leaf" },

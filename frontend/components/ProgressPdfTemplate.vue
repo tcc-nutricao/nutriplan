@@ -1,5 +1,5 @@
 <template>
-    <div class="w-[210mm] bg-white p-6 flex flex-col gap-4">
+    <div class="w-[210mm] h-[296mm] bg-white p-6 flex flex-col gap-4 relative">
         <!-- Header -->
         <div class="flex justify-between items-start">
             <div>
@@ -59,6 +59,15 @@
                     />
                 </div>
             </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-auto w-full pt-6 border-t border-gray-100 flex justify-between items-center text-gray-500 text-sm">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-leaf text-p-500"></i>
+                <span class="font-semibold text-p-600">Nutriplan</span>
+            </div>
+            <p>Gerado automaticamente em {{ new Date().toLocaleDateString('pt-BR') }}</p>
         </div>
     </div>
 </template>
