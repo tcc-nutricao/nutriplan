@@ -44,6 +44,28 @@
       </div>
       <WeekDaysBar v-model="selectedDay" class="my-2 px-2"/>
       <Menu :items="object?.mealPlanMeals" :selectedDay="selectedDay"  class="w-full px-8"/> 
+      <div class="w-full flex justify-center pt-5">
+        <Button
+          mediumPurple
+          class="w-max px-3 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
+          label="Gerar PDF"
+          icon="fa-solid fa-file-pdf"
+          @click="generatePDF"
+          :loading="isGeneratingPDF"
+        />
+      </div>
+    </div>
+
+    <!-- Hidden PDF Template -->
+    <div style="position: fixed; left: -9999px; top: 0; z-index: -1;">
+        <div ref="pdfContent">
+            <MealPlanPdfTemplate 
+                v-if="object"
+                :items="object.mealPlanMeals || []" 
+                :plan-details="object"
+                :creator-text="creatorText"
+            />
+        </div>
     </div>
 
     <!-- Modals -->
@@ -89,9 +111,36 @@ import { ref, onMounted, computed, defineAsyncComponent } from 'vue'
 import { useNuxtApp } from 'nuxt/app'
 const { $axios } = useNuxtApp()
 
-// Async components to avoid circular deps if any
 const ModalDanger = defineAsyncComponent(() => import('./ModalDanger.vue'))
 const MealPlanCreate = defineAsyncComponent(() => import('./MealPlanCreate.vue')) // Assuming in same folder or check path
+import MealPlanPdfTemplate from './MealPlanPdfTemplate.vue'
+
+const isGeneratingPDF = ref(false);
+const pdfContent = ref(null);
+
+async function generatePDF() {
+    isGeneratingPDF.value = true;
+    try {
+        const element = pdfContent.value;
+        const filename = `${props.object?.objective?.name || 'Plano Alimentar'} - ${new Date().toLocaleDateString('pt-BR').replace(/\//g, '-')}.pdf`;
+
+        const opt = {
+            margin: [0, 0],
+            filename: filename,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+        
+        const html2pdf = (await import('html2pdf.js')).default;
+        await html2pdf().set(opt).from(element).save();
+    } catch (error) {
+        console.error('Erro ao gerar PDF:', error);
+        alert('Erro ao gerar PDF. Tente novamente.');
+    } finally {
+        isGeneratingPDF.value = false;
+    }
+}
 
 const props = defineProps({
   object: { type: Object, required: true },

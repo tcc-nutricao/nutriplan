@@ -236,7 +236,6 @@ async function handleSubmit() {
         userCookie.value.name = updatedUser.name;
         userCookie.value.email = updatedUser.email;
 
-        alert("Perfil atualizado com sucesso!");
         emit("close", true);
       }
     } catch (err) {
