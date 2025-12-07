@@ -1,8 +1,8 @@
 <template>
-    <div class="px-4 lg:px-10 flex flex-col gap-3">
+    <div class="px-5 md:px-10 flex flex-col gap-3 mt-6 md:mt-0">
         <h1 class="h1">Receitas</h1>
 
-        <div class="flex flex-row gap-5">
+        <div class="hidden md:flex flex-row gap-5">
             <div class="flex flex-col w-[50%] mb-8">
                 <SearchBar 
                     :filter="true" 
@@ -48,6 +48,61 @@
 
             <RecipeCard :item="selectedItem" @toggleFavorite="handleToggleFavorite" />
         
+        </div>
+
+        <!-- MOBILE -->
+        <div class="flex flex-col gap-3 md:hidden">
+            <div class="search-sticky-wrapper md:static flex w-full gap-3">
+                <SearchBar 
+                    :filter="true"
+                    :sort="true"
+                    :filterOptions="getFilterOptions()"
+                    placeholder="Pesquise uma receita"
+                    searchType="recipes"
+                    @searchSelected="handleSearchSelected"
+                    @filterSelected="handleFilterSelected"
+                    @sortSelected="handleSortSelected"
+                    class="w-full shadowSearch z-[200]"
+                />
+            </div>
+            <Button
+                v-if="isNutri"
+                mediumPurple
+                class="w-max px-3 h-[42px] mt-5"
+                icon="fa-solid fa-plus short flex justify-center"
+                label="Criar uma receita"
+                @click="modalRecipe"
+            />
+            <div v-if="!loading && items.length > 0" class="flex flex-col gap-3 w-full mt-5">
+                <div 
+                    v-for="item in items" 
+                    :key="item.id"
+                    class="flex flex-col gap-2"
+                >
+                    <ReceitaButton
+                        :item="item"
+                        @selected="selectItem(item.id)"
+                    />
+                    <RecipeCard 
+                        v-if="item.id === selectedItemId"
+                        :item="item"
+                        @toggleFavorite="handleToggleFavorite"
+                        class="w-full"
+                    />
+                </div>
+                <Pagination
+                    :currentPage="currentPage"
+                    :totalPages="totalPages"
+                    @page-changed="handlePageChange"
+                    class="mt-4"
+                />
+            </div>
+            <div v-else-if="loading" class="mt-10 text-center text-lg text-gray-500">
+                <p>Carregando receitas...</p>
+            </div>
+            <div v-else class="mt-10 text-center text-lg text-gray-500">
+                <p>Nenhuma receita encontrada.</p>
+            </div>
         </div>
 
         <RecipeCreate
@@ -227,7 +282,6 @@ onMounted(async () => {
   await getPreferences();
 });
 
-
 function selectItem(id) {
     items.value.forEach(item => {
         item.isSelected = item.id === id;
@@ -272,11 +326,23 @@ const selectedItem = computed(() => {
   }
 }
 .shadowSearch {
+    background-color: #f6f5fd;
+
     animation: fade-shadow linear;
     animation-timeline: scroll();
-    animation-range-start: 100px;
-    animation-range-end: 130px;
-
+    animation-range-start: 120px;
+    animation-range-end: 200px;
     animation-fill-mode: forwards;
 }
+
+
+@media (max-width: 768px) {
+  .search-sticky-wrapper {
+    position: sticky;
+    top: calc(var(--menu-height) + 25px);
+    z-index: 500;
+    background-color: #f6f5fd;
+  }
+}
+
 </style>

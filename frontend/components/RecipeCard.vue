@@ -54,9 +54,12 @@
         </div>
     </Card>
     
-    <div v-else class="sticky top-[30px] text-center bg-white rounded-3xl shadow-lg border-2 z-0 p-6 py-20 w-[50%] flex items-center justify-center h-max text-gray-500">
-        <p>Selecione uma receita ao lado para ver os detalhes!</p>
-    </div>
+<div v-else 
+     class="sticky top-[30px] text-center bg-white rounded-3xl shadow-lg border-2 
+            z-0 p-6 py-20 w-[50%] flex items-center justify-center h-max text-gray-500
+            hidden md:flex">
+    <p>Selecione uma receita ao lado para ver os detalhes!</p>
+</div>
 </template>
 
 <script setup>
@@ -80,15 +83,19 @@ const props = defineProps({
 const emit = defineEmits(['toggleFavorite']);
 
 function handleFavoriteButtonClass(isFavorite = false) {
-    return isFavorite ? 'w-max px-3 h-[42px] transition' : 'w-max px-3 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition';
+    return isFavorite ? 'w-max ml-2 h-[42px] transition' : 'w-max ml-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition';
 }
 
 function handleFavoriteButtonIcon(isFavorite = false) {
-    return isFavorite ? 'fa-solid fa-heart short flex justify-center text-red-500' : 'fa-regular fa-heart short flex justify-center';
+    return isFavorite
+        ? 'fa-solid fa-heart md:mr-2 text-red-500'
+        : 'fa-regular fa-heart md:mr-2';
 }
 
 function handleFavoriteButtonLabel(isFavorite = false) {
-    return isFavorite ? 'Favoritado' : 'Favoritar';
+    return window.innerWidth >= 768 
+        ? (isFavorite ? 'Favoritado' : 'Favoritar')
+        : '';
 }
 
 async function toggleFavorite(recipe) {
