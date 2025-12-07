@@ -1,5 +1,17 @@
 <template>
     <div class="px-5 md:px-10 flex flex-col gap-3 mt-6 md:mt-0">
+        <!-- Hidden PDF Template -->
+        <div style="position: fixed; left: -9999px; top: 0; z-index: -1;">
+            <div ref="pdfContent">
+                <ProgressPdfTemplate 
+                    v-if="selectedItem"
+                    :items="pdfItems" 
+                    :progress="selectedItem.progress || []"
+                    :chart-data="pdfChartData"
+                    :chart-options="pdfChartOptions"
+                />
+            </div>
+        </div>
         <h1 class="h1">Meus Pacientes</h1>
         <div class="flex flex-col md:flex-row gap-5 justify-between">
             <div class="flex flex-col w-full md:w-[40%] mb-8">
@@ -181,19 +193,8 @@
                                 :patient="item" 
                                 :dataList="item.role === 'GUEST'"
                                 @refresh="fetchPatients"
+                                @pdf="generatePDF"
                             />
-                            <div class="bg-white rounded-3xl shadow-lg border-2 p-7 flex flex-col gap-5">
-                                <h2 class="h3">Receitas</h2>
-                                <div class="w-full border-b-2 border-gray-200">
-                                </div>
-                                <div class="w-full flex justify-center">
-                                    <Button mediumPurple
-                                        class="w-max pr-3 pl-2 h-[42px]"
-                                        icon="fa-solid fa-plus short flex justify-center" 
-                                        label="Incluir receita"
-                                    />
-                                </div>
-                            </div>
                             <p 
                                 v-if="index < itemList.length - 1"
                                 class="text-center text-gray-500 font-semibold mt-4"
@@ -349,6 +350,7 @@
                         <ProgressCard 
                             :patient="selectedItem" 
                             @refresh="fetchPatients"
+                            @pdf="generatePDF"
                         />
                     </div>
                 </div>
@@ -507,6 +509,163 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { get, remove, insert } from '~/crud.js'
+import ProgressPdfTemplate from '~/components/ProgressPdfTemplate.vue';
+
+const isGeneratingPDF = ref(false);
+const pdfContent = ref(null);
+
+const pdfItems = computed(() => {
+    if (!selectedItem.value) return {};
+    
+    const p = selectedItem.value;
+    const prog = p.progress || []; // Ascending order (oldest first) based on extraction
+    const initial = prog.length > 0 ? prog[0].weight : p.weight;
+    const current = p.weight;
+    const target = p.target_weight;
+    
+    let metaAchieved = 0;
+    if (target && initial !== current) {
+         const totalDiff = Math.abs(initial - target);
+         const currentDiff = Math.abs(initial - current);
+         metaAchieved = Math.min(100, Math.round((currentDiff / totalDiff) * 100));
+    }
+
+    // Calculate IMC number for the template
+    const heightM = p.height / 100;
+    const imc = (current / (heightM * heightM)).toFixed(2);
+
+    return {
+        patientName: p.name,
+        objective: p.objective,
+        metaAchieved: metaAchieved,
+        initialWeight: initial,
+        actualWeight: current,
+        imc: imc,
+        targetWeight: target
+    };
+});
+
+const pdfChartData = computed(() => {
+    if (!selectedItem.value || !selectedItem.value.progress || selectedItem.value.progress.length === 0) {
+        return {
+            labels: [],
+            datasets: [{
+                label: 'Peso (kg)',
+                borderColor: '#cec2f0',
+                fill: false,
+                data: [],
+                pointStyle: 'circle',
+                pointRadius: 6,
+                pointBackgroundColor: '#9b78da',
+                pointBorderWidth: 2,
+                pointBorderColor: '#fff',
+                pointHoverRadius: 8,
+                tension: 0.4,
+            }]
+        };
+    }
+
+    const labels = selectedItem.value.progress.map(registro => {
+        const data = new Date(registro.date);
+        return data.toLocaleDateString('pt-BR', { month: 'long' });
+    });
+    
+    const data = selectedItem.value.progress.map(registro => registro.weight);
+
+    return {
+        labels: labels,
+        datasets: [{
+            label: 'Peso (kg)',
+            borderColor: '#cec2f0',
+            fill: false,
+            data: data,
+            pointStyle: 'circle',
+            pointRadius: 6,
+            pointBackgroundColor: '#9b78da',
+            pointBorderWidth: 2,
+            pointBorderColor: '#fff',
+            pointHoverRadius: 8,
+            tension: 0.4,
+        }],
+    };
+});
+
+const pdfChartOptions = computed(() => {
+    if (!selectedItem.value || !selectedItem.value.progress || selectedItem.value.progress.length === 0) {
+        return {
+            responsive: true,
+            maintainAspectRatio: false,
+        };
+    }
+    const weights = selectedItem.value.progress.map(progressItem => progressItem.weight);
+    const minWeight = Math.min(...weights);
+    const maxWeight = Math.max(...weights);
+    const padding = 2;
+    const targetWeight = selectedItem.value.target_weight || 70;
+
+    return {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                suggestedMin: (minWeight > targetWeight ? targetWeight - padding : minWeight - padding),
+                suggestedMax: maxWeight + padding,
+            },
+            x: {
+                offset: true,
+                grid: {
+                    display: false
+                },
+            }
+        },
+        plugins: {
+            legend: {     
+                display: false
+            }, 
+            annotation: {
+                annotations: {
+                    metaLine: {
+                        type: 'line',
+                        yMin: targetWeight,
+                        yMax: targetWeight,
+                        borderColor: '#9b78da',
+                        borderWidth: 2,
+                        borderDash: [6, 6],
+                    }
+                }
+            }
+        },
+    };
+});
+
+async function generatePDF() {
+    if (!selectedItem.value) return;
+    isGeneratingPDF.value = true;
+    try {
+        const element = pdfContent.value;
+
+        const patientName = selectedItem.value.name || 'Paciente';
+        const firstName = patientName.split(' ')[0];
+        const date = new Date().toLocaleDateString('pt-BR').replace(/\//g, '-');
+        const filename = `${firstName} - ${date}.pdf`;
+
+        const opt = {
+            margin: [0, 0],
+            filename: filename,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+        
+        const html2pdf = (await import('html2pdf.js')).default;
+        await html2pdf().set(opt).from(element).save();
+    } catch (error) {
+        console.error('Erro ao gerar PDF:', error);
+        alert('Erro ao gerar PDF. Tente novamente.');
+    } finally {
+        isGeneratingPDF.value = false;
+    }
+}
 
 const selectedItemId = ref(null)
 const route = ref('nutritionist-patient')

@@ -17,12 +17,12 @@
             <ProgressBar :progress="items.metaAchieved" :height="'6'" class="w-full"/>
 
             <div class="w-full flex justify-center gap-3">
-                <div class="bg-white w-[150px] px-6 py-3 rounded-xl pb-9 border-2 border-p-200 text-center mt-4 z-10">
+                <div class="bg-white w-[220px] px-6 pt-2 rounded-xl pb-8 border-2 border-p-200 text-center mt-4 z-10">
                     <h3 class="text-3xl font-bold text-p-600 mb-2">{{ comma(items.metaAchieved) || 0 }}%</h3>
                     <p class="text-xs text-gray-500 font-medium">da meta atingida</p>
                 </div>
-                <div class="bg-white w-[150px] px-6 py-3 rounded-xl pb-9 border-2 border-p-200 text-center mt-4 z-10">
-                    <h3 class="text-3xl font-bold text-p-600 mb-2">{{ comma(items.actualWeight) }} kg</h3>
+                <div class="bg-white w-[220px] px-6 pt-2 rounded-xl pb-8 border-2 border-p-200 text-center mt-4 z-10">
+                    <h3 class="text-3xl font-bold text-p-600 mb-2 text-nowrap">{{ comma(items.actualWeight) }} kg</h3>
                     <p class="text-xs text-gray-500 font-medium">peso atual</p>
                 </div>
             </div>

@@ -5,6 +5,7 @@
         <h1 class="h1">Meu perfil</h1>
       </div>
     </div>
+    <div class="flex flex-col gap-6">
     <div
       class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto"
     >
@@ -59,7 +60,7 @@
 
     <div
       v-if="user.role === 'STANDARD'"
-      class="bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto mt-6"
+      class="bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto"
     >
       <div class="flex justify-between items-center mb-6">
         <h2 class="h2main">Dados Pessoais</h2>
@@ -126,7 +127,7 @@
 
     <div
       v-if="user.role === 'STANDARD'"
-      class="bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto mt-6"
+      class="bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto"
     >
       <h2 class="h2main mb-6">Nutricionista</h2>
       <div
@@ -180,7 +181,7 @@
     </div>
     <div
       v-if="user.role === 'PROFESSIONAL'"
-      class="bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto mt-6"
+      class="bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto"
     >
       <h2 class="h2main mb-6">Código de vínculo</h2>
       <div class="flex items-center justify-between w-full">
@@ -201,7 +202,7 @@
     </div>
 
     <div
-      class="flex flex-col sm:flex-row gap-4 items-center sm:justify-between bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto mt-10 border-2 border-danger text-center sm:text-left"
+      class="flex flex-col sm:flex-row gap-4 items-center sm:justify-between bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto border-2 border-danger text-center sm:text-left"
     >
       <h2 class="text-2xl font-semibold w-full text-start text-danger">
         Apagar conta
@@ -213,6 +214,7 @@
         label="Apagar"
         @click="openDangerModal('delete')"
       />
+    </div>
     </div>
 
     <ProfileEditModal

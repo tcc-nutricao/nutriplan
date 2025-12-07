@@ -40,8 +40,9 @@
             <div class="w-full flex justify-center mt-3">
                 <Button mediumPurple
                     class="w-max pr-3 pl-2 h-[42px]"
-                    icon="fa-solid fa-file short flex justify-center" 
+                    icon="fa-solid fa-file-pdf short flex justify-center" 
                     label="Gerar PDF"
+                    @click="$emit('pdf')"
                 />
             </div>
         </div>
