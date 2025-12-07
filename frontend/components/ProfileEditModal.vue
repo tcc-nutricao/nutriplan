@@ -13,8 +13,12 @@
         @click.self="$emit('close', false)"
       >
         <div
-          class="bg-white rounded-3xl py-6 px-4 sm:px-9 w-full shadow-lg relative max-h-[90vh] overflow-y-auto modal-container transition-transform duration-300 ease"
-          :class="section === 'basic' ? 'max-w-lg' : 'max-w-3xl'"
+          class="bg-white rounded-3xl py-4 sm:py-7 px-4 sm:px-9 w-full shadow-lg relative max-h-[85vh] sm:max-h-[90vh] overflow-y-auto modal-container transition-transform duration-300 ease"
+          :class="
+            section === 'basic'
+              ? 'max-w-[90vw] sm:max-w-lg'
+              : 'max-w-[95vw] sm:max-w-3xl'
+          "
         >
           <button
             class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-50"
