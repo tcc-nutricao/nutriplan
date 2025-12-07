@@ -119,7 +119,6 @@ const handleSave = () => {
     emit('refresh')
 }
 
-// Delete State
 const showDeleteModal = ref(false)
 const deleteModalState = ref({
     title: '',
@@ -128,16 +127,19 @@ const deleteModalState = ref({
 })
 
 const checkDelete = () => {
-    // Check if the plan is used by any valid patient (status: ACTIVE)
     const activePatients = props.object.mealPlanPatients ? props.object.mealPlanPatients.filter(p => p.status === 'ACTIVE').length : 0
     
-    if (activePatients > 0) {
+    if (activePatients > 1){
         deleteModalState.value.title = 'Não é possível excluir'
-        deleteModalState.value.content = `Este plano está atribuído a ${activePatients} paciente(s) ativo(s). Para excluí-lo, primeiro remova o plano dos pacientes.`
+        deleteModalState.value.content = `Este plano está atribuído a ${activePatients} pacientes. Para excluir, esse plano não pode estar atribuído a nenhum paciente.`
+        deleteModalState.value.canDelete = false
+    } else if (activePatients === 1) {
+        deleteModalState.value.title = 'Não é possível excluir'
+        deleteModalState.value.content = `Este plano está atribuído a um paciente. Para excluir, esse plano não pode estar atribuído a nenhum paciente.`
         deleteModalState.value.canDelete = false
     } else {
         deleteModalState.value.title = 'Excluir Plano Alimentar'
-        deleteModalState.value.content = 'Tem certeza que deseja excluir este plano? Esta Ação é irreversível.'
+        deleteModalState.value.content = 'Tem certeza que deseja excluir este plano? Ele será deletado permanentemente'
         deleteModalState.value.canDelete = true
     }
     
@@ -150,7 +152,7 @@ const confirmDelete = async () => {
     try {
         await $axios.delete(`/meal-plan/${props.object.id}`)
         showDeleteModal.value = false
-        emit('refresh') // Notify parent to reload data
+        emit('refresh') 
     } catch (error) {
         console.error('Erro ao excluir plano:', error)
         alert(error.response?.data?.message || 'Erro ao excluir plano')

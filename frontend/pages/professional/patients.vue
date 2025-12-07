@@ -9,7 +9,7 @@
                         :sort="false" 
                         placeholder="Pesquise um paciente" 
                         searchType="patients"
-                        @searchSelected=""
+                        @searchSelected="handleSearchSelection"
                         class="w-full shadowSearch z-[200]" 
                     />
                 </div>
@@ -515,18 +515,15 @@ const itemList = ref([])
 const newWeight = ref(null)
 const loading = ref(true)
 
-// Invite Code State
 const inviteCode = ref(null)
 const inviteCodeExpiresAt = ref(null)
 const showInviteModal = ref(false)
 
-// Invite Patient State
 const showInvitePatientModal = ref(false)
 const inviteEmail = ref('')
 const sendingInvite = ref(false)
 const patientToInvite = ref(null)
 
-// Meal Plan View Modal State
 const showViewModal = ref(false)
 const selectedPlan = ref(null)
 
@@ -628,7 +625,6 @@ const sendInvite = async () => {
     try {
         const res = await insert(`user/${patientToInvite.value.id_user}/invite`, { email: inviteEmail.value })
         if (res.success) {
-            // alert('Convite enviado com sucesso!')
             showInvitePatientModal.value = false
             await fetchPatients()
         } else {
@@ -639,6 +635,20 @@ const sendInvite = async () => {
         alert('Erro ao enviar convite')
     } finally {
         sendingInvite.value = false
+    }
+}
+
+const handleSearchSelection = (selected) => {
+    if (!selected) return
+
+    const index = itemList.value.findIndex(item => item.id === selected.id)
+    
+    if (index !== -1) {
+        const [item] = itemList.value.splice(index, 1)
+        itemList.value.unshift(item)
+        selectItem(item.id)
+    } else {
+        console.warn('Patient not found in current list')
     }
 }
 

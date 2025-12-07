@@ -3,7 +3,7 @@
         <h1 class="h1">Planos Alimentares</h1>
         <div class="flex flex-row gap-5 justify-between">
              <div class="flex flex-col w-full mb-8">
-                 <div class="flex justify-center gap-5 items-center w-full">
+                 <div class="flex justify-start gap-5 items-center w-full">
                     <Button
                         mediumPurple
                         class="w-max px-3 h-[42px] text-nowrap"
@@ -11,14 +11,14 @@
                         label="Criar plano alimentar"
                         @click="openCreateModal"
                     />
-                    <SearchBar
+                    <!-- <SearchBar
                         :filter="true"
                         :sort="true"
                         searchType="meal-plans"
                         placeholder="Pesquise um plano"
                         class="w-[40%] shadowSearch z-[200]"
                         noSearch
-                    />
+                    /> -->
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8 w-max">
