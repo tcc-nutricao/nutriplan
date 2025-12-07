@@ -88,7 +88,11 @@
             </template>
           </ClientOnly>
 
-          <input type="file" ref="fileInput" @change="onFileChange" accept="image/*" class="hidden" />
+          <p v-if="errorMessage" class="text-red-500 text-center text-sm font-medium my-2">
+            {{ errorMessage }}
+          </p>
+
+          <input type="file" ref="fileInput" @change="onFileChange" accept="image/png, image/jpeg" class="hidden" />
 
           <div class="flex justify-center mt-6">
             <div class="flex gap-3">
@@ -131,6 +135,7 @@ const emit = defineEmits(["close", "save"]);
 const cropper = ref(null);
 const fileInput = ref(null);
 const imageSrc = ref(props.currentImage);
+const errorMessage = ref(null);
 
 onMounted(() => {
   if (!imageSrc.value) {
@@ -140,7 +145,24 @@ onMounted(() => {
 
 const onFileChange = (e) => {
   const file = e.target.files[0];
+  errorMessage.value = null;
+
   if (file) {
+    const validTypes = ['image/png', 'image/jpeg'];
+    const maxSize = 2 * 1024 * 1024; // 2MB
+
+    if (!validTypes.includes(file.type)) {
+      errorMessage.value = "Apenas arquivos PNG e JPG são permitidos.";
+      e.target.value = '';
+      return;
+    }
+
+    if (file.size > maxSize) {
+      errorMessage.value = "O arquivo deve ter no máximo 2MB.";
+      e.target.value = '';
+      return;
+    }
+
     const reader = new FileReader();
     reader.onload = (event) => {
       imageSrc.value = event.target.result;
@@ -158,7 +180,8 @@ const cropImage = () => {
   if (cropper.value) {
     const { canvas } = cropper.value.getResult();
     if (canvas) {
-      const croppedDataUrl = canvas.toDataURL('image/png');
+      // Use JPEG with 0.8 quality to significantly reduce file size
+      const croppedDataUrl = canvas.toDataURL('image/jpeg', 0.8);
       emit("save", croppedDataUrl);
       emit("close");
     }

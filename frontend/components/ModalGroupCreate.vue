@@ -62,22 +62,25 @@
             </div>
           </div>
           <Label label="Foto de capa" class="mb-2" />
-          <div class="flex w-full gap-7 items-center">
-            <div class="flex items-center justify-center w-[9rem] h-[9rem] rounded-xl bg-p-200 cursor-pointer transition active:scale-95 group overflow-hidden flex-shrink-0"
-              @click="triggerFileInput">
-              <img v-if="object.image" :src="object.image" alt="Prévia da capa do grupo" class="w-full h-full object-cover">
-              <i v-else class="fa-solid fa-arrow-up-from-bracket text-[5rem] text-np group-hover:scale-[110%] transition group-active:scale-100"></i>
+          <div class="flex flex-col w-full">
+            <div class="flex w-full gap-7 items-center">
+              <div class="flex items-center justify-center w-[9rem] h-[9rem] rounded-xl bg-p-200 cursor-pointer transition active:scale-95 group overflow-hidden flex-shrink-0"
+                @click="triggerFileInput">
+                <img v-if="object.image" :src="object.image" alt="Prévia da capa do grupo" class="w-full h-full object-cover">
+                <i v-else class="fa-solid fa-arrow-up-from-bracket text-[5rem] text-np group-hover:scale-[110%] transition group-active:scale-100"></i>
+              </div>
+              <p class="text-[#351F56] text-start text-md">
+              <span v-if="!object.image">
+                Arraste e solte uma imagem aqui, ou clique no ícone para selecionar do seu dispositivo.
+              </span>
+              <span v-else>
+                Clique na imagem para escolher outra foto.
+              </span>
+            </p>
             </div>
-            <p class="text-[#351F56] text-start text-md">
-            <span v-if="!object.image">
-              Arraste e solte uma imagem aqui, ou clique no ícone para selecionar do seu dispositivo.
-            </span>
-            <span v-else>
-              Clique na imagem para escolher outra foto.
-            </span>
-          </p>
+            <Error v-if="errors.image" :message="errors.image" class="mt-2" />
           </div>
-          <input type="file" ref="fileInput" @change="onFileChange" accept="image/*" class="hidden" />
+          <input type="file" ref="fileInput" @change="onFileChange" accept="image/png, image/jpeg" class="hidden" />
           
           <div class="flex justify-center mt-6">
             <div class="flex gap-3">
@@ -124,6 +127,7 @@ const object = ref({
 const errors = ref({
   name: null,
   endDate: null,
+  image: null,
 })
 
 const hasEndDate = ref(false);
@@ -132,7 +136,25 @@ const fileInput = ref(null);
 const imageToEdit = ref(null);
 
 const handleFile = (file) => {
-  if (file && file.type.startsWith('image/')) {
+  errors.value.image = null;
+  if (!file) return;
+
+  const validTypes = ['image/png', 'image/jpeg'];
+  const maxSize = 2 * 1024 * 1024; // 2MB
+
+  if (!validTypes.includes(file.type)) {
+    errors.value.image = "Apenas arquivos PNG e JPG são permitidos.";
+    isDragging.value = false;
+    return;
+  }
+
+  if (file.size > maxSize) {
+    errors.value.image = "O arquivo deve ter no máximo 2MB.";
+    isDragging.value = false;
+    return;
+  }
+
+  if (file.type.startsWith('image/')) {
     const reader = new FileReader();
     reader.onload = (event) => {
       handleImageSelected(event.target.result);

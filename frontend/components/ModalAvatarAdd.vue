@@ -36,7 +36,11 @@
             selecionar do seu dispositivo.
           </p>
 
-          <input type="file" ref="fileInput" @change="onFileChange" accept="image/*" class="hidden" />
+          <input type="file" ref="fileInput" @change="onFileChange" accept="image/png, image/jpeg" class="hidden" />
+
+          <p v-if="errorMessage" class="text-red-500 text-center text-sm font-medium mb-4">
+            {{ errorMessage }}
+          </p>
 
           <div class="flex justify-center mt-6">
             <Button
@@ -61,9 +65,28 @@ const emit = defineEmits(["close", "imageSelected"]);
 
 const fileInput = ref(null);
 const isDragging = ref(false);
+const errorMessage = ref(null);
 
 const handleFile = (file) => {
-  if (file && file.type.startsWith('image/')) {
+  errorMessage.value = null;
+  if (!file) return;
+
+  const validTypes = ['image/png', 'image/jpeg'];
+  const maxSize = 2 * 1024 * 1024; // 2MB
+
+  if (!validTypes.includes(file.type)) {
+    errorMessage.value = "Apenas arquivos PNG e JPG são permitidos.";
+    isDragging.value = false;
+    return;
+  }
+
+  if (file.size > maxSize) {
+    errorMessage.value = "O arquivo deve ter no máximo 2MB.";
+    isDragging.value = false;
+    return;
+  }
+
+  if (file.type.startsWith('image/')) {
     const reader = new FileReader();
     reader.onload = (event) => {
       emit('imageSelected', event.target.result);
