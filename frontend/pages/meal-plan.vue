@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-3 px-10">
+  <div class="flex flex-col gap-3 px-10 pt-6 md:pt-0">
     <div class="flex justify-between items-center">
       <h1 class="h1">Plano Alimentar</h1>
       <Button 
@@ -37,12 +37,13 @@
       </div>
     </div>
     
-    <div class="grid grid-cols-6 gap-5 w-full items-stretch">
-      <MealPlanCardExtended v-if="actualPlan.length > 0" :object="actualPlan[0]" class="col-span-4 mb-10" />
-      <div class="col-span-2">
+    <div class="gap-5 w-full items-stretch">
+      <MealPlanCardExtended v-if="actualPlan.length > 0" :object="actualPlan[0]" class="hidden md:flex mb-10 w-[60%]" />
+      <MealPlanCardMobile v-if="actualPlan.length > 0" :object="actualPlan[0]" class="md:hidden mb-10" />
+      <!-- <div class="col-span-2">
         <MealPlanCard title="Meus planos" :items="actualPlan" />
-        <!-- <MealPlanCard title="Outros planos" :items="otherPlans" /> -->
-      </div>
+        <MealPlanCard title="Outros planos" :items="otherPlans" />
+      </div> -->
     </div>
 
     

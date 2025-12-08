@@ -19,7 +19,7 @@
     >
       <ul
         v-if="isOpen"
-        class="absolute ring-2 ring-p-200 border-1 border-p-300 mt-1 rounded-xl bg-white py-2 text-base shadow-lg focus:outline-none w-[280px] max-h-[160px] sm:max-h-60 overflow-auto right-0 z-[9999]"
+        class="absolute ring-2 ring-p-200 border-1 border-p-300 mt-1 rounded-xl bg-white py-2 text-base shadow-lg focus:outline-none w-[280px] max-h-[260px] sm:max-h-60 overflow-auto right-0 z-[9999]"
         role="listbox"
       >
         <li

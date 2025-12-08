@@ -39,9 +39,15 @@
                 
                 <Button 
                     mediumPurple 
-                    class="opacity-0 group-hover:opacity-100 transition-opacity px-3 h-[32px] text-sm"
+                    class="opacity-0 md:flex group-hover:opacity-100 transition-opacity px-3 h-[32px] text-sm"
                     icon="fa-solid fa-plus"
                     label="Adicionar receita"
+                    @click="addRecipe(meal)"
+                />
+                <Button 
+                    mediumPurple 
+                    class="opacity-100 md:hidden group-hover:opacity-100 transition-opacity px-0 h-[40px] text-sm"
+                    icon="fa-solid fa-plus"
                     @click="addRecipe(meal)"
                 />
             </div>

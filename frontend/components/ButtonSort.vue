@@ -86,9 +86,26 @@ const props = defineProps({
 const emits = defineEmits(["update:modelValue", "update:direction"]);
 
 const isOpen = ref(false);
+const dropdownStyle = ref({});
 
-const toggleDropdown = () => {
+const updatePosition = () => {
+  if (window.innerWidth < 768 && selectMenu.value) {
+    const rect = selectMenu.value.getBoundingClientRect();
+    dropdownStyle.value = {
+      left: `${-rect.left + 14}px`,
+      width: 'calc(100vw - 28px)',
+    };
+  } else {
+    dropdownStyle.value = {};
+  }
+};
+
+const toggleDropdown = async () => {
   isOpen.value = !isOpen.value;
+  if (isOpen.value) {
+    await nextTick();
+    updatePosition();
+  }
 };
 
 const selectOption = (option) => {

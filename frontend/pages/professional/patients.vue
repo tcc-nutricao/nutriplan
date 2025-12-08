@@ -25,17 +25,17 @@
                         class="w-full shadowSearch z-[200]" 
                     />
                 </div>
-                <div class="flex mt-3 gap-3">
+                <div class="flex mt-3 gap-3 w-full sm:w-max">
                     <Button
                         mediumPurple
-                        class="w-max px-3 h-[42px] text-nowrap"
+                        class="px-3 h-[42px] text-nowrap w-full sm:w-max"
                         icon="fa-solid fa-plus short flex justify-center"
                         label="Adicionar"
                         @click="openCreate"
                     />
                     <Button
                         mediumPurple
-                        class="w-max px-3 h-[42px] text-nowrap"
+                        class="px-3 h-[42px] text-nowrap w-full sm:w-max"
                         icon="fa-solid fa-key short flex justify-center"
                         label="Código"
                         @click="fetchInviteCode"

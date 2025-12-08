@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 sm:px-6 lg:mr-40 xl:mr-60 pb-12">
+  <div class="px-4 sm:px-6 lg:mr-40 xl:mr-60 pb-12 pt-6 md:pt-0">
     <div class="flex justify-center mb-3">
       <div class="w-full max-w-4xl text-start">
         <h1 class="h1">Meu perfil</h1>
@@ -136,7 +136,7 @@
         <h2 class="h2main mb-6">Nutricionista</h2>
         <div
           v-if="personalData.nutritionistName"
-          class="flex items-center justify-between w-full"
+          class="flex flex-col md:flex-row gap-3 items-center justify-between w-full"
         >
           <div class="flex items-center gap-4 min-w-0">
             <div

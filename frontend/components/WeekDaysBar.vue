@@ -1,9 +1,10 @@
 <template>
-  <div class="items-center flex gap-3">
+  <div class="items-center flex gap-3 flex-wrap justify-center">
     <Button
       v-for="(day, index) in weekDays"
       :key="index"
-      :label="day.label"
+      :label="day.label" 
+      class="text-sm md:text-[1em]"
       mediumPurple
       :outlined="modelValue !== day.value"
       @click="selectDay(day.value)"

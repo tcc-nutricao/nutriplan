@@ -68,7 +68,7 @@
             <Button
                 v-if="isNutri"
                 mediumPurple
-                class="w-max px-3 h-[42px] mt-5"
+                class="w-full px-3 h-[42px] mt-2"
                 icon="fa-solid fa-plus short flex justify-center"
                 label="Criar uma receita"
                 @click="modalRecipe"
@@ -94,7 +94,7 @@
                     :currentPage="currentPage"
                     :totalPages="totalPages"
                     @page-changed="handlePageChange"
-                    class="mt-4"
+                    class="mt-4 mb-5"
                 />
             </div>
             <div v-else-if="loading" class="mt-10 text-center text-lg text-gray-500">
