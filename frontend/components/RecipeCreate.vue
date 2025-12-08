@@ -10,7 +10,7 @@
       appear
     >
       <div
-        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]"
+        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000] px-3"
         @click.self="$emit('close')"
       >
         <Transition
@@ -22,28 +22,32 @@
           leave-to-class="scale-90"
           appear
         >
-          <Card class="w-2xl relative max-h-[90vh] p-8 z-50 ">
+          <Card
+            class="relative z-50 p-6 md:p-8 w-[95vw] md:w-[900px] lg:w-[1000px] max-h-[90vh] overflow-y-auto mx-auto"
+          >
             <button
               class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-50"
               @click="$emit('close')"
-              >&times;
+            >
+              &times;
             </button>
-      
+
             <h2 class="text-3xl font-semibold text-np mb-4">
-              {{ selected ? 'Editar' : 'Criar'}} receita
+              {{ selected ? "Editar" : "Criar" }} receita
             </h2>
-      
-            <div class="flex w-full justify-between gap-3">
+
+            <div class="flex flex-col md:flex-row w-full justify-between gap-3">
               <div class="flex flex-col w-full">
                 <InputText
-                class="mb-5"
-                label="Título"
-                v-model="object.name"
-                :error="errors.name"
-                required
-                placeholder="Qual é o nome da receita?" />
+                  class="mb-5"
+                  label="Título"
+                  v-model="object.name"
+                  :error="errors.name"
+                  required
+                  placeholder="Qual é o nome da receita?"
+                />
 
-                <SelectMultiple 
+                <SelectMultiple
                   v-model="object.preferences"
                   :options="preferenceOptions"
                   label="Categorias"
@@ -51,14 +55,31 @@
                   :error="errors.preferences"
                   required
                 />
-      
-                <div 
+
+                <div
                   class="flex flex-col px-4 pb-3 pt-4 border-2 rounded-2xl mb-5"
-                  :class="{ 'border-red-500': errors.ingredients, 'border-p-400': !errors.ingredients }"
+                  :class="{
+                    'border-red-500': errors.ingredients,
+                    'border-p-400': !errors.ingredients,
+                  }"
                 >
-                  <Label label="Ingredientes" class="text-xl font-semibold mb-1" :error="errors.ingredients" required/>
-                  <p v-if="!hasAnyItems" :class="{'text-red-500' : errors.ingredients}" class="text-gray-medium mt-1 pb-3 mb-3 border-b-2 border-p-200">Adicione ingredientes abaixo!</p>
-                  <div v-if="hasAnyItems" class="flex flex-col flex-wrap w-full gap-4 mt-1 pb-3 mb-3 max-w-full border-b-2 border-p-200">
+                  <Label
+                    label="Ingredientes"
+                    class="text-xl font-semibold mb-1"
+                    :error="errors.ingredients"
+                    required
+                  />
+                  <p
+                    v-if="!hasAnyItems"
+                    :class="{ 'text-red-500': errors.ingredients }"
+                    class="text-gray-medium mt-1 pb-3 mb-3 border-b-2 border-p-200"
+                  >
+                    Adicione ingredientes abaixo!
+                  </p>
+                  <div
+                    v-if="hasAnyItems"
+                    class="flex flex-col flex-wrap w-full gap-4 mt-1 pb-3 mb-3 max-w-full border-b-2 border-p-200"
+                  >
                     <ItemButton
                       v-for="(item, index) in newMealItems"
                       :key="index"
@@ -66,7 +87,7 @@
                       :quantity="item.quantity"
                       :unity="item.unit_label"
                       class="w-full"
-                      @delete-item="deleteItem(index)" 
+                      @delete-item="deleteItem(index)"
                     />
                   </div>
                   <Search
@@ -86,7 +107,7 @@
                       type="number"
                       :error="errors.quantity"
                       required
-                      />
+                    />
                     <Select
                       v-model="object.id_unit_of_measurement"
                       :options="unitOptions"
@@ -97,7 +118,7 @@
                     />
                   </div>
                   <div class="flex flex-row justify-center gap-2">
-                    <Button 
+                    <Button
                       mediumPurple
                       class="w-max px-0 h-[42px]"
                       label="Adicionar ingrediente"
@@ -112,7 +133,7 @@
                   v-model="object.portion"
                   class="mb-5"
                   label="Porções"
-                  placeholder="Quantidade de porções" 
+                  placeholder="Quantidade de porções"
                   :error="errors.portion"
                   required
                 />
@@ -120,7 +141,7 @@
                   v-model="object.time"
                   class="mb-5"
                   label="Tempo de preparo"
-                  placeholder="Tempo em minutos" 
+                  placeholder="Tempo em minutos"
                   :error="errors.time"
                   required
                 />
@@ -130,18 +151,20 @@
                   class="mb-5"
                   label="Modo de preparo"
                   rows="10"
-                  placeholder="Exemplo: Separe 200ml de água; Ferva; Sirva." 
+                  placeholder="Exemplo: Separe 200ml de água; Ferva; Sirva."
                   :error="errors.preparation"
                   required
                 />
                 <div class="flex justify-center mt-6">
-                  <Button mediumPurple
-                    class="w-max pr-3 pl-2 h-[42px]" label="Salvar" 
+                  <Button
+                    mediumPurple
+                    class="w-max pr-3 pl-2 h-[42px]"
+                    label="Salvar"
                     @click="saveRecipe"
                   />
                 </div>
               </div>
-              </div>
+            </div>
           </Card>
         </Transition>
       </div>
@@ -157,8 +180,8 @@ const props = defineProps({
   selected: {
     type: String,
     required: false,
-    default: null
-  }
+    default: null,
+  },
 });
 
 const emits = defineEmits(["close", "saved"]);
@@ -169,13 +192,13 @@ const preferenceOptions = ref([]);
 
 const object = ref({
   food: null,
-  quantity: '',
-  id_unit_of_measurement: '',
-  name: '',
-  portion: '',
-  time: '',
-  preparation: '',
-  preferences: []
+  quantity: "",
+  id_unit_of_measurement: "",
+  name: "",
+  portion: "",
+  time: "",
+  preparation: "",
+  preferences: [],
 });
 
 const errors = ref({
@@ -187,13 +210,13 @@ const errors = ref({
   portion: null,
   time: null,
   preparation: null,
-  preferences: null
+  preferences: null,
 });
 
 const hasAnyItems = computed(() => {
   return newMealItems.value.length > 0;
 });
-  
+
 onMounted(async () => {
   const selectRoutes = [
     { route: "unit-of-measurement", target: unitOptions },
@@ -218,32 +241,34 @@ function addItem() {
   errors.value.id_unit_of_measurement = null;
 
   if (!object.value.food || !object.value.food.id) {
-    errors.value.food = 'Selecione um alimento';
+    errors.value.food = "Selecione um alimento";
     return;
   }
 
   if (!object.value.quantity || object.value.quantity <= 0) {
-    errors.value.quantity = 'Informe uma quantidade válida';
+    errors.value.quantity = "Informe uma quantidade válida";
     return;
   }
 
   if (!object.value.id_unit_of_measurement) {
-    errors.value.id_unit_of_measurement = 'Selecione uma unidade';
+    errors.value.id_unit_of_measurement = "Selecione uma unidade";
     return;
   }
 
-  const selectedUnit = unitOptions.value.find(u => u.value === object.value.id_unit_of_measurement);
-  
+  const selectedUnit = unitOptions.value.find(
+    (u) => u.value === object.value.id_unit_of_measurement
+  );
+
   newMealItems.value.push({
     food: { ...object.value.food },
     quantity: object.value.quantity,
     id_unit_of_measurement: object.value.id_unit_of_measurement,
-    unit_label: selectedUnit?.label || ''
+    unit_label: selectedUnit?.label || "",
   });
 
   object.value.food = null;
-  object.value.quantity = '';
-  object.value.id_unit_of_measurement = '';
+  object.value.quantity = "";
+  object.value.id_unit_of_measurement = "";
 }
 
 function deleteItem(index) {
@@ -251,39 +276,39 @@ function deleteItem(index) {
 }
 
 async function saveRecipe() {
-  Object.keys(errors.value).forEach(key => {
+  Object.keys(errors.value).forEach((key) => {
     errors.value[key] = null;
   });
 
   let hasErrors = false;
 
-  if (!object.value.name || object.value.name.trim() === '') {
-    errors.value.name = 'Nome da receita é obrigatório';
+  if (!object.value.name || object.value.name.trim() === "") {
+    errors.value.name = "Nome da receita é obrigatório";
     hasErrors = true;
   }
 
   if (!object.value.portion || object.value.portion <= 0) {
-    errors.value.portion = 'Porções é obrigatório';
+    errors.value.portion = "Porções é obrigatório";
     hasErrors = true;
   }
 
-  if (object.value.time === '' || object.value.time < 0) {
-    errors.value.time = 'Tempo de preparo é obrigatório';
+  if (object.value.time === "" || object.value.time < 0) {
+    errors.value.time = "Tempo de preparo é obrigatório";
     hasErrors = true;
   }
 
   if (!object.value.preferences || object.value.preferences.length === 0) {
-    errors.value.preferences = 'Selecione pelo menos 1 categoria';
+    errors.value.preferences = "Selecione pelo menos 1 categoria";
     hasErrors = true;
   }
 
-  if (!object.value.preparation || object.value.preparation.trim() === '') {
-    errors.value.preparation = 'Modo de preparo é obrigatório';
+  if (!object.value.preparation || object.value.preparation.trim() === "") {
+    errors.value.preparation = "Modo de preparo é obrigatório";
     hasErrors = true;
   }
 
   if (newMealItems.value.length === 0) {
-    errors.value.ingredients = 'Adicione pelo menos um ingrediente';
+    errors.value.ingredients = "Adicione pelo menos um ingrediente";
     hasErrors = true;
   }
 
@@ -296,31 +321,31 @@ async function saveRecipe() {
     portion: parseInt(object.value.portion),
     preparation_time: parseInt(object.value.time),
     preparation_method: object.value.preparation,
-    recipeFoods: newMealItems.value.map(item => ({
+    recipeFoods: newMealItems.value.map((item) => ({
       id_food: item.food.id,
       id_unit_of_measurement: item.id_unit_of_measurement,
-      quantity: parseFloat(item.quantity)
+      quantity: parseFloat(item.quantity),
     })),
-    recipePreferences: object.value.preferences.map(id_preference => ({
-      id_preference
-    }))
+    recipePreferences: object.value.preferences.map((id_preference) => ({
+      id_preference,
+    })),
   };
 
-  const response = await insert('recipe', recipeData);
+  const response = await insert("recipe", recipeData);
 
   if (response && !response.error) {
-    object.value.name = '';
-    object.value.portion = '';
-    object. value.time = '';
-    object.value.preparation = '';
+    object.value.name = "";
+    object.value.portion = "";
+    object.value.time = "";
+    object.value.preparation = "";
     object.value.preferences = [];
     newMealItems.value = [];
-    
-    emits('saved');
-    emits('close');
+
+    emits("saved");
+    emits("close");
   } else {
     if (response.errors) {
-      Object.keys(response.errors).forEach(key => {
+      Object.keys(response.errors).forEach((key) => {
         if (errors.value.hasOwnProperty(key)) {
           errors.value[key] = response.errors[key];
         }
