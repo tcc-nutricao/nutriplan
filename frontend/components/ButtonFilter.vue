@@ -6,10 +6,10 @@
       class="w-auto px-2 h-[42px]"
       :label="label"
       :icon="icon"
-      aria-haspopup="listbox" 
+      aria-haspopup="listbox"
       :aria-expanded="isOpen"
     />
-    <transition 
+    <transition
       enter-active-class="transition duration-300 ease-out"
       enter-from-class="transform scale-95 opacity-0 -translate-y-2"
       enter-to-class="transform scale-100 opacity-100 translate-y-0"
@@ -17,21 +17,35 @@
       leave-from-class="transform scale-100 opacity-100 translate-y-0"
       leave-to-class="transform scale-95 opacity-0 -translate-y-2"
     >
-      <ul v-if="isOpen"
-        class="absolute ring-2 ring-p-200 border-1 border-p-300 z-0 mt-1 max-h-60 w-max overflow-auto rounded-xl bg-white py-2 text-base shadow-lg focus:outline-none"
-        role="listbox">
-        <li v-for="option in options" :key="option.value" @click="toggleOption(option)"
+      <ul
+        v-if="isOpen"
+        class="absolute ring-2 ring-p-200 border-1 border-p-300 mt-1 rounded-xl bg-white py-2 text-base shadow-lg focus:outline-none w-[280px] max-h-[160px] sm:max-h-60 overflow-auto right-0 z-[9999]"
+        role="listbox"
+      >
+        <li
+          v-for="option in options"
+          :key="option.value"
+          @click="toggleOption(option)"
           class="relative flex items-center gap-2 cursor-pointer select-none py-[10px] px-4 mx-2 rounded-lg text-p-950 hover:bg-p-100 hover:text-p-700 transition"
-          role="option" :aria-selected="isSelected(option.value)">
-          
-          <Checkbox 
-            :modelValue="isSelected(option.value)" 
+          role="option"
+          :aria-selected="isSelected(option.value)"
+        >
+          <Checkbox
+            :modelValue="isSelected(option.value)"
             @update:modelValue="() => {}"
             class="pointer-events-none"
           />
-          
-          <i v-if="option.icon !== undefined" :class="'fa-solid ' + option.icon "></i>
-          <span :class="[isSelected(option.value) ? 'font-semibold' : 'font-normal', 'block truncate']">
+
+          <i
+            v-if="option.icon !== undefined"
+            :class="'fa-solid ' + option.icon"
+          ></i>
+          <span
+            :class="[
+              isSelected(option.value) ? 'font-semibold' : 'font-normal',
+              'block truncate',
+            ]"
+          >
             {{ option.label }}
           </span>
         </li>
@@ -41,31 +55,32 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from "vue";
 
 const props = defineProps({
   modelValue: {
     type: Array,
-    default: () => []
+    default: () => [],
   },
   icon: String,
   label: String,
   options: {
     type: Array,
     required: true,
-    validator: (value) => value.every((opt) => "value" in opt && "label" in opt),
+    validator: (value) =>
+      value.every((opt) => "value" in opt && "label" in opt),
   },
   placeholder: {
     type: String,
-    default: 'Selecione opções'
+    default: "Selecione opções",
   },
   error: {
     type: [Boolean, String],
-    default: false
-  }
+    default: false,
+  },
 });
 
-const emits = defineEmits(['update:modelValue']);
+const emits = defineEmits(["update:modelValue"]);
 
 const isOpen = ref(false);
 
@@ -79,18 +94,18 @@ const isSelected = (value) => {
 
 const toggleOption = (option) => {
   let newValue = [...props.modelValue];
-  
+
   // Logic for exclusive options (handled by parent usually, but we can enforce basic toggle here)
   // If the parent handles exclusivity, we just emit the new array.
-  
+
   const index = newValue.indexOf(option.value);
   if (index === -1) {
     newValue.push(option.value);
   } else {
     newValue.splice(index, 1);
   }
-  
-  emits('update:modelValue', newValue);
+
+  emits("update:modelValue", newValue);
   // Keep dropdown open for multiple selection
 };
 
@@ -103,10 +118,10 @@ const handleClickOutside = (event) => {
 };
 
 onMounted(() => {
-  document.addEventListener('click', handleClickOutside);
+  document.addEventListener("click", handleClickOutside);
 });
 
 onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside);
+  document.removeEventListener("click", handleClickOutside);
 });
 </script>
