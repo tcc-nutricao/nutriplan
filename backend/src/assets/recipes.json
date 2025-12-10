@@ -61,13 +61,6 @@
     "pref_meal_id": 2
   },
   {
-    "name": "Pão de Queijo de Liquidificador",
-    "preparation_method": "Pré-aqueça o forno a 180°C e unte as forminhas; Bata o leite, o óleo, os ovos e o polvilho no liquidificador; Adicione o queijo ralado e bata mais um pouco; Despeje a massa nas forminhas e asse até dourar (cerca de 20 minutos).",
-    "preparation_time": 30,
-    "portion": 12,
-    "pref_meal_id": 1
-  },
-  {
     "name": "Frango Grelhado",
     "preparation_method": "Tempere os filés de frango com sal, pimenta e os temperos de sua preferência; Aqueça uma grelha ou frigideira com um fio de azeite; Grelhe os filés por cerca de 4 a 6 minutos de cada lado, até ficarem dourados e cozidos por dentro; Sirva quente.",
     "preparation_time": 15,
@@ -82,7 +75,7 @@
     "pref_meal_id": 3
   },
   {
-    "name": "Prato Feito: Frango com Arroz e Feijão",
+    "name": "Frango com Arroz e Feijão",
     "preparation_method": "Tempere o frango e grelhe; Cozinhe o arroz e o feijão separadamente; Monte o prato com uma porção de cada e sirva com salada.",
     "preparation_time": 20,
     "portion": 4,
@@ -289,13 +282,6 @@
     "calories": 500
   },
   {
-    "name": "Molho de Tomate Rápido",
-    "preparation_method": "Refogue alho e cebola no azeite; Adicione tomate pelado ou molho pronto de boa qualidade e tempere com sal e açúcar (para tirar a acidez); Adicione temperos como manjericão e orégano; Cozinhe em fogo baixo por 10 a 15 minutos.",
-    "preparation_time": 15,
-    "portion": 4,
-    "pref_meal_id": 3
-  },
-  {
     "name": "Mingau de Aveia",
     "preparation_method": "Em uma panela, misture a aveia, o leite e o açúcar ou adoçante; Leve ao fogo baixo e mexa constantemente; Cozinhe até engrossar e atingir a consistência de mingau; Sirva quente ou frio, com canela em pó.",
     "preparation_time": 6,
@@ -338,13 +324,6 @@
     "pref_meal_id": 1
   },
   {
-    "name": "Molho Branco",
-    "preparation_method": "Derreta a manteiga em uma panela e adicione a farinha, misturando rapidamente para formar um *roux*; Adicione o leite frio aos poucos, mexendo sempre com um *fouet* para não empelotar; Cozinhe em fogo baixo até engrossar; Tempere com sal, noz-moscada e pimenta-do-reino.",
-    "preparation_time": 12,
-    "portion": 4,
-    "pref_meal_id": 3
-  },
-  {
     "name": "Peito de Frango no Forno",
     "preparation_method": "Tempere os filés de peito de frango com sal, limão, azeite e ervas de sua preferência; Coloque os filés em uma assadeira; Cubra com papel alumínio e leve ao forno pré-aquecido a 200°C; Retire o papel alumínio nos últimos 10 minutos e deixe dourar.",
     "preparation_time": 35,
@@ -366,25 +345,11 @@
     "pref_meal_id": 3
   },
   {
-    "name": "Molho de Alho Caseiro",
-    "preparation_method": "No liquidificador ou *mixer*, coloque o leite (gelado), o alho, o sal e o cheiro-verde; Ligue o aparelho e, com ele ligado, vá adicionando o óleo em fio, bem lentamente; Continue batendo até o molho emulsionar e engrossar na consistência de maionese; Armazene na geladeira.",
-    "preparation_time": 10,
-    "portion": 8,
-    "pref_meal_id": 3
-  },
-  {
     "name": "Pão de Alho Simples",
     "preparation_method": "Misture manteiga derretida com alho amassado, azeite, sal e queijo ralado (opcional); Corte o pão em fatias sem ir até o final; Passe a pasta de alho entre as fatias e por cima do pão; Embrulhe em papel alumínio e asse em forno ou churrasqueira por 10 a 12 minutos.",
     "preparation_time": 12,
     "portion": 4,
-    "pref_meal_id": 3
-  },
-  {
-    "name": "Caldinho de Feijão",
-    "preparation_method": "Cozinhe o feijão com água e temperos (alho, bacon, cebola); Retire o feijão cozido da panela e bata no liquidificador; Coe a mistura para obter apenas o caldo; Reaqueça, acerte o sal e sirva em canecas, com *bacon* e cheiro-verde por cima.",
-    "preparation_time": 20,
-    "portion": 4,
-    "pref_meal_id": 3
+    "pref_meal_id": 2
   },
   {
     "name": "Abobrinha Grelhada",
@@ -392,13 +357,6 @@
     "preparation_time": 10,
     "portion": 2,
     "pref_meal_id": 3
-  },
-  {
-    "name": "Skyr com Mel",
-    "preparation_method": "Abra o pote de *Skyr* (ou iogurte grego natural); Despeje o iogurte em uma tigela; Regue generosamente com mel; Sirva imediatamente, gelado.",
-    "preparation_time": 3,
-    "portion": 1,
-    "pref_meal_id": 1
   },
   {
     "name": "Iogurte com Granola",
@@ -420,13 +378,6 @@
     "preparation_time": 5,
     "portion": 1,
     "pref_meal_id": 1
-  },
-  {
-    "name": "Creme de Papaya",
-    "preparation_method": "Corte o mamão papaya ao meio e retire as sementes; Retire a polpa do mamão e coloque no liquidificador com algumas bolas de sorvete de creme; Bata até obter uma consistência bem cremosa; Sirva em taças imediatamente com cassis (opcional).",
-    "preparation_time": 4,
-    "portion": 2,
-    "pref_meal_id": 2
   },
   {
     "name": "Sanduíche Natural",
@@ -513,13 +464,6 @@
     "pref_meal_id": 2
   },
   {
-    "name": "Creme de Abacate",
-    "preparation_method": "Retire a polpa do abacate e coloque no liquidificador ou *mixer*; Adicione açúcar e suco de limão (para não oxidar); Bata até obter um creme liso e homogêneo; Sirva gelado.",
-    "preparation_time": 3,
-    "portion": 1,
-    "pref_meal_id": 2
-  },
-  {
     "name": "Abacaxi Grelhado",
     "preparation_method": "Descasque e corte o abacaxi em fatias de 1,5 cm de espessura; Polvilhe canela em pó sobre as fatias; Aqueça uma chapa ou frigideira (grelha) com um pouco de manteiga ou azeite; Grelhe as fatias por 3 a 4 minutos de cada lado até ficarem macias e douradas.",
     "preparation_time": 8,
@@ -567,13 +511,6 @@
     "preparation_time": 240,
     "portion": 6,
     "pref_meal_id": 2
-  },
-  {
-    "name": "Creme de Milho Rápido",
-    "preparation_method": "Bata o milho (em conserva ou fresco) e o leite no liquidificador; Coe a mistura para remover as peles do milho; Em uma panela, derreta a manteiga e adicione o caldo coado; Cozinhe em fogo baixo, mexendo até engrossar e tempere com sal.",
-    "preparation_time": 15,
-    "portion": 3,
-    "pref_meal_id": 3
   },
   {
     "name": "Purê de Mandioquinha",
@@ -624,13 +561,6 @@
     "preparation_time": 5,
     "portion": 1,
     "pref_meal_id": 3
-  },
-  {
-    "name": "Pipoca de Micro-ondas",
-    "preparation_method": "Coloque o saco de pipoca de micro-ondas no centro do aparelho; Ajuste o tempo de preparo de acordo com a embalagem (geralmente 3 minutos); Ligue o micro-ondas na potência máxima; Retire o saco cuidadosamente, abra-o e sirva.",
-    "preparation_time": 3,
-    "portion": 3,
-    "pref_meal_id": 2
   },
   {
     "name": "Suco de Goiaba",
@@ -752,13 +682,6 @@
     "pref_meal_id": 3
   },
   {
-    "name": "Arroz de Micro-ondas",
-    "preparation_method": "Em um recipiente próprio, misture o arroz, a água e o sal; Cubra o recipiente com tampa própria para micro-ondas ou filme plástico com furos; Leve ao micro-ondas em potência alta por 15 a 20 minutos; Deixe descansar por 5 minutos antes de servir.",
-    "preparation_time": 20,
-    "portion": 3,
-    "pref_meal_id": 3
-  },
-  {
     "name": "Omelete de Legumes",
     "preparation_method": "Refogue os legumes picados (cenoura, abobrinha, pimentão) em azeite; Bata os ovos com sal e pimenta; Adicione os legumes refogados aos ovos; Despeje a mistura em uma frigideira untada e cozinhe até firmar; Dobre ao meio e sirva.",
     "preparation_time": 12,
@@ -777,20 +700,6 @@
     "preparation_method": "Passe requeijão ou maionese nas fatias de pão; Coloque fatias de peito de peru e queijo entre as fatias de pão; Opcionalmente, adicione folhas de alface e tomate; Monte o sanduíche e sirva.",
     "preparation_time": 4,
     "portion": 1,
-    "pref_meal_id": 3
-  },
-  {
-    "name": "Banana no Micro-ondas",
-    "preparation_method": "Descasque a banana e coloque em um prato; Polvilhe canela e açúcar por cima da banana; Leve ao micro-ondas em potência alta por 1 a 2 minutos; Sirva quente.",
-    "preparation_time": 2,
-    "portion": 1,
-    "pref_meal_id": 1
-  },
-  {
-    "name": "Pão de Alho na Airfryer",
-    "preparation_method": "Utilize pão de alho pronto ou caseiro em fatias; Coloque as fatias na cesta da *Airfryer*; Asse a 180°C por 8 a 10 minutos, virando na metade do tempo; Retire quando estiverem dourados e crocantes.",
-    "preparation_time": 10,
-    "portion": 4,
     "pref_meal_id": 3
   },
   {
@@ -871,13 +780,6 @@
     "pref_meal_id": 3
   },
   {
-    "name": "Molho Vinagrete para Churrasco",
-    "preparation_method": "Pique tomate, cebola e pimentão em cubos pequenos; Coloque os legumes em uma tigela; Adicione vinagre, azeite, sal, pimenta e cheiro-verde picado; Misture bem e reserve na geladeira para servir gelado.",
-    "preparation_time": 7,
-    "portion": 4,
-    "pref_meal_id": 3
-  },
-  {
     "name": "Tomate Grelhado",
     "preparation_method": "Corte os tomates em rodelas grossas ou ao meio; Pincele os tomates com azeite e tempere com sal e orégano; Aqueça uma chapa ou frigideira (grelha); Grelhe os tomates por 2 a 3 minutos de cada lado.",
     "preparation_time": 6,
@@ -946,13 +848,6 @@
     "preparation_time": 4,
     "portion": 3,
     "pref_meal_id": 2
-  },
-  {
-    "name": "Molho de Mostarda Rápido",
-    "preparation_method": "Em uma tigela, misture a mostarda (amarela ou dijon) com mel; Adicione um pouco de suco de limão ou vinagre para equilibrar o sabor; Tempere com sal e pimenta (opcional); Misture bem até ficar homogêneo.",
-    "preparation_time": 2,
-    "portion": 4,
-    "pref_meal_id": 3
   },
   {
     "name": "Mandioca Cozida",
@@ -1060,13 +955,6 @@
     "pref_meal_id": 1
   },
   {
-    "name": "Creme de Manga",
-    "preparation_method": "Descasque e corte a manga em cubos e congele; Bata a manga congelada no liquidificador com creme de leite; Adicione açúcar se desejar; Bata até obter um creme liso e consistente.",
-    "preparation_time": 5,
-    "portion": 2,
-    "pref_meal_id": 2
-  },
-  {
     "name": "Purê de Abóbora",
     "preparation_method": "Descasque e cozinhe a abóbora (moranga ou cabotiá) até ficar muito macia; Escorra e amasse a abóbora; Em uma panela, refogue alho e cebola (opcional); Adicione a abóbora amassada, sal e manteiga; Cozinhe por 5 minutos, mexendo para incorporar.",
     "preparation_time": 25,
@@ -1137,10 +1025,93 @@
     "pref_meal_id": 1
   },
   {
-    "name": "Arroz com Açafrão",
-    "preparation_method": "Prepare o arroz branco normalmente; Na hora de adicionar a água para cozinhar, acrescente uma pitada de açafrão; Cozinhe até secar; O açafrão dará uma cor amarelada e um leve sabor ao arroz.",
+    "name": "Prato Completo Brasileiro Light",
+    "preparation_method": "Grelhe a Carne Bovina (Patinho): Tempere a carne com sal e pimenta do reino. Grelhe em uma frigideira quente com um fio de Azeite de Oliva Extra Virgem até o ponto desejado.;Prepare a Couve Refogada: Em uma panela, refogue 1 Dente de Alho picado em Azeite de Oliva. Adicione a Couve e refogue rapidamente, temperando com sal.;Monte o prato com o Arroz Integral Cozido, o Feijão Preto Cozido e a Carne Bovina Grelhada, acompanhada da Couve Refogada.",
     "preparation_time": 20,
-    "portion": 4,
-    "pref_meal_id": 3
+    "portion": 3
+  },
+  {
+    "name": "Salmão Grelhado com Quinoa e Brócolis ao Limão",
+    "preparation_method": "Tempere o Salmão com sal, pimenta do reino e um pouco de suco de Limão. Grelhe o peixe em uma frigideira quente com um fio de Azeite de Oliva Extra Virgem por cerca de 4 a 6 minutos de cada lado, dependendo da espessura.;Misture a Quinoa Cozida com o Brócolis Cozido.;Regue a mistura de Quinoa e Brócolis com um fio de Azeite de Oliva e suco de Limão. Sirva o Salmão sobre a mistura.",
+    "preparation_time": 15,
+    "portion": 3
+  },
+  {
+    "name": "Refogado de Grão-de-Bico e Tofu com Espinafre",
+    "preparation_method": "Pique meia Cebola e o Pimentão Vermelho. Corte o Tofu Firme em cubos médios.;Em uma panela ou frigideira, refogue a Cebola e o Pimentão Vermelho em Azeite de Oliva.;Adicione os cubos de Tofu e deixe dourar levemente.;Acrescente o Grão-de-bico Cozido e o Espinafre Cozido. Tempere com sal e pimenta do reino. Refogue por mais 3 minutos até o Espinafre murchar completamente e os sabores se misturarem.",
+    "preparation_time": 15,
+    "portion": 3
+  },
+  {
+    "name": "Sanduíche Aberto de Frango e Abacate",
+    "preparation_method": "Amasse o Abacate em uma tigela, tempere com sal e um fio de Azeite de Oliva Extra Virgem.;Desfie o Peito de Frango Grelhado. Misture o frango desfiado com o purê de Abacate.;Toste levemente o Pão de Forma Integral.;Monte o sanduíche: coloque a Alface, o Tomate fatiado e a mistura de frango e Abacate sobre a fatia de Pão de Forma Integral.",
+    "preparation_time": 10,
+    "portion": 2
+  },
+  {
+    "name": "Lombo Grelhado com Purê Rústico de Batata Doce e Couve-Flor",
+    "preparation_method": "Prepare o Purê: Amasse a Batata Doce Cozida e a Couve-flor Cozida juntas. Misture 1 colher de sopa de Azeite de Oliva, sal e pimenta do reino. Reserve.;Tempere o Lombo de Porco Grelhado com sal, pimenta do reino e Alecrim. Grelhe em frigideira ou chapa até estar cozido por dentro (use um fio de Azeite de Oliva se necessário).;Sirva o Lombo fatiado sobre o purê rústico.",
+    "preparation_time": 25,
+    "portion": 3
+  },
+  {
+    "name": "Salada de Atum Mediterrânea com Grão-de-bico",
+    "preparation_method": "Lave e pique a Alface Romana, o Tomate e o Pepino Cru.;Em uma tigela grande, misture os vegetais picados com o Atum em Água (conserva) escorrido e o Grão de Bico Cozido.;Tempere com Azeite de Oliva Extra Virgem, Sal e Pimenta do Reino (a gosto). Misture delicadamente antes de servir.",
+    "preparation_time": 15,
+    "portion": 3
+  },
+  {
+    "name": "Prato Executivo Magro (Patinho, Arroz Integral e Couve)",
+    "preparation_method": "Aqueça o Bife de Patinho Grelhado.;Enquanto o bife aquece, aqueça o Arroz Integral Cozido e o Feijão Preto Cozido.;Em uma panela pequena, refogue a Couve Manteiga Refogada rapidamente com um fio de Azeite de Oliva e Alho (não listado, mas uso comum).;Monte o prato com todos os ingredientes.",
+    "preparation_time": 20,
+    "portion": 3
+  },
+  {
+    "name": "Tilápia Grelhada com Quinoa e Brócolis",
+    "preparation_method": "Tempere o Filé de Tilápia Grelhado com Sal e Pimenta.;Aqueça a Quinoa Cozida e o Brócolis Cozido.;Pique a Cenoura Crua em palitos finos.;Sirva o peixe ao lado da quinoa e do brócolis. Regue os vegetais com um fio de Azeite de Oliva Extra Virgem.",
+    "preparation_time": 15,
+    "portion": 3
+  },
+  {
+    "name": "Tofu e Vegetais Salteados com Arroz Branco",
+    "preparation_method": "Pique o Tofu Firme em cubos médios.;Pique a Cebola e o Pimentão Vermelho Cru em tiras.;Em uma frigideira com Azeite de Oliva Extra Virgem, salteie a Cebola e o Tofu até dourarem levemente.;Adicione o Pimentão e o Cogumelo Paris Salteado. Cozinhe por 3-5 minutos até o pimentão amaciar, mas mantendo a crocância. 5. Sirva imediatamente acompanhado do Arroz Branco Cozido.",
+    "preparation_time": 25,
+    "portion": 3
+  },
+  {
+    "name": "Lombo Grelhado com Batata Doce e Espinafre Cozido",
+    "preparation_method": "Aqueça o Lombo de Porco Grelhado e a Batata Doce Assada.;Enquanto aquecem, tempere o Espinafre Cozido com uma pitada de Sal e um fio de Azeite de Oliva.;Corte a Batata Doce Assada ao meio.;Monte o prato com o Lombo, a Batata Doce e o Espinafre Cozido.",
+    "preparation_time": 20,
+    "portion": 3
+  },
+  {
+    "name": "Salmão Grelhado com Batata Doce e Espinafre no Alho",
+    "preparation_method": "Grelhe o Salmão até atingir o ponto desejado.;Aqueça o azeite em uma panela e adicione o alho picado.;Adicione o Espinafre Cozido à panela e refogue rapidamente por 2 minutos, temperando com sal e pimenta.;Sirva o salmão com as fatias de Batata Doce Assada e o espinafre.",
+    "preparation_time": 20,
+    "portion": 3
+  },
+  {
+    "name": "Prato Feito Fit: Patinho Grelhado com Arroz Integral e Feijão",
+    "preparation_method": "Tempere o Bife de Patinho com sal e alho e grelhe-o até o ponto desejado.;Misture o Arroz Integral Cozido e o Feijão Preto Cozido em um bowl.;Sirva o bife acompanhado da mistura de arroz e feijão, e adicione o Tomate picado ao lado.",
+    "preparation_time": 15,
+    "portion": 3
+  },
+  {
+    "name": "Salada de Atum com Grão de Bico e Abacate",
+    "preparation_method": "Em uma tigela grande, misture a Alface Romana e a Cenoura Crua ralada.;Adicione o Atum em Lata (em água), o Grão de Bico Cozido e o Pimentão Vermelho Cru picado.;Corte o Abacate em cubos e adicione à salada.;Regue com Azeite de Oliva e um toque de Limão (se disponível na lista) ou apenas Azeite, e tempere com Sal e Pimenta.",
+    "preparation_time": 10,
+    "portion": 3
+  },
+  {
+    "name": "Macarrão Integral com Tofu e Brócolis",
+    "preparation_method": "Cozinhe o Tofu e corte em cubos. Tempere com sal e refogue ligeiramente em um fio de azeite e cebola.;Misture o Macarrão de Trigo Integral Cozido com os cubos de Tofu.;Adicione o Brócolis Cozido e o Cogumelo Paris (seco ou salteado, usando o Cogumelo Paris Salteado da lista).;Finalize com Azeite de Oliva e pimenta do reino (se desejar).",
+    "preparation_time": 25,
+    "portion": 3
+  },
+  {
+    "name": "Tigela Brasileira de Lombo de Porco com Mandioca e Couve",
+    "preparation_method": "Aqueça a Mandioca Cozida (pode ser em água ou micro-ondas).;Sirva o Lombo de Porco Grelhado ao lado da Mandioca.;Adicione a Couve Manteiga Refogada para completar o prato.;Tempere a gosto.",
+    "preparation_time": 10,
+    "portion": 3
   }
 ]

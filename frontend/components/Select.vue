@@ -4,7 +4,7 @@
 
     <button @click="toggleDropdown"
       class="relative w-full cursor-pointer rounded-xl border-2 border-p-g2 text-sm h-[42px] bg-white py-2 pl-3 pr-10 text-left focus:outline-none transition"
-      :class="classes" 
+      :class="{'border-red-500': error}" 
       aria-haspopup="listbox" 
       :aria-expanded="isOpen"
     >

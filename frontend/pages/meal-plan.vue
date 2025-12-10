@@ -2,15 +2,16 @@
   <div class="flex flex-col gap-3 px-10 pt-6 md:pt-0">
     <div class="flex justify-between items-center">
       <h1 class="h1">Plano Alimentar</h1>
-      <Button 
-        v-if="canGenerateSelf" 
-        @click="openGenerateModal" 
-        :disabled="isGeneratingSelf"
-        mediumPurple
-      >
-        {{ isGeneratingSelf ? 'Gerando...' : 'Gerar novo plano' }}
-      </Button>
     </div>
+    <Button 
+      v-if="canGenerateSelf" 
+      @click="openGenerateModal" 
+      :disabled="isGeneratingSelf"
+      class="w-max pr-3 pl-2"
+      icon="fa-solid fa-wand-magic-sparkles short flex justify-center"
+      :label="isGeneratingSelf ? 'Gerando...' : 'Gerar novo plano'"
+      mediumPurple
+    />
     
     <div 
       v-if="actualPlan[0] && isPlanEmpty(actualPlan[0])" 
@@ -118,8 +119,17 @@ const loadItems = async () => {
     const response = await $axios.get('/get-patient-meal-plan')
     const result = response.data
     
+    console.log('DEBUG: API /get-patient-meal-plan response:', result) // DEBUG LOG
+
     if (result.data) {
-        const activePlans = result.data.filter(item => item.mealPlanPatients?.[0]?.status === 'ACTIVE')
+        // Filter for ACTIVE
+        const activePlans = result.data.filter(item => {
+             const status = item.mealPlanPatients?.[0]?.status
+             // console.log(`Plan ${item.id} status:`, status) 
+             return status === 'ACTIVE'
+        })
+        
+        console.log('DEBUG: Active Plans found:', activePlans.length) // DEBUG LOG
         
         activePlans.sort((a, b) => {
           const aMeals = a.mealPlanMeals?.length || 0
@@ -131,6 +141,8 @@ const loadItems = async () => {
         })
         
         actualPlan.value = activePlans.map(transformPlan)
+        console.log('DEBUG: actualPlan:', actualPlan.value) // DEBUG LOG
+
         otherPlans.value = result.data.filter(item => item.mealPlanPatients?.[0]?.status !== 'ACTIVE').map(transformPlan)
     }
   } catch (error) {

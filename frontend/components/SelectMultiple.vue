@@ -4,7 +4,7 @@
 
     <button @click="toggleDropdown"
       class="relative w-full cursor-pointer rounded-xl border-2 border-p-g2 text-sm h-[42px] bg-white py-2 pl-3 pr-10 text-left focus:outline-none transition"
-      :class="classes" 
+      :class="{'border-red-500': error}" 
       aria-haspopup="listbox" 
       :aria-expanded="isOpen"
     >
@@ -105,10 +105,34 @@ const toggleOption = (option) => {
   const index = currentValue.indexOf(option.value);
   
   let newValue;
-  if (index === -1) {
-    newValue = [...currentValue, option.value];
+
+  // Check if the clicked option is "Nenhuma"
+  if (option.label === 'Nenhuma') {
+     if (index === -1) {
+         // Selecting "Nenhuma" -> Clear everything else
+         newValue = [option.value];
+     } else {
+         // Deselecting "Nenhuma" -> standard behavior
+         newValue = []; 
+     }
   } else {
-    newValue = currentValue.filter(v => v !== option.value);
+     // Clicked some other option
+     // Check if "Nenhuma" is currently selected
+     const noneOption = props.options.find(o => o.label === 'Nenhuma');
+     let tempValue = [...currentValue];
+     
+     // specific logic: if "Nenhuma" is selected, remove it
+     if (noneOption && tempValue.includes(noneOption.value)) {
+         tempValue = tempValue.filter(v => v !== noneOption.value);
+     }
+
+     // Now standard toggle on tempValue
+     const tempIndex = tempValue.indexOf(option.value);
+     if (tempIndex === -1) {
+         newValue = [...tempValue, option.value];
+     } else {
+         newValue = tempValue.filter(v => v !== option.value);
+     }
   }
   
   emits('update:modelValue', newValue);

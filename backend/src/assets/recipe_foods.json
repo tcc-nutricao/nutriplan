@@ -318,31 +318,31 @@
     "unit": "Pitada"
   },
   {
-    "recipe_name": "Prato Feito: Frango com Arroz e Feijão",
+    "recipe_name": "Frango com Arroz e Feijão",
     "food_name": "Arroz Branco",
     "quantity": 100,
     "unit": "Grama"
   },
   {
-    "recipe_name": "Prato Feito: Frango com Arroz e Feijão",
+    "recipe_name": "Frango com Arroz e Feijão",
     "food_name": "Azeite de Oliva",
     "quantity": 1,
     "unit": "Colher de Sopa"
   },
   {
-    "recipe_name": "Prato Feito: Frango com Arroz e Feijão",
+    "recipe_name": "Frango com Arroz e Feijão",
     "food_name": "Sal",
     "quantity": 1,
     "unit": "Pitada"
   },
   {
-    "recipe_name": "Prato Feito: Frango com Arroz e Feijão",
+    "recipe_name": "Frango com Arroz e Feijão",
     "food_name": "Alho",
     "quantity": 1,
     "unit": "Dente"
   },
   {
-    "recipe_name": "Prato Feito: Frango com Arroz e Feijão",
+    "recipe_name": "Frango com Arroz e Feijão",
     "food_name": "Água",
     "quantity": 200,
     "unit": "Mililitro"
@@ -4248,19 +4248,19 @@
     "unit": "Mililitro"
   },
   {
-    "recipe_name": "Prato Feito: Frango com Arroz e Feijão",
+    "recipe_name": "Frango com Arroz e Feijão",
     "food_name": "Peito de Frango Grelhado",
     "quantity": 150,
     "unit": "Grama"
   },
   {
-    "recipe_name": "Prato Feito: Frango com Arroz e Feijão",
+    "recipe_name": "Frango com Arroz e Feijão",
     "food_name": "Feijão Carioca Cozido",
     "quantity": 100,
     "unit": "Grama"
   },
   {
-    "recipe_name": "Prato Feito: Frango com Arroz e Feijão",
+    "recipe_name": "Frango com Arroz e Feijão",
     "food_name": "Alface",
     "quantity": 50,
     "unit": "Grama"
@@ -4312,5 +4312,557 @@
     "food_name": "Arroz Branco",
     "quantity": 100,
     "unit": "Grama"
+  },
+  {
+    "recipe_name": "Prato Completo Brasileiro Light",
+    "food_name": "Carne Bovina (Patinho) Grelhada",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Prato Completo Brasileiro Light",
+    "food_name": "Arroz Integral Cozido",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Prato Completo Brasileiro Light",
+    "food_name": "Feijão Preto Cozido",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Prato Completo Brasileiro Light",
+    "food_name": "Couve Refogada",
+    "quantity": 50,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Prato Completo Brasileiro Light",
+    "food_name": "Azeite de Oliva Extra Virgem",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Prato Completo Brasileiro Light",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Prato Completo Brasileiro Light",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salmão Grelhado com Quinoa e Brócolis ao Limão",
+    "food_name": "Salmão Grelhado",
+    "quantity": 180,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salmão Grelhado com Quinoa e Brócolis ao Limão",
+    "food_name": "Quinoa Cozida",
+    "quantity": 80,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salmão Grelhado com Quinoa e Brócolis ao Limão",
+    "food_name": "Brócolis Cozido",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salmão Grelhado com Quinoa e Brócolis ao Limão",
+    "food_name": "Azeite de Oliva Extra Virgem",
+    "quantity": 1.5,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Salmão Grelhado com Quinoa e Brócolis ao Limão",
+    "food_name": "Limão",
+    "quantity": 0.5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Salmão Grelhado com Quinoa e Brócolis ao Limão",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Refogado de Grão-de-Bico e Tofu com Espinafre",
+    "food_name": "Grão-de-bico Cozido",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Refogado de Grão-de-Bico e Tofu com Espinafre",
+    "food_name": "Tofu Firme",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Refogado de Grão-de-Bico e Tofu com Espinafre",
+    "food_name": "Espinafre Cozido",
+    "quantity": 80,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Refogado de Grão-de-Bico e Tofu com Espinafre",
+    "food_name": "Cebola",
+    "quantity": 0.5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Refogado de Grão-de-Bico e Tofu com Espinafre",
+    "food_name": "Pimentão Vermelho",
+    "quantity": 50,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Refogado de Grão-de-Bico e Tofu com Espinafre",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Refogado de Grão-de-Bico e Tofu com Espinafre",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Sanduíche Aberto de Frango e Abacate",
+    "food_name": "Pão de Forma Integral",
+    "quantity": 2,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Sanduíche Aberto de Frango e Abacate",
+    "food_name": "Peito de Frango Grelhado",
+    "quantity": 120,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Sanduíche Aberto de Frango e Abacate",
+    "food_name": "Abacate",
+    "quantity": 50,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Sanduíche Aberto de Frango e Abacate",
+    "food_name": "Alface",
+    "quantity": 3,
+    "unit": "Folha"
+  },
+  {
+    "recipe_name": "Sanduíche Aberto de Frango e Abacate",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Sanduíche Aberto de Frango e Abacate",
+    "food_name": "Azeite de Oliva Extra Virgem",
+    "quantity": 0.5,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Sanduíche Aberto de Frango e Abacate",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Lombo Grelhado com Purê Rústico de Batata Doce e Couve-Flor",
+    "food_name": "Lombo de Porco Grelhado",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Lombo Grelhado com Purê Rústico de Batata Doce e Couve-Flor",
+    "food_name": "Batata Doce Cozida",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Lombo Grelhado com Purê Rústico de Batata Doce e Couve-Flor",
+    "food_name": "Couve-flor Cozida",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Lombo Grelhado com Purê Rústico de Batata Doce e Couve-Flor",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1.5,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Lombo Grelhado com Purê Rústico de Batata Doce e Couve-Flor",
+    "food_name": "Alecrim",
+    "quantity": 1,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Lombo Grelhado com Purê Rústico de Batata Doce e Couve-Flor",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salada de Atum Mediterrânea com Grão-de-bico",
+    "food_name": "Atum em Água (conserva)",
+    "quantity": 120,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salada de Atum Mediterrânea com Grão-de-bico",
+    "food_name": "Grão de Bico Cozido",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salada de Atum Mediterrânea com Grão-de-bico",
+    "food_name": "Alface Romana",
+    "quantity": 50,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salada de Atum Mediterrânea com Grão-de-bico",
+    "food_name": "Tomate",
+    "quantity": 80,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salada de Atum Mediterrânea com Grão-de-bico",
+    "food_name": "Pepino Cru",
+    "quantity": 50,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salada de Atum Mediterrânea com Grão-de-bico",
+    "food_name": "Azeite de Oliva Extra Virgem",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Prato Executivo Magro (Patinho, Arroz Integral e Couve)",
+    "food_name": "Bife de Patinho Grelhado",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Prato Executivo Magro (Patinho, Arroz Integral e Couve)",
+    "food_name": "Arroz Integral Cozido",
+    "quantity": 120,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Prato Executivo Magro (Patinho, Arroz Integral e Couve)",
+    "food_name": "Feijão Preto Cozido",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Prato Executivo Magro (Patinho, Arroz Integral e Couve)",
+    "food_name": "Couve Manteiga Refogada",
+    "quantity": 80,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Prato Executivo Magro (Patinho, Arroz Integral e Couve)",
+    "food_name": "Azeite de Oliva",
+    "quantity": 0.5,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Tilápia Grelhada com Quinoa e Brócolis",
+    "food_name": "Filé de Tilápia Grelhado",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Tilápia Grelhada com Quinoa e Brócolis",
+    "food_name": "Quinoa Cozida",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Tilápia Grelhada com Quinoa e Brócolis",
+    "food_name": "Brócolis Cozido",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Tilápia Grelhada com Quinoa e Brócolis",
+    "food_name": "Cenoura Crua",
+    "quantity": 50,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Tilápia Grelhada com Quinoa e Brócolis",
+    "food_name": "Azeite de Oliva Extra Virgem",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Tofu e Vegetais Salteados com Arroz Branco",
+    "food_name": "Tofu Firme",
+    "quantity": 120,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Tofu e Vegetais Salteados com Arroz Branco",
+    "food_name": "Arroz Branco Cozido",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Tofu e Vegetais Salteados com Arroz Branco",
+    "food_name": "Cogumelo Paris Salteado",
+    "quantity": 50,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Tofu e Vegetais Salteados com Arroz Branco",
+    "food_name": "Pimentão Vermelho Cru",
+    "quantity": 40,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Tofu e Vegetais Salteados com Arroz Branco",
+    "food_name": "Cebola",
+    "quantity": 20,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Tofu e Vegetais Salteados com Arroz Branco",
+    "food_name": "Azeite de Oliva Extra Virgem",
+    "quantity": 1.5,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Lombo Grelhado com Batata Doce e Espinafre Cozido",
+    "food_name": "Lombo de Porco Grelhado",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Lombo Grelhado com Batata Doce e Espinafre Cozido",
+    "food_name": "Batata Doce Assada",
+    "quantity": 180,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Lombo Grelhado com Batata Doce e Espinafre Cozido",
+    "food_name": "Espinafre Cozido",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Lombo Grelhado com Batata Doce e Espinafre Cozido",
+    "food_name": "Azeite de Oliva",
+    "quantity": 0.5,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Salmão Grelhado com Batata Doce e Espinafre no Alho",
+    "food_name": "Salmão Grelhado",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salmão Grelhado com Batata Doce e Espinafre no Alho",
+    "food_name": "Batata Doce Assada",
+    "quantity": 200,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salmão Grelhado com Batata Doce e Espinafre no Alho",
+    "food_name": "Espinafre Cozido",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salmão Grelhado com Batata Doce e Espinafre no Alho",
+    "food_name": "Alho",
+    "quantity": 1,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Salmão Grelhado com Batata Doce e Espinafre no Alho",
+    "food_name": "Azeite de Oliva Extra Virgem",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Salmão Grelhado com Batata Doce e Espinafre no Alho",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "pitada"
+  },
+  {
+    "recipe_name": "Prato Feito Fit: Patinho Grelhado com Arroz Integral e Feijão",
+    "food_name": "Bife de Patinho Grelhado",
+    "quantity": 140,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Prato Feito Fit: Patinho Grelhado com Arroz Integral e Feijão",
+    "food_name": "Arroz Integral Cozido",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Prato Feito Fit: Patinho Grelhado com Arroz Integral e Feijão",
+    "food_name": "Feijão Preto Cozido",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Prato Feito Fit: Patinho Grelhado com Arroz Integral e Feijão",
+    "food_name": "Tomate",
+    "quantity": 1,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Prato Feito Fit: Patinho Grelhado com Arroz Integral e Feijão",
+    "food_name": "Alho",
+    "quantity": 0.5,
+    "unit": "Dente"
+  },
+  {
+    "recipe_name": "Prato Feito Fit: Patinho Grelhado com Arroz Integral e Feijão",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "pitada"
+  },
+  {
+    "recipe_name": "Salada de Atum com Grão de Bico e Abacate",
+    "food_name": "Atum em Lata (em água)",
+    "quantity": 120,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salada de Atum com Grão de Bico e Abacate",
+    "food_name": "Grão de Bico Cozido",
+    "quantity": 80,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salada de Atum com Grão de Bico e Abacate",
+    "food_name": "Alface Romana",
+    "quantity": 50,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salada de Atum com Grão de Bico e Abacate",
+    "food_name": "Cenoura Crua",
+    "quantity": 50,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salada de Atum com Grão de Bico e Abacate",
+    "food_name": "Abacate",
+    "quantity": 70,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salada de Atum com Grão de Bico e Abacate",
+    "food_name": "Pimentão Vermelho Cru",
+    "quantity": 40,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Salada de Atum com Grão de Bico e Abacate",
+    "food_name": "Azeite de Oliva Extra Virgem",
+    "quantity": 2,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Salada de Atum com Grão de Bico e Abacate",
+    "food_name": "Limão",
+    "quantity": 0.5,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Salada de Atum com Grão de Bico e Abacate",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "pitada"
+  },
+  {
+    "recipe_name": "Macarrão Integral com Tofu e Brócolis",
+    "food_name": "Macarrão de Trigo Integral Cozido",
+    "quantity": 150,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Macarrão Integral com Tofu e Brócolis",
+    "food_name": "Tofu Firme",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Macarrão Integral com Tofu e Brócolis",
+    "food_name": "Brócolis Cozido",
+    "quantity": 80,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Macarrão Integral com Tofu e Brócolis",
+    "food_name": "Cogumelo Paris Salteado",
+    "quantity": 50,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Macarrão Integral com Tofu e Brócolis",
+    "food_name": "Cebola",
+    "quantity": 0.25,
+    "unit": "Unidade"
+  },
+  {
+    "recipe_name": "Macarrão Integral com Tofu e Brócolis",
+    "food_name": "Azeite de Oliva",
+    "quantity": 2,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Macarrão Integral com Tofu e Brócolis",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "pitada"
+  },
+  {
+    "recipe_name": "Tigela Brasileira de Lombo de Porco com Mandioca e Couve",
+    "food_name": "Lombo de Porco Grelhado",
+    "quantity": 140,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Tigela Brasileira de Lombo de Porco com Mandioca e Couve",
+    "food_name": "Mandioca Cozida",
+    "quantity": 180,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Tigela Brasileira de Lombo de Porco com Mandioca e Couve",
+    "food_name": "Couve Manteiga Refogada",
+    "quantity": 100,
+    "unit": "Grama"
+  },
+  {
+    "recipe_name": "Tigela Brasileira de Lombo de Porco com Mandioca e Couve",
+    "food_name": "Azeite de Oliva",
+    "quantity": 1,
+    "unit": "Colher de Sopa"
+  },
+  {
+    "recipe_name": "Tigela Brasileira de Lombo de Porco com Mandioca e Couve",
+    "food_name": "Sal",
+    "quantity": 1,
+    "unit": "pitada"
   }
 ]
