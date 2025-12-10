@@ -107,10 +107,9 @@
                 </div>
                 <div class="col-span-1">
                   <Label class="mb-2" label="Restrições alimentares" />
-                  <Select
+                  <SelectMultiple
                     v-model="personalFormData.restrictions"
                     :options="restrictionOptions"
-                    multiple
                     required
                   />
                 </div>
@@ -119,7 +118,6 @@
                   <Select
                     v-model="personalFormData.objectives"
                     :options="objectiveOptions"
-                    multiple
                     required
                   />
                 </div>
@@ -207,7 +205,9 @@ onMounted(async () => {
     personalFormData.value.target_weight = props.userData.target_weight || "";
     personalFormData.value.restrictions = props.userData.restrictions || [];
     personalFormData.value.preferences = props.userData.preferences || [];
-    personalFormData.value.objectives = props.userData.objectives || [];
+    // Handle single select for objectives - take first item if array
+    const objs = props.userData.objectives || [];
+    personalFormData.value.objectives = Array.isArray(objs) && objs.length > 0 ? objs[0] : (objs || "");
   }
 });
 
@@ -234,7 +234,6 @@ async function handleSubmit() {
         console.error("Erro ao atualizar perfil:", res);
         alert("Erro ao atualizar perfil. Tente novamente.");
       } else {
-        console.log("Perfil atualizado com sucesso:", res.data.data);
 
         const updatedUser = res.data;
         userCookie.value.name = updatedUser.name;
@@ -252,9 +251,10 @@ async function handleSubmit() {
       gender: personalFormData.value.gender,
       height: parseFloat(personalFormData.value.height),
       weight: parseFloat(personalFormData.value.weight),
+      target_weight: personalFormData.value.target_weight ? parseFloat(personalFormData.value.target_weight) : undefined,
       restrictions: personalFormData.value.restrictions,
       preferences: personalFormData.value.preferences,
-      objectives: personalFormData.value.objectives,
+      objectives: Array.isArray(personalFormData.value.objectives) ? personalFormData.value.objectives : [personalFormData.value.objectives],
     };
 
     try {
@@ -264,7 +264,6 @@ async function handleSubmit() {
         alert("Erro ao atualizar dados pessoais. Tente novamente.");
       } else {
         console.log("Dados pessoais atualizados com sucesso:", res.data.data);
-        alert("Dados pessoais atualizados com sucesso!");
         emit("close", true);
       }
     } catch (err) {

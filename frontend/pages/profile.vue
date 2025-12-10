@@ -7,7 +7,7 @@
     </div>
     <div class="flex flex-col gap-6">
       <div
-        class="relative flex items-start sm:items-center gap-4 bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto"
+        class="relative flex flex-col sm:flex-row items-center gap-4 bg-white rounded-3xl shadow-lg p-6 w-full max-w-4xl mx-auto"
       >
         <div class="flex items-center gap-4 pr-24 sm:pr-0 w-full">
           <div
@@ -18,14 +18,14 @@
               v-if="profilePicture"
               :src="profilePicture"
               alt="Foto de perfil"
-              class="w-20 h-20 rounded-full object-cover border-2 border-p-200 shadow-md"
+              class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2 border-p-200 shadow-md"
             />
             <div
               v-else
-              class="w-20 h-20 flex items-center justify-center rounded-full bg-transparent border-purple-200"
+              class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center rounded-full bg-transparent border-purple-200"
             >
               <svg
-                class="w-20 h-20 mb-3 mt-1 text-p-600 block drop-shadow-np"
+                class="w-16 h-16 sm:w-20 sm:h-20 mb-3 mt-1 text-p-600 block drop-shadow-np"
                 viewBox="36.5 20 165 165"
                 fill="currentColor"
                 aria-hidden="true"
@@ -49,17 +49,13 @@
           </div>
         </div>
 
-        <div
-          class="absolute top-4 right-4 z-10 sm:static sm:z-auto sm:ml-auto sm:flex sm:items-center"
-        >
-          <Button
-            mediumPurple
-            class="h-[40px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
-            icon="fa-solid fa-edit short flex justify-center"
-            label="Editar"
-            @click="openProfileModal('basic')"
-          />
-        </div>
+        <Button
+          mediumPurple
+          class="h-[42px] pr-3 pl-2 w-max"
+          icon="fa-solid fa-edit short flex justify-center"
+          label="Editar"
+          @click="openProfileModal('basic')"
+        />
       </div>
 
       <div
@@ -70,14 +66,14 @@
           <h2 class="h2main">Dados Pessoais</h2>
           <Button
             mediumPurple
-            class="w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
+            class="hidden sm:flex w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
             icon="fa-solid fa-edit short flex justify-center"
             label="Editar"
             @click="openProfileModal('personal')"
           />
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           <div class="flex flex-col w-full gap-4">
             <InfoArea
               :value="
@@ -124,6 +120,15 @@
                   : personalData.restricoes || 'Não informado'
               "
               :title="'Restrições Alimentares'"
+            />
+          </div>
+          <div class="flex justify-center w-full">
+            <Button
+              mediumPurple
+              class="sm:hidden w-max pr-3 pl-2 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
+              icon="fa-solid fa-edit short flex justify-center"
+              label="Editar"
+              @click="openProfileModal('personal')"
             />
           </div>
         </div>
@@ -211,7 +216,7 @@
         </h2>
         <Button
           red
-          class="sm:ml-2 w-full sm:w-auto"
+          class="sm:ml-2 w-max pl-2 pr-3 h-[42px] sm:w-auto"
           icon="fa-regular fa-trash-can"
           label="Apagar"
           @click="openDangerModal('delete')"
