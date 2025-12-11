@@ -62,12 +62,11 @@
         </div>
 
         <!-- Footer -->
-        <div class="mt-auto w-full pt-6 border-t border-gray-100 flex justify-between items-center text-gray-500 text-sm">
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-leaf text-p-500"></i>
-                <span class="font-semibold text-p-600">Nutriplan</span>
+        <div class="mt-auto w-full pt-6 border-t border-gray-100 flex justify-between items-center text-gray-500 text-sm mb-4">
+            <div class="flex items-center gap-2 translate-y-3">
+                <Logo class="text-sm mx-auto" />
             </div>
-            <p>Gerado automaticamente em {{ new Date().toLocaleDateString('pt-BR') }}</p>
+            <p>Gerado em {{ new Date().toLocaleDateString('pt-BR') }}</p>
         </div>
     </div>
 </template>

@@ -107,7 +107,9 @@ export const GroupService = {
             return {
               id: participant.id_user,
               name: participant.user.name,
-              progress: p.metaAchieved  // porcentagem individual
+              progress: p.metaAchieved,  // porcentagem individual
+              objective: p.objective,
+              photo: p.profilePicture
             }
           })
         )

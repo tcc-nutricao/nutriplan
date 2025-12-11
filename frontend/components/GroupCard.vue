@@ -45,7 +45,12 @@
                 <p v-for="participant in group.participants" :key="participant.id"
                     class="font-semibold flex items-center text-lg text-gray-700 cursor-default break-words"
                     :title="participant.name">  
-                    <i class="fa-solid fa-circle-user mr-2 text-2xl text-p-700"></i>
+                    <img v-if="participant.photo" 
+                         :src="`data:image/jpeg;base64,${participant.photo}`" 
+                         alt="Foto de perfil" 
+                         class="w-7 h-7 rounded-full object-cover mr-2"
+                    />
+                    <i v-else class="fa-solid fa-circle-user mr-2 text-[1.6em] text-p-700"></i>
                     {{ participant.name }}
                 </p>
             </div>

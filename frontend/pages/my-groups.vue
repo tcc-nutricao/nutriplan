@@ -114,7 +114,8 @@ function mapApiDataToFrontend(apiGroup) {
     id: index,
     name: participant.name === userCookie.value?.name ? 'Você' : participant.name,
     progress: participant.progress,
-    objective: 'Não definido',
+    objective: participant.objective || 'Não definido',
+    photo: participant.photo,
   }
 )
 );

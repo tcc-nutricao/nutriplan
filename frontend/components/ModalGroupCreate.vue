@@ -45,7 +45,7 @@
               </div>
               <div class="w-full md:w-56 flex flex-col">
 
-                <div class="flex items-center mb-2">
+                <div class="flex items-center">
                 <Checkbox
                 label="Data de término"
                 class="mb-1"

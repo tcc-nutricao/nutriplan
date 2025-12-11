@@ -140,6 +140,10 @@
                                         </div>
                                     </div>
                                     <div class="flex justify-between">
+                                        <p>Meta de peso:</p>
+                                        <p class="text-p-600 font-bold">{{ selectedItem.target_weight ? selectedItem.target_weight + ' kg' : 'Não definido' }}</p>
+                                    </div>
+                                    <div class="flex justify-between">
                                         <p>Última atualização:</p>
                                         <p class="text-p-600 font-bold">{{ item.lastUpdate }}</p>
                                     </div>
@@ -289,6 +293,10 @@
                                         {{ r }}
                                     </p>
                                 </div>
+                            </div>
+                            <div class="flex justify-between">
+                                <p>Meta de peso:</p>
+                                <p class="text-p-600 font-bold">{{ selectedItem.target_weight ? selectedItem.target_weight + ' kg' : 'Não definido' }}</p>
                             </div>
                             <div class="flex justify-between">
                                 <p>Última atualização:</p>
@@ -518,7 +526,7 @@ const pdfItems = computed(() => {
     if (!selectedItem.value) return {};
     
     const p = selectedItem.value;
-    const prog = p.progress || []; // Ascending order (oldest first) based on extraction
+    const prog = p.progress || []; 
     const initial = prog.length > 0 ? prog[0].weight : p.weight;
     const current = p.weight;
     const target = p.target_weight;
@@ -567,7 +575,7 @@ const pdfChartData = computed(() => {
 
     const labels = selectedItem.value.progress.map(registro => {
         const data = new Date(registro.date);
-        return data.toLocaleDateString('pt-BR', { month: 'long' });
+        return data.toLocaleDateString('pt-BR', { day: 'numeric', month: 'short' });
     });
     
     const data = selectedItem.value.progress.map(registro => registro.weight);
@@ -601,7 +609,7 @@ const pdfChartOptions = computed(() => {
     const minWeight = Math.min(...weights);
     const maxWeight = Math.max(...weights);
     const padding = 2;
-    const targetWeight = selectedItem.value.target_weight || 70;
+    const targetWeight = selectedItem.value.target_weight;
 
     return {
         responsive: true,

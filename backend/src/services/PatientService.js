@@ -153,7 +153,9 @@ const getProgress = async (userId) => {
         lastUpdate: lastUpdate,
         progress: progressHistory,
         metaAchieved: metaAchieved,
-        weightDifference: weightDifference
+        metaAchieved: metaAchieved,
+        weightDifference: weightDifference,
+        profilePicture: patient.user.profile_picture ? Buffer.from(patient.user.profile_picture).toString('base64') : null
     };
 
   } catch (err) {
@@ -198,11 +200,11 @@ const getAllByNutritionist = async (nutritionistId) => {
           const validPlans = patient.mealPlanPatients.filter(mpp => mpp.mealPlan);
           
           if (validPlans.length > 0) {
-               // Sort by ID desc to get usually most recent
-               validPlans.sort((a, b) => b.mealPlan.id - a.mealPlan.id);
-               
-               const active = validPlans.find(mpp => mpp.status === 'ACTIVE');
-               activeMealPlan = active ? active.mealPlan : validPlans[0].mealPlan;
+                // Sort by ID desc to get usually most recent
+                validPlans.sort((a, b) => b.mealPlan.id - a.mealPlan.id);
+                
+                const active = validPlans.find(mpp => mpp.status === 'ACTIVE');
+                activeMealPlan = active ? active.mealPlan : validPlans[0].mealPlan;
           }
       }
 

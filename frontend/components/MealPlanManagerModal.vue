@@ -26,7 +26,7 @@
               </div>
               <h3 class="font-bold text-lg text-center">Criar Automaticamente</h3>
               <p class="text-center text-sm text-gray-500">
-                Gera um plano baseado nos dados do paciente (peso, altura, objetivo).
+                Gera um plano baseado nos dados do paciente (peso, altura, gênero, idade e objetivo).
               </p>
             </div>
 

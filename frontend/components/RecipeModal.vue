@@ -30,7 +30,7 @@
               >&times;
             </button>
       
-            <RecipeCard :item="recipeForCard" @toggleFavorite="handleToggleFavorite" class="w-full" :bg="false" />
+            <RecipeCard :item="recipeForCard" @toggleFavorite="handleToggleFavorite" class="w-full" wdth="100" :bg="false" />
           </Card>
         </Transition>
       </div>

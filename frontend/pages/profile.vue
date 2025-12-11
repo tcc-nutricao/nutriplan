@@ -144,7 +144,13 @@
           class="flex flex-col md:flex-row gap-3 items-center justify-between w-full"
         >
           <div class="flex items-center gap-4 min-w-0">
+            <img v-if="personalData.nutritionistProfilePicture"
+              :src="`data:image/jpeg;base64,${personalData.nutritionistProfilePicture}`" 
+              alt="Nutricionista"
+              class="w-16 h-16 rounded-full object-cover border-2 border-p-200"
+            />
             <div
+              v-else
               class="w-16 h-16 rounded-full bg-p-100 flex items-center justify-center text-p-600 text-2xl font-bold"
             >
               {{ personalData.nutritionistName.charAt(0).toUpperCase() }}
@@ -367,6 +373,7 @@ const personalData = ref({
   preferencias: "",
   meta: null,
   nutritionistName: null,
+  nutritionistProfilePicture: null,
 });
 
 const openProfileModal = (section) => {

@@ -54,9 +54,13 @@ const getPersonalData = async (userId) => {
   restrictionNames = patientRestrictions.data?.map((r) => r.dietaryRestriction?.name || "Desconhecido") || [];
 
   let nutritionistName = null;
+  let nutritionistProfilePicture = null;
   if (patient.id_nutritionist) {
     const nutritionist = await NutritionistRepository.findById(patient.id_nutritionist);
     nutritionistName = nutritionist?.user?.name;
+    nutritionistProfilePicture = nutritionist?.user?.profile_picture 
+        ? Buffer.from(nutritionist.user.profile_picture).toString('base64') 
+        : null;
   }
 
   return {
@@ -81,7 +85,8 @@ const getPersonalData = async (userId) => {
       filters: [{ field: "id_goal", value: activeGoal.id }],
     })).data?.map((go) => go.id_objective) || [] : [],
     restrictions: patientRestrictions.data?.map((r) => r.id_dietary_restriction) || [],
-    nutritionistName
+    nutritionistName,
+    nutritionistProfilePicture
   };
 };
 
