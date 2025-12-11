@@ -887,26 +887,10 @@ const transformPlan = (plan) => {
 const fetchPatients = async () => {
     loading.value = true
     try {
-        const [patientsRes, plansRes] = await Promise.all([
-            get('patient/all'),
-            get('meal-plan')
-        ]);
+        const patientsRes = await get('patient/all');
 
         if (patientsRes.success && patientsRes.data) {
-            const patients = patientsRes.data;
-            const rawPlans = plansRes.data || [];
-            const transformedPlans = rawPlans.map(transformPlan);
-
-            itemList.value = patients.map(p => {
-                const plan = transformedPlans.find(mp => 
-                    mp.mealPlanPatients && mp.mealPlanPatients.some(mpp => mpp.id_patient === p.id && mpp.status === 'ACTIVE')
-                );
-                
-                return {
-                    ...p,
-                    mealPlan: plan || null
-                };
-            });
+            itemList.value = patientsRes.data;
         }
     } catch (error) {
         console.error('Erro ao buscar dados:', error);

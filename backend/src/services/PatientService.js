@@ -190,8 +190,21 @@ const getAllByNutritionist = async (nutritionistId) => {
           restrictionIds = patient.patientDietaryRestrictions.map(pdr => pdr.dietaryRestriction.id);
       }
 
-      const activeMealPlanPatient = patient.mealPlanPatients && patient.mealPlanPatients.length > 0 ? patient.mealPlanPatients[0] : null;
-      const activeMealPlan = activeMealPlanPatient ? activeMealPlanPatient.mealPlan : null;
+      // Find the active meal plan, regardless of nutritionist
+      // Priority: ACTIVE > Most Recent
+      let activeMealPlan = null;
+      if (patient.mealPlanPatients && patient.mealPlanPatients.length > 0) {
+          // Filter out potential nulls first
+          const validPlans = patient.mealPlanPatients.filter(mpp => mpp.mealPlan);
+          
+          if (validPlans.length > 0) {
+               // Sort by ID desc to get usually most recent
+               validPlans.sort((a, b) => b.mealPlan.id - a.mealPlan.id);
+               
+               const active = validPlans.find(mpp => mpp.mealPlan.status === 'ACTIVE');
+               activeMealPlan = active ? active.mealPlan : validPlans[0].mealPlan;
+          }
+      }
 
       let goal = patient.goals && patient.goals.length > 0 ? patient.goals[0] : null;
       
@@ -223,9 +236,17 @@ const getAllByNutritionist = async (nutritionistId) => {
           restrictions: restrictions,
           preferences: [], 
           mealPlan: activeMealPlan ? {
-              calories: activeMealPlan.calories,
-              dietaryRestrictions: activeMealPlan.mealPlanDietaryRestrictions.map(mpdr => mpdr.dietaryRestriction.icon || mpdr.dietaryRestriction.name),
-              goalObjectives: goal ? goal.goalObjectives.map(go => ({ objective: { icon: go.objective.icon, name: go.objective.name } })) : []
+              ...activeMealPlan,
+              calories: activeMealPlan.calories, // Redundant but safe
+              dietaryRestrictions: activeMealPlan.mealPlanDietaryRestrictions?.map(mpdr => ({
+                  icon: mpdr.dietaryRestriction.icon || 'fa-solid fa-ban',
+                  name: mpdr.dietaryRestriction.name
+              })) || [],
+              goalObjectives: goal ? goal.goalObjectives.map(go => ({ objective: { icon: go.objective.icon, name: go.objective.name } })) : [],
+              // Ensure objective is present (prefer MealPlan's own, fallback to Goal's)
+              objective: activeMealPlan.objective || (goal && goal.goalObjectives && goal.goalObjectives.length > 0 
+                  ? (goal.goalObjectives.find(go => go.type === 'MAIN') || goal.goalObjectives[0])?.objective 
+                  : null)
           } : null,
           birth_date: patient.birth_date,
           target_weight: targetWeight,

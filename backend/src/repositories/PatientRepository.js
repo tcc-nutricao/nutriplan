@@ -39,10 +39,39 @@ const findByNutritionistId = async (idNutritionist) => {
         include: {
           mealPlan: {
             include: {
+              nutricionist: {
+                include: {
+                  user: true
+                }
+              },
               objective: true,
               mealPlanDietaryRestrictions: {
                 where: { deleted_at: null },
                 include: { dietaryRestriction: true }
+              },
+              mealPlanMeals: {
+                where: { deleted_at: null },
+                include: {
+                  meal: true,
+                  mealPlanRecipes: {
+                    where: { deleted_at: null },
+                    include: {
+                      recipe: {
+                        include: {
+                          recipePreferences: {
+                            include: { preference: true }
+                          },
+                          recipeFoods: {
+                            include: {
+                              food: true,
+                              unit_of_measurement: true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
