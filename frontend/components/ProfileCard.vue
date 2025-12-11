@@ -76,23 +76,23 @@
                 gap-[clamp(0.4rem, 2vw, 1rem)]
                 overflow-x-auto overflow-y-hidden no-scrollbar"
         >
+          <img
+            v-if="profilePicture"
+            :src="profilePicture"
+            alt="Foto de perfil"
+            class="rounded-full object-cover w-8 h-8 transition drop-shadow-xl active:scale-95"
+            @click="handleProfileClick"
+          />
           <div
+          v-else
             @click="handleProfileClick"
             class="cursor-pointer bg-white flex items-center justify-center 
                   p-[clamp(0.6rem,1.6vw,1.2rem)] rounded-xl 
                   transition drop-shadow-xl hover:scale-110 active:scale-95"
           >
-            <img
-              v-if="profilePicture"
-              :src="profilePicture"
-              alt="Foto de perfil"
-              class="rounded-full object-cover
-                    w-[clamp(2vw,4vw,6vw)] h-[clamp(2vw,4vw,6vw)]"
-            />
             <svg
-              v-else
               class="text-p-600 block drop-shadow-np
-                    w-[clamp(2vw,4vw,6vw)] h-[clamp(2vw,4vw,6vw)]"
+                    "
               viewBox="36.5 20 165 165"
               fill="currentColor"
               aria-hidden="true"

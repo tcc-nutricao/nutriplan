@@ -2,15 +2,16 @@
   <div class="flex flex-col w-full gap-6 px-5 md:px-10 mt-6 md:mt-0">
     <div class="flex justify-between items-center">
       <h1 class="h1">Plano Alimentar</h1>
-      <Button 
-        v-if="canGenerateSelf" 
-        @click="openGenerateModal" 
-        :disabled="isGeneratingSelf"
-        mediumPurple
-      >
-        {{ isGeneratingSelf ? 'Gerando...' : 'Gerar novo plano' }}
-      </Button>
     </div>
+    <Button 
+      v-if="canGenerateSelf" 
+      @click="openGenerateModal" 
+      :disabled="isGeneratingSelf"
+      class="w-max pr-3 pl-2"
+      icon="fa-solid fa-wand-magic-sparkles short flex justify-center"
+      :label="isGeneratingSelf ? 'Gerando...' : 'Gerar novo plano'"
+      mediumPurple
+    />
     
     <div 
       v-if="actualPlan[0] && isPlanEmpty(actualPlan[0])" 
@@ -37,12 +38,13 @@
       </div>
     </div>
     
-    <div class="grid grid-cols-6 gap-5 w-full items-stretch">
-      <MealPlanCardExtended v-if="actualPlan.length > 0" :object="actualPlan[0]" class="col-span-4 mb-10" />
-      <div class="col-span-2">
+    <div class="gap-5 w-full items-stretch">
+      <MealPlanCardExtended v-if="actualPlan.length > 0" :object="actualPlan[0]" class="hidden md:flex mb-10 w-[60%]" />
+      <MealPlanCardMobile v-if="actualPlan.length > 0" :object="actualPlan[0]" class="md:hidden mb-10" />
+      <!-- <div class="col-span-2">
         <MealPlanCard title="Meus planos" :items="actualPlan" />
-        <!-- <MealPlanCard title="Outros planos" :items="otherPlans" /> -->
-      </div>
+        <MealPlanCard title="Outros planos" :items="otherPlans" />
+      </div> -->
     </div>
 
     
@@ -117,8 +119,17 @@ const loadItems = async () => {
     const response = await $axios.get('/get-patient-meal-plan')
     const result = response.data
     
+    console.log('DEBUG: API /get-patient-meal-plan response:', result) // DEBUG LOG
+
     if (result.data) {
-        const activePlans = result.data.filter(item => item.mealPlanPatients?.[0]?.status === 'ACTIVE')
+        // Filter for ACTIVE
+        const activePlans = result.data.filter(item => {
+             const status = item.mealPlanPatients?.[0]?.status
+             // console.log(`Plan ${item.id} status:`, status) 
+             return status === 'ACTIVE'
+        })
+        
+        console.log('DEBUG: Active Plans found:', activePlans.length) // DEBUG LOG
         
         activePlans.sort((a, b) => {
           const aMeals = a.mealPlanMeals?.length || 0
@@ -130,6 +141,8 @@ const loadItems = async () => {
         })
         
         actualPlan.value = activePlans.map(transformPlan)
+        console.log('DEBUG: actualPlan:', actualPlan.value) // DEBUG LOG
+
         otherPlans.value = result.data.filter(item => item.mealPlanPatients?.[0]?.status !== 'ACTIVE').map(transformPlan)
     }
   } catch (error) {

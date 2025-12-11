@@ -24,7 +24,10 @@ const getMealPlanByPatient = async (patientId, additionalFilters = []) => {
     ]
     
     const { data: mealPlans = [], total } = await MealPlanRepository.search({ 
-      filters
+      filters,
+      limit: 100,
+      orderColumn: 'id',
+      order: 'desc'
     })
 
     if (mealPlans.length === 0) {

@@ -5,7 +5,7 @@
       :key="index"
       class="flex flex-col gap-2"
     >
-      <h2 class="text-lg font-semibold text-t uppercase">
+      <h2 class="text-md md:text-lg font-semibold text-t uppercase">
         {{ mealOfPlan.meal?.name || 'Refeição' }}
       </h2>
       
@@ -15,16 +15,21 @@
           :key="index2"
           class="bg-p-100 rounded-lg px-3 py-2 flex items-center justify-between"
         >
-          <h3 class="font-medium text-p-700">
+          <h3 class="text-sm md:text-md font-medium text-p-700">
             {{ mealPlanRecipe.recipe?.name || 'Receita' }}
-            <span class="text-sm text-gray-500 font-normal ml-1" v-if="mealPlanRecipe.recipe?.calories">
+            <span class="text-xs md:text-sm text-gray-500 font-normal ml-1" v-if="mealPlanRecipe.recipe?.calories">
               ({{ Math.round(mealPlanRecipe.recipe.calories) }} kcal)
             </span>
           </h3>
           <Button mediumPurple
-            class="w-min px-0 h-[36px]"
+            class="hidden md:flex w-min px-0 h-[36px]"
             icon="fa-solid fa-eye short flex justify-center"
             label="Ver"
+            @click="openRecipeModal(mealPlanRecipe.recipe)"
+          />
+          <Button mediumPurple
+            class="md:hidden w-min px-0 h-[36px]"
+            icon="fa-solid fa-eye short flex justify-center"
             @click="openRecipeModal(mealPlanRecipe.recipe)"
           />
         </div>

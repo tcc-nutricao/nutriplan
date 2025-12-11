@@ -31,14 +31,17 @@ const findByNutritionistId = async (idNutritionist) => {
         orderBy: { record_date: 'desc' }
       },
       patientDietaryRestrictions: {
+        where: { deleted_at: null },
         include: { dietaryRestriction: true }
       },
       mealPlanPatients: {
+        where: { deleted_at: null },
         include: {
           mealPlan: {
             include: {
               objective: true,
               mealPlanDietaryRestrictions: {
+                where: { deleted_at: null },
                 include: { dietaryRestriction: true }
               }
             }
@@ -55,6 +58,7 @@ const findById = async (id) => {
     include: {
       user: true,
       patientDietaryRestrictions: {
+        where: { deleted_at: null },
         include: { dietaryRestriction: true }
       }
     }

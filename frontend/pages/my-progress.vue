@@ -16,11 +16,11 @@
         <h1 class="h1">Meu progresso</h1>
 
         <div class="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-6 xl:grid-cols-7 gap-4 md:gap-6">
-            <Card class="col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-2">
+            <Card class="col-span-1 md:col-span-2">
                 <div class="flex flex-col space-y-2 sm:space-y-3 mb-3 sm:mb-5">
-                    <div v-for="objective in objectiveLabels" class="flex gap-2 items-center" :class="{'flex-col text-start xl:flex-row' : objective.isTitle}">
-                        <p :class="objective.isTitle ? 'text-sm sm:text-base md:text-lg font-semibold' : 'text-xs sm:text-sm'" class="text-t">{{ objective.label }} </p>
-                        <h3 :class="objective.isTitle ? 'text-lg sm:text-xl md:text-2xl font-bold text-p-600' : 'text-sm sm:text-base md:text-lg font-semibold text-t'">{{ objective.format ? objective.format(items[objective.value]) : items[objective.value] ?? '' }}</h3>
+                    <div v-for="objective in objectiveLabels" class="flex gap-2 items-center w-full">
+                        <p :class="objective.isTitle ? 'text-sm sm:text-base md:text-lg font-semibold text-nowrap' : 'text-xs sm:text-sm'" class="text-t">{{ objective.label }} </p>
+                        <h3 :class="objective.isTitle ? 'text-md sm:text-lg md:text-xl font-bold text-p-600' : 'text-sm sm:text-base md:text-lg font-semibold text-t'">{{ objective.format ? objective.format(items[objective.value]) : items[objective.value] ?? '' }}</h3>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-2">
@@ -41,7 +41,29 @@
                 </div>
             </Card>
 
-            <Card class="col-span-1 md:col-span-3 lg:col-span-3 xl:col-span-4">
+            <div class="md:hidden flex flex-col gap-3">
+                <Card centered class="text-center flex flex-col gap-0 pt-3 pb-3 justify-between items-center">
+                        <h1 class="text-2xl font-bold text-p-600 mb-0">{{ formatNumber(items.metaAchieved) }}%</h1>
+                        <h3 class="text-xs font-medium text-gray-600 mb-2">da meta atingida</h3>
+                        <ProgressBar :progress="items.metaAchieved"  class="mb-0 pb-0"/>
+                </Card>
+                <div class="flex gap-3 w-full">
+                    <Card centered class="text-center w-full">
+                        <div class="flex flex-col">
+                            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-p-600 mb-0">{{ formatNumber(items.imc) }}</h1>
+                            <h3 class="text-xs sm:text-sm font-medium text-gray-600">IMC atual</h3>
+                        </div>
+                    </Card>
+                    <Card centered class="text-center w-full">
+                        <div class="flex flex-col">
+                            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-p-600 mb-0">{{ progress.length > 0 ? progress.length : 0 }}</h1>
+                            <h3 class="text-xs sm:text-sm font-medium text-gray-600">registros de peso</h3>
+                        </div>
+                    </Card>
+                </div>
+            </div>
+
+            <Card class="col-span-1 md:col-span-3 lg:col-span-3 xl:col-span-4 mb-10">
                 <div class="flex flex-col justify-start items-center gap-3 sm:gap-5 mb-3">
                     <div class="flex justify-between items-center w-full px-4">
                         <h2 class="text-xl sm:text-2xl font-bold text-gray-800">Progresso</h2>
@@ -72,7 +94,7 @@
             </Card>
 
             <!-- <Card class="col-span-1 md:col-span-1"> -->
-                <div class="col-span-1 md:col-span-1 h-max space-y-3 sm:space-y-4">
+                <div class="hidden md:flex flex-col col-span-1 md:col-span-1 h-max space-y-3 sm:space-y-4">
                     <Card class="text-center">
                         <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-p-600 mb-0">{{ formatNumber(items.metaAchieved) }}%</h1>
                         <h3 class="text-xs sm:text-sm font-medium text-gray-600 mb-2">da meta atingida</h3>

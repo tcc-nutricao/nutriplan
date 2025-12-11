@@ -1,5 +1,5 @@
 <template>
-    <div class="flex gap-2 justify-center">
+    <div class="flex flex-wrap gap-2 justify-center">
         <div 
             v-for="(item, index) in safeItems"
             :key="index"
@@ -7,7 +7,7 @@
         >
             <IconSolid :icon="item.icon" color="text-gray-600" md />
             <!-- <IconSolid v-if="minicard" icon="fa-times" color="text-red-500" md /> -->
-            <p v-if="!minicard" class="text-gray-600 text-sm ml-1">{{ item.name }}</p>
+            <p v-if="!minicard" class="text-gray-600 text-sm ml-1 text-nowrap">{{ item.name }}</p>
         </div>
     </div>
   

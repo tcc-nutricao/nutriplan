@@ -3,9 +3,9 @@
     class="font-sora flex items-center justify-center min-h-screen bg-gradient-to-br from-p-500 via-p-600 to-p-700 px-4"
   >
     <div
-      class="w-full max-w-[420px] sm:max-w-xl mx-auto p-5 sm:p-8 md:p-[70px] md:py-[40px] bg-gradient-to-br from-white to-p-200 rounded-tl-[70px] rounded-br-[70px] rounded-bl-xl rounded-tr-xl shadow-custom"
+      class="w-full max-w-[420px] sm:max-w-xl mx-auto py-5 px-8 sm:p-8 md:p-[70px] md:py-[40px] bg-gradient-to-br from-white to-p-200 rounded-tl-[70px] rounded-br-[70px] rounded-bl-xl rounded-tr-xl shadow-custom"
     >
-      <Logo class="mb-5 text-5xl sm:text-6xl md:text-7xl mx-auto" />
+      <Logo class="mb-5 text-[2.6em] sm:text-6xl md:text-7xl mx-auto" />
       <div v-if="isLoading" class="flex items-center justify-center text-p-950 text-lg sm:text-xl md:text-2xl font-semibold">
         <svg class="animate-spin -ml-1 mr-3 h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-p-600"
           xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

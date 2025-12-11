@@ -29,7 +29,7 @@ const excludeNames = [
   'Pudim de Gelatina', 'Geladinho de Suco', 'Bolo de Areia', 'Bolo de Coco Simples', 
   'Salsicha na Airfryer', 'Salsicha no Molho', 'Mousse de Limão Rápida', 
   'Pipoca Doce Simples', 'Torrada com Geleia', 'Pão com Creme de Avelã',
-  'Salsicha Cozida', 'Macarrão com Queijo' 
+  'Salsicha Cozida', 'Macarrão com Queijo', 'Pão de alho'
 ];
 
 const healthyRecipes = recipes.filter(r => !excludeNames.includes(r.name));
@@ -46,17 +46,17 @@ function getPreferencesForRecipe(recipe) {
 
   const has = (regex) => regex.test(text);
 
-  const hasMeat = has(/carne|frango|peixe|bacon|presunto|linguiça|salsicha|atun|sardinha|bife/);
-  const hasFish = has(/peixe|atun|sardinha|camarão|frutos do mar/);
+  const hasMeat = has(/carne|frango|peixe|bacon|presunto|linguiça|salsicha|atum|sardinha|bife|iscas|bolonhesa/);
+  const hasFish = has(/peixe|atum|sardinha|camarão|frutos do mar|salmão/);
   const hasDairy = has(/leite|queijo|manteiga|iogurte|requeijão|creme de leite|coalhada|skyr/);
   const hasEgg = has(/ovo|clara|gema/);
   const hasGluten = has(/farinha de trigo|pão|macarrão|biscoito|torrada|lasanha|pizza|bolo|aveia/); 
-  const hasSugar = has(/açúcar|leite condensado|mel|chocolate|geleia|doce|mousse|gelatina|caramelo/);
+  const hasSugar = has(/açúcar|leite condensado|\bmel\b|chocolate|geleia|\bdoce\b|mousse|gelatina|\bcaramelo\b/);
   const hasNuts = has(/nozes|castanha|amendoim|avelã|amêndoa/);
 
   if (!hasMeat && !hasFish) {
     prefs.push('Vegetariano');
-    if (!hasDairy && !hasEgg && !has(/mel/)) {
+    if (!hasDairy && !hasEgg && !has(/\bmel\b/)) {
       prefs.push('Vegano');
     }
   }
@@ -68,7 +68,17 @@ function getPreferencesForRecipe(recipe) {
   if (!hasNuts) prefs.push('Sem nozes');
 
   if (recipe.preparation_time <= 15) prefs.push('Fácil');
-  if (hasSugar || has(/fruta|banana|maçã|manga|abacaxi|uva|morango|laranja/)) prefs.push('Doce'); 
+  
+  // Logic for Doce (Sweet)
+  // Exclude savory items that might accidentally key off sugar (like tomato sauce) or "batata doce" (which matches "doce" but is essentially savory in main dishes, though sweet-ish)
+  // Also excluding "Molho de tomate" explicitly if it contains "açúcar".
+  const isSavoryExclusion = has(/molho de tomate|sopa de cebola|omelete|molho de mostarda/);
+  
+  if ((hasSugar || has(/fruta|banana|maçã|manga|abacaxi|uva|morango|laranja/)) && !isSavoryExclusion) {
+    // Determine if it is likely a main savory dish despite having "doce" or "açúcar"
+    // For now, we trust the exclusions and the stricter regex.
+    prefs.push('Doce');
+  } 
   
   if (has(/salada|legumes|verdura|couve|espinafre|brócolis|cenoura|abobrinha|pepino/)) {
       prefs.push('Emagrecer');

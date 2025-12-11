@@ -19,7 +19,7 @@
 
       <Flex gap-5>
         <Button outlined lightPurple label="Voltar" @click="close" class="w-full" />
-        <Button mediumPurple label="OK" @click="$emit('confirm')" class="w-full" />
+        <Button mediumPurple :label="btnLabel" @click="$emit('confirm')" class="w-full" />
       </Flex>
     </div>
   </div>
@@ -33,10 +33,11 @@ import { ref } from 'vue'
 const props = defineProps({
     title: String,
     content: String,
-    text: String
+    text: String,
+    btnLabel: { type: String, default: 'OK' }
 })
 
-const emits = defineEmits(['closeModal'])
+const emits = defineEmits(['closeModal', 'confirm'])
 
 const isOpen = ref(false)
 

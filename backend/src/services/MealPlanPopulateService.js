@@ -35,13 +35,15 @@ const populateMealPlan = async (mealPlanId, options = {}) => {
       if (patientRestrictions.some(r => r.includes('glúten')) && !recipePrefs.includes('sem glúten')) return false
       if (patientRestrictions.some(r => r.includes('lactose')) && !recipePrefs.includes('sem lactose')) return false
       if (patientRestrictions.some(r => r.includes('açúcar')) && !recipePrefs.includes('sem açúcar')) return false
-      if (patientRestrictions.some(r => r.includes('carne')) && !recipePrefs.some(p => p.includes('vegetariano') || p.includes('vegano'))) return false
+      if (patientRestrictions.some(r => r.includes('carne') || r.includes('vegetariano') || r.includes('vegano')) && !recipePrefs.some(p => p.includes('vegetariano') || p.includes('vegano'))) return false
       
       return true
     })
 
     if (validRecipes.length === 0) {
-      console.warn('⚠️ Nenhuma receita compatível com as restrições encontradas. Usando todas.')
+      console.warn('⚠️ Nenhuma receita compatível com as restrições encontradas. Usando todas (mas isso pode violar restrições).')
+      // Fallback: If strict filtering removes EVERYTHING, maybe we shouldn't just "Use All"?
+      // But adhering to the previous logic style:
     }
     
     const recipesPool = validRecipes.length > 0 ? validRecipes : allRecipes

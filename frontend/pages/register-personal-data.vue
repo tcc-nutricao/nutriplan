@@ -90,16 +90,7 @@
         <div
           class="col-span-1 md:col-span-2 flex flex-col md:flex-row justify-center gap-3 mt-6"
         >
-          <Button
-            gray
-            outlined
-            class="w-full md:w-max px-3 h-[42px] shadow-lg border-2 border-gray-300 transition"
-            @click="navigateTo('/profile')"
-          >
-            Pular
-          </Button>
-
-          <Button class="w-full md:w-auto" mediumPurple @click.prevent="save">
+          <Button class="w-full md:w-auto px-3" mediumPurple @click.prevent="save">
             Salvar
           </Button>
         </div>
@@ -141,7 +132,6 @@ const errors = ref({
 const genderOptions = [
   { value: "FEM", label: "Feminino" },
   { value: "MASC", label: "Masculino" },
-  { value: "OTHER", label: "Outro" },
   { value: "NONE", label: "Prefiro não informar" },
 ];
 const restrictionOptions = ref([]);

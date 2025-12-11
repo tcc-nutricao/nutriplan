@@ -3,15 +3,17 @@
         <div class="bg-p-600 rounded-t-lg w-full h-full text-white text-center p-2">
             <p class="font-sora text-lg">{{ object.calories }} kcal</p>
         </div>
-        <RestrictionsIconBar v-if="hasRestrictions" :items="object.dietaryRestrictions" minicard />
-        <div class="pb-3 px-3">
-            <div 
-                class="flex items-center gap-1 text-sm justify-start"
-                v-if="object.objective"
-            >
-                <IconSolid :icon="object.objective.icon" color="text-p-600" sm />
-                <p class="font-sora text-p-950 font-semibold text-[0.85em]">{{ object.objective.name }}</p>
-            </div>  
+        <div class="flex justify-between items-center md:flex-col gap-2 px-4 pb-3">
+            <div class="px-3">
+                <div 
+                    class="flex items-center gap-1 text-sm justify-start"
+                    v-if="object.objective"
+                >
+                    <IconSolid :icon="object.objective.icon" color="text-p-600" sm />
+                    <p class="font-sora text-p-950 font-semibold text-[0.85em]">{{ object.objective.name }}</p>
+                </div>  
+            </div>
+            <RestrictionsIconBar v-if="hasRestrictions" :items="object.dietaryRestrictions" minicard />
         </div>
     </div>
 </template>

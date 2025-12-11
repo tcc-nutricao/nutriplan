@@ -3,8 +3,8 @@
     <Label class="mb-1" v-if="label" :label="label" :required="required" :error="error" />
 
     <button @click="toggleDropdown"
-      class="relative w-full cursor-pointer rounded-xl border-2 text-sm h-[42px] bg-white py-2 pl-3 pr-10 text-left focus:outline-none transition"
-      :class="classes" 
+      class="relative w-full cursor-pointer rounded-xl border-2 border-p-g2 text-sm h-[42px] bg-white py-2 pl-3 pr-10 text-left focus:outline-none transition"
+      :class="{'border-red-500': error}" 
       aria-haspopup="listbox" 
       :aria-expanded="isOpen"
     >
@@ -26,8 +26,8 @@
       leave-to-class="transform scale-95 opacity-0 -translate-y-2"
     >
       <ul v-if="isOpen"
-        class="absolute ring-2 ring-p-200 border-1 border-p-300 z-10 mt-1 max-h-60 w-full overflow-auto rounded-xl bg-white py-2 text-base shadow-lg focus:outline-none"
-        style="min-width: max-content;"
+        :style="dropdownStyle"
+        class="absolute top-full md:left-0 md:translate-x-0 md:translate-y-0 z-[1005] md:z-10 mt-1 max-h-[50vh] md:max-h-60 overflow-auto rounded-xl bg-white py-2 text-base shadow-2xl md:shadow-lg focus:outline-none ring-2 ring-p-200 border-1 border-p-300"
         role="listbox">
         <li v-for="option in options" :key="option.value" @click="selectOption(option)"
           class="relative cursor-pointer select-none py-[10px] px-4 mx-2 rounded-lg text-p-950 hover:bg-p-100 hover:text-p-700 transition"
@@ -42,7 +42,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue';
 
 const props = defineProps({
   modelValue: [Array, String, Number, Boolean],
@@ -68,20 +68,26 @@ const props = defineProps({
 const emits = defineEmits(['update:modelValue']);
 
 const isOpen = ref(false);
+const dropdownStyle = ref({});
 
-const classes = computed(() => {
-  const hasError = !!props.error;
+const updatePosition = () => {
+  if (window.innerWidth < 768 && selectMenu.value) {
+    const rect = selectMenu.value.getBoundingClientRect();
+    dropdownStyle.value = {
+      left: `${-rect.left + 14}px`,
+      width: 'calc(100vw - 28px)',
+    };
+  } else {
+    dropdownStyle.value = {};
+  }
+};
 
-  return {
-    'border-red-500': hasError,
-    'text-red-500': hasError,
-    'border-p-600': !hasError && isOpen.value,
-    'border-p-g2': !hasError && !isOpen.value,
-  };
-});
-
-const toggleDropdown = () => {
+const toggleDropdown = async () => {
   isOpen.value = !isOpen.value;
+  if (isOpen.value) {
+    await nextTick();
+    updatePosition();
+  }
 };
 
 const selectOption = (option) => {
@@ -104,9 +110,13 @@ const handleClickOutside = (event) => {
 
 onMounted(() => {
   document.addEventListener('click', handleClickOutside);
+  window.addEventListener('resize', () => {
+      if(isOpen.value) updatePosition();
+  });
 });
 
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside);
+  window.removeEventListener('resize', updatePosition);
 });
 </script>
