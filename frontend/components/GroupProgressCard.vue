@@ -3,13 +3,16 @@
         <div class="flex">
             <h2 class="h2">Progresso</h2>
         </div>
-        <div class="flex flex-col w-full px-10 gap-8">
+
+        <div class="flex flex-col w-full md:px-10 gap-8">
             <div>
-                <div class="flex justify-between items-center mb-3 gap-8">
+                <!-- PROBLEMA CORRIGIDO AQUI -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-3 gap-3 md:gap-8">
                     <h3 class="text-lg text-center" :class="endingClass(daysRemaining)">
                         {{ daysRemaining }}
                     </h3>
-                    <div class="flex gap-8">
+
+                    <div class="flex flex-col md:flex-row gap-2 md:gap-8 text-center md:text-left">
                         <p class="text-md text-gray-600">
                             Início: <span class="h3main">{{ formattedStartDate }}</span>
                         </p>
@@ -18,10 +21,12 @@
                         </p>
                     </div>
                 </div>
+
                 <div class="flex justify-between items-center mb-1">
                     <h3 class="h3">Progresso geral</h3>
                     <span class="text-lg font-bold text-p-700">{{ groupProgress }}%</span>
                 </div>
+
                 <ProgressBar :progress="groupProgress" :height="'6'" />
             </div>
 
@@ -30,7 +35,10 @@
                 <div class="flex flex-col gap-3">
                     <div v-for="participant in group.participants" :key="participant.id">
                         <div class="flex justify-between items-center mb-0">
-                            <p class=" text-md text-gray-700" :class="participant.name === 'Você' ? 'font-black text-p-600' : ''">{{ participant.name }}</p>
+                            <p class="text-md text-gray-700"
+                               :class="participant.name === 'Você' ? 'font-black text-p-600' : ''">
+                                {{ participant.name }}
+                            </p>
                             <span class="text-md font-bold text-gray-600">{{ participant.progress }}%</span>
                         </div>
                         <p class="font-light text-sm text-gray-600 mb-1">{{ participant.objective }}</p>
@@ -41,6 +49,7 @@
         </div>
     </div>
 </template>
+
 
 <script setup>
 import { computed } from 'vue';

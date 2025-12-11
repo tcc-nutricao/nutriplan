@@ -17,6 +17,7 @@
     "chartjs-plugin-annotation": "^3.1.0",
     "echarts": "^6.0.0",
     "html2pdf.js": "^0.12.1",
+    "install": "^0.13.0",
     "nuxt": "^4.0.3",
     "pdfmake": "^0.2.20",
     "postcss": "^8.5.6",

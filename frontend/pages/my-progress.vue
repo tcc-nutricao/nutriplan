@@ -1,6 +1,6 @@
 <template>
-    <div class="flex flex-col gap-3 px-4 sm:px-6 md:px-10 pt-6 md:pt-0">
-        <!-- Hidden PDF Template -->
+    <div class="flex flex-col w-full gap-6 px-5 md:px-10 mt-6 md:mt-0">
+    <!-- Hidden PDF Template -->
         <div style="position: fixed; left: -9999px; top: 0; z-index: -1;">
             <div ref="pdfContent">
                 <ProgressPdfTemplate 

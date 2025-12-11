@@ -1,15 +1,28 @@
 <template>
     <div 
         v-if="!loading"
-        class="flex justify-start items-center px-3 py-3 h-[120px] rounded-3xl shadow-lg gap-5 bg-white border-2 cursor-pointer transition-all duration-100 active:scale-[98%]"
-        :class="{'border-p-600 shadow-xl shadow-p-600/20 w-[100%] transition': isSelected}, {'w-[85%]' : !isSelected}"
+        class="
+            flex justify-start items-start px-3 py-3 rounded-3xl shadow-lg gap-5 bg-white 
+            border-2 cursor-pointer transition-all duration-100 active:scale-[98%]
+            w-full"
+        :class="{
+            'border-p-600 shadow-xl shadow-p-600/20 transition': isSelected,
+            'md:w-[100%]': isSelected,
+            'md:w-[85%]': !isSelected
+        }"
         @click="notificarClique"
     >
-        <img :src="picture || defaultImage" alt="Foto do grupo" class="h-full aspect-square object-cover rounded-2xl" />
+        <img 
+            :src="picture || defaultImage" 
+            alt="Foto do grupo" 
+            class="w-20 h-20 aspect-square object-cover rounded-2xl flex-shrink-0"
+        />
 
-        <div class="flex flex-col items-start w-full justify-between gap-2 h-full">
+        <div class="flex flex-col items-start w-full justify-between gap-2">
             <div class="flex flex-col">
-                <h3 class="h3" :class="{'h3main' : isSelected}">{{title}}</h3>
+                <h3 class="h3 leading-tight break-words" :class="{'h3main' : isSelected}">
+                    {{ title }}
+                </h3>
                 <p class="text-md">{{participants}} participante{{participants > 1 ? 's' : participants < 1 ? 's' : ''}}</p>
             </div>
             <p class="text-md font-semibold" :class="endingClass(daysRemaining)">{{daysRemaining}}</p>

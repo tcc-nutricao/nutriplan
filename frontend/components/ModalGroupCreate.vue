@@ -17,22 +17,24 @@
         @drop.prevent="onDrop"
       >
         <div
-          class="bg-white rounded-3xl py-7 px-9 w-full max-w-lg shadow-lg relative max-h-[90vh] overflow-y-auto modal-container transition-transform duration-300 ease"
+          class="bg-white rounded-3xl w-full max-w-lg shadow-lg relative max-h-[90vh] overflow-y-auto modal-container transition-transform duration-300 ease mx-4 md:mx-0"
           :class="{ 'is-dragging': isDragging }"
         >
-          <button
-            class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-50"
-            @click="$emit('close')"
-          >
-            &times;
-          </button>
+          <div class="p-4 py-7 px-9">
+            <button
+              class="absolute top-4 right-4 md:top-5 md:right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-50"
+              @click="$emit('close')"
+            >
+              &times;
+            </button>
 
           <h2 class="text-2xl font-semibold text-np mb-4">
             {{ title }} grupo
           </h2>
 
-          <div class="flex gap-3 justify-between w-full">
-            <InputText
+            <div class="flex flex-col md:flex-row gap-3 w-full">
+              <div class="flex-1">
+              <InputText
               class="mb-5 w-full"
               label="Nome do grupo"
               placeholder="Insira o nome do grupo"
@@ -40,12 +42,13 @@
               :error="errors.name"
               required 
             />
-            <div class="flex flex-col">
+              </div>
+              <div class="w-full md:w-56 flex flex-col">
 
-              <div class="flex w-full items-center">
+                <div class="flex items-center mb-2">
                 <Checkbox
                 label="Data de término"
-                class="mb-1"s
+                class="mb-1"
                 v-model="hasEndDate"
                 @update:modelValue="errors.endDate = null; object.endDate = null"
                 />
@@ -61,11 +64,11 @@
               <Error v-if="errors.endDate" :message="errors.endDate" class="mt-1" />
             </div>
           </div>
-          <Label label="Foto de capa" class="mb-2" />
-          <div class="flex flex-col w-full">
-            <div class="flex w-full gap-7 items-center">
-              <div class="flex items-center justify-center w-[9rem] h-[9rem] rounded-xl bg-p-200 cursor-pointer transition active:scale-95 group overflow-hidden flex-shrink-0"
-                @click="triggerFileInput">
+          <Label label="Foto de capa" class="mb-2 mt-4" />
+            <div class="flex flex-col w-full">
+              <div class="flex w-full gap-7 items-center">
+                <div class="flex items-center justify-center w-[9rem] h-[9rem] rounded-xl bg-p-200 cursor-pointer transition active:scale-95 group overflow-hidden flex-shrink-0"
+                  @click="triggerFileInput">
                 <img v-if="object.image" :src="object.image" alt="Prévia da capa do grupo" class="w-full h-full object-cover">
                 <i v-else class="fa-solid fa-arrow-up-from-bracket text-[5rem] text-np group-hover:scale-[110%] transition group-active:scale-100"></i>
               </div>
@@ -100,6 +103,7 @@
             </div>
           </div>
         </div>
+      </div>
       </div>
       <ModalAvatarEdit v-else
         v-if="showModal == 'groupEdit'"
