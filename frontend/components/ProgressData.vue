@@ -97,9 +97,9 @@ const formatDate = (dateString) => {
 };
 
 const confirmDelete = async (item) => {
-  if (confirm(`Tem certeza que deseja excluir o registro de ${item.weight}kg de ${formatDate(item.date)}?`)) {
+  // if (confirm(`Tem certeza que deseja excluir o registro de ${item.weight}kg de ${formatDate(item.date)}?`)) {
     await deleteItem(item.id);
-  }
+  // }
 };
 
 const deleteItem = async (id) => {

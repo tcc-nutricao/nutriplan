@@ -87,7 +87,7 @@
           v-else
             @click="handleProfileClick"
             class="cursor-pointer bg-white flex items-center justify-center 
-                  p-[clamp(0.6rem,1.6vw,1.2rem)] rounded-xl 
+                  h-8 w-8 rounded-xl p-1
                   transition drop-shadow-xl hover:scale-110 active:scale-95"
           >
             <svg

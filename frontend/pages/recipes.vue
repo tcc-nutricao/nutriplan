@@ -46,7 +46,7 @@
                 </div>
             </div>
 
-            <RecipeCard  class="w-[65%]" :item="selectedItem" @toggleFavorite="handleToggleFavorite" />
+            <RecipeCard  wdth="65" :item="selectedItem" @toggleFavorite="handleToggleFavorite" />
         
         </div>
 
@@ -87,7 +87,7 @@
                         v-if="item.id === selectedItemId"
                         :item="item"
                         @toggleFavorite="handleToggleFavorite"
-                        class="w-full"
+                        wdth="100"
                     />
                 </div>
                 <Pagination

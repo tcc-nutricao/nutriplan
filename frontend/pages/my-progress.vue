@@ -222,7 +222,7 @@ const chartData = computed(() => {
 
     const labels = progress.value.map(registro => {
         const data = new Date(registro.date);
-        return data.toLocaleDateString('pt-BR', { month: 'long' });
+        return data.toLocaleDateString('pt-BR', { day: 'numeric', month: 'short' });
     });
     
     const data = progress.value.map(registro => registro.weight);
