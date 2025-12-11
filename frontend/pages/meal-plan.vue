@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-3 px-10">
+  <div class="flex flex-col w-full gap-6 px-5 md:px-10 mt-6 md:mt-0">
     <div class="flex justify-between items-center">
       <h1 class="h1">Plano Alimentar</h1>
       <Button 

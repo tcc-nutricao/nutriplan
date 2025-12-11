@@ -961,7 +961,6 @@ const scrollToPatientCard = () => {
 .stickyProfile {
     position: sticky;
     top: 30px;
-    align-self: flex-start;
   }
 
   @keyframes fade-shadow {

@@ -56,7 +56,6 @@ onMounted(() => {
   .stickyProfile {
     position: sticky;
     top: 20px;
-    align-self: flex-start;
   }
 
 .page-content {

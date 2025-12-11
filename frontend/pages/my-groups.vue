@@ -1,45 +1,94 @@
 <template>
-  <div class="flex flex-col w-full gap-3 px-10">
+  <div class="flex flex-col w-full gap-6 px-5 md:px-10 mt-6 md:mt-0">
     <div class="flex w-full">
       <h1 class="h1">Meus Grupos</h1>
     </div>
-    <div class="flex w-full gap-5">
-      <div class="flex flex-col gap-5 w-[30%]">
+    <div class="flex flex-col md:flex-row w-full gap-6 md:gap-5">
+      <div class="w-full md:w-[30%] order-1 md:order-1 sticky top-0 z-50 md:top-6 md:self-start">
+        <div class="flex flex-col gap-6">
         <Card>
           <Button mediumPurple
             class="w-full px-3 h-[42px] text-nowrap shadow-lg border-2 mb-4 border-p-500 shadow-p-600/20 transition"
-            icon="fa-solid fa-plus short flex justify-center" label="Criar novo grupo" @click="openCreateModal" />
+            icon="fa-solid fa-plus short flex justify-center"
+            label="Criar novo grupo"
+            @click="openCreateModal" />
           <div class="flex flex-col 2xl:flex-row items-start 2xl:items-end gap-3 border-t-2 pt-3 mt-2 border-p-200">
-            <InputText class="mb-0 w-full" label="Entrar em um grupo" placeholder="Digite o código" v-model="groupCode"
-              :error="groupCodeError" @update:modelValue="handleGroupCodeInput" @keyup.enter="joinGroup" />
+            <InputText class="mb-0 w-full"
+              label="Entrar em um grupo"
+              placeholder="Digite o código"
+              v-model="groupCode"
+              :error="groupCodeError"
+              @update:modelValue="handleGroupCodeInput"
+              @keyup.enter="joinGroup" />
             <Button mediumPurple
               class="w-full 2xl:w-max px-3 h-[42px] shadow-lg border-2 border-p-500 shadow-p-600/20 transition"
-              label="Entrar" @click="joinGroup" />
+              label="Entrar"
+              @click="joinGroup" />
           </div>
         </Card>
-        <div v-if="!pending && itemList.length > 0" class="flex flex-col gap-3 w-full mb-10">
-          <GroupButton v-for="item in itemList" :key="item.id" :title="item.title"
-            :daysRemaining="item.endDate ? calculateDaysRemaining(item.endDate) : daysSince(item.startDate)"
-            :participants="item.participantCount" :picture="item.picture" :is-selected="item.id === selectedItemId"
-            @selected="selectItem(item.id)" />
+        <div
+          v-if="!pending && itemList.length > 0"
+          class="flex flex-col gap-3 w-full mb-10">
+          <template v-for="item in itemList" :key="item.id">
+            <GroupButton
+              :title="item.title"
+              :daysRemaining="item.endDate ? calculateDaysRemaining(item.endDate) : daysSince(item.startDate)"
+              :participants="item.participantCount"
+              :picture="item.picture"
+              :is-selected="item.id === selectedItemId"
+              @selected="selectItem(item.id)" />
+            <div
+              v-if="item.id === selectedItemId"
+              class="flex flex-col gap-6 md:hidden"
+            >
+              <GroupCard
+                :group="selectedItem"
+                @edit="openEditModal"
+                @delete="openDeleteModal"
+                @leave="openLeaveModal" />
+              <GroupProgressCard :group="selectedItem" />
+            </div>
+          </template>
+        </div>
         </div>
       </div>
-      <div v-if="!pending && selectedItem" class="flex flex-col gap-5 w-[65%]">
-        <GroupCard :group="selectedItem" @edit="openEditModal" @delete="openDeleteModal" @leave="openLeaveModal" />
-
+      <div
+        v-if="!pending && selectedItem"
+        class="hidden md:flex flex-col gap-6 w-full md:w-[65%] md:order-2"
+      >
+        <GroupCard
+          :group="selectedItem"
+          @edit="openEditModal"
+          @delete="openDeleteModal"
+          @leave="openLeaveModal" />
         <GroupProgressCard :group="selectedItem" />
       </div>
       <div v-else
-        class="stickyProfile bg-white rounded-3xl text-nowrap shadow-lg border-2 p-6 py-20 w-[70%] flex items-center justify-center text-gray-500">
+        class="bg-white rounded-3xl shadow-lg border-2 p-6 py-20
+               w-full md:w-[70%] flex items-center justify-center
+               text-gray-500 order-3 md:order-3">
         <h3 class="h2">{{ pending ? 'Carregando...' : 'Crie ou entre em um grupo!' }}</h3>
       </div>
     </div>
-    <ModalGroupCreate v-if="showModal === 'Criar' || showModal === 'Editar'" :title="showModal"
-      :initialData="showModal === 'Editar' ? selectedItem : {}" @close="closeModal" @save="handleSaveGroup" />
-    <ModalDanger v-if="showModal == 'delete' || showModal == 'leave'" title="Tem certeza?"
-      :content="showModal === 'delete' ? 'Esse grupo também será apagado para todos os participantes permanentemente.' : 'Ao sair do grupo, será necessário entrar com o mesmo código novamente.'"
-      :btnLabel="showModal === 'delete' ? 'Apagar' : 'Sair'" :confirm="showModal" 
-      @leave="handleGroupLeave" @delete="handleGroupDelete" @closeModal="closeModal" />
+    <div class="p-4">
+    <ModalGroupCreate
+      v-if="showModal === 'Criar' || showModal === 'Editar'"
+      :title="showModal"
+      :initialData="showModal === 'Editar' ? selectedItem : {}"
+      @close="closeModal"
+      @save="handleSaveGroup" />
+    </div>
+    <ModalDanger
+      v-if="showModal == 'delete' || showModal == 'leave'"
+      title="Tem certeza?"
+      :content="showModal === 'delete'
+        ? 'Esse grupo também será apagado para todos os participantes permanentemente.'
+        : 'Ao sair do grupo, será necessário entrar com o mesmo código novamente.'"
+      :btnLabel="showModal === 'delete' ? 'Apagar' : 'Sair'"
+      :confirm="showModal"
+      @leave="handleGroupLeave"
+      @delete="handleGroupDelete"
+      @closeModal="closeModal" />
   </div>
 </template>
 

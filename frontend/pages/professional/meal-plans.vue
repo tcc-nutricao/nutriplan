@@ -1,5 +1,5 @@
 <template>
-    <div class="px-10 flex flex-col gap-3">
+    <div class="flex flex-col w-full gap-6 px-5 md:px-10 mt-6 md:mt-0">
         <h1 class="h1">Planos Alimentares</h1>
         <div class="flex flex-row gap-5 justify-between">
              <div class="flex flex-col w-full mb-8">
