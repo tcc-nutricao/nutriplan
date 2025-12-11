@@ -201,7 +201,7 @@ const getAllByNutritionist = async (nutritionistId) => {
                // Sort by ID desc to get usually most recent
                validPlans.sort((a, b) => b.mealPlan.id - a.mealPlan.id);
                
-               const active = validPlans.find(mpp => mpp.mealPlan.status === 'ACTIVE');
+               const active = validPlans.find(mpp => mpp.status === 'ACTIVE');
                activeMealPlan = active ? active.mealPlan : validPlans[0].mealPlan;
           }
       }
