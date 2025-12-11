@@ -1,5 +1,5 @@
 <template>
-  <div class="items-center flex gap-3 flex-wrap justify-center">
+  <div class="items-center flex gap-3 flex-wrap justify-center sm:flex-nowrap">
     <Button
       v-for="(day, index) in weekDays"
       :key="index"

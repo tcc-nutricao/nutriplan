@@ -83,9 +83,29 @@ const props = defineProps({
 const emits = defineEmits(["update:modelValue"]);
 
 const isOpen = ref(false);
+const dropdownStyle = ref({});
 
-const toggleDropdown = () => {
+const updatePosition = () => {
+  if (window.innerWidth < 768 && selectMenu.value) {
+    const rect = selectMenu.value.getBoundingClientRect();
+    dropdownStyle.value = {
+      left: `${-rect.left + 14}px`,
+      width: 'calc(100vw - 28px)',
+    };
+  } else {
+    dropdownStyle.value = {};
+  }
+};
+const toggleDropdown = async () => {
   isOpen.value = !isOpen.value;
+  if (isOpen.value) {
+    await nextTick();
+    updatePosition();
+  }
+  if (isOpen.value) {
+    await nextTick();
+    updatePosition();
+  }
 };
 
 const isSelected = (value) => {
@@ -95,8 +115,6 @@ const isSelected = (value) => {
 const toggleOption = (option) => {
   let newValue = [...props.modelValue];
 
-  // Logic for exclusive options (handled by parent usually, but we can enforce basic toggle here)
-  // If the parent handles exclusivity, we just emit the new array.
 
   const index = newValue.indexOf(option.value);
   if (index === -1) {
@@ -106,7 +124,6 @@ const toggleOption = (option) => {
   }
 
   emits("update:modelValue", newValue);
-  // Keep dropdown open for multiple selection
 };
 
 const selectMenu = ref(null);

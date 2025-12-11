@@ -153,8 +153,7 @@ const errors = ref({
 const genderOptions = [
   { value: "FEM", label: "Feminino" },
   { value: "MASC", label: "Masculino" },
-  { value: "OTHER", label: "Outro" },
-  { value: "NONE", label: "Prefiro não informar" },
+  { value: "NONE", label: "Não informar" },
 ];
 const restrictionOptions = ref([]);
 const preferenceOptions = ref([]);

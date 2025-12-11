@@ -110,7 +110,7 @@
                                     <div class="flex justify-between">
                                         <p>Sexo:</p>
                                         <p class="text-p-600 font-bold">
-                                            {{ item.gender === 'F' ? 'Feminino' : 'Masculino' }}
+                                            {{ item.gender === 'FEM' ? 'Feminino' : item.gender === 'MASC' ? 'Masculino' : 'Não informado' }}
                                         </p>
                                     </div>
                                     <div class="flex justify-between">
@@ -259,7 +259,7 @@
                             <div class="flex justify-between">
                                 <p>Sexo:</p>
                                 <p class="text-p-600 font-bold">
-                                    {{ selectedItem.gender === 'F' ? 'Feminino' : 'Masculino'}}
+                                    {{ selectedItem.gender === 'FEM' ? 'Feminino' : selectedItem.gender === 'MASC' ? 'Masculino' : 'Não informado' }}
                                 </p>
                             </div>
                             <div class="flex justify-between">

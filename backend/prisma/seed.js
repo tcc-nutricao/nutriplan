@@ -39,7 +39,7 @@ async function main() {
     where: { email: "patient@example.com" },
     update: {},
     create: {
-      name: "Paciente",
+      name: "Maria",
       email: "patient@example.com",
       password: hashedPassword,
       role: Role.STANDARD,

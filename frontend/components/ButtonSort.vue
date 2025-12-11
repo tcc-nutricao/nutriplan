@@ -106,6 +106,10 @@ const toggleDropdown = async () => {
     await nextTick();
     updatePosition();
   }
+  if (isOpen.value) {
+    await nextTick();
+    updatePosition();
+  }
 };
 
 const selectOption = (option) => {
