@@ -39,7 +39,7 @@
     </div>
     
     <div class="gap-5 w-full items-stretch">
-      <MealPlanCardExtended v-if="actualPlan.length > 0" :object="actualPlan[0]" class="hidden md:flex mb-10 w-[60%]" />
+        <MealPlanCardExtended v-if="actualPlan.length > 0" :object="actualPlan[0]" class="hidden md:flex mb-10 w-[85%]" />
       <MealPlanCardMobile v-if="actualPlan.length > 0" :object="actualPlan[0]" class="md:hidden mb-10" />
       <!-- <div class="col-span-2">
         <MealPlanCard title="Meus planos" :items="actualPlan" />

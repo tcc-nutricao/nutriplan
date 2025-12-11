@@ -1,5 +1,5 @@
 <template>
-    <Card v-if="item" class="sticky top-[30px] self-start w-[65%] z-20" :bg="props.bg">
+    <Card v-if="item" class="sticky top-[30px] self-start z-20" :bg="props.bg">
         <div class="flex w-full justify-between items-center mb-4">
             <h2 :class="props.bg === true ? 'h2' : 'h1'">{{ item?.recipe?.name }}</h2>
             <Button

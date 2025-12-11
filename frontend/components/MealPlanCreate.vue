@@ -94,7 +94,7 @@
     <RecipeModal
         v-if="selectedRecipe"
         :recipe="selectedRecipe"
-         class="z-[1300]"
+        zindex="1300"
         @close="closeRecipe"
     />
   </div>

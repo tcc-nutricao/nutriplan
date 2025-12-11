@@ -13,7 +13,7 @@
       @click.self="$emit('close', false)"
     >
       <div
-        class="bg-white rounded-3xl py-7 px-9 w-full shadow-lg relative max-h-[90vh] modal-container transition-transform duration-300 ease"
+        class="bg-white rounded-3xl py-7 px-9 w-full overflow-auto shadow-lg relative max-h-[90vh] modal-container transition-transform duration-300 ease"
         :class="section === 'basic' ? 'max-w-lg' : 'max-w-3xl'"
       >
         <button

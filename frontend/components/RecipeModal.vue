@@ -10,7 +10,8 @@
       appear
     >
       <div
-        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]"
+        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+        :class="`z-[${zindex}]`"
         @click.self="$emit('close')"
       >
         <Transition
@@ -22,7 +23,7 @@
           leave-to-class="scale-90"
           appear
         >
-          <Card class="w-[40%] relative max-h-[90vh] p-5 pb-[10px] pt-8 z-50 overflow-y-auto">
+          <Card class="w-full md:w-[40%] relative max-h-[90vh] p-5 pb-[10px] pt-8 z-50 overflow-y-auto">
             <button
               class="absolute top-5 right-7 text-3xl text-gray-500 hover:text-danger hover:scale-110 transition z-50"
               @click="$emit('close')"
@@ -42,7 +43,8 @@ import { ref, computed, onMounted } from 'vue'
 import { get } from '../crud'
 
 const props = defineProps({
-  recipe: { type: Object, required: true }
+  recipe: { type: Object, required: true },
+  zindex: { type: String, required: false, default: '1000' },
 })
 
 const emit = defineEmits(['close'])

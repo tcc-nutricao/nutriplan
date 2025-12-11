@@ -46,7 +46,7 @@
                 </div>
             </div>
 
-            <RecipeCard :item="selectedItem" @toggleFavorite="handleToggleFavorite" />
+            <RecipeCard  class="w-[65%]" :item="selectedItem" @toggleFavorite="handleToggleFavorite" />
         
         </div>
 
